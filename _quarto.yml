@@ -1,0 +1,22 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "dsan6750"
+  sidebar:
+    id: mainnav
+    content:
+      - href: index.qmd
+        text: Home
+      - href: syllabus.qmd
+        text: Syllabus
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+

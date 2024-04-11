@@ -1,0 +1,5 @@
+---
+title: "DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)"
+---
+
+Welcome to the homepage for **DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)**, Fall 2024, at Georgetown University! The course takes place on **Wednesdays** from **6:30 to 9:00pm** in **Car Barn Room 204**. More details are provided on the [syllabus](syllabus.qmd).

@@ -1,0 +1,158 @@
+---
+title: "Syllabus"
+---
+
+## Course Staff
+
+* Prof. Jeff Jacobs, <a href='mailto:jj1088@georgetown.edu' target='_blank'>`jj1088@georgetown.edu`</a>
+  * Office hours: TBD, held in Car Barn Room 207-04A
+
+## Course Overview
+
+```{=html}
+<table>
+<thead>
+<tr>
+    <th>Category</th>
+    <th>Percent of Final Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>In-Class Midterm</td>
+    <td>30%</td>
+</tr>
+<tr>
+    <td>Final Project</td>
+    <td>30%</td>
+</tr>
+<tr>
+    <td>Homeworks</td>
+    <td>40%</td>
+</tr>
+<tr>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW1**: {{< var hw1.title >}}"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>10%"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW2**: {{< var hw2.title >}}"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>10%"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW3**: {{< var hw3.title >}}"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>10%"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW4**: {{< var hw4.title >}}"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>10%"></span></td>
+</tr>
+</tbody>
+</table>
+```
+
+The course does not have any "official" prerequisites, but a general comfort with **Python** is strongly recommended. If you have never used Python before, however (or if you haven't used it in a while and feel like your skills are rusty), you can browse the materials on the <a href='./resources.html' target='_blank'>Resources page</a>!
+
+## Course Topics / Calendar
+
+TBD
+
+## Assignment Distribution, Submission, and Grading
+
+The programming assignments for the course will be managed through Google Classroom. This means that, to work on and submit the assignments, you will use the following workflow:
+
+1. Open the `.ipynb` file for the assignment from within Google Classroom
+2. Work on the problems within the file, saving your progress early and often! You can **try things out** or **create drafts** of your solutions however you'd like (for example, in VSCode or JupyterLab or any other IDE), but your final submission for each assignment must be submitted through the Google Classroom interface!
+3. Submit the completed version of the assignment by clicking the blue "Hand in" button on the assignment page.
+
+The interface allows you to **unsubmit** and continue working on an assignment, for example if you find a mistake, but be careful and make sure you **resubmit** once you've fixed the mistake, since submissions will **not be accepted** after the grace period for late submission has ended.
+
+## Late Policy
+
+After the due date, for each **homework** assignment, you will have a grace period of 24 hours to submit the assignment without a lateness penalty. After this 24 hour grace period, late penalties will be applied up until 66 hours after the due date. Specifically, late penalties will be applied based on the following scale (unless you obtain an excused lateness from one of the instructional staff!):
+
+* **0 to 24 hours** after due date: no penalty
+* **24 to 30 hours** after due date: 2.5% penalty
+* **30 to 42 hours** after due date: 5% penalty
+* **42 to 54 hours** after due date: 10% penalty
+* **54 to 66 hours** after due date: 20% penalty
+* **More than 66 hours** after due date: Assignment submissions no longer accepted (without instructor approval)
+
+## Final Letter Grade Determination
+
+For DSAN students, once all assignments have been graded, we will compute your final **numeric grade** according to the above weighting, rounded to two decimal places. The **letter grade** that we report to Georgetown on the basis of this numeric grade will then follow the DSAN letter grade policy as follows, where the start and end points for each range are **inclusive**:
+
+```{=html}
+<table>
+<thead>
+<tr>
+    <th align="right">Range Start</th>
+    <th align="right">Range End</th>
+    <th align="left">Letter Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td align="right">92.50</td>
+    <td align="right">100.00</td>
+    <td align="left">A</td>
+</tr>
+<tr>
+    <td>89.50</td>
+    <td>92.49</td>
+    <td>A-</td>
+</tr>
+<tr>
+    <td>87.99</td>
+    <td>89.49</td>
+    <td>B+</td>
+</tr>
+<tr>
+    <td>81.50</td>
+    <td>87.98</td>
+    <td>B</td>
+</tr>
+<tr>
+    <td>79.50</td>
+    <td>81.49</td>
+    <td>B-</td>
+</tr>
+<tr>
+    <td>69.50</td>
+    <td>79.49</td>
+    <td>C</td>
+</tr>
+<tr>
+    <td>59.50</td>
+    <td>69.49</td>
+    <td>D</td>
+</tr>
+<tr>
+    <td>0.00</td>
+    <td>59.49</td>
+    <td>F</td>
+</tr>
+</tbody>
+</table>
+```
+
+## Official Course Description
+
+TBD
+
+## Title IX/Sexual Misconduct Statement
+
+Georgetown University and its faculty are committed to supporting survivors and those impacted by sexual misconduct, which includes sexual assault, sexual harassment, relationship violence, and stalking. Georgetown requires faculty members, unless otherwise designated as confidential, to report all disclosures of sexual misconduct to the University Title IX Coordinator or a Deputy Title IX Coordinator.
+
+If you disclose an incident of sexual misconduct to a professor in or outside of the classroom (with the exception of disclosures in papers), that faculty member must report the incident to the Title IX Coordinator, or Deputy Title IX Coordinator. The coordinator will, in turn, reach out to the student to provide support, resources, and the option to meet. [Please note that the student is not required to meet with the Title IX coordinator.]. More information about reporting options and resources can be found in the <a href='https://sexualassault.georgetown.edu/get-help/resourcecenter/#' target='_blank'>Sexual Misconduct Resource Center</a>.
+
+If you would prefer to speak to someone confidentially, Georgetown has a number of fully confidential professional resources that can provide support and assistance. These resources include:
+
+* *Health Education Services for Sexual Assault Response and Prevention*: Confidential email <a href='mailto:sarp@georgetown.edu' target='_blank'>`sarp@georgetown.edu`</a>
+* *Counseling and Psychiatric Services (CAPS)*: 202-687-6985
+  * After hours you can call 833-960-3006 to reach Fonemed, a telehealth service, and ask for the on-call CAPS clinician
+
+## GSAS Resources and Policies for Students
+
+You can find a collection of relevant resources and policies for students on the <a href='https://grad.georgetown.edu/academics/current-students/' target='_blank'>GSAS website</a>, and the Provost's policy on accommodating students' religious observances on the <a href='https://campusministry.georgetown.edu/faith-traditions/religious_holy_days/#' target='_blank'>Campus Ministry website</a>.
+
+You can also make use of the <a href='http://academicsupport.georgetown.edu/' target='_blank'>Student Academic Resource Center</a>. In particular, within the Resource Center there is a link to Georgetown's <a href='http://academicsupport.georgetown.edu/disability/' target='_blank'>Disability Support page</a>. If you believe you have a disability, you can contact the Academic Resource Center (<a href='mailto:arc@georgetown.edu' target='_blank'>`arc@georgetown.edu`</a>) for further information. The ARC is located in the Leavey Center, Suite 335 (202-687-8354), and it is the campus office responsible for reviewing documentation provided by students with disabilities and for determining reasonable accommodations in accordance with the Americans with Disabilities Act (ADA) and University policies.
