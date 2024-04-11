@@ -3,10 +3,10 @@ project:
   output-dir: docs
 
 website:
-  title: "dsan6750"
+  title: "DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)"
   sidebar:
     id: mainnav
-    content:
+    contents:
       - href: index.qmd
         text: Home
       - href: syllabus.qmd
