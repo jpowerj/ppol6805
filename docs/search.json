@@ -1,0 +1,86 @@
+[
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Prof. Jeff Jacobs, jj1088@georgetown.edu\n\nOffice hours: TBD, held in Car Barn Room 207-04A"
+  },
+  {
+    "objectID": "syllabus.html#course-staff",
+    "href": "syllabus.html#course-staff",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Prof. Jeff Jacobs, jj1088@georgetown.edu\n\nOffice hours: TBD, held in Car Barn Room 207-04A"
+  },
+  {
+    "objectID": "syllabus.html#course-overview",
+    "href": "syllabus.html#course-overview",
+    "title": "Syllabus",
+    "section": "Course Overview",
+    "text": "Course Overview\n\n\n\n\nCategory\nPercent of Final Grade\n\n\n\n\nIn-Class Midterm\n30%\n\n\nFinal Project\n30%\n\n\nHomeworks\n40%\n\n\nHW1: TBD\n10%\n\n\nHW2: TBD\n10%\n\n\nHW3: TBD\n10%\n\n\nHW4: TBD\n10%\n\n\n\n\nThe course does not have any “official” prerequisites, but a general comfort with Python is strongly recommended. If you have never used Python before, however (or if you haven’t used it in a while and feel like your skills are rusty), you can browse the materials on the Resources page!"
+  },
+  {
+    "objectID": "syllabus.html#course-topics-calendar",
+    "href": "syllabus.html#course-topics-calendar",
+    "title": "Syllabus",
+    "section": "Course Topics / Calendar",
+    "text": "Course Topics / Calendar\nTBD"
+  },
+  {
+    "objectID": "syllabus.html#assignment-distribution-submission-and-grading",
+    "href": "syllabus.html#assignment-distribution-submission-and-grading",
+    "title": "Syllabus",
+    "section": "Assignment Distribution, Submission, and Grading",
+    "text": "Assignment Distribution, Submission, and Grading\nThe programming assignments for the course will be managed through Google Classroom. This means that, to work on and submit the assignments, you will use the following workflow:\n\nOpen the .ipynb file for the assignment from within Google Classroom\nWork on the problems within the file, saving your progress early and often! You can try things out or create drafts of your solutions however you’d like (for example, in VSCode or JupyterLab or any other IDE), but your final submission for each assignment must be submitted through the Google Classroom interface!\nSubmit the completed version of the assignment by clicking the blue “Hand in” button on the assignment page.\n\nThe interface allows you to unsubmit and continue working on an assignment, for example if you find a mistake, but be careful and make sure you resubmit once you’ve fixed the mistake, since submissions will not be accepted after the grace period for late submission has ended."
+  },
+  {
+    "objectID": "syllabus.html#late-policy",
+    "href": "syllabus.html#late-policy",
+    "title": "Syllabus",
+    "section": "Late Policy",
+    "text": "Late Policy\nAfter the due date, for each homework assignment, you will have a grace period of 24 hours to submit the assignment without a lateness penalty. After this 24 hour grace period, late penalties will be applied up until 66 hours after the due date. Specifically, late penalties will be applied based on the following scale (unless you obtain an excused lateness from one of the instructional staff!):\n\n0 to 24 hours after due date: no penalty\n24 to 30 hours after due date: 2.5% penalty\n30 to 42 hours after due date: 5% penalty\n42 to 54 hours after due date: 10% penalty\n54 to 66 hours after due date: 20% penalty\nMore than 66 hours after due date: Assignment submissions no longer accepted (without instructor approval)"
+  },
+  {
+    "objectID": "syllabus.html#final-letter-grade-determination",
+    "href": "syllabus.html#final-letter-grade-determination",
+    "title": "Syllabus",
+    "section": "Final Letter Grade Determination",
+    "text": "Final Letter Grade Determination\nFor DSAN students, once all assignments have been graded, we will compute your final numeric grade according to the above weighting, rounded to two decimal places. The letter grade that we report to Georgetown on the basis of this numeric grade will then follow the DSAN letter grade policy as follows, where the start and end points for each range are inclusive:\n\n\n\n\nRange Start\nRange End\nLetter Grade\n\n\n\n\n92.50\n100.00\nA\n\n\n89.50\n92.49\nA-\n\n\n87.99\n89.49\nB+\n\n\n81.50\n87.98\nB\n\n\n79.50\n81.49\nB-\n\n\n69.50\n79.49\nC\n\n\n59.50\n69.49\nD\n\n\n0.00\n59.49\nF"
+  },
+  {
+    "objectID": "syllabus.html#official-course-description",
+    "href": "syllabus.html#official-course-description",
+    "title": "Syllabus",
+    "section": "Official Course Description",
+    "text": "Official Course Description\nTBD"
+  },
+  {
+    "objectID": "syllabus.html#title-ixsexual-misconduct-statement",
+    "href": "syllabus.html#title-ixsexual-misconduct-statement",
+    "title": "Syllabus",
+    "section": "Title IX/Sexual Misconduct Statement",
+    "text": "Title IX/Sexual Misconduct Statement\nGeorgetown University and its faculty are committed to supporting survivors and those impacted by sexual misconduct, which includes sexual assault, sexual harassment, relationship violence, and stalking. Georgetown requires faculty members, unless otherwise designated as confidential, to report all disclosures of sexual misconduct to the University Title IX Coordinator or a Deputy Title IX Coordinator.\nIf you disclose an incident of sexual misconduct to a professor in or outside of the classroom (with the exception of disclosures in papers), that faculty member must report the incident to the Title IX Coordinator, or Deputy Title IX Coordinator. The coordinator will, in turn, reach out to the student to provide support, resources, and the option to meet. [Please note that the student is not required to meet with the Title IX coordinator.]. More information about reporting options and resources can be found in the Sexual Misconduct Resource Center.\nIf you would prefer to speak to someone confidentially, Georgetown has a number of fully confidential professional resources that can provide support and assistance. These resources include:\n\nHealth Education Services for Sexual Assault Response and Prevention: Confidential email sarp@georgetown.edu\nCounseling and Psychiatric Services (CAPS): 202-687-6985\n\nAfter hours you can call 833-960-3006 to reach Fonemed, a telehealth service, and ask for the on-call CAPS clinician"
+  },
+  {
+    "objectID": "syllabus.html#gsas-resources-and-policies-for-students",
+    "href": "syllabus.html#gsas-resources-and-policies-for-students",
+    "title": "Syllabus",
+    "section": "GSAS Resources and Policies for Students",
+    "text": "GSAS Resources and Policies for Students\nYou can find a collection of relevant resources and policies for students on the GSAS website, and the Provost’s policy on accommodating students’ religious observances on the Campus Ministry website.\nYou can also make use of the Student Academic Resource Center. In particular, within the Resource Center there is a link to Georgetown’s Disability Support page. If you believe you have a disability, you can contact the Academic Resource Center (arc@georgetown.edu) for further information. The ARC is located in the Leavey Center, Suite 335 (202-687-8354), and it is the campus office responsible for reviewing documentation provided by students with disabilities and for determining reasonable accommodations in accordance with the Americans with Disabilities Act (ADA) and University policies."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)",
+    "section": "",
+    "text": "Welcome to the homepage for DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS), Fall 2024, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn Room 204. More details are provided on the syllabus."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  }
+]
