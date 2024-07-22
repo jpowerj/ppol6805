@@ -68,7 +68,7 @@
     "section": "",
     "text": "Open slides in new tab →",
     "crumbs": [
-      "Week 1: {{< var w01.date-md >}}"
+      "Week 1: Aug 28"
     ]
   },
   {
@@ -78,7 +78,7 @@
     "section": "Who Am I? Why Am I Teaching You?",
     "text": "Who Am I? Why Am I Teaching You?\n\nStarted out as PhD student in Computer Science\n\nUCLA: Algorithmic Game Theory\nStanford (MS): Economic Network Analysis\n\nEnded up with PhD in Political Economy\n\nColumbia: “Computational Political Theory”\n\nUsed GIS throughout, but especially while working as an Urban Economist at UC Berkeley\n\nUsed, e.g., Google Maps API to evaluate effects of Suburbanization of Poverty",
     "crumbs": [
-      "Week 1: {{< var w01.date-md >}}"
+      "Week 1: Aug 28"
     ]
   },
   {
@@ -88,7 +88,7 @@
     "section": "Data Scientists",
     "text": "Data Scientists\n\nAll data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)\nHowever, you can differentiate yourself in the scary scary job market by developing a particular focus on some “non-standard” type: text data, temporal data, signal processing, and/or geospatial data!",
     "crumbs": [
-      "Week 1: {{< var w01.date-md >}}"
+      "Week 1: Aug 28"
     ]
   },
   {
@@ -98,7 +98,7 @@
     "section": "Public Policy Experts",
     "text": "Public Policy Experts\n\nOftentimes, all it takes is one map to see why a policy has failed 😱",
     "crumbs": [
-      "Week 1: {{< var w01.date-md >}}"
+      "Week 1: Aug 28"
     ]
   },
   {
@@ -108,7 +108,7 @@
     "section": "ArcGIS",
     "text": "ArcGIS\n\nFor info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the Library Guide",
     "crumbs": [
-      "Week 1: {{< var w01.date-md >}}"
+      "Week 1: Aug 28"
     ]
   },
   {
@@ -118,7 +118,7 @@
     "section": "I Am The Opposite of a Prereq-Stickler",
     "text": "I Am The Opposite of a Prereq-Stickler\n\nI genuinely believe that I can make the course accessible to you, meeting you wherever you’re at, no matter what!\nTo skip an entire spiel… Everyone learns at their own pace, and I structure my courses as best as I possibly can to adapt to your pace",
     "crumbs": [
-      "Week 1: {{< var w01.date-md >}}"
+      "Week 1: Aug 28"
     ]
   },
   {
@@ -128,7 +128,7 @@
     "section": "R and/or Python",
     "text": "R and/or Python",
     "crumbs": [
-      "Week 1: {{< var w01.date-md >}}"
+      "Week 1: Aug 28"
     ]
   },
   {
