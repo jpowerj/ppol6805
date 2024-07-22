@@ -1,11 +1,14 @@
 project:
   type: website
   output-dir: docs
+  pre-render: _pre-set-updated.py
 
 website:
   title: "DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)"
+  favicon: "favicon.png"
   sidebar:
     id: mainnav
+    footer: "*Updated {{< env DSAN6750_LAST_UPDATED \"2024\" >}}*"
     contents:
       - href: index.qmd
         text: Home

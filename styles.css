@@ -18,6 +18,10 @@ a.disabled {
   border-top: 2px solid gray !important;
 }
 
+.sidebar-footer-item {
+  font-size: 80% !important;
+}
+
 .sidebar-menu-container {
   padding-top: 10px !important;
 }
