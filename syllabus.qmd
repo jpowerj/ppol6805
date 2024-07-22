@@ -2,12 +2,24 @@
 title: "Syllabus"
 ---
 
+Welcome to the Fall 2024 version of **Geographic Information Systems** at Georgetown University!
+
+::: {.callout-note title="Course Numbering"}
+
+* For *Data Science and Analytics* students: the course number is **DSAN 6750**
+* For *McCourt School of Public Policy* students: the course number is **PPOL 6805**
+
+:::
+
 ## Course Staff
 
 * Prof. Jeff Jacobs, <a href='mailto:jj1088@georgetown.edu' target='_blank'>`jj1088@georgetown.edu`</a>
   * Office hours: TBD, held in Car Barn Room 207-04A
+* TAs: to be determined!
 
-## Course Overview
+## Assignment Structure
+
+On the basis of the guidelines we've developed for courses offered through DSAN, this course will have one in-class midterm but **no** final exam! Instead, you will work on a final project throughout the second half of the course. Each of the four units will involve a homework assignment, and final grades will be determined using the following weighting scheme:
 
 ```{=html}
 <table>
@@ -54,7 +66,146 @@ The course does not have any "official" prerequisites, but a general comfort wit
 
 ## Course Topics / Calendar
 
-TBD
+The following is a rough map of what we will work through together throughout the semester; given that **everyone learns at a different pace**, my aim is to leave us with a good amount of **flexibility** in terms of how much time we spend on each topic.
+
+If I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!
+
+If you find any discrepancies between this schedule and Georgetown's [official calendar](https://registrar.georgetown.edu/academic-calendar/maincampus/){target='_blank'}, please let me know.
+
+```{=html}
+<table class='sticky-table'>
+<thead>
+<tr class='sticky-head'>
+    <th>Unit</th>
+    <th>Week</th>
+    <th>Date</th>
+    <th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td><span data-qmd="**Unit 1**: GIS Overview"></span></td>
+    <td>1</td>
+    <td><span data-qmd="{{< var w01.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var w01.title >}}](./w01/)"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td>2</td>
+    <td><span data-qmd="{{< var w02.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var w02.title >}}](./w02/)"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td>3</td>
+    <td><span data-qmd="{{< var w03.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var w03.title >}}](./w03/)"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="**Unit 2**: GIS APIs"></span></td>
+    <td>4</td>
+    <td><span data-qmd="{{< var w04.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var w04.title >}}](./w04/)"></span></td>
+</tr>
+<!-- <tr>
+    <td></td>
+    <td></td>
+    <td><span data-qmd="*Feb 9 (Friday), 11:59pm EST*"></span></td>
+    <td><span data-qmd="*[Deliverable] <a href='{{< var hw1.url >}}' target='_blank'>HW1: {{< var hw1.title >}} <i class='bi bi-box-arrow-up-right ps-1'></i></a>*"></span></td>
+</tr> -->
+<tr>
+    <td></td>
+    <td>5</td>
+    <td><span data-qmd="{{< var w05.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var w05.title >}}](./w05/)"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td>6</td>
+    <td><span data-qmd="{{< var w06.date-md >}}"></span></td>
+    <td><span data-qmd="[{{<var w06.title >}}](./w06/)"></span></td>
+</tr>
+<!-- <tr>
+    <td></td>
+    <td></td>
+    <td><span data-qmd="*Feb 26 (Monday), 11:59pm EST*"></span></td>
+    <td><span data-qmd="*[Deliverable] <a href='{{< var hw2.url >}}' target='_blank'>HW2: {{< var hw2.title >}} <i class='bi bi-box-arrow-up-right ps-1'></i></a>*"></span></td>
+</tr> -->
+<tr>
+    <td></td>
+    <td>7</td>
+    <td><span data-qmd="{{< var w07.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var w07.title >}}](./w07/)"></span></td>
+</tr>
+<tr class='new-unit'>
+    <td><span data-qmd="**Unit 3:** Geospatial Data Analysis"></span></td>
+    <td>8</td>
+    <td><span data-qmd="{{< var w08.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var w08.title >}}](./w08/)"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td>9</td>
+    <td><span data-qmd="{{< var w09.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var w09.title >}}](./w09/)"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td>10</td>
+    <td><span data-qmd="{{< var w10.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var w10.title >}}](./w10/)"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td>11</td>
+    <td><span data-qmd="{{< var w11.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var w11.title >}}](./w11/)"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="**Unit 4**: Datasets, Data Sharing, and Reproducible Science"></span></td>
+    <td>12</td>
+    <td><span data-qmd="{{< var w12.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var w12.title >}}](./w12/)"></span></td>
+</tr>
+<!-- <tr>
+    <td></td>
+    <td></td>
+    <td><span data-qmd="*Apr 12 (Friday)*"></span></td>
+    <td><span data-qmd="*[Deliverable] <a href='{{< var hw3.url >}}' target='_blank'>HW3: {{< var hw3.title >}} <i class='bi bi-box-arrow-up-right ps-1'></i></a>*"></span></td>
+</tr> -->
+<tr>
+    <td></td>
+    <td>13</td>
+    <td><span data-qmd="{{< var w13.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var w13.title >}}](./w13/)"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td></td>
+    <td><span data-qmd="*Nov 27*"></span></td>
+    <td><span data-qmd="*No Class (Fall Break)*"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td>14</td>
+    <td><span data-qmd="{{< var w14.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var w14.title >}}](./w14/)"></span></td>
+</tr>
+<!-- <tr>
+    <td></td>
+    <td></td>
+    <td><span data-qmd="*Apr 26 (Friday)*"></span></td>
+    <td><span data-qmd="*[Deliverable] HW4: {{< var hw4.title >}}*"></span></td>
+</tr> -->
+<!-- <tr>
+    <td></td>
+    <td></td>
+    <td><span data-qmd="*May 10 (Friday)*"></span></td>
+    <td><span data-qmd="*[Deliverable] [Policy Whitepaper](./final.qmd)*"></span></td>
+</tr> -->
+</tbody>
+</table>
+```
 
 ## Assignment Distribution, Submission, and Grading
 

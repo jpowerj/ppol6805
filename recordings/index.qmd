@@ -1,0 +1,25 @@
+---
+title: "Lecture Recordings"
+format: html
+listing:
+  sort-ui: false
+  filter-ui: false
+  contents:
+    - lecture-recordings.yml
+  type: table
+  fields: [week,title,date]
+  field-display-names:
+    week: "Week"
+    title: "Title"
+    date: "Date"
+    categories: "Category"
+  sort:
+    - "date desc"
+    - "title desc"
+  table-hover: true
+  #date-format: full
+  #date-format: "dddd MMM D, YYYY, HH:mm:ss"
+  date-format: "dddd MMM D, YYYY"
+---
+
+I will aim to update the Zoom recording links here as soon as they are available after the end of class. But, in case there's a delay, recordings are **automatically added** to the course's [Panopto page](https://georgetown.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=b412a327-e0cd-4897-8401-b1b500239335){target='_blank'}!

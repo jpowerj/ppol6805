@@ -1,10 +1,159 @@
 [
   {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
+    "section": "",
+    "text": "For a high-level overview, that will prepare you well for this course, see Coursera: Introduction to GIS \nIf you’re looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out Data Over Space and Time, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resources.html#gis-overviews",
+    "href": "resources.html#gis-overviews",
+    "title": "Resources",
+    "section": "",
+    "text": "For a high-level overview, that will prepare you well for this course, see Coursera: Introduction to GIS \nIf you’re looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out Data Over Space and Time, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "w01/slides.html#who-am-i-why-am-i-teaching-you",
+    "href": "w01/slides.html#who-am-i-why-am-i-teaching-you",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Who Am I? Why Am I Teaching You?",
+    "text": "Who Am I? Why Am I Teaching You?\n\nStarted out as PhD student in Computer Science\n\nUCLA: Algorithmic Game Theory\nStanford (MS): Economic Network Analysis\n\nEnded up with PhD in Political Economy\n\nColumbia: “Computational Political Theory”\n\nUsed GIS throughout, but especially while working as an Urban Economist at UC Berkeley\n\nUsed, e.g., Google Maps API to evaluate effects of Suburbanization of Poverty"
+  },
+  {
+    "objectID": "w01/slides.html#data-scientists",
+    "href": "w01/slides.html#data-scientists",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Data Scientists",
+    "text": "Data Scientists\n\nAll data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)\nHowever, you can differentiate yourself in the scary scary job market by developing a particular focus on some “non-standard” type: text data, temporal data, signal processing, and/or geospatial data!"
+  },
+  {
+    "objectID": "w01/slides.html#public-policy-experts",
+    "href": "w01/slides.html#public-policy-experts",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Public Policy Experts",
+    "text": "Public Policy Experts\n\nOftentimes, all it takes is one map to see why a policy has failed 😱"
+  },
+  {
+    "objectID": "w01/slides.html#arcgis",
+    "href": "w01/slides.html#arcgis",
+    "title": "Week 1: Introduction to GIS",
+    "section": "ArcGIS",
+    "text": "ArcGIS\n\nFor info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the Library Guide"
+  },
+  {
+    "objectID": "w01/slides.html#i-am-the-opposite-of-a-prereq-stickler",
+    "href": "w01/slides.html#i-am-the-opposite-of-a-prereq-stickler",
+    "title": "Week 1: Introduction to GIS",
+    "section": "I Am The Opposite of a Prereq-Stickler",
+    "text": "I Am The Opposite of a Prereq-Stickler\n\nI genuinely believe that I can make the course accessible to you, meeting you wherever you’re at, no matter what!\nTo skip an entire spiel… Everyone learns at their own pace, and I structure my courses as best as I possibly can to adapt to your pace"
+  },
+  {
+    "objectID": "w01/slides.html#r-andor-python",
+    "href": "w01/slides.html#r-andor-python",
+    "title": "Week 1: Introduction to GIS",
+    "section": "R and/or Python",
+    "text": "R and/or Python\n\n\n\nWeek 1: GIS Overview"
+  },
+  {
+    "objectID": "w01/index.html",
+    "href": "w01/index.html",
+    "title": "Week 1: Introduction to GIS",
+    "section": "",
+    "text": "Open slides in new tab →",
+    "crumbs": [
+      "Week 1: {{< var w01.date-md >}}"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#who-am-i-why-am-i-teaching-you",
+    "href": "w01/index.html#who-am-i-why-am-i-teaching-you",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Who Am I? Why Am I Teaching You?",
+    "text": "Who Am I? Why Am I Teaching You?\n\nStarted out as PhD student in Computer Science\n\nUCLA: Algorithmic Game Theory\nStanford (MS): Economic Network Analysis\n\nEnded up with PhD in Political Economy\n\nColumbia: “Computational Political Theory”\n\nUsed GIS throughout, but especially while working as an Urban Economist at UC Berkeley\n\nUsed, e.g., Google Maps API to evaluate effects of Suburbanization of Poverty",
+    "crumbs": [
+      "Week 1: {{< var w01.date-md >}}"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#data-scientists",
+    "href": "w01/index.html#data-scientists",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Data Scientists",
+    "text": "Data Scientists\n\nAll data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)\nHowever, you can differentiate yourself in the scary scary job market by developing a particular focus on some “non-standard” type: text data, temporal data, signal processing, and/or geospatial data!",
+    "crumbs": [
+      "Week 1: {{< var w01.date-md >}}"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#public-policy-experts",
+    "href": "w01/index.html#public-policy-experts",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Public Policy Experts",
+    "text": "Public Policy Experts\n\nOftentimes, all it takes is one map to see why a policy has failed 😱",
+    "crumbs": [
+      "Week 1: {{< var w01.date-md >}}"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#arcgis",
+    "href": "w01/index.html#arcgis",
+    "title": "Week 1: Introduction to GIS",
+    "section": "ArcGIS",
+    "text": "ArcGIS\n\nFor info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the Library Guide",
+    "crumbs": [
+      "Week 1: {{< var w01.date-md >}}"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#i-am-the-opposite-of-a-prereq-stickler",
+    "href": "w01/index.html#i-am-the-opposite-of-a-prereq-stickler",
+    "title": "Week 1: Introduction to GIS",
+    "section": "I Am The Opposite of a Prereq-Stickler",
+    "text": "I Am The Opposite of a Prereq-Stickler\n\nI genuinely believe that I can make the course accessible to you, meeting you wherever you’re at, no matter what!\nTo skip an entire spiel… Everyone learns at their own pace, and I structure my courses as best as I possibly can to adapt to your pace",
+    "crumbs": [
+      "Week 1: {{< var w01.date-md >}}"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#r-andor-python",
+    "href": "w01/index.html#r-andor-python",
+    "title": "Week 1: Introduction to GIS",
+    "section": "R and/or Python",
+    "text": "R and/or Python",
+    "crumbs": [
+      "Week 1: {{< var w01.date-md >}}"
+    ]
+  },
+  {
+    "objectID": "recordings/index.html",
+    "href": "recordings/index.html",
+    "title": "Lecture Recordings",
+    "section": "",
+    "text": "I will aim to update the Zoom recording links here as soon as they are available after the end of class. But, in case there’s a delay, recordings are automatically added to the course’s Panopto page!\n\n\n\n\n\n\n\n\n\nWeek\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\n1\n\n\nWeek 1: Introduction to GIS\n\n\nWednesday Aug 28, 2024\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)",
+    "section": "",
+    "text": "Welcome to the homepage for DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS), Fall 2024, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn Room 204. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 28\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
     "objectID": "syllabus.html",
     "href": "syllabus.html",
     "title": "Syllabus",
     "section": "",
-    "text": "Prof. Jeff Jacobs, jj1088@georgetown.edu\n\nOffice hours: TBD, held in Car Barn Room 207-04A",
+    "text": "Welcome to the Fall 2024 version of Geographic Information Systems at Georgetown University!",
     "crumbs": [
       "Syllabus"
     ]
@@ -13,18 +162,18 @@
     "objectID": "syllabus.html#course-staff",
     "href": "syllabus.html#course-staff",
     "title": "Syllabus",
-    "section": "",
-    "text": "Prof. Jeff Jacobs, jj1088@georgetown.edu\n\nOffice hours: TBD, held in Car Barn Room 207-04A",
+    "section": "Course Staff",
+    "text": "Course Staff\n\nProf. Jeff Jacobs, jj1088@georgetown.edu\n\nOffice hours: TBD, held in Car Barn Room 207-04A\n\nTAs: to be determined!",
     "crumbs": [
       "Syllabus"
     ]
   },
   {
-    "objectID": "syllabus.html#course-overview",
-    "href": "syllabus.html#course-overview",
+    "objectID": "syllabus.html#assignment-structure",
+    "href": "syllabus.html#assignment-structure",
     "title": "Syllabus",
-    "section": "Course Overview",
-    "text": "Course Overview\n\n\n\n\nCategory\nPercent of Final Grade\n\n\n\n\nIn-Class Midterm\n30%\n\n\nFinal Project\n30%\n\n\nHomeworks\n40%\n\n\nHW1: TBD\n10%\n\n\nHW2: TBD\n10%\n\n\nHW3: TBD\n10%\n\n\nHW4: TBD\n10%\n\n\n\n\nThe course does not have any “official” prerequisites, but a general comfort with Python is strongly recommended. If you have never used Python before, however (or if you haven’t used it in a while and feel like your skills are rusty), you can browse the materials on the Resources page!",
+    "section": "Assignment Structure",
+    "text": "Assignment Structure\nOn the basis of the guidelines we’ve developed for courses offered through DSAN, this course will have one in-class midterm but no final exam! Instead, you will work on a final project throughout the second half of the course. Each of the four units will involve a homework assignment, and final grades will be determined using the following weighting scheme:\n\n\n\n\nCategory\nPercent of Final Grade\n\n\n\n\nIn-Class Midterm\n30%\n\n\nFinal Project\n30%\n\n\nHomeworks\n40%\n\n\nHW1: TBD\n10%\n\n\nHW2: TBD\n10%\n\n\nHW3: TBD\n10%\n\n\nHW4: TBD\n10%\n\n\n\n\nThe course does not have any “official” prerequisites, but a general comfort with Python is strongly recommended. If you have never used Python before, however (or if you haven’t used it in a while and feel like your skills are rusty), you can browse the materials on the Resources page!",
     "crumbs": [
       "Syllabus"
     ]
@@ -34,7 +183,7 @@
     "href": "syllabus.html#course-topics-calendar",
     "title": "Syllabus",
     "section": "Course Topics / Calendar",
-    "text": "Course Topics / Calendar\nTBD",
+    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, please let me know.\n\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Overview\n1\nAug 28\nIntroduction to GIS\n\n\n\n2\nSep 4\nWeek 2\n\n\n\n3\nSep 11\nWeek 3\n\n\nUnit 2: GIS APIs\n4\nSep 18\nWeek 4\n\n\n\n5\nSep 25\nWeek 5\n\n\n\n6\nOct 2\nWeek 6\n\n\n\n7\nOct 9\nWeek 7\n\n\nUnit 3: Geospatial Data Analysis\n8\nOct 16\nWeek 8\n\n\n\n9\nOct 23\nWeek 9\n\n\n\n10\nOct 30\nWeek 10\n\n\n\n11\nNov 6\nWeek 11\n\n\nUnit 4: Datasets, Data Sharing, and Reproducible Science\n12\nNov 13\nWeek 12\n\n\n\n13\nNov 20\nWeek 13\n\n\n\n\nNov 27\nNo Class (Fall Break)\n\n\n\n14\nDec 4\nWeek 14",
     "crumbs": [
       "Syllabus"
     ]
@@ -98,22 +247,5 @@
     "crumbs": [
       "Syllabus"
     ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)",
-    "section": "",
-    "text": "Welcome to the homepage for DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS), Fall 2024, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn Room 204. More details are provided on the syllabus.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
   }
 ]

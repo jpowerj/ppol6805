@@ -1,3 +1,46 @@
+w01:
+  title: "Introduction to GIS"
+  footer: "Week 1: GIS Overview"
+  date-md: "Aug 28"
+w02:
+  title: "Week 2"
+  date-md: "Sep 4"
+w03:
+  title: "Week 3"
+  date-md: "Sep 11"
+w04:
+  title: "Week 4"
+  date-md: "Sep 18"
+w05:
+  title: "Week 5"
+  date-md: "Sep 25"
+w06:
+  title: "Week 6"
+  date-md: "Oct 2"
+w07:
+  title: "Week 7"
+  date-md: "Oct 9"
+w08:
+  title: "Week 8"
+  date-md: "Oct 16"
+w09:
+  title: "Week 9"
+  date-md: "Oct 23"
+w10:
+  title: "Week 10"
+  date-md: "Oct 30"
+w11:
+  title: "Week 11"
+  date-md: "Nov 6"
+w12:
+  title: "Week 12"
+  date-md: "Nov 13"
+w13:
+  title: "Week 13"
+  date-md: "Nov 20"
+w14:
+  title: "Week 14"
+  date-md: "Dec 4"
 hw1:
   title: "TBD"
 hw2:
@@ -6,3 +49,8 @@ hw3:
   title: "TBD"
 hw4:
   title: "TBD"
+course:
+  author: "Jeff Jacobs"
+  institute: "<a href='mailto:jj1088@georgetown.edu' target='_blank'>`jj1088@georgetown.edu`</a>"
+  slides-subtitle: "*DSAN 6750 / PPOL 6805: Geographic Information Systems*<br>*Fall 2024*"
+  zoom-url: "https://georgetown.zoom.us/j/94074713027"

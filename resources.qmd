@@ -1,0 +1,8 @@
+---
+title: "Resources"
+---
+
+## GIS Overviews
+
+* For a high-level overview, that will prepare you well for this course, see [Coursera: Introduction to GIS <i class='bi bi-box-arrow-up-right'></i>](https://www.coursera.org/learn/gis/lecture/S0HxB/why-gis-is-awesome){target='_blank'}
+* If you're looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out [Data Over Space and Time](https://www.stat.cmu.edu/~cshalizi/dst/20/){target='_blank'}, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.

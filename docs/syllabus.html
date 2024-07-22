@@ -66,6 +66,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" '="" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="./jjcustom.js"></script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -117,6 +118,25 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./recordings/" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture Recordings</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./w01/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1: Aug 28</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -128,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#course-staff" id="toc-course-staff" class="nav-link active" data-scroll-target="#course-staff">Course Staff</a></li>
-  <li><a href="#course-overview" id="toc-course-overview" class="nav-link" data-scroll-target="#course-overview">Course Overview</a></li>
+  <li><a href="#assignment-structure" id="toc-assignment-structure" class="nav-link" data-scroll-target="#assignment-structure">Assignment Structure</a></li>
   <li><a href="#course-topics-calendar" id="toc-course-topics-calendar" class="nav-link" data-scroll-target="#course-topics-calendar">Course Topics / Calendar</a></li>
   <li><a href="#assignment-distribution-submission-and-grading" id="toc-assignment-distribution-submission-and-grading" class="nav-link" data-scroll-target="#assignment-distribution-submission-and-grading">Assignment Distribution, Submission, and Grading</a></li>
   <li><a href="#late-policy" id="toc-late-policy" class="nav-link" data-scroll-target="#late-policy">Late Policy</a></li>
@@ -161,6 +181,23 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Welcome to the Fall 2024 version of <strong>Geographic Information Systems</strong> at Georgetown University!</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Course Numbering">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Course Numbering
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>For <em>Data Science and Analytics</em> students: the course number is <strong>DSAN 6750</strong></li>
+<li>For <em>McCourt School of Public Policy</em> students: the course number is <strong>PPOL 6805</strong></li>
+</ul>
+</div>
+</div>
 <section id="course-staff" class="level2">
 <h2 class="anchored" data-anchor-id="course-staff">Course Staff</h2>
 <ul>
@@ -168,10 +205,12 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Office hours: TBD, held in Car Barn Room 207-04A</li>
 </ul></li>
+<li>TAs: to be determined!</li>
 </ul>
 </section>
-<section id="course-overview" class="level2">
-<h2 class="anchored" data-anchor-id="course-overview">Course Overview</h2>
+<section id="assignment-structure" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-structure">Assignment Structure</h2>
+<p>On the basis of the guidelines we’ve developed for courses offered through DSAN, this course will have one in-class midterm but <strong>no</strong> final exam! Instead, you will work on a final project throughout the second half of the course. Each of the four units will involve a homework assignment, and final grades will be determined using the following weighting scheme:</p>
 <div>
 <table data-quarto-postprocess="true" class="table">
 <thead>
@@ -216,7 +255,113 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="course-topics-calendar" class="level2">
 <h2 class="anchored" data-anchor-id="course-topics-calendar">Course Topics / Calendar</h2>
-<p>TBD</p>
+<p>The following is a rough map of what we will work through together throughout the semester; given that <strong>everyone learns at a different pace</strong>, my aim is to leave us with a good amount of <strong>flexibility</strong> in terms of how much time we spend on each topic.</p>
+<p>If I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!</p>
+<p>If you find any discrepancies between this schedule and Georgetown’s <a href="https://registrar.georgetown.edu/academic-calendar/maincampus/" target="_blank">official calendar</a>, please let me know.</p>
+<div>
+<table class="sticky-table table" data-quarto-postprocess="true">
+<thead>
+<tr class="header sticky-head">
+<th data-quarto-table-cell-role="th">Unit</th>
+<th data-quarto-table-cell-role="th">Week</th>
+<th data-quarto-table-cell-role="th">Date</th>
+<th data-quarto-table-cell-role="th">Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Unit 1</strong>: GIS Overview</td>
+<td>1</td>
+<td>Aug 28</td>
+<td><a href="./w01/">Introduction to GIS</a></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>2</td>
+<td>Sep 4</td>
+<td><a href="./w02/">Week 2</a></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>3</td>
+<td>Sep 11</td>
+<td><a href="./w03/">Week 3</a></td>
+</tr>
+<tr class="even">
+<td><strong>Unit 2</strong>: GIS APIs</td>
+<td>4</td>
+<td>Sep 18</td>
+<td><a href="./w04/">Week 4</a></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>5</td>
+<td>Sep 25</td>
+<td><a href="./w05/">Week 5</a></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>6</td>
+<td>Oct 2</td>
+<td><a href="./w06/">Week 6</a></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>7</td>
+<td>Oct 9</td>
+<td><a href="./w07/">Week 7</a></td>
+</tr>
+<tr class="even new-unit">
+<td><strong>Unit 3:</strong> Geospatial Data Analysis</td>
+<td>8</td>
+<td>Oct 16</td>
+<td><a href="./w08/">Week 8</a></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>9</td>
+<td>Oct 23</td>
+<td><a href="./w09/">Week 9</a></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>10</td>
+<td>Oct 30</td>
+<td><a href="./w10/">Week 10</a></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>11</td>
+<td>Nov 6</td>
+<td><a href="./w11/">Week 11</a></td>
+</tr>
+<tr class="even">
+<td><strong>Unit 4</strong>: Datasets, Data Sharing, and Reproducible Science</td>
+<td>12</td>
+<td>Nov 13</td>
+<td><a href="./w12/">Week 12</a></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>13</td>
+<td>Nov 20</td>
+<td><a href="./w13/">Week 13</a></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td><em>Nov 27</em></td>
+<td><em>No Class (Fall Break)</em></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>14</td>
+<td>Dec 4</td>
+<td><a href="./w14/">Week 14</a></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="assignment-distribution-submission-and-grading" class="level2">
 <h2 class="anchored" data-anchor-id="assignment-distribution-submission-and-grading">Assignment Distribution, Submission, and Grading</h2>
