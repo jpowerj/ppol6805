@@ -9,7 +9,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.23">
+  <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Jeff Jacobs">
   <title>DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS) – Week 1: Introduction to GIS</title>
@@ -32,6 +32,7 @@
     }
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="../styles.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -331,7 +332,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Week 1: Introduction to GIS</h1>
-  <p class="subtitle"><em>DSAN 6750 / PPOL 6805: Geographic Information Systems</em><br><em>Fall 2024</em></p>
+  <p class="subtitle"><em>DSAN 6750 / PPOL 6805: Geographic Information Systems</em><br>Fall 2024</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -347,7 +348,7 @@ Jeff Jacobs
   <p class="date">Wednesday, August 28, 2024</p>
 </section>
 <section>
-<section id="welcome-to-the-wonderful-world-of-gis" class="title-slide slide level1 center" data-stack-name="About Me">
+<section id="welcome-to-the-wonderful-world-of-gis" class="title-slide slide level1 center" data-stack-name="Why Me?">
 <h1>Welcome to The Wonderful World of GIS!</h1>
 
 </section>
@@ -363,32 +364,128 @@ Jeff Jacobs
 <ul>
 <li>Columbia: “Computational Political Theory”</li>
 </ul></li>
-<li>Used GIS throughout, but especially while working as an <strong>Urban Economist</strong> at UC Berkeley
+</ul>
+</section>
+<section id="my-gis-adventures" class="slide level2">
+<h2>My GIS Adventures</h2>
+<ul>
+<li>High school project: <strong>mine defusal</strong> in Indochina</li>
+<li>As a <strong>Telecommunications Engineer</strong> for Huawei (HKUST)</li>
+<li>As an <strong>Urban Economist</strong> at UC Berkeley
 <ul>
 <li>Used, e.g., Google Maps API to evaluate effects of <a href="https://www.brookings.edu/wp-content/uploads/2016/06/0120_poverty_paper.pdf" target="_blank"><strong>Suburbanization of Poverty</strong></a></li>
 </ul></li>
 </ul>
-</section></section>
-<section>
-<section id="why-should-you-care-about-gis" class="title-slide slide level1 center" data-stack-name="About GIS">
-<h1>Why Should You Care About GIS?</h1>
+</section>
+<section id="my-gis-moment" class="slide level2">
+<h2>My GIS 🤯 Moment</h2>
 <ul>
-<li>Data Scientists</li>
-<li>Public Policy Experts</li>
+<li>Horrors of the “““Vietnam”“” “““War”“” did not end in 1975… Casualties from unexploded ordnance (cluster bombs) have continued to devastate the region, with over 219,000 victims:
+<ul>
+<li><a href="https://www.baldwin.senate.gov/imo/media/doc/Legacies%20of%20War%20Recognition%20and%20UXO%20Removal%20Act.pdf" target="_blank">&gt;105K in Vietnam</a></li>
+<li><a href="https://www.cnn.com/2016/09/05/asia/united-states-laos-secret-war/index.html" target="_blank">&gt;50K in Laos</a></li>
+<li><a href="https://apnews.com/article/bombs-land-mines-unexploded-ordnance-demining-564f0203aeb53aa95118a1396b907246" target="_blank">&gt;65K in Cambodia</a></li>
+</ul></li>
 </ul>
 </section>
-<section id="data-scientists" class="slide level2">
-<h2>Data Scientists</h2>
+<section id="at-huawei-optimizing-cell-tower-placement" class="slide level2">
+<h2>At Huawei: Optimizing Cell Tower Placement</h2>
+<ul>
+<li></li>
+</ul>
+</section>
+<section id="the-suburbanization-of-poverty" class="slide level2">
+<h2>The Suburbanization of Poverty</h2>
+<ul>
+<li>Since 2008, a person living in poverty in the US is more likely to be in a <strong>suburb</strong> than an “inner city”</li>
+</ul>
+</section></section>
+<section>
+<section id="why-should-you-care-about-gis" class="title-slide slide level1 center" data-stack-name="Why GIS?">
+<h1>Why Should You Care About GIS?</h1>
+<ul>
+<li>As a Human</li>
+<li>As a Data Scientist</li>
+<li>As a Public Policy Expert</li>
+</ul>
+</section>
+<section id="as-humans" class="slide level2">
+<h2>As Humans</h2>
+<ul>
+<li>To understand the world around you!</li>
+</ul>
+</section>
+<section id="as-data-scientists" class="slide level2">
+<h2>As Data Scientists</h2>
 <ul>
 <li>All data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)</li>
 <li>However, you can <strong>differentiate yourself</strong> in the scary scary job market by developing a particular focus on some “non-standard” type: <strong>text</strong> data, <strong>temporal</strong> data, <strong>signal</strong> processing, and/or <strong>geospatial</strong> data!</li>
 </ul>
 </section>
-<section id="public-policy-experts" class="slide level2">
-<h2>Public Policy Experts</h2>
+<section id="as-public-policy-experts" class="slide level2">
+<h2>As Public Policy Experts</h2>
 <ul>
 <li>Oftentimes, all it takes is one map to see why a policy has failed 😱</li>
 </ul>
+</section></section>
+<section>
+<section id="so-what-is-gis" class="title-slide slide level1 center" data-stack-name="What is GIS?">
+<h1>So… What <em>Is</em> GIS?</h1>
+
+</section>
+<section id="its-completely-made-up" class="slide level2 smaller crunch-title">
+<h2>It’s Completely Made Up</h2>
+<p><em>Like, even more made up than other made-up technical terms…</em> 😵‍💫</p>
+<iframe data-external="1" src="https://www.youtube.com/embed/yjw_DuNkOUw" width="100%" height="500" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</section>
+<section id="what-i-mean-by-made-up" class="slide level2 smaller crunch-title crunch-ul">
+<h2>What I Mean By “Made Up”</h2>
+<ul>
+<li>The <strong>libraries</strong> and <strong>tools</strong> we’ll use are <strong>specific</strong> systems/methods for analyzing geospatial data</li>
+<li><strong>GIS</strong> is an “umbrella term”, which just vaguely refers to this entire universe of libraries/tools/techniques/approaches</li>
+</ul>
+<table class="caption-top" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th class="tdc" data-quarto-table-cell-role="th">Umbrella Term</th>
+<th class="tdc" data-quarto-table-cell-role="th">Concepts</th>
+<th class="tdc" data-quarto-table-cell-role="th">Specific Skills</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="tdc"><strong>Coding</strong></td>
+<td><ul>
+<li>Variables</li>
+<li>Control Flow</li>
+<li>Algorithms</li>
+</ul></td>
+<td><ul>
+<li>Python</li>
+<li>R</li>
+<li>JavaScript</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="tdc"><strong>GIS</strong></td>
+<td><ul>
+<li>Projections</li>
+<li>Vector vs.&nbsp;Raster</li>
+<li>Spatial Data Formats (shapefiles, <code>.geojson</code>)</li>
+</ul></td>
+<td class="tdvc"><ul>
+<li>ArcGIS</li>
+<li>GeoPandas (Python)</li>
+<li><a href="https://r-spatial.github.io/sf/" target="_blank"><code>sf</code></a> (R)</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="arcgis" class="slide level2">
 <h2>ArcGIS</h2>
@@ -661,18 +758,7 @@ Jeff Jacobs
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -704,7 +790,29 @@ Jeff Jacobs
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -712,7 +820,7 @@ Jeff Jacobs
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {

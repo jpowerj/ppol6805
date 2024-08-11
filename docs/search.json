@@ -24,21 +24,70 @@
     "href": "w01/slides.html#who-am-i-why-am-i-teaching-you",
     "title": "Week 1: Introduction to GIS",
     "section": "Who Am I? Why Am I Teaching You?",
-    "text": "Who Am I? Why Am I Teaching You?\n\nStarted out as PhD student in Computer Science\n\nUCLA: Algorithmic Game Theory\nStanford (MS): Economic Network Analysis\n\nEnded up with PhD in Political Economy\n\nColumbia: “Computational Political Theory”\n\nUsed GIS throughout, but especially while working as an Urban Economist at UC Berkeley\n\nUsed, e.g., Google Maps API to evaluate effects of Suburbanization of Poverty"
+    "text": "Who Am I? Why Am I Teaching You?\n\nStarted out as PhD student in Computer Science\n\nUCLA: Algorithmic Game Theory\nStanford (MS): Economic Network Analysis\n\nEnded up with PhD in Political Economy\n\nColumbia: “Computational Political Theory”"
   },
   {
-    "objectID": "w01/slides.html#data-scientists",
-    "href": "w01/slides.html#data-scientists",
+    "objectID": "w01/slides.html#my-gis-adventures",
+    "href": "w01/slides.html#my-gis-adventures",
     "title": "Week 1: Introduction to GIS",
-    "section": "Data Scientists",
-    "text": "Data Scientists\n\nAll data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)\nHowever, you can differentiate yourself in the scary scary job market by developing a particular focus on some “non-standard” type: text data, temporal data, signal processing, and/or geospatial data!"
+    "section": "My GIS Adventures",
+    "text": "My GIS Adventures\n\nHigh school project: mine defusal in Indochina\nAs a Telecommunications Engineer for Huawei (HKUST)\nAs an Urban Economist at UC Berkeley\n\nUsed, e.g., Google Maps API to evaluate effects of Suburbanization of Poverty"
   },
   {
-    "objectID": "w01/slides.html#public-policy-experts",
-    "href": "w01/slides.html#public-policy-experts",
+    "objectID": "w01/slides.html#my-gis-moment",
+    "href": "w01/slides.html#my-gis-moment",
     "title": "Week 1: Introduction to GIS",
-    "section": "Public Policy Experts",
-    "text": "Public Policy Experts\n\nOftentimes, all it takes is one map to see why a policy has failed 😱"
+    "section": "My GIS 🤯 Moment",
+    "text": "My GIS 🤯 Moment\n\nHorrors of the “““Vietnam”“” “““War”“” did not end in 1975… Casualties from unexploded ordnance (cluster bombs) have continued to devastate the region, with over 219,000 victims:\n\n&gt;105K in Vietnam\n&gt;50K in Laos\n&gt;65K in Cambodia"
+  },
+  {
+    "objectID": "w01/slides.html#at-huawei-optimizing-cell-tower-placement",
+    "href": "w01/slides.html#at-huawei-optimizing-cell-tower-placement",
+    "title": "Week 1: Introduction to GIS",
+    "section": "At Huawei: Optimizing Cell Tower Placement",
+    "text": "At Huawei: Optimizing Cell Tower Placement"
+  },
+  {
+    "objectID": "w01/slides.html#the-suburbanization-of-poverty",
+    "href": "w01/slides.html#the-suburbanization-of-poverty",
+    "title": "Week 1: Introduction to GIS",
+    "section": "The Suburbanization of Poverty",
+    "text": "The Suburbanization of Poverty\n\nSince 2008, a person living in poverty in the US is more likely to be in a suburb than an “inner city”"
+  },
+  {
+    "objectID": "w01/slides.html#as-humans",
+    "href": "w01/slides.html#as-humans",
+    "title": "Week 1: Introduction to GIS",
+    "section": "As Humans",
+    "text": "As Humans\n\nTo understand the world around you!"
+  },
+  {
+    "objectID": "w01/slides.html#as-data-scientists",
+    "href": "w01/slides.html#as-data-scientists",
+    "title": "Week 1: Introduction to GIS",
+    "section": "As Data Scientists",
+    "text": "As Data Scientists\n\nAll data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)\nHowever, you can differentiate yourself in the scary scary job market by developing a particular focus on some “non-standard” type: text data, temporal data, signal processing, and/or geospatial data!"
+  },
+  {
+    "objectID": "w01/slides.html#as-public-policy-experts",
+    "href": "w01/slides.html#as-public-policy-experts",
+    "title": "Week 1: Introduction to GIS",
+    "section": "As Public Policy Experts",
+    "text": "As Public Policy Experts\n\nOftentimes, all it takes is one map to see why a policy has failed 😱"
+  },
+  {
+    "objectID": "w01/slides.html#its-completely-made-up",
+    "href": "w01/slides.html#its-completely-made-up",
+    "title": "Week 1: Introduction to GIS",
+    "section": "It’s Completely Made Up",
+    "text": "It’s Completely Made Up\nLike, even more made up than other made-up technical terms… 😵‍💫"
+  },
+  {
+    "objectID": "w01/slides.html#what-i-mean-by-made-up",
+    "href": "w01/slides.html#what-i-mean-by-made-up",
+    "title": "Week 1: Introduction to GIS",
+    "section": "What I Mean By “Made Up”",
+    "text": "What I Mean By “Made Up”\n\nThe libraries and tools we’ll use are specific systems/methods for analyzing geospatial data\nGIS is an “umbrella term”, which just vaguely refers to this entire universe of libraries/tools/techniques/approaches\n\n\n\n\n\n\n\n\n\nUmbrella Term\nConcepts\nSpecific Skills\n\n\n\n\nCoding\n\nVariables\nControl Flow\nAlgorithms\n\n\nPython\nR\nJavaScript\n\n\n\nGIS\n\nProjections\nVector vs. Raster\nSpatial Data Formats (shapefiles, .geojson)\n\n\nArcGIS\nGeoPandas (Python)\nsf (R)"
   },
   {
     "objectID": "w01/slides.html#arcgis",
@@ -76,27 +125,97 @@
     "href": "w01/index.html#who-am-i-why-am-i-teaching-you",
     "title": "Week 1: Introduction to GIS",
     "section": "Who Am I? Why Am I Teaching You?",
-    "text": "Who Am I? Why Am I Teaching You?\n\nStarted out as PhD student in Computer Science\n\nUCLA: Algorithmic Game Theory\nStanford (MS): Economic Network Analysis\n\nEnded up with PhD in Political Economy\n\nColumbia: “Computational Political Theory”\n\nUsed GIS throughout, but especially while working as an Urban Economist at UC Berkeley\n\nUsed, e.g., Google Maps API to evaluate effects of Suburbanization of Poverty",
+    "text": "Who Am I? Why Am I Teaching You?\n\nStarted out as PhD student in Computer Science\n\nUCLA: Algorithmic Game Theory\nStanford (MS): Economic Network Analysis\n\nEnded up with PhD in Political Economy\n\nColumbia: “Computational Political Theory”",
     "crumbs": [
       "Week 1: Aug 28"
     ]
   },
   {
-    "objectID": "w01/index.html#data-scientists",
-    "href": "w01/index.html#data-scientists",
+    "objectID": "w01/index.html#my-gis-adventures",
+    "href": "w01/index.html#my-gis-adventures",
     "title": "Week 1: Introduction to GIS",
-    "section": "Data Scientists",
-    "text": "Data Scientists\n\nAll data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)\nHowever, you can differentiate yourself in the scary scary job market by developing a particular focus on some “non-standard” type: text data, temporal data, signal processing, and/or geospatial data!",
+    "section": "My GIS Adventures",
+    "text": "My GIS Adventures\n\nHigh school project: mine defusal in Indochina\nAs a Telecommunications Engineer for Huawei (HKUST)\nAs an Urban Economist at UC Berkeley\n\nUsed, e.g., Google Maps API to evaluate effects of Suburbanization of Poverty",
     "crumbs": [
       "Week 1: Aug 28"
     ]
   },
   {
-    "objectID": "w01/index.html#public-policy-experts",
-    "href": "w01/index.html#public-policy-experts",
+    "objectID": "w01/index.html#my-gis-moment",
+    "href": "w01/index.html#my-gis-moment",
     "title": "Week 1: Introduction to GIS",
-    "section": "Public Policy Experts",
-    "text": "Public Policy Experts\n\nOftentimes, all it takes is one map to see why a policy has failed 😱",
+    "section": "My GIS 🤯 Moment",
+    "text": "My GIS 🤯 Moment\n\nHorrors of the “““Vietnam”“” “““War”“” did not end in 1975… Casualties from unexploded ordnance (cluster bombs) have continued to devastate the region, with over 219,000 victims:\n\n&gt;105K in Vietnam\n&gt;50K in Laos\n&gt;65K in Cambodia",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#at-huawei-optimizing-cell-tower-placement",
+    "href": "w01/index.html#at-huawei-optimizing-cell-tower-placement",
+    "title": "Week 1: Introduction to GIS",
+    "section": "At Huawei: Optimizing Cell Tower Placement",
+    "text": "At Huawei: Optimizing Cell Tower Placement",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#the-suburbanization-of-poverty",
+    "href": "w01/index.html#the-suburbanization-of-poverty",
+    "title": "Week 1: Introduction to GIS",
+    "section": "The Suburbanization of Poverty",
+    "text": "The Suburbanization of Poverty\n\nSince 2008, a person living in poverty in the US is more likely to be in a suburb than an “inner city”",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#as-humans",
+    "href": "w01/index.html#as-humans",
+    "title": "Week 1: Introduction to GIS",
+    "section": "As Humans",
+    "text": "As Humans\n\nTo understand the world around you!",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#as-data-scientists",
+    "href": "w01/index.html#as-data-scientists",
+    "title": "Week 1: Introduction to GIS",
+    "section": "As Data Scientists",
+    "text": "As Data Scientists\n\nAll data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)\nHowever, you can differentiate yourself in the scary scary job market by developing a particular focus on some “non-standard” type: text data, temporal data, signal processing, and/or geospatial data!",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#as-public-policy-experts",
+    "href": "w01/index.html#as-public-policy-experts",
+    "title": "Week 1: Introduction to GIS",
+    "section": "As Public Policy Experts",
+    "text": "As Public Policy Experts\n\nOftentimes, all it takes is one map to see why a policy has failed 😱",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#its-completely-made-up",
+    "href": "w01/index.html#its-completely-made-up",
+    "title": "Week 1: Introduction to GIS",
+    "section": "It’s Completely Made Up",
+    "text": "It’s Completely Made Up\nLike, even more made up than other made-up technical terms… 😵‍💫",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#what-i-mean-by-made-up",
+    "href": "w01/index.html#what-i-mean-by-made-up",
+    "title": "Week 1: Introduction to GIS",
+    "section": "What I Mean By “Made Up”",
+    "text": "What I Mean By “Made Up”\n\nThe libraries and tools we’ll use are specific systems/methods for analyzing geospatial data\nGIS is an “umbrella term”, which just vaguely refers to this entire universe of libraries/tools/techniques/approaches\n\n\n\n\n\n\n\n\n\nUmbrella Term\nConcepts\nSpecific Skills\n\n\n\n\nCoding\n\nVariables\nControl Flow\nAlgorithms\n\n\nPython\nR\nJavaScript\n\n\n\nGIS\n\nProjections\nVector vs. Raster\nSpatial Data Formats (shapefiles, .geojson)\n\n\nArcGIS\nGeoPandas (Python)\nsf (R)",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -169,11 +288,21 @@
     ]
   },
   {
+    "objectID": "syllabus.html#course-description",
+    "href": "syllabus.html#course-description",
+    "title": "Syllabus",
+    "section": "Course Description",
+    "text": "Course Description\nThis course provides students with an overview of Geographic Information Systems (GIS), encompassing both general principles of geospatial data analysis and their applications for studying important issues of climate change, international conflict, economic development, and urban planning, among other areas of application.\nThe beginning of the course emphasizes fundamentals of GIS design and use, such as projection systems, raster and vector data, and efficient representation and storage of geospatial data. As students become more comfortable with these foundations, the course will shift to a greater emphasis on applications during the second half of the semester. Particular emphasis will be placed on effective visualization of spatial data, through creation of static publication-quality maps as well as interactive maps for web applications and data dashboards.\nThe course will utilize libraries from R, Python, and JavaScript as needed, so experience using any of these languages will be helpful, but is not required. Pre-requisites (for PPOL students): PPOL 564 or PPOL 670.",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
     "objectID": "syllabus.html#assignment-structure",
     "href": "syllabus.html#assignment-structure",
     "title": "Syllabus",
     "section": "Assignment Structure",
-    "text": "Assignment Structure\nOn the basis of the guidelines we’ve developed for courses offered through DSAN, this course will have one in-class midterm but no final exam! Instead, you will work on a final project throughout the second half of the course. Each of the four units will involve a homework assignment, and final grades will be determined using the following weighting scheme:\n\n\n\n\nCategory\nPercent of Final Grade\n\n\n\n\nIn-Class Midterm\n30%\n\n\nFinal Project\n30%\n\n\nHomeworks\n40%\n\n\nHW1: TBD\n10%\n\n\nHW2: TBD\n10%\n\n\nHW3: TBD\n10%\n\n\nHW4: TBD\n10%\n\n\n\n\nThe course does not have any “official” prerequisites, but a general comfort with Python is strongly recommended. If you have never used Python before, however (or if you haven’t used it in a while and feel like your skills are rusty), you can browse the materials on the Resources page!",
+    "text": "Assignment Structure\nOn the basis of the guidelines we’ve developed for courses offered through DSAN, this course will have one in-class midterm but no final exam! Instead, you will work on a final project throughout the second half of the course. Each of the four units will involve a homework assignment, and final grades will be determined using the following weighting scheme:\n\n\n\nCategory\nPercent of Final Grade\n\n\n\n\nIn-Class Midterm\n30%\n\n\nFinal Project\n30%\n\n\nHomeworks\n40%\n\n\nHW1: TBD\n10%\n\n\nHW2: TBD\n10%\n\n\nHW3: TBD\n10%\n\n\nHW4: TBD\n10%\n\n\n\nThe course does not have any “official” prerequisites, but a general comfort with Python is strongly recommended. If you have never used Python before, however (or if you haven’t used it in a while and feel like your skills are rusty), you can browse the materials on the Resources page!",
     "crumbs": [
       "Syllabus"
     ]
@@ -183,7 +312,7 @@
     "href": "syllabus.html#course-topics-calendar",
     "title": "Syllabus",
     "section": "Course Topics / Calendar",
-    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, please let me know.\n\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Overview\n1\nAug 28\nIntroduction to GIS\n\n\n\n2\nSep 4\nWeek 2\n\n\n\n3\nSep 11\nWeek 3\n\n\nUnit 2: GIS APIs\n4\nSep 18\nWeek 4\n\n\n\n5\nSep 25\nWeek 5\n\n\n\n6\nOct 2\nWeek 6\n\n\n\n7\nOct 9\nWeek 7\n\n\nUnit 3: Geospatial Data Analysis\n8\nOct 16\nWeek 8\n\n\n\n9\nOct 23\nWeek 9\n\n\n\n10\nOct 30\nWeek 10\n\n\n\n11\nNov 6\nWeek 11\n\n\nUnit 4: Datasets, Data Sharing, and Reproducible Science\n12\nNov 13\nWeek 12\n\n\n\n13\nNov 20\nWeek 13\n\n\n\n\nNov 27\nNo Class (Fall Break)\n\n\n\n14\nDec 4\nWeek 14",
+    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, please let me know.\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Overview\n1\nAug 28\nIntroduction to GIS\n\n\n\n2\nSep 4\nWeek 2\n\n\n\n3\nSep 11\nWeek 3\n\n\nUnit 2: GIS APIs\n4\nSep 18\nWeek 4\n\n\n\n5\nSep 25\nWeek 5\n\n\n\n6\nOct 2\nWeek 6\n\n\n\n7\nOct 9\nWeek 7\n\n\nUnit 3: Geospatial Data Analysis\n8\nOct 16\nWeek 8\n\n\n\n9\nOct 23\nWeek 9\n\n\n\n10\nOct 30\nWeek 10\n\n\n\n11\nNov 6\nWeek 11\n\n\nUnit 4: Datasets, Data Sharing, and Reproducible Science\n12\nNov 13\nWeek 12\n\n\n\n13\nNov 20\nWeek 13\n\n\n\n\nNov 27\nNo Class (Fall Break)\n\n\n\n14\nDec 4\nWeek 14",
     "crumbs": [
       "Syllabus"
     ]
@@ -213,7 +342,7 @@
     "href": "syllabus.html#final-letter-grade-determination",
     "title": "Syllabus",
     "section": "Final Letter Grade Determination",
-    "text": "Final Letter Grade Determination\nFor DSAN students, once all assignments have been graded, we will compute your final numeric grade according to the above weighting, rounded to two decimal places. The letter grade that we report to Georgetown on the basis of this numeric grade will then follow the DSAN letter grade policy as follows, where the start and end points for each range are inclusive:\n\n\n\n\nRange Start\nRange End\nLetter Grade\n\n\n\n\n92.50\n100.00\nA\n\n\n89.50\n92.49\nA-\n\n\n87.99\n89.49\nB+\n\n\n81.50\n87.98\nB\n\n\n79.50\n81.49\nB-\n\n\n69.50\n79.49\nC\n\n\n59.50\n69.49\nD\n\n\n0.00\n59.49\nF",
+    "text": "Final Letter Grade Determination\nFor DSAN students, once all assignments have been graded, we will compute your final numeric grade according to the above weighting, rounded to two decimal places. The letter grade that we report to Georgetown on the basis of this numeric grade will then follow the DSAN letter grade policy as follows, where the start and end points for each range are inclusive:\n\n\n\nRange Start\nRange End\nLetter Grade\n\n\n\n\n92.50\n100.00\nA\n\n\n89.50\n92.49\nA-\n\n\n87.99\n89.49\nB+\n\n\n81.50\n87.98\nB\n\n\n79.50\n81.49\nB-\n\n\n69.50\n79.49\nC\n\n\n59.50\n69.49\nD\n\n\n0.00\n59.49\nF",
     "crumbs": [
       "Syllabus"
     ]

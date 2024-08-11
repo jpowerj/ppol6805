@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.23">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jeff Jacobs">
 
-<title>DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS) – Week 1: Introduction to GIS</title>
+<title>Week 1: Introduction to GIS – DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,13 +80,13 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w01/index.html">Week 1: Aug 28</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -142,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2024-07-21, 11:35:38 PM</em></p>
+<p><em>Updated 2024-08-11, 02:44:38 AM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -154,11 +154,21 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#welcome-to-the-wonderful-world-of-gis" id="toc-welcome-to-the-wonderful-world-of-gis" class="nav-link active" data-scroll-target="#welcome-to-the-wonderful-world-of-gis">Welcome to The Wonderful World of GIS!</a>
   <ul class="collapse">
   <li><a href="#who-am-i-why-am-i-teaching-you" id="toc-who-am-i-why-am-i-teaching-you" class="nav-link" data-scroll-target="#who-am-i-why-am-i-teaching-you">Who Am I? Why Am I Teaching You?</a></li>
+  <li><a href="#my-gis-adventures" id="toc-my-gis-adventures" class="nav-link" data-scroll-target="#my-gis-adventures">My GIS Adventures</a></li>
+  <li><a href="#my-gis-moment" id="toc-my-gis-moment" class="nav-link" data-scroll-target="#my-gis-moment">My GIS 🤯 Moment</a></li>
+  <li><a href="#at-huawei-optimizing-cell-tower-placement" id="toc-at-huawei-optimizing-cell-tower-placement" class="nav-link" data-scroll-target="#at-huawei-optimizing-cell-tower-placement">At Huawei: Optimizing Cell Tower Placement</a></li>
+  <li><a href="#the-suburbanization-of-poverty" id="toc-the-suburbanization-of-poverty" class="nav-link" data-scroll-target="#the-suburbanization-of-poverty">The Suburbanization of Poverty</a></li>
   </ul></li>
   <li><a href="#why-should-you-care-about-gis" id="toc-why-should-you-care-about-gis" class="nav-link" data-scroll-target="#why-should-you-care-about-gis">Why Should You Care About GIS?</a>
   <ul class="collapse">
-  <li><a href="#data-scientists" id="toc-data-scientists" class="nav-link" data-scroll-target="#data-scientists">Data Scientists</a></li>
-  <li><a href="#public-policy-experts" id="toc-public-policy-experts" class="nav-link" data-scroll-target="#public-policy-experts">Public Policy Experts</a></li>
+  <li><a href="#as-humans" id="toc-as-humans" class="nav-link" data-scroll-target="#as-humans">As Humans</a></li>
+  <li><a href="#as-data-scientists" id="toc-as-data-scientists" class="nav-link" data-scroll-target="#as-data-scientists">As Data Scientists</a></li>
+  <li><a href="#as-public-policy-experts" id="toc-as-public-policy-experts" class="nav-link" data-scroll-target="#as-public-policy-experts">As Public Policy Experts</a></li>
+  </ul></li>
+  <li><a href="#so-what-is-gis" id="toc-so-what-is-gis" class="nav-link" data-scroll-target="#so-what-is-gis">So… What <em>Is</em> GIS?</a>
+  <ul class="collapse">
+  <li><a href="#its-completely-made-up" id="toc-its-completely-made-up" class="nav-link" data-scroll-target="#its-completely-made-up">It’s Completely Made Up</a></li>
+  <li><a href="#what-i-mean-by-made-up" id="toc-what-i-mean-by-made-up" class="nav-link" data-scroll-target="#what-i-mean-by-made-up">What I Mean By “Made Up”</a></li>
   <li><a href="#arcgis" id="toc-arcgis" class="nav-link" data-scroll-target="#arcgis">ArcGIS</a></li>
   </ul></li>
   <li><a href="#how-to-not-be-scared-of-prerequisites" id="toc-how-to-not-be-scared-of-prerequisites" class="nav-link" data-scroll-target="#how-to-not-be-scared-of-prerequisites">How To Not Be Scared of Prerequisites</a>
@@ -175,7 +185,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Week 1: Introduction to GIS</h1>
-<p class="subtitle lead"><em>DSAN 6750 / PPOL 6805: Geographic Information Systems</em><br><em>Fall 2024</em></p>
+<p class="subtitle lead"><em>DSAN 6750 / PPOL 6805: Geographic Information Systems</em><br>Fall 2024</p>
   <div class="quarto-categories">
     <div class="quarto-category">Class Sessions</div>
   </div>
@@ -217,8 +227,8 @@ ul.task-list li input[type="checkbox"] {
 <center class="mb-3">
 <a class="h2" href="./slides.html" target="_blank">Open slides in new tab →</a>
 </center>
-<section id="welcome-to-the-wonderful-world-of-gis" class="level1" data-stack-name="About Me">
-<h1 data-stack-name="About Me">Welcome to The Wonderful World of GIS!</h1>
+<section id="welcome-to-the-wonderful-world-of-gis" class="level1" data-stack-name="Why Me?">
+<h1 data-stack-name="Why Me?">Welcome to The Wonderful World of GIS!</h1>
 <section id="who-am-i-why-am-i-teaching-you" class="level2 crunch-title">
 <h2 class="crunch-title anchored" data-anchor-id="who-am-i-why-am-i-teaching-you">Who Am I? Why Am I Teaching You?</h2>
 <ul>
@@ -231,31 +241,125 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Columbia: “Computational Political Theory”</li>
 </ul></li>
-<li>Used GIS throughout, but especially while working as an <strong>Urban Economist</strong> at UC Berkeley
+</ul>
+</section>
+<section id="my-gis-adventures" class="level2">
+<h2 class="anchored" data-anchor-id="my-gis-adventures">My GIS Adventures</h2>
+<ul>
+<li>High school project: <strong>mine defusal</strong> in Indochina</li>
+<li>As a <strong>Telecommunications Engineer</strong> for Huawei (HKUST)</li>
+<li>As an <strong>Urban Economist</strong> at UC Berkeley
 <ul>
 <li>Used, e.g., Google Maps API to evaluate effects of <a href="https://www.brookings.edu/wp-content/uploads/2016/06/0120_poverty_paper.pdf" target="_blank"><strong>Suburbanization of Poverty</strong></a></li>
 </ul></li>
 </ul>
 </section>
-</section>
-<section id="why-should-you-care-about-gis" class="level1" data-stack-name="About GIS">
-<h1 data-stack-name="About GIS">Why Should You Care About GIS?</h1>
+<section id="my-gis-moment" class="level2">
+<h2 class="anchored" data-anchor-id="my-gis-moment">My GIS 🤯 Moment</h2>
 <ul>
-<li>Data Scientists</li>
-<li>Public Policy Experts</li>
+<li>Horrors of the “““Vietnam”“” “““War”“” did not end in 1975… Casualties from unexploded ordnance (cluster bombs) have continued to devastate the region, with over 219,000 victims:
+<ul>
+<li><a href="https://www.baldwin.senate.gov/imo/media/doc/Legacies%20of%20War%20Recognition%20and%20UXO%20Removal%20Act.pdf" target="_blank">&gt;105K in Vietnam</a></li>
+<li><a href="https://www.cnn.com/2016/09/05/asia/united-states-laos-secret-war/index.html" target="_blank">&gt;50K in Laos</a></li>
+<li><a href="https://apnews.com/article/bombs-land-mines-unexploded-ordnance-demining-564f0203aeb53aa95118a1396b907246" target="_blank">&gt;65K in Cambodia</a></li>
+</ul></li>
 </ul>
-<section id="data-scientists" class="level2">
-<h2 class="anchored" data-anchor-id="data-scientists">Data Scientists</h2>
+</section>
+<section id="at-huawei-optimizing-cell-tower-placement" class="level2">
+<h2 class="anchored" data-anchor-id="at-huawei-optimizing-cell-tower-placement">At Huawei: Optimizing Cell Tower Placement</h2>
+<ul>
+<li></li>
+</ul>
+</section>
+<section id="the-suburbanization-of-poverty" class="level2">
+<h2 class="anchored" data-anchor-id="the-suburbanization-of-poverty">The Suburbanization of Poverty</h2>
+<ul>
+<li>Since 2008, a person living in poverty in the US is more likely to be in a <strong>suburb</strong> than an “inner city”</li>
+</ul>
+</section>
+</section>
+<section id="why-should-you-care-about-gis" class="level1" data-stack-name="Why GIS?">
+<h1 data-stack-name="Why GIS?">Why Should You Care About GIS?</h1>
+<ul>
+<li>As a Human</li>
+<li>As a Data Scientist</li>
+<li>As a Public Policy Expert</li>
+</ul>
+<section id="as-humans" class="level2">
+<h2 class="anchored" data-anchor-id="as-humans">As Humans</h2>
+<ul>
+<li>To understand the world around you!</li>
+</ul>
+</section>
+<section id="as-data-scientists" class="level2">
+<h2 class="anchored" data-anchor-id="as-data-scientists">As Data Scientists</h2>
 <ul>
 <li>All data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)</li>
 <li>However, you can <strong>differentiate yourself</strong> in the scary scary job market by developing a particular focus on some “non-standard” type: <strong>text</strong> data, <strong>temporal</strong> data, <strong>signal</strong> processing, and/or <strong>geospatial</strong> data!</li>
 </ul>
 </section>
-<section id="public-policy-experts" class="level2">
-<h2 class="anchored" data-anchor-id="public-policy-experts">Public Policy Experts</h2>
+<section id="as-public-policy-experts" class="level2">
+<h2 class="anchored" data-anchor-id="as-public-policy-experts">As Public Policy Experts</h2>
 <ul>
 <li>Oftentimes, all it takes is one map to see why a policy has failed 😱</li>
 </ul>
+</section>
+</section>
+<section id="so-what-is-gis" class="level1" data-stack-name="What is GIS?">
+<h1 data-stack-name="What is GIS?">So… What <em>Is</em> GIS?</h1>
+<section id="its-completely-made-up" class="level2 smaller crunch-title">
+<h2 class="smaller crunch-title anchored" data-anchor-id="its-completely-made-up">It’s Completely Made Up</h2>
+<p><em>Like, even more made up than other made-up technical terms…</em> 😵‍💫</p>
+<div class="quarto-video"><iframe data-external="1" src="https://www.youtube.com/embed/yjw_DuNkOUw" width="100%" height="500" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="what-i-mean-by-made-up" class="level2 smaller crunch-title crunch-ul">
+<h2 class="smaller crunch-title crunch-ul anchored" data-anchor-id="what-i-mean-by-made-up">What I Mean By “Made Up”</h2>
+<ul>
+<li>The <strong>libraries</strong> and <strong>tools</strong> we’ll use are <strong>specific</strong> systems/methods for analyzing geospatial data</li>
+<li><strong>GIS</strong> is an “umbrella term”, which just vaguely refers to this entire universe of libraries/tools/techniques/approaches</li>
+</ul>
+<table class="caption-top table" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th class="tdc" data-quarto-table-cell-role="th">Umbrella Term</th>
+<th class="tdc" data-quarto-table-cell-role="th">Concepts</th>
+<th class="tdc" data-quarto-table-cell-role="th">Specific Skills</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="tdc"><strong>Coding</strong></td>
+<td><ul>
+<li>Variables</li>
+<li>Control Flow</li>
+<li>Algorithms</li>
+</ul></td>
+<td><ul>
+<li>Python</li>
+<li>R</li>
+<li>JavaScript</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="tdc"><strong>GIS</strong></td>
+<td><ul>
+<li>Projections</li>
+<li>Vector vs.&nbsp;Raster</li>
+<li>Spatial Data Formats (shapefiles, <code>.geojson</code>)</li>
+</ul></td>
+<td class="tdvc"><ul>
+<li>ArcGIS</li>
+<li>GeoPandas (Python)</li>
+<li><a href="https://r-spatial.github.io/sf/" target="_blank"><code>sf</code></a> (R)</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="arcgis" class="level2">
 <h2 class="anchored" data-anchor-id="arcgis">ArcGIS</h2>
@@ -316,18 +420,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -359,7 +452,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -367,7 +482,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

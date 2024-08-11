@@ -14,6 +14,10 @@ a.disabled {
   margin-bottom: 0px !important;
 }
 
+.crunch-ul ul {
+  margin-bottom: 2px !important;
+}
+
 .new-unit {
   border-top: 2px solid gray !important;
 }
@@ -56,4 +60,15 @@ a.disabled {
 
 table thead th {
   background-clip: padding-box;
+}
+
+/* td centering */
+.tdc {
+  vertical-align: middle !important;
+  text-align: center !important;
+}
+
+/* td vertical centering */
+.tdvc {
+  vertical-align: middle !important;
 }
