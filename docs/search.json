@@ -270,19 +270,19 @@
   {
     "objectID": "syllabus.html",
     "href": "syllabus.html",
-    "title": "Syllabus",
+    "title": "DSAN 6750 / PPOL 6805",
     "section": "",
-    "text": "Welcome to the Fall 2024 version of Geographic Information Systems at Georgetown University!",
+    "text": "Welcome to the Fall 2024 version of Geographic Information Systems (GIS) and Geospatial Data Analysis at Georgetown University! Please note that the most up-to-date version of this syllabus will always be available at jjacobs.me/dsan6750",
     "crumbs": [
       "Syllabus"
     ]
   },
   {
-    "objectID": "syllabus.html#course-staff",
-    "href": "syllabus.html#course-staff",
-    "title": "Syllabus",
-    "section": "Course Staff",
-    "text": "Course Staff\n\nProf. Jeff Jacobs, jj1088@georgetown.edu\n\nOffice hours: TBD, held in Car Barn Room 207-04A\n\nTAs: to be determined!",
+    "objectID": "syllabus.html#course-staff-and-office-hours",
+    "href": "syllabus.html#course-staff-and-office-hours",
+    "title": "DSAN 6750 / PPOL 6805",
+    "section": "Course Staff and Office Hours",
+    "text": "Course Staff and Office Hours\n\nProf. Jeff Jacobs, jj1088@georgetown.edu: Schedule office hour slots at jjacobs.me/meet\n\nMondays 4:30-6:30pm\nTuesdays 3-5:30pm\n(Please try to schedule at least 8 hours in advance, and let me know briefly what you’d like to discuss, so I have time to prepare)\n\nTA\n\nTBD",
     "crumbs": [
       "Syllabus"
     ]
@@ -290,7 +290,7 @@
   {
     "objectID": "syllabus.html#course-description",
     "href": "syllabus.html#course-description",
-    "title": "Syllabus",
+    "title": "DSAN 6750 / PPOL 6805",
     "section": "Course Description",
     "text": "Course Description\nThis course provides students with an overview of Geographic Information Systems (GIS), encompassing both general principles of geospatial data analysis and their applications for studying important issues of climate change, international conflict, economic development, and urban planning, among other areas of application.\nThe beginning of the course emphasizes fundamentals of GIS design and use, such as projection systems, raster and vector data, and efficient representation and storage of geospatial data. As students become more comfortable with these foundations, the course will shift to a greater emphasis on applications during the second half of the semester. Particular emphasis will be placed on effective visualization of spatial data, through creation of static publication-quality maps as well as interactive maps for web applications and data dashboards.\nThe course will utilize libraries from R, Python, and JavaScript as needed, so experience using any of these languages will be helpful, but is not required. Pre-requisites (for PPOL students): PPOL 564 or PPOL 670.",
     "crumbs": [
@@ -300,7 +300,7 @@
   {
     "objectID": "syllabus.html#assignment-structure",
     "href": "syllabus.html#assignment-structure",
-    "title": "Syllabus",
+    "title": "DSAN 6750 / PPOL 6805",
     "section": "Assignment Structure",
     "text": "Assignment Structure\nOn the basis of the guidelines we’ve developed for courses offered through DSAN, this course will have one in-class midterm but no final exam! Instead, you will work on a final project throughout the second half of the course. Each of the four units will involve a homework assignment, and final grades will be determined using the following weighting scheme:\n\n\n\nCategory\nPercent of Final Grade\n\n\n\n\nIn-Class Midterm\n30%\n\n\nFinal Project\n30%\n\n\nHomeworks\n40%\n\n\nHW1: TBD\n10%\n\n\nHW2: TBD\n10%\n\n\nHW3: TBD\n10%\n\n\nHW4: TBD\n10%\n\n\n\nThe course does not have any “official” prerequisites, but a general comfort with Python is strongly recommended. If you have never used Python before, however (or if you haven’t used it in a while and feel like your skills are rusty), you can browse the materials on the Resources page!",
     "crumbs": [
@@ -310,9 +310,9 @@
   {
     "objectID": "syllabus.html#course-topics-calendar",
     "href": "syllabus.html#course-topics-calendar",
-    "title": "Syllabus",
+    "title": "DSAN 6750 / PPOL 6805",
     "section": "Course Topics / Calendar",
-    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, please let me know.\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Overview\n1\nAug 28\nIntroduction to GIS\n\n\n\n2\nSep 4\nWeek 2\n\n\n\n3\nSep 11\nWeek 3\n\n\nUnit 2: GIS APIs\n4\nSep 18\nWeek 4\n\n\n\n5\nSep 25\nWeek 5\n\n\n\n6\nOct 2\nWeek 6\n\n\n\n7\nOct 9\nWeek 7\n\n\nUnit 3: Geospatial Data Analysis\n8\nOct 16\nWeek 8\n\n\n\n9\nOct 23\nWeek 9\n\n\n\n10\nOct 30\nWeek 10\n\n\n\n11\nNov 6\nWeek 11\n\n\nUnit 4: Datasets, Data Sharing, and Reproducible Science\n12\nNov 13\nWeek 12\n\n\n\n13\nNov 20\nWeek 13\n\n\n\n\nNov 27\nNo Class (Fall Break)\n\n\n\n14\nDec 4\nWeek 14",
+    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, please let me know.\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Concepts\n1\nAug 28\nIntroduction to GIS\n\n\n\n2\nSep 4\nWeek 2\n\n\n\n3\nSep 11\nWeek 3\n\n\nUnit 2: GIS Libraries\n4\nSep 18\nWeek 4\n\n\n\n5\nSep 25\nWeek 5\n\n\n\n6\nOct 2\nWeek 6\n\n\n\n7\nOct 9\nWeek 7\n\n\nUnit 3: Geospatial Data Analysis\n8\nOct 16\nWeek 8\n\n\n\n9\nOct 23\nWeek 9\n\n\n\n10\nOct 30\nWeek 10\n\n\n\n11\nNov 6\nIn-Class Midterm\n\n\nUnit 4: Applications\n12\nNov 13\nWeek 12\n\n\n\n13\nNov 20\nWeek 13\n\n\n\n\nNov 27\nNo Class (Fall Break)\n\n\n\n14\nDec 4\nWeek 14",
     "crumbs": [
       "Syllabus"
     ]
@@ -320,7 +320,7 @@
   {
     "objectID": "syllabus.html#assignment-distribution-submission-and-grading",
     "href": "syllabus.html#assignment-distribution-submission-and-grading",
-    "title": "Syllabus",
+    "title": "DSAN 6750 / PPOL 6805",
     "section": "Assignment Distribution, Submission, and Grading",
     "text": "Assignment Distribution, Submission, and Grading\nThe programming assignments for the course will be managed through Google Classroom. This means that, to work on and submit the assignments, you will use the following workflow:\n\nOpen the .ipynb file for the assignment from within Google Classroom\nWork on the problems within the file, saving your progress early and often! You can try things out or create drafts of your solutions however you’d like (for example, in VSCode or JupyterLab or any other IDE), but your final submission for each assignment must be submitted through the Google Classroom interface!\nSubmit the completed version of the assignment by clicking the blue “Hand in” button on the assignment page.\n\nThe interface allows you to unsubmit and continue working on an assignment, for example if you find a mistake, but be careful and make sure you resubmit once you’ve fixed the mistake, since submissions will not be accepted after the grace period for late submission has ended.",
     "crumbs": [
@@ -330,7 +330,7 @@
   {
     "objectID": "syllabus.html#late-policy",
     "href": "syllabus.html#late-policy",
-    "title": "Syllabus",
+    "title": "DSAN 6750 / PPOL 6805",
     "section": "Late Policy",
     "text": "Late Policy\nAfter the due date, for each homework assignment, you will have a grace period of 24 hours to submit the assignment without a lateness penalty. After this 24 hour grace period, late penalties will be applied up until 66 hours after the due date. Specifically, late penalties will be applied based on the following scale (unless you obtain an excused lateness from one of the instructional staff!):\n\n0 to 24 hours after due date: no penalty\n24 to 30 hours after due date: 2.5% penalty\n30 to 42 hours after due date: 5% penalty\n42 to 54 hours after due date: 10% penalty\n54 to 66 hours after due date: 20% penalty\nMore than 66 hours after due date: Assignment submissions no longer accepted (without instructor approval)",
     "crumbs": [
@@ -340,19 +340,9 @@
   {
     "objectID": "syllabus.html#final-letter-grade-determination",
     "href": "syllabus.html#final-letter-grade-determination",
-    "title": "Syllabus",
+    "title": "DSAN 6750 / PPOL 6805",
     "section": "Final Letter Grade Determination",
-    "text": "Final Letter Grade Determination\nFor DSAN students, once all assignments have been graded, we will compute your final numeric grade according to the above weighting, rounded to two decimal places. The letter grade that we report to Georgetown on the basis of this numeric grade will then follow the DSAN letter grade policy as follows, where the start and end points for each range are inclusive:\n\n\n\nRange Start\nRange End\nLetter Grade\n\n\n\n\n92.50\n100.00\nA\n\n\n89.50\n92.49\nA-\n\n\n87.99\n89.49\nB+\n\n\n81.50\n87.98\nB\n\n\n79.50\n81.49\nB-\n\n\n69.50\n79.49\nC\n\n\n59.50\n69.49\nD\n\n\n0.00\n59.49\nF",
-    "crumbs": [
-      "Syllabus"
-    ]
-  },
-  {
-    "objectID": "syllabus.html#official-course-description",
-    "href": "syllabus.html#official-course-description",
-    "title": "Syllabus",
-    "section": "Official Course Description",
-    "text": "Official Course Description\nTBD",
+    "text": "Final Letter Grade Determination\nOnce all assignments have been graded, we will compute your final numeric grade according to the above weighting, rounded to two decimal places. The letter grade that we report to Georgetown on the basis of this numeric grade will then follow the DSAN letter grade policy as follows, where the start and end points for each range are inclusive:\n\n\n\nRange Start\nRange End\nLetter Grade\n\n\n\n\n92.50\n100.00\nA\n\n\n89.50\n92.49\nA-\n\n\n87.99\n89.49\nB+\n\n\n81.50\n87.98\nB\n\n\n79.50\n81.49\nB-\n\n\n69.50\n79.49\nC\n\n\n59.50\n69.49\nD\n\n\n0.00\n59.49\nF",
     "crumbs": [
       "Syllabus"
     ]
@@ -360,7 +350,7 @@
   {
     "objectID": "syllabus.html#title-ixsexual-misconduct-statement",
     "href": "syllabus.html#title-ixsexual-misconduct-statement",
-    "title": "Syllabus",
+    "title": "DSAN 6750 / PPOL 6805",
     "section": "Title IX/Sexual Misconduct Statement",
     "text": "Title IX/Sexual Misconduct Statement\nGeorgetown University and its faculty are committed to supporting survivors and those impacted by sexual misconduct, which includes sexual assault, sexual harassment, relationship violence, and stalking. Georgetown requires faculty members, unless otherwise designated as confidential, to report all disclosures of sexual misconduct to the University Title IX Coordinator or a Deputy Title IX Coordinator.\nIf you disclose an incident of sexual misconduct to a professor in or outside of the classroom (with the exception of disclosures in papers), that faculty member must report the incident to the Title IX Coordinator, or Deputy Title IX Coordinator. The coordinator will, in turn, reach out to the student to provide support, resources, and the option to meet. [Please note that the student is not required to meet with the Title IX coordinator.]. More information about reporting options and resources can be found in the Sexual Misconduct Resource Center.\nIf you would prefer to speak to someone confidentially, Georgetown has a number of fully confidential professional resources that can provide support and assistance. These resources include:\n\nHealth Education Services for Sexual Assault Response and Prevention: Confidential email sarp@georgetown.edu\nCounseling and Psychiatric Services (CAPS): 202-687-6985\n\nAfter hours you can call 833-960-3006 to reach Fonemed, a telehealth service, and ask for the on-call CAPS clinician",
     "crumbs": [
@@ -368,11 +358,11 @@
     ]
   },
   {
-    "objectID": "syllabus.html#gsas-resources-and-policies-for-students",
-    "href": "syllabus.html#gsas-resources-and-policies-for-students",
-    "title": "Syllabus",
-    "section": "GSAS Resources and Policies for Students",
-    "text": "GSAS Resources and Policies for Students\nYou can find a collection of relevant resources and policies for students on the GSAS website, and the Provost’s policy on accommodating students’ religious observances on the Campus Ministry website.\nYou can also make use of the Student Academic Resource Center. In particular, within the Resource Center there is a link to Georgetown’s Disability Support page. If you believe you have a disability, you can contact the Academic Resource Center (arc@georgetown.edu) for further information. The ARC is located in the Leavey Center, Suite 335 (202-687-8354), and it is the campus office responsible for reviewing documentation provided by students with disabilities and for determining reasonable accommodations in accordance with the Americans with Disabilities Act (ADA) and University policies.",
+    "objectID": "syllabus.html#gsas-and-mccourt-resources-and-policies",
+    "href": "syllabus.html#gsas-and-mccourt-resources-and-policies",
+    "title": "DSAN 6750 / PPOL 6805",
+    "section": "GSAS and McCourt Resources and Policies",
+    "text": "GSAS and McCourt Resources and Policies\nYou can find a collection of relevant resources and policies for students on the GSAS website, and the Provost’s policy on accommodating students’ religious observances on the Campus Ministry website.\nYou can also make use of the Student Academic Resource Center. In particular, within the Resource Center there is a link to Georgetown’s Disability Support page. If you believe you have a disability, you can contact the Academic Resource Center (arc@georgetown.edu) for further information. The ARC is located in the Leavey Center, Suite 335 (202-687-8354), and it is the campus office responsible for reviewing documentation provided by students with disabilities and for determining reasonable accommodations in accordance with the Americans with Disabilities Act (ADA) and University policies.\n\nMcCourt Academic Integrity Policy\nMcCourt School students are expected to uphold the academic policies set forth by Georgetown University and the Graduate School of Arts and Sciences. Students should therefore familiarize themselves with all the rules, regulations, and procedures relevant to their pursuit of a Graduate School degree. The relevant policies are listed at this link.",
     "crumbs": [
       "Syllabus"
     ]

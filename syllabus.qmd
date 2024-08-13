@@ -1,21 +1,45 @@
 ---
-title: "Syllabus"
+title: "DSAN 6750 / PPOL 6805"
+subtitle: "Geographic Information Systems (GIS) and Spatial Data Analysis"
+times: "Wednesdays 6:30-9pm, Car Barn 204"
+author: "Prof. Jeff Jacobs"
+email: "jj1088@georgetown.edu"
+term: "Fall 2024, Georgetown University"
+latex-auto-install: false
+format:
+  html:
+    output-file: "syllabus.html"
+    df-print: kable
+    html-math-method: mathjax
+    # link-external-icon: true
+    link-external-newwindow: true
+    # link-external-filter: '^(?:http:|https:)\/\/jjacobs\.me\/dsan6750'
+  pdf:
+    output-file: "DSAN6750_Fall_2024_Syllabus.pdf"
+    template-partials:
+      - title.tex
+    title-meta: "DSAN 6750 / PPOL 6805 Syllabus - Fall 2024"
+    documentclass: "scrartcl"
+    # documentclass: "scrreprt"
 ---
 
-Welcome to the Fall 2024 version of **Geographic Information Systems** at Georgetown University!
+Welcome to the Fall 2024 version of **Geographic Information Systems (GIS) and Geospatial Data Analysis** at Georgetown University! Please note that the most up-to-date version of this syllabus will always be available at [jjacobs.me/dsan6750](https://jjacobs.me/dsan6750){target='_blank'}
 
 ::: {.callout-note title="Course Numbering"}
 
 * For *Data Science and Analytics* students: the course number is **DSAN 6750**
-* For *McCourt School of Public Policy* students: the course number is **PPOL 6805**
+* For *Public Policy* students (McCourt): the course number is **PPOL 6805**
 
 :::
 
-## Course Staff
+## Course Staff and Office Hours
 
-* Prof. Jeff Jacobs, <a href='mailto:jj1088@georgetown.edu' target='_blank'>`jj1088@georgetown.edu`</a>
-  * Office hours: TBD, held in Car Barn Room 207-04A
-* TAs: to be determined!
+* **Prof. Jeff Jacobs**, [`jj1088@georgetown.edu`](mailto:jj1088@georgetown.edu){target='_blank'}:<br> *Schedule office hour slots at [`jjacobs.me/meet`](https://jjacobs.me/meet){target='_blank'}*
+    * Mondays 4:30-6:30pm
+    * Tuesdays 3-5:30pm
+    * *(Please try to schedule at least 8 hours in advance, and let me know briefly what you'd like to discuss, so I have time to prepare)*
+* **TA**
+    * TBD
 
 ## Course Description
 
@@ -92,7 +116,7 @@ If you find any discrepancies between this schedule and Georgetown's [official c
 </thead>
 <tbody>
 <tr>
-    <td><span data-qmd="**Unit 1**: GIS Overview"></span></td>
+    <td><span data-qmd="**Unit 1**: GIS Concepts"></span></td>
     <td>1</td>
     <td><span data-qmd="{{< var w01.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var w01.title >}}](./w01/)"></span></td>
@@ -109,8 +133,8 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="{{< var w03.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var w03.title >}}](./w03/)"></span></td>
 </tr>
-<tr>
-    <td><span data-qmd="**Unit 2**: GIS APIs"></span></td>
+<tr class='new-unit'>
+    <td><span data-qmd="**Unit 2**: GIS Libraries"></span></td>
     <td>4</td>
     <td><span data-qmd="{{< var w04.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var w04.title >}}](./w04/)"></span></td>
@@ -169,8 +193,8 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="{{< var w11.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var w11.title >}}](./w11/)"></span></td>
 </tr>
-<tr>
-    <td><span data-qmd="**Unit 4**: Datasets, Data Sharing, and Reproducible Science"></span></td>
+<tr class='new-unit'>
+    <td><span data-qmd="**Unit 4**: Applications"></span></td>
     <td>12</td>
     <td><span data-qmd="{{< var w12.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var w12.title >}}](./w12/)"></span></td>
@@ -238,7 +262,7 @@ After the due date, for each **homework** assignment, you will have a grace peri
 
 ## Final Letter Grade Determination
 
-For DSAN students, once all assignments have been graded, we will compute your final **numeric grade** according to the above weighting, rounded to two decimal places. The **letter grade** that we report to Georgetown on the basis of this numeric grade will then follow the DSAN letter grade policy as follows, where the start and end points for each range are **inclusive**:
+Once all assignments have been graded, we will compute your final **numeric grade** according to the above weighting, rounded to two decimal places. The **letter grade** that we report to Georgetown on the basis of this numeric grade will then follow the DSAN letter grade policy as follows, where the start and end points for each range are **inclusive**:
 
 ```{=html}
 <table>
@@ -294,10 +318,6 @@ For DSAN students, once all assignments have been graded, we will compute your f
 </table>
 ```
 
-## Official Course Description
-
-TBD
-
 ## Title IX/Sexual Misconduct Statement
 
 Georgetown University and its faculty are committed to supporting survivors and those impacted by sexual misconduct, which includes sexual assault, sexual harassment, relationship violence, and stalking. Georgetown requires faculty members, unless otherwise designated as confidential, to report all disclosures of sexual misconduct to the University Title IX Coordinator or a Deputy Title IX Coordinator.
@@ -310,8 +330,12 @@ If you would prefer to speak to someone confidentially, Georgetown has a number 
 * *Counseling and Psychiatric Services (CAPS)*: 202-687-6985
   * After hours you can call 833-960-3006 to reach Fonemed, a telehealth service, and ask for the on-call CAPS clinician
 
-## GSAS Resources and Policies for Students
+## GSAS and McCourt Resources and Policies
 
 You can find a collection of relevant resources and policies for students on the <a href='https://grad.georgetown.edu/academics/current-students/' target='_blank'>GSAS website</a>, and the Provost's policy on accommodating students' religious observances on the <a href='https://campusministry.georgetown.edu/faith-traditions/religious_holy_days/#' target='_blank'>Campus Ministry website</a>.
 
 You can also make use of the <a href='http://academicsupport.georgetown.edu/' target='_blank'>Student Academic Resource Center</a>. In particular, within the Resource Center there is a link to Georgetown's <a href='http://academicsupport.georgetown.edu/disability/' target='_blank'>Disability Support page</a>. If you believe you have a disability, you can contact the Academic Resource Center (<a href='mailto:arc@georgetown.edu' target='_blank'>`arc@georgetown.edu`</a>) for further information. The ARC is located in the Leavey Center, Suite 335 (202-687-8354), and it is the campus office responsible for reviewing documentation provided by students with disabilities and for determining reasonable accommodations in accordance with the Americans with Disabilities Act (ADA) and University policies.
+
+### McCourt Academic Integrity Policy
+
+McCourt School students are expected to uphold the academic policies set forth by Georgetown University and the Graduate School of Arts and Sciences. Students should therefore familiarize themselves with all the rules, regulations, and procedures relevant to their pursuit of a Graduate School degree. The relevant policies are listed at [this link](https://sites.google.com/a/georgetown.edu/gsas-graduate-bulletin/vi-academic-integrity-policies-procedures){target='_blank'}.
