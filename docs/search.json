@@ -104,11 +104,32 @@
     "text": "I Am The Opposite of a Prereq-Stickler\n\nI genuinely believe that I can make the course accessible to you, meeting you wherever you’re at, no matter what!\nTo skip an entire spiel… Everyone learns at their own pace, and I structure my courses as best as I possibly can to adapt to your pace"
   },
   {
-    "objectID": "w01/slides.html#r-andor-python",
-    "href": "w01/slides.html#r-andor-python",
+    "objectID": "w01/slides.html#r-andor-python-andor-js",
+    "href": "w01/slides.html#r-andor-python-andor-js",
     "title": "Week 1: Introduction to GIS",
-    "section": "R and/or Python",
-    "text": "R and/or Python\n\n\n\nWeek 1: GIS Overview"
+    "section": "R and/or Python and/or JS",
+    "text": "R and/or Python and/or JS\n\nMy Geometry vs. Algebra Rant… Euclid’s Elements, Book VI, Proposition 28.\nThe problem: Divide a given straight line so that the rectangle contained by its segments may be equal to a given area, not exceeding the square of half the line.\n\n\n\nGeometers solved w/geometry (300 BC)…\n\n\n\n\n\n\n…Algebraists solved w/algebra (2000 BC)…\n\\[\n\\begin{align*}\n&ax^2 + bx + c = 0 \\\\\n\\Rightarrow \\; & x_+ = \\frac{-b + \\sqrt{b^2 - 4ac}}{2a}\n\\end{align*}\n\\]\n…From 1637 onwards, whichever is easier! 🤯🤯🤯 (Isomorphism)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFig 1: Circle with radius 1? Or \\((x,y)\\) satisfying \\(x^2 + y^2 = 1\\)?"
+  },
+  {
+    "objectID": "w01/slides.html#descartes",
+    "href": "w01/slides.html#descartes",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Descartes",
+    "text": "Descartes\n\nSuddenly, after literally thousands of years of working separately in their own languages, we now have an isomorphism allowing geometric representation of algebraic expressions!"
+  },
+  {
+    "objectID": "w01/slides.html#projections",
+    "href": "w01/slides.html#projections",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Projections",
+    "text": "Projections"
+  },
+  {
+    "objectID": "w01/slides.html#whats-happening-when-we-zoom-inout-on-google-maps",
+    "href": "w01/slides.html#whats-happening-when-we-zoom-inout-on-google-maps",
+    "title": "Week 1: Introduction to GIS",
+    "section": "What’s Happening When We Zoom In/Out on Google Maps?",
+    "text": "What’s Happening When We Zoom In/Out on Google Maps?\n\n\n\nWeek 1: GIS Overview"
   },
   {
     "objectID": "w01/index.html",
@@ -241,11 +262,41 @@
     ]
   },
   {
-    "objectID": "w01/index.html#r-andor-python",
-    "href": "w01/index.html#r-andor-python",
+    "objectID": "w01/index.html#r-andor-python-andor-js",
+    "href": "w01/index.html#r-andor-python-andor-js",
     "title": "Week 1: Introduction to GIS",
-    "section": "R and/or Python",
-    "text": "R and/or Python",
+    "section": "R and/or Python and/or JS",
+    "text": "R and/or Python and/or JS\n\nMy Geometry vs. Algebra Rant… Euclid’s Elements, Book VI, Proposition 28.\nThe problem: Divide a given straight line so that the rectangle contained by its segments may be equal to a given area, not exceeding the square of half the line.\n\n\n\nGeometers solved w/geometry (300 BC)…\n\n\n\n\n\n\n…Algebraists solved w/algebra (2000 BC)…\n\\[\n\\begin{align*}\n&ax^2 + bx + c = 0 \\\\\n\\Rightarrow \\; & x_+ = \\frac{-b + \\sqrt{b^2 - 4ac}}{2a}\n\\end{align*}\n\\]\n…From 1637 onwards, whichever is easier! 🤯🤯🤯 (Isomorphism)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFig 1: Circle with radius 1? Or \\((x,y)\\) satisfying \\(x^2 + y^2 = 1\\)?",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#descartes",
+    "href": "w01/index.html#descartes",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Descartes",
+    "text": "Descartes\n\nSuddenly, after literally thousands of years of working separately in their own languages, we now have an isomorphism allowing geometric representation of algebraic expressions!",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#projections",
+    "href": "w01/index.html#projections",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Projections",
+    "text": "Projections",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#whats-happening-when-we-zoom-inout-on-google-maps",
+    "href": "w01/index.html#whats-happening-when-we-zoom-inout-on-google-maps",
+    "title": "Week 1: Introduction to GIS",
+    "section": "What’s Happening When We Zoom In/Out on Google Maps?",
+    "text": "What’s Happening When We Zoom In/Out on Google Maps?",
     "crumbs": [
       "Week 1: Aug 28"
     ]

@@ -7,9 +7,12 @@ date: "August 28, 2024"
 date-format: full
 categories:
   - "Class Sessions"
+crossref:
+  fig-title: Fig
 format:
   revealjs:
     output-file: "slides.html"
+    html-math-method: mathjax
     slide-number: true
     scrollable: true
     link-external-icon: true
@@ -152,5 +155,59 @@ format:
 * I genuinely believe that I can make the course accessible to you, meeting you **wherever you're at**, no matter what!
 * To skip an entire spiel... Everyone learns at their own pace, and I structure my courses as best as I possibly can to adapt to your pace
 
-## R and/or Python
+## R and/or Python and/or JS {.smaller .crunch-title .crunch-ul .crunch-p .crunch-img .crunch-li .crunch-quarto-figure .crunch-math}
+
+* My Geometry vs. Algebra Rant... Euclid's *Elements*, Book VI, Proposition 28.
+* The problem: *Divide a given straight line so that the rectangle contained by its segments may be equal to a given area, not exceeding the square of half the line.*
+
+::: {.columns}
+::: {.column width="50%"}
+
+[Geometers]{.cb1} solved w/[**geometry**]{.cb1} (300 BC)...
+
+![](images/euclid_271_crop.jpeg){fig-align="center" width="80%"}
+
+:::
+::: {.column width="50%"}
+
+...[Algebraists]{.cb2} solved w/[**algebra**]{.cb2} (2000 BC)...
+
+$$
+\begin{align*}
+&ax^2 + bx + c = 0 \\
+\Rightarrow \; & x_+ = \frac{-b + \sqrt{b^2 - 4ac}}{2a}
+\end{align*}
+$$
+
+...[From 1637 onwards](https://en.wikipedia.org/wiki/Cartesian_coordinate_system#History), **[w]{.cb1}[h]{.cb2}[i]{.cb1}[c]{.cb2}[h]{.cb1}[e]{.cb2}[v]{.cb1}[e]{.cb2}[r]{.cb1} [i]{.cb2}[s]{.cb1} [e]{.cb2}[a]{.cb1}[s]{.cb2}[i]{.cb1}[e]{.cb2}[r]{.cb1}!** 🤯🤯🤯 (*Isomorphism*)
+
+:::: {#fig-descartes}
+::: {.columns}
+::: {.column width="48%"}
+
+![](images/descartes.jpg){fig-align="center" width="70%"}
+
+:::
+::: {.column width="48%"}
+
+![](images/unit_circle.svg){fig-align="center" width="100%"}
+
+:::
+:::
+
+**Circle with radius 1**? Or $(x,y)$ satisfying $x^2 + y^2 = 1$?
+::::
+
+:::
+:::
+
+## Descartes
+
+* Suddenly, after literally thousands of years of working **separately** in their **own languages**, we now have an **isomorphism** allowing **geometric representation** of **algebraic expressions**!
+
+# Doin Maps {data-stack-name="Maps"}
+
+## Projections
+
+## What's Happening When We Zoom In/Out on Google Maps?
 

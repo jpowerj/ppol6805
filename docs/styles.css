@@ -5,9 +5,78 @@ a.disabled {
   pointer-events: none;
 }
 
+.cb1 {
+    color: rgb(230, 159, 0) !important;
+}
+.cb1-bg {
+    background-color: rgb(230, 159, 0) !important;
+}
+/* .cb1a-bg {
+    background-color: $cb1-alpha !important;
+    text-align: center !important;
+} */
+.cb2 {
+    color: rgb(86, 180, 233) !important;
+}
+.cb2-bg {
+    background-color: rgb(86, 180, 233) !important;
+}
+/* .cb2a-bg {
+    background-color: $cb2-alpha !important;
+    text-align: center !important;
+} */
+.cb3 {
+    color: rgb(0, 158, 115) !important;
+}
+.cb3-bg {
+    background-color: rgb(0, 158, 115) !important;
+}
+/* .cb3a-bg {
+    background-color: $cb3-alpha !important;
+    text-align: center !important;
+} */
+.cb4 {
+    color: #F0E442 !important;
+}
+.cbg {
+    color: rgb(211, 211, 211) !important;
+}
+.cbg-bg {
+    background-color: rgb(211, 211, 211) !important;
+}
+/* .cbga-bg {
+    background-color: $cbg-alpha !important;
+    text-align: center !important;
+} */
+
 .crunch-hr {
   margin-top: 8px !important;
   margin-bottom: 6px !important;
+}
+
+.crunch-img img {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+.crunch-li li {
+  margin-top: 2px !important;
+  margin-bottom: 2px !important;
+}
+
+.crunch-math mjx-container {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.crunch-p p {
+  margin-top: 2px !important;
+  margin-bottom: 2px !important;
+}
+
+.crunch-quarto-figure .quarto-figure {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
 }
 
 .crunch-title h2 {
