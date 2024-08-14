@@ -4,7 +4,7 @@
     "href": "resources.html",
     "title": "Additional Resources",
     "section": "",
-    "text": "All in R: Lovelace, Nowosad, and Muenchow (2024). Geocomputation with R (Legally free online book!)\nAll in Python: Rey, Arribas-Bel, and Wolf (2023). Geographic Data Science with Python (Also a legally free online book!)",
+    "text": "I’m going to try to dump everything I used to develop the course materials here—some of it I drew on explicitly (using images from books, for example), and the rest of it seeped into my mind implicitly over the course of preparing the materials. Explore them to see if their different approaches “click” in your mind more than my approach does!",
     "crumbs": [
       "Resources"
     ]
@@ -13,8 +13,8 @@
     "objectID": "resources.html#textbooks",
     "href": "resources.html#textbooks",
     "title": "Additional Resources",
-    "section": "",
-    "text": "All in R: Lovelace, Nowosad, and Muenchow (2024). Geocomputation with R (Legally free online book!)\nAll in Python: Rey, Arribas-Bel, and Wolf (2023). Geographic Data Science with Python (Also a legally free online book!)",
+    "section": "Textbooks",
+    "text": "Textbooks\n\nAll in R: Lovelace, Nowosad, and Muenchow (2024). Geocomputation with R (Legally free online book!)\nAll in Python: Rey, Arribas-Bel, and Wolf (2023). Geographic Data Science with Python (Also a legally free online book!)",
     "crumbs": [
       "Resources"
     ]
@@ -35,6 +35,16 @@
     "title": "Additional Resources",
     "section": "Course Materials",
     "text": "Course Materials\n\nIf you’re looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out Data Over Space and Time, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resources.html#cartography",
+    "href": "resources.html#cartography",
+    "title": "Additional Resources",
+    "section": "Cartography",
+    "text": "Cartography\n\nMark Monmonier, How to Lie with Maps (3rd Edition, 2019). [EPUB]\nDenis Wood, The Power of Maps (1992) [PDF]\n\nI found Chapter 2, Maps Are Embedded in a History They Help Construct, especially helpful!",
     "crumbs": [
       "Resources"
     ]
@@ -117,6 +127,13 @@
     "text": "ArcGIS\n\nFor info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the Library Guide"
   },
   {
+    "objectID": "w01/slides.html#then-why-cant-we-just-use-arcgis",
+    "href": "w01/slides.html#then-why-cant-we-just-use-arcgis",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Then… Why Can’t We Just Use ArcGIS?",
+    "text": "Then… Why Can’t We Just Use ArcGIS?\nAnalogy from non-geospatial data science:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nText\nDrawn Map\n→\nSpeadsheet\nDigital Map\n→\nEquations\nMaps w/ArcGIS\n→\nCode\nThis Class\n\n\n\n\n Start writing\n\n\ninfo.txt\n\nI gave Ana $3, then Ana paid me back $2. [...]\n\n Realize there’s regularity/structure 🤔\n Start entering info in rows\n\n\n\nFr\nTo\nAmt\nBal\n\n\n\n\nMe\nAna\n$3\n-$3\n\n\nAna\nMe\n$2\n-$1\n\n\n\n Realize you’re manually computing things that could be automated 🤔\n Start using equations\n\n\n\nFr\nTo\nAmt\nBal\n\n\n\n\nMe\nAna\n$3\n=0-C1\n\n\nAna\nMe\n$2\n=D1-C2\n\n\n\n Realize you need fancier equations, and/or need to coordinate with inputs (APIs), outputs (plotting libraries) 🤔\n Write code\n\n\nplot_balance.py\n\nimport pandas as pd\ndf = pd.read_csv(...)\ncalc_weekly_balance()\ndf.plot()\n\n \n Profit 💲💰🤑💰💲"
+  },
+  {
     "objectID": "w01/slides.html#i-am-the-opposite-of-a-prereq-stickler",
     "href": "w01/slides.html#i-am-the-opposite-of-a-prereq-stickler",
     "title": "Week 1: Introduction to GIS",
@@ -128,28 +145,7 @@
     "href": "w01/slides.html#r-andor-python-andor-js",
     "title": "Week 1: Introduction to GIS",
     "section": "R and/or Python and/or JS",
-    "text": "R and/or Python and/or JS\n\nMy Geometry vs. Algebra Rant… Euclid’s Elements, Book VI, Proposition 28.\nThe problem: Divide a given straight line so that the rectangle contained by its segments may be equal to a given area, not exceeding the square of half the line.\n\n\n\nGeometers solved w/geometry (300 BC)…\n\n\n\n\n\n\n…Algebraists solved w/algebra (2000 BC)…\n\\[\n\\begin{align*}\n&ax^2 + bx + c = 0 \\\\\n\\Rightarrow \\; & x_+ = \\frac{-b + \\sqrt{b^2 - 4ac}}{2a}\n\\end{align*}\n\\]\n…From 1637 onwards, whichever is easier! 🤯🤯🤯 (Isomorphism)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFig 1: Circle with radius 1? Or \\((x,y)\\) satisfying \\(x^2 + y^2 = 1\\)?"
-  },
-  {
-    "objectID": "w01/slides.html#descartes",
-    "href": "w01/slides.html#descartes",
-    "title": "Week 1: Introduction to GIS",
-    "section": "Descartes",
-    "text": "Descartes\n\nSuddenly, after literally thousands of years of working separately in their own languages, we now have an isomorphism allowing geometric representation of algebraic expressions!"
-  },
-  {
-    "objectID": "w01/slides.html#projections",
-    "href": "w01/slides.html#projections",
-    "title": "Week 1: Introduction to GIS",
-    "section": "Projections",
-    "text": "Projections"
-  },
-  {
-    "objectID": "w01/slides.html#whats-happening-when-we-zoom-inout-on-google-maps",
-    "href": "w01/slides.html#whats-happening-when-we-zoom-inout-on-google-maps",
-    "title": "Week 1: Introduction to GIS",
-    "section": "What’s Happening When We Zoom In/Out on Google Maps?",
-    "text": "What’s Happening When We Zoom In/Out on Google Maps?\n\n\n\nWeek 1: GIS Overview"
+    "text": "R and/or Python and/or JS\n\nMy Geometry vs. Algebra Rant… Euclid’s Elements, Book VI, Proposition 28.\nThe problem: Divide a given straight line so that the rectangle contained by its segments may be equal to a given area, not exceeding the square of half the line.\n\n\n\nGeometers solved w/geometry (300 BC)…\n\n\n\n\n\n\n…Algebraists solved w/algebra (2000 BC)…\n\\[\n\\begin{align*}\n&ax^2 + bx + c = 0 \\\\\n\\Rightarrow \\; & x_+ = \\frac{-b + \\sqrt{b^2 - 4ac}}{2a}\n\\end{align*}\n\\]\n…From 1637 onwards, whichever is easier! 🤯🤯🤯 (Isomorphism)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFig 1: Circle with radius 1? Or \\((x,y)\\) satisfying \\(x^2 + y^2 = 1\\)?\n\n\n\n\n\n\n\nWeek 1: GIS Overview"
   },
   {
     "objectID": "w01/index.html",
@@ -272,6 +268,16 @@
     ]
   },
   {
+    "objectID": "w01/index.html#then-why-cant-we-just-use-arcgis",
+    "href": "w01/index.html#then-why-cant-we-just-use-arcgis",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Then… Why Can’t We Just Use ArcGIS?",
+    "text": "Then… Why Can’t We Just Use ArcGIS?\nAnalogy from non-geospatial data science:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nText\nDrawn Map\n→\nSpeadsheet\nDigital Map\n→\nEquations\nMaps w/ArcGIS\n→\nCode\nThis Class\n\n\n\n\n Start writing\n\n\ninfo.txt\n\nI gave Ana $3, then Ana paid me back $2. [...]\n\n Realize there’s regularity/structure 🤔\n Start entering info in rows\n\n\n\nFr\nTo\nAmt\nBal\n\n\n\n\nMe\nAna\n$3\n-$3\n\n\nAna\nMe\n$2\n-$1\n\n\n\n Realize you’re manually computing things that could be automated 🤔\n Start using equations\n\n\n\nFr\nTo\nAmt\nBal\n\n\n\n\nMe\nAna\n$3\n=0-C1\n\n\nAna\nMe\n$2\n=D1-C2\n\n\n\n Realize you need fancier equations, and/or need to coordinate with inputs (APIs), outputs (plotting libraries) 🤔\n Write code\n\n\nplot_balance.py\n\nimport pandas as pd\ndf = pd.read_csv(...)\ncalc_weekly_balance()\ndf.plot()\n\n \n Profit 💲💰🤑💰💲",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
     "objectID": "w01/index.html#i-am-the-opposite-of-a-prereq-stickler",
     "href": "w01/index.html#i-am-the-opposite-of-a-prereq-stickler",
     "title": "Week 1: Introduction to GIS",
@@ -292,36 +298,6 @@
     ]
   },
   {
-    "objectID": "w01/index.html#descartes",
-    "href": "w01/index.html#descartes",
-    "title": "Week 1: Introduction to GIS",
-    "section": "Descartes",
-    "text": "Descartes\n\nSuddenly, after literally thousands of years of working separately in their own languages, we now have an isomorphism allowing geometric representation of algebraic expressions!",
-    "crumbs": [
-      "Week 1: Aug 28"
-    ]
-  },
-  {
-    "objectID": "w01/index.html#projections",
-    "href": "w01/index.html#projections",
-    "title": "Week 1: Introduction to GIS",
-    "section": "Projections",
-    "text": "Projections",
-    "crumbs": [
-      "Week 1: Aug 28"
-    ]
-  },
-  {
-    "objectID": "w01/index.html#whats-happening-when-we-zoom-inout-on-google-maps",
-    "href": "w01/index.html#whats-happening-when-we-zoom-inout-on-google-maps",
-    "title": "Week 1: Introduction to GIS",
-    "section": "What’s Happening When We Zoom In/Out on Google Maps?",
-    "text": "What’s Happening When We Zoom In/Out on Google Maps?",
-    "crumbs": [
-      "Week 1: Aug 28"
-    ]
-  },
-  {
     "objectID": "recordings/index.html",
     "href": "recordings/index.html",
     "title": "Lecture Recordings",
@@ -329,11 +305,144 @@
     "text": "I will aim to update the Zoom recording links here as soon as they are available after the end of class. But, in case there’s a delay, recordings are automatically added to the course’s Panopto page!\n\n\n\n\n\n\n\n\n\nWeek\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\n1\n\n\nWeek 1: Introduction to GIS\n\n\nWednesday Aug 28, 2024\n\n\n\n\n\nNo matching items"
   },
   {
+    "objectID": "w02/index.html#the-three-key-elements",
+    "href": "w02/index.html#the-three-key-elements",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "The Three Key Elements",
+    "text": "The Three Key Elements"
+  },
+  {
+    "objectID": "w02/index.html#what-happens-to-points",
+    "href": "w02/index.html#what-happens-to-points",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Happens to Points?",
+    "text": "What Happens to Points?"
+  },
+  {
+    "objectID": "w02/index.html#what-happens-to-lines",
+    "href": "w02/index.html#what-happens-to-lines",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Happens to Lines?",
+    "text": "What Happens to Lines?"
+  },
+  {
+    "objectID": "w02/index.html#what-happens-to-areas",
+    "href": "w02/index.html#what-happens-to-areas",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Happens to Areas?",
+    "text": "What Happens to Areas?"
+  },
+  {
+    "objectID": "w02/index.html#what-is-gained",
+    "href": "w02/index.html#what-is-gained",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Is Gained?",
+    "text": "What Is Gained?"
+  },
+  {
+    "objectID": "w02/index.html#what-is-lost",
+    "href": "w02/index.html#what-is-lost",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Is Lost?",
+    "text": "What Is Lost?"
+  },
+  {
+    "objectID": "w02/index.html#who-is-affected",
+    "href": "w02/index.html#who-is-affected",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Who Is Affected?",
+    "text": "Who Is Affected?"
+  },
+  {
+    "objectID": "w02/index.html#exhibit-a",
+    "href": "w02/index.html#exhibit-a",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Exhibit A",
+    "text": "Exhibit A"
+  },
+  {
+    "objectID": "w02/index.html#exhibit-b",
+    "href": "w02/index.html#exhibit-b",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Exhibit B",
+    "text": "Exhibit B"
+  },
+  {
+    "objectID": "w02/slides.html#smooshing-3d-into-2d",
+    "href": "w02/slides.html#smooshing-3d-into-2d",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Smooshing 3D into 2D",
+    "text": "Smooshing 3D into 2D"
+  },
+  {
+    "objectID": "w02/slides.html#the-three-key-elements",
+    "href": "w02/slides.html#the-three-key-elements",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "The Three Key Elements",
+    "text": "The Three Key Elements"
+  },
+  {
+    "objectID": "w02/slides.html#what-happens-to-points",
+    "href": "w02/slides.html#what-happens-to-points",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Happens to Points?",
+    "text": "What Happens to Points?"
+  },
+  {
+    "objectID": "w02/slides.html#what-happens-to-lines",
+    "href": "w02/slides.html#what-happens-to-lines",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Happens to Lines?",
+    "text": "What Happens to Lines?"
+  },
+  {
+    "objectID": "w02/slides.html#what-happens-to-areas",
+    "href": "w02/slides.html#what-happens-to-areas",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Happens to Areas?",
+    "text": "What Happens to Areas?"
+  },
+  {
+    "objectID": "w02/slides.html#what-is-gained",
+    "href": "w02/slides.html#what-is-gained",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Is Gained?",
+    "text": "What Is Gained?"
+  },
+  {
+    "objectID": "w02/slides.html#what-is-lost",
+    "href": "w02/slides.html#what-is-lost",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Is Lost?",
+    "text": "What Is Lost?"
+  },
+  {
+    "objectID": "w02/slides.html#who-is-affected",
+    "href": "w02/slides.html#who-is-affected",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Who Is Affected?",
+    "text": "Who Is Affected?"
+  },
+  {
+    "objectID": "w02/slides.html#exhibit-a",
+    "href": "w02/slides.html#exhibit-a",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Exhibit A",
+    "text": "Exhibit A"
+  },
+  {
+    "objectID": "w02/slides.html#exhibit-b",
+    "href": "w02/slides.html#exhibit-b",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Exhibit B",
+    "text": "Exhibit B\n\n\n\n\nWeek 2: How Do Maps Work?"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)",
     "section": "",
-    "text": "Welcome to the homepage for DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS), Fall 2024, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn Room 204. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 28\n\n\n\n\n\nNo matching items",
+    "text": "Welcome to the homepage for DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS), Fall 2024, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn Room 204. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 4\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 28\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Home"
     ]
@@ -383,7 +492,7 @@
     "href": "syllabus.html#course-topics-calendar",
     "title": "DSAN 6750 / PPOL 6805",
     "section": "Course Topics / Calendar",
-    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, please let me know.\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Concepts\n1\nAug 28\nIntroduction to GIS\n\n\n\n2\nSep 4\nWeek 2\n\n\n\n3\nSep 11\nWeek 3\n\n\nUnit 2: GIS Libraries\n4\nSep 18\nWeek 4\n\n\n\n5\nSep 25\nWeek 5\n\n\n\n6\nOct 2\nWeek 6\n\n\n\n7\nOct 9\nWeek 7\n\n\nUnit 3: Geospatial Data Analysis\n8\nOct 16\nWeek 8\n\n\n\n9\nOct 23\nWeek 9\n\n\n\n10\nOct 30\nWeek 10\n\n\n\n11\nNov 6\nIn-Class Midterm\n\n\nUnit 4: Applications\n12\nNov 13\nWeek 12\n\n\n\n13\nNov 20\nWeek 13\n\n\n\n\nNov 27\nNo Class (Fall Break)\n\n\n\n14\nDec 4\nWeek 14",
+    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, please let me know.\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Concepts\n1\nAug 28\nIntroduction to GIS\n\n\n\n2\nSep 4\nHow Do Maps Work?\n\n\n\n3\nSep 11\nWeek 3\n\n\nUnit 2: GIS Libraries\n4\nSep 18\nWeek 4\n\n\n\n5\nSep 25\nWeek 5\n\n\n\n6\nOct 2\nWeek 6\n\n\n\n7\nOct 9\nWeek 7\n\n\nUnit 3: Geospatial Data Analysis\n8\nOct 16\nWeek 8\n\n\n\n9\nOct 23\nWeek 9\n\n\n\n10\nOct 30\nWeek 10\n\n\n\n11\nNov 6\nIn-Class Midterm\n\n\nUnit 4: Applications\n12\nNov 13\nWeek 12\n\n\n\n13\nNov 20\nWeek 13\n\n\n\n\nNov 27\nNo Class (Fall Break)\n\n\n\n14\nDec 4\nWeek 14",
     "crumbs": [
       "Syllabus"
     ]

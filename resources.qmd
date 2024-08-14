@@ -6,6 +6,8 @@ format:
     link-external-newwindow: true
 ---
 
+I'm going to try to dump **everything** I used to develop the course materials here---some of it I drew on explicitly (using images from books, for example), and the rest of it seeped into my mind implicitly over the course of preparing the materials. Explore them to see if their different approaches "click" in your mind more than my approach does!
+
 ## Textbooks
 
 * All in **R**: Lovelace, Nowosad, and Muenchow (2024). *[Geocomputation with R](https://r.geocompx.org/preface){target='_blank'}* (**Legally free online book!**)
@@ -18,3 +20,9 @@ format:
 ## Course Materials
 
 * If you're looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out [Data Over Space and Time](https://www.stat.cmu.edu/~cshalizi/dst/20/){target='_blank'}, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.
+
+## Cartography
+
+* Mark Monmonier, *How to Lie with Maps* (3rd Edition, 2019). \[[EPUB](https://www.dropbox.com/scl/fi/6sb9hzp2ttugi9s6n5bnu/How-to-Lie-with-Maps_Mark-Monmonier.epub?rlkey=wx8yfep9rvhtsyldje5gdzp1t&dl=1){target='_blank'}\]
+* Denis Wood, *The Power of Maps* (1992) \[[PDF](https://www.dropbox.com/s/lpu5xsrip7oinir/Denis%20Wood%20%26%20John%20Fels%20-%20The%20power%20of%20maps%20%281992%2C%20The%20Guilford%20Press%29%20-%20libgen.li.pdf?dl=0){target='_blank'}\]
+  * I found Chapter 2, *Maps Are Embedded in a History They Help Construct*, especially helpful!

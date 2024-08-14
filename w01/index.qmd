@@ -148,6 +148,155 @@ format:
 
 * For info on Georgetown's provision of ArcGIS (Online, Pro, and Desktop), see the [Library Guide](https://guides.library.georgetown.edu/esri_software){target='_blank'}
 
+## Then... Why Can't We Just Use ArcGIS? {.crunch-title .title-12 .smaller .unindent-lists .tdvt-all .crunch-p}
+
+Analogy from **non**-geospatial data science:
+
+<!-- | Text Files | &rarr; | Spreadsheets | &rarr; | Equations | &rarr; | Code |
+| - |:-:| - |:-:| - |:-:| - |
+| <ul><li>Start entering information</li><li>2</li></ul> | |  | d | e | f | g |
+
+: {tbl-colwidths="[22,4,22,4,22,4,22]"} -->
+
+```{python}
+#| label: random-balance-plot
+#| echo: false
+#| output: false
+# Generates a random balance plot and saves it
+# to .svg, so we can load it into the table here
+import pandas as pd
+import numpy as np
+rng = np.random.default_rng(seed=6750)
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_theme(rc={'figure.figsize':(3,3)})
+sns.set_style('whitegrid')
+transactions = rng.standard_normal(size=25)
+balances = np.cumsum(transactions)
+df = pd.DataFrame({
+  'Week': range(len(balances)),
+  'Balance': balances
+})
+sns.lineplot(data=df, x='Week', y='Balance')
+plt.tight_layout()
+plt.savefig("balance.svg")
+```
+
+```{=html}
+<style>
+.border-all {
+  font-size: 70% !important;
+}
+.border-all td, .border-all th {
+  border: 1px solid black !important;
+}
+</style>
+<table>
+<colgroup>
+  <col style="width: 24%;">
+  <col style="width: 1.2%;">
+  <col style="width: 24%;">
+  <col style="width: 1.2%;">
+  <col style="width: 24%;">
+  <col style="width: 1.2%;">
+  <col style="width: 24%;">
+</colgroup>
+<thead>
+<tr>
+  <th align="center">Text<br><i>Drawn Map</i></th>
+  <th align="center" style='vertical-align: middle;'>&rarr;</th>
+  <th align="center">Speadsheet<br><i style='font-size: 80%'>Digital Map</i></th>
+  <th align="center" style='vertical-align: middle;'>&rarr;</th>
+  <th align="center">Equations<br><i>Maps w/ArcGIS</i></th>
+  <th align="center" style='vertical-align: middle;'>&rarr;</th>
+  <th align="center">Code<br><i>This Class</i></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td colspan="2">
+    <span data-qmd="<i class='bi bi-1-circle'></i> Start writing"></span>
+    
+    <div data-qmd="``` {filename='info.txt'}
+I gave Ana $3, then Ana paid me back $2. [...]
+```"></div>
+    
+    <span data-qmd="<i class='bi bi-2-circle'></i> Realize there's regularity/structure 🤔"></span>
+  </td>
+  <td colspan="2">
+    <span data-qmd="<i class='bi bi-1-circle'></i> Start entering info in rows"></span>
+    <table class="border-all">
+    <thead>
+    <tr>
+      <th>Fr</th>
+      <th>To</th>
+      <th>Amt</th>
+      <th>Bal</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Me</td>
+      <td>Ana</td>
+      <td>$3</td>
+      <td>-$3</td>
+    </tr>
+    <tr>
+      <td>Ana</td>
+      <td>Me</td>
+      <td>$2</td>
+      <td>-$1</td>
+    </tr>
+    </tbody>
+    </table>
+    <span data-qmd="<i class='bi bi-2-circle'></i> Realize you're manually computing things that could be automated 🤔"></span>
+  </td>
+  <td colspan="2">
+    <span data-qmd="<i class='bi bi-1-circle'></i> Start using equations"></span>
+    <table class="border-all">
+    <thead>
+    <tr>
+      <th>Fr</th>
+      <th>To</th>
+      <th>Amt</th>
+      <th>Bal</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Me</td>
+      <td>Ana</td>
+      <td>$3</td>
+      <td><span data-qmd="`=0-C1`"></span></td>
+    </tr>
+    <tr>
+      <td>Ana</td>
+      <td>Me</td>
+      <td>$2</td>
+      <td><span data-qmd="`=D1-C2`"></span></td>
+    </tr>
+    </tbody>
+    </table>
+    <span data-qmd="<i class='bi bi-2-circle'></i> Realize you need fancier equations, and/or need to coordinate with inputs (APIs), outputs (plotting libraries) 🤔"></span>
+  </td>
+  <td>
+    <div data-qmd="<i class='bi bi-1-circle'></i> Write code"></div>
+
+    <div data-qmd="``` {.python filename='plot_balance.py'}
+import pandas as pd
+df = pd.read_csv(...)
+calc_weekly_balance()
+df.plot()
+```"></div>
+  <!-- <img src="balance.svg" style='display: block; margin-left: auto; margin-right: auto; width: 50%;'></img> -->
+  <img src="balance.svg" style="width: 100%;"></img>
+  <div data-qmd="<i class='bi bi-2-circle'></i> Profit 💲💰🤑💰💲"></div>
+  </td>
+</tr>
+</tbody>
+</table>
+```
+
 # How To Not Be Scared of Prerequisites {data-stack-name="Prereqs Without Fear"}
 
 ## I Am The Opposite of a Prereq-Stickler
@@ -200,14 +349,4 @@ $$
 
 :::
 :::
-
-## Descartes
-
-* Suddenly, after literally thousands of years of working **separately** in their **own languages**, we now have an **isomorphism** allowing **geometric representation** of **algebraic expressions**!
-
-# Doin Maps {data-stack-name="Maps"}
-
-## Projections
-
-## What's Happening When We Zoom In/Out on Google Maps?
 

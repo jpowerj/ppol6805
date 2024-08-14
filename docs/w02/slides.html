@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Jeff Jacobs">
-  <title>DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS) – Week 1: Introduction to GIS</title>
+  <title>DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS) – Week 2: How Do Maps Work?</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -30,71 +30,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="../styles.css">
@@ -396,7 +331,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Week 1: Introduction to GIS</h1>
+  <h1 class="title">Week 2: How Do Maps Work?</h1>
   <p class="subtitle"><em>DSAN 6750 / PPOL 6805: Geographic Information Systems</em><br>Fall 2024</p>
 
 <div class="quarto-title-authors">
@@ -410,337 +345,77 @@ Jeff Jacobs
     </div>
 </div>
 
-  <p class="date">Wednesday, August 28, 2024</p>
+  <p class="date">Wednesday, September 4, 2024</p>
 </section>
 <section>
-<section id="welcome-to-the-wonderful-world-of-gis" class="title-slide slide level1 center" data-stack-name="Why Me?">
-<h1>Welcome to The Wonderful World of GIS!</h1>
+<section id="projections" class="title-slide slide level1 center" data-stack-name="Projections">
+<h1>Projections</h1>
 
 </section>
-<section id="who-am-i-why-am-i-teaching-you" class="slide level2 crunch-title">
-<h2>Who Am I? Why Am I Teaching You?</h2>
-<ul>
-<li>Started out as PhD student in <strong>Computer Science</strong>
-<ul>
-<li>UCLA: Algorithmic Game Theory</li>
-<li>Stanford (MS): Economic Network Analysis</li>
-</ul></li>
-<li>Ended up with PhD in <strong>Political Economy</strong>
-<ul>
-<li>Columbia: “Computational Political Theory”</li>
-</ul></li>
-</ul>
-</section>
-<section id="my-gis-adventures" class="slide level2">
-<h2>My GIS Adventures</h2>
-<ul>
-<li>High school project: <strong>mine defusal</strong> in Indochina</li>
-<li>As a <strong>Telecommunications Engineer</strong> for Huawei (HKUST)</li>
-<li>As an <strong>Urban Economist</strong> at UC Berkeley
-<ul>
-<li>Used, e.g., Google Maps API to evaluate effects of <a href="https://www.brookings.edu/wp-content/uploads/2016/06/0120_poverty_paper.pdf" target="_blank"><strong>Suburbanization of Poverty</strong></a></li>
-</ul></li>
-</ul>
-</section>
-<section id="my-gis-moment" class="slide level2">
-<h2>My GIS 🤯 Moment</h2>
-<ul>
-<li>Horrors of the “““Vietnam”“” “““War”“” did not end in 1975… Casualties from unexploded ordnance (cluster bombs) have continued to devastate the region, with over 219,000 victims:
-<ul>
-<li><a href="https://www.baldwin.senate.gov/imo/media/doc/Legacies%20of%20War%20Recognition%20and%20UXO%20Removal%20Act.pdf" target="_blank">&gt;105K in Vietnam</a></li>
-<li><a href="https://www.cnn.com/2016/09/05/asia/united-states-laos-secret-war/index.html" target="_blank">&gt;50K in Laos</a></li>
-<li><a href="https://apnews.com/article/bombs-land-mines-unexploded-ordnance-demining-564f0203aeb53aa95118a1396b907246" target="_blank">&gt;65K in Cambodia</a></li>
-</ul></li>
-</ul>
-</section>
-<section id="at-huawei-optimizing-cell-tower-placement" class="slide level2">
-<h2>At Huawei: Optimizing Cell Tower Placement</h2>
-<ul>
-<li></li>
-</ul>
-</section>
-<section id="the-suburbanization-of-poverty" class="slide level2">
-<h2>The Suburbanization of Poverty</h2>
-<ul>
-<li>Since 2008, a person living in poverty in the US is more likely to be in a <strong>suburb</strong> than an “inner city”</li>
-</ul>
-</section></section>
+<section id="smooshing-3d-into-2d" class="slide level2">
+<h2>Smooshing 3D into 2D</h2>
+
+<img data-src="images/chi-monmonier-fig02003.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section></section>
 <section>
-<section id="why-should-you-care-about-gis" class="title-slide slide level1 center" data-stack-name="Why GIS?">
-<h1>Why Should You Care About GIS?</h1>
+<section id="the-things-we-put-on-maps" class="title-slide slide level1 center" data-stack-name="Three Key Elements">
+<h1>The Things We Put On Maps</h1>
 <ul>
-<li>As a Human</li>
-<li>As a Data Scientist</li>
-<li>As a Public Policy Expert</li>
+<li>Points</li>
+<li>Lines</li>
+<li>Areas</li>
 </ul>
 </section>
-<section id="as-humans" class="slide level2">
-<h2>As Humans</h2>
-<ul>
-<li>To understand the world around you!</li>
-</ul>
-</section>
-<section id="as-data-scientists" class="slide level2">
-<h2>As Data Scientists</h2>
-<ul>
-<li>All data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)</li>
-<li>However, you can <strong>differentiate yourself</strong> in the scary scary job market by developing a particular focus on some “non-standard” type: <strong>text</strong> data, <strong>temporal</strong> data, <strong>signal</strong> processing, and/or <strong>geospatial</strong> data!</li>
-</ul>
-</section>
-<section id="as-public-policy-experts" class="slide level2">
-<h2>As Public Policy Experts</h2>
-<ul>
-<li>Oftentimes, all it takes is one map to see why a policy has failed 😱</li>
-</ul>
-</section></section>
+<section id="the-three-key-elements" class="slide level2">
+<h2>The Three Key Elements</h2>
+
+<img data-src="images/chi-monmonier-fig02011.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section></section>
 <section>
-<section id="so-what-is-gis" class="title-slide slide level1 center" data-stack-name="What is GIS?">
-<h1>So… What <em>Is</em> GIS?</h1>
-
-</section>
-<section id="its-completely-made-up" class="slide level2 smaller crunch-title">
-<h2>It’s Completely Made Up</h2>
-<p><em>Like, even more made up than other made-up technical terms…</em> 😵‍💫</p>
-<iframe data-external="1" src="https://www.youtube.com/embed/yjw_DuNkOUw" width="100%" height="500" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-</section>
-<section id="what-i-mean-by-made-up" class="slide level2 smaller crunch-title crunch-ul">
-<h2>What I Mean By “Made Up”</h2>
+<section id="thought-experiment-zooming-in-and-out" class="title-slide slide level1 center" data-stack-name="Zooming">
+<h1>Thought Experiment: Zooming In and Out</h1>
 <ul>
-<li>The <strong>libraries</strong> and <strong>tools</strong> we’ll use are <strong>specific</strong> systems/methods for analyzing geospatial data</li>
-<li><strong>GIS</strong> is an “umbrella term”, which just vaguely refers to this entire universe of libraries/tools/techniques/approaches</li>
-</ul>
-<table class="caption-top" data-quarto-postprocess="true">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 40%">
-<col style="width: 40%">
-</colgroup>
-<thead>
-<tr class="header">
-<th class="tdc" data-quarto-table-cell-role="th">Umbrella Term</th>
-<th class="tdc" data-quarto-table-cell-role="th">Concepts</th>
-<th class="tdc" data-quarto-table-cell-role="th">Specific Skills</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td class="tdc"><strong>Coding</strong></td>
-<td><ul>
-<li>Variables</li>
-<li>Control Flow</li>
-<li>Algorithms</li>
-</ul></td>
-<td><ul>
-<li>Python</li>
-<li>R</li>
-<li>JavaScript</li>
-</ul></td>
-</tr>
-<tr class="even">
-<td class="tdc"><strong>GIS</strong></td>
-<td><ul>
-<li>Projections</li>
-<li>Vector vs.&nbsp;Raster</li>
-<li>Spatial Data Formats (shapefiles, <code>.geojson</code>)</li>
-</ul></td>
-<td class="tdvc"><ul>
-<li>ArcGIS</li>
-<li>GeoPandas (Python)</li>
-<li><a href="https://r-spatial.github.io/sf/" target="_blank"><code>sf</code></a> (R)</li>
-</ul></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="arcgis" class="slide level2">
-<h2>ArcGIS</h2>
-<ul>
-<li>For info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the <a href="https://guides.library.georgetown.edu/esri_software" target="_blank">Library Guide</a></li>
+<li>What happens to points, lines, and areas?</li>
 </ul>
 </section>
-<section id="then-why-cant-we-just-use-arcgis" class="slide level2 crunch-title title-12 smaller unindent-lists tdvt-all crunch-p">
-<h2>Then… Why Can’t We Just Use ArcGIS?</h2>
-<p>Analogy from <strong>non</strong>-geospatial data science:</p>
-<!-- | Text Files | &rarr; | Spreadsheets | &rarr; | Equations | &rarr; | Code |
-| - |:-:| - |:-:| - |:-:| - |
-| <ul><li>Start entering information</li><li>2</li></ul> | |  | d | e | f | g |
+<section id="what-happens-to-points" class="slide level2">
+<h2>What Happens to Points?</h2>
 
-: {tbl-colwidths="[22,4,22,4,22,4,22]"} -->
-<style>
-.border-all {
-  font-size: 70% !important;
-}
-.border-all td, .border-all th {
-  border: 1px solid black !important;
-}
-</style>
+<img data-src="images/chi-monmonier-fig03002.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="what-happens-to-lines" class="slide level2">
+<h2>What Happens to Lines?</h2>
 
-<table class="caption-top" style="width:100%;" data-quarto-postprocess="true">
-<colgroup>
-<col style="width: 24%">
-<col style="width: 1%">
-<col style="width: 24%">
-<col style="width: 1%">
-<col style="width: 24%">
-<col style="width: 1%">
-<col style="width: 24%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: center;" data-quarto-table-cell-role="th">Text<br>
-<em>Drawn Map</em></th>
-<th data-quarto-table-cell-role="th" style="text-align: center; vertical-align: middle;">→</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Speadsheet<br>
-<em>Digital Map</em></th>
-<th data-quarto-table-cell-role="th" style="text-align: center; vertical-align: middle;">→</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Equations<br>
-<em>Maps w/ArcGIS</em></th>
-<th data-quarto-table-cell-role="th" style="text-align: center; vertical-align: middle;">→</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">Code<br>
-<em>This Class</em></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td colspan="2"><i class="bi bi-1-circle"></i> Start writing
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>info.txt</strong></pre>
-</div>
-<pre data-filename="info.txt"><code>I gave Ana $3, then Ana paid me back $2. [...]</code></pre>
-</div>
-<i class="bi bi-2-circle"></i> Realize there’s regularity/structure 🤔</td>
-<td colspan="2"><i class="bi bi-1-circle"></i> Start entering info in rows
-<table class="border-all caption-top" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">Fr</th>
-<th data-quarto-table-cell-role="th">To</th>
-<th data-quarto-table-cell-role="th">Amt</th>
-<th data-quarto-table-cell-role="th">Bal</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Me</td>
-<td>Ana</td>
-<td>$3</td>
-<td>-$3</td>
-</tr>
-<tr class="even">
-<td>Ana</td>
-<td>Me</td>
-<td>$2</td>
-<td>-$1</td>
-</tr>
-</tbody>
-</table>
-<i class="bi bi-2-circle"></i> Realize you’re manually computing things that could be automated 🤔</td>
-<td colspan="2"><i class="bi bi-1-circle"></i> Start using equations
-<table class="border-all caption-top" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">Fr</th>
-<th data-quarto-table-cell-role="th">To</th>
-<th data-quarto-table-cell-role="th">Amt</th>
-<th data-quarto-table-cell-role="th">Bal</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Me</td>
-<td>Ana</td>
-<td>$3</td>
-<td><code>=0-C1</code></td>
-</tr>
-<tr class="even">
-<td>Ana</td>
-<td>Me</td>
-<td>$2</td>
-<td><code>=D1-C2</code></td>
-</tr>
-</tbody>
-</table>
-<i class="bi bi-2-circle"></i> Realize you need fancier equations, and/or need to coordinate with inputs (APIs), outputs (plotting libraries) 🤔</td>
-<td><p><i class="bi bi-1-circle"></i> Write code</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>plot_balance.py</strong></pre>
-</div>
-<div class="sourceCode" id="cb2" data-filename="plot_balance.py"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-2"><a></a>df <span class="op">=</span> pd.read_csv(...)</span>
-<span id="cb2-3"><a></a>calc_weekly_balance()</span>
-<span id="cb2-4"><a></a>df.plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<!-- <img src="balance.svg" style='display: block; margin-left: auto; margin-right: auto; width: 50%;'></img> --> <img data-src="balance.svg" style="width: 100%;">
-<p><i class="bi bi-2-circle"></i> Profit 💲💰🤑💰💲</p></td>
-</tr>
-</tbody>
-</table>
-</section></section>
+<img data-src="images/chi-monmonier-fig03001.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="what-happens-to-areas" class="slide level2">
+<h2>What Happens to Areas?</h2>
+
+<img data-src="images/chi-monmonier-fig03003.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="what-is-gained" class="slide level2">
+<h2>What Is Gained?</h2>
+
+<img data-src="images/chi-monmonier-fig03004.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="what-is-lost" class="slide level2">
+<h2>What Is Lost?</h2>
+
+<img data-src="images/chi-monmonier-fig03005.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="who-is-affected" class="slide level2">
+<h2>Who Is Affected?</h2>
+
+<img data-src="images/chi-monmonier-fig03007.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section></section>
 <section>
-<section id="how-to-not-be-scared-of-prerequisites" class="title-slide slide level1 center" data-stack-name="Prereqs Without Fear">
-<h1>How To Not Be Scared of Prerequisites</h1>
+<section id="choropleths-for-good-and-evil" class="title-slide slide level1 center" data-stack-name="Choropleths">
+<h1>Choropleths for Good and Evil</h1>
 
 </section>
-<section id="i-am-the-opposite-of-a-prereq-stickler" class="slide level2">
-<h2>I Am The Opposite of a Prereq-Stickler</h2>
-<ul>
-<li>I genuinely believe that I can make the course accessible to you, meeting you <strong>wherever you’re at</strong>, no matter what!</li>
-<li>To skip an entire spiel… Everyone learns at their own pace, and I structure my courses as best as I possibly can to adapt to your pace</li>
-</ul>
-</section>
-<section id="r-andor-python-andor-js" class="slide level2 smaller crunch-title crunch-ul crunch-p crunch-img crunch-li crunch-quarto-figure crunch-math">
-<h2>R and/or Python and/or JS</h2>
-<ul>
-<li>My Geometry vs.&nbsp;Algebra Rant… Euclid’s <em>Elements</em>, Book VI, Proposition 28.</li>
-<li>The problem: <em>Divide a given straight line so that the rectangle contained by its segments may be equal to a given area, not exceeding the square of half the line.</em></li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><span class="cb1">Geometers</span> solved w/<span class="cb1"><strong>geometry</strong></span> (300 BC)…</p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/euclid_271_crop.jpeg" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<p>…<span class="cb2">Algebraists</span> solved w/<span class="cb2"><strong>algebra</strong></span> (2000 BC)…</p>
-<p><span class="math display">\[
-\begin{align*}
-&amp;ax^2 + bx + c = 0 \\
-\Rightarrow \; &amp; x_+ = \frac{-b + \sqrt{b^2 - 4ac}}{2a}
-\end{align*}
-\]</span></p>
-<p>…<a href="https://en.wikipedia.org/wiki/Cartesian_coordinate_system#History">From 1637 onwards</a>, <strong><span class="cb1">w</span><span class="cb2">h</span><span class="cb1">i</span><span class="cb2">c</span><span class="cb1">h</span><span class="cb2">e</span><span class="cb1">v</span><span class="cb2">e</span><span class="cb1">r</span> <span class="cb2">i</span><span class="cb1">s</span> <span class="cb2">e</span><span class="cb1">a</span><span class="cb2">s</span><span class="cb1">i</span><span class="cb2">e</span><span class="cb1">r</span>!</strong> 🤯🤯🤯 (<em>Isomorphism</em>)</p>
-<div id="fig-descartes" class="quarto-float quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-fig">
-<div aria-describedby="fig-descartes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="columns">
-<div class="column" style="width:48%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/descartes.jpg" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
-</figure>
-</div>
-</div><div class="column" style="width:48%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/unit_circle.svg" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
-</figure>
-</div>
-</div></div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-descartes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Fig&nbsp;1: <strong>Circle with radius 1</strong>? Or <span class="math inline">\((x,y)\)</span> satisfying <span class="math inline">\(x^2 + y^2 = 1\)</span>?
-</figcaption>
-</figure>
-</div>
-</div></div>
+<section id="exhibit-a" class="slide level2">
+<h2>Exhibit A</h2>
 
-<div class="quarto-auto-generated-content">
+<img data-src="images/chi-monmonier-fig03009.jpeg" class="r-stretch"></section>
+<section id="exhibit-b" class="slide level2">
+<h2>Exhibit B</h2>
+
+
+<img data-src="images/chi-monmonier-fig03010.jpeg" class="r-stretch"><div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p>Week 1: GIS Overview</p>
+<p>Week 2: How Do Maps Work?</p>
 </div>
 </div>
 </section></section>

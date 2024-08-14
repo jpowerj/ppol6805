@@ -5,6 +5,10 @@ a.disabled {
   pointer-events: none;
 }
 
+.border-all td {
+  border: 1px solid black !important;
+}
+
 .cb1 {
     color: rgb(230, 159, 0) !important;
 }
@@ -131,6 +135,18 @@ table thead th {
   background-clip: padding-box;
 }
 
+.title-09 h2 {
+  font-size: calc(0.9 * var(--r-heading2-size)) !important;
+}
+
+.title-10 h2 {
+  font-size: calc(1.0 * var(--r-heading2-size)) !important;
+}
+
+.title-12 h2 {
+  font-size: calc(1.2 * var(--r-heading2-size)) !important;
+}
+
 /* td centering */
 .tdc {
   vertical-align: middle !important;
@@ -140,4 +156,22 @@ table thead th {
 /* td vertical centering */
 .tdvc {
   vertical-align: middle !important;
+}
+
+/* td vertical top-align */
+.tdvt {
+  vertical-align: top !important;
+}
+
+.tdvc-all td {
+  vertical-align: middle !important;
+}
+
+.tdvt-all td {
+  vertical-align: top !important;
+}
+
+/* For lists, shifting the bullet points */
+.unindent-lists ul {
+  margin-left: 0px !important;
 }

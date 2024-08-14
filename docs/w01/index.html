@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -171,7 +205,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2024-08-14, 03:04:18 AM</em></p>
+<p><em>Updated 2024-08-14, 07:26:31 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -199,17 +233,12 @@ window.Quarto = {
   <li><a href="#its-completely-made-up" id="toc-its-completely-made-up" class="nav-link" data-scroll-target="#its-completely-made-up">It’s Completely Made Up</a></li>
   <li><a href="#what-i-mean-by-made-up" id="toc-what-i-mean-by-made-up" class="nav-link" data-scroll-target="#what-i-mean-by-made-up">What I Mean By “Made Up”</a></li>
   <li><a href="#arcgis" id="toc-arcgis" class="nav-link" data-scroll-target="#arcgis">ArcGIS</a></li>
+  <li><a href="#then-why-cant-we-just-use-arcgis" id="toc-then-why-cant-we-just-use-arcgis" class="nav-link" data-scroll-target="#then-why-cant-we-just-use-arcgis">Then… Why Can’t We Just Use ArcGIS?</a></li>
   </ul></li>
   <li><a href="#how-to-not-be-scared-of-prerequisites" id="toc-how-to-not-be-scared-of-prerequisites" class="nav-link" data-scroll-target="#how-to-not-be-scared-of-prerequisites">How To Not Be Scared of Prerequisites</a>
   <ul class="collapse">
   <li><a href="#i-am-the-opposite-of-a-prereq-stickler" id="toc-i-am-the-opposite-of-a-prereq-stickler" class="nav-link" data-scroll-target="#i-am-the-opposite-of-a-prereq-stickler">I Am The Opposite of a Prereq-Stickler</a></li>
   <li><a href="#r-andor-python-andor-js" id="toc-r-andor-python-andor-js" class="nav-link" data-scroll-target="#r-andor-python-andor-js">R and/or Python and/or JS</a></li>
-  <li><a href="#descartes" id="toc-descartes" class="nav-link" data-scroll-target="#descartes">Descartes</a></li>
-  </ul></li>
-  <li><a href="#doin-maps" id="toc-doin-maps" class="nav-link" data-scroll-target="#doin-maps">Doin Maps</a>
-  <ul class="collapse">
-  <li><a href="#projections" id="toc-projections" class="nav-link" data-scroll-target="#projections">Projections</a></li>
-  <li><a href="#whats-happening-when-we-zoom-inout-on-google-maps" id="toc-whats-happening-when-we-zoom-inout-on-google-maps" class="nav-link" data-scroll-target="#whats-happening-when-we-zoom-inout-on-google-maps">What’s Happening When We Zoom In/Out on Google Maps?</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -402,6 +431,126 @@ window.Quarto = {
 <li>For info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the <a href="https://guides.library.georgetown.edu/esri_software" target="_blank">Library Guide</a></li>
 </ul>
 </section>
+<section id="then-why-cant-we-just-use-arcgis" class="level2 crunch-title title-12 smaller unindent-lists tdvt-all crunch-p">
+<h2 class="crunch-title title-12 smaller unindent-lists tdvt-all crunch-p anchored" data-anchor-id="then-why-cant-we-just-use-arcgis">Then… Why Can’t We Just Use ArcGIS?</h2>
+<p>Analogy from <strong>non</strong>-geospatial data science:</p>
+<!-- | Text Files | &rarr; | Spreadsheets | &rarr; | Equations | &rarr; | Code |
+| - |:-:| - |:-:| - |:-:| - |
+| <ul><li>Start entering information</li><li>2</li></ul> | |  | d | e | f | g |
+
+: {tbl-colwidths="[22,4,22,4,22,4,22]"} -->
+<style>
+.border-all {
+  font-size: 70% !important;
+}
+.border-all td, .border-all th {
+  border: 1px solid black !important;
+}
+</style>
+
+<table class="caption-top table" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 1%">
+<col style="width: 24%">
+<col style="width: 1%">
+<col style="width: 24%">
+<col style="width: 1%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Text<br>
+<em>Drawn Map</em></th>
+<th data-quarto-table-cell-role="th" style="text-align: center; vertical-align: middle;">→</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Speadsheet<br>
+<em>Digital Map</em></th>
+<th data-quarto-table-cell-role="th" style="text-align: center; vertical-align: middle;">→</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Equations<br>
+<em>Maps w/ArcGIS</em></th>
+<th data-quarto-table-cell-role="th" style="text-align: center; vertical-align: middle;">→</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Code<br>
+<em>This Class</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td colspan="2"><i class="bi bi-1-circle"></i> Start writing
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>info.txt</strong></pre>
+</div>
+<pre data-filename="info.txt"><code>I gave Ana $3, then Ana paid me back $2. [...]</code></pre>
+</div>
+<i class="bi bi-2-circle"></i> Realize there’s regularity/structure 🤔</td>
+<td colspan="2"><i class="bi bi-1-circle"></i> Start entering info in rows
+<table class="border-all caption-top table" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Fr</th>
+<th data-quarto-table-cell-role="th">To</th>
+<th data-quarto-table-cell-role="th">Amt</th>
+<th data-quarto-table-cell-role="th">Bal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Me</td>
+<td>Ana</td>
+<td>$3</td>
+<td>-$3</td>
+</tr>
+<tr class="even">
+<td>Ana</td>
+<td>Me</td>
+<td>$2</td>
+<td>-$1</td>
+</tr>
+</tbody>
+</table>
+<i class="bi bi-2-circle"></i> Realize you’re manually computing things that could be automated 🤔</td>
+<td colspan="2"><i class="bi bi-1-circle"></i> Start using equations
+<table class="border-all caption-top table" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Fr</th>
+<th data-quarto-table-cell-role="th">To</th>
+<th data-quarto-table-cell-role="th">Amt</th>
+<th data-quarto-table-cell-role="th">Bal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Me</td>
+<td>Ana</td>
+<td>$3</td>
+<td><code>=0-C1</code></td>
+</tr>
+<tr class="even">
+<td>Ana</td>
+<td>Me</td>
+<td>$2</td>
+<td><code>=D1-C2</code></td>
+</tr>
+</tbody>
+</table>
+<i class="bi bi-2-circle"></i> Realize you need fancier equations, and/or need to coordinate with inputs (APIs), outputs (plotting libraries) 🤔</td>
+<td><p><i class="bi bi-1-circle"></i> Write code</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>plot_balance.py</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="plot_balance.py"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(...)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>calc_weekly_balance()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df.plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!-- <img src="balance.svg" style='display: block; margin-left: auto; margin-right: auto; width: 50%;'></img> --> <img src="balance.svg" class="img-fluid" style="width: 100%;">
+<p><i class="bi bi-2-circle"></i> Profit 💲💰🤑💰💲</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 <section id="how-to-not-be-scared-of-prerequisites" class="level1" data-stack-name="Prereqs Without Fear">
 <h1 data-stack-name="Prereqs Without Fear">How To Not Be Scared of Prerequisites</h1>
@@ -461,21 +610,6 @@ Fig&nbsp;1: <strong>Circle with radius 1</strong>? Or <span class="math inline">
 </div>
 </div>
 </div>
-</section>
-<section id="descartes" class="level2">
-<h2 class="anchored" data-anchor-id="descartes">Descartes</h2>
-<ul>
-<li>Suddenly, after literally thousands of years of working <strong>separately</strong> in their <strong>own languages</strong>, we now have an <strong>isomorphism</strong> allowing <strong>geometric representation</strong> of <strong>algebraic expressions</strong>!</li>
-</ul>
-</section>
-</section>
-<section id="doin-maps" class="level1" data-stack-name="Maps">
-<h1 data-stack-name="Maps">Doin Maps</h1>
-<section id="projections" class="level2">
-<h2 class="anchored" data-anchor-id="projections">Projections</h2>
-</section>
-<section id="whats-happening-when-we-zoom-inout-on-google-maps" class="level2">
-<h2 class="anchored" data-anchor-id="whats-happening-when-we-zoom-inout-on-google-maps">What’s Happening When We Zoom In/Out on Google Maps?</h2>
 
 
 </section>
