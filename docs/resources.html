@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Resources – DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)</title>
+<title>Additional Resources – DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -141,7 +141,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2024-08-14, 02:58:40 AM</em></p>
+<p><em>Updated 2024-08-14, 03:04:18 AM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -150,7 +150,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#gis-overviews" id="toc-gis-overviews" class="nav-link active" data-scroll-target="#gis-overviews">GIS Overviews</a></li>
+  <li><a href="#textbooks" id="toc-textbooks" class="nav-link active" data-scroll-target="#textbooks">Textbooks</a></li>
+  <li><a href="#lecture-videos" id="toc-lecture-videos" class="nav-link" data-scroll-target="#lecture-videos">Lecture Videos</a></li>
+  <li><a href="#course-materials" id="toc-course-materials" class="nav-link" data-scroll-target="#course-materials">Course Materials</a></li>
   </ul>
 </nav>
     </div>
@@ -159,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Resources</h1>
+<h1 class="title">Additional Resources</h1>
 </div>
 
 
@@ -176,10 +178,22 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="gis-overviews" class="level2">
-<h2 class="anchored" data-anchor-id="gis-overviews">GIS Overviews</h2>
+<section id="textbooks" class="level2">
+<h2 class="anchored" data-anchor-id="textbooks">Textbooks</h2>
 <ul>
-<li>For a high-level overview, that will prepare you well for this course, see <a href="https://www.coursera.org/learn/gis/lecture/S0HxB/why-gis-is-awesome" target="_blank">Coursera: Introduction to GIS <i class="bi bi-box-arrow-up-right"></i></a></li>
+<li>All in <strong>R</strong>: Lovelace, Nowosad, and Muenchow (2024). <em><a href="https://r.geocompx.org/preface" target="_blank">Geocomputation with R</a></em> (<strong>Legally free online book!</strong>)</li>
+<li>All in <strong>Python</strong>: Rey, Arribas-Bel, and Wolf (2023). <em><a href="https://geographicdata.science/book/intro.html" target="_blank">Geographic Data Science with Python</a></em> (<strong>Also a legally free online book!</strong>)</li>
+</ul>
+</section>
+<section id="lecture-videos" class="level2">
+<h2 class="anchored" data-anchor-id="lecture-videos">Lecture Videos</h2>
+<ul>
+<li>For a high-level overview, that will prepare you well for this course, see <a href="https://www.coursera.org/learn/gis/lecture/S0HxB/why-gis-is-awesome" target="_blank">Coursera: Introduction to GIS</a></li>
+</ul>
+</section>
+<section id="course-materials" class="level2">
+<h2 class="anchored" data-anchor-id="course-materials">Course Materials</h2>
+<ul>
 <li>If you’re looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out <a href="https://www.stat.cmu.edu/~cshalizi/dst/20/" target="_blank">Data Over Space and Time</a>, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.</li>
 </ul>
 
@@ -293,6 +307,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

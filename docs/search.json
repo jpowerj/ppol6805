@@ -2,19 +2,39 @@
   {
     "objectID": "resources.html",
     "href": "resources.html",
-    "title": "Resources",
+    "title": "Additional Resources",
     "section": "",
-    "text": "For a high-level overview, that will prepare you well for this course, see Coursera: Introduction to GIS \nIf you’re looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out Data Over Space and Time, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.",
+    "text": "All in R: Lovelace, Nowosad, and Muenchow (2024). Geocomputation with R (Legally free online book!)\nAll in Python: Rey, Arribas-Bel, and Wolf (2023). Geographic Data Science with Python (Also a legally free online book!)",
     "crumbs": [
       "Resources"
     ]
   },
   {
-    "objectID": "resources.html#gis-overviews",
-    "href": "resources.html#gis-overviews",
-    "title": "Resources",
+    "objectID": "resources.html#textbooks",
+    "href": "resources.html#textbooks",
+    "title": "Additional Resources",
     "section": "",
-    "text": "For a high-level overview, that will prepare you well for this course, see Coursera: Introduction to GIS \nIf you’re looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out Data Over Space and Time, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.",
+    "text": "All in R: Lovelace, Nowosad, and Muenchow (2024). Geocomputation with R (Legally free online book!)\nAll in Python: Rey, Arribas-Bel, and Wolf (2023). Geographic Data Science with Python (Also a legally free online book!)",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resources.html#lecture-videos",
+    "href": "resources.html#lecture-videos",
+    "title": "Additional Resources",
+    "section": "Lecture Videos",
+    "text": "Lecture Videos\n\nFor a high-level overview, that will prepare you well for this course, see Coursera: Introduction to GIS",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resources.html#course-materials",
+    "href": "resources.html#course-materials",
+    "title": "Additional Resources",
+    "section": "Course Materials",
+    "text": "Course Materials\n\nIf you’re looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out Data Over Space and Time, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.",
     "crumbs": [
       "Resources"
     ]

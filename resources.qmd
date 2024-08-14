@@ -1,8 +1,20 @@
 ---
-title: "Resources"
+title: "Additional Resources"
+format:
+  html:
+    link-external-icon: true
+    link-external-newwindow: true
 ---
 
-## GIS Overviews
+## Textbooks
 
-* For a high-level overview, that will prepare you well for this course, see [Coursera: Introduction to GIS <i class='bi bi-box-arrow-up-right'></i>](https://www.coursera.org/learn/gis/lecture/S0HxB/why-gis-is-awesome){target='_blank'}
+* All in **R**: Lovelace, Nowosad, and Muenchow (2024). *[Geocomputation with R](https://r.geocompx.org/preface){target='_blank'}* (**Legally free online book!**)
+* All in **Python**: Rey, Arribas-Bel, and Wolf (2023). *[Geographic Data Science with Python](https://geographicdata.science/book/intro.html){target='_blank'}* (**Also a legally free online book!**)
+
+## Lecture Videos
+
+* For a high-level overview, that will prepare you well for this course, see [Coursera: Introduction to GIS](https://www.coursera.org/learn/gis/lecture/S0HxB/why-gis-is-awesome){target='_blank'}
+
+## Course Materials
+
 * If you're looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out [Data Over Space and Time](https://www.stat.cmu.edu/~cshalizi/dst/20/){target='_blank'}, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.
