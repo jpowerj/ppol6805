@@ -309,119 +309,170 @@
     "href": "w02/index.html",
     "title": "Week 2: How Do Maps Work?",
     "section": "",
-    "text": "From Krygier and Wood (2016)"
+    "text": "From Krygier and Wood (2016)",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#latitude-and-longitude-are-angles",
     "href": "w02/index.html#latitude-and-longitude-are-angles",
     "title": "Week 2: How Do Maps Work?",
     "section": "",
-    "text": "From Krygier and Wood (2016)"
+    "text": "From Krygier and Wood (2016)",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#smooshing-3d-into-2d",
     "href": "w02/index.html#smooshing-3d-into-2d",
     "title": "Week 2: How Do Maps Work?",
     "section": "Smooshing 3D into 2D",
-    "text": "Smooshing 3D into 2D"
+    "text": "Smooshing 3D into 2D",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#avoid-getting-lost-in-the-sauce",
     "href": "w02/index.html#avoid-getting-lost-in-the-sauce",
     "title": "Week 2: How Do Maps Work?",
     "section": "Avoid Getting Lost in the Sauce",
-    "text": "Avoid Getting Lost in the Sauce"
+    "text": "Avoid Getting Lost in the Sauce",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#how-to-avoid-getting-lost-in-the-sauce",
     "href": "w02/index.html#how-to-avoid-getting-lost-in-the-sauce",
     "title": "Week 2: How Do Maps Work?",
     "section": "How To Avoid Getting Lost in the Sauce",
-    "text": "How To Avoid Getting Lost in the Sauce\n\n\n\n\n\nTissot Circles: Imagine infinitely small ellipses placed at regular intervals on the curved surface of the earth. Imagine these ellipses being projected along with the earth’s surface. When scaled up, changes in the ellipses show the location and quality of distortions on the projected map."
+    "text": "How To Avoid Getting Lost in the Sauce\n\n\n\n\n\nTissot Circles: Imagine infinitely small ellipses placed at regular intervals on the curved surface of the earth. Imagine these ellipses being projected along with the earth’s surface. When scaled up, changes in the ellipses show the location and quality of distortions on the projected map.",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#scales-wrules-of-thumb",
     "href": "w02/index.html#scales-wrules-of-thumb",
     "title": "Week 2: How Do Maps Work?",
     "section": "Scales (w/Rules of Thumb)",
-    "text": "Scales (w/Rules of Thumb)"
+    "text": "Scales (w/Rules of Thumb)",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#the-three-key-elements",
     "href": "w02/index.html#the-three-key-elements",
     "title": "Week 2: How Do Maps Work?",
     "section": "The Three Key Elements",
-    "text": "The Three Key Elements"
+    "text": "The Three Key Elements",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#what-can-happen-to-points",
     "href": "w02/index.html#what-can-happen-to-points",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Can Happen to Points?",
-    "text": "What Can Happen to Points?"
+    "text": "What Can Happen to Points?",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#what-can-happen-to-lines",
     "href": "w02/index.html#what-can-happen-to-lines",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Can Happen to Lines?",
-    "text": "What Can Happen to Lines?"
+    "text": "What Can Happen to Lines?",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#what-can-happen-to-lines-1",
     "href": "w02/index.html#what-can-happen-to-lines-1",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Can Happen to Lines?",
-    "text": "What Can Happen to Lines?\n\n\nSelection\n\n\n\nIn any map, most features from the human or natural environment are eliminated!\n\n\n\nSimplification\n\n\n\nWithin the features that do remain, eliminate details that are unnecessary with respect to audience/context"
+    "text": "What Can Happen to Lines?\n\n\nSelection\n\n\n\nIn any map, most features from the human or natural environment are eliminated!\n\n\n\nSimplification\n\n\n\nWithin the features that do remain, eliminate details that are unnecessary with respect to audience/context",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#what-can-happen-to-areas",
     "href": "w02/index.html#what-can-happen-to-areas",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Can Happen to Areas?",
-    "text": "What Can Happen to Areas?\n\nDimension Change"
+    "text": "What Can Happen to Areas?\n\nDimension Change",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#what-is-gained",
     "href": "w02/index.html#what-is-gained",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Is Gained?",
-    "text": "What Is Gained?"
+    "text": "What Is Gained?",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#what-is-lost",
     "href": "w02/index.html#what-is-lost",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Is Lost?",
-    "text": "What Is Lost?"
+    "text": "What Is Lost?",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#who-is-affected",
     "href": "w02/index.html#who-is-affected",
     "title": "Week 2: How Do Maps Work?",
     "section": "Who Is Affected?",
-    "text": "Who Is Affected?"
+    "text": "Who Is Affected?",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#exhibit-a",
     "href": "w02/index.html#exhibit-a",
     "title": "Week 2: How Do Maps Work?",
     "section": "Exhibit A",
-    "text": "Exhibit A"
+    "text": "Exhibit A",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#exhibit-b",
     "href": "w02/index.html#exhibit-b",
     "title": "Week 2: How Do Maps Work?",
     "section": "Exhibit B",
-    "text": "Exhibit B"
+    "text": "Exhibit B",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/index.html#references",
     "href": "w02/index.html#references",
     "title": "Week 2: How Do Maps Work?",
     "section": "References",
-    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications."
+    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
   },
   {
     "objectID": "w02/slides.html#latitude-and-longitude-are-angles",
@@ -560,7 +611,7 @@
     "href": "syllabus.html#course-staff-and-office-hours",
     "title": "DSAN 6750 / PPOL 6805",
     "section": "Course Staff and Office Hours",
-    "text": "Course Staff and Office Hours\n\nProf. Jeff Jacobs, jj1088@georgetown.edu: Schedule office hour slots at jjacobs.me/meet\n\nMondays 4:30-6:30pm\nTuesdays 3-5:30pm\n(Please try to schedule at least 8 hours in advance, and let me know briefly what you’d like to discuss, so I have time to prepare)\n\nTA\n\nTBD",
+    "text": "Course Staff and Office Hours\n\nProf. Jeff Jacobs, jj1088@georgetown.edu: Schedule office hour slots at jjacobs.me/meet\n\nMondays 4:30-6:30pm\nTuesdays 3-5:30pm\n(Please try to schedule at least 8 hours in advance, and let me know briefly what you’d like to discuss, so I have time to prepare)\n\nTA Billy McGloin, wtm30@georgetown.edu\n\nBy Appointment (Email)",
     "crumbs": [
       "Syllabus"
     ]

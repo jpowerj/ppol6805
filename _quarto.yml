@@ -6,6 +6,9 @@ project:
 website:
   title: "DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)"
   favicon: "favicon.png"
+  repo-url: "https://github.com/jpowerj/dsan6750"
+  repo-actions: [source]
+  repo-link-target: "_blank"
   sidebar:
     id: mainnav
     footer: "*Updated {{< env DSAN6750_LAST_UPDATED \"2024\" >}}*"
@@ -21,11 +24,13 @@ website:
       - "---"
       - href: w01/index.qmd
         text: "Week 1: Aug 28"
+      - href: w02/index.qmd
+        text: "Week 2: Sep 4"
 
 format:
   html:
     theme: default
-    css: styles.css
+    css: "/dsan-globals/jjstyles.css"
     toc: true
     include-in-header:
       text: "<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js' integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='' crossorigin='anonymous' referrerpolicy='no-referrer'></script><script src='/jjcustom.js'></script>"
