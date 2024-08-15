@@ -305,6 +305,20 @@
     "text": "I will aim to update the Zoom recording links here as soon as they are available after the end of class. But, in case there’s a delay, recordings are automatically added to the course’s Panopto page!\n\n\n\n\n\n\n\n\n\nWeek\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\n1\n\n\nWeek 1: Introduction to GIS\n\n\nWednesday Aug 28, 2024\n\n\n\n\n\nNo matching items"
   },
   {
+    "objectID": "w02/index.html",
+    "href": "w02/index.html",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "",
+    "text": "From Krygier and Wood (2016)"
+  },
+  {
+    "objectID": "w02/index.html#latitude-and-longitude-are-angles",
+    "href": "w02/index.html#latitude-and-longitude-are-angles",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "",
+    "text": "From Krygier and Wood (2016)"
+  },
+  {
     "objectID": "w02/index.html#smooshing-3d-into-2d",
     "href": "w02/index.html#smooshing-3d-into-2d",
     "title": "Week 2: How Do Maps Work?",
@@ -401,6 +415,13 @@
     "title": "Week 2: How Do Maps Work?",
     "section": "Exhibit B",
     "text": "Exhibit B"
+  },
+  {
+    "objectID": "w02/index.html#references",
+    "href": "w02/index.html#references",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "References",
+    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications."
   },
   {
     "objectID": "w02/slides.html#latitude-and-longitude-are-angles",
@@ -506,6 +527,13 @@
     "title": "Week 2: How Do Maps Work?",
     "section": "Exhibit B",
     "text": "Exhibit B"
+  },
+  {
+    "objectID": "w02/slides.html#references",
+    "href": "w02/slides.html#references",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "References",
+    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\n\n\n\nWeek 2: How Do Maps Work?"
   },
   {
     "objectID": "index.html",
@@ -616,12 +644,5 @@
     "crumbs": [
       "Syllabus"
     ]
-  },
-  {
-    "objectID": "w02/slides.html#references",
-    "href": "w02/slides.html#references",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "References",
-    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\n\n\n\nWeek 2: How Do Maps Work?"
   }
 ]
