@@ -8,7 +8,9 @@
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Jeff Jacobs">
@@ -348,6 +350,15 @@ Jeff Jacobs
   <p class="date">Wednesday, September 4, 2024</p>
 </section>
 <section>
+<section id="first-things-first" class="title-slide slide level1 center">
+<h1>First Things First</h1>
+
+</section>
+<section id="latitude-and-longitude-are-angles" class="slide level2">
+<h2>Latitude and Longitude are <em>Angles</em>!</h2>
+
+<img data-src="images/lat_lon.svg" class="quarto-figure quarto-figure-center r-stretch"></section></section>
+<section>
 <section id="projections" class="title-slide slide level1 center" data-stack-name="Projections">
 <h1>Projections</h1>
 
@@ -355,16 +366,50 @@ Jeff Jacobs
 <section id="smooshing-3d-into-2d" class="slide level2">
 <h2>Smooshing 3D into 2D</h2>
 
-<img data-src="images/chi-monmonier-fig02003.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section></section>
+<img data-src="images/chi-monmonier-fig02003.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="avoid-getting-lost-in-the-sauce" class="slide level2">
+<h2>Avoid Getting Lost in the Sauce</h2>
+<center>
+<video id="video_shortcode_videojs_video1" width="800" height="550" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="https://jpj.georgetown.domains/dsan6750-scratch/sauce.mp4"></video>
+</center>
+</section>
+<section id="how-to-avoid-getting-lost-in-the-sauce" class="slide level2 crunch-title title-09">
+<h2>How To Avoid Getting Lost in the Sauce</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/sphere_tissot.svg" style="width:50.0%"></p>
+<figcaption><strong>Tissot Circles</strong>: <em>Imagine infinitely small ellipses placed at regular intervals on the curved surface of the earth. Imagine these ellipses being projected along with the earth’s surface. When scaled up, changes in the ellipses show the location and quality of distortions on the projected map.</em></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/mercator_tissot.svg" class="quarto-figure quarto-figure-center" style="width:55.0%"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/equal_area_tissot.svg" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div></div>
+</section></section>
 <section>
 <section id="the-things-we-put-on-maps" class="title-slide slide level1 center" data-stack-name="Three Key Elements">
 <h1>The Things We Put On Maps</h1>
 <ul>
+<li>Scales</li>
 <li>Points</li>
 <li>Lines</li>
 <li>Areas</li>
 </ul>
 </section>
+<section id="scales-wrules-of-thumb" class="slide level2">
+<h2>Scales (w/Rules of Thumb)</h2>
+
+<img data-src="images/scales.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="the-three-key-elements" class="slide level2">
 <h2>The Three Key Elements</h2>
 
@@ -376,18 +421,41 @@ Jeff Jacobs
 <li>What happens to points, lines, and areas?</li>
 </ul>
 </section>
-<section id="what-happens-to-points" class="slide level2">
-<h2>What Happens to Points?</h2>
+<section id="what-can-happen-to-points" class="slide level2">
+<h2>What Can Happen to <em>Points</em>?</h2>
 
 <img data-src="images/chi-monmonier-fig03002.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="what-happens-to-lines" class="slide level2">
-<h2>What Happens to Lines?</h2>
+<section id="what-can-happen-to-lines" class="slide level2">
+<h2>What Can Happen to <em>Lines</em>?</h2>
 
 <img data-src="images/chi-monmonier-fig03001.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="what-happens-to-areas" class="slide level2">
-<h2>What Happens to Areas?</h2>
+<section id="what-can-happen-to-lines-1" class="slide level2">
+<h2>What Can Happen to <em>Lines</em>?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Selection</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/selection.svg" style="width:100.0%"></p>
+<figcaption>In any map, <strong>most</strong> features from the human or natural environment are eliminated!</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Simplification</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/simplification.svg" style="width:100.0%"></p>
+<figcaption>Within the features that <em>do</em> remain, eliminate <strong>details</strong> that are unnecessary with respect to audience/context</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="what-can-happen-to-areas" class="slide level2">
+<h2>What Can Happen to <em>Areas</em>?</h2>
+<!-- ![](images/chi-monmonier-fig03003.jpeg){fig-align="center"} -->
+<p><strong>Dimension Change</strong></p>
 
-<img data-src="images/chi-monmonier-fig03003.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<img data-src="images/dimension_change.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
 <section id="what-is-gained" class="slide level2">
 <h2>What Is Gained?</h2>
 
@@ -825,6 +893,7 @@ Jeff Jacobs
       }
     });
     </script>
+    <script>videojs(video_shortcode_videojs_video1);</script>
     
 
 </body></html>

@@ -41,6 +41,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -86,19 +88,27 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#projections" id="toc-projections" class="nav-link active" data-scroll-target="#projections">Projections</a>
+  <li><a href="#first-things-first" id="toc-first-things-first" class="nav-link active" data-scroll-target="#first-things-first">First Things First</a>
+  <ul class="collapse">
+  <li><a href="#latitude-and-longitude-are-angles" id="toc-latitude-and-longitude-are-angles" class="nav-link" data-scroll-target="#latitude-and-longitude-are-angles">Latitude and Longitude are <em>Angles</em>!</a></li>
+  </ul></li>
+  <li><a href="#projections" id="toc-projections" class="nav-link" data-scroll-target="#projections">Projections</a>
   <ul class="collapse">
   <li><a href="#smooshing-3d-into-2d" id="toc-smooshing-3d-into-2d" class="nav-link" data-scroll-target="#smooshing-3d-into-2d">Smooshing 3D into 2D</a></li>
+  <li><a href="#avoid-getting-lost-in-the-sauce" id="toc-avoid-getting-lost-in-the-sauce" class="nav-link" data-scroll-target="#avoid-getting-lost-in-the-sauce">Avoid Getting Lost in the Sauce</a></li>
+  <li><a href="#how-to-avoid-getting-lost-in-the-sauce" id="toc-how-to-avoid-getting-lost-in-the-sauce" class="nav-link" data-scroll-target="#how-to-avoid-getting-lost-in-the-sauce">How To Avoid Getting Lost in the Sauce</a></li>
   </ul></li>
   <li><a href="#the-things-we-put-on-maps" id="toc-the-things-we-put-on-maps" class="nav-link" data-scroll-target="#the-things-we-put-on-maps">The Things We Put On Maps</a>
   <ul class="collapse">
+  <li><a href="#scales-wrules-of-thumb" id="toc-scales-wrules-of-thumb" class="nav-link" data-scroll-target="#scales-wrules-of-thumb">Scales (w/Rules of Thumb)</a></li>
   <li><a href="#the-three-key-elements" id="toc-the-three-key-elements" class="nav-link" data-scroll-target="#the-three-key-elements">The Three Key Elements</a></li>
   </ul></li>
   <li><a href="#thought-experiment-zooming-in-and-out" id="toc-thought-experiment-zooming-in-and-out" class="nav-link" data-scroll-target="#thought-experiment-zooming-in-and-out">Thought Experiment: Zooming In and Out</a>
   <ul class="collapse">
-  <li><a href="#what-happens-to-points" id="toc-what-happens-to-points" class="nav-link" data-scroll-target="#what-happens-to-points">What Happens to Points?</a></li>
-  <li><a href="#what-happens-to-lines" id="toc-what-happens-to-lines" class="nav-link" data-scroll-target="#what-happens-to-lines">What Happens to Lines?</a></li>
-  <li><a href="#what-happens-to-areas" id="toc-what-happens-to-areas" class="nav-link" data-scroll-target="#what-happens-to-areas">What Happens to Areas?</a></li>
+  <li><a href="#what-can-happen-to-points" id="toc-what-can-happen-to-points" class="nav-link" data-scroll-target="#what-can-happen-to-points">What Can Happen to <em>Points</em>?</a></li>
+  <li><a href="#what-can-happen-to-lines" id="toc-what-can-happen-to-lines" class="nav-link" data-scroll-target="#what-can-happen-to-lines">What Can Happen to <em>Lines</em>?</a></li>
+  <li><a href="#what-can-happen-to-lines-1" id="toc-what-can-happen-to-lines-1" class="nav-link" data-scroll-target="#what-can-happen-to-lines-1">What Can Happen to <em>Lines</em>?</a></li>
+  <li><a href="#what-can-happen-to-areas" id="toc-what-can-happen-to-areas" class="nav-link" data-scroll-target="#what-can-happen-to-areas">What Can Happen to <em>Areas</em>?</a></li>
   <li><a href="#what-is-gained" id="toc-what-is-gained" class="nav-link" data-scroll-target="#what-is-gained">What Is Gained?</a></li>
   <li><a href="#what-is-lost" id="toc-what-is-lost" class="nav-link" data-scroll-target="#what-is-lost">What Is Lost?</a></li>
   <li><a href="#who-is-affected" id="toc-who-is-affected" class="nav-link" data-scroll-target="#who-is-affected">Who Is Affected?</a></li>
@@ -156,6 +166,17 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="first-things-first" class="level1">
+<h1>First Things First</h1>
+<section id="latitude-and-longitude-are-angles" class="level2">
+<h2 class="anchored" data-anchor-id="latitude-and-longitude-are-angles">Latitude and Longitude are <em>Angles</em>!</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/lat_lon.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+</section>
 <section id="projections" class="level1" data-stack-name="Projections">
 <h1 data-stack-name="Projections">Projections</h1>
 <section id="smooshing-3d-into-2d" class="level2">
@@ -166,14 +187,53 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 </section>
+<section id="avoid-getting-lost-in-the-sauce" class="level2">
+<h2 class="anchored" data-anchor-id="avoid-getting-lost-in-the-sauce">Avoid Getting Lost in the Sauce</h2>
+<center>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" width="800" height="550" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="https://jpj.georgetown.domains/dsan6750-scratch/sauce.mp4"></video></div>
+</center>
+</section>
+<section id="how-to-avoid-getting-lost-in-the-sauce" class="level2 crunch-title title-09">
+<h2 class="crunch-title title-09 anchored" data-anchor-id="how-to-avoid-getting-lost-in-the-sauce">How To Avoid Getting Lost in the Sauce</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/sphere_tissot.svg" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption><strong>Tissot Circles</strong>: <em>Imagine infinitely small ellipses placed at regular intervals on the curved surface of the earth. Imagine these ellipses being projected along with the earth’s surface. When scaled up, changes in the ellipses show the location and quality of distortions on the projected map.</em></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mercator_tissot.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:55.0%"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/equal_area_tissot.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="the-things-we-put-on-maps" class="level1" data-stack-name="Three Key Elements">
 <h1 data-stack-name="Three Key Elements">The Things We Put On Maps</h1>
 <ul>
+<li>Scales</li>
 <li>Points</li>
 <li>Lines</li>
 <li>Areas</li>
 </ul>
+<section id="scales-wrules-of-thumb" class="level2">
+<h2 class="anchored" data-anchor-id="scales-wrules-of-thumb">Scales (w/Rules of Thumb)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/scales.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
 <section id="the-three-key-elements" class="level2">
 <h2 class="anchored" data-anchor-id="the-three-key-elements">The Three Key Elements</h2>
 <div class="quarto-figure quarto-figure-center">
@@ -188,27 +248,51 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>What happens to points, lines, and areas?</li>
 </ul>
-<section id="what-happens-to-points" class="level2">
-<h2 class="anchored" data-anchor-id="what-happens-to-points">What Happens to Points?</h2>
+<section id="what-can-happen-to-points" class="level2">
+<h2 class="anchored" data-anchor-id="what-can-happen-to-points">What Can Happen to <em>Points</em>?</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/chi-monmonier-fig03002.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
-<section id="what-happens-to-lines" class="level2">
-<h2 class="anchored" data-anchor-id="what-happens-to-lines">What Happens to Lines?</h2>
+<section id="what-can-happen-to-lines" class="level2">
+<h2 class="anchored" data-anchor-id="what-can-happen-to-lines">What Can Happen to <em>Lines</em>?</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/chi-monmonier-fig03001.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
-<section id="what-happens-to-areas" class="level2">
-<h2 class="anchored" data-anchor-id="what-happens-to-areas">What Happens to Areas?</h2>
+<section id="what-can-happen-to-lines-1" class="level2">
+<h2 class="anchored" data-anchor-id="what-can-happen-to-lines-1">What Can Happen to <em>Lines</em>?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Selection</strong></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/chi-monmonier-fig03003.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="images/selection.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>In any map, <strong>most</strong> features from the human or natural environment are eliminated!</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Simplification</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/simplification.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Within the features that <em>do</em> remain, eliminate <strong>details</strong> that are unnecessary with respect to audience/context</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="what-can-happen-to-areas" class="level2">
+<h2 class="anchored" data-anchor-id="what-can-happen-to-areas">What Can Happen to <em>Areas</em>?</h2>
+<!-- ![](images/chi-monmonier-fig03003.jpeg){fig-align="center"} -->
+<p><strong>Dimension Change</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/dimension_change.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </section>
@@ -673,6 +757,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>videojs(video_shortcode_videojs_video1);</script>
 
 
 

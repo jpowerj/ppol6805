@@ -35,17 +35,53 @@ format:
       text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'><link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous'><script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js' integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='' crossorigin='anonymous' referrerpolicy='no-referrer'></script><script src='/jjcustom.js'></script>"
 ---
 
+# First Things First
+
+## Latitude and Longitude are *Angles*!
+
+![](images/lat_lon.svg){fig-align="center"}
+
 # Projections {data-stack-name="Projections"}
 
 ## Smooshing 3D into 2D
 
 ![](images/chi-monmonier-fig02003.jpeg){fig-align="center"}
 
+## Avoid Getting Lost in the Sauce
+
+<center>
+
+{{< video "https://jpj.georgetown.domains/dsan6750-scratch/sauce.mp4" width="800" height="550" >}}
+
+</center>
+
+## How To Avoid Getting Lost in the Sauce {.crunch-title .title-09}
+
+::: {.columns}
+::: {.column width="50%"}
+
+![**Tissot Circles**: *Imagine infinitely small ellipses placed at regular intervals on the curved surface of the earth. Imagine these ellipses being projected along with the earth's surface. When scaled up, changes in the ellipses show the location and quality of distortions on the projected map.*](images/sphere_tissot.svg){fig-align="center" width="50%"}
+
+:::
+::: {.column width="50%"}
+
+![](images/mercator_tissot.svg){fig-align="center" width="55%"}
+
+![](images/equal_area_tissot.svg){fig-align="center" width="100%"}
+
+:::
+:::
+
 # The Things We Put On Maps {data-stack-name="Three Key Elements"}
 
+* Scales
 * Points
 * Lines
 * Areas
+
+## Scales (w/Rules of Thumb)
+
+![](images/scales.svg){fig-align="center"}
 
 ## The Three Key Elements
 
@@ -55,17 +91,40 @@ format:
 
 * What happens to points, lines, and areas?
 
-## What Happens to Points?
+## What Can Happen to *Points*?
 
 ![](images/chi-monmonier-fig03002.jpeg){fig-align="center"}
 
-## What Happens to Lines?
+## What Can Happen to *Lines*?
 
 ![](images/chi-monmonier-fig03001.jpeg){fig-align="center"}
 
-## What Happens to Areas?
+## What Can Happen to *Lines*?
 
-![](images/chi-monmonier-fig03003.jpeg){fig-align="center"}
+::: {.columns}
+::: {.column width="50%"}
+
+**Selection**
+
+![In any map, **most** features from the human or natural environment are eliminated!](images/selection.svg){fig-align="center" width="100%"}
+
+:::
+::: {.column width="50%"}
+
+**Simplification**
+
+![Within the features that *do* remain, eliminate **details** that are unnecessary with respect to audience/context](images/simplification.svg){fig-align="center" width="100%"}
+
+:::
+:::
+
+## What Can Happen to *Areas*?
+
+<!-- ![](images/chi-monmonier-fig03003.jpeg){fig-align="center"} -->
+
+**Dimension Change**
+
+![](images/dimension_change.svg){fig-align="center" width="100%"}
 
 ## What Is Gained?
 

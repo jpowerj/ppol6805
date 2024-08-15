@@ -305,6 +305,34 @@
     "text": "I will aim to update the Zoom recording links here as soon as they are available after the end of class. But, in case there’s a delay, recordings are automatically added to the course’s Panopto page!\n\n\n\n\n\n\n\n\n\nWeek\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\n1\n\n\nWeek 1: Introduction to GIS\n\n\nWednesday Aug 28, 2024\n\n\n\n\n\nNo matching items"
   },
   {
+    "objectID": "w02/index.html#smooshing-3d-into-2d",
+    "href": "w02/index.html#smooshing-3d-into-2d",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Smooshing 3D into 2D",
+    "text": "Smooshing 3D into 2D"
+  },
+  {
+    "objectID": "w02/index.html#avoid-getting-lost-in-the-sauce",
+    "href": "w02/index.html#avoid-getting-lost-in-the-sauce",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Avoid Getting Lost in the Sauce",
+    "text": "Avoid Getting Lost in the Sauce"
+  },
+  {
+    "objectID": "w02/index.html#how-to-avoid-getting-lost-in-the-sauce",
+    "href": "w02/index.html#how-to-avoid-getting-lost-in-the-sauce",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "How To Avoid Getting Lost in the Sauce",
+    "text": "How To Avoid Getting Lost in the Sauce\n\n\n\n\n\nTissot Circles: Imagine infinitely small ellipses placed at regular intervals on the curved surface of the earth. Imagine these ellipses being projected along with the earth’s surface. When scaled up, changes in the ellipses show the location and quality of distortions on the projected map."
+  },
+  {
+    "objectID": "w02/index.html#scales-wrules-of-thumb",
+    "href": "w02/index.html#scales-wrules-of-thumb",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Scales (w/Rules of Thumb)",
+    "text": "Scales (w/Rules of Thumb)"
+  },
+  {
     "objectID": "w02/index.html#the-three-key-elements",
     "href": "w02/index.html#the-three-key-elements",
     "title": "Week 2: How Do Maps Work?",
@@ -312,25 +340,32 @@
     "text": "The Three Key Elements"
   },
   {
-    "objectID": "w02/index.html#what-happens-to-points",
-    "href": "w02/index.html#what-happens-to-points",
+    "objectID": "w02/index.html#what-can-happen-to-points",
+    "href": "w02/index.html#what-can-happen-to-points",
     "title": "Week 2: How Do Maps Work?",
-    "section": "What Happens to Points?",
-    "text": "What Happens to Points?"
+    "section": "What Can Happen to Points?",
+    "text": "What Can Happen to Points?"
   },
   {
-    "objectID": "w02/index.html#what-happens-to-lines",
-    "href": "w02/index.html#what-happens-to-lines",
+    "objectID": "w02/index.html#what-can-happen-to-lines",
+    "href": "w02/index.html#what-can-happen-to-lines",
     "title": "Week 2: How Do Maps Work?",
-    "section": "What Happens to Lines?",
-    "text": "What Happens to Lines?"
+    "section": "What Can Happen to Lines?",
+    "text": "What Can Happen to Lines?"
   },
   {
-    "objectID": "w02/index.html#what-happens-to-areas",
-    "href": "w02/index.html#what-happens-to-areas",
+    "objectID": "w02/index.html#what-can-happen-to-lines-1",
+    "href": "w02/index.html#what-can-happen-to-lines-1",
     "title": "Week 2: How Do Maps Work?",
-    "section": "What Happens to Areas?",
-    "text": "What Happens to Areas?"
+    "section": "What Can Happen to Lines?",
+    "text": "What Can Happen to Lines?\n\n\nSelection\n\n\n\nIn any map, most features from the human or natural environment are eliminated!\n\n\n\nSimplification\n\n\n\nWithin the features that do remain, eliminate details that are unnecessary with respect to audience/context"
+  },
+  {
+    "objectID": "w02/index.html#what-can-happen-to-areas",
+    "href": "w02/index.html#what-can-happen-to-areas",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Can Happen to Areas?",
+    "text": "What Can Happen to Areas?\n\nDimension Change"
   },
   {
     "objectID": "w02/index.html#what-is-gained",
@@ -368,11 +403,39 @@
     "text": "Exhibit B"
   },
   {
+    "objectID": "w02/slides.html#latitude-and-longitude-are-angles",
+    "href": "w02/slides.html#latitude-and-longitude-are-angles",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Latitude and Longitude are Angles!",
+    "text": "Latitude and Longitude are Angles!"
+  },
+  {
     "objectID": "w02/slides.html#smooshing-3d-into-2d",
     "href": "w02/slides.html#smooshing-3d-into-2d",
     "title": "Week 2: How Do Maps Work?",
     "section": "Smooshing 3D into 2D",
     "text": "Smooshing 3D into 2D"
+  },
+  {
+    "objectID": "w02/slides.html#avoid-getting-lost-in-the-sauce",
+    "href": "w02/slides.html#avoid-getting-lost-in-the-sauce",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Avoid Getting Lost in the Sauce",
+    "text": "Avoid Getting Lost in the Sauce"
+  },
+  {
+    "objectID": "w02/slides.html#how-to-avoid-getting-lost-in-the-sauce",
+    "href": "w02/slides.html#how-to-avoid-getting-lost-in-the-sauce",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "How To Avoid Getting Lost in the Sauce",
+    "text": "How To Avoid Getting Lost in the Sauce\n\n\n\n\n\nTissot Circles: Imagine infinitely small ellipses placed at regular intervals on the curved surface of the earth. Imagine these ellipses being projected along with the earth’s surface. When scaled up, changes in the ellipses show the location and quality of distortions on the projected map."
+  },
+  {
+    "objectID": "w02/slides.html#scales-wrules-of-thumb",
+    "href": "w02/slides.html#scales-wrules-of-thumb",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Scales (w/Rules of Thumb)",
+    "text": "Scales (w/Rules of Thumb)"
   },
   {
     "objectID": "w02/slides.html#the-three-key-elements",
@@ -382,25 +445,32 @@
     "text": "The Three Key Elements"
   },
   {
-    "objectID": "w02/slides.html#what-happens-to-points",
-    "href": "w02/slides.html#what-happens-to-points",
+    "objectID": "w02/slides.html#what-can-happen-to-points",
+    "href": "w02/slides.html#what-can-happen-to-points",
     "title": "Week 2: How Do Maps Work?",
-    "section": "What Happens to Points?",
-    "text": "What Happens to Points?"
+    "section": "What Can Happen to Points?",
+    "text": "What Can Happen to Points?"
   },
   {
-    "objectID": "w02/slides.html#what-happens-to-lines",
-    "href": "w02/slides.html#what-happens-to-lines",
+    "objectID": "w02/slides.html#what-can-happen-to-lines",
+    "href": "w02/slides.html#what-can-happen-to-lines",
     "title": "Week 2: How Do Maps Work?",
-    "section": "What Happens to Lines?",
-    "text": "What Happens to Lines?"
+    "section": "What Can Happen to Lines?",
+    "text": "What Can Happen to Lines?"
   },
   {
-    "objectID": "w02/slides.html#what-happens-to-areas",
-    "href": "w02/slides.html#what-happens-to-areas",
+    "objectID": "w02/slides.html#what-can-happen-to-lines-1",
+    "href": "w02/slides.html#what-can-happen-to-lines-1",
     "title": "Week 2: How Do Maps Work?",
-    "section": "What Happens to Areas?",
-    "text": "What Happens to Areas?"
+    "section": "What Can Happen to Lines?",
+    "text": "What Can Happen to Lines?\n\n\nSelection\n\n\n\nIn any map, most features from the human or natural environment are eliminated!\n\n\n\nSimplification\n\n\n\nWithin the features that do remain, eliminate details that are unnecessary with respect to audience/context"
+  },
+  {
+    "objectID": "w02/slides.html#what-can-happen-to-areas",
+    "href": "w02/slides.html#what-can-happen-to-areas",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Can Happen to Areas?",
+    "text": "What Can Happen to Areas?\n\nDimension Change"
   },
   {
     "objectID": "w02/slides.html#what-is-gained",
