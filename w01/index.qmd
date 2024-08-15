@@ -5,10 +5,12 @@ author: "{{< var course.author >}}"
 institute: "{{< var course.institute >}}"
 date: "August 28, 2024"
 date-format: full
+lecnum: 1
 categories:
   - "Class Sessions"
 crossref:
   fig-title: Fig
+bibliography: "../_DSAN6750.bib"
 format:
   revealjs:
     output-file: "slides.html"

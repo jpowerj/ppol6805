@@ -5,6 +5,7 @@ author: "{{< var course.author >}}"
 institute: "{{< var course.institute >}}"
 date: "September 4, 2024"
 date-format: full
+lecnum: 2
 categories:
   - "Class Sessions"
 crossref:
