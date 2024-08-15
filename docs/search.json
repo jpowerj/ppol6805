@@ -407,7 +407,7 @@
     "href": "w02/slides.html#latitude-and-longitude-are-angles",
     "title": "Week 2: How Do Maps Work?",
     "section": "Latitude and Longitude are Angles!",
-    "text": "Latitude and Longitude are Angles!"
+    "text": "Latitude and Longitude are Angles!\n\nFrom Krygier and Wood (2016)"
   },
   {
     "objectID": "w02/slides.html#smooshing-3d-into-2d",
@@ -505,7 +505,7 @@
     "href": "w02/slides.html#exhibit-b",
     "title": "Week 2: How Do Maps Work?",
     "section": "Exhibit B",
-    "text": "Exhibit B\n\n\n\n\nWeek 2: How Do Maps Work?"
+    "text": "Exhibit B"
   },
   {
     "objectID": "index.html",
@@ -616,5 +616,12 @@
     "crumbs": [
       "Syllabus"
     ]
+  },
+  {
+    "objectID": "w02/slides.html#references",
+    "href": "w02/slides.html#references",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "References",
+    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\n\n\n\nWeek 2: How Do Maps Work?"
   }
 ]

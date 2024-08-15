@@ -9,6 +9,10 @@ a.disabled {
   border: 1px solid black !important;
 }
 
+.caption {
+  text-align: center;
+}
+
 .cb1 {
     color: rgb(230, 159, 0) !important;
 }

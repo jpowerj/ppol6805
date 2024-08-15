@@ -32,7 +32,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="../styles.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -357,7 +377,7 @@ Jeff Jacobs
 <section id="latitude-and-longitude-are-angles" class="slide level2">
 <h2>Latitude and Longitude are <em>Angles</em>!</h2>
 
-<img data-src="images/lat_lon.svg" class="quarto-figure quarto-figure-center r-stretch"></section></section>
+<img data-src="images/lat_lon.svg" class="r-stretch quarto-figure-center"><p class="caption">From <span class="citation" data-cites="krygier_making_2016">Krygier and Wood (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span></p></section></section>
 <section>
 <section id="projections" class="title-slide slide level1 center" data-stack-name="Projections">
 <h1>Projections</h1>
@@ -480,8 +500,16 @@ Jeff Jacobs
 <section id="exhibit-b" class="slide level2">
 <h2>Exhibit B</h2>
 
+<img data-src="images/chi-monmonier-fig03010.jpeg" class="r-stretch"></section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-krygier_making_2016" class="csl-entry" role="listitem">
+Krygier, John, and Denis Wood. 2016. <em>Making <span>Maps</span>, <span>Third Edition</span>: <span>A Visual Guide</span> to <span>Map Design</span> for <span>GIS</span></em>. Guilford Publications.
+</div>
+</div>
 
-<img data-src="images/chi-monmonier-fig03010.jpeg" class="r-stretch"><div class="quarto-auto-generated-content">
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 <p>Week 2: How Do Maps Work?</p>
 </div>

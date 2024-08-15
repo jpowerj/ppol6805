@@ -9,6 +9,7 @@ categories:
   - "Class Sessions"
 crossref:
   fig-title: Fig
+bibliography: "../_DSAN6750.bib"
 format:
   revealjs:
     output-file: "slides.html"
@@ -39,7 +40,7 @@ format:
 
 ## Latitude and Longitude are *Angles*!
 
-![](images/lat_lon.svg){fig-align="center"}
+![From @krygier_making_2016](images/lat_lon.svg){fig-align="center"}
 
 # Projections {data-stack-name="Projections"}
 
@@ -148,3 +149,7 @@ format:
 
 ![](images/chi-monmonier-fig03010.jpeg)
 
+## References
+
+::: {#refs}
+:::
