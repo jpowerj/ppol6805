@@ -10,7 +10,7 @@ categories:
   - "Class Sessions"
 crossref:
   fig-title: Fig
-bibliography: "../_DSAN6750.bib"
+bibliography: "../_PPOL6805.bib"
 cache: true
 format:
   revealjs:

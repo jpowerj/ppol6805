@@ -7,53 +7,67 @@ w02:
   footer: "Week 2: How Do Maps Work?"
   date-md: "Sep 4"
 w03:
-  title: "Week 3"
+  title: "GIS Nuts and Bolts"
   date-md: "Sep 11"
 w04:
-  title: "Week 4"
+  title: "GIS Libraries Intro"
   date-md: "Sep 18"
 w05:
-  title: "Week 5"
+  title: "GIS Libraries Part 2"
   date-md: "Sep 25"
 w06:
-  title: "Week 6"
+  title: "GIS Libraries Part 3"
   date-md: "Oct 2"
 w07:
-  title: "Week 7"
+  title: "Spatial Data Science Intro"
   date-md: "Oct 9"
 w08:
-  title: "Week 8"
+  title: "Spatial Data Science Part 2"
   date-md: "Oct 16"
 w09:
-  title: "Week 9"
+  title: "Spatial Data Science Part 3"
   date-md: "Oct 23"
 w10:
-  title: "Week 10"
+  title: "Spatial Data Science Part 4"
   date-md: "Oct 30"
 w11:
   title: "In-Class Midterm"
   date-md: "Nov 6"
 w12:
-  title: "Week 12"
+  title: "Applications: Public Policy"
   date-md: "Nov 13"
 w13:
-  title: "Week 13"
+  title: "Applications: Operations Research"
   date-md: "Nov 20"
 w14:
-  title: "Week 14"
+  title: "Applications: Climate Change and Ecological Data"
   date-md: "Dec 4"
+w15:
+  title: "Final Presentations"
+  date-md: "Dec 11"
 hw1:
-  title: "TBD"
+  title: "GIS Concepts Checkpoint"
+  pct: 8
 hw2:
-  title: "TBD"
+  title: "GIS Concepts Finish Line"
+  pct: 8
 hw3:
-  title: "TBD"
+  title: "GIS Libraries Checkpoint"
+  pct: 8
 hw4:
-  title: "TBD"
+  title: "GIS Libraries Finish Line"
+  pct: 8
+hw5:
+  title: "Geospatial Data Analysis Checkpoint"
+  pct: 8
 course:
   author: "Jeff Jacobs"
   institute: "<a href='mailto:jj1088@georgetown.edu' target='_blank'>`jj1088@georgetown.edu`</a>"
-  slides-subtitle: "*DSAN 6750 / PPOL 6805: Geographic Information Systems*<br>Fall 2024"
-  zoom-url: "https://georgetown.zoom.us/j/94074713027"
+  slides-subtitle: "*PPOL 6805 / DSAN 6750: Geographic Information Systems*<br>Fall 2024"
+  zoom_url: "https://georgetown.zoom.us/j/94074713027"
   feedback_url: "https://forms.gle/1qmHmeXo94BaoN7d8"
   intro_survey_url: "https://forms.gle/kAyGvsMYSoLjZUtbA"
+  name: "Geographic Information Systems (GIS) for Spatial Data Science"
+  code: "PPOL 6805 / DSAN 6750"
+  gspace_url: "https://chat.google.com/room/AAAAbGZ4pJk?cls=7"
+  groups_url: "https://groups.google.com/a/georgetown.edu/g/dsan6750"

@@ -1,5 +1,5 @@
 ---
-title: "DSAN 6750 / PPOL 6805"
+title: "PPOL 6805 / DSAN 6750"
 subtitle: "Geographic Information Systems (GIS) for Spatial Data Science"
 times: "Wednesdays 6:30-9pm, Car Barn 204"
 author: "Prof. Jeff Jacobs"
@@ -18,17 +18,17 @@ format:
     output-file: "DSAN6750_Fall_2024_Syllabus.pdf"
     template-partials:
       - title.tex
-    title-meta: "DSAN 6750 / PPOL 6805 Syllabus - Fall 2024"
+    title-meta: "PPOL 6805 / DSAN 6750 Syllabus - Fall 2024"
     documentclass: "scrartcl"
     # documentclass: "scrreprt"
 ---
 
-Welcome to the Fall 2024 version of **Geographic Information Systems (GIS) for Spatial Data Science** at Georgetown University! Please note that the most up-to-date version of this syllabus will always be available at [jjacobs.me/dsan6750](https://jjacobs.me/dsan6750){target='_blank'}
+Welcome to the Fall 2024 version of **Geographic Information Systems (GIS) for Spatial Data Science** at Georgetown University! Please note that the most up-to-date version of this syllabus will always be available at [jjacobs.me/ppol6805](https://jjacobs.me/ppol6805){target='_blank'}
 
 ::: {.callout-note title="Course Numbering"}
 
-* For *Data Science and Analytics* students: the course number is **DSAN 6750**
 * For *Public Policy* students (McCourt): the course number is **PPOL 6805**
+* For *Data Science and Analytics* students: the course number is **DSAN 6750**
 
 :::
 
@@ -39,7 +39,7 @@ Welcome to the Fall 2024 version of **Geographic Information Systems (GIS) for S
     * Tuesdays 3-5:30pm
     * *(Please try to schedule at least 8 hours in advance, and let me know briefly what you'd like to discuss, so I have time to prepare)*
 * **TA Billy McGloin**, [`wtm30@georgetown.edu`](mailto:wtm30@georgetown.edu){target='_blank'}
-    * By Appointment (Email)
+    * By appointment (Email)
 
 ## Course Description
 
@@ -76,19 +76,23 @@ On the basis of the guidelines we've developed for courses offered through DSAN,
 </tr>
 <tr>
     <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW1**: {{< var hw1.title >}}"></span></td>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>10%"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw1.pct >}}%"></span></td>
 </tr>
 <tr>
     <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW2**: {{< var hw2.title >}}"></span></td>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>10%"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw2.pct >}}%"></span></td>
 </tr>
 <tr>
     <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW3**: {{< var hw3.title >}}"></span></td>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>10%"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw3.pct >}}%"></span></td>
 </tr>
 <tr>
     <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW4**: {{< var hw4.title >}}"></span></td>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>10%"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw4.pct >}}%"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW5**: {{< var hw5.title >}}"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw5.pct >}}%"></span></td>
 </tr>
 </tbody>
 </table>
@@ -106,6 +110,12 @@ If you find any discrepancies between this schedule and Georgetown's [official c
 
 ```{=html}
 <table class='sticky-table'>
+<colgroup>
+  <col style='width: 25%;'>
+  <col style='width: 10%;'>
+  <col style='width: 20%;'>
+  <col style='width: 45%;'>
+</colgroup>
 <thead>
 <tr class='sticky-head'>
     <th>Unit</th>
@@ -129,9 +139,21 @@ If you find any discrepancies between this schedule and Georgetown's [official c
 </tr>
 <tr>
     <td></td>
+    <td></td>
+    <td><span data-qmd="*Sep 6 (Friday)*"></span></td>
+    <td><span data-qmd="*[Deliverable] HW1: {{< var hw1.title >}}*"></span></td>
+</tr>
+<tr>
+    <td></td>
     <td>3</td>
     <td><span data-qmd="{{< var w03.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var w03.title >}}](./w03/)"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td></td>
+    <td><span data-qmd="*Sep 13 (Friday)*"></span></td>
+    <td><span data-qmd="*[Deliverable] HW2: {{< var hw2.title >}}*"></span></td>
 </tr>
 <tr class='new-unit'>
     <td><span data-qmd="**Unit 2**: GIS Libraries"></span></td>
@@ -139,12 +161,6 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="{{< var w04.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var w04.title >}}](./w04/)"></span></td>
 </tr>
-<!-- <tr>
-    <td></td>
-    <td></td>
-    <td><span data-qmd="*Feb 9 (Friday), 11:59pm EST*"></span></td>
-    <td><span data-qmd="*[Deliverable] <a href='{{< var hw1.url >}}' target='_blank'>HW1: {{< var hw1.title >}} <i class='bi bi-box-arrow-up-right ps-1'></i></a>*"></span></td>
-</tr> -->
 <tr>
     <td></td>
     <td>5</td>
@@ -153,24 +169,30 @@ If you find any discrepancies between this schedule and Georgetown's [official c
 </tr>
 <tr>
     <td></td>
+    <td></td>
+    <td><span data-qmd="*Sep 27 (Friday)*"></span></td>
+    <td><span data-qmd="*[Deliverable] HW3: {{< var hw3.title >}}*"></span></td>
+</tr>
+<tr>
+    <td></td>
     <td>6</td>
     <td><span data-qmd="{{< var w06.date-md >}}"></span></td>
     <td><span data-qmd="[{{<var w06.title >}}](./w06/)"></span></td>
 </tr>
-<!-- <tr>
-    <td></td>
-    <td></td>
-    <td><span data-qmd="*Feb 26 (Monday), 11:59pm EST*"></span></td>
-    <td><span data-qmd="*[Deliverable] <a href='{{< var hw2.url >}}' target='_blank'>HW2: {{< var hw2.title >}} <i class='bi bi-box-arrow-up-right ps-1'></i></a>*"></span></td>
-</tr> -->
 <tr>
     <td></td>
+    <td></td>
+    <td><span data-qmd="*Oct 4 (Friday)*"></span></td>
+    <td><span data-qmd="*[Deliverable] HW4: {{< var hw4.title >}}*"></span></td>
+</tr>
+<tr class='new-unit'>
+    <td><span data-qmd="**Unit 3:** Spatial Data Science"></span></td>
     <td>7</td>
     <td><span data-qmd="{{< var w07.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var w07.title >}}](./w07/)"></span></td>
 </tr>
-<tr class='new-unit'>
-    <td><span data-qmd="**Unit 3:** Geospatial Data Analysis"></span></td>
+<tr>
+    <td></td>
     <td>8</td>
     <td><span data-qmd="{{< var w08.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var w08.title >}}](./w08/)"></span></td>
@@ -180,6 +202,12 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td>9</td>
     <td><span data-qmd="{{< var w09.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var w09.title >}}](./w09/)"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td></td>
+    <td><span data-qmd="*Oct 25 (Friday)*"></span></td>
+    <td><span data-qmd="*[Deliverable] HW5: {{< var hw5.title >}}*"></span></td>
 </tr>
 <tr>
     <td></td>
@@ -199,12 +227,6 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="{{< var w12.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var w12.title >}}](./w12/)"></span></td>
 </tr>
-<!-- <tr>
-    <td></td>
-    <td></td>
-    <td><span data-qmd="*Apr 12 (Friday)*"></span></td>
-    <td><span data-qmd="*[Deliverable] <a href='{{< var hw3.url >}}' target='_blank'>HW3: {{< var hw3.title >}} <i class='bi bi-box-arrow-up-right ps-1'></i></a>*"></span></td>
-</tr> -->
 <tr>
     <td></td>
     <td>13</td>
@@ -223,18 +245,18 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="{{< var w14.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var w14.title >}}](./w14/)"></span></td>
 </tr>
-<!-- <tr>
+<tr>
+    <td></td>
+    <td>15</td>
+    <td><span data-qmd="{{< var w15.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var w15.title >}}](./w15/)"></span></td>
+</tr>
+<tr>
     <td></td>
     <td></td>
-    <td><span data-qmd="*Apr 26 (Friday)*"></span></td>
-    <td><span data-qmd="*[Deliverable] HW4: {{< var hw4.title >}}*"></span></td>
-</tr> -->
-<!-- <tr>
-    <td></td>
-    <td></td>
-    <td><span data-qmd="*May 10 (Friday)*"></span></td>
-    <td><span data-qmd="*[Deliverable] [Policy Whitepaper](./final.qmd)*"></span></td>
-</tr> -->
+    <td><span data-qmd="*Dec 13 (Friday)*"></span></td>
+    <td><span data-qmd="*[Deliverable] Final Project*"></span></td>
+</tr>
 </tbody>
 </table>
 ```

@@ -4,14 +4,14 @@ project:
   pre-render: _pre-set-updated.py
 
 website:
-  title: "DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)"
+  title: "PPOL 6805 / DSAN 6750: GIS"
   favicon: "favicon.png"
-  repo-url: "https://github.com/jpowerj/dsan6750"
+  repo-url: "https://github.com/jpowerj/ppol6805"
   repo-actions: [source]
   repo-link-target: "_blank"
   sidebar:
     id: mainnav
-    footer: "*Updated {{< env DSAN6750_LAST_UPDATED \"2024\" >}}*"
+    footer: "*Updated {{< env PPOL6805_LAST_UPDATED \"2024-08-28\" >}}*"
     contents:
       - href: index.qmd
         text: Home
@@ -26,6 +26,13 @@ website:
         text: "Week 1: Aug 28"
       - href: w02/index.qmd
         text: "Week 2: Sep 4"
+      - "---"
+      - href: "{{< var course.gspace_url >}}"
+        text: "Google Space  <i class='bi bi-box-arrow-up-right ps-1 align-self-center justify-self-center' style='font-size: 75%;'></i>"
+      - href: "{{< var course.groups_url >}}"
+        text: "Email Archive <i class='bi bi-box-arrow-up-right ps-1 align-self-center justify-self-center' style='font-size: 75%;'></i>"
+      - href: "{{< var course.feedback_url >}}"
+        text: "Feedback <i class='bi bi-box-arrow-up-right ps-1 align-self-center justify-self-center' style='font-size: 75%;'></i>"
 
 format:
   html:
@@ -33,5 +40,5 @@ format:
     css: "/dsan-globals/jjstyles.css"
     toc: true
     include-in-header:
-      text: "<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js' integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='' crossorigin='anonymous' referrerpolicy='no-referrer'></script><script src='/jjcustom.js'></script>"
+      text: "<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js' integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='' crossorigin='anonymous' referrerpolicy='no-referrer'></script><script src='/sidebar.js'></script>"
 
