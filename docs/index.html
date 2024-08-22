@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)</title>
+<title>DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS) for Spatial Data Science – DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -207,7 +207,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2024-08-21, 11:48:58 PM</em></p>
+<p><em>Updated 2024-08-22, 05:53:12 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -219,7 +219,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)</h1>
+<h1 class="title">DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS) for Spatial Data Science</h1>
 </div>
 
 
@@ -236,7 +236,20 @@ window.Quarto = {
 </header>
 
 
-<p>Welcome to the homepage for <strong>DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS)</strong>, Fall 2024, at Georgetown University! The course takes place on <strong>Wednesdays</strong> from <strong>6:30 to 9:00pm</strong> in <strong>Car Barn Room 204</strong>. More details are provided on the <a href="./syllabus.html">syllabus</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Introductory Survey">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Introductory Survey
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you are enrolled in the course you should have received an email about this, but just in case: please take the <a href="https://forms.gle/kAyGvsMYSoLjZUtbA" target="_blank"><strong>introductory course survey</strong> <i class="bi bi-box-arrow-up-right" style="font-size: 80%;"></i></a> before the first class session on Wednesday, August 28th (at 6:30pm in Car Barn 204)!</p>
+</div>
+</div>
+<p>Welcome to the homepage for <strong>DSAN 6750 / PPOL 6805: Geographic Information Systems (GIS) for Spatial Data Science</strong>, Fall 2024, at Georgetown University! The course takes place on <strong>Wednesdays</strong> from <strong>6:30 to 9:00pm</strong> in <strong>Car Barn Room 204</strong>. More details are provided on the <a href="./syllabus.html">syllabus</a>.</p>
 
 
 
@@ -384,6 +397,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

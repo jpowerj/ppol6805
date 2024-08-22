@@ -1,6 +1,6 @@
 ---
 title: "DSAN 6750 / PPOL 6805"
-subtitle: "Geographic Information Systems (GIS) and Spatial Data Analysis"
+subtitle: "Geographic Information Systems (GIS) for Spatial Data Science"
 times: "Wednesdays 6:30-9pm, Car Barn 204"
 author: "Prof. Jeff Jacobs"
 email: "jj1088@georgetown.edu"
@@ -23,7 +23,7 @@ format:
     # documentclass: "scrreprt"
 ---
 
-Welcome to the Fall 2024 version of **Geographic Information Systems (GIS) and Geospatial Data Analysis** at Georgetown University! Please note that the most up-to-date version of this syllabus will always be available at [jjacobs.me/dsan6750](https://jjacobs.me/dsan6750){target='_blank'}
+Welcome to the Fall 2024 version of **Geographic Information Systems (GIS) for Spatial Data Science** at Georgetown University! Please note that the most up-to-date version of this syllabus will always be available at [jjacobs.me/dsan6750](https://jjacobs.me/dsan6750){target='_blank'}
 
 ::: {.callout-note title="Course Numbering"}
 
