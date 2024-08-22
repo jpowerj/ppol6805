@@ -11,6 +11,7 @@ categories:
 crossref:
   fig-title: Fig
 bibliography: "../_DSAN6750.bib"
+cache: true
 format:
   revealjs:
     output-file: "slides.html"
@@ -146,9 +147,11 @@ format:
 </table>
 ```
 
-## ArcGIS
+## ArcGIS {.crunch-title .crunch-ul}
 
 * For info on Georgetown's provision of ArcGIS (Online, Pro, and Desktop), see the [Library Guide](https://guides.library.georgetown.edu/esri_software){target='_blank'}
+
+![[Ukraine Level-1 Administrative Regions Map](https://georgetownuniv.maps.arcgis.com/apps/mapviewer/index.html?webmap=50668b6cb4664b79948817100400b0dc){target='_blank'} (see [CDTO talk](https://jjacobs.me/data-ethics-cdto))](images/arcgis.jpg)
 
 ## Then... Why Can't We Just Use ArcGIS? {.crunch-title .title-12 .smaller .unindent-lists .tdvt-all .crunch-p}
 
@@ -299,6 +302,12 @@ df.plot()
 </table>
 ```
 
+## The Spatial Data Science Universe {.smaller}
+
+![](images/sf_deps.png){fig-align="center"}
+
+* We'll cover key "pieces": <i class='bi bi-1-circle'></i> [GDAL](https://gdal.org/index.html){target='_blank'} (Geospatial Data Abstraction Library), <i class='bi bi-2-circle'></i> [PROJ](https://proj.org/en/9.4/){target='_blank'} for converting between projections, <i class='bi bi-3-circle'></i> [GEOS](https://libgeos.org/){target='_blank'} for computational geometry
+
 # How To Not Be Scared of Prerequisites {data-stack-name="Prereqs Without Fear"}
 
 ## I Am The Opposite of a Prereq-Stickler
@@ -352,3 +361,17 @@ $$
 :::
 :::
 
+# Let's Make a Map! {data-stack-name="First Map"}
+
+## Our First Map
+
+```{r}
+library(tidyverse)
+library(sf)
+system.file("gpkg/nc.gpkg", package="sf") |>
+    read_sf() -> nc
+nc.32119 <- st_transform(nc, 'EPSG:32119')
+nc.32119 |>
+    select(BIR74) |>
+    plot(graticule = TRUE, axes = TRUE)
+```

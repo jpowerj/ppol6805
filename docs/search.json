@@ -124,7 +124,7 @@
     "href": "w01/slides.html#arcgis",
     "title": "Week 1: Introduction to GIS",
     "section": "ArcGIS",
-    "text": "ArcGIS\n\nFor info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the Library Guide"
+    "text": "ArcGIS\n\nFor info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the Library Guide\n\n\nUkraine Level-1 Administrative Regions Map (see CDTO talk)"
   },
   {
     "objectID": "w01/slides.html#then-why-cant-we-just-use-arcgis",
@@ -132,6 +132,13 @@
     "title": "Week 1: Introduction to GIS",
     "section": "Then… Why Can’t We Just Use ArcGIS?",
     "text": "Then… Why Can’t We Just Use ArcGIS?\nAnalogy from non-geospatial data science:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nText\nDrawn Map\n→\nSpeadsheet\nDigital Map\n→\nEquations\nMaps w/ArcGIS\n→\nCode\nThis Class\n\n\n\n\n Start writing\n\n\ninfo.txt\n\nI gave Ana $3, then Ana paid me back $2. [...]\n\n Realize there’s regularity/structure 🤔\n Start entering info in rows\n\n\n\nFr\nTo\nAmt\nBal\n\n\n\n\nMe\nAna\n$3\n-$3\n\n\nAna\nMe\n$2\n-$1\n\n\n\n Realize you’re manually computing things that could be automated 🤔\n Start using equations\n\n\n\nFr\nTo\nAmt\nBal\n\n\n\n\nMe\nAna\n$3\n=0-C1\n\n\nAna\nMe\n$2\n=D1-C2\n\n\n\n Realize you need fancier equations, and/or need to coordinate with inputs (APIs), outputs (plotting libraries) 🤔\n Write code\n\n\nplot_balance.py\n\nimport pandas as pd\ndf = pd.read_csv(...)\ncalc_weekly_balance()\ndf.plot()\n\n \n Profit 💲💰🤑💰💲"
+  },
+  {
+    "objectID": "w01/slides.html#the-spatial-data-science-universe",
+    "href": "w01/slides.html#the-spatial-data-science-universe",
+    "title": "Week 1: Introduction to GIS",
+    "section": "The Spatial Data Science Universe",
+    "text": "The Spatial Data Science Universe\n\n\nWe’ll cover key “pieces”:  GDAL (Geospatial Data Abstraction Library),  PROJ for converting between projections,  GEOS for computational geometry"
   },
   {
     "objectID": "w01/slides.html#i-am-the-opposite-of-a-prereq-stickler",
@@ -145,7 +152,14 @@
     "href": "w01/slides.html#r-andor-python-andor-js",
     "title": "Week 1: Introduction to GIS",
     "section": "R and/or Python and/or JS",
-    "text": "R and/or Python and/or JS\n\nMy Geometry vs. Algebra Rant… Euclid’s Elements, Book VI, Proposition 28.\nThe problem: Divide a given straight line so that the rectangle contained by its segments may be equal to a given area, not exceeding the square of half the line.\n\n\n\nGeometers solved w/geometry (300 BC)…\n\n\n\n\n\n\n…Algebraists solved w/algebra (2000 BC)…\n\\[\n\\begin{align*}\n&ax^2 + bx + c = 0 \\\\\n\\Rightarrow \\; & x_+ = \\frac{-b + \\sqrt{b^2 - 4ac}}{2a}\n\\end{align*}\n\\]\n…From 1637 onwards, whichever is easier! 🤯🤯🤯 (Isomorphism)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFig 1: Circle with radius 1? Or \\((x,y)\\) satisfying \\(x^2 + y^2 = 1\\)?\n\n\n\n\n\n\n\nWeek 1: GIS Overview"
+    "text": "R and/or Python and/or JS\n\nMy Geometry vs. Algebra Rant… Euclid’s Elements, Book VI, Proposition 28.\nThe problem: Divide a given straight line so that the rectangle contained by its segments may be equal to a given area, not exceeding the square of half the line.\n\n\n\nGeometers solved w/geometry (300 BC)…\n\n\n\n\n\n\n…Algebraists solved w/algebra (2000 BC)…\n\\[\n\\begin{align*}\n&ax^2 + bx + c = 0 \\\\\n\\Rightarrow \\; & x_+ = \\frac{-b + \\sqrt{b^2 - 4ac}}{2a}\n\\end{align*}\n\\]\n…From 1637 onwards, whichever is easier! 🤯🤯🤯 (Isomorphism)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFig 1: Circle with radius 1? Or \\((x,y)\\) satisfying \\(x^2 + y^2 = 1\\)?"
+  },
+  {
+    "objectID": "w01/slides.html#our-first-map",
+    "href": "w01/slides.html#our-first-map",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Our First Map",
+    "text": "Our First Map\n\n\n\n\nWeek 1: GIS Overview"
   },
   {
     "objectID": "w01/index.html",
@@ -262,7 +276,7 @@
     "href": "w01/index.html#arcgis",
     "title": "Week 1: Introduction to GIS",
     "section": "ArcGIS",
-    "text": "ArcGIS\n\nFor info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the Library Guide",
+    "text": "ArcGIS\n\nFor info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the Library Guide\n\n\n\n\nUkraine Level-1 Administrative Regions Map (see CDTO talk)",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -273,6 +287,16 @@
     "title": "Week 1: Introduction to GIS",
     "section": "Then… Why Can’t We Just Use ArcGIS?",
     "text": "Then… Why Can’t We Just Use ArcGIS?\nAnalogy from non-geospatial data science:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nText\nDrawn Map\n→\nSpeadsheet\nDigital Map\n→\nEquations\nMaps w/ArcGIS\n→\nCode\nThis Class\n\n\n\n\n Start writing\n\n\ninfo.txt\n\nI gave Ana $3, then Ana paid me back $2. [...]\n\n Realize there’s regularity/structure 🤔\n Start entering info in rows\n\n\n\nFr\nTo\nAmt\nBal\n\n\n\n\nMe\nAna\n$3\n-$3\n\n\nAna\nMe\n$2\n-$1\n\n\n\n Realize you’re manually computing things that could be automated 🤔\n Start using equations\n\n\n\nFr\nTo\nAmt\nBal\n\n\n\n\nMe\nAna\n$3\n=0-C1\n\n\nAna\nMe\n$2\n=D1-C2\n\n\n\n Realize you need fancier equations, and/or need to coordinate with inputs (APIs), outputs (plotting libraries) 🤔\n Write code\n\n\nplot_balance.py\n\nimport pandas as pd\ndf = pd.read_csv(...)\ncalc_weekly_balance()\ndf.plot()\n\n \n Profit 💲💰🤑💰💲",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#the-spatial-data-science-universe",
+    "href": "w01/index.html#the-spatial-data-science-universe",
+    "title": "Week 1: Introduction to GIS",
+    "section": "The Spatial Data Science Universe",
+    "text": "The Spatial Data Science Universe\n\n\n\n\n\n\nWe’ll cover key “pieces”:  GDAL (Geospatial Data Abstraction Library),  PROJ for converting between projections,  GEOS for computational geometry",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -293,6 +317,16 @@
     "title": "Week 1: Introduction to GIS",
     "section": "R and/or Python and/or JS",
     "text": "R and/or Python and/or JS\n\nMy Geometry vs. Algebra Rant… Euclid’s Elements, Book VI, Proposition 28.\nThe problem: Divide a given straight line so that the rectangle contained by its segments may be equal to a given area, not exceeding the square of half the line.\n\n\n\nGeometers solved w/geometry (300 BC)…\n\n\n\n\n\n\n…Algebraists solved w/algebra (2000 BC)…\n\\[\n\\begin{align*}\n&ax^2 + bx + c = 0 \\\\\n\\Rightarrow \\; & x_+ = \\frac{-b + \\sqrt{b^2 - 4ac}}{2a}\n\\end{align*}\n\\]\n…From 1637 onwards, whichever is easier! 🤯🤯🤯 (Isomorphism)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFig 1: Circle with radius 1? Or \\((x,y)\\) satisfying \\(x^2 + y^2 = 1\\)?",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#our-first-map",
+    "href": "w01/index.html#our-first-map",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Our First Map",
+    "text": "Our First Map\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.3     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(sf)\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\nsystem.file(\"gpkg/nc.gpkg\", package=\"sf\") |&gt;\n    read_sf() -&gt; nc\nnc.32119 &lt;- st_transform(nc, 'EPSG:32119')\nnc.32119 |&gt;\n    select(BIR74) |&gt;\n    plot(graticule = TRUE, axes = TRUE)",
     "crumbs": [
       "Week 1: Aug 28"
     ]

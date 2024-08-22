@@ -552,12 +552,13 @@ Jeff Jacobs
 </tbody>
 </table>
 </section>
-<section id="arcgis" class="slide level2">
+<section id="arcgis" class="slide level2 crunch-title crunch-ul">
 <h2>ArcGIS</h2>
 <ul>
 <li>For info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the <a href="https://guides.library.georgetown.edu/esri_software" target="_blank">Library Guide</a></li>
 </ul>
-</section>
+
+<img data-src="images/arcgis.jpg" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://georgetownuniv.maps.arcgis.com/apps/mapviewer/index.html?webmap=50668b6cb4664b79948817100400b0dc" target="_blank">Ukraine Level-1 Administrative Regions Map</a> (see <a href="https://jjacobs.me/data-ethics-cdto">CDTO talk</a>)</p></section>
 <section id="then-why-cant-we-just-use-arcgis" class="slide level2 crunch-title title-12 smaller unindent-lists tdvt-all crunch-p">
 <h2>Then… Why Can’t We Just Use ArcGIS?</h2>
 <p>Analogy from <strong>non</strong>-geospatial data science:</p>
@@ -677,6 +678,13 @@ Jeff Jacobs
 </tr>
 </tbody>
 </table>
+</section>
+<section id="the-spatial-data-science-universe" class="slide level2 smaller">
+<h2>The Spatial Data Science Universe</h2>
+
+<img data-src="images/sf_deps.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>We’ll cover key “pieces”: <i class="bi bi-1-circle"></i> <a href="https://gdal.org/index.html" target="_blank">GDAL</a> (Geospatial Data Abstraction Library), <i class="bi bi-2-circle"></i> <a href="https://proj.org/en/9.4/" target="_blank">PROJ</a> for converting between projections, <i class="bi bi-3-circle"></i> <a href="https://libgeos.org/" target="_blank">GEOS</a> for computational geometry</li>
+</ul>
 </section></section>
 <section>
 <section id="how-to-not-be-scared-of-prerequisites" class="title-slide slide level1 center" data-stack-name="Prereqs Without Fear">
@@ -737,8 +745,17 @@ Fig&nbsp;1: <strong>Circle with radius 1</strong>? Or <span class="math inline">
 </figure>
 </div>
 </div></div>
+</section></section>
+<section>
+<section id="lets-make-a-map" class="title-slide slide level1 center" data-stack-name="First Map">
+<h1>Let’s Make a Map!</h1>
 
-<div class="quarto-auto-generated-content">
+</section>
+<section id="our-first-map" class="slide level2">
+<h2>Our First Map</h2>
+
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-2-2.png" width="960" class="r-stretch"><div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 <p>Week 1: GIS Overview</p>
 </div>
@@ -956,6 +973,44 @@ Fig&nbsp;1: <strong>Circle with radius 1</strong>? Or <span class="math inline">
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

@@ -211,7 +211,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2024-08-15, 02:27:59 AM</em></p>
+<p><em>Updated 2024-08-21, 11:48:58 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -240,11 +240,16 @@ window.Quarto = {
   <li><a href="#what-i-mean-by-made-up" id="toc-what-i-mean-by-made-up" class="nav-link" data-scroll-target="#what-i-mean-by-made-up">What I Mean By “Made Up”</a></li>
   <li><a href="#arcgis" id="toc-arcgis" class="nav-link" data-scroll-target="#arcgis">ArcGIS</a></li>
   <li><a href="#then-why-cant-we-just-use-arcgis" id="toc-then-why-cant-we-just-use-arcgis" class="nav-link" data-scroll-target="#then-why-cant-we-just-use-arcgis">Then… Why Can’t We Just Use ArcGIS?</a></li>
+  <li><a href="#the-spatial-data-science-universe" id="toc-the-spatial-data-science-universe" class="nav-link" data-scroll-target="#the-spatial-data-science-universe">The Spatial Data Science Universe</a></li>
   </ul></li>
   <li><a href="#how-to-not-be-scared-of-prerequisites" id="toc-how-to-not-be-scared-of-prerequisites" class="nav-link" data-scroll-target="#how-to-not-be-scared-of-prerequisites">How To Not Be Scared of Prerequisites</a>
   <ul class="collapse">
   <li><a href="#i-am-the-opposite-of-a-prereq-stickler" id="toc-i-am-the-opposite-of-a-prereq-stickler" class="nav-link" data-scroll-target="#i-am-the-opposite-of-a-prereq-stickler">I Am The Opposite of a Prereq-Stickler</a></li>
   <li><a href="#r-andor-python-andor-js" id="toc-r-andor-python-andor-js" class="nav-link" data-scroll-target="#r-andor-python-andor-js">R and/or Python and/or JS</a></li>
+  </ul></li>
+  <li><a href="#lets-make-a-map" id="toc-lets-make-a-map" class="nav-link" data-scroll-target="#lets-make-a-map">Let’s Make a Map!</a>
+  <ul class="collapse">
+  <li><a href="#our-first-map" id="toc-our-first-map" class="nav-link" data-scroll-target="#our-first-map">Our First Map</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/dsan6750/blob/main/w01/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -431,11 +436,17 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
-<section id="arcgis" class="level2">
-<h2 class="anchored" data-anchor-id="arcgis">ArcGIS</h2>
+<section id="arcgis" class="level2 crunch-title crunch-ul">
+<h2 class="crunch-title crunch-ul anchored" data-anchor-id="arcgis">ArcGIS</h2>
 <ul>
 <li>For info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the <a href="https://guides.library.georgetown.edu/esri_software" target="_blank">Library Guide</a></li>
 </ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/arcgis.jpg" class="img-fluid figure-img"></p>
+<figcaption><a href="https://georgetownuniv.maps.arcgis.com/apps/mapviewer/index.html?webmap=50668b6cb4664b79948817100400b0dc" target="_blank">Ukraine Level-1 Administrative Regions Map</a> (see <a href="https://jjacobs.me/data-ethics-cdto">CDTO talk</a>)</figcaption>
+</figure>
+</div>
 </section>
 <section id="then-why-cant-we-just-use-arcgis" class="level2 crunch-title title-12 smaller unindent-lists tdvt-all crunch-p">
 <h2 class="crunch-title title-12 smaller unindent-lists tdvt-all crunch-p anchored" data-anchor-id="then-why-cant-we-just-use-arcgis">Then… Why Can’t We Just Use ArcGIS?</h2>
@@ -557,6 +568,17 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
+<section id="the-spatial-data-science-universe" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="the-spatial-data-science-universe">The Spatial Data Science Universe</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/sf_deps.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<ul>
+<li>We’ll cover key “pieces”: <i class="bi bi-1-circle"></i> <a href="https://gdal.org/index.html" target="_blank">GDAL</a> (Geospatial Data Abstraction Library), <i class="bi bi-2-circle"></i> <a href="https://proj.org/en/9.4/" target="_blank">PROJ</a> for converting between projections, <i class="bi bi-3-circle"></i> <a href="https://libgeos.org/" target="_blank">GEOS</a> for computational geometry</li>
+</ul>
+</section>
 </section>
 <section id="how-to-not-be-scared-of-prerequisites" class="level1" data-stack-name="Prereqs Without Fear">
 <h1 data-stack-name="Prereqs Without Fear">How To Not Be Scared of Prerequisites</h1>
@@ -612,6 +634,44 @@ window.Quarto = {
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-descartes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Fig&nbsp;1: <strong>Circle with radius 1</strong>? Or <span class="math inline">\((x,y)\)</span> satisfying <span class="math inline">\(x^2 + y^2 = 1\)</span>?
 </figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="lets-make-a-map" class="level1" data-stack-name="First Map">
+<h1 data-stack-name="First Map">Let’s Make a Map!</h1>
+<section id="our-first-map" class="level2">
+<h2 class="anchored" data-anchor-id="our-first-map">Our First Map</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.file</span>(<span class="st">"gpkg/nc.gpkg"</span>, <span class="at">package=</span><span class="st">"sf"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read_sf</span>() <span class="ot">-&gt;</span> nc</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>nc<span class="fl">.32119</span> <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(nc, <span class="st">'EPSG:32119'</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>nc<span class="fl">.32119</span> <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(BIR74) <span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(<span class="at">graticule =</span> <span class="cn">TRUE</span>, <span class="at">axes =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
