@@ -14,7 +14,7 @@
     "href": "resources.html#textbooks",
     "title": "Additional Resources",
     "section": "Textbooks",
-    "text": "Textbooks\n\nAll in R: Lovelace, Nowosad, and Muenchow (2024). Geocomputation with R (Legally free online book!)\nAll in Python: Rey, Arribas-Bel, and Wolf (2023). Geographic Data Science with Python (Also a legally free online book!)",
+    "text": "Textbooks\n\nUsing R\n\nPebesma and Bivand (2024). Spatial Data Science with Applications in R (Legally free online book!)\nLovelace, Nowosad, and Muenchow (2024). Geocomputation with R (Also a legally free online book!)\n\n\n\nUsing Python\n\nRey, Arribas-Bel, and Wolf (2023). Geographic Data Science with Python (Yet another legally free online book!)",
     "crumbs": [
       "Resources"
     ]

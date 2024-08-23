@@ -10,8 +10,14 @@ I'm going to try to dump **everything** I used to develop the course materials h
 
 ## Textbooks
 
-* All in **R**: Lovelace, Nowosad, and Muenchow (2024). *[Geocomputation with R](https://r.geocompx.org/preface){target='_blank'}* (**Legally free online book!**)
-* All in **Python**: Rey, Arribas-Bel, and Wolf (2023). *[Geographic Data Science with Python](https://geographicdata.science/book/intro.html){target='_blank'}* (**Also a legally free online book!**)
+### Using R
+
+* Pebesma and Bivand (2024). *[Spatial Data Science with Applications in R](https://r-spatial.org/book/){target='_blank'}* (**Legally free online book!**)
+* Lovelace, Nowosad, and Muenchow (2024). *[Geocomputation with R](https://r.geocompx.org/preface){target='_blank'}* (**Also a legally free online book!**)
+
+### Using Python
+
+* Rey, Arribas-Bel, and Wolf (2023). *[Geographic Data Science with Python](https://geographicdata.science/book/intro.html){target='_blank'}* (**Yet another legally free online book!**)
 
 ## Lecture Videos
 
