@@ -15,7 +15,7 @@ format:
     link-external-newwindow: true
     # link-external-filter: '^(?:http:|https:)\/\/jjacobs\.me\/dsan6750'
   pdf:
-    output-file: "DSAN6750_Fall_2024_Syllabus.pdf"
+    output-file: "PPOL6805_Fall_2024_Syllabus.pdf"
     template-partials:
       - title.tex
     title-meta: "PPOL 6805 / DSAN 6750 Syllabus - Fall 2024"

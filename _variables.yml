@@ -1,3 +1,19 @@
+course:
+  author: "Jeff Jacobs"
+  institute: "<a href='mailto:jj1088@georgetown.edu' target='_blank'>`jj1088@georgetown.edu`</a>"
+  slides-subtitle: "*PPOL 6805 / DSAN 6750: Geographic Information Systems*<br>Fall 2024"
+  zoom_url: "https://georgetown.zoom.us/j/94074713027"
+  feedback_url: "https://forms.gle/1qmHmeXo94BaoN7d8"
+  intro_survey_url: "https://forms.gle/kAyGvsMYSoLjZUtbA"
+  name: "Geographic Information Systems (GIS) for Spatial Data Science"
+  code: "PPOL 6805 / DSAN 6750"
+  gspace_url: "https://chat.google.com/room/AAAAbGZ4pJk?cls=7"
+  groups_url: "https://groups.google.com/a/georgetown.edu/g/dsan6750"
+weeks:
+  - weeknum: 1
+    title: "Introduction to GIS"
+    footer: "Week 1: GIS Overview"
+    date-md: "Aug 28"
 w01:
   title: "Introduction to GIS"
   footer: "Week 1: GIS Overview"
@@ -45,6 +61,9 @@ w14:
 w15:
   title: "Final Presentations"
   date-md: "Dec 11"
+hw:
+  - title: "GIS Concepts Checkpoint"
+    pct: 8
 hw1:
   title: "GIS Concepts Checkpoint"
   pct: 8
@@ -60,14 +79,3 @@ hw4:
 hw5:
   title: "Geospatial Data Analysis Checkpoint"
   pct: 8
-course:
-  author: "Jeff Jacobs"
-  institute: "<a href='mailto:jj1088@georgetown.edu' target='_blank'>`jj1088@georgetown.edu`</a>"
-  slides-subtitle: "*PPOL 6805 / DSAN 6750: Geographic Information Systems*<br>Fall 2024"
-  zoom_url: "https://georgetown.zoom.us/j/94074713027"
-  feedback_url: "https://forms.gle/1qmHmeXo94BaoN7d8"
-  intro_survey_url: "https://forms.gle/kAyGvsMYSoLjZUtbA"
-  name: "Geographic Information Systems (GIS) for Spatial Data Science"
-  code: "PPOL 6805 / DSAN 6750"
-  gspace_url: "https://chat.google.com/room/AAAAbGZ4pJk?cls=7"
-  groups_url: "https://groups.google.com/a/georgetown.edu/g/dsan6750"
