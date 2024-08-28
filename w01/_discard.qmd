@@ -1,0 +1,228 @@
+```{r}
+#| label: euler-diagram
+#| fig-align: center
+library(eulerr)
+topic_circs <- c(
+  "A" = 30, "B" = 0, "Maps" = 0,
+  "A&B" = 20, "A&Maps" = 0, "B&Maps" = 0,
+  "A&B&Maps" = 10
+)
+russian_doll <- euler(topic_circs, input="disjoint")
+plot(russian_doll)
+```
+
+```{r}
+#| label: nc-map
+#| echo: false
+#| output: false
+library(tidyverse)
+library(sf)
+system.file("gpkg/nc.gpkg", package="sf") |>
+    read_sf() -> nc
+nc.32119 <- st_transform(nc, 'EPSG:32119')
+nc.32119 |>
+    select(BIR74) |>
+    plot(graticule = TRUE, axes = TRUE)
+```
+
+## Xie workshop
+
+
+### Assign weights to neighbors
+
+Next, we'll assign weights to each neighboring polygon. We'll use the simplest option ('style="W"), which assigns equal weight to each neighboring polygon. In other words, the weight applied to the neigbors of a polygon will equal 1/(no. of neighbors for that polygon).
+
+```{r}
+# Calculate weights from nb object, we'll specify style = "W" for equal weights
+lyme_weights <- nb2listw(lyme_nb, style = "W")
+class(lyme_weights)
+
+# View the weight of the first polygon's neighbors
+str(lyme_weights, max.level = 1) # view the structure of lw, we'll set max.level = 1 for easier viewing
+lyme_weights$weights[[1]]  # The weights of the neighbors for the first polygon (Albany)
+                 # Recall that Albany has 6 neighbors
+
+lyme$NAME[2]     # Allegheny
+lyme_nb[[2]]          # Allegheny has 4 neighbors
+lyme_weights$weights[[2]]  # The weights of the neighbors for Allegheny
+
+```
+
+### Perform hypothesis testing 
+
+Now we can calculate the Moran's *I* statistic and perform hypothesis testing using 'moran.test' (analytical calculation) and 'moran.mc' (via Monte Carlo simulations). These functions require that we specify the variable of interest and the list of neighbor weights for each polygon. The option 'alternative = "greater"' specifies testing for *positive* spatial autocorrelation, which is also the default for these functions. The 'moran.mc' function also requires that we specify the number of simulations with option 'nsim'.
+
+```{r}
+# Analytical test - quicker computation but sensitive to irregularly distributed polygons
+moran.test(lyme$log_lyme_incidence, lyme_weights, alternative = "greater")
+
+# Monte Carlo (MC) simulation is slower but the preferred  method to calculate an accurate p-value
+MC <- moran.mc(lyme$log_lyme_incidence, lyme_weights, nsim = 999, alternative = "greater")
+MC
+```
+We can see the results of the MC simulations graphically by passing the output of MC model to the 'plot' function.
+
+```{r}
+plot(MC)
+```
+
+## Local clustering (local Moran)
+
+The local Moran statistic is an extension of the Moran's *I* for the analysis of *local* (rather than global) spatial autocorrelation. There are some steps in common with the global clustering analysis we performed previously (for example, we have to calculate neighbor weights again) but there are key differences, due to particularities of the 'rgeoda' library.
+
+
+### Assign neighbor weights 
+We will once again find queen-case contiguous weights, though in 'rgeoda' we do this with the 'queen_weights' function. Note instead of a list of weights like we saw previously with the 'nb2listw' function, 'queen_weights' outputs an 'rgeoda' 'Weight' object, which has some nice features.
+
+```{r}
+library(rgeoda)
+
+# Find queen-case contiguous weights
+lyme_gweights <- queen_weights(lyme)
+class(lyme_gweights)
+
+# str function allows us to see a nice summary of the weights object
+str(lyme_gweights)
+
+# See the neighbors of the first polygon (Albany)
+get_neighbors(lyme_gweights, 1)
+lyme$NAME[1]
+lyme$NAME[get_neighbors(lyme_gweights, 1)]
+
+# See the neighbors of the first polygon (Allegany)
+get_neighbors(lyme_gweights, 2)
+lyme$NAME[2]
+lyme$NAME[get_neighbors(lyme_gweights, 2)]
+
+# See the neighbor weights of the first and second polygons
+get_neighbors_weights(lyme_gweights, 1)
+get_neighbors_weights(lyme_gweights, 2)
+
+```
+
+
+### Calculate Local Moran statistic
+
+Now you can use your 'geoda' 'Weights' to calculate the Local Moran statistic at each polygon.
+```{r}
+# We will coerce our data variable into a one-column data frame because this is the format required by the local_moran function
+log_lyme_df <- as.data.frame(lyme$log_lyme_incidence)
+
+# Now we can run the local_moran function
+lyme_lisa <- local_moran(lyme_gweights, log_lyme_df)
+
+# local_moran returns a LISA object
+class(lyme_lisa)
+
+# Let's take a closer look at this LISA object
+lyme_lisa$lisa_vals  # View local Moran's I values for each polygon
+lyme_lisa$p_vals     # View pseudo p-values
+
+```
+
+Finally, we can make a map of our results! 'rgeoda' includes some nifty functions ('map_colors', 'map_labels' and 'map_clusters' to help us with our mapping).
+
+```{r}
+map_colors <- lisa_colors(lyme_lisa)
+map_labels <- lisa_labels(lyme_lisa)
+map_clusters <- lisa_clusters(lyme_lisa)
+
+plot(st_geometry(lyme), 
+     col=sapply(map_clusters, function(x){return(map_colors[[x+1]])}), 
+     border = "#333333", lwd=0.2)
+legend('topright', legend = map_labels, fill = map_colors, border = "#eeeeee", cex = 0.7)
+```
+
+
+---
+
+
+```{r}
+
+# sf objects can be handled like data frames using standard commands
+str(pt_sf)   # view structure
+head(pt_sf)  # view first several rows
+dim(pt_sf)   # view dimensions
+pt_sf[1,]    # select first row
+head(pt_sf$NAMELSAD10)  # select column by name  
+head(pt_sf[,7])         # select column by number
+
+# We can extract the geometry of philly.tracts with the st_geometry function
+pt_geo <- st_geometry(pt_sf)
+pt_geo
+pt_geo[[1]]        # perimeter coordinates for the first census tract of the sf
+pt_sf[1,]  # i.e. Census Tract 94
+
+pt_geo[[2]]        # perimeter coordinates for the second census tract of the sf
+pt_sf[2,]  # i.e. Census Tract 95
+
+# Plot the geometry of philly.tracts with the base plot function
+plot(pt_geo)
+
+# The base plot function has some aesthetic options we can use to tweak our plots
+plot(pt_geo, col = "lemonchiffon2")
+plot(pt_geo, lwd = 2, border = "red")
+
+```
+
+
+```{r}
+plot(st_geometry(crime))
+
+# Let's take a look at offense types and use dplyr to filter by offense_type...
+table(crime$offense_type)
+homicide <- filter(crime, offense_type == "Homicide - Criminal")
+fraud <- filter(crime, offense_type == "Fraud")
+
+# Note subsets of an sf object are also sf objects
+class(homicide)
+class(fraud)
+
+# Plotting homicide and fraud incidents with the base plot function
+plot(st_geometry(homicide))
+```
+
+
+```{r}
+# Points by themselves are not very easy to understand. Let's layer them on top of the tract polygons with add = TRUE
+plot(pt_geo)
+plot(st_geometry(fraud), col = "blue", alpha = 0.1, add = TRUE)
+plot(st_geometry(homicide), col = "red", add = TRUE)
+legend("bottomright", legend = c("Fraud", "Homicide"), title = "Offense type:", col = c("blue", "red"), pch = 1, bty = "n")
+```
+
+---
+
+
+## Line Data 
+
+Next let's look at an example of line data: streets in Philadelphia with bicycle access. This data was sourced directly from the [Philadelphia Bike Network](https://www.opendataphilly.org/dataset/bike-network). 
+
+```{r}
+bn_sf <- st_read("data/Bike_Network/Bike_Network.shp")  # read shapefile as an sf object
+class(bn_sf)  # bn.sf is an sf object, which is a subclass of data.frame
+
+# Once again, let's accss the spatial attributes of this sf object with the st_geometry command. 
+bn_geo <- st_geometry(bn_sf)
+bn_geo[[2]]  # line segment 2
+bn_sf[2,]
+
+# Let's plot the bike network data
+plot(bn_geo)
+
+```
+
+### Point Data
+
+As an example of point data, we will work with crime incidents that occurred in Philadelphia in September 2018. The full publicly available crime incidents database for Philadelphia is maintained by the Philadelphia Police Department and is available on the [OpenDataPhilly](https://www.opendataphilly.org/dataset/crime-incidents) website.
+
+```{r}
+library(tidyverse)
+
+crime <- st_read("data/Philly_Crime/incidents_part1_part2.shp")
+
+# The crime data is an sf object of type POINT and includes information on the date, time and offense type for each incident
+class(crime)
+head(crime)
+
+```

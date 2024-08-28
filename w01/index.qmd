@@ -46,9 +46,66 @@ format:
 
 :::
 
-# Welcome to The Wonderful World of GIS! {data-stack-name="Why Me?"}
+# Welcome to The Wonderful World of GIS! {data-stack-name="Welcome!" .title-09}
 
-## Who Am I? Why Am I Teaching You? {.crunch-title}
+<!-- * **Unit 1**: Maps
+* **Unit 2**: Maps + Coding
+* **Unit 3**: Data Science/Statistics/Econometrics with Maps
+  * Drawing inferences about spatial phenomena using coding
+* **Unit 4**: Applying Units 1-3 to Issues in the World! -->
+
+![](images/Euler.svg){fig-align="center"}
+
+## Your Final Project {background-color="black" background-image="images/goku_final.jpeg" background-size="100%" background-repeat="no-repeat" .title-center}
+
+## Unit 1: Maps {.smaller .crunch-title .crunch-ul .smaller-table .crunch-li}
+
+* Your least favorite part of the course (per survey 😜)
+* My favorite part of the course (because I love overthinking things)
+* My goal given survey results: Let's think of this unit like learning **languages** for expressing **spatial** information:
+
+```{r}
+#| label: gen-polygon
+#| output: false
+library(sf)
+library(svglite)
+svglite("images/st_polygon.svg", width = 6, height = 4.5)
+poly_blob <- st_polygon(
+  list(
+    rbind(c(2,1), c(3,1), c(5,2), c(6,3), c(5,3), c(4,4), c(3,4), c(1,3), c(2,1)),
+    rbind(c(2,2), c(3,3), c(4,3), c(4,2), c(2,2))
+  )
+)
+plot(poly_blob,
+  border = 'black', col = '#ff8888', lwd = 4
+)
+dev.off()
+```
+
+| Temporal Information | Spatial Information |
+|:-:|:-:|
+| ![](images/stopwatch.svg){width="200"} | ![](images/st_polygon.svg){fig-align="center" width="100%" height="200"} |
+| $\Rightarrow$ `22.5 seconds` | $\Rightarrow$ `POLYGON ((2 1, 3 1, 5 2, 6 3, 5 3, 4 4, 3 4, 1 3, 2 1),(2 2, 3 3, 4 3, 4 2, 2 2))` |
+
+: {tbl-colwidths="[50,50]"}
+
+* I think you'll be surprised at how, complexity of geospatial/spatio-temporal data $\implies$ need for **programming-language-independent** representations
+
+## Unit 2: Using Code to Make Maps
+
+* (More on this in Prereqs section below!)
+* Given representations from Part 1, the task of coding becomes task of **finding "best" library for loading/manipulating/plotting them**
+  * Where "best" = best for **you!**
+
+## Unit 3: Spatial Data Science
+
+* Drawing **inferences** about spatial phenomena
+
+## Unit 4: Applications / Final Project
+
+* Kamehameha
+
+# Who Am I? Why Am I Teaching You? {.crunch-title data-stack-name="Why Me?"}
 
 * Started out as PhD student in **Computer Science**
   * UCLA: Algorithmic Game Theory
@@ -97,7 +154,7 @@ format:
 
 * Oftentimes, all it takes is one map to see why a policy has failed 😱
 
-# So... What *Is* GIS? {data-stack-name="What is GIS?"}
+# So... What *Is* GIS?
 
 ## It's Completely Made Up {.smaller .crunch-title}
 
@@ -308,12 +365,54 @@ df.plot()
 
 * We'll cover key "pieces": <i class='bi bi-1-circle'></i> [GDAL](https://gdal.org/index.html){target='_blank'} (Geospatial Data Abstraction Library), <i class='bi bi-2-circle'></i> [PROJ](https://proj.org/en/9.4/){target='_blank'} for converting between projections, <i class='bi bi-3-circle'></i> [GEOS](https://libgeos.org/){target='_blank'} for computational geometry
 
-# How To Not Be Scared of Prerequisites {data-stack-name="Prereqs Without Fear"}
+# Course Policy Things {data-stack-name="Prereqs / Policies"}
 
-## I Am The Opposite of a Prereq-Stickler
+* How To Not Be Scared of Prerequisites
+* ChatGPT
+* Learning How To Learn
+
+## Pedagogical Principles {.crunch-title .crunch-ul .crunch-li .crunch-blockquote}
+
+* There's literally [no such thing as "intelligence"](http://bactra.org/weblog/523.html){target='_blank'}
+* Anyone is capable of learning anything (neural plasticity)
+* Growth mindset: "I can't do this" $\leadsto$ "I can't do this **yet**!"
+* The point of a class is **learning**: understanding something about the world, either (a) For its own sake (**end in itself**) or (b) Because it's relevant to something you care about (**means to an end**)
+
+::: {.text-90}
+
+> Our teaching should be governed, not by a desire to **make** students learn things, but by the endeavor to keep burning within them that light which is called **curiosity**. [@montessori_spontaneous_1916]
+
+:::
+
+## ChatGPT and Whatnot {.crunch-title .crunch-ul}
+
+* If you feel like ChatGPT will help you learn something in the course, then **use it**!
+* If you feel like you're using it as a "crutch", try to hold yourself accountable for **not** using it!
+
+```{=html}
+<table>
+<thead>
+<tr>
+  <th>Take the time/energy you're using to worry about...</th>
+  <th>Use it instead to worry about...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><ul><li>ChatGPT</li><li>Collaboration Policies</li><li>Plagiarism</li></ul></td>
+  <td align="center" style="vertical-align: middle;">Learning GIS</td>
+</tr>
+</tbody>
+</table>
+```
+
+## I Am The Opposite of a Prereq-Stickler {.crunch-title .crunch-li}
 
 * I genuinely believe that I can make the course accessible to you, meeting you **wherever you're at**, no matter what!
-* To skip an entire spiel... Everyone learns at their own pace, and I structure my courses as best as I possibly can to adapt to your pace
+* Everyone learns at their own pace (who says 14 weeks is "correct" amount of time to learn GIS?), and I structure my courses as best as I possibly can to adapt to your pace
+* $\Rightarrow$ Assessments (HW, Midterm) valuable in two ways:
+* **[Valuable for you]** As an **accountability mechanism** to make sure you're learn the material (how do we know when we've learned something? When we can answer questions about it / use it to accomplish things!)
+* **[Valuable for me]** For **assessing and updating** pace
 
 ## R and/or Python and/or JS {.smaller .crunch-title .crunch-ul .crunch-p .crunch-img .crunch-li .crunch-quarto-figure .crunch-math}
 
@@ -361,17 +460,170 @@ $$
 :::
 :::
 
+## Learning How To Learn {.smaller .crunch-title}
+
+::: {#fig-lilwayne}
+
+{{< video https://jpj.georgetown.domains/ppol6805-scratch/repetition.mp4 >}}
+
+From [The Carter (Documentary)](https://en.wikipedia.org/wiki/The_Carter){target='_blank'}
+:::
+
+## He's Entirely Correct!
+
+![From *[Elsevier Osmosis: Spaced Repetition](https://www.osmosis.org/learn/Spaced_repetition){target='_blank'}*](images/forgetting-curve.png){fig-align="center"}
+
 # Let's Make a Map! {data-stack-name="First Map"}
 
-## Our First Map
+## Our First Map: Polygon Data
+
+* DC Census Tracts from [Open Data DC](https://opendata.dc.gov/datasets/DCGIS::census-tracts-in-2020/about){target='_blank'}
 
 ```{r}
-library(tidyverse)
+#| warning: false
 library(sf)
-system.file("gpkg/nc.gpkg", package="sf") |>
-    read_sf() -> nc
-nc.32119 <- st_transform(nc, 'EPSG:32119')
-nc.32119 |>
-    select(BIR74) |>
-    plot(graticule = TRUE, axes = TRUE)
+
+# Load philly tracts data
+dc_sf <- st_read("data/DC_Census_2020/Census_Tracts_in_2020.shp")
+cols_to_keep <- c("OBJECTID", "TRACT", "GEOID", "ALAND", "AWATER", "STUSAB", "SUMLEV", "GEOCODE", "STATE", "NAME", "POP100", "HU100", "geometry")
+dc_sf <- dc_sf |> select(cols_to_keep)
+
+# dc_sf is an sf ("simple feature") object of type "POLYGON"
+class(dc_sf)
+head(dc_sf)
 ```
+
+## `sf` Objects
+
+```{r}
+# sf objects can be handled like data frames using standard commands
+str(dc_sf)   # view structure
+head(dc_sf)  # view first several rows
+dim(dc_sf)   # view dimensions
+dc_sf[1,]    # select first row
+# head(dc_sf$NAMELSAD10)  # select column by name  
+# head(dc_sf[,7])         # select column by number
+```
+
+
+
+## Raster Data
+
+So far, we have considered point, line, and polygon data, all of which fall under the umbrella of vector data types. Rasters are a distinct GIS data type that we will consider only briefly because they cannot be handled with `sf` methods. We will look at the `volcano` dataset, which gives topographic information for Maunga Whau (a volcano located in Auckland, New Zealand) on a 10m by 10m grid. Because it is a relatively small raster, we can handle `volcano` using base functions. Larger rasters should be handled using the _raster_ package.
+
+```{r}
+library(datasets)
+
+# The volcano dataset is a 87x61 matrix
+class(volcano)
+str(volcano)
+filled.contour(volcano, color = terrain.colors, asp = 1)
+```
+
+## NYS Lyme incidence data
+
+We will use the example of New York State county-aggregated Lyme disease incidence for 2014-2016 to try our hand at spatial analysis. This data is publicly available and can be accessed at the [Health Data NY](https://health.data.ny.gov/Health/Community-Health-Lyme-Disease-Incidence-Rate-per-1/6sxr-cqij) website. Raw data can be downloaded in .csv format. If you're curious to see how this tabular data can be merged with a New York State county shapefile (available at [NYS GIS](https://gis.ny.gov/gisdata/inventories/details.cfm?DSID=927)), you can see how this is done in the 'prep_nys_lyme_data.R' script file located in the 'data' folder of our project directory. But for now, we'll start with this data that has already been merged and converted to an 'sf' object.
+
+```{r}
+library(sf)
+
+# Load NYS Lyme incidence data
+lyme <- readRDS("data/nys_lyme_data.rds")
+
+# Let's take a look at some data attributes
+class(lyme)
+#head(lyme)
+
+# Note that the variable Lyme.Incidence.Rate gives the county-level Lyme disease incidence per 100,000 population
+
+# Once again, we can plot the spatial attrbutes of this data
+plot(st_geometry(lyme))
+
+```
+
+This data is an example of regional rate data. An easy way to map this data is using the 'tmap' library. Let's load 'tmap' and create an interactive map with just a few lines of code.
+
+```{r}
+library(tmap)
+
+tmap_mode("view")  # set mode to interactive
+tm_shape(lyme) +    # specify sf object with geographic attribute of interest
+  tm_polygons("Lyme.Incidence.Rate")  # specify column with value of interest
+```
+
+We have a missing value in St. Lawrence county. Let's remove this row from the data so it doesn't throw an error later in our analysis.
+
+```{r}
+lyme <- lyme[!is.na(lyme$Lyme.Incidence.Rate),]
+
+# Let's map again 
+tmap_mode("view")  # set mode to interactive
+tm_shape(lyme) +    # specify sf object with geographic attribute of interest
+  tm_polygons("Lyme.Incidence.Rate")  # specify column with value of interest
+```
+
+
+## Global clustering (Moran's I)
+
+This section was adapted from a tutorial created by Manuel Gimmond, which can be found on his [github page](https://mgimond.github.io/simple_moransI_example/). 
+
+### Assess data distribution
+Let's begin by looking at the distribution of our Lyme incidence rate data. The Moran's *I* statistic is not robust to extreme values or outliers so we will need to transform our data if it deviates greatly from a normal distribution.
+
+```{r}
+# Five-number summary 
+summary(lyme$Lyme.Incidence.Rate)
+
+# Histogram
+hist(lyme$Lyme.Incidence.Rate)
+
+# Boxplot
+boxplot(lyme$Lyme.Incidence.Rate, horizontal = TRUE)
+
+```
+
+Our data is skewed strongly to the right with lots of outliers much greater than the mean. Let's see if a log transformation can make our data look more normal.
+
+```{r}
+
+# Create new variable that is the log-transformed incidence rate
+lyme$log_lyme_incidence <- log(lyme$Lyme.Incidence.Rate)
+
+# Histogram
+hist(lyme$log_lyme_incidence)
+
+# Boxplot
+boxplot(lyme$log_lyme_incidence, horizontal = TRUE)
+
+```
+
+That's much better! We can see what our log-transformed values look like on a map.
+
+```{r}
+
+tm_shape(lyme) +    # specify sf object with geographic attribute of interest
+  tm_polygons("log_lyme_incidence")  # specify column with value of interest
+
+```
+
+### Define neighboring polygons
+Now we're ready to begin our analysis. The first step is to define "neighboring" polygons. Recall that neighbors can be defined based on contiguity or distance or as the *k* nearest neighbors to each polygon. We'll use a **queen**-case contiguity-based definition, where any contiguous polygon that shares at least one vertex will be considered a neighbor. We can store the neighbors of each one of our polygons by creating an 'nb' object using the 'poly2nb' function from the 'spdep' library.
+
+```{r}
+library(spdep)
+
+# Create nb object from Lyme dataset
+lyme_nb <- poly2nb(lyme, queen = T) # queen case
+class(lyme_nb)
+str(lyme_nb)
+
+# View the neighbors of the first polygon
+lyme_nb[[1]]
+lyme$NAME[1]
+lyme$NAME[c(11, 20, 42, 45, 46, 47)]
+```
+
+## References
+
+::: {#refs}
+:::

@@ -9,3 +9,7 @@ stringr
 forcats
 lubridate
 sf
+svglite
+tmap
+spData
+spdep
