@@ -21,6 +21,8 @@ website:
         text: Resources
       - href: "recordings/"
         text: "Lecture Recordings"
+      - href: https://georgetown.zoom.us/j/94074713027
+        text: "ZOOM"
       - "---"
       - href: w01/index.qmd
         text: "Week 1: Aug 28"
