@@ -68,21 +68,21 @@
     "href": "w01/slides.html#unit-2-using-code-to-make-maps",
     "title": "Week 1: Introduction to GIS",
     "section": "Unit 2: Using Code to Make Maps",
-    "text": "Unit 2: Using Code to Make Maps\n\n(More on this in Prereqs section below!)\nGiven representations from Part 1, the task of coding becomes task of finding “best” library for loading/manipulating/plotting them\n\nWhere “best” = best for you!"
+    "text": "Unit 2: Using Code to Make Maps\n\n(More on this in Prereqs section below!)\nGiven representations from Part 1, the task of coding becomes task of finding “best” library for loading/manipulating/plotting them\n\nWhere “best” = best for you!\n\nIn R: sf and friends (tidyverse)\nIn Python: geopandas"
   },
   {
     "objectID": "w01/slides.html#unit-3-spatial-data-science",
     "href": "w01/slides.html#unit-3-spatial-data-science",
     "title": "Week 1: Introduction to GIS",
     "section": "Unit 3: Spatial Data Science",
-    "text": "Unit 3: Spatial Data Science\n\nDrawing inferences about spatial phenomena"
+    "text": "Unit 3: Spatial Data Science\n\nDrawing inferences about spatial phenomena\nThe meat of the course\nHow can we write code (Unit 2) to analyze a map (Unit 1) so as to…\n\nDiscover patterns (EDA: Exploratory Data Analysis) or\nTest hypotheses (CDA: Confirmatory Data Analysis)"
   },
   {
     "objectID": "w01/slides.html#unit-4-applications-final-project",
     "href": "w01/slides.html#unit-4-applications-final-project",
     "title": "Week 1: Introduction to GIS",
     "section": "Unit 4: Applications / Final Project",
-    "text": "Unit 4: Applications / Final Project\n\nKamehameha"
+    "text": "Unit 4: Applications / Final Project\n\nTake everything you’ve learned in Units 1-3 and Kamehameha them onto something you care about in the world!\nPublic Policy: Which counties are most in need of more transportation infrastructure?\nUrban Planning: Which neighborhoods are most in need of a new bus stop?\nEpidemiology: What properties of a region make it more/less susceptible to infectious diseases? Where should we intervene to “cut the chain” of a disease vector?"
   },
   {
     "objectID": "w01/slides.html#my-gis-adventures",
@@ -96,42 +96,49 @@
     "href": "w01/slides.html#my-gis-moment",
     "title": "Week 1: Introduction to GIS",
     "section": "My GIS 🤯 Moment",
-    "text": "My GIS 🤯 Moment\n\nHorrors of the “““Vietnam”“” “““War”“” did not end in 1975… Casualties from unexploded ordnance (cluster bombs) have continued to devastate the region, with over 219,000 victims:\n\n&gt;105K in Vietnam\n&gt;50K in Laos\n&gt;65K in Cambodia"
+    "text": "My GIS 🤯 Moment\n\n\n\nHorrors of “Vietnam War” did not end in 1975… Casualties from unexploded ordnance (cluster bombs) continue to devastate the region, over 220,000 victims:\n\n&gt;105K in Vietnam\n&gt;50K in Laos\n&gt;65K in Cambodia\n\n\n\n\n\n\nFrom Robert (2016)"
   },
   {
-    "objectID": "w01/slides.html#at-huawei-optimizing-cell-tower-placement",
-    "href": "w01/slides.html#at-huawei-optimizing-cell-tower-placement",
+    "objectID": "w01/slides.html#huawei-optimizing-cell-tower-placement",
+    "href": "w01/slides.html#huawei-optimizing-cell-tower-placement",
     "title": "Week 1: Introduction to GIS",
-    "section": "At Huawei: Optimizing Cell Tower Placement",
-    "text": "At Huawei: Optimizing Cell Tower Placement"
+    "section": "Huawei: Optimizing Cell Tower Placement",
+    "text": "Huawei: Optimizing Cell Tower Placement\n\nFrom LTE 4G/5G Self-Organizing Networks"
   },
   {
     "objectID": "w01/slides.html#the-suburbanization-of-poverty",
     "href": "w01/slides.html#the-suburbanization-of-poverty",
     "title": "Week 1: Introduction to GIS",
     "section": "The Suburbanization of Poverty",
-    "text": "The Suburbanization of Poverty\n\nSince 2008, a person living in poverty in the US is more likely to be in a suburb than an “inner city”"
+    "text": "The Suburbanization of Poverty\n\nSince 2008, a person living in poverty in the US is more likely to be in a suburb than an “inner city”\nWhat does this mean for…\n\nAccess to Food / Public Services?\nFinding a job \\(\\leadsto\\) Commuting?\n\nMy job: computing “suburban accessibility indices”\nDoes commuting = straight line distance?"
+  },
+  {
+    "objectID": "w01/slides.html#distance-vs.-distance",
+    "href": "w01/slides.html#distance-vs.-distance",
+    "title": "Week 1: Introduction to GIS",
+    "section": "“Distance” vs. Distance!",
+    "text": "“Distance” vs. Distance!\n\nYou’ve just been hired as a fine art curator at The Whitney… Congratulations!\n\n\n\n\n\n\n\n\nCommuting 1 mile to the Whitney\n\n\n\nAlso commuting 1 mile to the Whitney"
   },
   {
     "objectID": "w01/slides.html#as-humans",
     "href": "w01/slides.html#as-humans",
     "title": "Week 1: Introduction to GIS",
     "section": "As Humans",
-    "text": "As Humans\n\nTo understand the world around you!"
+    "text": "As Humans\n\nTo understand the world around you!\n\n\nCharles Dupin, Carte figurative de l’instruction populaire de la France (1826)\n\\(\\implies\\) Crucial landmark in the genesis of social science"
   },
   {
     "objectID": "w01/slides.html#as-data-scientists",
     "href": "w01/slides.html#as-data-scientists",
     "title": "Week 1: Introduction to GIS",
     "section": "As Data Scientists",
-    "text": "As Data Scientists\n\nAll data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)\nHowever, you can differentiate yourself in the scary scary job market by developing a particular focus on some “non-standard” type: text data, temporal data, signal processing, and/or geospatial data!"
+    "text": "As Data Scientists\n\nAll data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)\nHowever, you can differentiate yourself in the scary scary job market by developing a particular focus on some “non-standard” type:\n\n\nHello Mr. Google Musk, yes, indeed, I have a wealth of experience working with [text data / temporal data / signal processing / geospatial data]. This job will be no problem for me."
   },
   {
     "objectID": "w01/slides.html#as-public-policy-experts",
     "href": "w01/slides.html#as-public-policy-experts",
     "title": "Week 1: Introduction to GIS",
     "section": "As Public Policy Experts",
-    "text": "As Public Policy Experts\n\nOftentimes, all it takes is one map to see why a policy has failed 😱"
+    "text": "As Public Policy Experts\n\nOftentimes, all it takes is one map to see why a policy has failed 😱\n\n\nWho can guess what this map represents? (Source)\nhttp://www.radicalcartography.net/index.html?chicagodots, then adapted to DC: “[Eric Fisher] was astounded by Bill Rankin’s map of Chicago’s racial and ethnic divides and wanted to see what other cities looked like mapped the same way. To match his map, Red is White, Blue is Black, Green is Asian, Orange is Hispanic, Gray is Other, and each dot is 25 people. Data from Census 2000. Base map © OpenStreetMap, CC-BY-SA” https://commons.wikimedia.org/wiki/File:Race_and_ethnicity_map_of_Washington,_D.C..png"
   },
   {
     "objectID": "w01/slides.html#its-completely-made-up",
@@ -215,7 +222,7 @@
     "href": "w01/slides.html#our-first-map-polygon-data",
     "title": "Week 1: Introduction to GIS",
     "section": "Our First Map: Polygon Data",
-    "text": "Our First Map: Polygon Data\n\nDC Census Tracts from Open Data DC\n\n\n\nReading layer `Census_Tracts_in_2020' from data source \n  `/Users/jpj/Library/CloudStorage/Dropbox/gtown/ppol6805/w01/data/DC_Census_2020/Census_Tracts_in_2020.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 206 features and 315 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8584933 ymin: 4691871 xmax: -8561515 ymax: 4721078\nProjected CRS: WGS 84 / Pseudo-Mercator\n\n\n[1] \"sf\"         \"data.frame\"\n\n\nSimple feature collection with 6 features and 12 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8577962 ymin: 4708107 xmax: -8572564 ymax: 4716136\nProjected CRS: WGS 84 / Pseudo-Mercator\n  OBJECTID  TRACT       GEOID  ALAND AWATER STUSAB SUMLEV     GEOCODE STATE\n1        1 002002 11001002002 849376      0     DC    140 11001002002    11\n2        2 002101 11001002101 600992      0     DC    140 11001002101    11\n3        3 002102 11001002102 725975      0     DC    140 11001002102    11\n4        4 002201 11001002201 415173      0     DC    140 11001002201    11\n5        5 002202 11001002202 698895    566     DC    140 11001002202    11\n6        6 000101 11001000101 199776   5261     DC    140 11001000101    11\n                NAME POP100 HU100                       geometry\n1 Census Tract 20.02   4072  1532 POLYGON ((-8575655 4714476,...\n2 Census Tract 21.01   5687  2335 POLYGON ((-8574745 4715676,...\n3 Census Tract 21.02   5099  2221 POLYGON ((-8573824 4715684,...\n4 Census Tract 22.01   3485  1229 POLYGON ((-8574654 4714781,...\n5 Census Tract 22.02   3339  1454 POLYGON ((-8573792 4714811,...\n6  Census Tract 1.01   1406   999 POLYGON ((-8577962 4708867,..."
+    "text": "Our First Map: Polygon Data\n\nDC Census Tracts from Open Data DC\n\n\n\nReading layer `Census_Tracts_in_2020' from data source \n  `/Users/jpj/gtown-local/ppol6805/w01/data/DC_Census_2020/Census_Tracts_in_2020.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 206 features and 315 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8584933 ymin: 4691871 xmax: -8561515 ymax: 4721078\nProjected CRS: WGS 84 / Pseudo-Mercator\n\n\n[1] \"sf\"         \"data.frame\"\n\n\nSimple feature collection with 6 features and 12 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8577962 ymin: 4708107 xmax: -8572564 ymax: 4716136\nProjected CRS: WGS 84 / Pseudo-Mercator\n  OBJECTID  TRACT       GEOID  ALAND AWATER STUSAB SUMLEV     GEOCODE STATE\n1        1 002002 11001002002 849376      0     DC    140 11001002002    11\n2        2 002101 11001002101 600992      0     DC    140 11001002101    11\n3        3 002102 11001002102 725975      0     DC    140 11001002102    11\n4        4 002201 11001002201 415173      0     DC    140 11001002201    11\n5        5 002202 11001002202 698895    566     DC    140 11001002202    11\n6        6 000101 11001000101 199776   5261     DC    140 11001000101    11\n                NAME POP100 HU100                       geometry\n1 Census Tract 20.02   4072  1532 POLYGON ((-8575655 4714476,...\n2 Census Tract 21.01   5687  2335 POLYGON ((-8574745 4715676,...\n3 Census Tract 21.02   5099  2221 POLYGON ((-8573824 4715684,...\n4 Census Tract 22.01   3485  1229 POLYGON ((-8574654 4714781,...\n5 Census Tract 22.02   3339  1454 POLYGON ((-8573792 4714811,...\n6  Census Tract 1.01   1406   999 POLYGON ((-8577962 4708867,..."
   },
   {
     "objectID": "w01/slides.html#sf-objects",
@@ -243,14 +250,14 @@
     "href": "w01/slides.html#global-clustering-morans-i",
     "title": "Week 1: Introduction to GIS",
     "section": "Global clustering (Moran’s I)",
-    "text": "Global clustering (Moran’s I)\nThis section was adapted from a tutorial created by Manuel Gimmond, which can be found on his github page.\nAssess data distribution\nLet’s begin by looking at the distribution of our Lyme incidence rate data. The Moran’s I statistic is not robust to extreme values or outliers so we will need to transform our data if it deviates greatly from a normal distribution.\n\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   1.90   13.50   36.30   80.27   98.50  599.60 \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOur data is skewed strongly to the right with lots of outliers much greater than the mean. Let’s see if a log transformation can make our data look more normal.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThat’s much better! We can see what our log-transformed values look like on a map.\n\n\n\n\n\n\nDefine neighboring polygons\nNow we’re ready to begin our analysis. The first step is to define “neighboring” polygons. Recall that neighbors can be defined based on contiguity or distance or as the k nearest neighbors to each polygon. We’ll use a queen-case contiguity-based definition, where any contiguous polygon that shares at least one vertex will be considered a neighbor. We can store the neighbors of each one of our polygons by creating an ‘nb’ object using the ‘poly2nb’ function from the ‘spdep’ library.\n\n\n[1] \"nb\"\n\n\nList of 61\n $ : int [1:6] 11 20 42 45 46 47\n $ : int [1:4] 5 26 50 60\n $ : int [1:4] 30 31 41 59\n $ : int [1:4] 9 12 13 53\n $ : int [1:4] 2 7 15 60\n $ : int [1:7] 12 23 34 38 49 54 58\n $ : int [1:2] 5 15\n $ : int [1:4] 48 50 53 54\n $ : int [1:5] 4 12 13 27 39\n $ : int [1:2] 16 17\n $ : int [1:5] 1 14 20 42 55\n $ : int [1:7] 4 6 9 27 34 53 54\n $ : int [1:7] 4 9 20 39 47 52 55\n $ : int [1:4] 11 36 40 55\n $ : int [1:5] 5 7 19 32 60\n $ : int [1:5] 10 17 21 56 57\n $ : int [1:3] 10 16 21\n $ : int [1:4] 21 22 29 45\n $ : int [1:6] 15 26 28 32 37 60\n $ : int [1:6] 1 11 13 42 47 55\n $ : int [1:6] 16 17 18 22 45 56\n $ : int [1:6] 18 21 25 29 33 39\n $ : int [1:3] 6 25 38\n $ : int [1:3] 31 41 43\n $ : int [1:4] 22 23 33 38\n $ : int [1:6] 2 19 28 35 50 60\n $ : int [1:6] 9 12 33 34 38 39\n $ : int [1:5] 19 26 35 37 58\n $ : int [1:6] 18 22 39 45 46 47\n $ : int [1:4] 3 41 51 59\n $ : int [1:3] 3 24 41\n $ : int [1:3] 15 19 37\n $ : int [1:5] 22 25 27 38 39\n $ : int [1:4] 6 12 27 38\n $ : int [1:6] 26 28 49 50 58 61\n $ : int [1:5] 14 40 44 52 55\n $ : int [1:3] 19 28 32\n $ : int [1:6] 6 23 25 27 33 34\n $ : int [1:7] 9 13 22 27 29 33 47\n $ : int [1:4] 14 36 44 59\n $ : int [1:5] 3 24 30 31 43\n $ : int [1:5] 1 11 20 45 57\n $ : int [1:2] 24 41\n $ : int [1:3] 36 40 59\n $ : int [1:8] 1 18 21 29 42 46 56 57\n $ : int [1:4] 1 29 45 47\n $ : int [1:6] 1 13 20 29 39 46\n $ : int [1:5] 8 49 50 54 61\n $ : int [1:6] 6 35 48 54 58 61\n $ : int [1:6] 2 8 26 35 48 61\n $ : int 30\n $ : int [1:3] 13 36 55\n $ : int [1:4] 4 8 12 54\n $ : int [1:6] 6 8 12 48 49 53\n $ : int [1:6] 11 13 14 20 36 52\n $ : int [1:4] 16 21 45 57\n $ : int [1:4] 16 42 45 56\n $ : int [1:4] 6 28 35 49\n $ : int [1:4] 3 30 40 44\n $ : int [1:5] 2 5 15 19 26\n $ : int [1:4] 35 48 49 50\n - attr(*, \"class\")= chr \"nb\"\n - attr(*, \"region.id\")= chr [1:61] \"1\" \"2\" \"3\" \"4\" ...\n - attr(*, \"call\")= language poly2nb(pl = lyme, queen = T)\n - attr(*, \"type\")= chr \"queen\"\n - attr(*, \"sym\")= logi TRUE\n\n\n[1] 11 20 42 45 46 47\n\n\n[1] \"Albany\"\n\n\n[1] \"Columbia\"    \"Greene\"      \"Rensselaer\"  \"Saratoga\"    \"Schenectady\"\n[6] \"Schoharie\""
+    "text": "Global clustering (Moran’s I)\nThis section was adapted from a tutorial created by Manuel Gimmond, which can be found on his github page.\nAssess data distribution\nLet’s begin by looking at the distribution of our Lyme incidence rate data. The Moran’s I statistic is not robust to extreme values or outliers so we will need to transform our data if it deviates greatly from a normal distribution.\n\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   1.90   13.50   36.30   80.27   98.50  599.60 \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOur data is skewed strongly to the right with lots of outliers much greater than the mean. Let’s see if a log transformation can make our data look more normal.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThat’s much better! We can see what our log-transformed values look like on a map."
   },
   {
     "objectID": "w01/slides.html#references",
     "href": "w01/slides.html#references",
     "title": "Week 1: Introduction to GIS",
     "section": "References",
-    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.\n\n\n\n\n\nWeek 1: GIS Overview"
+    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.\n\n\nRobert, Amélie. 2016. “At the Heart of the Vietnam War: Herbicides, Napalm and Bulldozers Against the A Lưới Mountains.” Journal of Alpine Research  Revue de géographie Alpine, no. 104-1 (April). https://doi.org/10.4000/rga.3266.\n\n\n\n\n\nWeek 1: GIS Overview"
   },
   {
     "objectID": "w01/index.html",
@@ -287,7 +294,7 @@
     "href": "w01/index.html#unit-2-using-code-to-make-maps",
     "title": "Week 1: Introduction to GIS",
     "section": "Unit 2: Using Code to Make Maps",
-    "text": "Unit 2: Using Code to Make Maps\n\n(More on this in Prereqs section below!)\nGiven representations from Part 1, the task of coding becomes task of finding “best” library for loading/manipulating/plotting them\n\nWhere “best” = best for you!",
+    "text": "Unit 2: Using Code to Make Maps\n\n(More on this in Prereqs section below!)\nGiven representations from Part 1, the task of coding becomes task of finding “best” library for loading/manipulating/plotting them\n\nWhere “best” = best for you!\n\nIn R: sf and friends (tidyverse)\nIn Python: geopandas",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -297,7 +304,7 @@
     "href": "w01/index.html#unit-3-spatial-data-science",
     "title": "Week 1: Introduction to GIS",
     "section": "Unit 3: Spatial Data Science",
-    "text": "Unit 3: Spatial Data Science\n\nDrawing inferences about spatial phenomena",
+    "text": "Unit 3: Spatial Data Science\n\nDrawing inferences about spatial phenomena\nThe meat of the course\nHow can we write code (Unit 2) to analyze a map (Unit 1) so as to…\n\nDiscover patterns (EDA: Exploratory Data Analysis) or\nTest hypotheses (CDA: Confirmatory Data Analysis)",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -307,7 +314,7 @@
     "href": "w01/index.html#unit-4-applications-final-project",
     "title": "Week 1: Introduction to GIS",
     "section": "Unit 4: Applications / Final Project",
-    "text": "Unit 4: Applications / Final Project\n\nKamehameha",
+    "text": "Unit 4: Applications / Final Project\n\nTake everything you’ve learned in Units 1-3 and Kamehameha them onto something you care about in the world!\nPublic Policy: Which counties are most in need of more transportation infrastructure?\nUrban Planning: Which neighborhoods are most in need of a new bus stop?\nEpidemiology: What properties of a region make it more/less susceptible to infectious diseases? Where should we intervene to “cut the chain” of a disease vector?",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -327,17 +334,17 @@
     "href": "w01/index.html#my-gis-moment",
     "title": "Week 1: Introduction to GIS",
     "section": "My GIS 🤯 Moment",
-    "text": "My GIS 🤯 Moment\n\nHorrors of the “““Vietnam”“” “““War”“” did not end in 1975… Casualties from unexploded ordnance (cluster bombs) have continued to devastate the region, with over 219,000 victims:\n\n&gt;105K in Vietnam\n&gt;50K in Laos\n&gt;65K in Cambodia",
+    "text": "My GIS 🤯 Moment\n\n\n\nHorrors of “Vietnam War” did not end in 1975… Casualties from unexploded ordnance (cluster bombs) continue to devastate the region, over 220,000 victims:\n\n&gt;105K in Vietnam\n&gt;50K in Laos\n&gt;65K in Cambodia\n\n\n\n\n\n\nFrom Robert (2016)",
     "crumbs": [
       "Week 1: Aug 28"
     ]
   },
   {
-    "objectID": "w01/index.html#at-huawei-optimizing-cell-tower-placement",
-    "href": "w01/index.html#at-huawei-optimizing-cell-tower-placement",
+    "objectID": "w01/index.html#huawei-optimizing-cell-tower-placement",
+    "href": "w01/index.html#huawei-optimizing-cell-tower-placement",
     "title": "Week 1: Introduction to GIS",
-    "section": "At Huawei: Optimizing Cell Tower Placement",
-    "text": "At Huawei: Optimizing Cell Tower Placement",
+    "section": "Huawei: Optimizing Cell Tower Placement",
+    "text": "Huawei: Optimizing Cell Tower Placement\n\n\n\nFrom LTE 4G/5G Self-Organizing Networks",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -347,7 +354,17 @@
     "href": "w01/index.html#the-suburbanization-of-poverty",
     "title": "Week 1: Introduction to GIS",
     "section": "The Suburbanization of Poverty",
-    "text": "The Suburbanization of Poverty\n\nSince 2008, a person living in poverty in the US is more likely to be in a suburb than an “inner city”",
+    "text": "The Suburbanization of Poverty\n\nSince 2008, a person living in poverty in the US is more likely to be in a suburb than an “inner city”\nWhat does this mean for…\n\nAccess to Food / Public Services?\nFinding a job \\(\\leadsto\\) Commuting?\n\nMy job: computing “suburban accessibility indices”\nDoes commuting = straight line distance?",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#distance-vs.-distance",
+    "href": "w01/index.html#distance-vs.-distance",
+    "title": "Week 1: Introduction to GIS",
+    "section": "“Distance” vs. Distance!",
+    "text": "“Distance” vs. Distance!\n\nYou’ve just been hired as a fine art curator at The Whitney… Congratulations!\n\n\n\n\n\n\n\n\nCommuting 1 mile to the Whitney\n\n\n\nAlso commuting 1 mile to the Whitney",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -357,7 +374,7 @@
     "href": "w01/index.html#as-humans",
     "title": "Week 1: Introduction to GIS",
     "section": "As Humans",
-    "text": "As Humans\n\nTo understand the world around you!",
+    "text": "As Humans\n\nTo understand the world around you!\n\n\n\n\nCharles Dupin, Carte figurative de l’instruction populaire de la France (1826)\n\n\n\n\\(\\implies\\) Crucial landmark in the genesis of social science",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -367,7 +384,7 @@
     "href": "w01/index.html#as-data-scientists",
     "title": "Week 1: Introduction to GIS",
     "section": "As Data Scientists",
-    "text": "As Data Scientists\n\nAll data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)\nHowever, you can differentiate yourself in the scary scary job market by developing a particular focus on some “non-standard” type: text data, temporal data, signal processing, and/or geospatial data!",
+    "text": "As Data Scientists\n\nAll data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)\nHowever, you can differentiate yourself in the scary scary job market by developing a particular focus on some “non-standard” type:\n\n\nHello Mr. Google Musk, yes, indeed, I have a wealth of experience working with [text data / temporal data / signal processing / geospatial data]. This job will be no problem for me.",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -377,7 +394,7 @@
     "href": "w01/index.html#as-public-policy-experts",
     "title": "Week 1: Introduction to GIS",
     "section": "As Public Policy Experts",
-    "text": "As Public Policy Experts\n\nOftentimes, all it takes is one map to see why a policy has failed 😱",
+    "text": "As Public Policy Experts\n\nOftentimes, all it takes is one map to see why a policy has failed 😱\n\n\n\n\nWho can guess what this map represents? (Source)\n\n\n\nhttp://www.radicalcartography.net/index.html?chicagodots, then adapted to DC: “[Eric Fisher] was astounded by Bill Rankin’s map of Chicago’s racial and ethnic divides and wanted to see what other cities looked like mapped the same way. To match his map, Red is White, Blue is Black, Green is Asian, Orange is Hispanic, Gray is Other, and each dot is 25 people. Data from Census 2000. Base map © OpenStreetMap, CC-BY-SA” https://commons.wikimedia.org/wiki/File:Race_and_ethnicity_map_of_Washington,_D.C..png",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -497,7 +514,7 @@
     "href": "w01/index.html#our-first-map-polygon-data",
     "title": "Week 1: Introduction to GIS",
     "section": "Our First Map: Polygon Data",
-    "text": "Our First Map: Polygon Data\n\nDC Census Tracts from Open Data DC\n\n\nlibrary(sf)\n\n# Load philly tracts data\ndc_sf &lt;- st_read(\"data/DC_Census_2020/Census_Tracts_in_2020.shp\")\n\nReading layer `Census_Tracts_in_2020' from data source \n  `/Users/jpj/Library/CloudStorage/Dropbox/gtown/ppol6805/w01/data/DC_Census_2020/Census_Tracts_in_2020.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 206 features and 315 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8584933 ymin: 4691871 xmax: -8561515 ymax: 4721078\nProjected CRS: WGS 84 / Pseudo-Mercator\n\ncols_to_keep &lt;- c(\"OBJECTID\", \"TRACT\", \"GEOID\", \"ALAND\", \"AWATER\", \"STUSAB\", \"SUMLEV\", \"GEOCODE\", \"STATE\", \"NAME\", \"POP100\", \"HU100\", \"geometry\")\ndc_sf &lt;- dc_sf |&gt; select(cols_to_keep)\n\n# dc_sf is an sf (\"simple feature\") object of type \"POLYGON\"\nclass(dc_sf)\n\n[1] \"sf\"         \"data.frame\"\n\nhead(dc_sf)\n\nSimple feature collection with 6 features and 12 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8577962 ymin: 4708107 xmax: -8572564 ymax: 4716136\nProjected CRS: WGS 84 / Pseudo-Mercator\n  OBJECTID  TRACT       GEOID  ALAND AWATER STUSAB SUMLEV     GEOCODE STATE\n1        1 002002 11001002002 849376      0     DC    140 11001002002    11\n2        2 002101 11001002101 600992      0     DC    140 11001002101    11\n3        3 002102 11001002102 725975      0     DC    140 11001002102    11\n4        4 002201 11001002201 415173      0     DC    140 11001002201    11\n5        5 002202 11001002202 698895    566     DC    140 11001002202    11\n6        6 000101 11001000101 199776   5261     DC    140 11001000101    11\n                NAME POP100 HU100                       geometry\n1 Census Tract 20.02   4072  1532 POLYGON ((-8575655 4714476,...\n2 Census Tract 21.01   5687  2335 POLYGON ((-8574745 4715676,...\n3 Census Tract 21.02   5099  2221 POLYGON ((-8573824 4715684,...\n4 Census Tract 22.01   3485  1229 POLYGON ((-8574654 4714781,...\n5 Census Tract 22.02   3339  1454 POLYGON ((-8573792 4714811,...\n6  Census Tract 1.01   1406   999 POLYGON ((-8577962 4708867,...",
+    "text": "Our First Map: Polygon Data\n\nDC Census Tracts from Open Data DC\n\n\nlibrary(sf)\n\n# Load philly tracts data\ndc_sf &lt;- st_read(\"data/DC_Census_2020/Census_Tracts_in_2020.shp\");\n\nReading layer `Census_Tracts_in_2020' from data source \n  `/Users/jpj/gtown-local/ppol6805/w01/data/DC_Census_2020/Census_Tracts_in_2020.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 206 features and 315 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8584933 ymin: 4691871 xmax: -8561515 ymax: 4721078\nProjected CRS: WGS 84 / Pseudo-Mercator\n\ncols_to_keep &lt;- c(\"OBJECTID\", \"TRACT\", \"GEOID\", \"ALAND\", \"AWATER\", \"STUSAB\", \"SUMLEV\", \"GEOCODE\", \"STATE\", \"NAME\", \"POP100\", \"HU100\", \"geometry\")\ndc_sf &lt;- dc_sf |&gt; select(cols_to_keep)\n\n# dc_sf is an sf (\"simple feature\") object of type \"POLYGON\"\nclass(dc_sf)\n\n[1] \"sf\"         \"data.frame\"\n\nhead(dc_sf)\n\nSimple feature collection with 6 features and 12 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8577962 ymin: 4708107 xmax: -8572564 ymax: 4716136\nProjected CRS: WGS 84 / Pseudo-Mercator\n  OBJECTID  TRACT       GEOID  ALAND AWATER STUSAB SUMLEV     GEOCODE STATE\n1        1 002002 11001002002 849376      0     DC    140 11001002002    11\n2        2 002101 11001002101 600992      0     DC    140 11001002101    11\n3        3 002102 11001002102 725975      0     DC    140 11001002102    11\n4        4 002201 11001002201 415173      0     DC    140 11001002201    11\n5        5 002202 11001002202 698895    566     DC    140 11001002202    11\n6        6 000101 11001000101 199776   5261     DC    140 11001000101    11\n                NAME POP100 HU100                       geometry\n1 Census Tract 20.02   4072  1532 POLYGON ((-8575655 4714476,...\n2 Census Tract 21.01   5687  2335 POLYGON ((-8574745 4715676,...\n3 Census Tract 21.02   5099  2221 POLYGON ((-8573824 4715684,...\n4 Census Tract 22.01   3485  1229 POLYGON ((-8574654 4714781,...\n5 Census Tract 22.02   3339  1454 POLYGON ((-8573792 4714811,...\n6  Census Tract 1.01   1406   999 POLYGON ((-8577962 4708867,...",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -537,7 +554,7 @@
     "href": "w01/index.html#global-clustering-morans-i",
     "title": "Week 1: Introduction to GIS",
     "section": "Global clustering (Moran’s I)",
-    "text": "Global clustering (Moran’s I)\nThis section was adapted from a tutorial created by Manuel Gimmond, which can be found on his github page.\n\nAssess data distribution\nLet’s begin by looking at the distribution of our Lyme incidence rate data. The Moran’s I statistic is not robust to extreme values or outliers so we will need to transform our data if it deviates greatly from a normal distribution.\n\n# Five-number summary \nsummary(lyme$Lyme.Incidence.Rate)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   1.90   13.50   36.30   80.27   98.50  599.60 \n\n# Histogram\nhist(lyme$Lyme.Incidence.Rate)\n\n\n\n\n\n\n\n# Boxplot\nboxplot(lyme$Lyme.Incidence.Rate, horizontal = TRUE)\n\n\n\n\n\n\n\n\nOur data is skewed strongly to the right with lots of outliers much greater than the mean. Let’s see if a log transformation can make our data look more normal.\n\n# Create new variable that is the log-transformed incidence rate\nlyme$log_lyme_incidence &lt;- log(lyme$Lyme.Incidence.Rate)\n\n# Histogram\nhist(lyme$log_lyme_incidence)\n\n\n\n\n\n\n\n# Boxplot\nboxplot(lyme$log_lyme_incidence, horizontal = TRUE)\n\n\n\n\n\n\n\n\nThat’s much better! We can see what our log-transformed values look like on a map.\n\ntm_shape(lyme) +    # specify sf object with geographic attribute of interest\n  tm_polygons(\"log_lyme_incidence\")  # specify column with value of interest\n\n\n\n\n\n\n\nDefine neighboring polygons\nNow we’re ready to begin our analysis. The first step is to define “neighboring” polygons. Recall that neighbors can be defined based on contiguity or distance or as the k nearest neighbors to each polygon. We’ll use a queen-case contiguity-based definition, where any contiguous polygon that shares at least one vertex will be considered a neighbor. We can store the neighbors of each one of our polygons by creating an ‘nb’ object using the ‘poly2nb’ function from the ‘spdep’ library.\n\nlibrary(spdep)\n\nLoading required package: spData\n\n\nTo access larger datasets in this package, install the spDataLarge\npackage with: `install.packages('spDataLarge',\nrepos='https://nowosad.github.io/drat/', type='source')`\n\n# Create nb object from Lyme dataset\nlyme_nb &lt;- poly2nb(lyme, queen = T) # queen case\nclass(lyme_nb)\n\n[1] \"nb\"\n\nstr(lyme_nb)\n\nList of 61\n $ : int [1:6] 11 20 42 45 46 47\n $ : int [1:4] 5 26 50 60\n $ : int [1:4] 30 31 41 59\n $ : int [1:4] 9 12 13 53\n $ : int [1:4] 2 7 15 60\n $ : int [1:7] 12 23 34 38 49 54 58\n $ : int [1:2] 5 15\n $ : int [1:4] 48 50 53 54\n $ : int [1:5] 4 12 13 27 39\n $ : int [1:2] 16 17\n $ : int [1:5] 1 14 20 42 55\n $ : int [1:7] 4 6 9 27 34 53 54\n $ : int [1:7] 4 9 20 39 47 52 55\n $ : int [1:4] 11 36 40 55\n $ : int [1:5] 5 7 19 32 60\n $ : int [1:5] 10 17 21 56 57\n $ : int [1:3] 10 16 21\n $ : int [1:4] 21 22 29 45\n $ : int [1:6] 15 26 28 32 37 60\n $ : int [1:6] 1 11 13 42 47 55\n $ : int [1:6] 16 17 18 22 45 56\n $ : int [1:6] 18 21 25 29 33 39\n $ : int [1:3] 6 25 38\n $ : int [1:3] 31 41 43\n $ : int [1:4] 22 23 33 38\n $ : int [1:6] 2 19 28 35 50 60\n $ : int [1:6] 9 12 33 34 38 39\n $ : int [1:5] 19 26 35 37 58\n $ : int [1:6] 18 22 39 45 46 47\n $ : int [1:4] 3 41 51 59\n $ : int [1:3] 3 24 41\n $ : int [1:3] 15 19 37\n $ : int [1:5] 22 25 27 38 39\n $ : int [1:4] 6 12 27 38\n $ : int [1:6] 26 28 49 50 58 61\n $ : int [1:5] 14 40 44 52 55\n $ : int [1:3] 19 28 32\n $ : int [1:6] 6 23 25 27 33 34\n $ : int [1:7] 9 13 22 27 29 33 47\n $ : int [1:4] 14 36 44 59\n $ : int [1:5] 3 24 30 31 43\n $ : int [1:5] 1 11 20 45 57\n $ : int [1:2] 24 41\n $ : int [1:3] 36 40 59\n $ : int [1:8] 1 18 21 29 42 46 56 57\n $ : int [1:4] 1 29 45 47\n $ : int [1:6] 1 13 20 29 39 46\n $ : int [1:5] 8 49 50 54 61\n $ : int [1:6] 6 35 48 54 58 61\n $ : int [1:6] 2 8 26 35 48 61\n $ : int 30\n $ : int [1:3] 13 36 55\n $ : int [1:4] 4 8 12 54\n $ : int [1:6] 6 8 12 48 49 53\n $ : int [1:6] 11 13 14 20 36 52\n $ : int [1:4] 16 21 45 57\n $ : int [1:4] 16 42 45 56\n $ : int [1:4] 6 28 35 49\n $ : int [1:4] 3 30 40 44\n $ : int [1:5] 2 5 15 19 26\n $ : int [1:4] 35 48 49 50\n - attr(*, \"class\")= chr \"nb\"\n - attr(*, \"region.id\")= chr [1:61] \"1\" \"2\" \"3\" \"4\" ...\n - attr(*, \"call\")= language poly2nb(pl = lyme, queen = T)\n - attr(*, \"type\")= chr \"queen\"\n - attr(*, \"sym\")= logi TRUE\n\n# View the neighbors of the first polygon\nlyme_nb[[1]]\n\n[1] 11 20 42 45 46 47\n\nlyme$NAME[1]\n\n[1] \"Albany\"\n\nlyme$NAME[c(11, 20, 42, 45, 46, 47)]\n\n[1] \"Columbia\"    \"Greene\"      \"Rensselaer\"  \"Saratoga\"    \"Schenectady\"\n[6] \"Schoharie\"",
+    "text": "Global clustering (Moran’s I)\nThis section was adapted from a tutorial created by Manuel Gimmond, which can be found on his github page.\n\nAssess data distribution\nLet’s begin by looking at the distribution of our Lyme incidence rate data. The Moran’s I statistic is not robust to extreme values or outliers so we will need to transform our data if it deviates greatly from a normal distribution.\n\n# Five-number summary \nsummary(lyme$Lyme.Incidence.Rate)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   1.90   13.50   36.30   80.27   98.50  599.60 \n\n# Histogram\nhist(lyme$Lyme.Incidence.Rate)\n\n\n\n\n\n\n\n# Boxplot\nboxplot(lyme$Lyme.Incidence.Rate, horizontal = TRUE)\n\n\n\n\n\n\n\n\nOur data is skewed strongly to the right with lots of outliers much greater than the mean. Let’s see if a log transformation can make our data look more normal.\n\n# Create new variable that is the log-transformed incidence rate\nlyme$log_lyme_incidence &lt;- log(lyme$Lyme.Incidence.Rate)\n\n# Histogram\nhist(lyme$log_lyme_incidence)\n\n\n\n\n\n\n\n# Boxplot\nboxplot(lyme$log_lyme_incidence, horizontal = TRUE)\n\n\n\n\n\n\n\n\nThat’s much better! We can see what our log-transformed values look like on a map.\n\ntm_shape(lyme) +    # specify sf object with geographic attribute of interest\n  tm_polygons(\"log_lyme_incidence\")  # specify column with value of interest",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -547,7 +564,7 @@
     "href": "w01/index.html#references",
     "title": "Week 1: Introduction to GIS",
     "section": "References",
-    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.",
+    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.\n\n\nRobert, Amélie. 2016. “At the Heart of the Vietnam War: Herbicides, Napalm and Bulldozers Against the A Lưới Mountains.” Journal of Alpine Research  Revue de géographie Alpine, no. 104-1 (April). https://doi.org/10.4000/rga.3266.",
     "crumbs": [
       "Week 1: Aug 28"
     ]

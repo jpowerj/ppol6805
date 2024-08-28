@@ -226,3 +226,23 @@ class(crime)
 head(crime)
 
 ```
+
+---
+
+
+### Define neighboring polygons
+Now we're ready to begin our analysis. The first step is to define "neighboring" polygons. Recall that neighbors can be defined based on contiguity or distance or as the *k* nearest neighbors to each polygon. We'll use a **queen**-case contiguity-based definition, where any contiguous polygon that shares at least one vertex will be considered a neighbor. We can store the neighbors of each one of our polygons by creating an 'nb' object using the 'poly2nb' function from the 'spdep' library.
+
+```{r}
+library(spdep)
+
+# Create nb object from Lyme dataset
+lyme_nb <- poly2nb(lyme, queen = T) # queen case
+class(lyme_nb)
+str(lyme_nb)
+
+# View the neighbors of the first polygon
+lyme_nb[[1]]
+lyme$NAME[1]
+lyme$NAME[c(11, 20, 42, 45, 46, 47)]
+```

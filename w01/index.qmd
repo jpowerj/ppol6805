@@ -96,14 +96,23 @@ dev.off()
 * (More on this in Prereqs section below!)
 * Given representations from Part 1, the task of coding becomes task of **finding "best" library for loading/manipulating/plotting them**
   * Where "best" = best for **you!**
+* In **R**: `sf` and friends (`tidyverse`)
+* In **Python**: `geopandas`
 
 ## Unit 3: Spatial Data Science
 
 * Drawing **inferences** about spatial phenomena
+* The meat of the course
+* How can we write code (Unit 2) to analyze a map (Unit 1) so as to...
+  * **Discover** patterns (EDA: Exploratory Data Analysis) or
+  * **Test** hypotheses (CDA: Confirmatory Data Analysis)
 
 ## Unit 4: Applications / Final Project
 
-* Kamehameha
+* Take everything you've learned in Units 1-3 and Kamehameha them onto something you care about in the world!
+* Public Policy: Which counties are most in need of more transportation infrastructure?
+* Urban Planning: Which neighborhoods are most in need of a new bus stop?
+* Epidemiology: What properties of a region make it more/less susceptible to infectious diseases? Where should we **intervene** to "cut the chain" of a disease vector?
 
 # Who Am I? Why Am I Teaching You? {.crunch-title data-stack-name="Why Me?"}
 
@@ -120,20 +129,47 @@ dev.off()
 * As an **Urban Economist** at UC Berkeley
   * Used, e.g., Google Maps API to evaluate effects of [**Suburbanization of Poverty**](https://www.brookings.edu/wp-content/uploads/2016/06/0120_poverty_paper.pdf){target='_blank'}
 
-## My GIS 🤯 Moment
+## My GIS 🤯 Moment {.crunch-title .crunch-ul}
 
-* Horrors of the """Vietnam""" """War""" did not end in 1975... Casualties from unexploded ordnance (cluster bombs) have continued to devastate the region, with over 219,000 victims:
+::: {.columns}
+::: {.column width="50%"}
+
+* Horrors of "Vietnam War" did not end in 1975... Casualties from unexploded ordnance (cluster bombs) continue to devastate the region, over 220,000 victims:
   * [>105K in Vietnam](https://www.baldwin.senate.gov/imo/media/doc/Legacies%20of%20War%20Recognition%20and%20UXO%20Removal%20Act.pdf){target='_blank'}
   * [>50K in Laos](https://www.cnn.com/2016/09/05/asia/united-states-laos-secret-war/index.html){target='_blank'}
   * [>65K in Cambodia](https://apnews.com/article/bombs-land-mines-unexploded-ordnance-demining-564f0203aeb53aa95118a1396b907246){target='_blank'}
 
-## At Huawei: Optimizing Cell Tower Placement
+:::
+::: {.column width="50%"}
 
-* 
+![From @robert_heart_2016](images/indochina.png){fig-align="center" width="90%"}
+
+:::
+:::
+
+## Huawei: Optimizing Cell Tower Placement {.smaller .title-12}
+
+![From *[LTE 4G/5G Self-Organizing Networks](https://lte-son.blogspot.com/2018/10/inter-cell-interference-coordination.html){target='_blank}*](images/mimo.jpeg){fig-align="center"}
 
 ## The Suburbanization of Poverty
 
 * Since 2008, a person living in poverty in the US is more likely to be in a **suburb** than an "inner city"
+* What does this mean for...
+  * **Access to Food / Public Services?**
+  * **Finding a job $\leadsto$ Commuting?**
+* My job: computing "suburban accessibility indices"
+* Does commuting = straight line distance?
+
+## "Distance" vs. Distance! {.smaller .crunch-title .crunch-ul .crunch-quarto-figure}
+
+* You've just been hired as a fine art curator at [The Whitney](https://en.wikipedia.org/wiki/Whitney_Museum){target='_blank'}... Congratulations!
+
+| | |
+| - | - |
+| Commuting 1 mile to the Whitney | ![](images/whitney1.jpeg){fig-align="center"} |
+| Also commuting 1 mile to the Whitney | ![](images/whitney2.jpeg){fig-align="center"} |
+
+: {tbl-colwidths="[25,75]"}
 
 # Why Should You Care About GIS? {data-stack-name="Why GIS?"}
 
@@ -141,18 +177,32 @@ dev.off()
 * As a Data Scientist
 * As a Public Policy Expert
 
-## As Humans
+## As Humans {.smaller .crunch-title}
 
 * To understand the world around you!
 
-## As Data Scientists
+![Charles Dupin, [Carte figurative de l'instruction populaire de la France](https://fr.wikipedia.org/wiki/Carte_figurative_de_l%27instruction_populaire_de_la_France){target='_blank'} (1826)](images/dupin.jpg){fig-align="center"}
+
+* $\implies$ Crucial landmark in the [**genesis of social science**](https://read.dukeupress.edu/french-historical-studies/article-abstract/33/2/307/9657/Charles-Tilly-s-Vende-e-as-a-Model-for-Social?redirectedFrom=PDF){target='_blank'}
+
+## As Data Scientists {.crunch-ul .crunch-title}
 
 * All data scientists are expected to know how to analyze "standard" types of data: tabular, numeric data (think spreadsheets)
-* However, you can **differentiate yourself** in the scary scary job market by developing a particular focus on some "non-standard" type: **text** data, **temporal** data, **signal** processing, and/or **geospatial** data!
+* However, you can **differentiate yourself** in the scary scary job market by developing a particular focus on some "non-standard" type:
 
-## As Public Policy Experts
+> *Hello Mr. Google Musk, yes, indeed, I have a wealth of experience working with [**text** data / **temporal** data / **signal** processing / **geospatial** data]. This job will be no problem for me.*
+
+## As Public Policy Experts {.smaller .crunch-ul .crunch-quarto-figure}
 
 * Oftentimes, all it takes is one map to see why a policy has failed 😱
+
+![Who can guess what this map represents? ([Source](https://commons.wikimedia.org/wiki/File:Race_and_ethnicity_map_of_Washington,_D.C..png){target='_blank'})](images/dc_racial_dot_map.png){fig-align="center"}
+
+::: {.notes}
+
+http://www.radicalcartography.net/index.html?chicagodots, then adapted to DC: "[Eric Fisher] was astounded by Bill Rankin's map of Chicago's racial and ethnic divides</a> and wanted to see what other cities looked like mapped the same way. To match his map, Red is White, Blue is Black, Green is Asian, Orange is Hispanic, Gray is Other, and each dot is 25 people. Data from Census 2000. Base map © OpenStreetMap, CC-BY-SA" https://commons.wikimedia.org/wiki/File:Race_and_ethnicity_map_of_Washington,_D.C..png
+
+:::
 
 # So... What *Is* GIS?
 
@@ -473,7 +523,7 @@ From [The Carter (Documentary)](https://en.wikipedia.org/wiki/The_Carter){target
 
 ![From *[Elsevier Osmosis: Spaced Repetition](https://www.osmosis.org/learn/Spaced_repetition){target='_blank'}*](images/forgetting-curve.png){fig-align="center"}
 
-# Let's Make a Map! {data-stack-name="First Map"}
+# Let's Make Some Dang Maps! {data-stack-name="First Maps"}
 
 ## Our First Map: Polygon Data
 
@@ -484,7 +534,7 @@ From [The Carter (Documentary)](https://en.wikipedia.org/wiki/The_Carter){target
 library(sf)
 
 # Load philly tracts data
-dc_sf <- st_read("data/DC_Census_2020/Census_Tracts_in_2020.shp")
+dc_sf <- st_read("data/DC_Census_2020/Census_Tracts_in_2020.shp");
 cols_to_keep <- c("OBJECTID", "TRACT", "GEOID", "ALAND", "AWATER", "STUSAB", "SUMLEV", "GEOCODE", "STATE", "NAME", "POP100", "HU100", "geometry")
 dc_sf <- dc_sf |> select(cols_to_keep)
 
@@ -504,8 +554,6 @@ dc_sf[1,]    # select first row
 # head(dc_sf$NAMELSAD10)  # select column by name  
 # head(dc_sf[,7])         # select column by number
 ```
-
-
 
 ## Raster Data
 
@@ -604,23 +652,6 @@ That's much better! We can see what our log-transformed values look like on a ma
 tm_shape(lyme) +    # specify sf object with geographic attribute of interest
   tm_polygons("log_lyme_incidence")  # specify column with value of interest
 
-```
-
-### Define neighboring polygons
-Now we're ready to begin our analysis. The first step is to define "neighboring" polygons. Recall that neighbors can be defined based on contiguity or distance or as the *k* nearest neighbors to each polygon. We'll use a **queen**-case contiguity-based definition, where any contiguous polygon that shares at least one vertex will be considered a neighbor. We can store the neighbors of each one of our polygons by creating an 'nb' object using the 'poly2nb' function from the 'spdep' library.
-
-```{r}
-library(spdep)
-
-# Create nb object from Lyme dataset
-lyme_nb <- poly2nb(lyme, queen = T) # queen case
-class(lyme_nb)
-str(lyme_nb)
-
-# View the neighbors of the first polygon
-lyme_nb[[1]]
-lyme$NAME[1]
-lyme$NAME[c(11, 20, 42, 45, 46, 47)]
 ```
 
 ## References
