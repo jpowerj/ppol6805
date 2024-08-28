@@ -519,139 +519,84 @@ $$
 From [The Carter (Documentary)](https://en.wikipedia.org/wiki/The_Carter){target='_blank'}
 :::
 
-## He's Entirely Correct!
+## He's Literally Extremely Correct!
 
 ![From *[Elsevier Osmosis: Spaced Repetition](https://www.osmosis.org/learn/Spaced_repetition){target='_blank'}*](images/forgetting-curve.png){fig-align="center"}
 
 # Let's Make Some Dang Maps! {data-stack-name="First Maps"}
 
-## Our First Map: Polygon Data
+## Our First Map: Polygons! {.smaller}
 
-* DC Census Tracts from [Open Data DC](https://opendata.dc.gov/datasets/DCGIS::census-tracts-in-2020/about){target='_blank'}
+*(Quick demo adapted from Sherry Xie's R Consortium Workshop: [*Analyzing Geospatial Data in R*](https://www.youtube.com/watch?v=DD7bXonh-_E), using DC rather than Philadelphia open data.)*
 
 ```{r}
-#| warning: false
+#| echo: true
+#| code-fold: show
 library(sf)
-
-# Load philly tracts data
-dc_sf <- st_read("data/DC_Census_2020/Census_Tracts_in_2020.shp");
+# Load DC tracts data
+dc_sf_fpath <- "data/DC_Census_2020/Census_Tracts_in_2020.shp"
+dc_sf <- st_read(dc_sf_fpath);
 cols_to_keep <- c("OBJECTID", "TRACT", "GEOID", "ALAND", "AWATER", "STUSAB", "SUMLEV", "GEOCODE", "STATE", "NAME", "POP100", "HU100", "geometry")
 dc_sf <- dc_sf |> select(cols_to_keep)
+```
 
-# dc_sf is an sf ("simple feature") object of type "POLYGON"
+## What is an `sf` Object?
+
+* `dc_sf` is an object of type `sf` (short for **"simple feature"**), which extends `data.frame`, and contains **features** which have type **`POLYGON`**
+
+```{r}
 class(dc_sf)
 head(dc_sf)
 ```
 
-## `sf` Objects
+## Working With `sf` Objects {.smaller}
+
+* With some rare but important exceptions (which we'll learn!), can be used just like a `data.frame` / `tibble`:
 
 ```{r}
-# sf objects can be handled like data frames using standard commands
+#| echo: true
+#| code-fold: show
 str(dc_sf)   # view structure
+```
+
+## Working With `sf` Objects {.smaller}
+
+```{r}
+#| echo: true
+#| code-fold: show
 head(dc_sf)  # view first several rows
+```
+
+## Working With `sf` Objects {.smaller}
+
+```{r}
+#| echo: true
+#| code-fold: show
 dim(dc_sf)   # view dimensions
 dc_sf[1,]    # select first row
-# head(dc_sf$NAMELSAD10)  # select column by name  
-# head(dc_sf[,7])         # select column by number
 ```
 
-## Raster Data
-
-So far, we have considered point, line, and polygon data, all of which fall under the umbrella of vector data types. Rasters are a distinct GIS data type that we will consider only briefly because they cannot be handled with `sf` methods. We will look at the `volcano` dataset, which gives topographic information for Maunga Whau (a volcano located in Auckland, New Zealand) on a 10m by 10m grid. Because it is a relatively small raster, we can handle `volcano` using base functions. Larger rasters should be handled using the _raster_ package.
+## Working With `sf` Objects {.smaller}
 
 ```{r}
-library(datasets)
-
-# The volcano dataset is a 87x61 matrix
-class(volcano)
-str(volcano)
-filled.contour(volcano, color = terrain.colors, asp = 1)
+#| echo: true
+#| code-fold: show
+head(dc_sf$NAME)  # select column by name  
+head(dc_sf[,4])         # select column by number
 ```
 
-## NYS Lyme incidence data
-
-We will use the example of New York State county-aggregated Lyme disease incidence for 2014-2016 to try our hand at spatial analysis. This data is publicly available and can be accessed at the [Health Data NY](https://health.data.ny.gov/Health/Community-Health-Lyme-Disease-Incidence-Rate-per-1/6sxr-cqij) website. Raw data can be downloaded in .csv format. If you're curious to see how this tabular data can be merged with a New York State county shapefile (available at [NYS GIS](https://gis.ny.gov/gisdata/inventories/details.cfm?DSID=927)), you can see how this is done in the 'prep_nys_lyme_data.R' script file located in the 'data' folder of our project directory. But for now, we'll start with this data that has already been merged and converted to an 'sf' object.
+## And... Actually Displaying the Map! {.smaller .crunch-quarto-figure}
 
 ```{r}
-library(sf)
+#| echo: true
+#| code-fold: show
+#| fig-align: center
+# We can extract the geometry with the st_geometry function
+dc_geo <- st_geometry(dc_sf)
+#pt_geo
 
-# Load NYS Lyme incidence data
-lyme <- readRDS("data/nys_lyme_data.rds")
-
-# Let's take a look at some data attributes
-class(lyme)
-#head(lyme)
-
-# Note that the variable Lyme.Incidence.Rate gives the county-level Lyme disease incidence per 100,000 population
-
-# Once again, we can plot the spatial attrbutes of this data
-plot(st_geometry(lyme))
-
-```
-
-This data is an example of regional rate data. An easy way to map this data is using the 'tmap' library. Let's load 'tmap' and create an interactive map with just a few lines of code.
-
-```{r}
-library(tmap)
-
-tmap_mode("view")  # set mode to interactive
-tm_shape(lyme) +    # specify sf object with geographic attribute of interest
-  tm_polygons("Lyme.Incidence.Rate")  # specify column with value of interest
-```
-
-We have a missing value in St. Lawrence county. Let's remove this row from the data so it doesn't throw an error later in our analysis.
-
-```{r}
-lyme <- lyme[!is.na(lyme$Lyme.Incidence.Rate),]
-
-# Let's map again 
-tmap_mode("view")  # set mode to interactive
-tm_shape(lyme) +    # specify sf object with geographic attribute of interest
-  tm_polygons("Lyme.Incidence.Rate")  # specify column with value of interest
-```
-
-
-## Global clustering (Moran's I)
-
-This section was adapted from a tutorial created by Manuel Gimmond, which can be found on his [github page](https://mgimond.github.io/simple_moransI_example/). 
-
-### Assess data distribution
-Let's begin by looking at the distribution of our Lyme incidence rate data. The Moran's *I* statistic is not robust to extreme values or outliers so we will need to transform our data if it deviates greatly from a normal distribution.
-
-```{r}
-# Five-number summary 
-summary(lyme$Lyme.Incidence.Rate)
-
-# Histogram
-hist(lyme$Lyme.Incidence.Rate)
-
-# Boxplot
-boxplot(lyme$Lyme.Incidence.Rate, horizontal = TRUE)
-
-```
-
-Our data is skewed strongly to the right with lots of outliers much greater than the mean. Let's see if a log transformation can make our data look more normal.
-
-```{r}
-
-# Create new variable that is the log-transformed incidence rate
-lyme$log_lyme_incidence <- log(lyme$Lyme.Incidence.Rate)
-
-# Histogram
-hist(lyme$log_lyme_incidence)
-
-# Boxplot
-boxplot(lyme$log_lyme_incidence, horizontal = TRUE)
-
-```
-
-That's much better! We can see what our log-transformed values look like on a map.
-
-```{r}
-
-tm_shape(lyme) +    # specify sf object with geographic attribute of interest
-  tm_polygons("log_lyme_incidence")  # specify column with value of interest
-
+# Plot the geometry with base R's plot() function
+plot(dc_geo)
 ```
 
 ## References
