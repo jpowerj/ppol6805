@@ -19,16 +19,17 @@ website:
         text: Syllabus
       - href: resources.qmd
         text: Resources
-      - href: "recordings/"
-        text: "Lecture Recordings"
-      - href: https://georgetown.zoom.us/j/94074713027
-        text: "ZOOM"
       - "---"
       - href: w01/index.qmd
         text: "Week 1: Aug 28"
       - href: w02/index.qmd
         text: "Week 2: Sep 4"
       - "---"
+      - href: "https://georgetown.zoom.us/j/94074713027"
+        text: "Zoom Link <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
+        target: "_blank"
+      - href: "https://georgetown.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=b412a327-e0cd-4897-8401-b1b500239335"
+        text: "Lecture Videos <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
       - href: "https://chat.google.com/room/AAAAbGZ4pJk?cls=7"
         text: "Google Space  <i class='bi bi-box-arrow-up-right ps-1 align-self-center justify-self-center' style='font-size: 75%;'></i>"
       - href: "https://groups.google.com/a/georgetown.edu/g/dsan6750"
