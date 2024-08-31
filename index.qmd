@@ -17,10 +17,4 @@ format:
     toc: false
 ---
 
-::: {.callout-note title="Introductory Survey"}
-
-If you are enrolled in the course you should have received an email about this, but just in case: please take the [**introductory course survey** <i class='bi bi-box-arrow-up-right' style='font-size: 80%;'></i>](https://forms.gle/kAyGvsMYSoLjZUtbA){target='_blank'} before the first class session on Wednesday, August 28th (at 6:30pm in Car Barn 204)!
-
-:::
-
 Welcome to the homepage for **{{< var course.code >}}: {{< var course.name >}}**, Fall 2024, at Georgetown University! The course takes place on **Wednesdays** from **6:30 to 9:00pm** in **Car Barn Room 204**. More details are provided on the [syllabus](syllabus.qmd).
