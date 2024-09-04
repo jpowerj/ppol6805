@@ -621,11 +621,81 @@
     ]
   },
   {
+    "objectID": "w02/index.html#end-of-last-week-vector-data",
+    "href": "w02/index.html#end-of-last-week-vector-data",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "End of Last Week: Vector Data",
+    "text": "End of Last Week: Vector Data\n\n\nCode\nlibrary(sf)\nlibrary(tidyverse)\n# Load DC tracts data\ndc_sf_fpath &lt;- \"data/DC_Census_2020/Census_Tracts_in_2020.shp\"\ndc_sf &lt;- st_read(dc_sf_fpath, quiet = TRUE)\ncols_to_keep &lt;- c(\"OBJECTID\", \"TRACT\", \"GEOID\", \"ALAND\", \"AWATER\", \"STUSAB\", \"SUMLEV\", \"GEOCODE\", \"STATE\", \"NAME\", \"POP100\", \"HU100\", \"geometry\")\ndc_sf &lt;- dc_sf |&gt; select(cols_to_keep)\n# We can extract the geometry with the st_geometry function\ndc_geo &lt;- st_geometry(dc_sf)\n# And plot the geometry with base R's plot() function\nplot(dc_geo, mar = c(0,0,0,0))",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#now-with-ggplot",
+    "href": "w02/index.html#now-with-ggplot",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Now with ggplot!",
+    "text": "Now with ggplot!\n\n\nCode\nggplot2::theme_set(ggplot2::theme_classic())\ndc_sf |&gt;\n  ggplot() +\n  geom_sf()",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#raster-data",
+    "href": "w02/index.html#raster-data",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Raster Data",
+    "text": "Raster Data\n\nEach DC Census Tract has its own (odd) shape, which can be described by discrete coordinates forming a POLYGON\nFor geospatial analysis, however, we often need to compute over evenly-spaced grids rather than this odd collection of shapes\nPOLYGONs may make sense for demographers, but how about someone studying air pollution in DC? (Smog, for example, does not confine itself to census tracts!)",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#step-1-union-of-all-tracts",
+    "href": "w02/index.html#step-1-union-of-all-tracts",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Step 1: Union of All Tracts",
+    "text": "Step 1: Union of All Tracts\n\n\nCode\ndc_union_sf &lt;- sf::st_union(dc_sf)\ndc_union_sf |&gt;\n  ggplot() +\n  geom_sf()",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#step-2-rasterize",
+    "href": "w02/index.html#step-2-rasterize",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Step 2: Rasterize",
+    "text": "Step 2: Rasterize\n\n\nCode\nlibrary(terra)\n\n\nterra 1.7.78\n\n\n\nAttaching package: 'terra'\n\n\nThe following object is masked from 'package:tidyr':\n\n    extract\n\n\nCode\ndc_SpatVector &lt;- terra::vect(dc_union_sf)\nrast_template &lt;- rast(ext(dc_SpatVector),\n  resolution = 1000, # meters\n  crs = crs(dc_SpatVector)\n)\ndc_SpatRaster &lt;- terra::rasterize(dc_SpatVector, rast_template)\ndim(dc_SpatRaster)\n\n\n[1] 29 23  1\n\n\nCode\nnlyr(dc_SpatRaster)\n\n\n[1] 1\n\n\nCode\nplot(dc_SpatRaster)",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#and-with-tidyterra",
+    "href": "w02/index.html#and-with-tidyterra",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "And with tidyterra",
+    "text": "And with tidyterra\n\n\nCode\nlibrary(tidyterra)\n\n\n\nAttaching package: 'tidyterra'\n\n\nThe following object is masked from 'package:stats':\n\n    filter\n\n\nCode\nggplot(data=dc_SpatRaster, aes(fill=layer)) +\n  geom_spatraster(data=dc_SpatRaster)",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
     "objectID": "w02/index.html#latitude-and-longitude-are-angles",
     "href": "w02/index.html#latitude-and-longitude-are-angles",
     "title": "Week 2: How Do Maps Work?",
     "section": "Latitude and Longitude are Angles!",
     "text": "Latitude and Longitude are Angles!\n\n\n\nFrom Krygier and Wood (2016)",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#angular-distance-vs.-travel-distance",
+    "href": "w02/index.html#angular-distance-vs.-travel-distance",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Angular Distance vs. Travel Distance",
+    "text": "Angular Distance vs. Travel Distance\nThe Earth’s “width” is slightly greater than its “length” 😰\n\n\n\nFrom Wikimedia Commons",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -781,11 +851,60 @@
     ]
   },
   {
+    "objectID": "w02/slides.html#end-of-last-week-vector-data",
+    "href": "w02/slides.html#end-of-last-week-vector-data",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "End of Last Week: Vector Data",
+    "text": "End of Last Week: Vector Data\n\n\nCode\nlibrary(sf)\nlibrary(tidyverse)\n# Load DC tracts data\ndc_sf_fpath &lt;- \"data/DC_Census_2020/Census_Tracts_in_2020.shp\"\ndc_sf &lt;- st_read(dc_sf_fpath, quiet = TRUE)\ncols_to_keep &lt;- c(\"OBJECTID\", \"TRACT\", \"GEOID\", \"ALAND\", \"AWATER\", \"STUSAB\", \"SUMLEV\", \"GEOCODE\", \"STATE\", \"NAME\", \"POP100\", \"HU100\", \"geometry\")\ndc_sf &lt;- dc_sf |&gt; select(cols_to_keep)\n# We can extract the geometry with the st_geometry function\ndc_geo &lt;- st_geometry(dc_sf)\n# And plot the geometry with base R's plot() function\nplot(dc_geo, mar = c(0,0,0,0))"
+  },
+  {
+    "objectID": "w02/slides.html#now-with-ggplot",
+    "href": "w02/slides.html#now-with-ggplot",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Now with ggplot!",
+    "text": "Now with ggplot!\n\n\nCode\nggplot2::theme_set(ggplot2::theme_classic())\ndc_sf |&gt;\n  ggplot() +\n  geom_sf()"
+  },
+  {
+    "objectID": "w02/slides.html#raster-data",
+    "href": "w02/slides.html#raster-data",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Raster Data",
+    "text": "Raster Data\n\nEach DC Census Tract has its own (odd) shape, which can be described by discrete coordinates forming a POLYGON\nFor geospatial analysis, however, we often need to compute over evenly-spaced grids rather than this odd collection of shapes\nPOLYGONs may make sense for demographers, but how about someone studying air pollution in DC? (Smog, for example, does not confine itself to census tracts!)"
+  },
+  {
+    "objectID": "w02/slides.html#step-1-union-of-all-tracts",
+    "href": "w02/slides.html#step-1-union-of-all-tracts",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Step 1: Union of All Tracts",
+    "text": "Step 1: Union of All Tracts\n\n\nCode\ndc_union_sf &lt;- sf::st_union(dc_sf)\ndc_union_sf |&gt;\n  ggplot() +\n  geom_sf()"
+  },
+  {
+    "objectID": "w02/slides.html#step-2-rasterize",
+    "href": "w02/slides.html#step-2-rasterize",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Step 2: Rasterize",
+    "text": "Step 2: Rasterize\n\n\nCode\nlibrary(terra)\ndc_SpatVector &lt;- terra::vect(dc_union_sf)\nrast_template &lt;- rast(ext(dc_SpatVector),\n  resolution = 1000, # meters\n  crs = crs(dc_SpatVector)\n)\ndc_SpatRaster &lt;- terra::rasterize(dc_SpatVector, rast_template)\ndim(dc_SpatRaster)\n\n\n[1] 29 23  1\n\n\nCode\nnlyr(dc_SpatRaster)\n\n\n[1] 1\n\n\nCode\nplot(dc_SpatRaster)"
+  },
+  {
+    "objectID": "w02/slides.html#and-with-tidyterra",
+    "href": "w02/slides.html#and-with-tidyterra",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "And with tidyterra",
+    "text": "And with tidyterra\n\n\nCode\nlibrary(tidyterra)\nggplot(data=dc_SpatRaster, aes(fill=layer)) +\n  geom_spatraster(data=dc_SpatRaster)"
+  },
+  {
     "objectID": "w02/slides.html#latitude-and-longitude-are-angles",
     "href": "w02/slides.html#latitude-and-longitude-are-angles",
     "title": "Week 2: How Do Maps Work?",
     "section": "Latitude and Longitude are Angles!",
     "text": "Latitude and Longitude are Angles!\n\nFrom Krygier and Wood (2016)"
+  },
+  {
+    "objectID": "w02/slides.html#angular-distance-vs.-travel-distance",
+    "href": "w02/slides.html#angular-distance-vs.-travel-distance",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Angular Distance vs. Travel Distance",
+    "text": "Angular Distance vs. Travel Distance\nThe Earth’s “width” is slightly greater than its “length” 😰\n\nFrom Wikimedia Commons"
   },
   {
     "objectID": "w02/slides.html#smooshing-3d-into-2d",
