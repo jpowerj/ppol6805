@@ -661,11 +661,11 @@
     ]
   },
   {
-    "objectID": "w02/index.html#step-2-rasterize",
-    "href": "w02/index.html#step-2-rasterize",
+    "objectID": "w02/index.html#step-2-rasterize-terra",
+    "href": "w02/index.html#step-2-rasterize-terra",
     "title": "Week 2: How Do Maps Work?",
-    "section": "Step 2: Rasterize",
-    "text": "Step 2: Rasterize\n\n\nCode\nlibrary(terra)\n\n\nterra 1.7.78\n\n\n\nAttaching package: 'terra'\n\n\nThe following object is masked from 'package:tidyr':\n\n    extract\n\n\nCode\ndc_SpatVector &lt;- terra::vect(dc_union_sf)\nrast_template &lt;- rast(ext(dc_SpatVector),\n  resolution = 1000, # meters\n  crs = crs(dc_SpatVector)\n)\ndc_SpatRaster &lt;- terra::rasterize(dc_SpatVector, rast_template)\ndim(dc_SpatRaster)\n\n\n[1] 29 23  1\n\n\nCode\nnlyr(dc_SpatRaster)\n\n\n[1] 1\n\n\nCode\nplot(dc_SpatRaster)",
+    "section": "Step 2: Rasterize (terra)",
+    "text": "Step 2: Rasterize (terra)\n\n\nCode\nlibrary(terra)\n\n\nterra 1.7.78\n\n\n\nAttaching package: 'terra'\n\n\nThe following object is masked from 'package:tidyr':\n\n    extract\n\n\nCode\ndc_SpatVector &lt;- terra::vect(dc_union_sf)\nrast_template &lt;- rast(ext(dc_SpatVector), resolution = 1000, crs = crs(dc_SpatVector))\ndc_SpatRaster &lt;- terra::rasterize(dc_SpatVector, rast_template)\ndim(dc_SpatRaster)\n\n\n[1] 29 23  1\n\n\nCode\nplot(dc_SpatRaster)",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -676,6 +676,26 @@
     "title": "Week 2: How Do Maps Work?",
     "section": "And with tidyterra",
     "text": "And with tidyterra\n\n\nCode\nlibrary(tidyterra)\n\n\n\nAttaching package: 'tidyterra'\n\n\nThe following object is masked from 'package:stats':\n\n    filter\n\n\nCode\nggplot(data=dc_SpatRaster, aes(fill=layer)) +\n  geom_spatraster(data=dc_SpatRaster)",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#rasters-from-scratch",
+    "href": "w02/index.html#rasters-from-scratch",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Rasters From Scratch",
+    "text": "Rasters From Scratch\nWelcome to Gridtown!\n\n\nCode\nset.seed(6805)\nlibrary(terra)\ngridtown &lt;- terra::rast(\n  nrows = 4, ncols = 4,\n  xmin = 0, xmax = 4, ymin = 0, ymax = 4,\n  vals = sample(1:16)\n)\nplot(gridtown)\ntext(\n  gridtown,\n  labels=1:16,\n  halo=TRUE, hc=\"black\", col=\"white\", hw=0.2\n)\n\n\n\n\n\n\n\n\nFigure 1: Gridtown Indices\n\n\n\n\n\n\nRaster indices vs. values: The above plot displays indices for each cell: since a raster is a regular grid, can achieve memory-efficient representation with a single index (rather than, e.g., \\((x, y)\\) coords). But what we really care about are…",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#raster-layer-values",
+    "href": "w02/index.html#raster-layer-values",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Raster Layer Values",
+    "text": "Raster Layer Values\n\n\nCode\nplot(gridtown)\ntext(gridtown, halo=TRUE, hc=\"black\", col=\"white\", hw=0.2)\n\n\n\n\n\n\n\n\nFigure 2: Gridtown Values",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -705,7 +725,7 @@
     "href": "w02/index.html#smooshing-3d-into-2d",
     "title": "Week 2: How Do Maps Work?",
     "section": "Smooshing 3D into 2D",
-    "text": "Smooshing 3D into 2D",
+    "text": "Smooshing 3D into 2D\n\n\n\nFrom Monmonier (2018)",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -735,7 +755,7 @@
     "href": "w02/index.html#scales-wrules-of-thumb",
     "title": "Week 2: How Do Maps Work?",
     "section": "Scales (w/Rules of Thumb)",
-    "text": "Scales (w/Rules of Thumb)",
+    "text": "Scales (w/Rules of Thumb)\n\n\n\nFrom Krygier and Wood (2016)",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -745,7 +765,7 @@
     "href": "w02/index.html#the-three-key-elements",
     "title": "Week 2: How Do Maps Work?",
     "section": "The Three Key Elements",
-    "text": "The Three Key Elements",
+    "text": "The Three Key Elements\n\n\n\nFrom Monmonier (2018)",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -755,7 +775,7 @@
     "href": "w02/index.html#what-can-happen-to-points",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Can Happen to Points?",
-    "text": "What Can Happen to Points?",
+    "text": "What Can Happen to Points?\n\n\n\nFrom Monmonier (2018)",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -765,7 +785,7 @@
     "href": "w02/index.html#what-can-happen-to-lines",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Can Happen to Lines?",
-    "text": "What Can Happen to Lines?",
+    "text": "What Can Happen to Lines?\n\n\n\nFrom Monmonier (2018)",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -775,7 +795,7 @@
     "href": "w02/index.html#what-can-happen-to-lines-1",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Can Happen to Lines?",
-    "text": "What Can Happen to Lines?\n\n\nSelection\n\n\n\nIn any map, most features from the human or natural environment are eliminated!\n\n\n\nSimplification\n\n\n\nWithin the features that do remain, eliminate details that are unnecessary with respect to audience/context",
+    "text": "What Can Happen to Lines?\n\n\nSelection\n\n\n\nIn any map, most features from the human or natural environment are eliminated! (Krygier and Wood 2016)\n\n\n\nSimplification\n\n\n\nWithin the features that do remain, eliminate details that are unnecessary with respect to audience/context (Krygier and Wood 2016)",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -785,7 +805,17 @@
     "href": "w02/index.html#what-can-happen-to-areas",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Can Happen to Areas?",
-    "text": "What Can Happen to Areas?\n\nDimension Change",
+    "text": "What Can Happen to Areas?\n\n\n\nFrom Monmonier (2018)",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#areal-dimension-change",
+    "href": "w02/index.html#areal-dimension-change",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Areal Dimension Change",
+    "text": "Areal Dimension Change\n\n\n\nFrom Krygier and Wood (2016)",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -795,7 +825,7 @@
     "href": "w02/index.html#what-is-gained",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Is Gained?",
-    "text": "What Is Gained?",
+    "text": "What Is Gained?\n\n\n\nFrom Monmonier (2018)",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -805,7 +835,7 @@
     "href": "w02/index.html#what-is-lost",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Is Lost?",
-    "text": "What Is Lost?",
+    "text": "What Is Lost?\n\n\n\nFrom Monmonier (2018)",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -815,7 +845,37 @@
     "href": "w02/index.html#who-is-affected",
     "title": "Week 2: How Do Maps Work?",
     "section": "Who Is Affected?",
-    "text": "Who Is Affected?",
+    "text": "Who Is Affected?\n\n\n\nFrom Monmonier (2018)",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#having-domain-knowledge-of-a-region",
+    "href": "w02/index.html#having-domain-knowledge-of-a-region",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Having Domain Knowledge of a Region",
+    "text": "Having Domain Knowledge of a Region\n\n\n\nFrom XKCD",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#crime-in-mongolia",
+    "href": "w02/index.html#crime-in-mongolia",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Crime in Mongolia",
+    "text": "Crime in Mongolia\n\n\n\nFrom Reddit",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#population-of-mongolia",
+    "href": "w02/index.html#population-of-mongolia",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Population of Mongolia",
+    "text": "Population of Mongolia\n\n\n\nFrom Wikimedia Commons",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -825,7 +885,7 @@
     "href": "w02/index.html#exhibit-a",
     "title": "Week 2: How Do Maps Work?",
     "section": "Exhibit A",
-    "text": "Exhibit A",
+    "text": "Exhibit A\n\n\n\nFrom Monmonier (2018)",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -835,7 +895,57 @@
     "href": "w02/index.html#exhibit-b",
     "title": "Week 2: How Do Maps Work?",
     "section": "Exhibit B",
-    "text": "Exhibit B",
+    "text": "Exhibit B\n\n\n\nFrom Monmonier (2018)",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#country-boundaries",
+    "href": "w02/index.html#country-boundaries",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Country Boundaries",
+    "text": "Country Boundaries\nKey package: rnaturalearth\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(sf)\nlibrary(ggplot2)\nlibrary(viridis)\n\n\nLoading required package: viridisLite\n\n\nCode\nlibrary(patchwork)\n\n\n\nAttaching package: 'patchwork'\n\n\nThe following object is masked from 'package:terra':\n\n    area\n\n\nCode\nmap1 &lt;- ne_countries(type = \"countries\", country = \"Germany\", scale = \"medium\", returnclass = \"sf\")\nmap2 &lt;- rnaturalearth::ne_states(\"Germany\", returnclass = \"sf\")\n(ggplot(map1) + geom_sf()) + (ggplot(map2) + geom_sf())",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#climate-data",
+    "href": "w02/index.html#climate-data",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Climate Data",
+    "text": "Climate Data\nKey package: geodata\n\n\nCode\nlibrary(geodata)\nd &lt;- worldclim_country(country = \"Jamaica\", var = \"tmin\",\n                       path = tempdir())\nterra::plot(mean(d), plg = list(title = \"Min. temperature (C)\"))",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#elevation",
+    "href": "w02/index.html#elevation",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Elevation",
+    "text": "Elevation\nKey packages: rnaturalearth + elevatr\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(elevatr)\n\n\nelevatr v0.99.0 NOTE: Version 0.99.0 of 'elevatr' uses 'sf' and 'terra'.  Use \nof the 'sp', 'raster', and underlying 'rgdal' packages by 'elevatr' is being \ndeprecated; however, get_elev_raster continues to return a RasterLayer.  This \nwill be dropped in future versions, so please plan accordingly.\n\n\nCode\nlibrary(terra)\nmap &lt;- ne_countries(type = \"countries\", country = \"Switzerland\",\n                    scale = \"medium\", returnclass = \"sf\")\nd &lt;- get_elev_raster(locations = map, z = 9, clip = \"locations\")\n\n\nMosaicing & Projecting\n\n\nClipping DEM to locations\n\n\nNote: Elevation units are in meters.\n\n\nCode\nterra::plot(rast(d), plg = list(title = \"Elevation (m)\"))",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#street-maps",
+    "href": "w02/index.html#street-maps",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Street Maps",
+    "text": "Street Maps\n\n\nCode\nlibrary(osmdata)\n\n\nData (c) OpenStreetMap contributors, ODbL 1.0. https://www.openstreetmap.org/copyright\n\n\nCode\nplacebb &lt;- getbb(\"Barcelona\")\nhospitals &lt;- placebb %&gt;% opq() %&gt;%\n  add_osm_feature(key = \"amenity\", value = \"hospital\") %&gt;%\n  osmdata_sf()\nmotorways &lt;- placebb %&gt;% opq() %&gt;%\n  add_osm_feature(key = \"highway\", value = \"motorway\") %&gt;%\n  osmdata_sf()\nlibrary(leaflet)\nleaflet() |&gt;  addTiles() |&gt;\n  addPolylines(data = motorways$osm_lines, color = \"black\") |&gt;\n  addPolygons(data = hospitals$osm_polygons,\n              label = hospitals$osm_polygons$name)",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#world-bank-dataverse",
+    "href": "w02/index.html#world-bank-dataverse",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "World Bank Dataverse",
+    "text": "World Bank Dataverse\nKey package: wbstats\n\n\nCode\nlibrary(wbstats)\nd &lt;- wb_data(indicator = \"MO.INDEX.HDEV.XQ\",\n             start_date = 2011, end_date = 2011)\nlibrary(rnaturalearth)\nlibrary(mapview)\nmap &lt;- ne_countries(continent = \"Africa\", returnclass = \"sf\")\nmap &lt;- dplyr::left_join(map, d, by = c(\"iso_a3\" = \"iso3c\"))\nmapview(map, zcol = \"MO.INDEX.HDEV.XQ\")",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -845,7 +955,7 @@
     "href": "w02/index.html#references",
     "title": "Week 2: How Do Maps Work?",
     "section": "References",
-    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.",
+    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\nMonmonier, Mark. 2018. How to Lie with Maps. University of Chicago Press.",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -879,11 +989,11 @@
     "text": "Step 1: Union of All Tracts\n\n\nCode\ndc_union_sf &lt;- sf::st_union(dc_sf)\ndc_union_sf |&gt;\n  ggplot() +\n  geom_sf()"
   },
   {
-    "objectID": "w02/slides.html#step-2-rasterize",
-    "href": "w02/slides.html#step-2-rasterize",
+    "objectID": "w02/slides.html#step-2-rasterize-terra",
+    "href": "w02/slides.html#step-2-rasterize-terra",
     "title": "Week 2: How Do Maps Work?",
-    "section": "Step 2: Rasterize",
-    "text": "Step 2: Rasterize\n\n\nCode\nlibrary(terra)\ndc_SpatVector &lt;- terra::vect(dc_union_sf)\nrast_template &lt;- rast(ext(dc_SpatVector),\n  resolution = 1000, # meters\n  crs = crs(dc_SpatVector)\n)\ndc_SpatRaster &lt;- terra::rasterize(dc_SpatVector, rast_template)\ndim(dc_SpatRaster)\n\n\n[1] 29 23  1\n\n\nCode\nnlyr(dc_SpatRaster)\n\n\n[1] 1\n\n\nCode\nplot(dc_SpatRaster)"
+    "section": "Step 2: Rasterize (terra)",
+    "text": "Step 2: Rasterize (terra)\n\n\nCode\nlibrary(terra)\ndc_SpatVector &lt;- terra::vect(dc_union_sf)\nrast_template &lt;- rast(ext(dc_SpatVector), resolution = 1000, crs = crs(dc_SpatVector))\ndc_SpatRaster &lt;- terra::rasterize(dc_SpatVector, rast_template)\ndim(dc_SpatRaster)\n\n\n[1] 29 23  1\n\n\nCode\nplot(dc_SpatRaster)"
   },
   {
     "objectID": "w02/slides.html#and-with-tidyterra",
@@ -891,6 +1001,20 @@
     "title": "Week 2: How Do Maps Work?",
     "section": "And with tidyterra",
     "text": "And with tidyterra\n\n\nCode\nlibrary(tidyterra)\nggplot(data=dc_SpatRaster, aes(fill=layer)) +\n  geom_spatraster(data=dc_SpatRaster)"
+  },
+  {
+    "objectID": "w02/slides.html#rasters-from-scratch",
+    "href": "w02/slides.html#rasters-from-scratch",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Rasters From Scratch",
+    "text": "Rasters From Scratch\nWelcome to Gridtown!\n\n\n\nCode\nset.seed(6805)\nlibrary(terra)\ngridtown &lt;- terra::rast(\n  nrows = 4, ncols = 4,\n  xmin = 0, xmax = 4, ymin = 0, ymax = 4,\n  vals = sample(1:16)\n)\nplot(gridtown)\ntext(\n  gridtown,\n  labels=1:16,\n  halo=TRUE, hc=\"black\", col=\"white\", hw=0.2\n)\n\n\n\n\n\n\n\n\n\nFigure 1: Gridtown Indices\n\n\n\n\n\n\nRaster indices vs. values: The above plot displays indices for each cell: since a raster is a regular grid, can achieve memory-efficient representation with a single index (rather than, e.g., \\((x, y)\\) coords). But what we really care about are…"
+  },
+  {
+    "objectID": "w02/slides.html#raster-layer-values",
+    "href": "w02/slides.html#raster-layer-values",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Raster Layer Values",
+    "text": "Raster Layer Values\n\n\nCode\nplot(gridtown)\ntext(gridtown, halo=TRUE, hc=\"black\", col=\"white\", hw=0.2)\n\n\n\n\nFigure 2: Gridtown Values"
   },
   {
     "objectID": "w02/slides.html#latitude-and-longitude-are-angles",
@@ -911,7 +1035,7 @@
     "href": "w02/slides.html#smooshing-3d-into-2d",
     "title": "Week 2: How Do Maps Work?",
     "section": "Smooshing 3D into 2D",
-    "text": "Smooshing 3D into 2D"
+    "text": "Smooshing 3D into 2D\n\nFrom Monmonier (2018)"
   },
   {
     "objectID": "w02/slides.html#avoid-getting-lost-in-the-sauce",
@@ -932,84 +1056,147 @@
     "href": "w02/slides.html#scales-wrules-of-thumb",
     "title": "Week 2: How Do Maps Work?",
     "section": "Scales (w/Rules of Thumb)",
-    "text": "Scales (w/Rules of Thumb)"
+    "text": "Scales (w/Rules of Thumb)\n\nFrom Krygier and Wood (2016)"
   },
   {
     "objectID": "w02/slides.html#the-three-key-elements",
     "href": "w02/slides.html#the-three-key-elements",
     "title": "Week 2: How Do Maps Work?",
     "section": "The Three Key Elements",
-    "text": "The Three Key Elements"
+    "text": "The Three Key Elements\n\nFrom Monmonier (2018)"
   },
   {
     "objectID": "w02/slides.html#what-can-happen-to-points",
     "href": "w02/slides.html#what-can-happen-to-points",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Can Happen to Points?",
-    "text": "What Can Happen to Points?"
+    "text": "What Can Happen to Points?\n\nFrom Monmonier (2018)"
   },
   {
     "objectID": "w02/slides.html#what-can-happen-to-lines",
     "href": "w02/slides.html#what-can-happen-to-lines",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Can Happen to Lines?",
-    "text": "What Can Happen to Lines?"
+    "text": "What Can Happen to Lines?\n\nFrom Monmonier (2018)"
   },
   {
     "objectID": "w02/slides.html#what-can-happen-to-lines-1",
     "href": "w02/slides.html#what-can-happen-to-lines-1",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Can Happen to Lines?",
-    "text": "What Can Happen to Lines?\n\n\nSelection\n\n\n\nIn any map, most features from the human or natural environment are eliminated!\n\n\n\nSimplification\n\n\n\nWithin the features that do remain, eliminate details that are unnecessary with respect to audience/context"
+    "text": "What Can Happen to Lines?\n\n\nSelection\n\n\n\nIn any map, most features from the human or natural environment are eliminated! (Krygier and Wood 2016)\n\n\n\nSimplification\n\n\n\nWithin the features that do remain, eliminate details that are unnecessary with respect to audience/context (Krygier and Wood 2016)"
   },
   {
     "objectID": "w02/slides.html#what-can-happen-to-areas",
     "href": "w02/slides.html#what-can-happen-to-areas",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Can Happen to Areas?",
-    "text": "What Can Happen to Areas?\n\nDimension Change"
+    "text": "What Can Happen to Areas?\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w02/slides.html#areal-dimension-change",
+    "href": "w02/slides.html#areal-dimension-change",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Areal Dimension Change",
+    "text": "Areal Dimension Change\n\nFrom Krygier and Wood (2016)"
   },
   {
     "objectID": "w02/slides.html#what-is-gained",
     "href": "w02/slides.html#what-is-gained",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Is Gained?",
-    "text": "What Is Gained?"
+    "text": "What Is Gained?\n\nFrom Monmonier (2018)"
   },
   {
     "objectID": "w02/slides.html#what-is-lost",
     "href": "w02/slides.html#what-is-lost",
     "title": "Week 2: How Do Maps Work?",
     "section": "What Is Lost?",
-    "text": "What Is Lost?"
+    "text": "What Is Lost?\n\nFrom Monmonier (2018)"
   },
   {
     "objectID": "w02/slides.html#who-is-affected",
     "href": "w02/slides.html#who-is-affected",
     "title": "Week 2: How Do Maps Work?",
     "section": "Who Is Affected?",
-    "text": "Who Is Affected?"
+    "text": "Who Is Affected?\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w02/slides.html#having-domain-knowledge-of-a-region",
+    "href": "w02/slides.html#having-domain-knowledge-of-a-region",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Having Domain Knowledge of a Region",
+    "text": "Having Domain Knowledge of a Region\n\nFrom XKCD"
+  },
+  {
+    "objectID": "w02/slides.html#crime-in-mongolia",
+    "href": "w02/slides.html#crime-in-mongolia",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Crime in Mongolia",
+    "text": "Crime in Mongolia\n\nFrom Reddit"
+  },
+  {
+    "objectID": "w02/slides.html#population-of-mongolia",
+    "href": "w02/slides.html#population-of-mongolia",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Population of Mongolia",
+    "text": "Population of Mongolia\n\nFrom Wikimedia Commons"
   },
   {
     "objectID": "w02/slides.html#exhibit-a",
     "href": "w02/slides.html#exhibit-a",
     "title": "Week 2: How Do Maps Work?",
     "section": "Exhibit A",
-    "text": "Exhibit A"
+    "text": "Exhibit A\n\nFrom Monmonier (2018)"
   },
   {
     "objectID": "w02/slides.html#exhibit-b",
     "href": "w02/slides.html#exhibit-b",
     "title": "Week 2: How Do Maps Work?",
     "section": "Exhibit B",
-    "text": "Exhibit B"
+    "text": "Exhibit B\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w02/slides.html#country-boundaries",
+    "href": "w02/slides.html#country-boundaries",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Country Boundaries",
+    "text": "Country Boundaries\nKey package: rnaturalearth\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(sf)\nlibrary(ggplot2)\nlibrary(viridis)\nlibrary(patchwork)\nmap1 &lt;- ne_countries(type = \"countries\", country = \"Germany\", scale = \"medium\", returnclass = \"sf\")\nmap2 &lt;- rnaturalearth::ne_states(\"Germany\", returnclass = \"sf\")\n(ggplot(map1) + geom_sf()) + (ggplot(map2) + geom_sf())"
+  },
+  {
+    "objectID": "w02/slides.html#climate-data",
+    "href": "w02/slides.html#climate-data",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Climate Data",
+    "text": "Climate Data\nKey package: geodata\n\n\nCode\nlibrary(geodata)\nd &lt;- worldclim_country(country = \"Jamaica\", var = \"tmin\",\n                       path = tempdir())\nterra::plot(mean(d), plg = list(title = \"Min. temperature (C)\"))"
+  },
+  {
+    "objectID": "w02/slides.html#elevation",
+    "href": "w02/slides.html#elevation",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Elevation",
+    "text": "Elevation\nKey packages: rnaturalearth + elevatr\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(elevatr)\nlibrary(terra)\nmap &lt;- ne_countries(type = \"countries\", country = \"Switzerland\",\n                    scale = \"medium\", returnclass = \"sf\")\nd &lt;- get_elev_raster(locations = map, z = 9, clip = \"locations\")\nterra::plot(rast(d), plg = list(title = \"Elevation (m)\"))"
+  },
+  {
+    "objectID": "w02/slides.html#street-maps",
+    "href": "w02/slides.html#street-maps",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Street Maps",
+    "text": "Street Maps\n\n\nCode\nlibrary(osmdata)\nplacebb &lt;- getbb(\"Barcelona\")\nhospitals &lt;- placebb %&gt;% opq() %&gt;%\n  add_osm_feature(key = \"amenity\", value = \"hospital\") %&gt;%\n  osmdata_sf()\nmotorways &lt;- placebb %&gt;% opq() %&gt;%\n  add_osm_feature(key = \"highway\", value = \"motorway\") %&gt;%\n  osmdata_sf()\nlibrary(leaflet)\nleaflet() |&gt;  addTiles() |&gt;\n  addPolylines(data = motorways$osm_lines, color = \"black\") |&gt;\n  addPolygons(data = hospitals$osm_polygons,\n              label = hospitals$osm_polygons$name)"
+  },
+  {
+    "objectID": "w02/slides.html#world-bank-dataverse",
+    "href": "w02/slides.html#world-bank-dataverse",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "World Bank Dataverse",
+    "text": "World Bank Dataverse\nKey package: wbstats\n\n\nCode\nlibrary(wbstats)\nd &lt;- wb_data(indicator = \"MO.INDEX.HDEV.XQ\",\n             start_date = 2011, end_date = 2011)\nlibrary(rnaturalearth)\nlibrary(mapview)\nmap &lt;- ne_countries(continent = \"Africa\", returnclass = \"sf\")\nmap &lt;- dplyr::left_join(map, d, by = c(\"iso_a3\" = \"iso3c\"))\nmapview(map, zcol = \"MO.INDEX.HDEV.XQ\")"
   },
   {
     "objectID": "w02/slides.html#references",
     "href": "w02/slides.html#references",
     "title": "Week 2: How Do Maps Work?",
     "section": "References",
-    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\n\n\n\nWeek 2: How Do Maps Work?"
+    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\nMonmonier, Mark. 2018. How to Lie with Maps. University of Chicago Press.\n\n\n\n\n\nWeek 2: How Do Maps Work?"
   },
   {
     "objectID": "index.html",
@@ -1120,33 +1307,5 @@
     "crumbs": [
       "Syllabus"
     ]
-  },
-  {
-    "objectID": "w02/slides.html#step-2-rasterize-terra",
-    "href": "w02/slides.html#step-2-rasterize-terra",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Step 2: Rasterize (terra)",
-    "text": "Step 2: Rasterize (terra)\n\n\nCode\nlibrary(terra)\ndc_SpatVector &lt;- terra::vect(dc_union_sf)\nrast_template &lt;- rast(ext(dc_SpatVector),\n  resolution = 1000, # meters\n  crs = crs(dc_SpatVector)\n)\ndc_SpatRaster &lt;- terra::rasterize(dc_SpatVector, rast_template)\ndim(dc_SpatRaster)\n\n\n[1] 29 23  1\n\n\nCode\nnlyr(dc_SpatRaster)\n\n\n[1] 1\n\n\nCode\nplot(dc_SpatRaster)"
-  },
-  {
-    "objectID": "w02/slides.html#rasters-from-scratch",
-    "href": "w02/slides.html#rasters-from-scratch",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Rasters From Scratch",
-    "text": "Rasters From Scratch\nWelcome to Gridtown!\n\n\nCode\nset.seed(6805)\nlibrary(terra)\ngrid_town &lt;- terra::rast(\n  nrows = 4, ncols = 4,\n  xmin = 0, xmax = 4, ymin = 0, ymax = 4,\n  vals = sample(1:16)\n)"
-  },
-  {
-    "objectID": "w02/slides.html#important-distinction-raster-indices-vs.-values",
-    "href": "w02/slides.html#important-distinction-raster-indices-vs.-values",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Important Distinction: Raster Indices vs. Values",
-    "text": "Important Distinction: Raster Indices vs. Values\nHere we plot the indices for each cell: since a raster is a regular grid, can achieve memory-efficient representation with a single index (rather than, e.g., \\((x, y)\\) coords)\n\n\nCode\nplot(grid_town)\ntext(\n  grid_town,\n  labels=1:16,\n  halo=TRUE,\n  hc=\"black\",\n  col=\"white\",\n  hw=0.2\n)"
-  },
-  {
-    "objectID": "w02/slides.html#and-the-values-at-each-cell",
-    "href": "w02/slides.html#and-the-values-at-each-cell",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "And the Values at Each Cell",
-    "text": "And the Values at Each Cell\n\n\nCode\nplot(grid_town)\ntext(\n  grid_town,\n  halo=TRUE,\n  hc=\"black\",\n  col=\"white\",\n  hw=0.2\n)"
   }
 ]

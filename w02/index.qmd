@@ -8,8 +8,6 @@ date-format: full
 lecnum: 2
 categories:
   - "Class Sessions"
-crossref:
-  fig-title: Fig
 bibliography: "../_PPOL6805.bib"
 # Shared across formats:
 echo: true
@@ -59,6 +57,7 @@ format:
 ## End of Last Week: Vector Data {.crunch-title .smaller .crunch-quarto-figure}
 
 ```{r}
+#| label: dc-tracts-plot
 #| echo: true
 #| warning: false
 #| code-fold: true
@@ -110,13 +109,9 @@ dc_union_sf |>
 #| fig-align: center
 library(terra)
 dc_SpatVector <- terra::vect(dc_union_sf)
-rast_template <- rast(ext(dc_SpatVector),
-  resolution = 1000, # meters
-  crs = crs(dc_SpatVector)
-)
+rast_template <- rast(ext(dc_SpatVector), resolution = 1000, crs = crs(dc_SpatVector))
 dc_SpatRaster <- terra::rasterize(dc_SpatVector, rast_template)
 dim(dc_SpatRaster)
-nlyr(dc_SpatRaster)
 plot(dc_SpatRaster)
 ```
 
@@ -130,48 +125,40 @@ ggplot(data=dc_SpatRaster, aes(fill=layer)) +
   geom_spatraster(data=dc_SpatRaster)
 ```
 
-## Rasters From Scratch
+## Rasters From Scratch {.smaller}
 
 Welcome to Gridtown!
 
 ```{r}
-#| label: create-grid-town
+#| label: fig-gridtown-indices
+#| fig-align: center
+#| output-location: column
+#| fig-cap: "Gridtown Indices"
 set.seed(6805)
 library(terra)
-grid_town <- terra::rast(
+gridtown <- terra::rast(
   nrows = 4, ncols = 4,
   xmin = 0, xmax = 4, ymin = 0, ymax = 4,
   vals = sample(1:16)
 )
-```
-
-## Important Distinction: Raster **Indices** vs. **Values** {.smaller}
-
-Here we plot the **indices** for each cell: since a raster is a regular grid, can achieve memory-efficient representation with a **single** index (rather than, e.g., $(x, y)$ coords)
-
-```{r}
-plot(grid_town)
+plot(gridtown)
 text(
-  grid_town,
+  gridtown,
   labels=1:16,
-  halo=TRUE,
-  hc="black",
-  col="white",
-  hw=0.2
+  halo=TRUE, hc="black", col="white", hw=0.2
 )
 ```
 
-## And the **Values** at Each Cell
+* Raster **indices** vs. **values**: The above plot displays **indices** for each cell: since a raster is a regular grid, can achieve memory-efficient representation with a **single** index (rather than, e.g., $(x, y)$ coords). But what we really care about are...
+
+## Raster Layer **Values** {.smaller .title-10}
 
 ```{r}
-plot(grid_town)
-text(
-  grid_town,
-  halo=TRUE,
-  hc="black",
-  col="white",
-  hw=0.2
-)
+#| label: fig-gridtown-values
+#| fig-align: center
+#| fig-cap: "Gridtown Values"
+plot(gridtown)
+text(gridtown, halo=TRUE, hc="black", col="white", hw=0.2)
 ```
 
 # First Things First: Coordinates {data-stack-name="Coordinates"}
@@ -192,7 +179,7 @@ The Earth's "width" is slightly greater than its "length" 😰
 
 ## Smooshing 3D into 2D
 
-![](images/chi-monmonier-fig02003.jpeg){fig-align="center"}
+![From @monmonier_how_2018](images/chi-monmonier-fig02003.jpeg){fig-align="center"}
 
 ## Avoid Getting Lost in the Sauce
 
@@ -228,11 +215,11 @@ The Earth's "width" is slightly greater than its "length" 😰
 
 ## Scales (w/Rules of Thumb)
 
-![](images/scales.svg){fig-align="center"}
+![From @krygier_making_2016](images/scales.svg){fig-align="center"}
 
 ## The Three Key Elements
 
-![](images/chi-monmonier-fig02011.jpeg){fig-align="center"}
+![From @monmonier_how_2018](images/chi-monmonier-fig02011.jpeg){fig-align="center"}
 
 # Thought Experiment: Zooming In and Out {data-stack-name="Zooming"}
 
@@ -240,11 +227,11 @@ The Earth's "width" is slightly greater than its "length" 😰
 
 ## What Can Happen to *Points*?
 
-![](images/chi-monmonier-fig03002.jpeg){fig-align="center"}
+![From @monmonier_how_2018](images/chi-monmonier-fig03002.jpeg){fig-align="center"}
 
 ## What Can Happen to *Lines*?
 
-![](images/chi-monmonier-fig03001.jpeg){fig-align="center"}
+![From @monmonier_how_2018](images/chi-monmonier-fig03001.jpeg){fig-align="center"}
 
 ## What Can Happen to *Lines*?
 
@@ -253,47 +240,146 @@ The Earth's "width" is slightly greater than its "length" 😰
 
 **Selection**
 
-![In any map, **most** features from the human or natural environment are eliminated!](images/selection.svg){fig-align="center" width="100%"}
+![In any map, **most** features from the human or natural environment are eliminated! [@krygier_making_2016]](images/selection.svg){fig-align="center" width="100%"}
 
 :::
 ::: {.column width="50%"}
 
 **Simplification**
 
-![Within the features that *do* remain, eliminate **details** that are unnecessary with respect to audience/context](images/simplification.svg){fig-align="center" width="100%"}
+![Within the features that *do* remain, eliminate **details** that are unnecessary with respect to audience/context [@krygier_making_2016]](images/simplification.svg){fig-align="center" width="100%"}
 
 :::
 :::
 
 ## What Can Happen to *Areas*?
 
-<!-- ![](images/chi-monmonier-fig03003.jpeg){fig-align="center"} -->
+![From @monmonier_how_2018](images/chi-monmonier-fig03003.jpeg){fig-align="center"}
 
-**Dimension Change**
+## Areal Dimension Change
 
-![](images/dimension_change.svg){fig-align="center" width="100%"}
+![From @krygier_making_2016](images/dimension_change.svg){fig-align="center" width="100%"}
 
 ## What Is Gained?
 
-![](images/chi-monmonier-fig03004.jpeg){fig-align="center"}
+![From @monmonier_how_2018](images/chi-monmonier-fig03004.jpeg){fig-align="center"}
 
 ## What Is Lost?
 
-![](images/chi-monmonier-fig03005.jpeg){fig-align="center"}
+![From @monmonier_how_2018](images/chi-monmonier-fig03005.jpeg){fig-align="center"}
 
 ## Who Is Affected?
 
-![](images/chi-monmonier-fig03007.jpeg){fig-align="center"}
+![From @monmonier_how_2018](images/chi-monmonier-fig03007.jpeg){fig-align="center"}
 
 # Choropleths for Good and Evil {data-stack-name="Choropleths"}
 
+## Having *Domain Knowledge* of a Region
+
+![From [XKCD](https://xkcd.com/1138/){target='_blank'}](images/xkcd_1138.png)
+
+## Crime in Mongolia
+
+![From [Reddit](https://www.reddit.com/r/MapPorn/comments/717vkc/population_density_in_mongolia_the_least_densely/){target='_blank'}](images/mongolia.png){fig-align="center"}
+
+## Population of Mongolia
+
+![From [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Mongolia_Population_Density,_2000_%285457623300%29.jpg){target='_blank'}](images/mongolia_density_2000.jpg){fig-align="center"}
+
 ## Exhibit A
 
-![](images/chi-monmonier-fig03009.jpeg)
+![From @monmonier_how_2018](images/chi-monmonier-fig03009.jpeg)
 
 ## Exhibit B
 
-![](images/chi-monmonier-fig03010.jpeg)
+![From @monmonier_how_2018](images/chi-monmonier-fig03010.jpeg)
+
+# Finding Geospatial Data {data-stack-name="Finding Data"}
+
+* Draws heavily on [Chapter 6: "R packages to download open spatial data"](https://www.paulamoraga.com/book-spatial/r-packages-to-download-open-spatial-data.html){target='_blank'}, in Moraga (2018), [Spatial Statistics for Data Science: Theory and Practice with R](https://www.paulamoraga.com/book-spatial/index.html){target='_blank'}
+
+## Country Boundaries {.smaller}
+
+Key package: [`rnaturalearth`](http://ropensci.github.io/rnaturalearth/){target='_blank'}
+
+```{r}
+#| label: de-boundaries
+#| fig-align: center
+library(rnaturalearth)
+library(sf)
+library(ggplot2)
+library(viridis)
+library(patchwork)
+map1 <- ne_countries(type = "countries", country = "Germany", scale = "medium", returnclass = "sf")
+map2 <- rnaturalearth::ne_states("Germany", returnclass = "sf")
+(ggplot(map1) + geom_sf()) + (ggplot(map2) + geom_sf())
+```
+
+## Climate Data
+
+Key package: [`geodata`](https://github.com/rspatial/geodata){target='_blank'}
+
+```{r}
+#| label: plot-climate-data
+#| fig-align: center
+library(geodata)
+d <- worldclim_country(country = "Jamaica", var = "tmin",
+                       path = tempdir())
+terra::plot(mean(d), plg = list(title = "Min. temperature (C)"))
+```
+
+## Elevation {.smaller}
+
+Key packages: `rnaturalearth` + [`elevatr`](https://github.com/jhollist/elevatr){target='_blank'}
+
+```{r}
+#| label: elevation-plot
+#| fig-align: center
+library(rnaturalearth)
+library(elevatr)
+library(terra)
+map <- ne_countries(type = "countries", country = "Switzerland",
+                    scale = "medium", returnclass = "sf")
+d <- get_elev_raster(locations = map, z = 9, clip = "locations")
+terra::plot(rast(d), plg = list(title = "Elevation (m)"))
+```
+
+## Street Maps {.smaller}
+
+```{r}
+#| label: street-map-plot
+#| fig-align: center
+library(osmdata)
+placebb <- getbb("Barcelona")
+hospitals <- placebb %>% opq() %>%
+  add_osm_feature(key = "amenity", value = "hospital") %>%
+  osmdata_sf()
+motorways <- placebb %>% opq() %>%
+  add_osm_feature(key = "highway", value = "motorway") %>%
+  osmdata_sf()
+library(leaflet)
+leaflet() |>  addTiles() |>
+  addPolylines(data = motorways$osm_lines, color = "black") |>
+  addPolygons(data = hospitals$osm_polygons,
+              label = hospitals$osm_polygons$name)
+```
+
+## World Bank Dataverse {.smaller}
+
+Key package: [`wbstats`](http://gshs-ornl.github.io/wbstats/){target='_blank'}
+
+```{r}
+#| label: wb-choro
+#| fig-align: center
+library(wbstats)
+d <- wb_data(indicator = "MO.INDEX.HDEV.XQ",
+             start_date = 2011, end_date = 2011)
+library(rnaturalearth)
+library(mapview)
+map <- ne_countries(continent = "Africa", returnclass = "sf")
+map <- dplyr::left_join(map, d, by = c("iso_a3" = "iso3c"))
+mapview(map, zcol = "MO.INDEX.HDEV.XQ")
+```
 
 ## References
 
