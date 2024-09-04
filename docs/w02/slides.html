@@ -493,8 +493,8 @@ Jeff Jacobs
 
 </div>
 <img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="step-2-rasterize" class="slide level2 smaller crunch-title">
-<h2>Step 2: Rasterize</h2>
+<section id="step-2-rasterize-terra" class="slide level2 smaller crunch-title">
+<h2>Step 2: Rasterize (<code>terra</code>)</h2>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -535,7 +535,59 @@ Jeff Jacobs
 </details>
 
 </div>
-<img data-src="index_files/figure-revealjs/rasterized-dc-tidy-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section></section>
+<img data-src="index_files/figure-revealjs/rasterized-dc-tidy-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="rasters-from-scratch" class="slide level2">
+<h2>Rasters From Scratch</h2>
+<p>Welcome to Gridtown!</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb10-2"><a></a><span class="fu">library</span>(terra)</span>
+<span id="cb10-3"><a></a>grid_town <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(</span>
+<span id="cb10-4"><a></a>  <span class="at">nrows =</span> <span class="dv">4</span>, <span class="at">ncols =</span> <span class="dv">4</span>,</span>
+<span id="cb10-5"><a></a>  <span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">4</span>, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> <span class="dv">4</span>,</span>
+<span id="cb10-6"><a></a>  <span class="at">vals =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>)</span>
+<span id="cb10-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="important-distinction-raster-indices-vs.-values" class="slide level2 smaller">
+<h2>Important Distinction: Raster <strong>Indices</strong> vs.&nbsp;<strong>Values</strong></h2>
+<p>Here we plot the <strong>indices</strong> for each cell: since a raster is a regular grid, can achieve memory-efficient representation with a <strong>single</strong> index (rather than, e.g., <span class="math inline">\((x, y)\)</span> coords)</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">plot</span>(grid_town)</span>
+<span id="cb11-2"><a></a><span class="fu">text</span>(</span>
+<span id="cb11-3"><a></a>  grid_town,</span>
+<span id="cb11-4"><a></a>  <span class="at">labels=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>,</span>
+<span id="cb11-5"><a></a>  <span class="at">halo=</span><span class="cn">TRUE</span>,</span>
+<span id="cb11-6"><a></a>  <span class="at">hc=</span><span class="st">"black"</span>,</span>
+<span id="cb11-7"><a></a>  <span class="at">col=</span><span class="st">"white"</span>,</span>
+<span id="cb11-8"><a></a>  <span class="at">hw=</span><span class="fl">0.2</span></span>
+<span id="cb11-9"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<section id="and-the-values-at-each-cell" class="slide level2">
+<h2>And the <strong>Values</strong> at Each Cell</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">plot</span>(grid_town)</span>
+<span id="cb12-2"><a></a><span class="fu">text</span>(</span>
+<span id="cb12-3"><a></a>  grid_town,</span>
+<span id="cb12-4"><a></a>  <span class="at">halo=</span><span class="cn">TRUE</span>,</span>
+<span id="cb12-5"><a></a>  <span class="at">hc=</span><span class="st">"black"</span>,</span>
+<span id="cb12-6"><a></a>  <span class="at">col=</span><span class="st">"white"</span>,</span>
+<span id="cb12-7"><a></a>  <span class="at">hw=</span><span class="fl">0.2</span></span>
+<span id="cb12-8"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="first-things-first-coordinates" class="title-slide slide level1 center" data-stack-name="Coordinates">
 <h1>First Things First: Coordinates</h1>

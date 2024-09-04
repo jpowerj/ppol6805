@@ -1120,5 +1120,33 @@
     "crumbs": [
       "Syllabus"
     ]
+  },
+  {
+    "objectID": "w02/slides.html#step-2-rasterize-terra",
+    "href": "w02/slides.html#step-2-rasterize-terra",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Step 2: Rasterize (terra)",
+    "text": "Step 2: Rasterize (terra)\n\n\nCode\nlibrary(terra)\ndc_SpatVector &lt;- terra::vect(dc_union_sf)\nrast_template &lt;- rast(ext(dc_SpatVector),\n  resolution = 1000, # meters\n  crs = crs(dc_SpatVector)\n)\ndc_SpatRaster &lt;- terra::rasterize(dc_SpatVector, rast_template)\ndim(dc_SpatRaster)\n\n\n[1] 29 23  1\n\n\nCode\nnlyr(dc_SpatRaster)\n\n\n[1] 1\n\n\nCode\nplot(dc_SpatRaster)"
+  },
+  {
+    "objectID": "w02/slides.html#rasters-from-scratch",
+    "href": "w02/slides.html#rasters-from-scratch",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Rasters From Scratch",
+    "text": "Rasters From Scratch\nWelcome to Gridtown!\n\n\nCode\nset.seed(6805)\nlibrary(terra)\ngrid_town &lt;- terra::rast(\n  nrows = 4, ncols = 4,\n  xmin = 0, xmax = 4, ymin = 0, ymax = 4,\n  vals = sample(1:16)\n)"
+  },
+  {
+    "objectID": "w02/slides.html#important-distinction-raster-indices-vs.-values",
+    "href": "w02/slides.html#important-distinction-raster-indices-vs.-values",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Important Distinction: Raster Indices vs. Values",
+    "text": "Important Distinction: Raster Indices vs. Values\nHere we plot the indices for each cell: since a raster is a regular grid, can achieve memory-efficient representation with a single index (rather than, e.g., \\((x, y)\\) coords)\n\n\nCode\nplot(grid_town)\ntext(\n  grid_town,\n  labels=1:16,\n  halo=TRUE,\n  hc=\"black\",\n  col=\"white\",\n  hw=0.2\n)"
+  },
+  {
+    "objectID": "w02/slides.html#and-the-values-at-each-cell",
+    "href": "w02/slides.html#and-the-values-at-each-cell",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "And the Values at Each Cell",
+    "text": "And the Values at Each Cell\n\n\nCode\nplot(grid_town)\ntext(\n  grid_town,\n  halo=TRUE,\n  hc=\"black\",\n  col=\"white\",\n  hw=0.2\n)"
   }
 ]

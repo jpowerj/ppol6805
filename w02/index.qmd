@@ -103,7 +103,7 @@ dc_union_sf |>
   geom_sf()
 ```
 
-## Step 2: Rasterize {.smaller .crunch-title}
+## Step 2: Rasterize (`terra`) {.smaller .crunch-title}
 
 ```{r}
 #| label: rasterized-dc
@@ -128,6 +128,50 @@ plot(dc_SpatRaster)
 library(tidyterra)
 ggplot(data=dc_SpatRaster, aes(fill=layer)) +
   geom_spatraster(data=dc_SpatRaster)
+```
+
+## Rasters From Scratch
+
+Welcome to Gridtown!
+
+```{r}
+#| label: create-grid-town
+set.seed(6805)
+library(terra)
+grid_town <- terra::rast(
+  nrows = 4, ncols = 4,
+  xmin = 0, xmax = 4, ymin = 0, ymax = 4,
+  vals = sample(1:16)
+)
+```
+
+## Important Distinction: Raster **Indices** vs. **Values** {.smaller}
+
+Here we plot the **indices** for each cell: since a raster is a regular grid, can achieve memory-efficient representation with a **single** index (rather than, e.g., $(x, y)$ coords)
+
+```{r}
+plot(grid_town)
+text(
+  grid_town,
+  labels=1:16,
+  halo=TRUE,
+  hc="black",
+  col="white",
+  hw=0.2
+)
+```
+
+## And the **Values** at Each Cell
+
+```{r}
+plot(grid_town)
+text(
+  grid_town,
+  halo=TRUE,
+  hc="black",
+  col="white",
+  hw=0.2
+)
 ```
 
 # First Things First: Coordinates {data-stack-name="Coordinates"}
