@@ -140,14 +140,14 @@ If you find any discrepancies between this schedule and Georgetown's [official c
 <tr>
     <td></td>
     <td></td>
-    <td><span data-qmd="*Sep 6 (Friday)*"></span></td>
+    <td><span data-qmd="*Sep 11 (Wednesday)*"></span></td>
     <td><span data-qmd="*[Deliverable] HW1: {{< var hw1.title >}}*"></span></td>
 </tr>
 <tr>
     <td></td>
     <td>3</td>
     <td><span data-qmd="{{< var w03.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var w03.title >}}](./w03/)"></span></td>
+    <td><span data-qmd="*[Deliverable] HW1: {{< var hw1.title >}}*"></span><br><span data-qmd="[{{< var w03.title >}}](./w03/)"></span></td>
 </tr>
 <tr>
     <td></td>
