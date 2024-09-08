@@ -1,5 +1,0 @@
-- week: 1
-  title: "<a href='#' target='_blank'>Week 1: {{< var w01.title >}}</a>"
-  url: ""
-  date: 2024-08-28
-  categories: ["Lecture Recordings"]

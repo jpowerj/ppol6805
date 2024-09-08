@@ -9,73 +9,81 @@ course:
   code: "PPOL 6805 / DSAN 6750"
   gspace_url: "https://chat.google.com/room/AAAAbGZ4pJk?cls=7"
   groups_url: "https://groups.google.com/a/georgetown.edu/g/dsan6750"
+  posit_url: "https://posit.cloud/spaces/547750/join?access_code=pxoi5atXz19sdp1N9e2X2qUbtxGV8yqRTtN5MeeD"
 weeks:
   - weeknum: 1
     title: "Introduction to GIS"
-    footer: "Week 1: GIS Overview"
+    footer: "PPOL 6805 Week 1: GIS Overview"
     date-md: "Aug 28"
-w01:
-  title: "Introduction to GIS"
-  footer: "Week 1: GIS Overview"
-  date-md: "Aug 28"
-w02:
-  title: "How Do Maps Work?"
-  footer: "Week 2: How Do Maps Work?"
-  date-md: "Sep 4"
-w03:
-  title: "GIS Nuts and Bolts"
-  date-md: "Sep 11"
-w04:
-  title: "GIS Libraries Intro"
-  date-md: "Sep 18"
-w05:
-  title: "GIS Libraries Part 2"
-  date-md: "Sep 25"
-w06:
-  title: "GIS Libraries Part 3"
-  date-md: "Oct 2"
-w07:
-  title: "Spatial Data Science Intro"
-  date-md: "Oct 9"
-w08:
-  title: "Spatial Data Science Part 2"
-  date-md: "Oct 16"
-w09:
-  title: "Spatial Data Science Part 3"
-  date-md: "Oct 23"
-w10:
-  title: "Spatial Data Science Part 4"
-  date-md: "Oct 30"
-w11:
-  title: "In-Class Midterm"
-  date-md: "Nov 6"
-w12:
-  title: "Applications: Public Policy"
-  date-md: "Nov 13"
-w13:
-  title: "Applications: Operations Research"
-  date-md: "Nov 20"
-w14:
-  title: "Applications: Climate Change and Ecological Data"
-  date-md: "Dec 4"
-w15:
-  title: "Final Presentations"
-  date-md: "Dec 11"
+  - weeknum: 2
+    title: "How Do Maps Work?"
+    footer: "PPOL 6805 Week 2: How Do Maps Work?"
+    date-md: "Sep 4"
+  - weeknum: 3
+    title: "Basic Geospatial Operations"
+    footer: "PPOL 6805 Week 3: Geospatial Operations"
+    date-md: "Sep 11"
+  - weeknum: 4
+    title: "Slightly-More-Complex Geospatial Operations"
+    footer: "PPOL 6805 Week 4: Slightly-More-Complex Geospatial Operations"
+    date-md: "Sep 18"
+  - weeknum: 5
+    title: "Static Mapping Libraries"
+    footer: "PPOL 6805 Week 5"
+    date-md: "Sep 25"
+  - weeknum: 6
+    title: "Interactive Mapping Libraries"
+    footer: "PPOL 6805 Week 6"
+    date-md: "Oct 2"
+  - weeknum: 7
+    title: "Spatial Autocorrelation"
+    footer: "PPOL 6805 Week 7"
+    date-md: "Oct 9"
+  - weeknum: 8
+    title: "Point Patterns and Clustering"
+    footer: "PPOL 6805 Week 8"
+    date-md: "Oct 16"
+  - weeknum: 9
+    title: "Spatial Interpolation"
+    footer: "PPOL 6805 Week 7"
+    date-md: "Oct 23"
+  - weeknum: 10
+    title: "Spatial Regression"
+    footer: "PPOL 6805 Week 8"
+    date-md: "Oct 30"
+  - weeknum: 11
+    title: "In-Class Midterm"
+    footer: "PPOL 6805 Week 11"
+    date-md: "Nov 6"
+  - weeknum: 12
+    title: "Applications: Public Policy"
+    footer: "PPOL 6805 Week 12"
+    date-md: "Nov 13"
+  - weeknum: 13
+    title: "Applications: Urban Planning"
+    footer: "PPOL 6805 Week 13"
+    date-md: "Nov 20"
+  - weeknum: 14
+    title: "Applications: Climate Change and Ecological Data"
+    footer: "PPOL 6805 Week 14"
+    date-md: "Dec 4"
+  - weeknum: 15
+    title: "Final Presentations"
+    footer: "PPOL 6805 Week 15"
+    date-md: "Dec 11"
 hw:
-  - title: "GIS Concepts Checkpoint"
-    pct: 8
-hw1:
-  title: "GIS Concepts Checkpoint"
-  pct: 8
-hw2:
-  title: "GIS Concepts Finish Line"
-  pct: 8
-hw3:
-  title: "GIS Libraries Checkpoint"
-  pct: 8
-hw4:
-  title: "GIS Libraries Finish Line"
-  pct: 8
-hw5:
-  title: "Geospatial Data Analysis Checkpoint"
-  pct: 8
+  - hw-num: 1
+    title: "GIS Concepts"
+    pct: 10
+  - hw-num: 2
+    title: "Geospatial Operations"
+    pct: 10
+  - hw-num: 3
+    title: "Mapping Libraries"
+    pct: 10
+  - hw-num: 4
+    title: "Clustering"
+    pct: 10
+  # - hw-num: 5
+  #   title: "Spatial Regression"
+  #   pct: 8

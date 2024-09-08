@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jeff Jacobs">
 
-<title>Lecture Recordings – PPOL 6805 / DSAN 6750: GIS</title>
+<title>Week 3: Basic Geospatial Operations – PPOL 6805 / DSAN 6750: GIS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +21,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -31,8 +51,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../favicon.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -71,35 +89,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-week','listing-title','listing-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-title-sort'] },{ data: ['listing-date-sort'] }],
-      
-      searchColumns: ["listing-week","listing-title","listing-url","listing-date","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" '="" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="../sidebar.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -133,6 +122,7 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../dsan-globals/jjstyles.css">
+<link rel="stylesheet" href="../dsan-globals/jjstyles.css">
 </head>
 
 <body>
@@ -142,22 +132,55 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#how-to-do-things-with-geometries" id="toc-how-to-do-things-with-geometries" class="nav-link active" data-scroll-target="#how-to-do-things-with-geometries">How to <em>Do Things</em> with Geometries</a>
+  <ul class="collapse">
+  <li><a href="#hw1-rightarrow-hw2" id="toc-hw1-rightarrow-hw2" class="nav-link" data-scroll-target="#hw1-rightarrow-hw2">HW1 <span class="math inline">\(\rightarrow\)</span> HW2</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/w03/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lecture Recordings</h1>
-</div>
+<h1 class="title">Week 3: Basic Geospatial Operations</h1>
+<p class="subtitle lead"><em>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</em><br>Fall 2024</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Class Sessions</div>
+  </div>
+  </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Jeff Jacobs </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="mailto:jj1088@georgetown.edu" target="_blank"><code>jj1088@georgetown.edu</code></a>
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Wednesday, September 11, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -167,45 +190,41 @@ window.Quarto = {
 </header>
 
 
-<p>I will aim to update the Zoom recording links here as soon as they are available after the end of class. But, in case there’s a delay, recordings are <strong>automatically added</strong> to the course’s <a href="https://georgetown.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=b412a327-e0cd-4897-8401-b1b500239335" target="_blank">Panopto page</a>!</p>
-
-
-
-
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<table class="quarto-listing-table table table-hover">
-<thead>
-<tr>
-<th>
-Week
-</th>
-<th>
-Title
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-categories="Lecture Recordings" data-listing-date-sort="1724817600000" data-listing-title-sort="<a href='#' target='_blank'>Week 1: {{< var w01.title >}}</a>" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td>
-<span class="listing-week">1</span>
-</td>
-<td>
-<span class="listing-title"><a href="#" target="_blank">Week 1: Introduction to GIS</a></span>
-</td>
-<td>
-<span class="listing-date">Wednesday Aug 28, 2024</span>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="listing-no-matching d-none">
-No matching items
+<center class="mb-3">
+<a class="h2" href="./slides.html" target="_blank">Open slides in new tab →</a>
+</center>
+<section id="how-to-do-things-with-geometries" class="level1" data-stack-name="Geospatial Operations">
+<h1 data-stack-name="Geospatial Operations">How to <em>Do Things</em> with Geometries</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/sf_full.svg" class="img-fluid figure-img"></p>
+<figcaption>From the <a href="https://rstudio.github.io/cheatsheets/sf.pdf" target="_blank"><code>sf</code> Cheatsheet</a></figcaption>
+</figure>
 </div>
-</div></main> <!-- /main -->
+<section id="hw1-rightarrow-hw2" class="level2 crunch-title crunch-ul inline-90 crunch-li-8">
+<h2 class="crunch-title crunch-ul inline-90 crunch-li-8 anchored" data-anchor-id="hw1-rightarrow-hw2">HW1 <span class="math inline">\(\rightarrow\)</span> HW2</h2>
+<ul>
+<li>Congrats on finishing HW1! You now know how to <strong>create</strong> geometries with <code>sf</code> and <code>terra</code></li>
+<li>So now, what can you <strong>do</strong> with them?</li>
+<li>For example, we’d like to be able to say things like:
+<ul>
+<li><em>“The new lamppost cannot be placed at <span class="math inline">\((x, y)\)</span>, since there is already a building there!”</em></li>
+<li><em>“There are <span class="math inline">\(N_1\)</span> lampposts in County 1, and <span class="math inline">\(N_2\)</span> lampposts in County 2”</em></li>
+<li><em>“The average resident in Neighborhood A lives 2 km away from their nearest bus stop</em></li>
+</ul></li>
+</ul>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" role="list">
+
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -775,4 +794,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/recordings/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/w03/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>

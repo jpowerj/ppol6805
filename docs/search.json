@@ -14,17 +14,17 @@
     "href": "resources.html#textbooks",
     "title": "Additional Resources",
     "section": "Textbooks",
-    "text": "Textbooks\n\nUsing R\n\nPebesma and Bivand (2024). Spatial Data Science with Applications in R (Legally free online book!)\nLovelace, Nowosad, and Muenchow (2024). Geocomputation with R (Also a legally free online book!)\n\n\n\nUsing Python\n\nRey, Arribas-Bel, and Wolf (2023). Geographic Data Science with Python (Yet another legally free online book!)",
+    "text": "Textbooks\n\nUsing R\nThe course’s R material is drawn mainly from the following books, where I’ve tried to put them in order from most-used to least-used (in terms of the slides and assignments!):\n\nMoraga, Paula (2023). Spatial Statistics for Data Science: Theory and Practice with R (Legally free online book!)\nPebesma and Bivand (2024). Spatial Data Science with Applications in R (Legally free online book!)\nLovelace, Nowosad, and Muenchow (2024). Geocomputation with R (Also a legally free online book!)\n\n\n\nUsing Python\n\nRey, Arribas-Bel, and Wolf (2023). Geographic Data Science with Python (Yet another legally free online book!)",
     "crumbs": [
       "Resources"
     ]
   },
   {
-    "objectID": "resources.html#lecture-videos",
-    "href": "resources.html#lecture-videos",
+    "objectID": "resources.html#videos",
+    "href": "resources.html#videos",
     "title": "Additional Resources",
-    "section": "Lecture Videos",
-    "text": "Lecture Videos\n\nFor a high-level overview, that will prepare you well for this course, see Coursera: Introduction to GIS",
+    "section": "Videos",
+    "text": "Videos\n\nFor the quickest and most accessible intro to GIS using R I’ve ever found, you can watch Sherrie Xie’s R Consortium workshop talk, Analyzing Geospatial Data in R\nFor a high-level overview, that will prepare you well for this course, see Coursera: Introduction to GIS, which is an online version of UC Davis’ Introduction to GIS course.",
     "crumbs": [
       "Resources"
     ]
@@ -271,7 +271,7 @@
     "href": "w01/slides.html#references",
     "title": "Week 1: Introduction to GIS",
     "section": "References",
-    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.\n\n\nRobert, Amélie. 2016. “At the Heart of the Vietnam War: Herbicides, Napalm and Bulldozers Against the A Lưới Mountains.” Journal of Alpine Research  Revue de géographie Alpine, no. 104-1 (April). https://doi.org/10.4000/rga.3266.\n\n\n\n\n\nWeek 1: GIS Overview"
+    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.\n\n\nRobert, Amélie. 2016. “At the Heart of the Vietnam War: Herbicides, Napalm and Bulldozers Against the A Lưới Mountains.” Journal of Alpine Research  Revue de géographie Alpine, no. 104-1 (April). https://doi.org/10.4000/rga.3266.\n\n\n\n\n\nPPOL 6805 Week 1: GIS Overview"
   },
   {
     "objectID": "w01/index.html",
@@ -604,11 +604,242 @@
     ]
   },
   {
-    "objectID": "recordings/index.html",
-    "href": "recordings/index.html",
-    "title": "Lecture Recordings",
-    "section": "",
-    "text": "I will aim to update the Zoom recording links here as soon as they are available after the end of class. But, in case there’s a delay, recordings are automatically added to the course’s Panopto page!\n\n\n\n\n\n\n\n\n\nWeek\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\n1\n\n\nWeek 1: Introduction to GIS\n\n\nWednesday Aug 28, 2024\n\n\n\n\n\nNo matching items"
+    "objectID": "w02/slides.html#end-of-last-week-vector-data",
+    "href": "w02/slides.html#end-of-last-week-vector-data",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "End of Last Week: Vector Data",
+    "text": "End of Last Week: Vector Data\n\n\nCode\nlibrary(sf)\nlibrary(tidyverse)\n# Load DC tracts data\ndc_sf_fpath &lt;- \"data/DC_Census_2020/Census_Tracts_in_2020.shp\"\ndc_sf &lt;- st_read(dc_sf_fpath, quiet = TRUE)\ncols_to_keep &lt;- c(\"OBJECTID\", \"TRACT\", \"GEOID\", \"ALAND\", \"AWATER\", \"STUSAB\", \"SUMLEV\", \"GEOCODE\", \"STATE\", \"NAME\", \"POP100\", \"HU100\", \"geometry\")\ndc_sf &lt;- dc_sf |&gt; select(cols_to_keep)\n# We can extract the geometry with the st_geometry function\ndc_geo &lt;- st_geometry(dc_sf)\n# And plot the geometry with base R's plot() function\nplot(dc_geo, mar = c(0,0,0,0))"
+  },
+  {
+    "objectID": "w02/slides.html#now-with-ggplot",
+    "href": "w02/slides.html#now-with-ggplot",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Now with ggplot!",
+    "text": "Now with ggplot!\n\n\nCode\nggplot2::theme_set(ggplot2::theme_classic())\ndc_sf |&gt;\n  ggplot() +\n  geom_sf()"
+  },
+  {
+    "objectID": "w02/slides.html#raster-data",
+    "href": "w02/slides.html#raster-data",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Raster Data",
+    "text": "Raster Data\n\nEach DC Census Tract has its own (odd) shape, which can be described by discrete coordinates forming a POLYGON\nFor geospatial analysis, however, we often need to compute over evenly-spaced grids rather than this odd collection of shapes\nPOLYGONs may make sense for demographers, but how about someone studying air pollution in DC? (Smog, for example, does not confine itself to census tracts!)"
+  },
+  {
+    "objectID": "w02/slides.html#step-1-union-of-all-tracts",
+    "href": "w02/slides.html#step-1-union-of-all-tracts",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Step 1: Union of All Tracts",
+    "text": "Step 1: Union of All Tracts\n\n\nCode\ndc_union_sf &lt;- sf::st_union(dc_sf)\ndc_union_sf |&gt;\n  ggplot() +\n  geom_sf()"
+  },
+  {
+    "objectID": "w02/slides.html#step-2-rasterize-terra",
+    "href": "w02/slides.html#step-2-rasterize-terra",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Step 2: Rasterize (terra)",
+    "text": "Step 2: Rasterize (terra)\n\n\nCode\nlibrary(terra)\ndc_SpatVector &lt;- terra::vect(dc_union_sf)\nrast_template &lt;- rast(ext(dc_SpatVector), resolution = 1000, crs = crs(dc_SpatVector))\ndc_SpatRaster &lt;- terra::rasterize(dc_SpatVector, rast_template)\ndim(dc_SpatRaster)\n\n\n[1] 29 23  1\n\n\nCode\nplot(dc_SpatRaster)"
+  },
+  {
+    "objectID": "w02/slides.html#and-with-tidyterra",
+    "href": "w02/slides.html#and-with-tidyterra",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "And with tidyterra",
+    "text": "And with tidyterra\n\n\nCode\nlibrary(tidyterra)\nggplot(data=dc_SpatRaster, aes(fill=layer)) +\n  geom_spatraster(data=dc_SpatRaster)"
+  },
+  {
+    "objectID": "w02/slides.html#rasters-from-scratch",
+    "href": "w02/slides.html#rasters-from-scratch",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Rasters From Scratch",
+    "text": "Rasters From Scratch\nWelcome to Gridtown!\n\n\n\nCode\nset.seed(6805)\nlibrary(terra)\ngridtown &lt;- terra::rast(\n  nrows = 4, ncols = 4,\n  xmin = 0, xmax = 4, ymin = 0, ymax = 4,\n  vals = sample(1:16)\n)\nplot(gridtown)\ntext(\n  gridtown,\n  labels=1:16,\n  halo=TRUE, hc=\"black\", col=\"white\", hw=0.2\n)\n\n\n\n\n\n\n\n\n\nFigure 1: Gridtown Indices\n\n\n\n\n\n\nRaster indices vs. values: The above plot displays indices for each cell: since a raster is a regular grid, can achieve memory-efficient representation with a single index (rather than, e.g., \\((x, y)\\) coords). But what we really care about are…"
+  },
+  {
+    "objectID": "w02/slides.html#raster-layer-values",
+    "href": "w02/slides.html#raster-layer-values",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Raster Layer Values",
+    "text": "Raster Layer Values\n\n\nCode\nplot(gridtown)\ntext(gridtown, halo=TRUE, hc=\"black\", col=\"white\", hw=0.2)\n\n\n\n\nFigure 2: Gridtown Values"
+  },
+  {
+    "objectID": "w02/slides.html#latitude-and-longitude-are-angles",
+    "href": "w02/slides.html#latitude-and-longitude-are-angles",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Latitude and Longitude are Angles!",
+    "text": "Latitude and Longitude are Angles!\n\nFrom Krygier and Wood (2016)"
+  },
+  {
+    "objectID": "w02/slides.html#angular-distance-vs.-travel-distance",
+    "href": "w02/slides.html#angular-distance-vs.-travel-distance",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Angular Distance vs. Travel Distance",
+    "text": "Angular Distance vs. Travel Distance\nThe Earth’s “width” is slightly greater than its “length” 😰\n\nFrom Wikimedia Commons"
+  },
+  {
+    "objectID": "w02/slides.html#smooshing-3d-into-2d",
+    "href": "w02/slides.html#smooshing-3d-into-2d",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Smooshing 3D into 2D",
+    "text": "Smooshing 3D into 2D\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w02/slides.html#avoid-getting-lost-in-the-sauce",
+    "href": "w02/slides.html#avoid-getting-lost-in-the-sauce",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Avoid Getting Lost in the Sauce",
+    "text": "Avoid Getting Lost in the Sauce"
+  },
+  {
+    "objectID": "w02/slides.html#how-to-avoid-getting-lost-in-the-sauce",
+    "href": "w02/slides.html#how-to-avoid-getting-lost-in-the-sauce",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "How To Avoid Getting Lost in the Sauce",
+    "text": "How To Avoid Getting Lost in the Sauce\n\n\n\n\n\nTissot Circles: Imagine infinitely small ellipses placed at regular intervals on the curved surface of the earth. Imagine these ellipses being projected along with the earth’s surface. When scaled up, changes in the ellipses show the location and quality of distortions on the projected map."
+  },
+  {
+    "objectID": "w02/slides.html#scales-wrules-of-thumb",
+    "href": "w02/slides.html#scales-wrules-of-thumb",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Scales (w/Rules of Thumb)",
+    "text": "Scales (w/Rules of Thumb)\n\nFrom Krygier and Wood (2016)"
+  },
+  {
+    "objectID": "w02/slides.html#the-three-key-elements",
+    "href": "w02/slides.html#the-three-key-elements",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "The Three Key Elements",
+    "text": "The Three Key Elements\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w02/slides.html#what-can-happen-to-points",
+    "href": "w02/slides.html#what-can-happen-to-points",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Can Happen to Points?",
+    "text": "What Can Happen to Points?\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w02/slides.html#what-can-happen-to-lines",
+    "href": "w02/slides.html#what-can-happen-to-lines",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Can Happen to Lines?",
+    "text": "What Can Happen to Lines?\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w02/slides.html#what-can-happen-to-lines-1",
+    "href": "w02/slides.html#what-can-happen-to-lines-1",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Can Happen to Lines?",
+    "text": "What Can Happen to Lines?\n\n\nSelection\n\n\n\nIn any map, most features from the human or natural environment are eliminated! (Krygier and Wood 2016)\n\n\n\nSimplification\n\n\n\nWithin the features that do remain, eliminate details that are unnecessary with respect to audience/context (Krygier and Wood 2016)"
+  },
+  {
+    "objectID": "w02/slides.html#what-can-happen-to-areas",
+    "href": "w02/slides.html#what-can-happen-to-areas",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Can Happen to Areas?",
+    "text": "What Can Happen to Areas?\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w02/slides.html#areal-dimension-change",
+    "href": "w02/slides.html#areal-dimension-change",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Areal Dimension Change",
+    "text": "Areal Dimension Change\n\nFrom Krygier and Wood (2016)"
+  },
+  {
+    "objectID": "w02/slides.html#what-is-gained",
+    "href": "w02/slides.html#what-is-gained",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Is Gained?",
+    "text": "What Is Gained?\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w02/slides.html#what-is-lost",
+    "href": "w02/slides.html#what-is-lost",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "What Is Lost?",
+    "text": "What Is Lost?\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w02/slides.html#who-is-affected",
+    "href": "w02/slides.html#who-is-affected",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Who Is Affected?",
+    "text": "Who Is Affected?\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w02/slides.html#having-domain-knowledge-of-a-region",
+    "href": "w02/slides.html#having-domain-knowledge-of-a-region",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Having Domain Knowledge of a Region",
+    "text": "Having Domain Knowledge of a Region\n\nFrom XKCD"
+  },
+  {
+    "objectID": "w02/slides.html#crime-in-mongolia",
+    "href": "w02/slides.html#crime-in-mongolia",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Crime in Mongolia",
+    "text": "Crime in Mongolia\n\nFrom Reddit"
+  },
+  {
+    "objectID": "w02/slides.html#population-of-mongolia",
+    "href": "w02/slides.html#population-of-mongolia",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Population of Mongolia",
+    "text": "Population of Mongolia\n\nFrom Wikimedia Commons"
+  },
+  {
+    "objectID": "w02/slides.html#exhibit-a",
+    "href": "w02/slides.html#exhibit-a",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Exhibit A",
+    "text": "Exhibit A\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w02/slides.html#exhibit-b",
+    "href": "w02/slides.html#exhibit-b",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Exhibit B",
+    "text": "Exhibit B\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w02/slides.html#country-boundaries",
+    "href": "w02/slides.html#country-boundaries",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Country Boundaries",
+    "text": "Country Boundaries\nKey package: rnaturalearth\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(sf)\nlibrary(ggplot2)\nlibrary(viridis)\nlibrary(patchwork)\nmap1 &lt;- ne_countries(type = \"countries\", country = \"Germany\", scale = \"medium\", returnclass = \"sf\")\nmap2 &lt;- rnaturalearth::ne_states(\"Germany\", returnclass = \"sf\")\n(ggplot(map1) + geom_sf()) + (ggplot(map2) + geom_sf())"
+  },
+  {
+    "objectID": "w02/slides.html#climate-data",
+    "href": "w02/slides.html#climate-data",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Climate Data",
+    "text": "Climate Data\nKey package: geodata\n\n\nCode\nlibrary(geodata)\nd &lt;- worldclim_country(country = \"Jamaica\", var = \"tmin\",\n                       path = tempdir())\nterra::plot(mean(d), plg = list(title = \"Min. temperature (C)\"))"
+  },
+  {
+    "objectID": "w02/slides.html#elevation",
+    "href": "w02/slides.html#elevation",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Elevation",
+    "text": "Elevation\nKey packages: rnaturalearth + elevatr\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(elevatr)\nlibrary(terra)\nmap &lt;- ne_countries(type = \"countries\", country = \"Switzerland\",\n                    scale = \"medium\", returnclass = \"sf\")\nd &lt;- get_elev_raster(locations = map, z = 9, clip = \"locations\")\nterra::plot(rast(d), plg = list(title = \"Elevation (m)\"))"
+  },
+  {
+    "objectID": "w02/slides.html#street-maps",
+    "href": "w02/slides.html#street-maps",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Street Maps",
+    "text": "Street Maps\n\n\nCode\nlibrary(osmdata)\nplacebb &lt;- getbb(\"Barcelona\")\nhospitals &lt;- placebb %&gt;% opq() %&gt;%\n  add_osm_feature(key = \"amenity\", value = \"hospital\") %&gt;%\n  osmdata_sf()\nmotorways &lt;- placebb %&gt;% opq() %&gt;%\n  add_osm_feature(key = \"highway\", value = \"motorway\") %&gt;%\n  osmdata_sf()\nlibrary(leaflet)\nleaflet() |&gt;  addTiles() |&gt;\n  addPolylines(data = motorways$osm_lines, color = \"black\") |&gt;\n  addPolygons(data = hospitals$osm_polygons,\n              label = hospitals$osm_polygons$name)"
+  },
+  {
+    "objectID": "w02/slides.html#world-bank-dataverse",
+    "href": "w02/slides.html#world-bank-dataverse",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "World Bank Dataverse",
+    "text": "World Bank Dataverse\nKey package: wbstats\n\n\nCode\nlibrary(wbstats)\nd &lt;- wb_data(indicator = \"MO.INDEX.HDEV.XQ\",\n             start_date = 2011, end_date = 2011)\nlibrary(rnaturalearth)\nlibrary(mapview)\nmap &lt;- ne_countries(continent = \"Africa\", returnclass = \"sf\")\nmap &lt;- dplyr::left_join(map, d, by = c(\"iso_a3\" = \"iso3c\"))\nmapview(map, zcol = \"MO.INDEX.HDEV.XQ\")"
+  },
+  {
+    "objectID": "w02/slides.html#references",
+    "href": "w02/slides.html#references",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "References",
+    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\nMonmonier, Mark. 2018. How to Lie with Maps. University of Chicago Press.\n\n\n\n\n\nPPOL 6805 Week 2: How Do Maps Work?"
   },
   {
     "objectID": "w02/index.html",
@@ -961,249 +1192,46 @@
     ]
   },
   {
-    "objectID": "w02/slides.html#end-of-last-week-vector-data",
-    "href": "w02/slides.html#end-of-last-week-vector-data",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "End of Last Week: Vector Data",
-    "text": "End of Last Week: Vector Data\n\n\nCode\nlibrary(sf)\nlibrary(tidyverse)\n# Load DC tracts data\ndc_sf_fpath &lt;- \"data/DC_Census_2020/Census_Tracts_in_2020.shp\"\ndc_sf &lt;- st_read(dc_sf_fpath, quiet = TRUE)\ncols_to_keep &lt;- c(\"OBJECTID\", \"TRACT\", \"GEOID\", \"ALAND\", \"AWATER\", \"STUSAB\", \"SUMLEV\", \"GEOCODE\", \"STATE\", \"NAME\", \"POP100\", \"HU100\", \"geometry\")\ndc_sf &lt;- dc_sf |&gt; select(cols_to_keep)\n# We can extract the geometry with the st_geometry function\ndc_geo &lt;- st_geometry(dc_sf)\n# And plot the geometry with base R's plot() function\nplot(dc_geo, mar = c(0,0,0,0))"
+    "objectID": "w03/index.html",
+    "href": "w03/index.html",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "",
+    "text": "Open slides in new tab →"
   },
   {
-    "objectID": "w02/slides.html#now-with-ggplot",
-    "href": "w02/slides.html#now-with-ggplot",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Now with ggplot!",
-    "text": "Now with ggplot!\n\n\nCode\nggplot2::theme_set(ggplot2::theme_classic())\ndc_sf |&gt;\n  ggplot() +\n  geom_sf()"
+    "objectID": "w03/index.html#hw1-rightarrow-hw2",
+    "href": "w03/index.html#hw1-rightarrow-hw2",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "HW1 \\(\\rightarrow\\) HW2",
+    "text": "HW1 \\(\\rightarrow\\) HW2\n\nCongrats on finishing HW1! You now know how to create geometries with sf and terra\nSo now, what can you do with them?\nFor example, we’d like to be able to say things like:\n\n“The new lamppost cannot be placed at \\((x, y)\\), since there is already a building there!”\n“There are \\(N_1\\) lampposts in County 1, and \\(N_2\\) lampposts in County 2”\n“The average resident in Neighborhood A lives 2 km away from their nearest bus stop"
   },
   {
-    "objectID": "w02/slides.html#raster-data",
-    "href": "w02/slides.html#raster-data",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Raster Data",
-    "text": "Raster Data\n\nEach DC Census Tract has its own (odd) shape, which can be described by discrete coordinates forming a POLYGON\nFor geospatial analysis, however, we often need to compute over evenly-spaced grids rather than this odd collection of shapes\nPOLYGONs may make sense for demographers, but how about someone studying air pollution in DC? (Smog, for example, does not confine itself to census tracts!)"
-  },
-  {
-    "objectID": "w02/slides.html#step-1-union-of-all-tracts",
-    "href": "w02/slides.html#step-1-union-of-all-tracts",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Step 1: Union of All Tracts",
-    "text": "Step 1: Union of All Tracts\n\n\nCode\ndc_union_sf &lt;- sf::st_union(dc_sf)\ndc_union_sf |&gt;\n  ggplot() +\n  geom_sf()"
-  },
-  {
-    "objectID": "w02/slides.html#step-2-rasterize-terra",
-    "href": "w02/slides.html#step-2-rasterize-terra",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Step 2: Rasterize (terra)",
-    "text": "Step 2: Rasterize (terra)\n\n\nCode\nlibrary(terra)\ndc_SpatVector &lt;- terra::vect(dc_union_sf)\nrast_template &lt;- rast(ext(dc_SpatVector), resolution = 1000, crs = crs(dc_SpatVector))\ndc_SpatRaster &lt;- terra::rasterize(dc_SpatVector, rast_template)\ndim(dc_SpatRaster)\n\n\n[1] 29 23  1\n\n\nCode\nplot(dc_SpatRaster)"
-  },
-  {
-    "objectID": "w02/slides.html#and-with-tidyterra",
-    "href": "w02/slides.html#and-with-tidyterra",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "And with tidyterra",
-    "text": "And with tidyterra\n\n\nCode\nlibrary(tidyterra)\nggplot(data=dc_SpatRaster, aes(fill=layer)) +\n  geom_spatraster(data=dc_SpatRaster)"
-  },
-  {
-    "objectID": "w02/slides.html#rasters-from-scratch",
-    "href": "w02/slides.html#rasters-from-scratch",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Rasters From Scratch",
-    "text": "Rasters From Scratch\nWelcome to Gridtown!\n\n\n\nCode\nset.seed(6805)\nlibrary(terra)\ngridtown &lt;- terra::rast(\n  nrows = 4, ncols = 4,\n  xmin = 0, xmax = 4, ymin = 0, ymax = 4,\n  vals = sample(1:16)\n)\nplot(gridtown)\ntext(\n  gridtown,\n  labels=1:16,\n  halo=TRUE, hc=\"black\", col=\"white\", hw=0.2\n)\n\n\n\n\n\n\n\n\n\nFigure 1: Gridtown Indices\n\n\n\n\n\n\nRaster indices vs. values: The above plot displays indices for each cell: since a raster is a regular grid, can achieve memory-efficient representation with a single index (rather than, e.g., \\((x, y)\\) coords). But what we really care about are…"
-  },
-  {
-    "objectID": "w02/slides.html#raster-layer-values",
-    "href": "w02/slides.html#raster-layer-values",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Raster Layer Values",
-    "text": "Raster Layer Values\n\n\nCode\nplot(gridtown)\ntext(gridtown, halo=TRUE, hc=\"black\", col=\"white\", hw=0.2)\n\n\n\n\nFigure 2: Gridtown Values"
-  },
-  {
-    "objectID": "w02/slides.html#latitude-and-longitude-are-angles",
-    "href": "w02/slides.html#latitude-and-longitude-are-angles",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Latitude and Longitude are Angles!",
-    "text": "Latitude and Longitude are Angles!\n\nFrom Krygier and Wood (2016)"
-  },
-  {
-    "objectID": "w02/slides.html#angular-distance-vs.-travel-distance",
-    "href": "w02/slides.html#angular-distance-vs.-travel-distance",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Angular Distance vs. Travel Distance",
-    "text": "Angular Distance vs. Travel Distance\nThe Earth’s “width” is slightly greater than its “length” 😰\n\nFrom Wikimedia Commons"
-  },
-  {
-    "objectID": "w02/slides.html#smooshing-3d-into-2d",
-    "href": "w02/slides.html#smooshing-3d-into-2d",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Smooshing 3D into 2D",
-    "text": "Smooshing 3D into 2D\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#avoid-getting-lost-in-the-sauce",
-    "href": "w02/slides.html#avoid-getting-lost-in-the-sauce",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Avoid Getting Lost in the Sauce",
-    "text": "Avoid Getting Lost in the Sauce"
-  },
-  {
-    "objectID": "w02/slides.html#how-to-avoid-getting-lost-in-the-sauce",
-    "href": "w02/slides.html#how-to-avoid-getting-lost-in-the-sauce",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "How To Avoid Getting Lost in the Sauce",
-    "text": "How To Avoid Getting Lost in the Sauce\n\n\n\n\n\nTissot Circles: Imagine infinitely small ellipses placed at regular intervals on the curved surface of the earth. Imagine these ellipses being projected along with the earth’s surface. When scaled up, changes in the ellipses show the location and quality of distortions on the projected map."
-  },
-  {
-    "objectID": "w02/slides.html#scales-wrules-of-thumb",
-    "href": "w02/slides.html#scales-wrules-of-thumb",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Scales (w/Rules of Thumb)",
-    "text": "Scales (w/Rules of Thumb)\n\nFrom Krygier and Wood (2016)"
-  },
-  {
-    "objectID": "w02/slides.html#the-three-key-elements",
-    "href": "w02/slides.html#the-three-key-elements",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "The Three Key Elements",
-    "text": "The Three Key Elements\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#what-can-happen-to-points",
-    "href": "w02/slides.html#what-can-happen-to-points",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Can Happen to Points?",
-    "text": "What Can Happen to Points?\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#what-can-happen-to-lines",
-    "href": "w02/slides.html#what-can-happen-to-lines",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Can Happen to Lines?",
-    "text": "What Can Happen to Lines?\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#what-can-happen-to-lines-1",
-    "href": "w02/slides.html#what-can-happen-to-lines-1",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Can Happen to Lines?",
-    "text": "What Can Happen to Lines?\n\n\nSelection\n\n\n\nIn any map, most features from the human or natural environment are eliminated! (Krygier and Wood 2016)\n\n\n\nSimplification\n\n\n\nWithin the features that do remain, eliminate details that are unnecessary with respect to audience/context (Krygier and Wood 2016)"
-  },
-  {
-    "objectID": "w02/slides.html#what-can-happen-to-areas",
-    "href": "w02/slides.html#what-can-happen-to-areas",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Can Happen to Areas?",
-    "text": "What Can Happen to Areas?\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#areal-dimension-change",
-    "href": "w02/slides.html#areal-dimension-change",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Areal Dimension Change",
-    "text": "Areal Dimension Change\n\nFrom Krygier and Wood (2016)"
-  },
-  {
-    "objectID": "w02/slides.html#what-is-gained",
-    "href": "w02/slides.html#what-is-gained",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Is Gained?",
-    "text": "What Is Gained?\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#what-is-lost",
-    "href": "w02/slides.html#what-is-lost",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Is Lost?",
-    "text": "What Is Lost?\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#who-is-affected",
-    "href": "w02/slides.html#who-is-affected",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Who Is Affected?",
-    "text": "Who Is Affected?\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#having-domain-knowledge-of-a-region",
-    "href": "w02/slides.html#having-domain-knowledge-of-a-region",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Having Domain Knowledge of a Region",
-    "text": "Having Domain Knowledge of a Region\n\nFrom XKCD"
-  },
-  {
-    "objectID": "w02/slides.html#crime-in-mongolia",
-    "href": "w02/slides.html#crime-in-mongolia",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Crime in Mongolia",
-    "text": "Crime in Mongolia\n\nFrom Reddit"
-  },
-  {
-    "objectID": "w02/slides.html#population-of-mongolia",
-    "href": "w02/slides.html#population-of-mongolia",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Population of Mongolia",
-    "text": "Population of Mongolia\n\nFrom Wikimedia Commons"
-  },
-  {
-    "objectID": "w02/slides.html#exhibit-a",
-    "href": "w02/slides.html#exhibit-a",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Exhibit A",
-    "text": "Exhibit A\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#exhibit-b",
-    "href": "w02/slides.html#exhibit-b",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Exhibit B",
-    "text": "Exhibit B\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#country-boundaries",
-    "href": "w02/slides.html#country-boundaries",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Country Boundaries",
-    "text": "Country Boundaries\nKey package: rnaturalearth\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(sf)\nlibrary(ggplot2)\nlibrary(viridis)\nlibrary(patchwork)\nmap1 &lt;- ne_countries(type = \"countries\", country = \"Germany\", scale = \"medium\", returnclass = \"sf\")\nmap2 &lt;- rnaturalearth::ne_states(\"Germany\", returnclass = \"sf\")\n(ggplot(map1) + geom_sf()) + (ggplot(map2) + geom_sf())"
-  },
-  {
-    "objectID": "w02/slides.html#climate-data",
-    "href": "w02/slides.html#climate-data",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Climate Data",
-    "text": "Climate Data\nKey package: geodata\n\n\nCode\nlibrary(geodata)\nd &lt;- worldclim_country(country = \"Jamaica\", var = \"tmin\",\n                       path = tempdir())\nterra::plot(mean(d), plg = list(title = \"Min. temperature (C)\"))"
-  },
-  {
-    "objectID": "w02/slides.html#elevation",
-    "href": "w02/slides.html#elevation",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Elevation",
-    "text": "Elevation\nKey packages: rnaturalearth + elevatr\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(elevatr)\nlibrary(terra)\nmap &lt;- ne_countries(type = \"countries\", country = \"Switzerland\",\n                    scale = \"medium\", returnclass = \"sf\")\nd &lt;- get_elev_raster(locations = map, z = 9, clip = \"locations\")\nterra::plot(rast(d), plg = list(title = \"Elevation (m)\"))"
-  },
-  {
-    "objectID": "w02/slides.html#street-maps",
-    "href": "w02/slides.html#street-maps",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Street Maps",
-    "text": "Street Maps\n\n\nCode\nlibrary(osmdata)\nplacebb &lt;- getbb(\"Barcelona\")\nhospitals &lt;- placebb %&gt;% opq() %&gt;%\n  add_osm_feature(key = \"amenity\", value = \"hospital\") %&gt;%\n  osmdata_sf()\nmotorways &lt;- placebb %&gt;% opq() %&gt;%\n  add_osm_feature(key = \"highway\", value = \"motorway\") %&gt;%\n  osmdata_sf()\nlibrary(leaflet)\nleaflet() |&gt;  addTiles() |&gt;\n  addPolylines(data = motorways$osm_lines, color = \"black\") |&gt;\n  addPolygons(data = hospitals$osm_polygons,\n              label = hospitals$osm_polygons$name)"
-  },
-  {
-    "objectID": "w02/slides.html#world-bank-dataverse",
-    "href": "w02/slides.html#world-bank-dataverse",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "World Bank Dataverse",
-    "text": "World Bank Dataverse\nKey package: wbstats\n\n\nCode\nlibrary(wbstats)\nd &lt;- wb_data(indicator = \"MO.INDEX.HDEV.XQ\",\n             start_date = 2011, end_date = 2011)\nlibrary(rnaturalearth)\nlibrary(mapview)\nmap &lt;- ne_countries(continent = \"Africa\", returnclass = \"sf\")\nmap &lt;- dplyr::left_join(map, d, by = c(\"iso_a3\" = \"iso3c\"))\nmapview(map, zcol = \"MO.INDEX.HDEV.XQ\")"
-  },
-  {
-    "objectID": "w02/slides.html#references",
-    "href": "w02/slides.html#references",
-    "title": "Week 2: How Do Maps Work?",
+    "objectID": "w03/index.html#references",
+    "href": "w03/index.html#references",
+    "title": "Week 3: Basic Geospatial Operations",
     "section": "References",
-    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\nMonmonier, Mark. 2018. How to Lie with Maps. University of Chicago Press.\n\n\n\n\n\nWeek 2: How Do Maps Work?"
+    "text": "References"
+  },
+  {
+    "objectID": "w03/slides.html#hw1-rightarrow-hw2",
+    "href": "w03/slides.html#hw1-rightarrow-hw2",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "HW1 \\(\\rightarrow\\) HW2",
+    "text": "HW1 \\(\\rightarrow\\) HW2\n\nCongrats on finishing HW1! You now know how to create geometries with sf and terra\nSo now, what can you do with them?\nFor example, we’d like to be able to say things like:\n\n“The new lamppost cannot be placed at \\((x, y)\\), since there is already a building there!”\n“There are \\(N_1\\) lampposts in County 1, and \\(N_2\\) lampposts in County 2”\n“The average resident in Neighborhood A lives 2 km away from their nearest bus stop"
+  },
+  {
+    "objectID": "w03/slides.html#references",
+    "href": "w03/slides.html#references",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\nPPOL 6805 Week 3: Geospatial Operations"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science",
     "section": "",
-    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2024, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn Room 204. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 28\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 4\n\n\n\n\n\nNo matching items",
+    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2024, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn Room 204. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 28\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 4\n\n\n\n\nWeek 3: Basic Geospatial Operations\n\n\nSep 11\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Home"
     ]
@@ -1243,7 +1271,7 @@
     "href": "syllabus.html#assignment-structure",
     "title": "PPOL 6805 / DSAN 6750",
     "section": "Assignment Structure",
-    "text": "Assignment Structure\nOn the basis of the guidelines we’ve developed for courses offered through DSAN, this course will have one in-class midterm but no final exam! Instead, you will work on a final project throughout the second half of the course. Each of the four units will involve a homework assignment, and final grades will be determined using the following weighting scheme:\n\n\n\nCategory\nPercent of Final Grade\n\n\n\n\nIn-Class Midterm\n30%\n\n\nFinal Project\n30%\n\n\nHomeworks\n40%\n\n\nHW1: GIS Concepts Checkpoint\n8%\n\n\nHW2: GIS Concepts Finish Line\n8%\n\n\nHW3: GIS Libraries Checkpoint\n8%\n\n\nHW4: GIS Libraries Finish Line\n8%\n\n\nHW5: Geospatial Data Analysis Checkpoint\n8%\n\n\n\nThe course does not have any “official” prerequisites, but a general comfort with Python is strongly recommended. If you have never used Python before, however (or if you haven’t used it in a while and feel like your skills are rusty), you can browse the materials on the Resources page!",
+    "text": "Assignment Structure\nOn the basis of the guidelines we’ve developed for courses offered through DSAN, this course will have one in-class midterm but no final exam! Instead, you will work on a final project throughout the second half of the course. Each of the four units will involve a homework assignment, and final grades will be determined using the following weighting scheme:\n\n\n\nCategory\nPercent of Final Grade\n\n\n\n\nIn-Class Midterm (Nov 6)\n30%\n\n\nFinal Project\n30%\n\n\nHomeworks\n40%\n\n\nHW1: GIS Concepts\n10%\n\n\nHW2: Geospatial Operations\n10%\n\n\nHW3: Mapping Libraries\n10%\n\n\nHW4: Clustering\n10%\n\n\n\nThe course does not have any “official” prerequisites, but a general comfort with R and/or Python is strongly recommended. If you have never used Python before, however (or if you haven’t used it in a while and feel like your skills are rusty), you can browse the materials on the Resources page!",
     "crumbs": [
       "Syllabus"
     ]
@@ -1253,7 +1281,7 @@
     "href": "syllabus.html#course-topics-calendar",
     "title": "PPOL 6805 / DSAN 6750",
     "section": "Course Topics / Calendar",
-    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, please let me know.\n\n\n\n\n\n\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Concepts\n1\nAug 28\nIntroduction to GIS\n\n\n\n2\nSep 4\nHow Do Maps Work?\n\n\n\n\nSep 11 (Wednesday)\n[Deliverable] HW1: GIS Concepts Checkpoint\n\n\n\n3\nSep 11\n[Deliverable] HW1: GIS Concepts Checkpoint\nGIS Nuts and Bolts\n\n\n\n\nSep 13 (Friday)\n[Deliverable] HW2: GIS Concepts Finish Line\n\n\nUnit 2: GIS Libraries\n4\nSep 18\nGIS Libraries Intro\n\n\n\n5\nSep 25\nGIS Libraries Part 2\n\n\n\n\nSep 27 (Friday)\n[Deliverable] HW3: GIS Libraries Checkpoint\n\n\n\n6\nOct 2\nGIS Libraries Part 3\n\n\n\n\nOct 4 (Friday)\n[Deliverable] HW4: GIS Libraries Finish Line\n\n\nUnit 3: Spatial Data Science\n7\nOct 9\nSpatial Data Science Intro\n\n\n\n8\nOct 16\nSpatial Data Science Part 2\n\n\n\n9\nOct 23\nSpatial Data Science Part 3\n\n\n\n\nOct 25 (Friday)\n[Deliverable] HW5: Geospatial Data Analysis Checkpoint\n\n\n\n10\nOct 30\nSpatial Data Science Part 4\n\n\n\n11\nNov 6\nIn-Class Midterm\n\n\nUnit 4: Applications\n12\nNov 13\nApplications: Public Policy\n\n\n\n13\nNov 20\nApplications: Operations Research\n\n\n\n\nNov 27\nNo Class (Fall Break)\n\n\n\n14\nDec 4\nApplications: Climate Change and Ecological Data\n\n\n\n15\nDec 11\nFinal Presentations\n\n\n\n\nDec 13 (Friday)\n[Deliverable] Final Project",
+    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, please let me know.\n\n\n\n\n\n\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Concepts\n1\nAug 28\nIntroduction to GIS\n\n\n\n2\nSep 4\nHow Do Maps Work?\nHW1 Release\n\n\nUnit 2: Geospatial Operations\n3\nSep 11\nBasic Geospatial Operations\n[Deliverable] HW1: GIS Concepts\n\n\n\n4\nSep 18\nSlightly-More-Complex Geospatial Operations\nHW2 Release\n\n\nUnit 3: Mapping Libraries\n5\nSep 25\nStatic Mapping Libraries\n[Deliverable] HW2: Geospatial Operations\n\n\n\n6\nOct 2\nInteractive Mapping Libraries\nHW3 Release\n\n\nUnit 4: Spatial Data Science\n7\nOct 9\nSpatial Autocorrelation\n[Deliverable] HW3: Mapping Libraries\n\n\n\n8\nOct 16\nPoint Patterns and Clustering\nHW4 Release\n\n\n\n9\nOct 23\nSpatial Interpolation\n[Deliverable] HW4: Clustering\n\n\n\n10\nOct 30\nSpatial Regression\nMidterm Practice Problems Release\n\n\n\n11\nNov 6\nIn-Class Midterm\n\n\nUnit 5: Applications\n12\nNov 13\nApplications: Public Policy\n\n\n\n13\nNov 20\nApplications: Urban Planning\n\n\n\n\nNov 27\nNo Class (Fall Break)\n\n\n\n14\nDec 4\nApplications: Climate Change and Ecological Data\n\n\n\n15\nDec 11\nFinal Presentations\n\n\n\n\nDec 13 (Friday)\n[Deliverable] Final Project",
     "crumbs": [
       "Syllabus"
     ]
@@ -1263,7 +1291,7 @@
     "href": "syllabus.html#assignment-distribution-submission-and-grading",
     "title": "PPOL 6805 / DSAN 6750",
     "section": "Assignment Distribution, Submission, and Grading",
-    "text": "Assignment Distribution, Submission, and Grading\nThe programming assignments for the course will be managed through Google Classroom. This means that, to work on and submit the assignments, you will use the following workflow:\n\nOpen the .ipynb file for the assignment from within Google Classroom\nWork on the problems within the file, saving your progress early and often! You can try things out or create drafts of your solutions however you’d like (for example, in VSCode or JupyterLab or any other IDE), but your final submission for each assignment must be submitted through the Google Classroom interface!\nSubmit the completed version of the assignment by clicking the blue “Hand in” button on the assignment page.\n\nThe interface allows you to unsubmit and continue working on an assignment, for example if you find a mistake, but be careful and make sure you resubmit once you’ve fixed the mistake, since submissions will not be accepted after the grace period for late submission has ended.",
+    "text": "Assignment Distribution, Submission, and Grading\nThe programming assignments for the course will be managed through Posit.Cloud This means that, to work on and submit the assignments, you will use the following workflow:\n\nClick the “Start” button for the assignment within the Posit.Cloud interface, which should immediately create and display a new in-browser RStudio workspace for you.\nWork on the problems within the project’s .qmd file, saving your progress early and often! You can try things out or create drafts of your solutions locally if you’d like (for example, in VSCode or JupyterLab or any other IDE), but the .qmd file within your RStudio project will be considered your “official” submission for each assignment.",
     "crumbs": [
       "Syllabus"
     ]

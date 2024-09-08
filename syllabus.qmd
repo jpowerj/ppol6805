@@ -6,6 +6,8 @@ author: "Prof. Jeff Jacobs"
 email: "jj1088@georgetown.edu"
 term: "Fall 2024, Georgetown University"
 latex-auto-install: false
+editor:
+  render-on-save: true
 format:
   html:
     output-file: "syllabus.html"
@@ -63,7 +65,7 @@ On the basis of the guidelines we've developed for courses offered through DSAN,
 </thead>
 <tbody>
 <tr>
-    <td>In-Class Midterm</td>
+    <td>In-Class Midterm (Nov 6)</td>
     <td>30%</td>
 </tr>
 <tr>
@@ -75,30 +77,26 @@ On the basis of the guidelines we've developed for courses offered through DSAN,
     <td>40%</td>
 </tr>
 <tr>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW1**: {{< var hw1.title >}}"></span></td>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw1.pct >}}%"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW1**: {{< var hw.1.title >}}"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.1.pct >}}%"></span></td>
 </tr>
 <tr>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW2**: {{< var hw2.title >}}"></span></td>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw2.pct >}}%"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW2**: {{< var hw.2.title >}}"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.2.pct >}}%"></span></td>
 </tr>
 <tr>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW3**: {{< var hw3.title >}}"></span></td>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw3.pct >}}%"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW3**: {{< var hw.3.title >}}"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.3.pct >}}%"></span></td>
 </tr>
 <tr>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW4**: {{< var hw4.title >}}"></span></td>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw4.pct >}}%"></span></td>
-</tr>
-<tr>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW5**: {{< var hw5.title >}}"></span></td>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw5.pct >}}%"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW4**: {{< var hw.4.title >}}"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.4.pct >}}%"></span></td>
 </tr>
 </tbody>
 </table>
 ```
 
-The course does not have any "official" prerequisites, but a general comfort with **Python** is strongly recommended. If you have never used Python before, however (or if you haven't used it in a while and feel like your skills are rusty), you can browse the materials on the <a href='./resources.html' target='_blank'>Resources page</a>!
+The course does not have any "official" prerequisites, but a general comfort with **R** and/or **Python** is strongly recommended. If you have never used Python before, however (or if you haven't used it in a while and feel like your skills are rusty), you can browse the materials on the [Resources page](resources.qmd)!
 
 ## Course Topics / Calendar
 
@@ -128,110 +126,80 @@ If you find any discrepancies between this schedule and Georgetown's [official c
 <tr>
     <td><span data-qmd="**Unit 1**: GIS Concepts"></span></td>
     <td>1</td>
-    <td><span data-qmd="{{< var w01.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var w01.title >}}](./w01/)"></span></td>
+    <td><span data-qmd="{{< var weeks.1.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.1.title >}}](./w01/)"></span></td>
 </tr>
 <tr>
     <td></td>
     <td>2</td>
-    <td><span data-qmd="{{< var w02.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var w02.title >}}](./w02/)"></span></td>
-</tr>
-<tr>
-    <td></td>
-    <td></td>
-    <td><span data-qmd="*Sep 11 (Wednesday)*"></span></td>
-    <td><span data-qmd="*[Deliverable] HW1: {{< var hw1.title >}}*"></span></td>
-</tr>
-<tr>
-    <td></td>
-    <td>3</td>
-    <td><span data-qmd="{{< var w03.date-md >}}"></span></td>
-    <td><span data-qmd="*[Deliverable] HW1: {{< var hw1.title >}}*"></span><br><span data-qmd="[{{< var w03.title >}}](./w03/)"></span></td>
-</tr>
-<tr>
-    <td></td>
-    <td></td>
-    <td><span data-qmd="*Sep 13 (Friday)*"></span></td>
-    <td><span data-qmd="*[Deliverable] HW2: {{< var hw2.title >}}*"></span></td>
+    <td><span data-qmd="{{< var weeks.2.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.2.title >}}](./w02/)"></span><br><span data-qmd="*HW1 Release*"></span></td>
 </tr>
 <tr class='new-unit'>
-    <td><span data-qmd="**Unit 2**: GIS Libraries"></span></td>
+    <td><span data-qmd="**Unit 2:** Geospatial Operations"></span></td>
+    <td>3</td>
+    <td><span data-qmd="{{< var weeks.3.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.3.title >}}](./w03/)"></span><br><span data-qmd="*[Deliverable] HW1: {{< var hw.1.title >}}*"></span></td>
+</tr>
+<tr>
+    <td></td>
     <td>4</td>
-    <td><span data-qmd="{{< var w04.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var w04.title >}}](./w04/)"></span></td>
+    <td><span data-qmd="{{< var weeks.4.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.4.title >}}](./w04/)"></span><br><span data-qmd="*HW2 Release*"></span></td>
 </tr>
-<tr>
-    <td></td>
+<tr class='new-unit'>
+    <td><span data-qmd="**Unit 3:** Mapping Libraries"></span></td>
     <td>5</td>
-    <td><span data-qmd="{{< var w05.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var w05.title >}}](./w05/)"></span></td>
-</tr>
-<tr>
-    <td></td>
-    <td></td>
-    <td><span data-qmd="*Sep 27 (Friday)*"></span></td>
-    <td><span data-qmd="*[Deliverable] HW3: {{< var hw3.title >}}*"></span></td>
+    <td><span data-qmd="{{< var weeks.5.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.5.title >}}](./w05/)"></span><br><span data-qmd="*[Deliverable] HW2: {{< var hw.2.title >}}*"></span></td>
 </tr>
 <tr>
     <td></td>
     <td>6</td>
-    <td><span data-qmd="{{< var w06.date-md >}}"></span></td>
-    <td><span data-qmd="[{{<var w06.title >}}](./w06/)"></span></td>
-</tr>
-<tr>
-    <td></td>
-    <td></td>
-    <td><span data-qmd="*Oct 4 (Friday)*"></span></td>
-    <td><span data-qmd="*[Deliverable] HW4: {{< var hw4.title >}}*"></span></td>
+    <td><span data-qmd="{{< var weeks.6.date-md >}}"></span></td>
+    <td><span data-qmd="[{{<var weeks.6.title >}}](./w06/)"></span><br><span data-qmd="*HW3 Release*"></span></td>
 </tr>
 <tr class='new-unit'>
-    <td><span data-qmd="**Unit 3:** Spatial Data Science"></span></td>
+    <td><span data-qmd="**Unit 4:** Spatial Data Science"></span></td>
     <td>7</td>
-    <td><span data-qmd="{{< var w07.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var w07.title >}}](./w07/)"></span></td>
+    <td><span data-qmd="{{< var weeks.7.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.7.title >}}](./w07/)"></span><br><span data-qmd="*[Deliverable] HW3: {{< var hw.3.title >}}*"></span></td>
 </tr>
 <tr>
     <td></td>
     <td>8</td>
-    <td><span data-qmd="{{< var w08.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var w08.title >}}](./w08/)"></span></td>
+    <td><span data-qmd="{{< var weeks.8.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.8.title >}}](./w08/)"></span><br><span data-qmd="*HW4 Release*"></span></td>
 </tr>
 <tr>
     <td></td>
     <td>9</td>
-    <td><span data-qmd="{{< var w09.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var w09.title >}}](./w09/)"></span></td>
-</tr>
-<tr>
-    <td></td>
-    <td></td>
-    <td><span data-qmd="*Oct 25 (Friday)*"></span></td>
-    <td><span data-qmd="*[Deliverable] HW5: {{< var hw5.title >}}*"></span></td>
+    <td><span data-qmd="{{< var weeks.9.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.9.title >}}](./w09/)"></span><br><span data-qmd="*[Deliverable] HW4: {{< var hw.4.title >}}*"></span></td>
 </tr>
 <tr>
     <td></td>
     <td>10</td>
-    <td><span data-qmd="{{< var w10.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var w10.title >}}](./w10/)"></span></td>
+    <td><span data-qmd="{{< var weeks.10.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.10.title >}}](./w10/)"></span><br><span data-qmd="*Midterm Practice Problems Release*"></span></td>
 </tr>
 <tr>
     <td></td>
     <td>11</td>
-    <td><span data-qmd="{{< var w11.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var w11.title >}}](./w11/)"></span></td>
+    <td><span data-qmd="{{< var weeks.11.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.11.title >}}](./w11/)"></span></td>
 </tr>
 <tr class='new-unit'>
-    <td><span data-qmd="**Unit 4**: Applications"></span></td>
+    <td><span data-qmd="**Unit 5**: Applications"></span></td>
     <td>12</td>
-    <td><span data-qmd="{{< var w12.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var w12.title >}}](./w12/)"></span></td>
+    <td><span data-qmd="{{< var weeks.12.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.12.title >}}](./w12/)"></span></td>
 </tr>
 <tr>
     <td></td>
     <td>13</td>
-    <td><span data-qmd="{{< var w13.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var w13.title >}}](./w13/)"></span></td>
+    <td><span data-qmd="{{< var weeks.13.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.13.title >}}](./w13/)"></span></td>
 </tr>
 <tr>
     <td></td>
@@ -242,14 +210,14 @@ If you find any discrepancies between this schedule and Georgetown's [official c
 <tr>
     <td></td>
     <td>14</td>
-    <td><span data-qmd="{{< var w14.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var w14.title >}}](./w14/)"></span></td>
+    <td><span data-qmd="{{< var weeks.14.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.14.title >}}](./w14/)"></span></td>
 </tr>
 <tr>
     <td></td>
     <td>15</td>
-    <td><span data-qmd="{{< var w15.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var w15.title >}}](./w15/)"></span></td>
+    <td><span data-qmd="{{< var weeks.15.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.15.title >}}](./w15/)"></span></td>
 </tr>
 <tr>
     <td></td>
@@ -263,13 +231,10 @@ If you find any discrepancies between this schedule and Georgetown's [official c
 
 ## Assignment Distribution, Submission, and Grading
 
-The programming assignments for the course will be managed through Google Classroom. This means that, to work on and submit the assignments, you will use the following workflow:
+The programming assignments for the course will be managed through [Posit.Cloud]({{< var course.posit_url >}}) This means that, to work on and submit the assignments, you will use the following workflow:
 
-1. Open the `.ipynb` file for the assignment from within Google Classroom
-2. Work on the problems within the file, saving your progress early and often! You can **try things out** or **create drafts** of your solutions however you'd like (for example, in VSCode or JupyterLab or any other IDE), but your final submission for each assignment must be submitted through the Google Classroom interface!
-3. Submit the completed version of the assignment by clicking the blue "Hand in" button on the assignment page.
-
-The interface allows you to **unsubmit** and continue working on an assignment, for example if you find a mistake, but be careful and make sure you **resubmit** once you've fixed the mistake, since submissions will **not be accepted** after the grace period for late submission has ended.
+1. Click the "Start" button for the assignment within the Posit.Cloud interface, which should immediately create and display a new in-browser RStudio workspace for you.
+2. Work on the problems within the project's `.qmd` file, saving your progress early and often! You can **try things out** or **create drafts** of your solutions locally if you'd like (for example, in VSCode or JupyterLab or any other IDE), but the `.qmd` file within your RStudio project will be considered your "official" submission for each assignment.
 
 ## Late Policy
 

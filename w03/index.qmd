@@ -1,0 +1,66 @@
+---
+title: "Week 3: {{< var weeks.3.title >}}"
+subtitle: "{{< var course.slides-subtitle >}}"
+author: "{{< var course.author >}}"
+institute: "{{< var course.institute >}}"
+date: "September 11, 2024"
+date-format: full
+lecnum: 3
+categories:
+  - "Class Sessions"
+bibliography: "../_PPOL6805.bib"
+# Shared across formats:
+echo: true
+code-fold: show
+css: "../dsan-globals/jjstyles.css"
+html-math-method: mathjax
+# Format-specific settings:
+format:
+  revealjs:
+    output-file: "slides.html"
+    slide-number: true
+    scrollable: true
+    link-external-icon: true
+    link-external-newwindow: true
+    footer: "{{< var weeks.3.footer >}}"
+    include-in-header:
+      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>"
+    theme: [default]
+    revealjs-plugins:
+      - simplemenu
+    simplemenu:
+      flat: true
+      barhtml:
+        header: "<div class='menubar'><span style='position: absolute; left: 8; padding-left: 8px;'><a href='./index.html'>&larr; Return to Notes</a></span><ul class='menu'></ul></div>"
+      scale: 0.5
+  html:
+    output-file: "index.html"
+    html-math-method: mathjax
+    df-print: kable
+---
+
+::: {.content-visible unless-format="revealjs"}
+
+<center class='mb-3'>
+<a class="h2" href="./slides.html" target="_blank">Open slides in new tab &rarr;</a>
+</center>
+
+:::
+
+# How to *Do Things* with Geometries {data-stack-name="Geospatial Operations"}
+
+![From the [`sf` Cheatsheet](https://rstudio.github.io/cheatsheets/sf.pdf){target='_blank'}](images/sf_full.svg){fig-align="center"}
+
+## HW1 $\rightarrow$ HW2 {.crunch-title .crunch-ul .inline-90 .crunch-li-8}
+
+* Congrats on finishing HW1! You now know how to **create** geometries with `sf` and `terra`
+* So now, what can you **do** with them?
+* For example, we'd like to be able to say things like:
+    * *"The new lamppost cannot be placed at $(x, y)$, since there is already a building there!"*
+    * *"There are $N_1$ lampposts in County 1, and $N_2$ lampposts in County 2"*
+    * *"The average resident in Neighborhood A lives 2 km away from their nearest bus stop*
+
+## References
+
+::: {#refs}
+:::

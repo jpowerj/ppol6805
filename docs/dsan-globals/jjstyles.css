@@ -76,8 +76,16 @@ a.disabled {
 }
 
 .crunch-li li {
-  margin-top: unset !important;
-  /* margin-bottom: 2px !important; */
+  margin-top: 2px !important;
+  margin-bottom: 2px !important;
+}
+.crunch-li-5 li {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+.crunch-li-8 li {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
 }
 
 .crunch-math mjx-container {
@@ -103,8 +111,16 @@ a.disabled {
   margin-bottom: 2px !important;
 }
 
+details {
+  margin-bottom: 0px !important;
+}
+
 figcaption {
   text-align: center !important;
+}
+
+.inline-90 .math.inline {
+  font-size: 90% !important;
 }
 
 .new-unit {
@@ -155,6 +171,9 @@ table thead th {
   background-clip: padding-box;
 }
 
+summary {
+  font-size: 70% !important;
+}
 
 /* td centering */
 .tdc {
