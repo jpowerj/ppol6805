@@ -1,0 +1,46 @@
+## Getting the ISO3 Codes {.smaller}
+
+:::: {.columns}
+::: {.column width="50%"}
+
+* Pulling my PhD card for just one slide...
+* **"Country"** can be ambiguous/arbitrary (UK? England / Wales / Scotland / Northern Ireland?)
+* **"Continent"** can be **even more** ambiguous/arbitrary
+* $\implies$ **choose** a definition, **cite** it, use **ISO**, and be willing to **change** it on the basis of audience/peer review/global geopolitical changes/etc.
+* Here we'll use the UNEP (UN Environment Program) definition of continents, from `rworldmap`
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: get-iso3
+library(tidyverse)
+library(rworldmap)
+afr_countries <- rworldmap::countryRegions |>
+  filter(GEO3major == "Africa") |>
+  select(ISO3, ADMIN, GEO3major)
+afr_countries |> head()
+```
+
+:::
+::::
+
+
+```{r}
+#| label: get-geos
+#| fig-align: center
+
+#asia <- ne_countries(continent = "Asia")
+usa <- ne_countries(country = "United States of America", scale = 10)
+us_map <- mapview(usa, label = "geounit", legend = FALSE)
+us_map
+```
+
+## Centroid
+
+```{r}
+#| label: us-centroid
+library(sf)
+usa_cent <- sf::st_centroid(usa)
+us_map + mapview(usa_cent)
+```

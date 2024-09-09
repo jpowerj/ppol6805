@@ -18,13 +18,14 @@ html-math-method: mathjax
 format:
   revealjs:
     output-file: "slides.html"
+    df-print: kable
     slide-number: true
     scrollable: true
     link-external-icon: true
     link-external-newwindow: true
     footer: "{{< var weeks.3.footer >}}"
     include-in-header:
-      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>"
+      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'><link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css'><script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js'></script>"
     theme: [default]
     revealjs-plugins:
       - simplemenu
@@ -47,7 +48,7 @@ format:
 
 :::
 
-# How to *Do Things* with Geometries {data-stack-name="Geospatial Operations"}
+# How to *Do Things* with Geometries {data-stack-name="Overview"}
 
 ![From the [`sf` Cheatsheet](https://rstudio.github.io/cheatsheets/sf.pdf){target='_blank'}](images/sf_full.svg){fig-align="center"}
 
@@ -59,6 +60,216 @@ format:
     * *"The new lamppost cannot be placed at $(x, y)$, since there is already a building there!"*
     * *"There are $N_1$ lampposts in County 1, and $N_2$ lampposts in County 2"*
     * *"The average resident in Neighborhood A lives 2 km away from their nearest bus stop*
+
+## First Things First: Loading and Saving
+
+* Note how there were **no data files** in HW1 😱
+* From HW2 onwards (and in your GIS life), we'll:
+  * Download from e.g. city Open Data Portals: geo data **files**, but also loading **on-the-fly** (this week)
+  * Summarize/aggregate (this week and next week)
+  * **Visualize** findings ("Mapping Libraries" unit)
+
+# Vector Formats {data-stack-name="Data Formats"}
+
+## Shapefiles (`.shp` et al.)
+
+A shape*"file"* is actually **(at least) three separate files** bundled together:
+
+* <span class="badge rounded-pill text-bg-secondary"><i class='bi bi-exclamation-circle pe-1'></i> Mandatory</span> `.shp`: Containing feature geometries
+* <span class="badge rounded-pill text-bg-secondary"><i class='bi bi-exclamation-circle pe-1'></i> Mandatory</span> `.shx`: Positional indices
+* <span class="badge rounded-pill text-bg-secondary"><i class='bi bi-exclamation-circle pe-1'></i> Mandatory</span> `.dbf`: Data attributes
+* <span class="badge rounded-pill text-bg-light"><i class='bi bi-question-circle pe-1'></i> Optional</span> `.prj`: Coordinate reference system
+* <span class="badge rounded-pill text-bg-light"><i class='bi bi-question-circle pe-1'></i> Optional</span> `.xml`: Metadata
+
+## Shapefiles {.crunch-title .smaller}
+
+Let's see what's inside the shapefile we first saw in Week 1, containing data on DC's **Census Tracts**: [Census Tracts in 2020](https://opendata.dc.gov/datasets/DCGIS::census-tracts-in-2020/explore){target='_blank'} 
+
+![DC Census Tracts (with the Georgetown campus tract highlighted!) from [OpenData.DC.gov](https://opendata.dc.gov/datasets/DCGIS::census-tracts-in-2020/explore){target='_blank'}](images/open_data_dc.jpg){fig-align="center"}
+
+## Shapefile Anatomy
+
+![From @rodrigue_geography_2016](images/esri_shapefile_model.webp){fig-align="center"}
+
+## GeoJSON / TopoJSON (`.geojson`)
+
+:::: {.columns}
+::: {.column width="50%"}
+
+* **J**ava**S**cript **O**bject **N**otation: General cross-platform format
+* Useful when data is too complex for e.g. `.csv`
+* [TopoJSON](https://github.com/topojson/topojson){target='_blank'} = Memory-efficient GeoJSON
+* Bonus: [Inline preview](https://gist.github.com/jpowerj/880fb251add1c7d414bd758c77038c35){target='_blank'} on GitHub!
+
+:::
+::: {.column width="50%"}
+
+``` {.json filename="my_data.geojson"}
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [30, 20], [45, 40],
+            [10, 40], [30, 20]
+          ]
+        ]
+      },
+      "properties": {
+        "color": "green",
+        "area": 3565747
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [15, 5], [40, 10],
+            [10, 20], [5, 10], 
+            [15, 5]
+          ]
+        ]
+      },
+      "properties": {
+        "color": "red",
+        "area": 3272386
+      }
+    }
+  ]
+}
+```
+
+:::
+::::
+
+## GeoPackage (`.gpkg`)
+
+* Open-source (non-proprietary) [data format standard](https://www.geopackage.org/){target='_blank'}
+
+# Raster Formats
+
+## GeoTIFF (`.tif`)
+
+* Based on TIFF format developed at NASA.
+
+## NetCDF (`.nc4`)
+
+* Used in **earth sciences**, as format for data sources measured and distributed multiple times per day over large full-country or full-continent areas.
+
+## Coordinate Reference Systems (CRS) {.crunch-title}
+
+* **EPSG** (European Petroleum Survey Group) Registry: Most common way to specify a CRS
+  * For example, **4326** is the EPSG code for the WGS84 coordinate system
+* **PROJ**: Rather than opaque numeric code like EPSG, uses **plaintext** "proj-strings" containing parameter info: datum, ellipsoid, projection, and units (e.g. meters). Example: `PROJ4` code `EPSG:4326` is represented as
+
+  ```
+  +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
+  ```
+
+* **WKT**: [Lengthy but human-readable descriptions](https://en.wikipedia.org/wiki/Well-known_text_representation_of_coordinate_reference_systems){target='_blank'}
+
+# Geospatial Operations {data-stack-name="Data Operations"}
+
+Here we'll look at **Africa**:
+
+* The least "stretched" by different projections,
+* Interesting geometric properties like countries-inside-of-countries (South Africa, Gambia), and
+* Will be helpful for comparing/contrasting different ways of defining "neighbors"/neighborhoods
+
+## Getting the Geometries {.smaller .crunch-title .fix-mapview}
+
+Using [`rnaturalearth`](http://ropensci.github.io/rnaturalearth/){target='_blank'} with [`mapview`](https://r-spatial.github.io/mapview/){target='_blank'}
+
+## France
+
+```{r}
+#| label: france-mapview
+library(rnaturalearth)
+library(mapview)
+france <- ne_countries(country = "France", scale = 50)
+(france_map <- mapview(france, label = "geounit", legend = FALSE))
+```
+
+## Centroid of France
+
+```{r}
+#| label: france-centroid
+library(sf)
+france_cent <- sf::st_centroid(france)
+france_map + mapview(france_cent, label = "Centroid", legend = FALSE)
+```
+
+## One We Already Saw: Union {.smaller .crunch-title .leaflet-375}
+
+Computing the **union** of all geometries in the `sf` via `sf::st_union()`
+
+```{r}
+#| label: africa-union
+library(leaflet.extras2)
+africa <- ne_countries(continent = "Africa", scale = 50)
+africa_union <- sf::st_union(africa)
+africa_map <- mapview(africa, label="geounit", legend=FALSE)
+africa_union_map <- mapview(africa_union, label="st_union(africa)", legend=FALSE)
+africa_map | africa_union_map
+```
+
+## Helpful for Rasterizing: BBox
+
+```{r}
+#| label: africa-bbox
+africa_bbox <- sf::st_bbox(africa)
+africa_bbox_map <- mapview(africa_bbox, label="st_bbox(africa)", legend=FALSE)
+africa_map | africa_bbox_map
+```
+
+## Convex Hulls by Country
+
+```{r}
+#| label: africa-countries-convex-hull
+africa_countries_cvx <- sf::st_convex_hull(africa)
+africa_countries_cvx_map <- mapview(africa_countries_cvx, label="geounit", legend=FALSE)
+africa_map | africa_countries_cvx_map
+```
+
+## Convex Hull of Continent
+
+Use `st_union()` first:
+
+```{r}
+#| label: africa-convex_hull
+africa_cvx <- africa |> st_union() |> st_convex_hull()
+africa_cvx_map <- mapview(africa_cvx, label="geounit", legend=FALSE)
+africa_map | africa_cvx_map
+```
+
+## One We Already Saw: Centroids {.smaller .crunch-title .leaflet-375}
+
+Computing the **centroid** of all geometries in the `sf` via `sf::st_centroid()`
+
+```{r}
+#| label: africa-centroids
+africa_cents <- sf::st_centroid(africa)
+africa_cents_map <- mapview(africa_cents, label="geounit", legend=FALSE)
+africa_map | africa_cents_map
+```
+
+## Pairs of Geometries {.smaller}
+
+```{r}
+#| label: lesotho-sa
+sa <- ne_countries(country = "South Africa", scale = 50)
+lesotho <- ne_countries(country = "Lesotho", scale=50)
+sf::st_relate(lesotho, sa)
+sf::st_covers(lesotho, sa)
+sf::st_covered_by(lesotho, sa)
+mapview(sa) + mapview(lesotho)
+```
 
 ## References
 
