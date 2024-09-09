@@ -1,5 +1,6 @@
 ---
 title: "Additional Resources"
+bibliography: "_PPOL6805.bib"
 format:
   html:
     link-external-icon: true
@@ -8,31 +9,45 @@ format:
 
 I'm going to try to dump **everything** I used to develop the course materials here---some of it I drew on explicitly (using images from books, for example), and the rest of it seeped into my mind implicitly over the course of preparing the materials. Explore them to see if their different approaches "click" in your mind more than my approach does!
 
-## Textbooks
+## Legally-Free Textbooks
+
+All of the following textbooks have been chosen specifically because they are available for **free**, legally, online. In fact, the online versions are especially nice since you can interact with the maps, copy-and-paste the code into your own notebooks to run and modify it, and so on.
 
 ### Using R
 
 The course's R material is drawn mainly from the following books, where I've tried to put them in order from most-used to least-used (in terms of the slides and assignments!):
 
-* Moraga, Paula (2023). [*Spatial Statistics for Data Science: Theory and Practice with R*](https://www.paulamoraga.com/book-spatial/){target='_blank'} (**Legally free online book!**)
-* Pebesma and Bivand (2024). *[Spatial Data Science with Applications in R](https://r-spatial.org/book/){target='_blank'}* (**Legally free online book!**)
-* Lovelace, Nowosad, and Muenchow (2024). *[Geocomputation with R](https://r.geocompx.org/preface){target='_blank'}* (**Also a legally free online book!**)
+* @moraga_spatial_2024: [*Spatial Statistics for Data Science: Theory and Practice with R*](https://www.paulamoraga.com/book-spatial/){target='_blank'}
+  * This book, along with the video tutorial from Sherrie Xie linked below, will get you up-to-speed on the main topics in this course!
+* @nowosad_geocomputation_2024: *[Geocomputation with R](https://r.geocompx.org/preface){target='_blank'}*
+* @pebesma_spatial_2023: *[Spatial Data Science with Applications in R](https://r-spatial.org/book/){target='_blank'}*
+  * This book is significantly more in-depth and goes into a level of detail that is probably overkill for this course, but if there is a particular topic you want to pursue for your final project, for example, this is where you can get a detailed account (from the creator of the `sf` library!)
 
 ### Using Python
 
-* Rey, Arribas-Bel, and Wolf (2023). *[Geographic Data Science with Python](https://geographicdata.science/book/intro.html){target='_blank'}* (**Yet another legally free online book!**)
+* @tenkanen_introduction_2024: *[Introduction to Python for Geographic Data Analysis](https://pythongis.org/){target='_blank'}*
+  * I found this book even more straightforward and organized as an overview, the only issue is that the portion on Spatial Data Science is not yet finished (as of early September 2024), so for that portion of the course @rey_geographic_2023 will be more helpful!
+* @rey_geographic_2023: *[Geographic Data Science with Python](https://geographicdata.science/book/intro.html){target='_blank'}*
+  * This book is especially nice if you're interested in applying GIS to public policy or the social sciences!
+
+## Illegally-Free Textbooks
+
+### Using R
+
+* @comber_geographical_2020: *Geographical Data Science and Spatial Data Analysis: An Introduction in R* \[[`epub`](https://www.dropbox.com/scl/fi/rv7nr0v9276pvt4a0w32q/Lex-Comber-Geographical-Data-Science-and-Spatial-Data-Analysis_-An-Introduction-in-R.epub?rlkey=b2naf1aipbte9qng1z7x7x0v0&dl=1){target='_blank'}\]
+  * I wanted to include this book as well because, if you're like me and you read ebooks on a device that requires `.epub` files... this is the only GIS book I was able to find in EPUB format!
 
 ## Videos
 
 * For the quickest and most accessible intro to GIS using R I've ever found, you can watch [Sherrie Xie](https://www.med.upenn.edu/apps/faculty/index.php/g275/p8649466){target='_blank'}'s R Consortium workshop talk, [*Analyzing Geospatial Data in R*](https://www.youtube.com/watch?v=DD7bXonh-_E){target='_blank'}
 * For a high-level overview, that will prepare you well for this course, see [Coursera: Introduction to GIS](https://www.coursera.org/learn/gis/lecture/S0HxB/why-gis-is-awesome){target='_blank'}, which is an online version of UC Davis' Introduction to GIS course.
 
-## Course Materials
+## Other Courses
 
 * If you're looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out [Data Over Space and Time](https://www.stat.cmu.edu/~cshalizi/dst/20/){target='_blank'}, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.
 
-## Cartography
+## Cartography in General
 
-* Mark Monmonier, *How to Lie with Maps* (3rd Edition, 2019). \[[EPUB](https://www.dropbox.com/scl/fi/6sb9hzp2ttugi9s6n5bnu/How-to-Lie-with-Maps_Mark-Monmonier.epub?rlkey=wx8yfep9rvhtsyldje5gdzp1t&dl=1){target='_blank'}\]
-* Denis Wood, *The Power of Maps* (1992) \[[PDF](https://www.dropbox.com/s/lpu5xsrip7oinir/Denis%20Wood%20%26%20John%20Fels%20-%20The%20power%20of%20maps%20%281992%2C%20The%20Guilford%20Press%29%20-%20libgen.li.pdf?dl=0){target='_blank'}\]
+* @monmonier_how_2018: *How to Lie with Maps* (3rd Edition). \[[`.epub`](https://www.dropbox.com/scl/fi/6sb9hzp2ttugi9s6n5bnu/How-to-Lie-with-Maps_Mark-Monmonier.epub?rlkey=wx8yfep9rvhtsyldje5gdzp1t&dl=1){target='_blank'}\]
+* Denis Wood, *The Power of Maps* (1992) \[[`.pdf`](https://www.dropbox.com/s/lpu5xsrip7oinir/Denis%20Wood%20%26%20John%20Fels%20-%20The%20power%20of%20maps%20%281992%2C%20The%20Guilford%20Press%29%20-%20libgen.li.pdf?dl=0){target='_blank'}\]
   * I found Chapter 2, *Maps Are Embedded in a History They Help Construct*, especially helpful!

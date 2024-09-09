@@ -10,11 +10,21 @@
     ]
   },
   {
-    "objectID": "resources.html#textbooks",
-    "href": "resources.html#textbooks",
+    "objectID": "resources.html#legally-free-textbooks",
+    "href": "resources.html#legally-free-textbooks",
     "title": "Additional Resources",
-    "section": "Textbooks",
-    "text": "Textbooks\n\nUsing R\nThe course’s R material is drawn mainly from the following books, where I’ve tried to put them in order from most-used to least-used (in terms of the slides and assignments!):\n\nMoraga, Paula (2023). Spatial Statistics for Data Science: Theory and Practice with R (Legally free online book!)\nPebesma and Bivand (2024). Spatial Data Science with Applications in R (Legally free online book!)\nLovelace, Nowosad, and Muenchow (2024). Geocomputation with R (Also a legally free online book!)\n\n\n\nUsing Python\n\nRey, Arribas-Bel, and Wolf (2023). Geographic Data Science with Python (Yet another legally free online book!)",
+    "section": "Legally-Free Textbooks",
+    "text": "Legally-Free Textbooks\nAll of the following textbooks have been chosen specifically because they are available for free, legally, online. In fact, the online versions are especially nice since you can interact with the maps, copy-and-paste the code into your own notebooks to run and modify it, and so on.\n\nUsing R\nThe course’s R material is drawn mainly from the following books, where I’ve tried to put them in order from most-used to least-used (in terms of the slides and assignments!):\n\nMoraga (2024): Spatial Statistics for Data Science: Theory and Practice with R\n\nThis book, along with the video tutorial from Sherrie Xie linked below, will get you up-to-speed on the main topics in this course!\n\nNowosad, Lovelace, and Muenchow (2024): Geocomputation with R\nPebesma and Bivand (2023): Spatial Data Science with Applications in R\n\nThis book is significantly more in-depth and goes into a level of detail that is probably overkill for this course, but if there is a particular topic you want to pursue for your final project, for example, this is where you can get a detailed account (from the creator of the sf library!)\n\n\n\n\nUsing Python\n\nTenkanen, Heikinheimo, and Whipp (2024): Introduction to Python for Geographic Data Analysis\n\nI found this book even more straightforward and organized as an overview, the only issue is that the portion on Spatial Data Science is not yet finished (as of early September 2024), so for that portion of the course Rey, Arribas-Bel, and Wolf (2023) will be more helpful!\n\nRey, Arribas-Bel, and Wolf (2023): Geographic Data Science with Python\n\nThis book is especially nice if you’re interested in applying GIS to public policy or the social sciences!",
+    "crumbs": [
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resources.html#illegally-free-textbooks",
+    "href": "resources.html#illegally-free-textbooks",
+    "title": "Additional Resources",
+    "section": "Illegally-Free Textbooks",
+    "text": "Illegally-Free Textbooks\n\nUsing R\n\nComber and Brunsdon (2020): Geographical Data Science and Spatial Data Analysis: An Introduction in R [epub]\n\nI wanted to include this book as well because, if you’re like me and you read ebooks on a device that requires .epub files… this is the only GIS book I was able to find in EPUB format!",
     "crumbs": [
       "Resources"
     ]
@@ -30,21 +40,21 @@
     ]
   },
   {
-    "objectID": "resources.html#course-materials",
-    "href": "resources.html#course-materials",
+    "objectID": "resources.html#other-courses",
+    "href": "resources.html#other-courses",
     "title": "Additional Resources",
-    "section": "Course Materials",
-    "text": "Course Materials\n\nIf you’re looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out Data Over Space and Time, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.",
+    "section": "Other Courses",
+    "text": "Other Courses\n\nIf you’re looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out Data Over Space and Time, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.",
     "crumbs": [
       "Resources"
     ]
   },
   {
-    "objectID": "resources.html#cartography",
-    "href": "resources.html#cartography",
+    "objectID": "resources.html#cartography-in-general",
+    "href": "resources.html#cartography-in-general",
     "title": "Additional Resources",
-    "section": "Cartography",
-    "text": "Cartography\n\nMark Monmonier, How to Lie with Maps (3rd Edition, 2019). [EPUB]\nDenis Wood, The Power of Maps (1992) [PDF]\n\nI found Chapter 2, Maps Are Embedded in a History They Help Construct, especially helpful!",
+    "section": "Cartography in General",
+    "text": "Cartography in General\n\nMonmonier (2018): How to Lie with Maps (3rd Edition). [.epub]\nDenis Wood, The Power of Maps (1992) [.pdf]\n\nI found Chapter 2, Maps Are Embedded in a History They Help Construct, especially helpful!",
     "crumbs": [
       "Resources"
     ]

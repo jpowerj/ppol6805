@@ -1,3 +1,15 @@
+@book{comber_geographical_2020,
+  title = {Geographical {{Data Science}} and {{Spatial Data Analysis}}: {{An Introduction}} in {{R}}},
+  shorttitle = {Geographical {{Data Science}} and {{Spatial Data Analysis}}},
+  author = {Comber, Lex and Brunsdon, Chris},
+  year = {2020},
+  month = dec,
+  publisher = {SAGE},
+  abstract = {We are in an age of big data where all of our everyday interactions and transactions generate data. Much of this data is spatial -- it is collected some-where -- and identifying analytical insight from trends and patterns in these increasing rich digital footprints presents a number of challenges.  Whilst other books describe different flavours of Data Analytics in R and other programming languages, there are none that consider Spatial Data (i.e. the location attached to data), or that consider issues of inference, linking Big Data, Geography, GIS, Mapping and Spatial Analytics.   This is a `learning by doing' textbook, building on the previous book by the same authors, An Introduction to R for Spatial Analysis and Mapping. It details the theoretical issues in analyses of Big Spatial Data and developing practical skills in the reader for addressing these with confidence.},
+  isbn = {978-1-5264-8543-4},
+  langid = {english}
+}
+
 @book{krygier_making_2016,
   title = {Making {{Maps}}, {{Third Edition}}: {{A Visual Guide}} to {{Map Design}} for {{GIS}}},
   shorttitle = {Making {{Maps}}, {{Third Edition}}},
@@ -35,16 +47,53 @@
   langid = {english}
 }
 
-@book{moraga_spatial_2023,
+@book{moraga_spatial_2024,
   title = {Spatial {{Statistics}} for {{Data Science}}: {{Theory}} and {{Practice}} with {{R}}},
   shorttitle = {Spatial {{Statistics}} for {{Data Science}}},
   author = {Moraga, Paula},
-  year = {2023},
-  month = dec,
+  year = {2024},
   publisher = {CRC Press},
-  abstract = {Spatial data is crucial to improve decision-making in a wide range of fields including environment, health, ecology, urban planning, economy, and society. Spatial Statistics for Data Science: Theory and Practice with R describes statistical methods, modeling approaches, and visualization techniques to analyze spatial data using R. The book provides a comprehensive overview of the varying types of spatial data, and detailed explanations of the theoretical concepts of spatial statistics, alongside fully reproducible examples which demonstrate how to simulate, describe, and analyze spatial data in various applications. Combining theory and practice, the book includes real-world data science examples such as disease risk mapping, air pollution prediction, species distribution modeling, crime mapping, and real state analyses. The book utilizes publicly available data and offers clear explanations of the R code for importing, manipulating, analyzing, and visualizing data, as well as the interpretation of the results. This ensures contents are easily accessible and fully reproducible for students, researchers, and practitioners.Key Features: Describes R packages for retrieval, manipulation, and visualization of spatial data. Offers a comprehensive overview of spatial statistical methods including spatial autocorrelation, clustering, spatial interpolation, model-based geostatistics, and spatial point processes. Provides detailed explanations on how to fit and interpret Bayesian spatial models using the integrated nested Laplace approximation (INLA) and stochastic partial differential equation (SPDE) approaches.},
-  googlebooks = {AgXlEAAAQBAJ},
-  isbn = {978-1-00-383230-0},
+  url = {https://www.paulamoraga.com/book-spatial/},
+  abstract = {"Spatial data is crucial to improve decision-making in a wide range of fields including environment, health, ecology, urban planning, economy, and society. Spatial Statistics for Data Science: Theory and Practice with R describes statistical methods, modeling approaches, and visualization techniques to analyze spatial data using R. The book provides a comprehensive overview of the varying types of spatial data, and detailed explanations of the theoretical concepts of spatial statistics, alongside fully reproducible examples which demonstrate how to simulate, describe, and analyze spatial data in various applications. Combining theory and practice, the book includes real-world data science examples such as disease risk mapping, air pollution prediction, species distribution modeling, crime mapping, and real state analyses. The book utilizes publicly available data and offers clear explanations of the R code for importing, manipulating, analyzing, and visualizing data, as well as the interpretation of the results. This ensures contents are easily accessible and fully reproducible for students, researchers, and practitioners"--},
+  isbn = {978-1-03-264148-5},
+  langid = {english}
+}
+
+@book{nowosad_geocomputation_2024,
+  title = {Geocomputation with {{R}}},
+  author = {Nowosad, Jakub and Lovelace, Robin and Muenchow, Jannes},
+  year = {2024},
+  publisher = {CRC Press},
+  url = {https://r.geocompx.org/},
+  abstract = {Geocomputation with R is for people who want to analyze, visualize, and model geographic data with open source software. The book provides a foundation for learning how to solve a wide range of geographic data analysis problems in a reproducible, and therefore scientifically sound and scalable way. The second edition features numerous updates, including the adoption of the high-performance terra package for all raster data processing, detailed coverage of the spherical geometry engine s2, updated information on coordinate reference systems and new content on openEO, STAC, COG, and gdalcubes. The data visualization chapter has been revamped around version 4 of the tmap package, providing a fresh perspective on creating publication-quality maps from the command line. The importance of the book is also highlighted in a new foreword by Edzer Pebesma.The book equips you with the knowledge and skills necessary to tackle a wide range of issues manifested in geographic data, including those with scientific, societal, and environmental implications. The book is especially well-suited to:  Data scientists and engineers interested in upskilling to handle spatial data. People with existing geographic data skills interested in developing powerful geosolutions via code.  Anyone who needs to work with spatial data in a reproducible and scalable way. The book is divided into three parts: Foundations, Extensions, and Applications, covering progressively more advanced topics. The exercises at the end of each chapter provide the necessary skills to address various geospatial problems, with solutions and supplementary materials available at r.geocompx.org/solutions/.},
+  googlebooks = {QZnK0AEACAAJ},
+  isbn = {978-1-03-222979-9},
+  langid = {english}
+}
+
+@book{pebesma_spatial_2023,
+  title = {Spatial {{Data Science}}: {{With Applications}} in {{R}}},
+  shorttitle = {Spatial {{Data Science}}},
+  author = {Pebesma, Edzer and Bivand, Roger},
+  year = {2023},
+  month = may,
+  publisher = {CRC Press},
+  url = {https://r-spatial.org/book/},
+  abstract = {Spatial Data Science introduces fundamental aspects of spatial data that every data scientist should know before they start working with spatial data. These aspects include how geometries are represented, coordinate reference systems (projections, datums), the fact that the Earth is round and its consequences for analysis, and how attributes of geometries can relate to geometries. In the second part of the book, these concepts are illustrated with data science examples using the R language. In the third part, statistical modelling approaches are demonstrated using real world data examples. After reading this book, the reader will be well equipped to avoid a number of major spatial data analysis errors.The book gives a detailed explanation of the core spatial software packages for R: sf for simple feature access, and stars for raster and vector data cubes -- array data with spatial and temporal dimensions. It also shows how geometrical operations change when going from a flat space to the surface of a sphere, which is what sf and stars use when coordinates are not projected (degrees longitude/latitude). Separate chapters detail a variety of plotting approaches for spatial maps using R, and different ways of handling very large vector or raster (imagery) datasets, locally, in databases, or in the cloud. The data used and all code examples are freely available online from https://r-spatial.org/book/. The solutions to the exercises can be found here: https://edzer.github.io/sdsr\_exercises/.},
+  isbn = {978-0-429-85944-1},
+  langid = {english}
+}
+
+@book{rey_geographic_2023,
+  title = {Geographic {{Data Science}} with {{Python}}},
+  author = {Rey, Sergio and {Arribas-Bel}, Dani and Wolf, Levi John},
+  year = {2023},
+  month = jun,
+  publisher = {CRC Press},
+  url = {https://geographicdata.science/book},
+  abstract = {This book provides the tools, the methods, and the theory to meet the challenges of contemporary data science applied to geographic problems and data. In the new world of pervasive, large, frequent, and rapid data, there are new opportunities to understand and analyze the role of geography in everyday life. Geographic Data Science with Python introduces a new way of thinking about analysis, by using geographical and computational reasoning, it shows the reader how to unlock new insights hidden within data. Key Features: \ding{108} Showcases the excellent data science environment in Python. \ding{108} Provides examples for readers to replicate, adapt, extend, and improve. \ding{108} Covers the crucial knowledge needed by geographic data scientists. It presents concepts in a far more geographic way than competing textbooks, covering spatial data, mapping, and spatial statistics whilst covering concepts, such as clusters and outliers, as geographic concepts. Intended for data scientists, GIScientists, and geographers, the material provided in this book is of interest due to the manner in which it presents geospatial data, methods, tools, and practices in this new field.},
+  googlebooks = {aVG\_EAAAQBAJ},
+  isbn = {978-1-00-088527-9},
   langid = {english}
 }
 
@@ -65,6 +114,14 @@
   copyright = {https://creativecommons.org/licenses/by-nc-nd/4.0/},
   langid = {english},
   file = {/Users/jpj/Zotero/storage/CFYIZVFP/Robert - 2016 - At the Heart of the Vietnam War Herbicides, Napal.pdf}
+}
+
+@book{tenkanen_introduction_2024,
+  title = {Introduction to {{Python}} for {{Geographic Data Analysis}}},
+  author = {Tenkanen, Henrikki and Heikinheimo, Vuokko and Whipp, David},
+  year = {2024},
+  publisher = {CRC Press},
+  url = {https://pythongis.org/}
 }
 
 @book{wood_power_1992,
