@@ -24,6 +24,8 @@ website:
         text: "Week 1: Aug 28"
       - href: w02/index.qmd
         text: "Week 2: Sep 4"
+      - href: w03/index.qmd
+        text: "Week 3: Sep 11"
       - "---"
       - href: "https://georgetown.zoom.us/j/94074713027"
         text: "Zoom Link <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
