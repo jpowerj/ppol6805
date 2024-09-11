@@ -1282,21 +1282,11 @@
     ]
   },
   {
-    "objectID": "w03/index.html#geotiff-.tif",
-    "href": "w03/index.html#geotiff-.tif",
+    "objectID": "w03/index.html#raster-formats",
+    "href": "w03/index.html#raster-formats",
     "title": "Week 3: Basic Geospatial Operations",
-    "section": "GeoTIFF (.tif)",
-    "text": "GeoTIFF (.tif)\n\nBased on TIFF format developed at NASA.",
-    "crumbs": [
-      "Week 3: Sep 11"
-    ]
-  },
-  {
-    "objectID": "w03/index.html#netcdf-.nc4",
-    "href": "w03/index.html#netcdf-.nc4",
-    "title": "Week 3: Basic Geospatial Operations",
-    "section": "NetCDF (.nc4)",
-    "text": "NetCDF (.nc4)\n\nUsed in earth sciences, as format for data sources measured and distributed multiple times per day over large full-country or full-continent areas.",
+    "section": "Raster Formats",
+    "text": "Raster Formats\n\nGeoTIFF (.tif or .tiff)\n\nBased on TIFF format developed at NASA\n\nNetCDF (.nc4)\n\nUsed in earth sciences, as format for data sources measured and distributed multiple times per day over large full-country or full-continent areas.",
     "crumbs": [
       "Week 3: Sep 11"
     ]
@@ -1316,17 +1306,7 @@
     "href": "w03/index.html#getting-the-geometries",
     "title": "Week 3: Basic Geospatial Operations",
     "section": "Getting the Geometries",
-    "text": "Getting the Geometries\nUsing rnaturalearth with mapview",
-    "crumbs": [
-      "Week 3: Sep 11"
-    ]
-  },
-  {
-    "objectID": "w03/index.html#france",
-    "href": "w03/index.html#france",
-    "title": "Week 3: Basic Geospatial Operations",
-    "section": "France",
-    "text": "France\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(mapview)\nfrance &lt;- ne_countries(country = \"France\", scale = 50)\n(france_map &lt;- mapview(france, label = \"geounit\", legend = FALSE))",
+    "text": "Getting the Geometries\nUsing rnaturalearth with mapview\n\n\nCode\nset.seed(6805)\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\nlibrary(sf)\n\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(mapview)\nsource(\"../dsan-globals/_globals.r\")\nfrance_sf &lt;- ne_countries(country = \"France\", scale = 50)\n(france_map &lt;- mapview(france_sf, label = \"geounit\", legend = FALSE))",
     "crumbs": [
       "Week 3: Sep 11"
     ]
@@ -1336,7 +1316,7 @@
     "href": "w03/index.html#centroid-of-france",
     "title": "Week 3: Basic Geospatial Operations",
     "section": "Centroid of France",
-    "text": "Centroid of France\n\n\nCode\nlibrary(sf)\n\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\n\nCode\nfrance_cent &lt;- sf::st_centroid(france)\n\n\nWarning: st_centroid assumes attributes are constant over geometries\n\n\nCode\nfrance_map + mapview(france_cent, label = \"Centroid\", legend = FALSE)",
+    "text": "Centroid of France\n\n\nCode\nfrance_cent_sf &lt;- sf::st_centroid(france_sf)\n\n\nWarning: st_centroid assumes attributes are constant over geometries\n\n\nCode\nfrance_map + mapview(france_cent_sf, label = \"Centroid\", legend = FALSE)",
     "crumbs": [
       "Week 3: Sep 11"
     ]
@@ -1346,7 +1326,7 @@
     "href": "w03/index.html#one-we-already-saw-union",
     "title": "Week 3: Basic Geospatial Operations",
     "section": "One We Already Saw: Union",
-    "text": "One We Already Saw: Union\nComputing the union of all geometries in the sf via sf::st_union()\n\n\nCode\nlibrary(leaflet.extras2)\n\n\nLoading required package: leaflet\n\n\nCode\nafrica &lt;- ne_countries(continent = \"Africa\", scale = 50)\nafrica_union &lt;- sf::st_union(africa)\nafrica_map &lt;- mapview(africa, label=\"geounit\", legend=FALSE)\nafrica_union_map &lt;- mapview(africa_union, label=\"st_union(africa)\", legend=FALSE)\nafrica_map | africa_union_map",
+    "text": "One We Already Saw: Union\nComputing the union of all geometries in the sf via sf::st_union()\n\n\nCode\nlibrary(leaflet.extras2)\n\n\nLoading required package: leaflet\n\n\nCode\nafrica_sf &lt;- ne_countries(continent = \"Africa\", scale = 50)\nafrica_union_sf &lt;- sf::st_union(africa_sf)\nafrica_map &lt;- mapview(africa_sf, label=\"geounit\", legend=FALSE)\nafrica_union_map &lt;- mapview(africa_union_sf, label=\"st_union(africa)\", legend=FALSE)\nafrica_map | africa_union_map",
     "crumbs": [
       "Week 3: Sep 11"
     ]
@@ -1356,7 +1336,7 @@
     "href": "w03/index.html#helpful-for-rasterizing-bbox",
     "title": "Week 3: Basic Geospatial Operations",
     "section": "Helpful for Rasterizing: BBox",
-    "text": "Helpful for Rasterizing: BBox\n\n\nCode\nafrica_bbox &lt;- sf::st_bbox(africa)\nafrica_bbox_map &lt;- mapview(africa_bbox, label=\"st_bbox(africa)\", legend=FALSE)\nafrica_map | africa_bbox_map",
+    "text": "Helpful for Rasterizing: BBox\n\n\nCode\nafrica_bbox_sf &lt;- sf::st_bbox(africa_sf)\nafrica_bbox_map &lt;- mapview(africa_bbox_sf, label=\"st_bbox(africa)\", legend=FALSE)\nafrica_map | africa_bbox_map",
     "crumbs": [
       "Week 3: Sep 11"
     ]
@@ -1366,7 +1346,7 @@
     "href": "w03/index.html#convex-hulls-by-country",
     "title": "Week 3: Basic Geospatial Operations",
     "section": "Convex Hulls by Country",
-    "text": "Convex Hulls by Country\n\n\nCode\nafrica_countries_cvx &lt;- sf::st_convex_hull(africa)\nafrica_countries_cvx_map &lt;- mapview(africa_countries_cvx, label=\"geounit\", legend=FALSE)\nafrica_map | africa_countries_cvx_map",
+    "text": "Convex Hulls by Country\n\n\nCode\nafrica_countries_cvx &lt;- sf::st_convex_hull(africa_sf)\nafrica_countries_cvx_map &lt;- mapview(africa_countries_cvx, label=\"geounit\", legend=FALSE)\nafrica_map | africa_countries_cvx_map",
     "crumbs": [
       "Week 3: Sep 11"
     ]
@@ -1376,7 +1356,7 @@
     "href": "w03/index.html#convex-hull-of-continent",
     "title": "Week 3: Basic Geospatial Operations",
     "section": "Convex Hull of Continent",
-    "text": "Convex Hull of Continent\nUse st_union() first:\n\n\nCode\nafrica_cvx &lt;- africa |&gt; st_union() |&gt; st_convex_hull()\nafrica_cvx_map &lt;- mapview(africa_cvx, label=\"geounit\", legend=FALSE)\nafrica_map | africa_cvx_map",
+    "text": "Convex Hull of Continent\nUse st_union() first:\n\n\nCode\nafrica_cvx &lt;- africa_sf |&gt; st_union() |&gt; st_convex_hull()\nafrica_cvx_map &lt;- mapview(africa_cvx, label=\"geounit\", legend=FALSE)\nafrica_map | africa_cvx_map",
     "crumbs": [
       "Week 3: Sep 11"
     ]
@@ -1386,17 +1366,87 @@
     "href": "w03/index.html#one-we-already-saw-centroids",
     "title": "Week 3: Basic Geospatial Operations",
     "section": "One We Already Saw: Centroids",
-    "text": "One We Already Saw: Centroids\nComputing the centroid of all geometries in the sf via sf::st_centroid()\n\n\nCode\nafrica_cents &lt;- sf::st_centroid(africa)\n\n\nWarning: st_centroid assumes attributes are constant over geometries\n\n\nCode\nafrica_cents_map &lt;- mapview(africa_cents, label=\"geounit\", legend=FALSE)\nafrica_map | africa_cents_map",
+    "text": "One We Already Saw: Centroids\nComputing the centroid of all geometries in the sf via sf::st_centroid()\n\n\nCode\nafrica_cents_sf &lt;- sf::st_centroid(africa_sf)\n\n\nWarning: st_centroid assumes attributes are constant over geometries\n\n\nCode\nafrica_cents_map &lt;- mapview(africa_cents_sf, label=\"geounit\", legend=FALSE)\nafrica_map | africa_cents_map",
     "crumbs": [
       "Week 3: Sep 11"
     ]
   },
   {
-    "objectID": "w03/index.html#pairs-of-geometries",
-    "href": "w03/index.html#pairs-of-geometries",
+    "objectID": "w03/index.html#spatial-joins",
+    "href": "w03/index.html#spatial-joins",
     "title": "Week 3: Basic Geospatial Operations",
-    "section": "Pairs of Geometries",
-    "text": "Pairs of Geometries\n\n\nCode\nsa &lt;- ne_countries(country = \"South Africa\", scale = 50)\nlesotho &lt;- ne_countries(country = \"Lesotho\", scale=50)\nsf::st_relate(lesotho, sa)\n\n\nalthough coordinates are longitude/latitude, st_relate assumes that they are\nplanar\n\n\n     [,1]       \n[1,] \"FF2F1F212\"\n\n\nCode\nsf::st_covers(lesotho, sa)\n\n\nSparse geometry binary predicate list of length 1, where the predicate\nwas `covers'\n 1: (empty)\n\n\nCode\nsf::st_covered_by(lesotho, sa)\n\n\nSparse geometry binary predicate list of length 1, where the predicate\nwas `covered_by'\n 1: (empty)\n\n\nCode\nmapview(sa) + mapview(lesotho)",
+    "section": "Spatial Joins",
+    "text": "Spatial Joins\n\n\nCode\nnc &lt;- system.file(\"shape/nc.shp\", package=\"sf\") |&gt;\n  read_sf() |&gt;\n  st_transform('EPSG:2264')\ngr &lt;- st_sf(\n         label = apply(expand.grid(1:10, LETTERS[10:1])[,2:1], 1, paste0, collapse = \"\"),\n         geom = st_make_grid(nc))\ngr$col &lt;- sf.colors(10, categorical = TRUE, alpha = .3)\n# cut, to verify that NA's work out:\ngr &lt;- gr[-(1:30),]\nsuppressWarnings(nc_j &lt;- st_join(nc, gr, largest = TRUE))\npar(mfrow = c(2,1), mar = rep(0,4))\nplot(st_geometry(nc_j), border = 'grey')\nplot(st_geometry(gr), add = TRUE, col = gr$col)\ntext(st_coordinates(st_centroid(st_geometry(gr))), labels = gr$label, cex = .85)\n# the joined dataset:\nplot(st_geometry(nc_j), border = 'grey', col = nc_j$col)\ntext(st_coordinates(st_centroid(st_geometry(nc_j))), labels = nc_j$label, cex = .7)\nplot(st_geometry(gr), border = '#88ff88aa', add = TRUE)",
+    "crumbs": [
+      "Week 3: Sep 11"
+    ]
+  },
+  {
+    "objectID": "w03/index.html#spatial-sampling",
+    "href": "w03/index.html#spatial-sampling",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "Spatial Sampling",
+    "text": "Spatial Sampling\n\n\nCode\n# Sample random points\nafrica_points_list &lt;- sf::st_sample(africa_union_sf, 10)\nafrica_points_sf &lt;- sf::st_sf(africa_points_list)\nafrica_points_map &lt;- mapview(africa_points_sf, label=\"Random Point\", col.regions=cbPalette[1], legend=FALSE)\n\n\nWarning in cbind(`Feature ID` = fid, mat): number of rows of result is not a\nmultiple of vector length (arg 1)\n\n\nCode\nafrica_map + africa_points_map",
+    "crumbs": [
+      "Week 3: Sep 11"
+    ]
+  },
+  {
+    "objectID": "w03/index.html#the-default-predicate-st_intersects",
+    "href": "w03/index.html#the-default-predicate-st_intersects",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "The “Default” Predicate: st_intersects",
+    "text": "The “Default” Predicate: st_intersects\n\n\nCode\ncountries_w_points &lt;- africa_sf[africa_points_sf,]\nmapview(countries_w_points, label=\"geounit\", legend=FALSE) + africa_points_map",
+    "crumbs": [
+      "Week 3: Sep 11"
+    ]
+  },
+  {
+    "objectID": "w03/index.html#counting-with-lengths",
+    "href": "w03/index.html#counting-with-lengths",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "Counting with lengths()",
+    "text": "Counting with lengths()\n\n\nCode\ncountry_inter &lt;- sf::st_intersects(africa_sf, africa_points_sf)\n# Computes point counts for each polygon\n(num_intersections &lt;- lengths(country_inter))\n\n\n [1] 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0 1 0 0 0\n[39] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 2\n\n\nCode\nafrica_sf &lt;- africa_sf |&gt; mutate(\n  num_points = num_intersections\n) |&gt; arrange(geounit)\nafrica_sf |&gt; select(geounit, num_points) |&gt; head()\n\n\n\n\n\n\ngeounit\nnum_points\ngeometry\n\n\n\n\nAlgeria\n2\nMULTIPOLYGON (((8.576563 36…\n\n\nAngola\n2\nMULTIPOLYGON (((13.07275 -4…\n\n\nBenin\n0\nMULTIPOLYGON (((1.622656 6….\n\n\nBotswana\n0\nMULTIPOLYGON (((25.25879 -1…\n\n\nBurkina Faso\n0\nMULTIPOLYGON (((0.9004883 1…\n\n\nBurundi\n0\nMULTIPOLYGON (((30.55361 -2…",
+    "crumbs": [
+      "Week 3: Sep 11"
+    ]
+  },
+  {
+    "objectID": "w03/index.html#plotting-with-mapview",
+    "href": "w03/index.html#plotting-with-mapview",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "Plotting with mapview",
+    "text": "Plotting with mapview\n\n\nCode\nmapview(africa_sf, zcol=\"num_points\")",
+    "crumbs": [
+      "Week 3: Sep 11"
+    ]
+  },
+  {
+    "objectID": "w03/index.html#plotting-with-ggplot2",
+    "href": "w03/index.html#plotting-with-ggplot2",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "Plotting with ggplot2",
+    "text": "Plotting with ggplot2\nSince we’re starting to get into data attributes rather than geometric features, switching to ggplot2 is recommended!\n\n\nCode\nafrica_sf |&gt; ggplot(aes(fill=num_points)) +\n  geom_sf() +\n  theme_classic()",
+    "crumbs": [
+      "Week 3: Sep 11"
+    ]
+  },
+  {
+    "objectID": "w03/index.html#getting-fancier",
+    "href": "w03/index.html#getting-fancier",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "Getting Fancier…",
+    "text": "Getting Fancier…\n\nTo do fancier geospatial operations, we’ll need to start overthinking the different possible relationships between two or more geometries!\nTo this end: predicates",
+    "crumbs": [
+      "Week 3: Sep 11"
+    ]
+  },
+  {
+    "objectID": "w03/index.html#de-9im-strings",
+    "href": "w03/index.html#de-9im-strings",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "DE-9IM Strings",
+    "text": "DE-9IM Strings\n\n\nCode\nlibrary(sf)\npolygon &lt;- po &lt;- st_polygon(list(rbind(c(0,0), c(1,0), c(1,1), c(0,1), c(0,0))))\np0 &lt;- st_polygon(list(rbind(c(-1,-1), c(2,-1), c(2,2), c(-1,2), c(-1,-1))))\nline &lt;- li &lt;- st_linestring(rbind(c(.5, -.5), c(.5, 0.5)))\ns &lt;- st_sfc(po, li)\n\npar(mfrow = c(3,3))\npar(mar = c(1,1,1,1))\n\n# \"1020F1102\"\n# 1: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5,0), c(.5,.495)), col = 'red', lwd = 2)\npoints(0.5, 0.5, pch = 1)\n\n# 2: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"B(line) = 0\")))\npoints(0.5, 0.5, col = 'red', pch = 16)\n\n# 3: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"E(line) = 2\")))\nplot(po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n# 4: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"I(line) = 0\")))\npoints(.5, 0, col = 'red', pch = 16)\n\n# 5: F\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"B(line) = F\")))\n\n# 6: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"E(line) = 1\")))\nplot(po, border = 'red', col = NA, add = TRUE, lwd = 2)\n\n# 7: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5, -.5), c(.5, 0)), col = 'red', lwd = 2)\n\n# 8: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"B(line) = 0\")))\npoints(.5, -.5, col = 'red', pch = 16)\n\n# 9: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"E(line) = 2\")))\nplot(p0 / po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n\n\n\n\n\n\n\n\n\nThe predicate equals corresponds to the DE-9IM string \"T*F**FFF*\". If any two geometries obey this relationship, they are (topologically) equal!",
     "crumbs": [
       "Week 3: Sep 11"
     ]
@@ -1461,18 +1511,11 @@
     "text": "GeoPackage (.gpkg)\n\nOpen-source (non-proprietary) data format standard"
   },
   {
-    "objectID": "w03/slides.html#geotiff-.tif",
-    "href": "w03/slides.html#geotiff-.tif",
+    "objectID": "w03/slides.html#raster-formats",
+    "href": "w03/slides.html#raster-formats",
     "title": "Week 3: Basic Geospatial Operations",
-    "section": "GeoTIFF (.tif)",
-    "text": "GeoTIFF (.tif)\n\nBased on TIFF format developed at NASA."
-  },
-  {
-    "objectID": "w03/slides.html#netcdf-.nc4",
-    "href": "w03/slides.html#netcdf-.nc4",
-    "title": "Week 3: Basic Geospatial Operations",
-    "section": "NetCDF (.nc4)",
-    "text": "NetCDF (.nc4)\n\nUsed in earth sciences, as format for data sources measured and distributed multiple times per day over large full-country or full-continent areas."
+    "section": "Raster Formats",
+    "text": "Raster Formats\n\nGeoTIFF (.tif or .tiff)\n\nBased on TIFF format developed at NASA\n\nNetCDF (.nc4)\n\nUsed in earth sciences, as format for data sources measured and distributed multiple times per day over large full-country or full-continent areas."
   },
   {
     "objectID": "w03/slides.html#coordinate-reference-systems-crs",
@@ -1486,63 +1529,105 @@
     "href": "w03/slides.html#getting-the-geometries",
     "title": "Week 3: Basic Geospatial Operations",
     "section": "Getting the Geometries",
-    "text": "Getting the Geometries\nUsing rnaturalearth with mapview"
-  },
-  {
-    "objectID": "w03/slides.html#france",
-    "href": "w03/slides.html#france",
-    "title": "Week 3: Basic Geospatial Operations",
-    "section": "France",
-    "text": "France\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(mapview)\nfrance &lt;- ne_countries(country = \"France\", scale = 50)\n(france_map &lt;- mapview(france, label = \"geounit\", legend = FALSE))"
+    "text": "Getting the Geometries\nUsing rnaturalearth with mapview\n\n\nCode\nset.seed(6805)\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(rnaturalearth)\nlibrary(mapview)\nsource(\"../dsan-globals/_globals.r\")\nfrance_sf &lt;- ne_countries(country = \"France\", scale = 50)\n(france_map &lt;- mapview(france_sf, label = \"geounit\", legend = FALSE))"
   },
   {
     "objectID": "w03/slides.html#centroid-of-france",
     "href": "w03/slides.html#centroid-of-france",
     "title": "Week 3: Basic Geospatial Operations",
     "section": "Centroid of France",
-    "text": "Centroid of France\n\n\nCode\nlibrary(sf)\nfrance_cent &lt;- sf::st_centroid(france)\nfrance_map + mapview(france_cent, label = \"Centroid\", legend = FALSE)"
+    "text": "Centroid of France\n\n\nCode\nfrance_cent_sf &lt;- sf::st_centroid(france_sf)\nfrance_map + mapview(france_cent_sf, label = \"Centroid\", legend = FALSE)"
   },
   {
     "objectID": "w03/slides.html#one-we-already-saw-union",
     "href": "w03/slides.html#one-we-already-saw-union",
     "title": "Week 3: Basic Geospatial Operations",
     "section": "One We Already Saw: Union",
-    "text": "One We Already Saw: Union\nComputing the union of all geometries in the sf via sf::st_union()\n\n\nCode\nlibrary(leaflet.extras2)\nafrica &lt;- ne_countries(continent = \"Africa\", scale = 50)\nafrica_union &lt;- sf::st_union(africa)\nafrica_map &lt;- mapview(africa, label=\"geounit\", legend=FALSE)\nafrica_union_map &lt;- mapview(africa_union, label=\"st_union(africa)\", legend=FALSE)\nafrica_map | africa_union_map"
+    "text": "One We Already Saw: Union\nComputing the union of all geometries in the sf via sf::st_union()\n\n\nCode\nlibrary(leaflet.extras2)\nafrica_sf &lt;- ne_countries(continent = \"Africa\", scale = 50)\nafrica_union_sf &lt;- sf::st_union(africa_sf)\nafrica_map &lt;- mapview(africa_sf, label=\"geounit\", legend=FALSE)\nafrica_union_map &lt;- mapview(africa_union_sf, label=\"st_union(africa)\", legend=FALSE)\nafrica_map | africa_union_map"
   },
   {
     "objectID": "w03/slides.html#helpful-for-rasterizing-bbox",
     "href": "w03/slides.html#helpful-for-rasterizing-bbox",
     "title": "Week 3: Basic Geospatial Operations",
     "section": "Helpful for Rasterizing: BBox",
-    "text": "Helpful for Rasterizing: BBox\n\n\nCode\nafrica_bbox &lt;- sf::st_bbox(africa)\nafrica_bbox_map &lt;- mapview(africa_bbox, label=\"st_bbox(africa)\", legend=FALSE)\nafrica_map | africa_bbox_map"
+    "text": "Helpful for Rasterizing: BBox\n\n\nCode\nafrica_bbox_sf &lt;- sf::st_bbox(africa_sf)\nafrica_bbox_map &lt;- mapview(africa_bbox_sf, label=\"st_bbox(africa)\", legend=FALSE)\nafrica_map | africa_bbox_map"
   },
   {
     "objectID": "w03/slides.html#convex-hulls-by-country",
     "href": "w03/slides.html#convex-hulls-by-country",
     "title": "Week 3: Basic Geospatial Operations",
     "section": "Convex Hulls by Country",
-    "text": "Convex Hulls by Country\n\n\nCode\nafrica_countries_cvx &lt;- sf::st_convex_hull(africa)\nafrica_countries_cvx_map &lt;- mapview(africa_countries_cvx, label=\"geounit\", legend=FALSE)\nafrica_map | africa_countries_cvx_map"
+    "text": "Convex Hulls by Country\n\n\nCode\nafrica_countries_cvx &lt;- sf::st_convex_hull(africa_sf)\nafrica_countries_cvx_map &lt;- mapview(africa_countries_cvx, label=\"geounit\", legend=FALSE)\nafrica_map | africa_countries_cvx_map"
   },
   {
     "objectID": "w03/slides.html#convex-hull-of-continent",
     "href": "w03/slides.html#convex-hull-of-continent",
     "title": "Week 3: Basic Geospatial Operations",
     "section": "Convex Hull of Continent",
-    "text": "Convex Hull of Continent\nUse st_union() first:\n\n\nCode\nafrica_cvx &lt;- africa |&gt; st_union() |&gt; st_convex_hull()\nafrica_cvx_map &lt;- mapview(africa_cvx, label=\"geounit\", legend=FALSE)\nafrica_map | africa_cvx_map"
+    "text": "Convex Hull of Continent\nUse st_union() first:\n\n\nCode\nafrica_cvx &lt;- africa_sf |&gt; st_union() |&gt; st_convex_hull()\nafrica_cvx_map &lt;- mapview(africa_cvx, label=\"geounit\", legend=FALSE)\nafrica_map | africa_cvx_map"
   },
   {
     "objectID": "w03/slides.html#one-we-already-saw-centroids",
     "href": "w03/slides.html#one-we-already-saw-centroids",
     "title": "Week 3: Basic Geospatial Operations",
     "section": "One We Already Saw: Centroids",
-    "text": "One We Already Saw: Centroids\nComputing the centroid of all geometries in the sf via sf::st_centroid()\n\n\nCode\nafrica_cents &lt;- sf::st_centroid(africa)\nafrica_cents_map &lt;- mapview(africa_cents, label=\"geounit\", legend=FALSE)\nafrica_map | africa_cents_map"
+    "text": "One We Already Saw: Centroids\nComputing the centroid of all geometries in the sf via sf::st_centroid()\n\n\nCode\nafrica_cents_sf &lt;- sf::st_centroid(africa_sf)\nafrica_cents_map &lt;- mapview(africa_cents_sf, label=\"geounit\", legend=FALSE)\nafrica_map | africa_cents_map"
   },
   {
-    "objectID": "w03/slides.html#pairs-of-geometries",
-    "href": "w03/slides.html#pairs-of-geometries",
+    "objectID": "w03/slides.html#spatial-joins",
+    "href": "w03/slides.html#spatial-joins",
     "title": "Week 3: Basic Geospatial Operations",
-    "section": "Pairs of Geometries",
-    "text": "Pairs of Geometries\n\n\nCode\nsa &lt;- ne_countries(country = \"South Africa\", scale = 50)\nlesotho &lt;- ne_countries(country = \"Lesotho\", scale=50)\nsf::st_relate(lesotho, sa)\n\n\n     [,1]       \n[1,] \"FF2F1F212\"\n\n\nCode\nsf::st_covers(lesotho, sa)\n\n\nSparse geometry binary predicate list of length 1, where the predicate\nwas `covers'\n 1: (empty)\n\n\nCode\nsf::st_covered_by(lesotho, sa)\n\n\nSparse geometry binary predicate list of length 1, where the predicate\nwas `covered_by'\n 1: (empty)\n\n\nCode\nmapview(sa) + mapview(lesotho)"
+    "section": "Spatial Joins",
+    "text": "Spatial Joins\n\n\n\nCode\nnc &lt;- system.file(\"shape/nc.shp\", package=\"sf\") |&gt;\n  read_sf() |&gt;\n  st_transform('EPSG:2264')\ngr &lt;- st_sf(\n         label = apply(expand.grid(1:10, LETTERS[10:1])[,2:1], 1, paste0, collapse = \"\"),\n         geom = st_make_grid(nc))\ngr$col &lt;- sf.colors(10, categorical = TRUE, alpha = .3)\n# cut, to verify that NA's work out:\ngr &lt;- gr[-(1:30),]\nsuppressWarnings(nc_j &lt;- st_join(nc, gr, largest = TRUE))\npar(mfrow = c(2,1), mar = rep(0,4))\nplot(st_geometry(nc_j), border = 'grey')\nplot(st_geometry(gr), add = TRUE, col = gr$col)\ntext(st_coordinates(st_centroid(st_geometry(gr))), labels = gr$label, cex = .85)\n# the joined dataset:\nplot(st_geometry(nc_j), border = 'grey', col = nc_j$col)\ntext(st_coordinates(st_centroid(st_geometry(nc_j))), labels = nc_j$label, cex = .7)\nplot(st_geometry(gr), border = '#88ff88aa', add = TRUE)"
+  },
+  {
+    "objectID": "w03/slides.html#spatial-sampling",
+    "href": "w03/slides.html#spatial-sampling",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "Spatial Sampling",
+    "text": "Spatial Sampling\n\n\nCode\n# Sample random points\nafrica_points_list &lt;- sf::st_sample(africa_union_sf, 10)\nafrica_points_sf &lt;- sf::st_sf(africa_points_list)\nafrica_points_map &lt;- mapview(africa_points_sf, label=\"Random Point\", col.regions=cbPalette[1], legend=FALSE)\nafrica_map + africa_points_map"
+  },
+  {
+    "objectID": "w03/slides.html#the-default-predicate-st_intersects",
+    "href": "w03/slides.html#the-default-predicate-st_intersects",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "The “Default” Predicate: st_intersects",
+    "text": "The “Default” Predicate: st_intersects\n\n\nCode\ncountries_w_points &lt;- africa_sf[africa_points_sf,]\nmapview(countries_w_points, label=\"geounit\", legend=FALSE) + africa_points_map"
+  },
+  {
+    "objectID": "w03/slides.html#counting-with-lengths",
+    "href": "w03/slides.html#counting-with-lengths",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "Counting with lengths()",
+    "text": "Counting with lengths()\n\n\nCode\ncountry_inter &lt;- sf::st_intersects(africa_sf, africa_points_sf)\n# Computes point counts for each polygon\n(num_intersections &lt;- lengths(country_inter))\n\n\n [1] 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0 1 0 0 0\n[39] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 2\n\n\nCode\nafrica_sf &lt;- africa_sf |&gt; mutate(\n  num_points = num_intersections\n) |&gt; arrange(geounit)\nafrica_sf |&gt; select(geounit, num_points) |&gt; head()\n\n\n\n\n\n\ngeounit\nnum_points\ngeometry\n\n\n\n\nAlgeria\n2\nMULTIPOLYGON (((8.576563 36…\n\n\nAngola\n2\nMULTIPOLYGON (((13.07275 -4…\n\n\nBenin\n0\nMULTIPOLYGON (((1.622656 6….\n\n\nBotswana\n0\nMULTIPOLYGON (((25.25879 -1…\n\n\nBurkina Faso\n0\nMULTIPOLYGON (((0.9004883 1…\n\n\nBurundi\n0\nMULTIPOLYGON (((30.55361 -2…"
+  },
+  {
+    "objectID": "w03/slides.html#plotting-with-mapview",
+    "href": "w03/slides.html#plotting-with-mapview",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "Plotting with mapview",
+    "text": "Plotting with mapview\n\n\nCode\nmapview(africa_sf, zcol=\"num_points\")"
+  },
+  {
+    "objectID": "w03/slides.html#plotting-with-ggplot2",
+    "href": "w03/slides.html#plotting-with-ggplot2",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "Plotting with ggplot2",
+    "text": "Plotting with ggplot2\nSince we’re starting to get into data attributes rather than geometric features, switching to ggplot2 is recommended!\n\n\nCode\nafrica_sf |&gt; ggplot(aes(fill=num_points)) +\n  geom_sf() +\n  theme_classic()"
+  },
+  {
+    "objectID": "w03/slides.html#getting-fancier",
+    "href": "w03/slides.html#getting-fancier",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "Getting Fancier…",
+    "text": "Getting Fancier…\n\nTo do fancier geospatial operations, we’ll need to start overthinking the different possible relationships between two or more geometries!\nTo this end: predicates"
+  },
+  {
+    "objectID": "w03/slides.html#de-9im-strings",
+    "href": "w03/slides.html#de-9im-strings",
+    "title": "Week 3: Basic Geospatial Operations",
+    "section": "DE-9IM Strings",
+    "text": "DE-9IM Strings\n\n\nCode\nlibrary(sf)\npolygon &lt;- po &lt;- st_polygon(list(rbind(c(0,0), c(1,0), c(1,1), c(0,1), c(0,0))))\np0 &lt;- st_polygon(list(rbind(c(-1,-1), c(2,-1), c(2,2), c(-1,2), c(-1,-1))))\nline &lt;- li &lt;- st_linestring(rbind(c(.5, -.5), c(.5, 0.5)))\ns &lt;- st_sfc(po, li)\n\npar(mfrow = c(3,3))\npar(mar = c(1,1,1,1))\n\n# \"1020F1102\"\n# 1: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5,0), c(.5,.495)), col = 'red', lwd = 2)\npoints(0.5, 0.5, pch = 1)\n\n# 2: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"B(line) = 0\")))\npoints(0.5, 0.5, col = 'red', pch = 16)\n\n# 3: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"E(line) = 2\")))\nplot(po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n# 4: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"I(line) = 0\")))\npoints(.5, 0, col = 'red', pch = 16)\n\n# 5: F\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"B(line) = F\")))\n\n# 6: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"E(line) = 1\")))\nplot(po, border = 'red', col = NA, add = TRUE, lwd = 2)\n\n# 7: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5, -.5), c(.5, 0)), col = 'red', lwd = 2)\n\n# 8: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"B(line) = 0\")))\npoints(.5, -.5, col = 'red', pch = 16)\n\n# 9: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"E(line) = 2\")))\nplot(p0 / po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n\n\n\nThe predicate equals corresponds to the DE-9IM string \"T*F**FFF*\". If any two geometries obey this relationship, they are (topologically) equal!"
   },
   {
     "objectID": "w03/slides.html#references",

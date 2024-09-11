@@ -1,3 +1,11 @@
+Here we'll look at **Africa**:
+
+* The least "stretched" by different projections,
+* Interesting geometric properties like countries-inside-of-countries (South Africa, Gambia), and
+* Will be helpful for comparing/contrasting different ways of defining "neighbors"/neighborhoods
+
+---
+
 ## Getting the ISO3 Codes {.smaller}
 
 :::: {.columns}
@@ -43,4 +51,18 @@ us_map
 library(sf)
 usa_cent <- sf::st_centroid(usa)
 us_map + mapview(usa_cent)
+```
+
+---
+
+## Pairs of Geometries {.smaller}
+
+```{r}
+#| label: lesotho-sa
+sa <- ne_countries(country = "South Africa", scale = 50)
+lesotho <- ne_countries(country = "Lesotho", scale=50)
+sf::st_relate(lesotho, sa)
+sf::st_covers(lesotho, sa)
+sf::st_covered_by(lesotho, sa)
+mapview(sa) + mapview(lesotho)
 ```
