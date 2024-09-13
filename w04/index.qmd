@@ -1,0 +1,120 @@
+---
+title: "Week 4: {{< var weeks.4.title >}}"
+subtitle: "{{< var course.slides-subtitle >}}"
+author: "{{< var course.author >}}"
+institute: "{{< var course.institute >}}"
+date: "September 18, 2024"
+date-format: full
+lecnum: 4
+categories:
+  - "Class Sessions"
+bibliography: "../_PPOL6805.bib"
+# Shared across formats:
+echo: true
+code-fold: show
+css: "../dsan-globals/jjstyles.css"
+html-math-method: mathjax
+# Format-specific settings:
+format:
+  revealjs:
+    output-file: "slides.html"
+    df-print: kable
+    slide-number: true
+    scrollable: true
+    link-external-icon: true
+    link-external-newwindow: true
+    footer: "{{< var weeks.4.footer >}}"
+    include-in-header:
+      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>"
+    theme: [default]
+    revealjs-plugins:
+      - simplemenu
+    simplemenu:
+      flat: true
+      barhtml:
+        header: "<div class='menubar'><span style='position: absolute; left: 8; padding-left: 8px;'><a href='./index.html'>&larr; Return to Notes</a></span><ul class='menu'></ul></div>"
+      scale: 0.5
+  html:
+    output-file: "index.html"
+    html-math-method: mathjax
+    df-print: kable
+---
+
+::: {.content-visible unless-format="revealjs"}
+
+<center class='mb-3'>
+<a class="h2" href="./slides.html" target="_blank">Open slides in new tab &rarr;</a>
+</center>
+
+:::
+
+# Geospatial Operations 2: Binary Operations {data-stack-name="Binary Operations"}
+
+## Getting Fancier...
+
+* To do fancier geospatial operations, we'll need to start **overthinking** the different possible **relationships** between two or more geometries!
+* To this end: **predicates**
+
+![](images/relations.png){fig-align="center"}
+
+## DE-9IM Strings {.smaller}
+
+```{r}
+#| label: de-9im-strings
+#| echo: true
+#| code-fold: true
+library(sf)
+polygon <- po <- st_polygon(list(rbind(c(0,0), c(1,0), c(1,1), c(0,1), c(0,0))))
+p0 <- st_polygon(list(rbind(c(-1,-1), c(2,-1), c(2,2), c(-1,2), c(-1,-1))))
+line <- li <- st_linestring(rbind(c(.5, -.5), c(.5, 0.5)))
+s <- st_sfc(po, li)
+
+par(mfrow = c(3,3))
+par(mar = c(1,1,1,1))
+
+# "1020F1102"
+# 1: 1
+plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("I(pol)",intersect(),"I(line) = 1")))
+lines(rbind(c(.5,0), c(.5,.495)), col = 'red', lwd = 2)
+points(0.5, 0.5, pch = 1)
+
+# 2: 0
+plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("I(pol)",intersect(),"B(line) = 0")))
+points(0.5, 0.5, col = 'red', pch = 16)
+
+# 3: 2
+plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("I(pol)",intersect(),"E(line) = 2")))
+plot(po, col = '#ff8888', add = TRUE)
+plot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)
+
+# 4: 0
+plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("B(pol)",intersect(),"I(line) = 0")))
+points(.5, 0, col = 'red', pch = 16)
+
+# 5: F
+plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("B(pol)",intersect(),"B(line) = F")))
+
+# 6: 1
+plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("B(pol)",intersect(),"E(line) = 1")))
+plot(po, border = 'red', col = NA, add = TRUE, lwd = 2)
+
+# 7: 1
+plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("E(pol)",intersect(),"I(line) = 1")))
+lines(rbind(c(.5, -.5), c(.5, 0)), col = 'red', lwd = 2)
+
+# 8: 0
+plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("E(pol)",intersect(),"B(line) = 0")))
+points(.5, -.5, col = 'red', pch = 16)
+
+# 9: 2
+plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("E(pol)",intersect(),"E(line) = 2")))
+plot(p0 / po, col = '#ff8888', add = TRUE)
+plot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)
+```
+
+* The predicate `equals` corresponds to the DE-9IM string `"T*F**FFF*"`. If any two geometries obey this relationship, they are (topologically) equal!
+
+## References
+
+::: {#refs}
+:::

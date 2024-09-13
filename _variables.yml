@@ -74,16 +74,19 @@ weeks:
 hw:
   - hw-num: 1
     title: "GIS Concepts"
-    pct: 10
+    pct: 8
   - hw-num: 2
     title: "Geospatial Operations"
-    pct: 10
+    pct: 8
   - hw-num: 3
-    title: "Mapping Libraries"
-    pct: 10
+    title: "Spatial Joins and Distances"
+    pct: 8
   - hw-num: 4
+    title: "Mapping Libraries"
+    pct: 8
+  - hw-num: 5
     title: "Clustering"
-    pct: 10
+    pct: 8
   # - hw-num: 5
   #   title: "Spatial Regression"
   #   pct: 8
