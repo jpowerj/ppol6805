@@ -24,8 +24,8 @@ weeks:
     footer: "PPOL 6805 Week 3: Geospatial Operations"
     date-md: "Sep 11"
   - weeknum: 4
-    title: "Slightly-More-Complex Geospatial Operations"
-    footer: "PPOL 6805 Week 4: Slightly-More-Complex Geospatial Operations"
+    title: "Fancier Geospatial Operations"
+    footer: "PPOL 6805 Week 4: Fancier Geospatial Operations"
     date-md: "Sep 18"
   - weeknum: 5
     title: "Static Mapping Libraries"
