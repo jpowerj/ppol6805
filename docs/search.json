@@ -624,6 +624,27 @@
     ]
   },
   {
+    "objectID": "w04/slides.html#st_buffer-an-unary-operation-i-forgot-to-introduce",
+    "href": "w04/slides.html#st_buffer-an-unary-operation-i-forgot-to-introduce",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "st_buffer(): An Unary Operation I Forgot to Introduce!",
+    "text": "st_buffer(): An Unary Operation I Forgot to Introduce!\n\nThink about how you might answer questions like:\n\n“How far is your house (POINT) from Manhattan (POLYGON)?”\n“Are there any chemical plants within a mile of this building (POLYGON) / stretch of road (LINESTRING)?”\n\nLazy mode (my favorite mode): Compute distances from the centroid\nGIS master mode: Construct the buffer!"
+  },
+  {
+    "objectID": "w04/slides.html#on-polygons",
+    "href": "w04/slides.html#on-polygons",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "On POLYGONs",
+    "text": "On POLYGONs\nKey line: manhattan_buffer_sf &lt;- manhattan_union_sf |&gt; st_buffer(dist = 1609.34) (1 mile \\(\\approx\\) 1609.34 meters)\n\n\nCode\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(tidycensus)\nlibrary(tigris)\nlibrary(mapview)\noptions(tigris_use_cache = TRUE)\nmanhattan_sf &lt;- get_acs(\n  geography = \"tract\",\n  variables = \"B19013_001\",\n  state = \"NY\",\n  county = \"New York\",\n  year = 2020,\n  geometry = TRUE,\n  cb = FALSE\n)\n# Erase the island tracts real quick\nisland_tracts &lt;- c(\n  \"Census Tract 1, New York County, New York\",\n  \"Census Tract 2.02, New York County, New York\"\n)\nmanhattan_sf &lt;- manhattan_sf |&gt; filter(\n  !(NAME %in% island_tracts)\n)\n# Union of all census tracts within the county\nmanhattan_union_sf &lt;- st_union(manhattan_sf)\nmanhattan_union_map &lt;- mapview(manhattan_union_sf, label=\"New York County\")\n# Construct buffer (1 mile ~= 1609.34 meters)\nmanhattan_buffer_sf &lt;- manhattan_union_sf |&gt; st_buffer(dist = 1609.34)\nmanhattan_buffer_map &lt;- mapview(manhattan_buffer_sf, label=\"Buffer (1 Mile)\", col.regions = cbPalette[1], legend = TRUE)\nmanhattan_buffer_map + manhattan_union_map"
+  },
+  {
+    "objectID": "w04/slides.html#on-linestrings",
+    "href": "w04/slides.html#on-linestrings",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "On LINESTRINGs",
+    "text": "On LINESTRINGs\n\n\nCode\nlibrary(tidyverse)\nlibrary(sf)\n## st_buffer, style options (taken from rgeos gBuffer)\nl1 = st_as_sfc(\"LINESTRING(0 0,1 5,4 5,5 2,8 2,9 4,4 6.5)\")\nop = par(mfrow=c(2,3))\nplot(st_buffer(l1, dist = 1, endCapStyle=\"ROUND\"), reset = FALSE, main = \"endCapStyle: ROUND\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, endCapStyle=\"FLAT\"), reset = FALSE, main = \"endCapStyle: FLAT\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, endCapStyle=\"SQUARE\"), reset = FALSE, main = \"endCapStyle: SQUARE\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs=1), reset = FALSE, main = \"nQuadSegs: 1\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs=2), reset = FALSE, main = \"nQuadSegs: 2\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs= 5), reset = FALSE, main = \"nQuadSegs: 5\")\nplot(l1,col='blue',add=TRUE)\n\n\n\nFrom the sf Documentation"
+  },
+  {
     "objectID": "w04/slides.html#what-makes-binary-operations-fancier",
     "href": "w04/slides.html#what-makes-binary-operations-fancier",
     "title": "Week 4: Fancier Spatial Operations",
@@ -691,7 +712,7 @@
     "href": "w04/slides.html#de-9im-vs.-everyday-language",
     "title": "Week 4: Fancier Spatial Operations",
     "section": "DE-9IM vs. Everyday Language",
-    "text": "DE-9IM vs. Everyday Language\n\nDE-9IM can (in theory) represent \\(6^9 = 10~077~696\\) possible geometric relationships!\nThe English language has like 10, and they’re ambiguous ☠️ (Different textbooks may have different encodings of the same English word:)\n\n\n\n\nEnglish\nMask\n212101212\nResult\n\n\n\n\n“Disjoint”\nFF*FF****\nFALSE\nx not disjoint from y\n\n\n“Touches”\nFT*******\nFALSE\nx doesn’t touch y\n\n\n“Touches”\nF***T****\nFALSE\nx doesn’t touch y\n\n\n“Crosses”\nT*T***T**\nTRUE\nx crosses y\n\n\n“Within”\nTF*F*****\nFALSE\nx is not within y\n\n\n“Overlaps”\nT*T***T**\nTRUE\nx overlaps y"
+    "text": "DE-9IM vs. Everyday Language\n\nDE-9IM can (in theory) represent \\(6^9 = 10~077~696\\) possible geometric relationships!\nThe English language has like 10, and they’re ambiguous ☠️ (Compromise employed by GIS systems: allow multiple masks for same English word:)\n\n\n\n\nEnglish\nMask\n212101212\nResult\n\n\n\n\n“Disjoint”\nFF*FF****\nFALSE\nx not disjoint from y\n\n\n“Touches”\nFT*******\nFALSE\nx doesn’t touch y\n\n\n“Touches”\nF***T****\nFALSE\nx doesn’t touch y\n\n\n“Crosses”\nT*T***T**\nTRUE\nx crosses y\n\n\n“Within”\nTF*F*****\nFALSE\nx is not within y\n\n\n“Overlaps”\nT*T***T**\nTRUE\nx overlaps y"
   },
   {
     "objectID": "w04/slides.html#st_relate-the-ultimate-predicate",
@@ -699,6 +720,62 @@
     "title": "Week 4: Fancier Spatial Operations",
     "section": "st_relate(): The Ultimate Predicate",
     "text": "st_relate(): The Ultimate Predicate\n\n\nCode\nlibrary(tidyverse)\nlibrary(rnaturalearth)\nus &lt;- ne_states(country=\"United States of America\")\ndc &lt;- us |&gt; filter(iso_3166_2 == \"US-DC\")\nus &lt;- us |&gt;\n  mutate(\n    de9im = st_relate(us, dc),\n    touch = st_touches(us, dc, sparse = F)\n  ) |&gt;\n  select(iso_3166_2, name, de9im, touch) |&gt;\n  arrange(name)\nus\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_3166_2\nname\nde9im\ntouch\ngeometry\n\n\n\n\nUS-AL\nAlabama\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-87.41958 3…\n\n\nUS-AK\nAlaska\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-141.0056 6…\n\n\nUS-AZ\nArizona\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-111.0063 3…\n\n\nUS-AR\nArkansas\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-90.30422 3…\n\n\nUS-CA\nCalifornia\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-114.7243 3…\n\n\nUS-CO\nColorado\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-109.0463 4…\n\n\nUS-CT\nConnecticut\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-73.6417 41…\n\n\nUS-DE\nDelaware\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-75.05809 3…\n\n\nUS-DC\nDistrict of Columbia\n2FFF1FFF2\nFALSE\nMULTIPOLYGON (((-77.02293 3…\n\n\nUS-FL\nFlorida\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-87.44734 3…\n\n\nUS-GA\nGeorgia\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-80.89029 3…\n\n\nUS-HI\nHawaii\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-154.8996 1…\n\n\nUS-ID\nIdaho\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-117.0382 4…\n\n\nUS-IL\nIllinois\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-89.1237 36…\n\n\nUS-IN\nIndiana\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-84.80608 4…\n\n\nUS-IA\nIowa\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-96.48266 4…\n\n\nUS-KS\nKansas\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-102.0396 3…\n\n\nUS-KY\nKentucky\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-89.42446 3…\n\n\nUS-LA\nLouisiana\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-89.52599 3…\n\n\nUS-ME\nMaine\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-71.08495 4…\n\n\nUS-MD\nMaryland\nFF2F11212\nTRUE\nMULTIPOLYGON (((-75.64786 3…\n\n\nUS-MA\nMassachusetts\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-71.19396 4…\n\n\nUS-MI\nMichigan\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-84.4913 46…\n\n\nUS-MN\nMinnesota\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-97.22609 4…\n\n\nUS-MS\nMississippi\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-88.40221 3…\n\n\nUS-MO\nMissouri\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-95.31725 4…\n\n\nUS-MT\nMontana\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-116.0482 4…\n\n\nUS-NE\nNebraska\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-104.0537 4…\n\n\nUS-NV\nNevada\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-114.0425 4…\n\n\nUS-NH\nNew Hampshire\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-71.50585 4…\n\n\nUS-NJ\nNew Jersey\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-75.54133 3…\n\n\nUS-NM\nNew Mexico\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-108.1375 3…\n\n\nUS-NY\nNew York\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-79.06523 4…\n\n\nUS-NC\nNorth Carolina\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-76.03173 3…\n\n\nUS-ND\nNorth Dakota\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-104.0476 4…\n\n\nUS-OH\nOhio\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-80.52023 4…\n\n\nUS-OK\nOklahoma\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-103.0002 3…\n\n\nUS-OR\nOregon\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-124.4924 4…\n\n\nUS-PA\nPennsylvania\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-79.76301 4…\n\n\nUS-RI\nRhode Island\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-71.23686 4…\n\n\nUS-SC\nSouth Carolina\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-78.57316 3…\n\n\nUS-SD\nSouth Dakota\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-104.0567 4…\n\n\nUS-TN\nTennessee\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-90.30422 3…\n\n\nUS-TX\nTexas\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-103.3115 2…\n\n\nUS-UT\nUtah\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-111.0502 4…\n\n\nUS-VT\nVermont\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-73.35134 4…\n\n\nUS-VA\nVirginia\nFF2F11212\nTRUE\nMULTIPOLYGON (((-76.01325 3…\n\n\nUS-WA\nWashington\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-122.753 48…\n\n\nUS-WV\nWest Virginia\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-82.58945 3…\n\n\nUS-WI\nWisconsin\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-87.80425 4…\n\n\nUS-WY\nWyoming\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-109.0463 4…"
+  },
+  {
+    "objectID": "w04/slides.html#if-you-dont-want-to-scroll",
+    "href": "w04/slides.html#if-you-dont-want-to-scroll",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "(If You Don’t Want to Scroll)",
+    "text": "(If You Don’t Want to Scroll)\n\n\nCode\nus |&gt; filter(touch)\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_3166_2\nname\nde9im\ntouch\ngeometry\n\n\n\n\nUS-MD\nMaryland\nFF2F11212\nTRUE\nMULTIPOLYGON (((-75.64786 3…\n\n\nUS-VA\nVirginia\nFF2F11212\nTRUE\nMULTIPOLYGON (((-76.01325 3…"
+  },
+  {
+    "objectID": "w04/slides.html#from-last-week-almost-a-spatial-join",
+    "href": "w04/slides.html#from-last-week-almost-a-spatial-join",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "From Last Week: Almost a Spatial Join",
+    "text": "From Last Week: Almost a Spatial Join\n\n\nCode\nlibrary(mapview)\nlibrary(leaflet.extras2)\nafrica_sf &lt;- ne_countries(continent = \"Africa\", scale = 50) |&gt; select(iso_a3, geounit)\nafrica_map &lt;- mapview(africa_sf, label=\"geounit\", legend=FALSE)\nN &lt;- 10\nafrica_union_sf &lt;- sf::st_union(africa_sf)\nsampled_points_sf &lt;- sf::st_sample(africa_union_sf, N) |&gt; sf::st_sf() |&gt; mutate(temp = runif(N, 0, 100))\nsampled_points_map &lt;- mapview(sampled_points_sf, label=\"Random Point\", col.regions=cbPalette[1], legend=FALSE)\ncountries_points_sf &lt;- africa_sf[sampled_points_sf,]\nfiltered_map &lt;- mapview(countries_points_sf, label=\"geounit\", legend=FALSE) + sampled_points_map\n(africa_map + sampled_points_map) | filtered_map"
+  },
+  {
+    "objectID": "w04/slides.html#spatial-filter-neq-spatial-join",
+    "href": "w04/slides.html#spatial-filter-neq-spatial-join",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "Spatial Filter \\(\\neq\\) Spatial Join",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (23.5386 22.01628)\n94.385575\n\n\nPOINT (14.64665 -13.35285)\n26.332960\n\n\nPOINT (32.29586 -27.78115)\n95.603092\n\n\nPOINT (16.11575 -9.174237)\n11.086251\n\n\nPOINT (14.39308 -1.016639)\n6.604077\n\n\nPOINT (47.91478 7.723278)\n40.497326\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n58\nSOM\nSomalia\nMULTIPOLYGON (((41.53271 -1…\n\n\n104\nMAR\nMorocco\nMULTIPOLYGON (((-2.219629 3…\n\n\n118\nMDG\nMadagascar\nMULTIPOLYGON (((49.53828 -1…"
+  },
+  {
+    "objectID": "w04/slides.html#our-first-real-spatial-join-st_join",
+    "href": "w04/slides.html#our-first-real-spatial-join-st_join",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "Our First Real Spatial Join: st_join()",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n57\nZAF\nSouth Africa\n95.603092\nMULTIPOLYGON (((29.36484 -2…\n\n\n58\nSOM\nSomalia\n40.497326\nMULTIPOLYGON (((41.53271 -1…\n\n\n104\nMAR\nMorocco\n94.671352\nMULTIPOLYGON (((-2.219629 3…\n\n\n118\nMDG\nMadagascar\n1.921007\nMULTIPOLYGON (((49.53828 -1…\n\n\n123\nLBY\nLibya\n94.385575\nMULTIPOLYGON (((9.51875 30….\n\n\n160\nGAB\nGabon\n6.604077\nMULTIPOLYGON (((13.29355 2…."
+  },
+  {
+    "objectID": "w04/slides.html#but-we-were-still-in-easy-mode",
+    "href": "w04/slides.html#but-we-were-still-in-easy-mode",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "But… We Were Still in Easy Mode",
+    "text": "But… We Were Still in Easy Mode\n\nEvery point could be matched one-to-one with a country. But what if… 😱\n\n\n\nCode\ng &lt;- st_make_grid(st_bbox(st_as_sfc(\"LINESTRING(0 0,1 1)\")), n = c(2,2))\npar(mar = rep(0,4))\nplot(g)\nplot(g[1] * diag(c(3/4, 1)) + c(0.25, 0.125), add = TRUE, lty = 2)\ntext(c(.2, .8, .2, .8), c(.2, .2, .8, .8), c(1,2,4,8), col = 'red')"
+  },
+  {
+    "objectID": "w04/slides.html#spatially-intensive-vs.-spatially-extensive",
+    "href": "w04/slides.html#spatially-intensive-vs.-spatially-extensive",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "Spatially Intensive vs. Spatially Extensive",
+    "text": "Spatially Intensive vs. Spatially Extensive\n\nExtensive attributes: associated with a physical size (length, area, volume, counts of items). Ex: population count.\n\nAssociated with an area \\(\\implies\\) if that area is cut into smaller areas, the population count needs to be split too\n(At minimum, the sum of the population counts for the smaller areas needs to equal the total for the larger area)\n\nIntensive attributes: Not proportional to support: if the area is split, values may vary but on average remain the same. Ex: population density\n\nIf an area is split into smaller areas, population density is not split similarly!\nThe sum of population densities for the smaller areas is a meaningless measure\nInstead, the mean will be more useful as ~similar to the density of the total"
+  },
+  {
+    "objectID": "w04/slides.html#handling-the-extensive-case",
+    "href": "w04/slides.html#handling-the-extensive-case",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "Handling the Extensive Case",
+    "text": "Handling the Extensive Case\n\nAssume the extensive attribute \\(Y\\) is uniformly distributed over a space \\(S_i\\) (e.g., for population counts we assume everyone is evenly-spaced across the region)\nWe first compute \\(Y_{ij}\\), derived from \\(Y_i\\) for a sub-area of \\(S_i\\), \\(A_{ij} = S_i \\cap T_j\\):\n\\[\n\\hat{Y}_{ij}(A_{ij}) = \\frac{|A_{ij}|}{|S_i|}Y_i(S_i)\n\\]\nwhere \\(|\\cdot|\\) denotes area.\nThen we can compute \\(Y_j(T_j)\\) by summing all the elements over area \\(T_j\\):\n\n\\[\n\\hat{Y}_j(T_j) = \\sum_{i=1}^{p}\\frac{|A_{ij}|}{|S_i|}Y_i(S_i)\n\\]"
+  },
+  {
+    "objectID": "w04/slides.html#handling-the-intensive-case",
+    "href": "w04/slides.html#handling-the-intensive-case",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "Handling the Intensive Case",
+    "text": "Handling the Intensive Case\n\nAssume the variable \\(Y\\) has constant value over a space \\(S_i\\) (e.g., population density in assumed to be the same across all sub-areas)\nThen the estimate for a sub-area is the same as the estimate for the total area:\n\n\\[\n\\hat{Y}_{ij} = Y_i(S_i)\n\\]\n\nSo that we can obtain estimates of \\(Y\\) for new spatial units \\(T_j\\) via area-weighted average of the source values:\n\n\\[\n\\hat{Y}_j(T_j) = \\sum_{i=1}^{p}\\frac{|A_{ij}|}{|T_j|}Y_j(S_i)\n\\]"
   },
   {
     "objectID": "w04/slides.html#references",
@@ -713,6 +790,36 @@
     "title": "Week 4: Fancier Spatial Operations",
     "section": "",
     "text": "Open slides in new tab →",
+    "crumbs": [
+      "Week 4: Sep 18"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#st_buffer-an-unary-operation-i-forgot-to-introduce",
+    "href": "w04/index.html#st_buffer-an-unary-operation-i-forgot-to-introduce",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "st_buffer(): An Unary Operation I Forgot to Introduce!",
+    "text": "st_buffer(): An Unary Operation I Forgot to Introduce!\n\nThink about how you might answer questions like:\n\n“How far is your house (POINT) from Manhattan (POLYGON)?”\n“Are there any chemical plants within a mile of this building (POLYGON) / stretch of road (LINESTRING)?”\n\nLazy mode (my favorite mode): Compute distances from the centroid\nGIS master mode: Construct the buffer!",
+    "crumbs": [
+      "Week 4: Sep 18"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#on-polygons",
+    "href": "w04/index.html#on-polygons",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "On POLYGONs",
+    "text": "On POLYGONs\nKey line: manhattan_buffer_sf &lt;- manhattan_union_sf |&gt; st_buffer(dist = 1609.34) (1 mile \\(\\approx\\) 1609.34 meters)\n\n\nCode\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(tidycensus)\nlibrary(tigris)\nlibrary(mapview)\noptions(tigris_use_cache = TRUE)\nmanhattan_sf &lt;- get_acs(\n  geography = \"tract\",\n  variables = \"B19013_001\",\n  state = \"NY\",\n  county = \"New York\",\n  year = 2020,\n  geometry = TRUE,\n  cb = FALSE\n)\n# Erase the island tracts real quick\nisland_tracts &lt;- c(\n  \"Census Tract 1, New York County, New York\",\n  \"Census Tract 2.02, New York County, New York\"\n)\nmanhattan_sf &lt;- manhattan_sf |&gt; filter(\n  !(NAME %in% island_tracts)\n)\n# Union of all census tracts within the county\nmanhattan_union_sf &lt;- st_union(manhattan_sf)\nmanhattan_union_map &lt;- mapview(manhattan_union_sf, label=\"New York County\")\n# Construct buffer (1 mile ~= 1609.34 meters)\nmanhattan_buffer_sf &lt;- manhattan_union_sf |&gt; st_buffer(dist = 1609.34)\nmanhattan_buffer_map &lt;- mapview(manhattan_buffer_sf, label=\"Buffer (1 Mile)\", col.regions = cbPalette[1], legend = TRUE)\nmanhattan_buffer_map + manhattan_union_map",
+    "crumbs": [
+      "Week 4: Sep 18"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#on-linestrings",
+    "href": "w04/index.html#on-linestrings",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "On LINESTRINGs",
+    "text": "On LINESTRINGs\n\n\nCode\nlibrary(tidyverse)\nlibrary(sf)\n## st_buffer, style options (taken from rgeos gBuffer)\nl1 = st_as_sfc(\"LINESTRING(0 0,1 5,4 5,5 2,8 2,9 4,4 6.5)\")\nop = par(mfrow=c(2,3))\nplot(st_buffer(l1, dist = 1, endCapStyle=\"ROUND\"), reset = FALSE, main = \"endCapStyle: ROUND\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, endCapStyle=\"FLAT\"), reset = FALSE, main = \"endCapStyle: FLAT\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, endCapStyle=\"SQUARE\"), reset = FALSE, main = \"endCapStyle: SQUARE\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs=1), reset = FALSE, main = \"nQuadSegs: 1\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs=2), reset = FALSE, main = \"nQuadSegs: 2\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs= 5), reset = FALSE, main = \"nQuadSegs: 5\")\nplot(l1,col='blue',add=TRUE)\n\n\n\n\n\nFrom the sf Documentation",
     "crumbs": [
       "Week 4: Sep 18"
     ]
@@ -762,7 +869,7 @@
     "href": "w04/index.html#de-9im-strings",
     "title": "Week 4: Fancier Spatial Operations",
     "section": "DE-9IM Strings",
-    "text": "DE-9IM Strings\nEach cell here visualizes one component of the DE-9IM string 1020F1102, which describes the relationship between the following two geometries:\n\nBoxey McBoxface: POLYGON(0 0, 1 0, 1 1, 0 1, 0 0)\nLiney McLineface: LINESTRING(0.5 -0.5, 0.5 0.5)\n\n\n\nCode\nlibrary(sf)\n\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\n\nCode\npolygon &lt;- po &lt;- st_polygon(list(rbind(c(0,0), c(1,0), c(1,1), c(0,1), c(0,0))))\np0 &lt;- st_polygon(list(rbind(c(-1,-1), c(2,-1), c(2,2), c(-1,2), c(-1,-1))))\nline &lt;- li &lt;- st_linestring(rbind(c(.5, -.5), c(.5, 0.5)))\ns &lt;- st_sfc(po, li)\n\npar(mfrow = c(3,3))\npar(mar = c(1,1,1,1))\n\n# \"1020F1102\"\n# 1: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5,0), c(.5,.495)), col = 'red', lwd = 2)\npoints(0.5, 0.5, pch = 1)\n\n# 2: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"B(line) = 0\")))\npoints(0.5, 0.5, col = 'red', pch = 16)\n\n# 3: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"E(line) = 2\")))\nplot(po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n# 4: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"I(line) = 0\")))\npoints(.5, 0, col = 'red', pch = 16)\n\n# 5: F\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"B(line) = F\")))\n\n# 6: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"E(line) = 1\")))\nplot(po, border = 'red', col = NA, add = TRUE, lwd = 2)\n\n# 7: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5, -.5), c(.5, 0)), col = 'red', lwd = 2)\n\n# 8: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"B(line) = 0\")))\npoints(.5, -.5, col = 'red', pch = 16)\n\n# 9: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"E(line) = 2\")))\nplot(p0 / po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n\n\n\n\nCode from Pebesma and Bivand (2023)",
+    "text": "DE-9IM Strings\nEach cell here visualizes one component of the DE-9IM string 1020F1102, which describes the relationship between the following two geometries:\n\nBoxey McBoxface: POLYGON(0 0, 1 0, 1 1, 0 1, 0 0)\nLiney McLineface: LINESTRING(0.5 -0.5, 0.5 0.5)\n\n\n\nCode\nlibrary(sf)\npolygon &lt;- po &lt;- st_polygon(list(rbind(c(0,0), c(1,0), c(1,1), c(0,1), c(0,0))))\np0 &lt;- st_polygon(list(rbind(c(-1,-1), c(2,-1), c(2,2), c(-1,2), c(-1,-1))))\nline &lt;- li &lt;- st_linestring(rbind(c(.5, -.5), c(.5, 0.5)))\ns &lt;- st_sfc(po, li)\n\npar(mfrow = c(3,3))\npar(mar = c(1,1,1,1))\n\n# \"1020F1102\"\n# 1: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5,0), c(.5,.495)), col = 'red', lwd = 2)\npoints(0.5, 0.5, pch = 1)\n\n# 2: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"B(line) = 0\")))\npoints(0.5, 0.5, col = 'red', pch = 16)\n\n# 3: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"E(line) = 2\")))\nplot(po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n# 4: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"I(line) = 0\")))\npoints(.5, 0, col = 'red', pch = 16)\n\n# 5: F\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"B(line) = F\")))\n\n# 6: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"E(line) = 1\")))\nplot(po, border = 'red', col = NA, add = TRUE, lwd = 2)\n\n# 7: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5, -.5), c(.5, 0)), col = 'red', lwd = 2)\n\n# 8: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"B(line) = 0\")))\npoints(.5, -.5, col = 'red', pch = 16)\n\n# 9: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"E(line) = 2\")))\nplot(p0 / po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n\n\n\n\nCode from Pebesma and Bivand (2023)",
     "crumbs": [
       "Week 4: Sep 18"
     ]
@@ -812,7 +919,7 @@
     "href": "w04/index.html#de-9im-vs.-everyday-language",
     "title": "Week 4: Fancier Spatial Operations",
     "section": "DE-9IM vs. Everyday Language",
-    "text": "DE-9IM vs. Everyday Language\n\nDE-9IM can (in theory) represent \\(6^9 = 10~077~696\\) possible geometric relationships!\nThe English language has like 10, and they’re ambiguous ☠️ (Different textbooks may have different encodings of the same English word:)\n\n\n\n\nEnglish\nMask\n212101212\nResult\n\n\n\n\n“Disjoint”\nFF*FF****\nFALSE\nx not disjoint from y\n\n\n“Touches”\nFT*******\nFALSE\nx doesn’t touch y\n\n\n“Touches”\nF***T****\nFALSE\nx doesn’t touch y\n\n\n“Crosses”\nT*T***T**\nTRUE\nx crosses y\n\n\n“Within”\nTF*F*****\nFALSE\nx is not within y\n\n\n“Overlaps”\nT*T***T**\nTRUE\nx overlaps y",
+    "text": "DE-9IM vs. Everyday Language\n\nDE-9IM can (in theory) represent \\(6^9 = 10~077~696\\) possible geometric relationships!\nThe English language has like 10, and they’re ambiguous ☠️ (Compromise employed by GIS systems: allow multiple masks for same English word:)\n\n\n\n\nEnglish\nMask\n212101212\nResult\n\n\n\n\n“Disjoint”\nFF*FF****\nFALSE\nx not disjoint from y\n\n\n“Touches”\nFT*******\nFALSE\nx doesn’t touch y\n\n\n“Touches”\nF***T****\nFALSE\nx doesn’t touch y\n\n\n“Crosses”\nT*T***T**\nTRUE\nx crosses y\n\n\n“Within”\nTF*F*****\nFALSE\nx is not within y\n\n\n“Overlaps”\nT*T***T**\nTRUE\nx overlaps y",
     "crumbs": [
       "Week 4: Sep 18"
     ]
@@ -822,7 +929,87 @@
     "href": "w04/index.html#st_relate-the-ultimate-predicate",
     "title": "Week 4: Fancier Spatial Operations",
     "section": "st_relate(): The Ultimate Predicate",
-    "text": "st_relate(): The Ultimate Predicate\n\n\nCode\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\nlibrary(rnaturalearth)\nus &lt;- ne_states(country=\"United States of America\")\ndc &lt;- us |&gt; filter(iso_3166_2 == \"US-DC\")\nus &lt;- us |&gt;\n  mutate(\n    de9im = st_relate(us, dc),\n    touch = st_touches(us, dc, sparse = F)\n  ) |&gt;\n  select(iso_3166_2, name, de9im, touch) |&gt;\n  arrange(name)\n\n\nalthough coordinates are longitude/latitude, st_relate assumes that they are\nplanar\n\n\nCode\nus\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_3166_2\nname\nde9im\ntouch\ngeometry\n\n\n\n\nUS-AL\nAlabama\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-87.41958 3…\n\n\nUS-AK\nAlaska\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-141.0056 6…\n\n\nUS-AZ\nArizona\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-111.0063 3…\n\n\nUS-AR\nArkansas\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-90.30422 3…\n\n\nUS-CA\nCalifornia\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-114.7243 3…\n\n\nUS-CO\nColorado\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-109.0463 4…\n\n\nUS-CT\nConnecticut\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-73.6417 41…\n\n\nUS-DE\nDelaware\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-75.05809 3…\n\n\nUS-DC\nDistrict of Columbia\n2FFF1FFF2\nFALSE\nMULTIPOLYGON (((-77.02293 3…\n\n\nUS-FL\nFlorida\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-87.44734 3…\n\n\nUS-GA\nGeorgia\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-80.89029 3…\n\n\nUS-HI\nHawaii\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-154.8996 1…\n\n\nUS-ID\nIdaho\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-117.0382 4…\n\n\nUS-IL\nIllinois\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-89.1237 36…\n\n\nUS-IN\nIndiana\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-84.80608 4…\n\n\nUS-IA\nIowa\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-96.48266 4…\n\n\nUS-KS\nKansas\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-102.0396 3…\n\n\nUS-KY\nKentucky\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-89.42446 3…\n\n\nUS-LA\nLouisiana\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-89.52599 3…\n\n\nUS-ME\nMaine\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-71.08495 4…\n\n\nUS-MD\nMaryland\nFF2F11212\nTRUE\nMULTIPOLYGON (((-75.64786 3…\n\n\nUS-MA\nMassachusetts\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-71.19396 4…\n\n\nUS-MI\nMichigan\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-84.4913 46…\n\n\nUS-MN\nMinnesota\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-97.22609 4…\n\n\nUS-MS\nMississippi\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-88.40221 3…\n\n\nUS-MO\nMissouri\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-95.31725 4…\n\n\nUS-MT\nMontana\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-116.0482 4…\n\n\nUS-NE\nNebraska\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-104.0537 4…\n\n\nUS-NV\nNevada\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-114.0425 4…\n\n\nUS-NH\nNew Hampshire\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-71.50585 4…\n\n\nUS-NJ\nNew Jersey\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-75.54133 3…\n\n\nUS-NM\nNew Mexico\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-108.1375 3…\n\n\nUS-NY\nNew York\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-79.06523 4…\n\n\nUS-NC\nNorth Carolina\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-76.03173 3…\n\n\nUS-ND\nNorth Dakota\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-104.0476 4…\n\n\nUS-OH\nOhio\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-80.52023 4…\n\n\nUS-OK\nOklahoma\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-103.0002 3…\n\n\nUS-OR\nOregon\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-124.4924 4…\n\n\nUS-PA\nPennsylvania\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-79.76301 4…\n\n\nUS-RI\nRhode Island\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-71.23686 4…\n\n\nUS-SC\nSouth Carolina\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-78.57316 3…\n\n\nUS-SD\nSouth Dakota\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-104.0567 4…\n\n\nUS-TN\nTennessee\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-90.30422 3…\n\n\nUS-TX\nTexas\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-103.3115 2…\n\n\nUS-UT\nUtah\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-111.0502 4…\n\n\nUS-VT\nVermont\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-73.35134 4…\n\n\nUS-VA\nVirginia\nFF2F11212\nTRUE\nMULTIPOLYGON (((-76.01325 3…\n\n\nUS-WA\nWashington\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-122.753 48…\n\n\nUS-WV\nWest Virginia\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-82.58945 3…\n\n\nUS-WI\nWisconsin\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-87.80425 4…\n\n\nUS-WY\nWyoming\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-109.0463 4…",
+    "text": "st_relate(): The Ultimate Predicate\n\n\nCode\nlibrary(tidyverse)\nlibrary(rnaturalearth)\nus &lt;- ne_states(country=\"United States of America\")\ndc &lt;- us |&gt; filter(iso_3166_2 == \"US-DC\")\nus &lt;- us |&gt;\n  mutate(\n    de9im = st_relate(us, dc),\n    touch = st_touches(us, dc, sparse = F)\n  ) |&gt;\n  select(iso_3166_2, name, de9im, touch) |&gt;\n  arrange(name)\n\n\nalthough coordinates are longitude/latitude, st_relate assumes that they are\nplanar\n\n\nCode\nus\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_3166_2\nname\nde9im\ntouch\ngeometry\n\n\n\n\nUS-AL\nAlabama\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-87.41958 3…\n\n\nUS-AK\nAlaska\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-141.0056 6…\n\n\nUS-AZ\nArizona\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-111.0063 3…\n\n\nUS-AR\nArkansas\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-90.30422 3…\n\n\nUS-CA\nCalifornia\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-114.7243 3…\n\n\nUS-CO\nColorado\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-109.0463 4…\n\n\nUS-CT\nConnecticut\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-73.6417 41…\n\n\nUS-DE\nDelaware\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-75.05809 3…\n\n\nUS-DC\nDistrict of Columbia\n2FFF1FFF2\nFALSE\nMULTIPOLYGON (((-77.02293 3…\n\n\nUS-FL\nFlorida\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-87.44734 3…\n\n\nUS-GA\nGeorgia\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-80.89029 3…\n\n\nUS-HI\nHawaii\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-154.8996 1…\n\n\nUS-ID\nIdaho\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-117.0382 4…\n\n\nUS-IL\nIllinois\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-89.1237 36…\n\n\nUS-IN\nIndiana\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-84.80608 4…\n\n\nUS-IA\nIowa\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-96.48266 4…\n\n\nUS-KS\nKansas\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-102.0396 3…\n\n\nUS-KY\nKentucky\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-89.42446 3…\n\n\nUS-LA\nLouisiana\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-89.52599 3…\n\n\nUS-ME\nMaine\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-71.08495 4…\n\n\nUS-MD\nMaryland\nFF2F11212\nTRUE\nMULTIPOLYGON (((-75.64786 3…\n\n\nUS-MA\nMassachusetts\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-71.19396 4…\n\n\nUS-MI\nMichigan\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-84.4913 46…\n\n\nUS-MN\nMinnesota\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-97.22609 4…\n\n\nUS-MS\nMississippi\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-88.40221 3…\n\n\nUS-MO\nMissouri\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-95.31725 4…\n\n\nUS-MT\nMontana\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-116.0482 4…\n\n\nUS-NE\nNebraska\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-104.0537 4…\n\n\nUS-NV\nNevada\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-114.0425 4…\n\n\nUS-NH\nNew Hampshire\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-71.50585 4…\n\n\nUS-NJ\nNew Jersey\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-75.54133 3…\n\n\nUS-NM\nNew Mexico\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-108.1375 3…\n\n\nUS-NY\nNew York\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-79.06523 4…\n\n\nUS-NC\nNorth Carolina\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-76.03173 3…\n\n\nUS-ND\nNorth Dakota\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-104.0476 4…\n\n\nUS-OH\nOhio\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-80.52023 4…\n\n\nUS-OK\nOklahoma\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-103.0002 3…\n\n\nUS-OR\nOregon\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-124.4924 4…\n\n\nUS-PA\nPennsylvania\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-79.76301 4…\n\n\nUS-RI\nRhode Island\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-71.23686 4…\n\n\nUS-SC\nSouth Carolina\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-78.57316 3…\n\n\nUS-SD\nSouth Dakota\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-104.0567 4…\n\n\nUS-TN\nTennessee\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-90.30422 3…\n\n\nUS-TX\nTexas\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-103.3115 2…\n\n\nUS-UT\nUtah\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-111.0502 4…\n\n\nUS-VT\nVermont\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-73.35134 4…\n\n\nUS-VA\nVirginia\nFF2F11212\nTRUE\nMULTIPOLYGON (((-76.01325 3…\n\n\nUS-WA\nWashington\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-122.753 48…\n\n\nUS-WV\nWest Virginia\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-82.58945 3…\n\n\nUS-WI\nWisconsin\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-87.80425 4…\n\n\nUS-WY\nWyoming\nFF2FF1212\nFALSE\nMULTIPOLYGON (((-109.0463 4…",
+    "crumbs": [
+      "Week 4: Sep 18"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#if-you-dont-want-to-scroll",
+    "href": "w04/index.html#if-you-dont-want-to-scroll",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "(If You Don’t Want to Scroll)",
+    "text": "(If You Don’t Want to Scroll)\n\n\nCode\nus |&gt; filter(touch)\n\n\nWarning: Using one column matrices in `filter()` was deprecated in dplyr 1.1.0.\nℹ Please use one dimensional logical vectors instead.\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_3166_2\nname\nde9im\ntouch\ngeometry\n\n\n\n\nUS-MD\nMaryland\nFF2F11212\nTRUE\nMULTIPOLYGON (((-75.64786 3…\n\n\nUS-VA\nVirginia\nFF2F11212\nTRUE\nMULTIPOLYGON (((-76.01325 3…",
+    "crumbs": [
+      "Week 4: Sep 18"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#from-last-week-almost-a-spatial-join",
+    "href": "w04/index.html#from-last-week-almost-a-spatial-join",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "From Last Week: Almost a Spatial Join",
+    "text": "From Last Week: Almost a Spatial Join\n\n\nCode\nlibrary(mapview)\nlibrary(leaflet.extras2)\n\n\nLoading required package: leaflet\n\n\nCode\nafrica_sf &lt;- ne_countries(continent = \"Africa\", scale = 50) |&gt; select(iso_a3, geounit)\nafrica_map &lt;- mapview(africa_sf, label=\"geounit\", legend=FALSE)\nN &lt;- 10\nafrica_union_sf &lt;- sf::st_union(africa_sf)\nsampled_points_sf &lt;- sf::st_sample(africa_union_sf, N) |&gt; sf::st_sf() |&gt; mutate(temp = runif(N, 0, 100))\nsampled_points_map &lt;- mapview(sampled_points_sf, label=\"Random Point\", col.regions=cbPalette[1], legend=FALSE)\ncountries_points_sf &lt;- africa_sf[sampled_points_sf,]\nfiltered_map &lt;- mapview(countries_points_sf, label=\"geounit\", legend=FALSE) + sampled_points_map\n(africa_map + sampled_points_map) | filtered_map",
+    "crumbs": [
+      "Week 4: Sep 18"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#spatial-filter-neq-spatial-join",
+    "href": "w04/index.html#spatial-filter-neq-spatial-join",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "Spatial Filter \\(\\neq\\) Spatial Join",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (23.5386 22.01628)\n94.385575\n\n\nPOINT (14.64665 -13.35285)\n26.332960\n\n\nPOINT (32.29586 -27.78115)\n95.603092\n\n\nPOINT (16.11575 -9.174237)\n11.086251\n\n\nPOINT (14.39308 -1.016639)\n6.604077\n\n\nPOINT (47.91478 7.723278)\n40.497326\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n58\nSOM\nSomalia\nMULTIPOLYGON (((41.53271 -1…\n\n\n104\nMAR\nMorocco\nMULTIPOLYGON (((-2.219629 3…\n\n\n118\nMDG\nMadagascar\nMULTIPOLYGON (((49.53828 -1…",
+    "crumbs": [
+      "Week 4: Sep 18"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#our-first-real-spatial-join-st_join",
+    "href": "w04/index.html#our-first-real-spatial-join-st_join",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "Our First Real Spatial Join: st_join()",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n57\nZAF\nSouth Africa\n95.603092\nMULTIPOLYGON (((29.36484 -2…\n\n\n58\nSOM\nSomalia\n40.497326\nMULTIPOLYGON (((41.53271 -1…\n\n\n104\nMAR\nMorocco\n94.671352\nMULTIPOLYGON (((-2.219629 3…\n\n\n118\nMDG\nMadagascar\n1.921007\nMULTIPOLYGON (((49.53828 -1…\n\n\n123\nLBY\nLibya\n94.385575\nMULTIPOLYGON (((9.51875 30….\n\n\n160\nGAB\nGabon\n6.604077\nMULTIPOLYGON (((13.29355 2….",
+    "crumbs": [
+      "Week 4: Sep 18"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#but-we-were-still-in-easy-mode",
+    "href": "w04/index.html#but-we-were-still-in-easy-mode",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "But… We Were Still in Easy Mode",
+    "text": "But… We Were Still in Easy Mode\n\nEvery point could be matched one-to-one with a country. But what if… 😱\n\n\n\nCode\ng &lt;- st_make_grid(st_bbox(st_as_sfc(\"LINESTRING(0 0,1 1)\")), n = c(2,2))\npar(mar = rep(0,4))\nplot(g)\nplot(g[1] * diag(c(3/4, 1)) + c(0.25, 0.125), add = TRUE, lty = 2)\ntext(c(.2, .8, .2, .8), c(.2, .2, .8, .8), c(1,2,4,8), col = 'red')",
+    "crumbs": [
+      "Week 4: Sep 18"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#spatially-intensive-vs.-spatially-extensive",
+    "href": "w04/index.html#spatially-intensive-vs.-spatially-extensive",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "Spatially Intensive vs. Spatially Extensive",
+    "text": "Spatially Intensive vs. Spatially Extensive\n\nExtensive attributes: associated with a physical size (length, area, volume, counts of items). Ex: population count.\n\nAssociated with an area \\(\\implies\\) if that area is cut into smaller areas, the population count needs to be split too\n(At minimum, the sum of the population counts for the smaller areas needs to equal the total for the larger area)\n\nIntensive attributes: Not proportional to support: if the area is split, values may vary but on average remain the same. Ex: population density\n\nIf an area is split into smaller areas, population density is not split similarly!\nThe sum of population densities for the smaller areas is a meaningless measure\nInstead, the mean will be more useful as ~similar to the density of the total",
+    "crumbs": [
+      "Week 4: Sep 18"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#handling-the-extensive-case",
+    "href": "w04/index.html#handling-the-extensive-case",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "Handling the Extensive Case",
+    "text": "Handling the Extensive Case\n\nAssume the extensive attribute \\(Y\\) is uniformly distributed over a space \\(S_i\\) (e.g., for population counts we assume everyone is evenly-spaced across the region)\nWe first compute \\(Y_{ij}\\), derived from \\(Y_i\\) for a sub-area of \\(S_i\\), \\(A_{ij} = S_i \\cap T_j\\):\n\\[\n\\hat{Y}_{ij}(A_{ij}) = \\frac{|A_{ij}|}{|S_i|}Y_i(S_i)\n\\]\nwhere \\(|\\cdot|\\) denotes area.\nThen we can compute \\(Y_j(T_j)\\) by summing all the elements over area \\(T_j\\):\n\n\\[\n\\hat{Y}_j(T_j) = \\sum_{i=1}^{p}\\frac{|A_{ij}|}{|S_i|}Y_i(S_i)\n\\]",
+    "crumbs": [
+      "Week 4: Sep 18"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#handling-the-intensive-case",
+    "href": "w04/index.html#handling-the-intensive-case",
+    "title": "Week 4: Fancier Spatial Operations",
+    "section": "Handling the Intensive Case",
+    "text": "Handling the Intensive Case\n\nAssume the variable \\(Y\\) has constant value over a space \\(S_i\\) (e.g., population density in assumed to be the same across all sub-areas)\nThen the estimate for a sub-area is the same as the estimate for the total area:\n\n\\[\n\\hat{Y}_{ij} = Y_i(S_i)\n\\]\n\nSo that we can obtain estimates of \\(Y\\) for new spatial units \\(T_j\\) via area-weighted average of the source values:\n\n\\[\n\\hat{Y}_j(T_j) = \\sum_{i=1}^{p}\\frac{|A_{ij}|}{|T_j|}Y_j(S_i)\n\\]",
     "crumbs": [
       "Week 4: Sep 18"
     ]

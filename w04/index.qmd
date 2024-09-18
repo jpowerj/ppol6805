@@ -49,6 +49,92 @@ format:
 
 :::
 
+# One More Unary Operation {data-stack-name="Buffers"}
+
+::: {.hidden}
+
+```{r}
+#| label: source-globals
+source("../dsan-globals/_globals.r")
+set.seed(6805)
+```
+
+:::
+
+## `st_buffer()`: An Unary Operation I Forgot to Introduce!
+
+* Think about how you might answer questions like:
+  * "How far is your house (`POINT`) from Manhattan (`POLYGON`)?"
+  * "Are there any chemical plants within a mile of this building (`POLYGON`) / stretch of road (`LINESTRING`)?"
+* Lazy mode (my favorite mode): Compute distances from the **centroid**
+* GIS master mode: Construct the **buffer**!
+
+## On `POLYGON`s {.smaller .crunch-title}
+
+Key line: `manhattan_buffer_sf <- manhattan_union_sf |> st_buffer(dist = 1609.34)` (1 mile $\approx$ 1609.34 meters)
+
+```{r}
+#| label: manhattan-buffer
+#| warning: false
+#| code-fold: true
+library(tidyverse)
+library(sf)
+library(tidycensus)
+library(tigris)
+library(mapview)
+options(tigris_use_cache = TRUE)
+manhattan_sf <- get_acs(
+  geography = "tract",
+  variables = "B19013_001",
+  state = "NY",
+  county = "New York",
+  year = 2020,
+  geometry = TRUE,
+  cb = FALSE
+)
+# Erase the island tracts real quick
+island_tracts <- c(
+  "Census Tract 1, New York County, New York",
+  "Census Tract 2.02, New York County, New York"
+)
+manhattan_sf <- manhattan_sf |> filter(
+  !(NAME %in% island_tracts)
+)
+# Union of all census tracts within the county
+manhattan_union_sf <- st_union(manhattan_sf)
+manhattan_union_map <- mapview(manhattan_union_sf, label="New York County")
+# Construct buffer (1 mile ~= 1609.34 meters)
+manhattan_buffer_sf <- manhattan_union_sf |> st_buffer(dist = 1609.34)
+manhattan_buffer_map <- mapview(manhattan_buffer_sf, label="Buffer (1 Mile)", col.regions = cbPalette[1], legend = TRUE)
+manhattan_buffer_map + manhattan_union_map
+```
+
+
+## On `LINESTRING`s
+
+```{r}
+#| label: st-buffer-linestring
+#| code-fold: true
+#| fig-cap: "From the [`sf` Documentation](https://r-spatial.github.io/sf/reference/geos_unary.html){target='_blank'}"
+library(tidyverse)
+library(sf)
+## st_buffer, style options (taken from rgeos gBuffer)
+l1 = st_as_sfc("LINESTRING(0 0,1 5,4 5,5 2,8 2,9 4,4 6.5)")
+op = par(mfrow=c(2,3))
+plot(st_buffer(l1, dist = 1, endCapStyle="ROUND"), reset = FALSE, main = "endCapStyle: ROUND")
+plot(l1,col='blue',add=TRUE)
+plot(st_buffer(l1, dist = 1, endCapStyle="FLAT"), reset = FALSE, main = "endCapStyle: FLAT")
+plot(l1,col='blue',add=TRUE)
+plot(st_buffer(l1, dist = 1, endCapStyle="SQUARE"), reset = FALSE, main = "endCapStyle: SQUARE")
+plot(l1,col='blue',add=TRUE)
+plot(st_buffer(l1, dist = 1, nQuadSegs=1), reset = FALSE, main = "nQuadSegs: 1")
+plot(l1,col='blue',add=TRUE)
+plot(st_buffer(l1, dist = 1, nQuadSegs=2), reset = FALSE, main = "nQuadSegs: 2")
+plot(l1,col='blue',add=TRUE)
+plot(st_buffer(l1, dist = 1, nQuadSegs= 5), reset = FALSE, main = "nQuadSegs: 5")
+plot(l1,col='blue',add=TRUE)
+```
+
 # From Unary to Binary Operations {data-stack-name="Getting Fancy"}
 
 ## What Makes Binary Operations "Fancier"? {.smaller .title-12 .crunch-title .crunch-ul}
@@ -287,7 +373,7 @@ From [OSGeo Project](https://docs.geotools.org/latest/userguide/library/jts/dim9
 ## DE-9IM vs. Everyday Language {.smaller}
 
 * DE-9IM can (in theory) represent $6^9 = 10~077~696$ possible geometric relationships!
-* The English language has like 10, and they're ambiguous ☠️ *(Different textbooks may have different encodings of the same English word:)*
+* The English language has like 10, and they're ambiguous ☠️ *(Compromise employed by GIS systems: allow multiple masks for same English word:)*
 
 | English | Mask | `212101212` | Result |
 | - | - | - | - |
@@ -297,8 +383,6 @@ From [OSGeo Project](https://docs.geotools.org/latest/userguide/library/jts/dim9
 | "Crosses" | `T*T***T**` | `TRUE` | `x` crosses `y` |
 | "Within" | `TF*F*****` | `FALSE` | `x` is not within `y` |
 | "Overlaps" | `T*T***T**` | `TRUE` | `x` overlaps `y` |
-
-# Doing Things with DE-9IM (Back to Binary Operations) {data-stack-name="Binary Operations"}
 
 ## `st_relate()`: The Ultimate Predicate {.smaller .crunch-title .title-12}
 
@@ -317,6 +401,125 @@ us <- us |>
   arrange(name)
 us
 ```
+
+## (If You Don't Want to Scroll) {.smaller}
+
+```{r}
+#| label: st-relate-filtered
+us |> filter(touch)
+```
+
+# Doing Things with DE-9IM (Back to Binary Operations) {data-stack-name="Binary Operations"}
+
+## From Last Week: *Almost* a Spatial Join {.smaller .crunch-title .leaflet-350}
+
+```{r}
+library(mapview)
+library(leaflet.extras2)
+africa_sf <- ne_countries(continent = "Africa", scale = 50) |> select(iso_a3, geounit)
+africa_map <- mapview(africa_sf, label="geounit", legend=FALSE)
+N <- 10
+africa_union_sf <- sf::st_union(africa_sf)
+sampled_points_sf <- sf::st_sample(africa_union_sf, N) |> sf::st_sf() |> mutate(temp = runif(N, 0, 100))
+sampled_points_map <- mapview(sampled_points_sf, label="Random Point", col.regions=cbPalette[1], legend=FALSE)
+countries_points_sf <- africa_sf[sampled_points_sf,]
+filtered_map <- mapview(countries_points_sf, label="geounit", legend=FALSE) + sampled_points_map
+(africa_map + sampled_points_map) | filtered_map
+```
+
+## Spatial Filter $\neq$ Spatial Join {.smaller .smaller-table}
+
+* The issue: **Data attributes of `POINT`s are not merged into data attributes of `POLYGON`s**
+
+::: {.columns}
+::: {.column width="50%"}
+
+<center>**`POINT` Attributes**</center>
+
+```{r}
+#| label: point-attributes
+st_geometry(sampled_points_sf) <- c("geom")
+sampled_points_sf |> head()
+```
+
+:::
+::: {.column width="50%"}
+
+<center>**`POLYGON` Attributes**</center>
+
+```{r}
+#| label: poly-attributes
+countries_points_sf |> head(4)
+```
+
+:::
+:::
+
+## Our First Real Spatial Join: `st_join()` {.smaller .crunch-title .title-12}
+
+```{r}
+#| label: st-join
+joined_sf <- countries_points_sf |> st_join(sampled_points_sf)
+joined_sf |> head()
+```
+
+![](images/dance_with_doge.gif){fig-align="center"}
+
+## But... We Were Still in Easy Mode {.crunch-title}
+
+* Every point could be matched **one-to-one** with a country. But what if... 😱
+
+```{r}
+#| label: area-weighted-interpolation
+#| code-fold: true
+g <- st_make_grid(st_bbox(st_as_sfc("LINESTRING(0 0,1 1)")), n = c(2,2))
+par(mar = rep(0,4))
+plot(g)
+plot(g[1] * diag(c(3/4, 1)) + c(0.25, 0.125), add = TRUE, lty = 2)
+text(c(.2, .8, .2, .8), c(.2, .2, .8, .8), c(1,2,4,8), col = 'red')
+```
+
+## Spatially *Intensive* vs. Spatially *Extensive* {.smaller .crunch-title .title-12}
+
+* **Extensive** attributes: associated with a physical size (length, area, volume, counts of items). Ex: **population count**.
+  * Associated with an area $\implies$ if that area is cut into smaller areas, the population count needs to be split too
+  * (At minimum, the **sum** of the population counts for the smaller areas needs to equal the total for the larger area)
+* **Intensive** attributes: **Not** proportional to support: if the area is split, values may vary but on average remain the same. Ex: **population density**
+  * If an area is split into smaller areas, population density is not split similarly!
+  * The **sum** of population densities for the smaller areas is a meaningless measure
+  * Instead, the **mean** will be more useful as ~similar to the density of the total
+
+## Handling the Extensive Case {.smaller .crunch-title}
+
+* Assume the **extensive** attribute $Y$ is **uniformly distributed** over a space $S_i$ (e.g., for **population counts** we assume everyone is evenly-spaced across the region)
+* We first compute $Y_{ij}$, derived from $Y_i$ for a sub-area of $S_i$, $A_{ij} = S_i \cap T_j$:
+
+  $$
+  \hat{Y}_{ij}(A_{ij}) = \frac{|A_{ij}|}{|S_i|}Y_i(S_i)
+  $$
+
+  where $|\cdot|$ denotes area.
+
+* Then we can compute $Y_j(T_j)$ by summing all the elements over area $T_j$:
+
+$$
+\hat{Y}_j(T_j) = \sum_{i=1}^{p}\frac{|A_{ij}|}{|S_i|}Y_i(S_i)
+$$
+
+## Handling the *Intensive* Case {.smaller .crunch-title}
+
+* Assume the variable $Y$ has **constant value** over a space $S_i$ (e.g., **population density** in assumed to be the same across all sub-areas)
+* Then the estimate for a sub-area is the **same** as the estimate for the total area:
+
+$$
+\hat{Y}_{ij} = Y_i(S_i)
+$$
+
+* So that we can obtain estimates of $Y$ for new spatial units $T_j$ via **area-weighted average** of the source values:
+
+$$
+\hat{Y}_j(T_j) = \sum_{i=1}^{p}\frac{|A_{ij}|}{|T_j|}Y_j(S_i)
+$$
 
 ## References
 
