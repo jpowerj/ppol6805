@@ -4,7 +4,7 @@ project:
   pre-render: _pre-set-updated.py
 
 website:
-  title: "PPOL 6805 / DSAN 6750: GIS"
+  title: "PPOL 6805 / DSAN 6750: GIS for Spatial Data Science"
   favicon: "favicon.png"
   repo-url: "https://github.com/jpowerj/ppol6805"
   repo-actions: [source]
@@ -19,6 +19,8 @@ website:
         text: Syllabus
       - href: resources.qmd
         text: Resources
+      - href: final-project.qmd
+        text: Final Project
       - "---"
       - href: w01/index.qmd
         text: "Week 1: Aug 28"
