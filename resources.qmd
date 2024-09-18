@@ -5,7 +5,14 @@ format:
   html:
     link-external-icon: true
     link-external-newwindow: true
+    callout-appearance: default
 ---
+
+::: {.callout-note title="Update Log" collapse="true"}
+
+* 2024 Sep 18: Added [*Geocomputation with Python*](https://py.geocompx.org/){target='_blank'}, the Python version of @lovelace_geocomputation_2024
+
+:::
 
 I'm going to try to dump **everything** I used to develop the course materials here---some of it I drew on explicitly (using images from books, for example), and the rest of it seeped into my mind implicitly over the course of preparing the materials. Explore them to see if their different approaches "click" in your mind more than my approach does!
 
@@ -19,7 +26,7 @@ The course's R material is drawn mainly from the following books, where I've tri
 
 * **@moraga_spatial_2024**: [*Spatial Statistics for Data Science: Theory and Practice with R*](https://www.paulamoraga.com/book-spatial/){target='_blank'}
   * This book, along with the video tutorial from Sherrie Xie linked below, will get you up-to-speed on the main topics in this course!
-* **@nowosad_geocomputation_2024**: *[Geocomputation with R](https://r.geocompx.org/preface){target='_blank'}*
+* **@lovelace_geocomputation_2024**: *[Geocomputation with R](https://r.geocompx.org/preface){target='_blank'}*
   * This book is *almost* my first choice, except that the figures and tables and etc. are generated in a kind of opaque way: if you have patience, and you want to reproduce a figure or table from the book as part of your own work, you can go to the book's GitHub repository to find the `.R` scripts, but personally I wasn't able to get a lot of them to run due to outdated/deprecated functions and libraries.
 * **@pebesma_spatial_2023**: *[Spatial Data Science with Applications in R](https://r-spatial.org/book/){target='_blank'}*
   * This book is significantly more in-depth and goes into a level of detail that is probably overkill for this course, but if there is a particular topic you want to pursue for your final project, for example, this is where you can get a detailed account (from the creator of the `sf` library!)
@@ -32,6 +39,8 @@ The course's R material is drawn mainly from the following books, where I've tri
   * I found this book even more straightforward and organized as an overview, the only issue is that the portion on Spatial Data Science is not yet finished (as of early September 2024), so for that portion of the course @rey_geographic_2023 will be more helpful!
 * **@rey_geographic_2023**: *[Geographic Data Science with Python](https://geographicdata.science/book/intro.html){target='_blank'}*
   * This book is especially nice if you're interested in applying GIS to public policy or the social sciences!
+* **@graser_geocomputation_2025**: *[Geocomputation with Python](https://py.geocompx.org/){target='_blank'}
+  * This is the Python companion book to @lovelace_geocomputation_2024, and is not yet completed, but I wanted to include it here in case you're looking for a pair of books where the Python and R content is **aligned** by chapter
 
 ## Videos
 

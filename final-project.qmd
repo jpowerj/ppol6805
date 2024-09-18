@@ -17,6 +17,6 @@ You should have received the Google Cloud Platform credits at your `@georgetown.
 
 ## GIS Datasets/Project Ideas Collection
 
-Once we get to the Spatial Data Science unit, I'm hoping that you will have lots of inspiration in terms of the different methods that can be used for drawing **inferences** about spatial phenomena! Until then, me and TA Billy will add links to the following Raindrop.io collection, which you can browse to potentially draw inspiration for your own final project topic:
+Once we get to the Spatial Data Science unit, I'm hoping that you will have lots of inspiration in terms of the different methods that can be used for drawing **inferences** about spatial phenomena! Until then, me and TA Billy will add links to the following [Raindrop.io collection](https://raindrop.io/jpowerj/gis-47891594){target='_blank'}, which you can browse to potentially draw inspiration for your own final project topic:
 
 <iframe style="border: 0; width: 100%; height: 450px;" allowfullscreen frameborder="0" src="https://raindrop.io/jpowerj/gis-47891594/embed/sort=-created"></iframe>

@@ -20,12 +20,12 @@ weeks:
     footer: "PPOL 6805 Week 2: How Do Maps Work?"
     date-md: "Sep 4"
   - weeknum: 3
-    title: "Basic Geospatial Operations"
-    footer: "PPOL 6805 Week 3: Geospatial Operations"
+    title: "Basic Spatial Operations"
+    footer: "PPOL 6805 Week 3: Spatial Operations"
     date-md: "Sep 11"
   - weeknum: 4
-    title: "Fancier Geospatial Operations"
-    footer: "PPOL 6805 Week 4: Fancier Geospatial Operations"
+    title: "Fancier Spatial Operations"
+    footer: "PPOL 6805 Week 4: Fancier Spatial Operations"
     date-md: "Sep 18"
   - weeknum: 5
     title: "Static Mapping Libraries"

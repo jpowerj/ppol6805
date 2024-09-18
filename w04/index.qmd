@@ -21,6 +21,7 @@ format:
     df-print: kable
     slide-number: true
     scrollable: true
+    tbl-cap-location: bottom
     link-external-icon: true
     link-external-newwindow: true
     footer: "{{< var weeks.4.footer >}}"
@@ -48,21 +49,132 @@ format:
 
 :::
 
-# Geospatial Operations 2: Binary Operations {data-stack-name="Binary Operations"}
+# From Unary to Binary Operations {data-stack-name="Getting Fancy"}
 
-## Getting Fancier...
+## What Makes Binary Operations "Fancier"? {.smaller .title-12 .crunch-title .crunch-ul}
 
-* To do fancier geospatial operations, we'll need to start **overthinking** the different possible **relationships** between two or more geometries!
-* To this end: **predicates**
+::: {.columns}
+::: {.column width="50%"}
 
-![](images/relations.png){fig-align="center"}
+<center>**Unary**</center>
+
+* `st_centroid()`
+  * `POLYGON` $\mapsto$ `POINT`
+  * `MULTIPOLYGON` $\mapsto$ `POINT`
+* `st_convex_hull()`
+  * `POLYGON` $\mapsto$ `POLYGON`
+  * `MULTIPOINT` $\mapsto$ `POLYGON`
+
+:::
+::: {.column width="50%"}
+
+<center>**Binary**</center>
+
+* `st_intersection()`
+  * (`POINT`, `POINT`) $\mapsto$ `POINT | POINT EMPTY`
+  * (`POLYGON`, `POLYGON`) $\mapsto$ `POLYGON | LINESTRING | POINT | POLYGON EMPTY`
+
+:::
+:::
+
+* `st_is_empty()` and `st_dimension()` become your [new best friends](https://r-spatial.github.io/sf/reference/geos_query.html){target='_blank'} 😉
+* `st_is_empty()`: Distinguishes between, e.g., `POINT EMPTY` and `POINT(0 0)`
+* `st_dimension()`: `NA` for `empty` versions, otherwise
+  * `2` for surfaces (`POLYGON`, `MULTIPOLYGON`)
+  * `1` for lines (`LINESTRING`, `MULTILINESTRING`)
+  * `0` for points (`POINT`, `MULTIPOINT`)
+
+## The Bad Kind of Overthinking: Will My Life Just Get Harder and Harder? {.smaller .crunch-title .title-10 .crunch-img .crunch-quarto-layout-panel .crunch-quarto-figure .crunch-figure}
+
+::: {layout="[1,1]" layout-valign="center" layout-align="center"}
+
+![](images/bored_pooh.jpeg){fig-align="center" width="170"}
+
+::: {#bored-pooh}
+
+Unary Operations
+
+:::
+:::
+
+::: {layout="[1,1]" layout-valign="center" layout-align="center"}
+
+![](images/fancy_pooh.jpeg){fig-align="center" width="170"}
+
+::: {#fancy-pooh}
+
+Binary Operations
+
+:::
+:::
+
+::: {layout="[1,1]" layout-valign="center" layout-align="center"}
+
+![](images/fanciest_pooh.jpeg){fig-align="center" width="170"}
+
+::: {#fanciest-pooh}
+
+Ternary Operations
+
+:::
+:::
+
+::: {layout="[1,1]" layout-valign="center" layout-align="center"}
+
+![](images/infinite_pooh.jpeg){fig-align="center" width="170"}
+
+::: {#fanciest-pooh}
+
+Quaternary Operations
+
+:::
+:::
+
+## Good News and Bad News {.smaller .crunch-title .crunch-ul}
+
+* The good news: No!
+* The bad news: You'll have to read the 465-page [Volume I](https://www.google.com/books/edition/Basic_Algebra/bOElBQAAQBAJ?hl=en&gbpv=0){target='_blank'} and then the 451-page [Volume II](https://www.google.com/books/edition/Further_Algebra_and_Applications/2Z_OC6uGzkwC?hl=en&sa=X&ved=2ahUKEwjCmMONmsyIAxWxKFkFHU7PGtAQiqUDegQIFBAH){target='_blank'} and then to page 15 of [Volume III](https://www.google.com/books/edition/Universal_Algebra/6tbuCAAAQBAJ?hl=en&gbpv=0){target='_blank'} of @cohn_universal_1965 to know why:
+
+::: {.columns}
+::: {.column width="50%"}
+
+![](images/cohn_1.jpeg){fig-align="center"}
+
+:::
+::: {.column width="50%"}
+
+![](images/cohn_2.jpeg){fig-align="center"}
+
+::: {#rantyrant style="font-size: 10pt;"}
+
+*(i spent 4 yrs of undergrad studying abstract algebra and now it all sits gathering dust somewhere deep within my brain plz just let me have this moment i'll never mention it again i promise)*
+
+:::
+
+:::
+:::
+
+## The Good Kind of Overthinking... {.crunch-title .crunch-ul}
+
+* For fancier geospatial operations, we'll need to start **overthinking**, about the possible **relationships** between two (or more) geometries! $\leadsto$ Relational **Predicates**:
+
+![[Figure 4.2](https://r.geocompx.org/spatial-operations.html) in @lovelace_geocomputation_2024](images/relations.png){fig-align="center"}
+
+# Ad Hoc / Ambiguous $\rightarrow$ Precise: Enter DE-9IM! {data-stack-name="DE-9IM"}
 
 ## DE-9IM Strings {.smaller}
+
+Each cell here visualizes one component of the DE-9IM string `1020F1102`, which describes the relationship between the following two geometries:
+
+* **Boxey McBoxface**: `POLYGON(0 0, 1 0, 1 1, 0 1, 0 0)`
+* **Liney McLineface**: `LINESTRING(0.5 -0.5, 0.5 0.5)`
 
 ```{r}
 #| label: de-9im-strings
 #| echo: true
 #| code-fold: true
+#| fig-align: center
+#| fig-cap: "Code from @pebesma_spatial_2023"
 library(sf)
 polygon <- po <- st_polygon(list(rbind(c(0,0), c(1,0), c(1,1), c(0,1), c(0,0))))
 p0 <- st_polygon(list(rbind(c(-1,-1), c(2,-1), c(2,2), c(-1,2), c(-1,-1))))
@@ -112,7 +224,99 @@ plot(p0 / po, col = '#ff8888', add = TRUE)
 plot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)
 ```
 
-* The predicate `equals` corresponds to the DE-9IM string `"T*F**FFF*"`. If any two geometries obey this relationship, they are (topologically) equal!
+## Slowing Down: 9IM *(no DE yet!)* {.smaller .crunch-title .crunch-img .table-va}
+
+::: {#tbl-polys}
+
+| 9IM | Interior | Boundary | Exterior |
+|:-:|:-:|:-:|:-:|
+| **Interior** | ![](images/matrix_x0_y0.png){.de9im fig-align="center"}<br>&nbsp; | ![](images/matrix_x0_dy.png){.de9im fig-align="center"}<br>&nbsp; | ![](images/matrix_x0_ny.png){.de9im fig-align="center"}<br>&nbsp; |
+| **Boundary** | ![](images/matrix_dx_y0.png){.de9im fig-align="center"}<br>&nbsp; | ![](images/matrix_dx_dy.png){.de9im fig-align="center"}<br>&nbsp; | ![](images/matrix_dx_ny.png){.de9im fig-align="center"}<br>&nbsp; |
+| **Exterior** | ![](images/matrix_nx_y0.png){.de9im fig-align="center"}<br>&nbsp; | ![](images/matrix_nx_dy.png){.de9im fig-align="center"}<br>&nbsp; | ![](images/matrix_nx_ny.png){.de9im fig-align="center"}<br>&nbsp; |
+
+From [OSGeo Project](https://docs.geotools.org/latest/userguide/library/jts/dim9.html){target='_blank'}
+:::
+
+## *Dimensionally Extended* (DE) 9IM {.smaller .crunch-title .crunch-img .table-va}
+
+::: {#tbl-de-polys}
+
+| 9IM | Interior | Boundary | Exterior |
+|:-:|:-:|:-:|:-:|
+| **Interior** | ![](images/matrix_x0_y0.png){.de9im fig-align="center"}<br>2 | ![](images/matrix_x0_dy.png){.de9im fig-align="center"}<br>1 | ![](images/matrix_x0_ny.png){.de9im fig-align="center"}<br>2 |
+| **Boundary** | ![](images/matrix_dx_y0.png){.de9im fig-align="center"}<br>1 | ![](images/matrix_dx_dy.png){.de9im fig-align="center"}<br>0 | ![](images/matrix_dx_ny.png){.de9im fig-align="center"}<br>1 |
+| **Exterior** | ![](images/matrix_nx_y0.png){.de9im fig-align="center"}<br>2 | ![](images/matrix_nx_dy.png){.de9im fig-align="center"}<br>1 | ![](images/matrix_nx_ny.png){.de9im fig-align="center"}<br>2 |
+
+From [OSGeo Project](https://docs.geotools.org/latest/userguide/library/jts/dim9.html){target='_blank'}
+:::
+
+## Crunching it Down into a Tiny Box
+
+| DE-9IM | Interior | Boundary | Exterior |
+|:-|:-:|:-:|:-:|
+| **Interior** | 2 | 1 | 2 |
+| **Boundary** | 1 | 0 | 1 |
+| **Exterior** | 2 | 1 | 2 |
+
+<h2>**And Then into a Tiny String**</h2>
+
+<center style="margin-bottom: 10px;">
+`212101212`
+</center>
+
+<h3>And Then into an Infinitesimally-Small Point</h3>
+
+![](images/gangster_spongebob.jpg){.nostretch fig-align="center" width="15px"}
+
+## DE-9IM *Masks* {.smaller .crunch-title .crunch-ul}
+
+* Now terms can be given **unambiguous, precise meaning!**
+
+| [`st_overlaps()`](https://r-spatial.github.io/sf/reference/geos_binary_pred.html){target='_blank'} | Interior | Boundary | Exterior |
+|:-|:-:|:-:|:-:|
+| **Interior** | `T` | `*` | `T` |
+| **Boundary** | `*` | `*` | `*` |
+| **Exterior** | `T` | `*` | `*` |
+
+* Special Values (besides `0`, `1`, `2`):
+  * `T`: "True" (non-empty, `st_dimension() >= 0`)
+  * `F`: "False" (empty, `st_dimension() == NA`)
+  * `*`: "Wildcard" (Don't care what the value is)
+* `st_overlaps()`: `T*T***T**`, `st_equals()`: `T*F**FFF*`
+
+## DE-9IM vs. Everyday Language {.smaller}
+
+* DE-9IM can (in theory) represent $6^9 = 10~077~696$ possible geometric relationships!
+* The English language has like 10, and they're ambiguous ☠️ *(Different textbooks may have different encodings of the same English word:)*
+
+| English | Mask | `212101212` | Result |
+| - | - | - | - |
+| "Disjoint" | `FF*FF****` | `FALSE` | `x` not disjoint from `y` |
+| "Touches" | `FT*******` | `FALSE` | `x` doesn't touch `y` |
+| "Touches" | `F***T****` | `FALSE` | `x` doesn't touch `y` |
+| "Crosses" | `T*T***T**` | `TRUE` | `x` crosses `y` |
+| "Within" | `TF*F*****` | `FALSE` | `x` is not within `y` |
+| "Overlaps" | `T*T***T**` | `TRUE` | `x` overlaps `y` |
+
+# Doing Things with DE-9IM (Back to Binary Operations) {data-stack-name="Binary Operations"}
+
+## `st_relate()`: The Ultimate Predicate {.smaller .crunch-title .title-12}
+
+```{r}
+#| label: st-relate
+library(tidyverse)
+library(rnaturalearth)
+us <- ne_states(country="United States of America")
+dc <- us |> filter(iso_3166_2 == "US-DC")
+us <- us |>
+  mutate(
+    de9im = st_relate(us, dc),
+    touch = st_touches(us, dc, sparse = F)
+  ) |>
+  select(iso_3166_2, name, de9im, touch) |>
+  arrange(name)
+us
+```
 
 ## References
 

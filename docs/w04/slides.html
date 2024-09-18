@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Jeff Jacobs">
-  <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 4: Fancier Geospatial Operations</title>
+  <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 4: Fancier Spatial Operations</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -99,6 +99,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -415,7 +416,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Week 4: Fancier Geospatial Operations</h1>
+  <h1 class="title">Week 4: Fancier Spatial Operations</h1>
   <p class="subtitle"><em>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</em><br>Fall 2024</p>
 
 <div class="quarto-title-authors">
@@ -432,21 +433,167 @@ Jeff Jacobs
   <p class="date">Wednesday, September 18, 2024</p>
 </section>
 <section>
-<section id="geospatial-operations-2-binary-operations" class="title-slide slide level1 center" data-stack-name="Binary Operations">
-<h1>Geospatial Operations 2: Binary Operations</h1>
+<section id="from-unary-to-binary-operations" class="title-slide slide level1 center" data-stack-name="Getting Fancy">
+<h1>From Unary to Binary Operations</h1>
 
 </section>
-<section id="getting-fancier" class="slide level2">
-<h2>Getting Fancier…</h2>
+<section id="what-makes-binary-operations-fancier" class="slide level2 smaller title-12 crunch-title crunch-ul">
+<h2>What Makes Binary Operations “Fancier”?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<center>
+<strong>Unary</strong>
+</center>
 <ul>
-<li>To do fancier geospatial operations, we’ll need to start <strong>overthinking</strong> the different possible <strong>relationships</strong> between two or more geometries!</li>
-<li>To this end: <strong>predicates</strong></li>
+<li><code>st_centroid()</code>
+<ul>
+<li><code>POLYGON</code> <span class="math inline">\(\mapsto\)</span> <code>POINT</code></li>
+<li><code>MULTIPOLYGON</code> <span class="math inline">\(\mapsto\)</span> <code>POINT</code></li>
+</ul></li>
+<li><code>st_convex_hull()</code>
+<ul>
+<li><code>POLYGON</code> <span class="math inline">\(\mapsto\)</span> <code>POLYGON</code></li>
+<li><code>MULTIPOINT</code> <span class="math inline">\(\mapsto\)</span> <code>POLYGON</code></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<center>
+<strong>Binary</strong>
+</center>
+<ul>
+<li><code>st_intersection()</code>
+<ul>
+<li>(<code>POINT</code>, <code>POINT</code>) <span class="math inline">\(\mapsto\)</span> <code>POINT | POINT EMPTY</code></li>
+<li>(<code>POLYGON</code>, <code>POLYGON</code>) <span class="math inline">\(\mapsto\)</span> <code>POLYGON | LINESTRING | POINT | POLYGON EMPTY</code></li>
+</ul></li>
+</ul>
+</div></div>
+<ul>
+<li><code>st_is_empty()</code> and <code>st_dimension()</code> become your <a href="https://r-spatial.github.io/sf/reference/geos_query.html" target="_blank">new best friends</a> 😉</li>
+<li><code>st_is_empty()</code>: Distinguishes between, e.g., <code>POINT EMPTY</code> and <code>POINT(0 0)</code></li>
+<li><code>st_dimension()</code>: <code>NA</code> for <code>empty</code> versions, otherwise
+<ul>
+<li><code>2</code> for surfaces (<code>POLYGON</code>, <code>MULTIPOLYGON</code>)</li>
+<li><code>1</code> for lines (<code>LINESTRING</code>, <code>MULTILINESTRING</code>)</li>
+<li><code>0</code> for points (<code>POINT</code>, <code>MULTIPOINT</code>)</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-bad-kind-of-overthinking-will-my-life-just-get-harder-and-harder" class="slide level2 smaller crunch-title title-10 crunch-img crunch-quarto-layout-panel crunch-quarto-figure crunch-figure">
+<h2>The Bad Kind of Overthinking: Will My Life Just Get Harder and Harder?</h2>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout="[1,1]" data-layout-align="center">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/bored_pooh.jpeg" class="quarto-figure quarto-figure-center" width="170"></p>
+</figure>
+</div>
+</div>
+<div id="bored-pooh" class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p>Unary Operations</p>
+</div>
+</div>
+</div>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout="[1,1]" data-layout-align="center">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/fancy_pooh.jpeg" class="quarto-figure quarto-figure-center" width="170"></p>
+</figure>
+</div>
+</div>
+<div id="fancy-pooh" class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p>Binary Operations</p>
+</div>
+</div>
+</div>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout="[1,1]" data-layout-align="center">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/fanciest_pooh.jpeg" class="quarto-figure quarto-figure-center" width="170"></p>
+</figure>
+</div>
+</div>
+<div id="fanciest-pooh" class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p>Ternary Operations</p>
+</div>
+</div>
+</div>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout="[1,1]" data-layout-align="center">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/infinite_pooh.jpeg" class="quarto-figure quarto-figure-center" width="170"></p>
+</figure>
+</div>
+</div>
+<div id="fanciest-pooh" class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p>Quaternary Operations</p>
+</div>
+</div>
+</div>
+</section>
+<section id="good-news-and-bad-news" class="slide level2 smaller crunch-title crunch-ul">
+<h2>Good News and Bad News</h2>
+<ul>
+<li>The good news: No!</li>
+<li>The bad news: You’ll have to read the 465-page <a href="https://www.google.com/books/edition/Basic_Algebra/bOElBQAAQBAJ?hl=en&amp;gbpv=0" target="_blank">Volume I</a> and then the 451-page <a href="https://www.google.com/books/edition/Further_Algebra_and_Applications/2Z_OC6uGzkwC?hl=en&amp;sa=X&amp;ved=2ahUKEwjCmMONmsyIAxWxKFkFHU7PGtAQiqUDegQIFBAH" target="_blank">Volume II</a> and then to page 15 of <a href="https://www.google.com/books/edition/Universal_Algebra/6tbuCAAAQBAJ?hl=en&amp;gbpv=0" target="_blank">Volume III</a> of <span class="citation" data-cites="cohn_universal_1965">Cohn (<a href="#/references" role="doc-biblioref" onclick="">1965</a>)</span> to know why:</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/cohn_1.jpeg" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/cohn_2.jpeg" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+<div id="rantyrant" style="font-size: 10pt;">
+<p><em>(i spent 4 yrs of undergrad studying abstract algebra and now it all sits gathering dust somewhere deep within my brain plz just let me have this moment i’ll never mention it again i promise)</em></p>
+</div>
+</div></div>
+</section>
+<section id="the-good-kind-of-overthinking" class="slide level2 crunch-title crunch-ul">
+<h2>The Good Kind of Overthinking…</h2>
+<ul>
+<li>For fancier geospatial operations, we’ll need to start <strong>overthinking</strong>, about the possible <strong>relationships</strong> between two (or more) geometries! <span class="math inline">\(\leadsto\)</span> Relational <strong>Predicates</strong>:</li>
 </ul>
 
-<img data-src="images/relations.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<img data-src="images/relations.png" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://r.geocompx.org/spatial-operations.html">Figure 4.2</a> in <span class="citation" data-cites="lovelace_geocomputation_2024">Lovelace, Nowosad, and Muenchow (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></p></section></section>
+<section>
+<section id="ad-hoc-ambiguous-rightarrow-precise-enter-de-9im" class="title-slide slide level1 center" data-stack-name="DE-9IM">
+<h1>Ad Hoc / Ambiguous <span class="math inline">\(\rightarrow\)</span> Precise: Enter DE-9IM!</h1>
+
+</section>
 <section id="de-9im-strings" class="slide level2 smaller">
 <h2>DE-9IM Strings</h2>
-<div class="cell">
+<p>Each cell here visualizes one component of the DE-9IM string <code>1020F1102</code>, which describes the relationship between the following two geometries:</p>
+<ul>
+<li><strong>Boxey McBoxface</strong>: <code>POLYGON(0 0, 1 0, 1 1, 0 1, 0 0)</code></li>
+<li><strong>Liney McLineface</strong>: <code>LINESTRING(0.5 -0.5, 0.5 0.5)</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(sf)</span>
@@ -499,19 +646,673 @@ Jeff Jacobs
 </details>
 
 </div>
-<img data-src="index_files/figure-revealjs/de-9im-strings-1.png" width="960" class="r-stretch"><ul>
-<li>The predicate <code>equals</code> corresponds to the DE-9IM string <code>"T*F**FFF*"</code>. If any two geometries obey this relationship, they are (topologically) equal!</li>
+<img data-src="index_files/figure-revealjs/de-9im-strings-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Code from <span class="citation" data-cites="pebesma_spatial_2023">Pebesma and Bivand (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span></p></section>
+<section id="slowing-down-9im-no-de-yet" class="slide level2 smaller crunch-title crunch-img table-va">
+<h2>Slowing Down: 9IM <em>(no DE yet!)</em></h2>
+<div id="tbl-polys" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl">
+<div aria-describedby="tbl-polys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">9IM</th>
+<th style="text-align: center;">Interior</th>
+<th style="text-align: center;">Boundary</th>
+<th style="text-align: center;">Exterior</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Interior</strong></td>
+<td style="text-align: center;"><img data-src="images/matrix_x0_y0.png" class="de9im quarto-figure quarto-figure-center"><br>&nbsp;</td>
+<td style="text-align: center;"><img data-src="images/matrix_x0_dy.png" class="de9im quarto-figure quarto-figure-center"><br>&nbsp;</td>
+<td style="text-align: center;"><img data-src="images/matrix_x0_ny.png" class="de9im quarto-figure quarto-figure-center"><br>&nbsp;</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Boundary</strong></td>
+<td style="text-align: center;"><img data-src="images/matrix_dx_y0.png" class="de9im quarto-figure quarto-figure-center"><br>&nbsp;</td>
+<td style="text-align: center;"><img data-src="images/matrix_dx_dy.png" class="de9im quarto-figure quarto-figure-center"><br>&nbsp;</td>
+<td style="text-align: center;"><img data-src="images/matrix_dx_ny.png" class="de9im quarto-figure quarto-figure-center"><br>&nbsp;</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Exterior</strong></td>
+<td style="text-align: center;"><img data-src="images/matrix_nx_y0.png" class="de9im quarto-figure quarto-figure-center"><br>&nbsp;</td>
+<td style="text-align: center;"><img data-src="images/matrix_nx_dy.png" class="de9im quarto-figure quarto-figure-center"><br>&nbsp;</td>
+<td style="text-align: center;"><img data-src="images/matrix_nx_ny.png" class="de9im quarto-figure quarto-figure-center"><br>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-polys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: From <a href="https://docs.geotools.org/latest/userguide/library/jts/dim9.html" target="_blank">OSGeo Project</a>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="dimensionally-extended-de-9im" class="slide level2 smaller crunch-title crunch-img table-va">
+<h2><em>Dimensionally Extended</em> (DE) 9IM</h2>
+<div id="tbl-de-polys" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl">
+<div aria-describedby="tbl-de-polys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">9IM</th>
+<th style="text-align: center;">Interior</th>
+<th style="text-align: center;">Boundary</th>
+<th style="text-align: center;">Exterior</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Interior</strong></td>
+<td style="text-align: center;"><img data-src="images/matrix_x0_y0.png" class="de9im quarto-figure quarto-figure-center"><br>2</td>
+<td style="text-align: center;"><img data-src="images/matrix_x0_dy.png" class="de9im quarto-figure quarto-figure-center"><br>1</td>
+<td style="text-align: center;"><img data-src="images/matrix_x0_ny.png" class="de9im quarto-figure quarto-figure-center"><br>2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Boundary</strong></td>
+<td style="text-align: center;"><img data-src="images/matrix_dx_y0.png" class="de9im quarto-figure quarto-figure-center"><br>1</td>
+<td style="text-align: center;"><img data-src="images/matrix_dx_dy.png" class="de9im quarto-figure quarto-figure-center"><br>0</td>
+<td style="text-align: center;"><img data-src="images/matrix_dx_ny.png" class="de9im quarto-figure quarto-figure-center"><br>1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Exterior</strong></td>
+<td style="text-align: center;"><img data-src="images/matrix_nx_y0.png" class="de9im quarto-figure quarto-figure-center"><br>2</td>
+<td style="text-align: center;"><img data-src="images/matrix_nx_dy.png" class="de9im quarto-figure quarto-figure-center"><br>1</td>
+<td style="text-align: center;"><img data-src="images/matrix_nx_ny.png" class="de9im quarto-figure quarto-figure-center"><br>2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-de-polys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: From <a href="https://docs.geotools.org/latest/userguide/library/jts/dim9.html" target="_blank">OSGeo Project</a>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="crunching-it-down-into-a-tiny-box" class="slide level2">
+<h2>Crunching it Down into a Tiny Box</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">DE-9IM</th>
+<th style="text-align: center;">Interior</th>
+<th style="text-align: center;">Boundary</th>
+<th style="text-align: center;">Exterior</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Interior</strong></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Boundary</strong></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Exterior</strong></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<strong>And Then into a Tiny String</strong>
+</h2>
+<center style="margin-bottom: 10px;">
+<code>212101212</code>
+</center>
+<h3>
+And Then into an Infinitesimally-Small Point
+</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/gangster_spongebob.jpg" class="quarto-figure quarto-figure-center" width="15"></p>
+</figure>
+</div>
+</section>
+<section id="de-9im-masks" class="slide level2 smaller crunch-title crunch-ul">
+<h2>DE-9IM <em>Masks</em></h2>
+<ul>
+<li>Now terms can be given <strong>unambiguous, precise meaning!</strong></li>
 </ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><a href="https://r-spatial.github.io/sf/reference/geos_binary_pred.html" target="_blank"><code>st_overlaps()</code></a></th>
+<th style="text-align: center;">Interior</th>
+<th style="text-align: center;">Boundary</th>
+<th style="text-align: center;">Exterior</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Interior</strong></td>
+<td style="text-align: center;"><code>T</code></td>
+<td style="text-align: center;"><code>*</code></td>
+<td style="text-align: center;"><code>T</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Boundary</strong></td>
+<td style="text-align: center;"><code>*</code></td>
+<td style="text-align: center;"><code>*</code></td>
+<td style="text-align: center;"><code>*</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Exterior</strong></td>
+<td style="text-align: center;"><code>T</code></td>
+<td style="text-align: center;"><code>*</code></td>
+<td style="text-align: center;"><code>*</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Special Values (besides <code>0</code>, <code>1</code>, <code>2</code>):
+<ul>
+<li><code>T</code>: “True” (non-empty, <code>st_dimension() &gt;= 0</code>)</li>
+<li><code>F</code>: “False” (empty, <code>st_dimension() == NA</code>)</li>
+<li><code>*</code>: “Wildcard” (Don’t care what the value is)</li>
+</ul></li>
+<li><code>st_overlaps()</code>: <code>T*T***T**</code>, <code>st_equals()</code>: <code>T*F**FFF*</code></li>
+</ul>
+</section>
+<section id="de-9im-vs.-everyday-language" class="slide level2 smaller">
+<h2>DE-9IM vs.&nbsp;Everyday Language</h2>
+<ul>
+<li>DE-9IM can (in theory) represent <span class="math inline">\(6^9 = 10~077~696\)</span> possible geometric relationships!</li>
+<li>The English language has like 10, and they’re ambiguous ☠️ <em>(Different textbooks may have different encodings of the same English word:)</em></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>English</th>
+<th>Mask</th>
+<th><code>212101212</code></th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“Disjoint”</td>
+<td><code>FF*FF****</code></td>
+<td><code>FALSE</code></td>
+<td><code>x</code> not disjoint from <code>y</code></td>
+</tr>
+<tr class="even">
+<td>“Touches”</td>
+<td><code>FT*******</code></td>
+<td><code>FALSE</code></td>
+<td><code>x</code> doesn’t touch <code>y</code></td>
+</tr>
+<tr class="odd">
+<td>“Touches”</td>
+<td><code>F***T****</code></td>
+<td><code>FALSE</code></td>
+<td><code>x</code> doesn’t touch <code>y</code></td>
+</tr>
+<tr class="even">
+<td>“Crosses”</td>
+<td><code>T*T***T**</code></td>
+<td><code>TRUE</code></td>
+<td><code>x</code> crosses <code>y</code></td>
+</tr>
+<tr class="odd">
+<td>“Within”</td>
+<td><code>TF*F*****</code></td>
+<td><code>FALSE</code></td>
+<td><code>x</code> is not within <code>y</code></td>
+</tr>
+<tr class="even">
+<td>“Overlaps”</td>
+<td><code>T*T***T**</code></td>
+<td><code>TRUE</code></td>
+<td><code>x</code> overlaps <code>y</code></td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section>
+<section id="doing-things-with-de-9im-back-to-binary-operations" class="title-slide slide level1 center" data-stack-name="Binary Operations">
+<h1>Doing Things with DE-9IM (Back to Binary Operations)</h1>
+
+</section>
+<section id="st_relate-the-ultimate-predicate" class="slide level2 smaller crunch-title title-12">
+<h2><code>st_relate()</code>: The Ultimate Predicate</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb2-3"><a></a>us <span class="ot">&lt;-</span> <span class="fu">ne_states</span>(<span class="at">country=</span><span class="st">"United States of America"</span>)</span>
+<span id="cb2-4"><a></a>dc <span class="ot">&lt;-</span> us <span class="sc">|&gt;</span> <span class="fu">filter</span>(iso_3166_2 <span class="sc">==</span> <span class="st">"US-DC"</span>)</span>
+<span id="cb2-5"><a></a>us <span class="ot">&lt;-</span> us <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-7"><a></a>    <span class="at">de9im =</span> <span class="fu">st_relate</span>(us, dc),</span>
+<span id="cb2-8"><a></a>    <span class="at">touch =</span> <span class="fu">st_touches</span>(us, dc, <span class="at">sparse =</span> F)</span>
+<span id="cb2-9"><a></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-10"><a></a>  <span class="fu">select</span>(iso_3166_2, name, de9im, touch) <span class="sc">|&gt;</span></span>
+<span id="cb2-11"><a></a>  <span class="fu">arrange</span>(name)</span>
+<span id="cb2-12"><a></a>us</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table style="width:100%;">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 26%">
+<col style="width: 12%">
+<col style="width: 7%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">iso_3166_2</th>
+<th style="text-align: left;">name</th>
+<th style="text-align: left;">de9im</th>
+<th style="text-align: left;">touch</th>
+<th style="text-align: left;">geometry</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">US-AL</td>
+<td style="text-align: left;">Alabama</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-87.41958 3…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-AK</td>
+<td style="text-align: left;">Alaska</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-141.0056 6…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-AZ</td>
+<td style="text-align: left;">Arizona</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-111.0063 3…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-AR</td>
+<td style="text-align: left;">Arkansas</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-90.30422 3…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-CA</td>
+<td style="text-align: left;">California</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-114.7243 3…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-CO</td>
+<td style="text-align: left;">Colorado</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-109.0463 4…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-CT</td>
+<td style="text-align: left;">Connecticut</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-73.6417 41…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-DE</td>
+<td style="text-align: left;">Delaware</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-75.05809 3…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-DC</td>
+<td style="text-align: left;">District of Columbia</td>
+<td style="text-align: left;">2FFF1FFF2</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-77.02293 3…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-FL</td>
+<td style="text-align: left;">Florida</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-87.44734 3…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-GA</td>
+<td style="text-align: left;">Georgia</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-80.89029 3…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-HI</td>
+<td style="text-align: left;">Hawaii</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-154.8996 1…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-ID</td>
+<td style="text-align: left;">Idaho</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-117.0382 4…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-IL</td>
+<td style="text-align: left;">Illinois</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-89.1237 36…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-IN</td>
+<td style="text-align: left;">Indiana</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-84.80608 4…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-IA</td>
+<td style="text-align: left;">Iowa</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-96.48266 4…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-KS</td>
+<td style="text-align: left;">Kansas</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-102.0396 3…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-KY</td>
+<td style="text-align: left;">Kentucky</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-89.42446 3…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-LA</td>
+<td style="text-align: left;">Louisiana</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-89.52599 3…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-ME</td>
+<td style="text-align: left;">Maine</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-71.08495 4…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-MD</td>
+<td style="text-align: left;">Maryland</td>
+<td style="text-align: left;">FF2F11212</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-75.64786 3…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-MA</td>
+<td style="text-align: left;">Massachusetts</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-71.19396 4…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-MI</td>
+<td style="text-align: left;">Michigan</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-84.4913 46…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-MN</td>
+<td style="text-align: left;">Minnesota</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-97.22609 4…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-MS</td>
+<td style="text-align: left;">Mississippi</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-88.40221 3…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-MO</td>
+<td style="text-align: left;">Missouri</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-95.31725 4…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-MT</td>
+<td style="text-align: left;">Montana</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-116.0482 4…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-NE</td>
+<td style="text-align: left;">Nebraska</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-104.0537 4…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-NV</td>
+<td style="text-align: left;">Nevada</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-114.0425 4…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-NH</td>
+<td style="text-align: left;">New Hampshire</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-71.50585 4…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-NJ</td>
+<td style="text-align: left;">New Jersey</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-75.54133 3…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-NM</td>
+<td style="text-align: left;">New Mexico</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-108.1375 3…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-NY</td>
+<td style="text-align: left;">New York</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-79.06523 4…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-NC</td>
+<td style="text-align: left;">North Carolina</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-76.03173 3…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-ND</td>
+<td style="text-align: left;">North Dakota</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-104.0476 4…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-OH</td>
+<td style="text-align: left;">Ohio</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-80.52023 4…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-OK</td>
+<td style="text-align: left;">Oklahoma</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-103.0002 3…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-OR</td>
+<td style="text-align: left;">Oregon</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-124.4924 4…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-PA</td>
+<td style="text-align: left;">Pennsylvania</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-79.76301 4…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-RI</td>
+<td style="text-align: left;">Rhode Island</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-71.23686 4…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-SC</td>
+<td style="text-align: left;">South Carolina</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-78.57316 3…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-SD</td>
+<td style="text-align: left;">South Dakota</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-104.0567 4…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-TN</td>
+<td style="text-align: left;">Tennessee</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-90.30422 3…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-TX</td>
+<td style="text-align: left;">Texas</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-103.3115 2…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-UT</td>
+<td style="text-align: left;">Utah</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-111.0502 4…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-VT</td>
+<td style="text-align: left;">Vermont</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-73.35134 4…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-VA</td>
+<td style="text-align: left;">Virginia</td>
+<td style="text-align: left;">FF2F11212</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-76.01325 3…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-WA</td>
+<td style="text-align: left;">Washington</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-122.753 48…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-WV</td>
+<td style="text-align: left;">West Virginia</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-82.58945 3…</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">US-WI</td>
+<td style="text-align: left;">Wisconsin</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-87.80425 4…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US-WY</td>
+<td style="text-align: left;">Wyoming</td>
+<td style="text-align: left;">FF2FF1212</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">MULTIPOLYGON (((-109.0463 4…</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
-<div id="refs" role="list">
-
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-cohn_universal_1965" class="csl-entry" role="listitem">
+Cohn, P. M. 1965. <em>Universal <span>Algebra</span></em>. Springer Science &amp; Business Media.
+</div>
+<div id="ref-lovelace_geocomputation_2024" class="csl-entry" role="listitem">
+Lovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2024. <em>Geocomputation with <span>R</span></em>. CRC Press. <a href="https://r.geocompx.org/">https://r.geocompx.org/</a>.
+</div>
+<div id="ref-pebesma_spatial_2023" class="csl-entry" role="listitem">
+Pebesma, Edzer, and Roger Bivand. 2023. <em>Spatial <span>Data Science</span>: <span>With Applications</span> in <span>R</span></em>. CRC Press. <a href="https://r-spatial.org/book/">https://r-spatial.org/book/</a>.
+</div>
 </div>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p>PPOL 6805 Week 4: Fancier Geospatial Operations</p>
+<p>PPOL 6805 Week 4: Fancier Spatial Operations</p>
 </div>
 </div>
 </section></section>
