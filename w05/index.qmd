@@ -1,0 +1,191 @@
+---
+title: "Week 5: {{< var weeks.5.title >}}"
+subtitle: "{{< var course.slides-subtitle >}}"
+author: "{{< var course.author >}}"
+institute: "{{< var course.institute >}}"
+date: "September 25, 2024"
+date-format: full
+lecnum: 5
+categories:
+  - "Class Sessions"
+bibliography: "../_PPOL6805.bib"
+# Shared across formats:
+echo: true
+code-fold: show
+css: "../dsan-globals/jjstyles.css"
+html-math-method: mathjax
+# Format-specific settings:
+format:
+  revealjs:
+    output-file: "slides.html"
+    df-print: kable
+    slide-number: true
+    scrollable: true
+    tbl-cap-location: bottom
+    link-external-icon: true
+    link-external-newwindow: true
+    footer: "{{< var weeks.5.footer >}}"
+    include-in-header:
+      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>"
+    theme: [default]
+    revealjs-plugins:
+      - simplemenu
+    simplemenu:
+      flat: true
+      barhtml:
+        header: "<div class='menubar'><span style='position: absolute; left: 8; padding-left: 8px;'><a href='./index.html'>&larr; Return to Notes</a></span><ul class='menu'></ul></div>"
+      scale: 0.5
+  html:
+    output-file: "index.html"
+    html-math-method: mathjax
+    df-print: kable
+---
+
+::: {.content-visible unless-format="revealjs"}
+
+<center class='mb-3'>
+<a class="h2" href="./slides.html" target="_blank">Open slides in new tab &rarr;</a>
+</center>
+
+:::
+
+# Doing Things with DE-9IM (Back to Binary Operations) {data-stack-name="Binary Operations"}
+
+::: {.hidden}
+
+```{r}
+#| label: source-globals
+source("../dsan-globals/_globals.r")
+```
+
+:::
+
+## From Last Week: *Almost* a Spatial Join {.smaller .crunch-title .leaflet-350}
+
+```{r}
+library(rnaturalearth)
+library(tidyverse)
+library(sf)
+library(mapview)
+library(leaflet.extras2)
+africa_sf <- ne_countries(continent = "Africa", scale = 50) |> select(iso_a3, geounit)
+africa_map <- mapview(africa_sf, label="geounit", legend=FALSE)
+N <- 10
+africa_union_sf <- sf::st_union(africa_sf)
+sampled_points_sf <- sf::st_sample(africa_union_sf, N) |> sf::st_sf() |> mutate(temp = runif(N, 0, 100))
+sampled_points_map <- mapview(sampled_points_sf, label="Random Point", col.regions=cbPalette[1], legend=FALSE)
+countries_points_sf <- africa_sf[sampled_points_sf,]
+filtered_map <- mapview(countries_points_sf, label="geounit", legend=FALSE) + sampled_points_map
+(africa_map + sampled_points_map) | filtered_map
+```
+
+## Spatial Filter $\neq$ Spatial Join {.smaller .smaller-table}
+
+* The issue: **Data attributes of `POINT`s are not merged into data attributes of `POLYGON`s**
+
+::: {.columns}
+::: {.column width="50%"}
+
+<center>**`POINT` Attributes**</center>
+
+```{r}
+#| label: point-attributes
+st_geometry(sampled_points_sf) <- c("geom")
+sampled_points_sf |> head()
+```
+
+:::
+::: {.column width="50%"}
+
+<center>**`POLYGON` Attributes**</center>
+
+```{r}
+#| label: poly-attributes
+countries_points_sf |> head(4)
+```
+
+:::
+:::
+
+## Our First Real Spatial Join: `st_join()` {.smaller .crunch-title .title-12}
+
+```{r}
+#| label: st-join
+joined_sf <- countries_points_sf |> st_join(sampled_points_sf)
+joined_sf |> head()
+```
+
+![](images/dance_with_doge.gif){fig-align="center"}
+
+## But... We Were Still in Easy Mode {.crunch-title}
+
+* Every point could be matched **one-to-one** with a country. But what if... 😱
+
+```{r}
+#| label: area-weighted-interpolation
+#| code-fold: true
+g <- st_make_grid(st_bbox(st_as_sfc("LINESTRING(0 0,1 1)")), n = c(2,2))
+par(mar = rep(0,4))
+plot(g)
+plot(g[1] * diag(c(3/4, 1)) + c(0.25, 0.125), add = TRUE, lty = 2)
+text(c(.2, .8, .2, .8), c(.2, .2, .8, .8), c(1,2,4,8), col = 'red')
+```
+
+## Spatially *Intensive* vs. Spatially *Extensive* {.smaller .crunch-title .title-12}
+
+* **Extensive** attributes: associated with a physical size (length, area, volume, counts of items). Ex: **population count**.
+  * Associated with an area $\implies$ if that area is cut into smaller areas, the population count needs to be split too
+  * (At minimum, the **sum** of the population counts for the smaller areas needs to equal the total for the larger area)
+* **Intensive** attributes: **Not** proportional to support: if the area is split, values may vary but on average remain the same. Ex: **population density**
+  * If an area is split into smaller areas, population density is not split similarly!
+  * The **sum** of population densities for the smaller areas is a meaningless measure
+  * Instead, the **mean** will be more useful as ~similar to the density of the total
+
+## Handling the Extensive Case {.smaller .crunch-title}
+
+* Assume the **extensive** attribute $Y$ is **uniformly distributed** over a space $S_i$ (e.g., for **population counts** we assume everyone is evenly-spaced across the region)
+* We first compute $Y_{ij}$, derived from $Y_i$ for a sub-area of $S_i$, $A_{ij} = S_i \cap T_j$:
+
+  $$
+  \hat{Y}_{ij}(A_{ij}) = \frac{|A_{ij}|}{|S_i|}Y_i(S_i)
+  $$
+
+  where $|\cdot|$ denotes area.
+
+* Then we can compute $Y_j(T_j)$ by summing all the elements over area $T_j$:
+
+$$
+\hat{Y}_j(T_j) = \sum_{i=1}^{p}\frac{|A_{ij}|}{|S_i|}Y_i(S_i)
+$$
+
+## Handling the *Intensive* Case {.smaller .crunch-title}
+
+* Assume the variable $Y$ has **constant value** over a space $S_i$ (e.g., **population density** in assumed to be the same across all sub-areas)
+* Then the estimate for a sub-area is the **same** as the estimate for the total area:
+
+$$
+\hat{Y}_{ij} = Y_i(S_i)
+$$
+
+* So that we can obtain estimates of $Y$ for new spatial units $T_j$ via **area-weighted average** of the source values:
+
+$$
+\hat{Y}_j(T_j) = \sum_{i=1}^{p}\frac{|A_{ij}|}{|T_j|}Y_j(S_i)
+$$
+
+## Let's Go See It In Action!
+
+
+
+# Nuts and Bolts for Spatial Data Science
+
+## Who Are My Neighbors?
+
+Introducing the `spdep` library!
+
+## Spatial Autocorrelation
+
+## References
+
+::: {#refs}
+:::
