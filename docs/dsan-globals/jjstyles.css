@@ -10,6 +10,11 @@ a.disabled {
   border: 1px solid black !important;
 }
 
+.boxed {
+  border: 3px solid black !important;
+  padding: 2px !important;
+}
+
 /* div.callout-note > .callout-header {
   background-color: #f8f8f8 !important;
 }
@@ -81,9 +86,13 @@ a.disabled {
   margin-bottom: 0px !important;
 }
 
-.crunch-hr {
+.crunch-hr hr {
   margin-top: 8px !important;
   margin-bottom: 6px !important;
+}
+.crunch-hr-3 hr {
+  margin-top: 4px !important;
+  margin-bottom: 3px !important;
 }
 
 .crunch-img img {
@@ -229,12 +238,19 @@ summary {
   font-size: 1.2rem !important;
 }
 
+.table-80 td {
+  font-size: 80% !important;
+}
+
 /* and one small fix for weird FF behavior, described in https://stackoverflow.com/questions/7517127/ */
 table thead th {
   background-clip: padding-box;
 }
 
 .table-va td {
+  vertical-align: middle !important;
+}
+.table-valign td {
   vertical-align: middle !important;
 }
 
@@ -262,10 +278,12 @@ table thead th {
   vertical-align: top !important;
 }
 
+.text-85 {
+  font-size: 85% !important;
+}
 .text-90 {
   font-size: 90% !important;
 }
-
 .text-95 {
   font-size: 95% !important;
 }
@@ -297,4 +315,8 @@ table thead th {
 /* For lists, shifting the bullet points */
 .unindent-lists ul {
   margin-left: 0px !important;
+}
+
+.valign-cols div.column {
+  vertical-align: middle;
 }
