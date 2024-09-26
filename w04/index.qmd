@@ -10,6 +10,7 @@ categories:
   - "Class Sessions"
 bibliography: "../_PPOL6805.bib"
 # Shared across formats:
+cache: true
 echo: true
 code-fold: show
 css: "../dsan-globals/jjstyles.css"

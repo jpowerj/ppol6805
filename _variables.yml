@@ -20,35 +20,31 @@ weeks:
     footer: "PPOL 6805 Week 2: How Do Maps Work?"
     date-md: "Sep 4"
   - weeknum: 3
-    title: "Basic Spatial Operations"
-    footer: "PPOL 6805 Week 3: Spatial Operations"
+    title: "Unary Operations"
+    footer: "PPOL 6805 Week 3: Unary Operations"
     date-md: "Sep 11"
   - weeknum: 4
-    title: "Fancier Spatial Operations"
-    footer: "PPOL 6805 Week 4: Fancier Spatial Operations"
+    title: "Binary Operations"
+    footer: "PPOL 6805 Week 4: Binary Operations"
     date-md: "Sep 18"
   - weeknum: 5
     title: "Spatial Data Science!"
     footer: "PPOL 6805 Week 5: Spatial Data Science"
     date-md: "Sep 25"
-  # - weeknum: 5
-  #   title: "Static Mapping Libraries"
-  #   footer: "PPOL 6805 Week 5"
-  #   date-md: "Sep 25"
-  # - weeknum: 6
-  #   title: "Interactive Mapping Libraries"
-  #   footer: "PPOL 6805 Week 6"
-  #   date-md: "Oct 2"
+  - weeknum: 6
+    title: "Random Fields and Spatial Autocorrelation"
+    footer: "PPOL 6805 Week 6: Random Fields"
+    date-md: "Oct 2"
   - weeknum: 7
-    title: "Spatial Autocorrelation"
-    footer: "PPOL 6805 Week 7"
+    title: "Point Data and Clustering"
+    footer: "PPOL 6805 Week 7: Point Patterns"
     date-md: "Oct 9"
   - weeknum: 8
-    title: "Point Patterns and Clustering"
-    footer: "PPOL 6805 Week 8"
+    title: "Areal Data and Diffusion Models"
+    footer: "PPOL 6805 Week 8: Spatial Prediction"
     date-md: "Oct 16"
   - weeknum: 9
-    title: "Spatial Interpolation"
+    title: "Geostatistical Data and Spatial Prediction"
     footer: "PPOL 6805 Week 7"
     date-md: "Oct 23"
   - weeknum: 10
@@ -60,8 +56,8 @@ weeks:
     footer: "PPOL 6805 Week 11"
     date-md: "Nov 6"
   - weeknum: 12
-    title: "Applications: Public Policy"
-    footer: "PPOL 6805 Week 12"
+    title: "Static and Interactive Mapping"
+    footer: "PPOL 6805 Week 12: Mapping Libraries"
     date-md: "Nov 13"
   - weeknum: 13
     title: "Applications: Urban Planning"
@@ -80,16 +76,16 @@ hw:
     title: "GIS Concepts"
     pct: 8
   - hw-num: 2
-    title: "Geospatial Operations"
+    title: "Unary Operations"
     pct: 8
   - hw-num: 3
-    title: "Spatial Joins and Distances"
+    title: "Binary Operations and Spatial Joins"
     pct: 8
   - hw-num: 4
-    title: "Mapping Libraries"
+    title: "Random Fields, Autocorrelation, and Clustering"
     pct: 8
   - hw-num: 5
-    title: "Clustering"
+    title: "Areal Data and Diffusion Models"
     pct: 8
   # - hw-num: 5
   #   title: "Spatial Regression"

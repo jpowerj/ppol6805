@@ -93,8 +93,8 @@ On the basis of the guidelines we've developed for courses offered through DSAN,
     <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.4.pct >}}%"></span></td>
 </tr>
 <tr>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW4**: {{< var hw.4.title >}}"></span></td>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.4.pct >}}%"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW5**: {{< var hw.5.title >}}"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.5.pct >}}%"></span></td>
 </tr>
 </tbody>
 </table>
@@ -155,7 +155,7 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td></td>
     <td>4</td>
     <td><span data-qmd="{{< var weeks.4.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var weeks.4.title >}}](./w04/)"></span><br><span data-qmd="*HW3 Release*"></span></td>
+    <td><span data-qmd="[{{< var weeks.4.title >}}](./w04/)"></span></td>
 </tr>
 <tr>
     <td></td>
@@ -164,16 +164,10 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="*[Deliverable] HW2: {{< var hw.2.title >}}*"></span></td>
 </tr>
 <tr class='new-unit'>
-    <td><span data-qmd="**Unit 3:** Mapping Libraries"></span></td>
+    <td><span data-qmd="**Unit 3:** Spatial Data Science I: Foundations"></span></td>
     <td>5</td>
     <td><span data-qmd="{{< var weeks.5.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var weeks.5.title >}}](./w05/)"></span></td>
-</tr>
-<tr>
-    <td></td>
-    <td></td>
-    <td><span data-qmd="*Sep 27 (Fri), 5:59pm*"></span></td>
-    <td><span data-qmd="*[Deliverable] HW3: {{< var hw.3.title >}}*"></span></td>
+    <td><span data-qmd="[{{< var weeks.5.title >}}](./w05/)"></span><br><span data-qmd="*HW3 Release*"></span></td>
 </tr>
 <tr>
     <td></td>
@@ -181,11 +175,23 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="{{< var weeks.6.date-md >}}"></span></td>
     <td><span data-qmd="[{{<var weeks.6.title >}}](./w06/)"></span><br><span data-qmd="*HW4 Release*"></span></td>
 </tr>
+<tr>
+    <td></td>
+    <td></td>
+    <td><span data-qmd="*Oct 4 (Fri), 5:59pm*"></span></td>
+    <td><span data-qmd="*[Deliverable] HW3: {{< var hw.3.title >}}*"></span></td>
+</tr>
 <tr class='new-unit'>
-    <td><span data-qmd="**Unit 4:** Spatial Data Science"></span></td>
+    <td><span data-qmd="**Unit 4:** Spatial Data Science II: Methods"></span></td>
     <td>7</td>
     <td><span data-qmd="{{< var weeks.7.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var weeks.7.title >}}](./w07/)"></span><br><span data-qmd="*[Deliverable] HW4: {{< var hw.4.title >}}*"></span></td>
+    <td><span data-qmd="[{{< var weeks.7.title >}}](./w07/)"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td></td>
+    <td><span data-qmd="*Oct 11 (Fri), 5:59pm*"></span></td>
+    <td><span data-qmd="*[Deliverable] HW4: {{< var hw.4.title >}}*"></span></td>
 </tr>
 <tr>
     <td></td>
@@ -212,7 +218,7 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="[{{< var weeks.11.title >}}](./w11/)"></span></td>
 </tr>
 <tr class='new-unit'>
-    <td><span data-qmd="**Unit 5**: Applications"></span></td>
+    <td><span data-qmd="**Unit 5**: Mapping and Applications"></span></td>
     <td>12</td>
     <td><span data-qmd="{{< var weeks.12.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var weeks.12.title >}}](./w12/)"></span></td>

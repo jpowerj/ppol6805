@@ -10,17 +10,18 @@ format:
 
 ::: {.callout-note title="Update Log" collapse="true"}
 
+* 2024 Sep 26: Added [collection of links to R and Python libraries](#libraries)
 * 2024 Sep 18: Added [*Geocomputation with Python*](https://py.geocompx.org/){target='_blank'}, the Python version of @lovelace_geocomputation_2024
 
 :::
 
 I'm going to try to dump **everything** I used to develop the course materials here---some of it I drew on explicitly (using images from books, for example), and the rest of it seeped into my mind implicitly over the course of preparing the materials. Explore them to see if their different approaches "click" in your mind more than my approach does!
 
-## GIS with Python and R
+## Textbooks
 
 All of the following textbooks have been chosen specifically because they are available for **free**, legally, online. In fact, the online versions are especially nice since you can interact with the maps, copy-and-paste the code into your own notebooks to run and modify it, and so on.
 
-### Using R
+### GIS with R
 
 The course's R material is drawn mainly from the following books, where I've tried to put them in order from most-used to least-used (in terms of the slides and assignments!):
 
@@ -33,7 +34,7 @@ The course's R material is drawn mainly from the following books, where I've tri
 * **@comber_geographical_2020**: *Geographical Data Science and Spatial Data Analysis: An Introduction in R* \[[`epub`](https://www.dropbox.com/scl/fi/rv7nr0v9276pvt4a0w32q/Lex-Comber-Geographical-Data-Science-and-Spatial-Data-Analysis_-An-Introduction-in-R.epub?rlkey=b2naf1aipbte9qng1z7x7x0v0&dl=1){target='_blank'}\]
   * I wanted to include this book as well because, if you're like me and you read ebooks on a device that requires `.epub` files... this is the only GIS book I was able to find in EPUB format!
 
-### Using Python
+### GIS with Python
 
 * **@tenkanen_introduction_2024**: *[Introduction to Python for Geographic Data Analysis](https://pythongis.org/){target='_blank'}*
   * I found this book even more straightforward and organized as an overview, the only issue is that the portion on Spatial Data Science is not yet finished (as of early September 2024), so for that portion of the course @rey_geographic_2023 will be more helpful!
@@ -42,22 +43,7 @@ The course's R material is drawn mainly from the following books, where I've tri
 * **@graser_geocomputation_2025**: *[Geocomputation with Python](https://py.geocompx.org/){target='_blank'}
   * This is the Python companion book to @lovelace_geocomputation_2024, and is not yet completed, but I wanted to include it here in case you're looking for a pair of books where the Python and R content is **aligned** by chapter
 
-## Videos
-
-* For the quickest and most accessible intro to GIS using R I've ever found, you can watch [Sherrie Xie](https://www.med.upenn.edu/apps/faculty/index.php/g275/p8649466){target='_blank'}'s R Consortium workshop talk, [*Analyzing Geospatial Data in R*](https://www.youtube.com/watch?v=DD7bXonh-_E){target='_blank'}
-* For a high-level overview, that will prepare you well for this course, see [Coursera: Introduction to GIS](https://www.coursera.org/learn/gis/lecture/S0HxB/why-gis-is-awesome){target='_blank'}, which is an online version of UC Davis' Introduction to GIS course.
-
-## Other Courses
-
-* If you're looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out [Data Over Space and Time](https://www.stat.cmu.edu/~cshalizi/dst/20/){target='_blank'}, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.
-
-## Cartography in General
-
-* **@monmonier_how_2018**: *How to Lie with Maps* (3rd Edition). \[[`epub`](https://www.dropbox.com/scl/fi/6sb9hzp2ttugi9s6n5bnu/How-to-Lie-with-Maps_Mark-Monmonier.epub?rlkey=wx8yfep9rvhtsyldje5gdzp1t&dl=1){target='_blank'}\]
-* **@wood_power_1992**: *The Power of Maps* \[[`pdf`](https://www.dropbox.com/s/lpu5xsrip7oinir/Denis%20Wood%20%26%20John%20Fels%20-%20The%20power%20of%20maps%20%281992%2C%20The%20Guilford%20Press%29%20-%20libgen.li.pdf?dl=0){target='_blank'}\]
-  * I found Chapter 2, *Maps Are Embedded in a History They Help Construct*, especially helpful!
-
-## Spatial Statistics / Spatial Data Science
+### Spatial Statistics / Spatial Data Science
 
 Whereas the [GIS with Python and R](#gis-with-python-and-r) resources above are the key texts for this class, these books/resources dive deeper into the mathematical and statistical details of the models we look at towards the second half of the course. Here they're ordered from most to least-approachable (for someone just getting started with GIS), based on my subjective experience going through them over the summer!
 
@@ -66,3 +52,24 @@ Whereas the [GIS with Python and R](#gis-with-python-and-r) resources above are 
 * **@gaetan_spatial_2009**: *Spatial Statistics and Modeling* \[[`pdf`](https://www.dropbox.com/scl/fi/ggrmx9gcekawzulcwspgj/Carlo-Gaetan-Xavier-Guyon-auth.-Spatial-Statistics-and-Modeling-2010.pdf?rlkey=a2e52hphc9ifaha8ra6ckbm2o&dl=1){target='_blank'}\]
   * This one has a pretty steep learning curve, as it starts right off the bat on the first page with some fairly intensive math introducing concepts like [random fields](https://en.wikipedia.org/wiki/Random_field){target='_blank'}. But, if you were a math major or you'd really like to know the mathematical underpinnings of the GIS methods we'll use towards the end of the course, this one may be for you!
 * **@bivand_applied_2013**: *Applied Spatial Data Analysis with R* \[[`pdf`](https://www.dropbox.com/scl/fi/gm2mb07gylqmcwghz0e0t/Bivand-Roger-S._G-mez-Rubio-Virgilio_Pebesma-Edzer-Applied-spatial-data-analysis-with-R-2013.pdf?rlkey=y3ip1gzj1t9m2xgxlh9k66k2v&dl=1){target='_blank'}\]: This one has been superceded by @pebesma_spatial_2023, discussed in the [Using R](#using-r) section above, but I wanted to include it here since it was the textbook I used when first learning GIS with R back in the day... It is actually double-outdated since, not only is there a newer book but also a newer library, since this book uses the `sp` library rather than the newer `sf` library we've been using throughout the first few weeks of class!
+
+### Cartography and Geodesy
+
+* **@monmonier_how_2018**: *How to Lie with Maps* (3rd Edition). \[[`epub`](https://www.dropbox.com/scl/fi/6sb9hzp2ttugi9s6n5bnu/How-to-Lie-with-Maps_Mark-Monmonier.epub?rlkey=wx8yfep9rvhtsyldje5gdzp1t&dl=1){target='_blank'}\]
+* **@wood_power_1992**: *The Power of Maps* \[[`pdf`](https://www.dropbox.com/s/lpu5xsrip7oinir/Denis%20Wood%20%26%20John%20Fels%20-%20The%20power%20of%20maps%20%281992%2C%20The%20Guilford%20Press%29%20-%20libgen.li.pdf?dl=0){target='_blank'}\]
+  * I found Chapter 2, *Maps Are Embedded in a History They Help Construct*, especially helpful!
+
+## Videos
+
+* For the quickest and most accessible intro to GIS using R I've ever found, you can watch [Sherrie Xie](https://www.med.upenn.edu/apps/faculty/index.php/g275/p8649466){target='_blank'}'s R Consortium workshop talk, [*Analyzing Geospatial Data in R*](https://www.youtube.com/watch?v=DD7bXonh-_E){target='_blank'}
+* For a high-level overview, that will prepare you well for this course, see [Coursera: Introduction to GIS](https://www.coursera.org/learn/gis/lecture/S0HxB/why-gis-is-awesome){target='_blank'}, which is an online version of UC Davis' Introduction to GIS course.
+
+## Libraries
+
+```{=html}
+<iframe style="border: 0; width: 100%; height: 450px;" allowfullscreen frameborder="0" src="https://raindrop.io/jpowerj/r-libraries-48121467/embed"></iframe>
+```
+
+## Other Courses
+
+* If you're looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out [Data Over Space and Time](https://www.stat.cmu.edu/~cshalizi/dst/20/){target='_blank'}, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.
