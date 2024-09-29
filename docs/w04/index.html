@@ -272,6 +272,12 @@ window.Quarto = {
  <span class="menu-text">Week 5: Sep 25</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6: Oct 2</span></a>
+  </div>
+</li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -319,7 +325,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2024-09-26, 07:15:36 AM</em></p>
+<p><em>Updated 2024-09-29, 12:15:42 AM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -440,7 +446,7 @@ window.Quarto = {
 <section id="on-polygons" class="level2 smaller crunch-title">
 <h2 class="smaller crunch-title anchored" data-anchor-id="on-polygons">On <code>POLYGON</code>s</h2>
 <p>Key line: <code>manhattan_buffer_sf &lt;- manhattan_union_sf |&gt; st_buffer(dist = 1609.34)</code> (1 mile <span class="math inline">\(\approx\)</span> 1609.34 meters)</p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -482,7 +488,7 @@ window.Quarto = {
 </section>
 <section id="on-linestrings" class="level2">
 <h2 class="anchored" data-anchor-id="on-linestrings">On <code>LINESTRING</code>s</h2>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -983,7 +989,7 @@ And Then into an Infinitesimally-Small Point
 </section>
 <section id="st_relate-the-ultimate-predicate" class="level2 smaller crunch-title title-12">
 <h2 class="smaller crunch-title title-12 anchored" data-anchor-id="st_relate-the-ultimate-predicate"><code>st_relate()</code>: The Ultimate Predicate</h2>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -1391,7 +1397,7 @@ planar</code></pre>
 </section>
 <section id="if-you-dont-want-to-scroll" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="if-you-dont-want-to-scroll">(If You Don’t Want to Scroll)</h2>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>us <span class="sc">|&gt;</span> <span class="fu">filter</span>(touch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1445,26 +1451,20 @@ planar</code></pre>
 <h1 data-stack-name="Binary Operations">Doing Things with DE-9IM (Back to Binary Operations)</h1>
 <section id="from-last-week-almost-a-spatial-join" class="level2 smaller crunch-title leaflet-350">
 <h2 class="smaller crunch-title leaflet-350 anchored" data-anchor-id="from-last-week-almost-a-spatial-join">From Last Week: <em>Almost</em> a Spatial Join</h2>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet.extras2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: leaflet</code></pre>
-</div>
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>africa_sf <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">continent =</span> <span class="st">"Africa"</span>, <span class="at">scale =</span> <span class="dv">50</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(iso_a3, geounit)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>africa_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>africa_union_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_union</span>(africa_sf)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>sampled_points_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(africa_union_sf, N) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_sf</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">temp =</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">100</span>))</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>sampled_points_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(sampled_points_sf, <span class="at">label=</span><span class="st">"Random Point"</span>, <span class="at">col.regions=</span>cbPalette[<span class="dv">1</span>], <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>countries_points_sf <span class="ot">&lt;-</span> africa_sf[sampled_points_sf,]</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>filtered_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(countries_points_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> sampled_points_map</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>(africa_map <span class="sc">+</span> sampled_points_map) <span class="sc">|</span> filtered_map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet.extras2)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>africa_sf <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">continent =</span> <span class="st">"Africa"</span>, <span class="at">scale =</span> <span class="dv">50</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(iso_a3, geounit)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>africa_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>africa_union_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_union</span>(africa_sf)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>sampled_points_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(africa_union_sf, N) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_sf</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">temp =</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">100</span>))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>sampled_points_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(sampled_points_sf, <span class="at">label=</span><span class="st">"Random Point"</span>, <span class="at">col.regions=</span>cbPalette[<span class="dv">1</span>], <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>countries_points_sf <span class="ot">&lt;-</span> africa_sf[sampled_points_sf,]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>filtered_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(countries_points_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> sampled_points_map</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>(africa_map <span class="sc">+</span> sampled_points_map) <span class="sc">|</span> filtered_map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-98c367b142f44ba5eb19" style="width:100%;height:464px;"></div>
@@ -1482,11 +1482,11 @@ planar</code></pre>
 <center>
 <strong><code>POINT</code> Attributes</strong>
 </center>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(sampled_points_sf) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"geom"</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>sampled_points_sf <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(sampled_points_sf) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"geom"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sampled_points_sf <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -1531,10 +1531,10 @@ planar</code></pre>
 <center>
 <strong><code>POLYGON</code> Attributes</strong>
 </center>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>countries_points_sf <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>countries_points_sf <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -1582,11 +1582,11 @@ planar</code></pre>
 </section>
 <section id="our-first-real-spatial-join-st_join" class="level2 smaller crunch-title title-12">
 <h2 class="smaller crunch-title title-12 anchored" data-anchor-id="our-first-real-spatial-join-st_join">Our First Real Spatial Join: <code>st_join()</code></h2>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>joined_sf <span class="ot">&lt;-</span> countries_points_sf <span class="sc">|&gt;</span> <span class="fu">st_join</span>(sampled_points_sf)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>joined_sf <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>joined_sf <span class="ot">&lt;-</span> countries_points_sf <span class="sc">|&gt;</span> <span class="fu">st_join</span>(sampled_points_sf)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>joined_sf <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -1659,19 +1659,19 @@ planar</code></pre>
 <ul>
 <li>Every point could be matched <strong>one-to-one</strong> with a country. But what if… 😱</li>
 </ul>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">st_make_grid</span>(<span class="fu">st_bbox</span>(<span class="fu">st_as_sfc</span>(<span class="st">"LINESTRING(0 0,1 1)"</span>)), <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">4</span>))</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g[<span class="dv">1</span>] <span class="sc">*</span> <span class="fu">diag</span>(<span class="fu">c</span>(<span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>, <span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.125</span>), <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fu">c</span>(.<span class="dv">2</span>, .<span class="dv">8</span>, .<span class="dv">2</span>, .<span class="dv">8</span>), <span class="fu">c</span>(.<span class="dv">2</span>, .<span class="dv">2</span>, .<span class="dv">8</span>, .<span class="dv">8</span>), <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>), <span class="at">col =</span> <span class="st">'red'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">st_make_grid</span>(<span class="fu">st_bbox</span>(<span class="fu">st_as_sfc</span>(<span class="st">"LINESTRING(0 0,1 1)"</span>)), <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">4</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g[<span class="dv">1</span>] <span class="sc">*</span> <span class="fu">diag</span>(<span class="fu">c</span>(<span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>, <span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.125</span>), <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fu">c</span>(.<span class="dv">2</span>, .<span class="dv">8</span>, .<span class="dv">2</span>, .<span class="dv">8</span>), <span class="fu">c</span>(.<span class="dv">2</span>, .<span class="dv">2</span>, .<span class="dv">8</span>, .<span class="dv">8</span>), <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>), <span class="at">col =</span> <span class="st">'red'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure class="figure">
-<p><img src="index_files/figure-html/area-weighted-interpolation-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="index_files/figure-html/area-weighted-interpolation-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

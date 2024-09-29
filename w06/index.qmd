@@ -1,0 +1,156 @@
+---
+title: "Week 6: {{< var weeks.6.title >}}"
+subtitle: "{{< var course.slides-subtitle >}}"
+author: "{{< var course.author >}}"
+institute: "{{< var course.institute >}}"
+date: "October 2, 2024"
+date-format: full
+lecnum: 6
+categories:
+  - "Class Sessions"
+bibliography: "../_PPOL6805.bib"
+# Shared across formats:
+echo: true
+code-fold: show
+css: "../dsan-globals/jjstyles.css"
+html-math-method: mathjax
+# Format-specific settings:
+format:
+  revealjs:
+    output-file: "slides.html"
+    df-print: kable
+    slide-number: true
+    scrollable: true
+    tbl-cap-location: bottom
+    link-external-icon: true
+    link-external-newwindow: true
+    footer: "{{< var weeks.6.footer >}}"
+    include-in-header:
+      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>"
+    theme: [default]
+    revealjs-plugins:
+      - simplemenu
+    simplemenu:
+      flat: true
+      barhtml:
+        header: "<div class='menubar'><span style='position: absolute; left: 8; padding-left: 8px;'><a href='./index.html'>&larr; Return to Notes</a></span><ul class='menu'></ul></div>"
+      scale: 0.5
+  html:
+    output-file: "index.html"
+    html-math-method: mathjax
+    df-print: kable
+---
+
+::: {.content-visible unless-format="revealjs"}
+
+<center class='mb-3'>
+<a class="h2" href="./slides.html" target="_blank">Open slides in new tab &rarr;</a>
+</center>
+
+:::
+
+# Random Fields {data-stack-name="Random Fields"}
+
+* (Now on slides rather than scribbled on the whiteboard!)
+
+## Key Notation / Definition {.smaller .smaller-table .crunch-title .crunch-ul .crunch-math}
+
+::: {#full-defn style="width: 100% !important"}
+
+* $d$-Dimensional "Spatial Process" [@schabenberger_statistical_2004, 6]
+
+$$
+\text{Data} = \left\{Z(\mathbf{s}) \mid \mathbf{s} \in D \subset \mathbb{R}^d\right\}
+$$
+
+* $d > 1$: Data forms a **Random Field** (this class: $d = 2$!)
+
+:::
+
+```{=html}
+<table>
+<colgroup>
+  <col style="width: 10%;">
+  <col style="width: 30%;">
+  <col style="width: 30%;">
+  <col style="width: 30%;">
+</colgroup>
+<thead>
+<tr>
+    <th></th>
+    <th>Geostatistical Data</th>
+    <th>Lattice/Region Data</th>
+    <th>Point Process</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td><b>Criteria</b></td>
+    <td><span data-qmd="Fixed $D$, Continuous"></span></td>
+    <td><span data-qmd="Fixed $D$, Discrete"></span></td>
+    <td><span data-qmd="$D$ Itself is Random"></span></td>
+    <td></td>
+</tr>
+<tr>
+    <td><b>Example</b></td>
+    <td class='tdvt'><div data-qmd="* $N$ **trees** $\mathbf{s}_1, \mathbf{s}_2, \ldots, \mathbf{s}_N$, observed within a **sample window** $D \subset \mathbb{R}^2$, ($D$ some finite plot of land)
+* $Z(\mathbf{s}_i)$: Attribute(s) at site $\mathbf{s}_i$
+* Example: **Height**. $Z(\mathbf{s}_1) = 500\text{m}$, $Z(\mathbf{s}_2) = 850\text{m}$, $\ldots$"></div></td>
+    <td class='tdvt'><div data-qmd="* $Z(\mathbf{s})$ observed over $N \times N$ grid of **plots**
+    
+* $\implies$ Contiguity, Neighbors (next section of slides!)"></div></td>
+    <td class='tdvt'><div data-qmd='* Data on unknown number of lightning strikes $\mathbf{s}_1, \mathbf{s}_2, \ldots$
+    
+* "Unmarked": Just locations
+* "Marked": Locations+info (e.g., intensity of strike)'></div></td>
+</tr>
+</tbody>
+</table>
+```
+
+<!-- * Note the **lack of subscript** on $Z$! Important, not a typo! -->
+
+# Doing Things with `nbdep` {data-stack-name="Autocorrelation"}
+
+* "Neighbor" Definitions
+* Testing Hypotheses About Neighborhoods!
+
+## Who Are My Neighbors?
+
+* Contiguity-Based:
+    * Queen Definition
+    * Rook Definition
+* Distance-Based
+* $K$-Nearest Neighbors
+
+## Spatial Autocorrelation
+
+* Location $i$ has high value $\implies$ locations **near** $i$ more likely to have high values
+
+## Moran's $I$
+
+$$
+I =
+\underset{\text{Inverse of Variance}}{\boxed{\frac{n}{\sum_{i=1}^{n}(y_i - \overline{y})^2}}}
+\frac
+  {\overbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(y_i - \overline{y})(y_j - \overline{y})}^{\text{Weighted Covariance}}}
+  {\underbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}_{\text{Normalize Weights}}}
+$$
+
+* $I$ is **Large** when:
+    * $y_i$ and $y_j$ are **neighbors**: $w_{ij}$, and
+    * $y_i$ and $y_j$ **large at the same time**: $(y_i - \overline{y})(y_j - \overline{y})$
+
+## Local Indicators of Spatial Autocorrelation (LISA)
+
+* tldr: See how much a given location $\mathbf{s}$ **contributes to** overall Moran's $I$
+* Local Moran's $I$:
+
+$$
+I_i = \frac{y_i - \overline{y}}{S_i^2}\sum_{j=1}^{n}w_{ij}(y_j - \overline{y})
+$$
+
+## References
+
+::: {#refs}
+:::
