@@ -54,7 +54,14 @@
     "href": "w06/slides.html#key-notation-definition",
     "title": "Week 6: Random Fields and Spatial Autocorrelation",
     "section": "Key Notation / Definition",
-    "text": "Key Notation / Definition\n\n\n\\(d\\)-Dimensional “Spatial Process” (Schabenberger and Gotway 2004, 6)\n\n\\[\n\\text{Data} = \\left\\{Z(\\mathbf{s}) \\mid \\mathbf{s} \\in D \\subset \\mathbb{R}^d\\right\\}\n\\]\n\n\\(d &gt; 1\\): Data forms a Random Field (this class: \\(d = 2\\)!)\n\n\n\n\n\n\n\n\n\n\n\n\nGeostatistical Data\nLattice/Region Data\nPoint Process\n\n\n\n\nCriteria\nFixed \\(D\\), Continuous\nFixed \\(D\\), Discrete\n\\(D\\) Itself is Random\n\n\nExample\n\n\\(N\\) trees \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots, \\mathbf{s}_N\\), observed within a sample window \\(D \\subset \\mathbb{R}^2\\), (\\(D\\) some finite plot of land)\n\\(Z(\\mathbf{s}_i)\\): Attribute(s) at site \\(\\mathbf{s}_i\\)\nExample: Height. \\(Z(\\mathbf{s}_1) = 500\\text{m}\\), \\(Z(\\mathbf{s}_2) = 850\\text{m}\\), \\(\\ldots\\)\n\n\n\\(Z(\\mathbf{s})\\) observed over \\(N \\times N\\) grid of plots\n\\(\\implies\\) Contiguity, Neighbors (next section of slides!)\n\n\nData on unknown number of lightning strikes \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots\\)\n“Unmarked”: Just locations\n“Marked”: Locations+info (e.g., intensity of strike)"
+    "text": "Key Notation / Definition\n\n\n\\(d\\)-Dimensional “Spatial Process” (Schabenberger and Gotway 2004, 6)\n\n\\[\n\\text{Data} = \\left\\{Z(\\mathbf{s}) \\mid \\mathbf{s} \\in D \\subset \\mathbb{R}^d\\right\\}\n\\]\n\n\\(d &gt; 1\\): Data forms a Random Field (this class: \\(d = 2\\)!)\n\n\n\n\n\n\n\n\n\n\n\n\nGeostatistical Data\nLattice/Region Data\nPoint Process\n\n\n\n\nCriteria\nFixed \\(D\\), Continuous\nFixed \\(D\\), Discrete\n\\(D\\) Itself is Random\n\n\nInterest\nInfer non-observed parts of \\(D\\)\nAutocorrelation, clustering\nPoint-generating process\n\n\nExample\n\n\\(N\\) trees \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots, \\mathbf{s}_N\\), observed within a sample window \\(D \\subset \\mathbb{R}^2\\), (\\(D\\) some finite plot of land)\n\\(Z(\\mathbf{s}_i)\\): Attribute(s) at site \\(\\mathbf{s}_i\\)\nExample: Height. \\(Z(\\mathbf{s}_1) = 500\\text{m}\\), \\(Z(\\mathbf{s}_2) = 850\\text{m}\\), \\(\\ldots\\)\n\n\n\\(Z(\\mathbf{s})\\) observed over \\(N \\times N\\) grid of plots\n\\(\\implies\\) Contiguity, Neighbors (next section of slides!)\n\n\nData on unknown number of lightning strikes \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots\\)\n“Unmarked”: Just locations\n“Marked”: Locations+info (e.g., intensity of strike)"
+  },
+  {
+    "objectID": "w06/slides.html#dumping-sand-onto-a-table",
+    "href": "w06/slides.html#dumping-sand-onto-a-table",
+    "title": "Week 6: Random Fields and Spatial Autocorrelation",
+    "section": "Dumping Sand onto a Table",
+    "text": "Dumping Sand onto a Table\n\nDomain \\(D\\): tabletop; Random process: dumping sand onto the tabletop\n\\(\\Omega\\): All possible realizations of process. \\(\\omega_i \\in \\Omega\\) Particular realization"
   },
   {
     "objectID": "w06/slides.html#who-are-my-neighbors",
@@ -106,7 +113,17 @@
     "href": "w06/index.html#key-notation-definition",
     "title": "Week 6: Random Fields and Spatial Autocorrelation",
     "section": "Key Notation / Definition",
-    "text": "Key Notation / Definition\n\n\n\\(d\\)-Dimensional “Spatial Process” (Schabenberger and Gotway 2004, 6)\n\n\\[\n\\text{Data} = \\left\\{Z(\\mathbf{s}) \\mid \\mathbf{s} \\in D \\subset \\mathbb{R}^d\\right\\}\n\\]\n\n\\(d &gt; 1\\): Data forms a Random Field (this class: \\(d = 2\\)!)\n\n\n\n\n\n\n\n\n\n\n\n\nGeostatistical Data\nLattice/Region Data\nPoint Process\n\n\n\n\nCriteria\nFixed \\(D\\), Continuous\nFixed \\(D\\), Discrete\n\\(D\\) Itself is Random\n\n\nExample\n\n\\(N\\) trees \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots, \\mathbf{s}_N\\), observed within a sample window \\(D \\subset \\mathbb{R}^2\\), (\\(D\\) some finite plot of land)\n\\(Z(\\mathbf{s}_i)\\): Attribute(s) at site \\(\\mathbf{s}_i\\)\nExample: Height. \\(Z(\\mathbf{s}_1) = 500\\text{m}\\), \\(Z(\\mathbf{s}_2) = 850\\text{m}\\), \\(\\ldots\\)\n\n\n\\(Z(\\mathbf{s})\\) observed over \\(N \\times N\\) grid of plots\n\\(\\implies\\) Contiguity, Neighbors (next section of slides!)\n\n\nData on unknown number of lightning strikes \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots\\)\n“Unmarked”: Just locations\n“Marked”: Locations+info (e.g., intensity of strike)",
+    "text": "Key Notation / Definition\n\n\n\\(d\\)-Dimensional “Spatial Process” (Schabenberger and Gotway 2004, 6)\n\n\\[\n\\text{Data} = \\left\\{Z(\\mathbf{s}) \\mid \\mathbf{s} \\in D \\subset \\mathbb{R}^d\\right\\}\n\\]\n\n\\(d &gt; 1\\): Data forms a Random Field (this class: \\(d = 2\\)!)\n\n\n\n\n\n\n\n\n\n\n\n\nGeostatistical Data\nLattice/Region Data\nPoint Process\n\n\n\n\nCriteria\nFixed \\(D\\), Continuous\nFixed \\(D\\), Discrete\n\\(D\\) Itself is Random\n\n\nInterest\nInfer non-observed parts of \\(D\\)\nAutocorrelation, clustering\nPoint-generating process\n\n\nExample\n\n\\(N\\) trees \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots, \\mathbf{s}_N\\), observed within a sample window \\(D \\subset \\mathbb{R}^2\\), (\\(D\\) some finite plot of land)\n\\(Z(\\mathbf{s}_i)\\): Attribute(s) at site \\(\\mathbf{s}_i\\)\nExample: Height. \\(Z(\\mathbf{s}_1) = 500\\text{m}\\), \\(Z(\\mathbf{s}_2) = 850\\text{m}\\), \\(\\ldots\\)\n\n\n\\(Z(\\mathbf{s})\\) observed over \\(N \\times N\\) grid of plots\n\\(\\implies\\) Contiguity, Neighbors (next section of slides!)\n\n\nData on unknown number of lightning strikes \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots\\)\n“Unmarked”: Just locations\n“Marked”: Locations+info (e.g., intensity of strike)",
+    "crumbs": [
+      "Week 6: Oct 2"
+    ]
+  },
+  {
+    "objectID": "w06/index.html#dumping-sand-onto-a-table",
+    "href": "w06/index.html#dumping-sand-onto-a-table",
+    "title": "Week 6: Random Fields and Spatial Autocorrelation",
+    "section": "Dumping Sand onto a Table",
+    "text": "Dumping Sand onto a Table\n\nDomain \\(D\\): tabletop; Random process: dumping sand onto the tabletop\n\\(\\Omega\\): All possible realizations of process. \\(\\omega_i \\in \\Omega\\) Particular realization",
     "crumbs": [
       "Week 6: Oct 2"
     ]
@@ -1640,7 +1657,7 @@
     "href": "w05/index.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (33.38649 -24.33006)\n2.020653\n\n\nPOINT (7.252834 30.42113)\n30.429286\n\n\nPOINT (36.81766 4.525418)\n40.498559\n\n\nPOINT (22.63233 -22.12448)\n69.516586\n\n\nPOINT (24.80046 3.939561)\n1.464889\n\n\nPOINT (36.07665 8.285507)\n7.765117\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n52\nSSD\nSouth Sudan\nMULTIPOLYGON (((33.97607 4….\n\n\n91\nNGA\nNigeria\nMULTIPOLYGON (((7.300781 4….\n\n\n102\nNAM\nNamibia\nMULTIPOLYGON (((23.38066 -1…\n\n\n103\nMOZ\nMozambique\nMULTIPOLYGON (((31.28789 -2…",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (28.39994 24.25239)\n42.83456\n\n\nPOINT (-0.07054627 29.6909)\n38.48512\n\n\nPOINT (28.87461 24.27544)\n73.60756\n\n\nPOINT (4.565639 25.36758)\n10.14443\n\n\nPOINT (13.82953 20.56742)\n59.50242\n\n\nPOINT (13.08548 1.126778)\n43.81393\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n92\nNER\nNiger\nMULTIPOLYGON (((13.60635 13…\n\n\n103\nMOZ\nMozambique\nMULTIPOLYGON (((31.28789 -2…\n\n\n112\nMRT\nMauritania\nMULTIPOLYGON (((-16.37334 1…\n\n\n160\nGAB\nGabon\nMULTIPOLYGON (((13.29355 2….",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -1650,7 +1667,7 @@
     "href": "w05/index.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n52\nSSD\nSouth Sudan\n87.400775\nMULTIPOLYGON (((33.97607 4….\n\n\n91\nNGA\nNigeria\n82.972746\nMULTIPOLYGON (((7.300781 4….\n\n\n102\nNAM\nNamibia\n26.468351\nMULTIPOLYGON (((23.38066 -1…\n\n\n103\nMOZ\nMozambique\n2.020653\nMULTIPOLYGON (((31.28789 -2…\n\n\n172\nETH\nEthiopia\n40.498559\nMULTIPOLYGON (((35.26836 5….\n\n\n172.1\nETH\nEthiopia\n7.765117\nMULTIPOLYGON (((35.26836 5….",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n92\nNER\nNiger\n59.50242\nMULTIPOLYGON (((13.60635 13…\n\n\n103\nMOZ\nMozambique\n98.16446\nMULTIPOLYGON (((31.28789 -2…\n\n\n112\nMRT\nMauritania\n66.68757\nMULTIPOLYGON (((-16.37334 1…\n\n\n160\nGAB\nGabon\n43.81393\nMULTIPOLYGON (((13.29355 2….\n\n\n177\nEGY\nEgypt\n42.83456\nMULTIPOLYGON (((36.87139 21…\n\n\n177.1\nEGY\nEgypt\n73.60756\nMULTIPOLYGON (((36.87139 21…",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -1747,14 +1764,14 @@
     "href": "w05/slides.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (32.84358 -10.24261)\n43.05014\n\n\nPOINT (20.55383 -31.48244)\n55.50544\n\n\nPOINT (24.16095 -25.63852)\n84.00339\n\n\nPOINT (29.87648 24.84846)\n26.91508\n\n\nPOINT (18.72177 -4.385336)\n40.75822\n\n\nPOINT (18.10775 -16.97338)\n41.17158\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n177\nEGY\nEgypt\nMULTIPOLYGON (((36.87139 21…"
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-6.668197 24.0605)\n97.21479\n\n\nPOINT (36.63988 -13.82217)\n75.65264\n\n\nPOINT (37.55847 -4.822779)\n42.71289\n\n\nPOINT (22.90998 22.60255)\n36.12331\n\n\nPOINT (16.81115 27.42394)\n35.86674\n\n\nPOINT (34.75166 -15.6898)\n26.26703\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n1\nZWE\nZimbabwe\nMULTIPOLYGON (((31.28789 -2…\n\n\n44\nTZA\nTanzania\nMULTIPOLYGON (((39.49648 -6…\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n103\nMOZ\nMozambique\nMULTIPOLYGON (((31.28789 -2…"
   },
   {
     "objectID": "w05/slides.html#our-first-real-spatial-join-st_join",
     "href": "w05/slides.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n2\nZMB\nZambia\n43.05014\nMULTIPOLYGON (((30.39609 -1…\n\n\n53\nSDN\nSudan\n94.37453\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\n55.50544\nMULTIPOLYGON (((29.36484 -2…\n\n\n57.1\nZAF\nSouth Africa\n84.00339\nMULTIPOLYGON (((29.36484 -2…\n\n\n57.2\nZAF\nSouth Africa\n64.77633\nMULTIPOLYGON (((29.36484 -2…\n\n\n177\nEGY\nEgypt\n26.91508\nMULTIPOLYGON (((36.87139 21…"
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n1\nZWE\nZimbabwe\n65.34231\nMULTIPOLYGON (((31.28789 -2…\n\n\n44\nTZA\nTanzania\n42.71289\nMULTIPOLYGON (((39.49648 -6…\n\n\n57\nZAF\nSouth Africa\n54.13928\nMULTIPOLYGON (((29.36484 -2…\n\n\n103\nMOZ\nMozambique\n75.65264\nMULTIPOLYGON (((31.28789 -2…\n\n\n112\nMRT\nMauritania\n97.21479\nMULTIPOLYGON (((-16.37334 1…\n\n\n112.1\nMRT\nMauritania\n96.91168\nMULTIPOLYGON (((-16.37334 1…"
   },
   {
     "objectID": "w05/slides.html#but-we-were-still-in-easy-mode",

@@ -92,6 +92,13 @@ $$
     <td></td>
 </tr>
 <tr>
+    <td><b>Interest</b></td>
+    <td><span data-qmd="Infer non-observed parts of $D$"></span></td>
+    <td><span data-qmd="Autocorrelation, clustering"></span></td>
+    <td><span data-qmd="Point-generating process"></span></td>
+    <td></td>
+</tr>
+<tr>
     <td><b>Example</b></td>
     <td class='tdvt'><div data-qmd="* $N$ **trees** $\mathbf{s}_1, \mathbf{s}_2, \ldots, \mathbf{s}_N$, observed within a **sample window** $D \subset \mathbb{R}^2$, ($D$ some finite plot of land)
 * $Z(\mathbf{s}_i)$: Attribute(s) at site $\mathbf{s}_i$
@@ -109,6 +116,16 @@ $$
 ```
 
 <!-- * Note the **lack of subscript** on $Z$! Important, not a typo! -->
+
+## Dumping Sand onto a Table {.smaller .crunch-title .crunch-ul}
+
+* Domain $D$: **tabletop**; Random process: dumping sand onto the tabletop
+* $\Omega$: All possible realizations of process. $\omega_i \in \Omega$ Particular realization
+
+| | |
+|:-:|:-:|
+| ![](images/w1.jpg){width="80%"} | ![](images/w2.jpg){width="80%"} |
+| ![](images/w3.jpg){width="80%"} | ![](images/w4.jpg){width="80%"} |
 
 # Doing Things with `nbdep` {data-stack-name="Autocorrelation"}
 

@@ -271,7 +271,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2024-09-29, 09:42:24 PM</em></p>
+<p><em>Updated 2024-09-30, 02:24:35 AM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -283,6 +283,7 @@ window.Quarto = {
   <li><a href="#random-fields" id="toc-random-fields" class="nav-link active" data-scroll-target="#random-fields">Random Fields</a>
   <ul class="collapse">
   <li><a href="#key-notation-definition" id="toc-key-notation-definition" class="nav-link" data-scroll-target="#key-notation-definition">Key Notation / Definition</a></li>
+  <li><a href="#dumping-sand-onto-a-table" id="toc-dumping-sand-onto-a-table" class="nav-link" data-scroll-target="#dumping-sand-onto-a-table">Dumping Sand onto a Table</a></li>
   </ul></li>
   <li><a href="#doing-things-with-nbdep" id="toc-doing-things-with-nbdep" class="nav-link" data-scroll-target="#doing-things-with-nbdep">Doing Things with <code>nbdep</code></a>
   <ul class="collapse">
@@ -384,6 +385,12 @@ window.Quarto = {
 <td><span class="math inline">\(D\)</span> Itself is Random</td>
 </tr>
 <tr class="even">
+<td><strong>Interest</strong></td>
+<td>Infer non-observed parts of <span class="math inline">\(D\)</span></td>
+<td>Autocorrelation, clustering</td>
+<td>Point-generating process</td>
+</tr>
+<tr class="odd">
 <td><strong>Example</strong></td>
 <td class="tdvt"><ul>
 <li><span class="math inline">\(N\)</span> <strong>trees</strong> <span class="math inline">\(\mathbf{s}_1, \mathbf{s}_2, \ldots, \mathbf{s}_N\)</span>, observed within a <strong>sample window</strong> <span class="math inline">\(D \subset \mathbb{R}^2\)</span>, (<span class="math inline">\(D\)</span> some finite plot of land)</li>
@@ -403,6 +410,25 @@ window.Quarto = {
 </tbody>
 </table>
 <!-- * Note the **lack of subscript** on $Z$! Important, not a typo! -->
+</section>
+<section id="dumping-sand-onto-a-table" class="level2 smaller crunch-title crunch-ul">
+<h2 class="smaller crunch-title crunch-ul anchored" data-anchor-id="dumping-sand-onto-a-table">Dumping Sand onto a Table</h2>
+<ul>
+<li>Domain <span class="math inline">\(D\)</span>: <strong>tabletop</strong>; Random process: dumping sand onto the tabletop</li>
+<li><span class="math inline">\(\Omega\)</span>: All possible realizations of process. <span class="math inline">\(\omega_i \in \Omega\)</span> Particular realization</li>
+</ul>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="images/w1.jpg" class="img-fluid" style="width:80.0%"></td>
+<td style="text-align: center;"><img src="images/w2.jpg" class="img-fluid" style="width:80.0%"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="images/w3.jpg" class="img-fluid" style="width:80.0%"></td>
+<td style="text-align: center;"><img src="images/w4.jpg" class="img-fluid" style="width:80.0%"></td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 <section id="doing-things-with-nbdep" class="level1" data-stack-name="Autocorrelation">
