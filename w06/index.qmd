@@ -49,9 +49,11 @@ format:
 
 :::
 
-# Random Fields {data-stack-name="Random Fields"}
+# Random Fields {.crunch-title .crunch-ul data-stack-name="Random Fields"}
 
 * (Now on slides rather than scribbled on the whiteboard!)
+
+![$D$ = Rectangle; $Z(\mathbf{s})$ here: **height** at coordinate $\mathbf{s} \in D$](images/w3.jpg){fig-align="center"}
 
 ## Key Notation / Definition {.smaller .smaller-table .crunch-title .crunch-ul .crunch-math}
 
@@ -117,15 +119,22 @@ $$
 
 <!-- * Note the **lack of subscript** on $Z$! Important, not a typo! -->
 
-## Dumping Sand onto a Table {.smaller .crunch-title .crunch-ul}
+## Geospatial Data: Dumping Sand onto a Table {.smaller .crunch-title .crunch-ul .crunch-quarto-figure .crunch-img .crunch-figcaption .crunch-quarto-layout-cell .crunch-quarto-layout-panel .title-11}
 
-* Domain $D$: **tabletop**; Random process: dumping sand onto the tabletop
+* Domain $D$: **tabletop**; Random process: **dumping sand** onto the tabletop
 * $\Omega$: All possible realizations of process. $\omega_i \in \Omega$ Particular realization
 
-| | |
-|:-:|:-:|
-| ![](images/w1.jpg){width="80%"} | ![](images/w2.jpg){width="80%"} |
-| ![](images/w3.jpg){width="80%"} | ![](images/w4.jpg){width="80%"} |
+::: {layout="[[1,1],[1,1]]"}
+
+![$\omega_1 \in \Omega$](images/w1.jpg){#fig-w1 width="82%" fig-cap-location="top"}
+
+![$\omega_2 \in \Omega$](images/w2.jpg){#fig-w2 width="82%" fig-cap-location="top"}
+
+![$\omega_3 \in \Omega$](images/w3.jpg){#fig-w3 width="82%" fig-cap-location="top"}
+
+![$\omega_4 \in \Omega$](images/w4.jpg){#fig-w4 width="82%" fig-cap-location="top"}
+
+:::
 
 # Doing Things with `nbdep` {data-stack-name="Autocorrelation"}
 
