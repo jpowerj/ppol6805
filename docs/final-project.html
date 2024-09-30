@@ -220,7 +220,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2024-09-29, 12:15:42 AM</em></p>
+<p><em>Updated 2024-09-29, 09:42:24 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -263,6 +263,11 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Creating a full-on Virtual Machine for the project, if you think that you’ll need a bunch of storage or computing power or GPU usage, and/or</li>
 <li>For use with Google Maps Engine, if you think that one of their Maps Engine datasets/tools may be useful!</li>
+</ul>
+<p>As mentioned in the email: A reasonable choice, which ensures that you’ll stay within-budget even if you run the VM instance from now until the semester, is to create an instance (you can name it “gis-project”, for example) with all of the default options except:</p>
+<ul>
+<li>Choose <strong>ec2-small</strong> for the Machine Type (ec2-medium is the default, but based on the estimated cost for this type, it would run out of $ before the semester ends)</li>
+<li>Click the “Change” button under “Boot Disk” and then set the size to <strong>25 GB</strong> (this is what I meant by “trying a few different options”: with the $ saved moving from ec2-medium to ec2-small, you can increase from the default 10 GB disk to a 25 GB disk without the expected cost going over $50 for the semester).</li>
 </ul>
 </section>
 <section id="gis-datasetsproject-ideas-collection" class="level2">
