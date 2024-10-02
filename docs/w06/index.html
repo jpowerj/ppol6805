@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -271,7 +305,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2024-09-30, 07:53:13 PM</em></p>
+<p><em>Updated 2024-10-02, 06:29:22 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -283,14 +317,23 @@ window.Quarto = {
   <li><a href="#random-fields" id="toc-random-fields" class="nav-link active" data-scroll-target="#random-fields">Random Fields</a>
   <ul class="collapse">
   <li><a href="#key-notation-definition" id="toc-key-notation-definition" class="nav-link" data-scroll-target="#key-notation-definition">Key Notation / Definition</a></li>
-  <li><a href="#geospatial-data-dumping-sand-onto-a-table" id="toc-geospatial-data-dumping-sand-onto-a-table" class="nav-link" data-scroll-target="#geospatial-data-dumping-sand-onto-a-table">Geospatial Data: Dumping Sand onto a Table</a></li>
+  <li><a href="#geostatistical-data-dumping-sand-onto-a-table" id="toc-geostatistical-data-dumping-sand-onto-a-table" class="nav-link" data-scroll-target="#geostatistical-data-dumping-sand-onto-a-table">Geostatistical Data: Dumping Sand onto a Table</a></li>
+  <li><a href="#geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes" id="toc-geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes" class="nav-link" data-scroll-target="#geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes">Geostatistical <em>Modeling</em>: Terrains Are <em>Not</em> Spiky Chaotic Landscapes!</a></li>
+  <li><a href="#geostatistical-data-rightarrow-point-pattern" id="toc-geostatistical-data-rightarrow-point-pattern" class="nav-link" data-scroll-target="#geostatistical-data-rightarrow-point-pattern">Geostatistical Data <span class="math inline">\(\rightarrow\)</span> Point Pattern</a></li>
+  <li><a href="#geospatial-data-rightarrow-latticeregion-data" id="toc-geospatial-data-rightarrow-latticeregion-data" class="nav-link" data-scroll-target="#geospatial-data-rightarrow-latticeregion-data">Geospatial Data <span class="math inline">\(\rightarrow\)</span> Lattice/Region Data</a></li>
   </ul></li>
   <li><a href="#doing-things-with-nbdep" id="toc-doing-things-with-nbdep" class="nav-link" data-scroll-target="#doing-things-with-nbdep">Doing Things with <code>nbdep</code></a>
   <ul class="collapse">
   <li><a href="#who-are-my-neighbors" id="toc-who-are-my-neighbors" class="nav-link" data-scroll-target="#who-are-my-neighbors">Who Are My Neighbors?</a></li>
+  <li><a href="#distance-based-neighbors" id="toc-distance-based-neighbors" class="nav-link" data-scroll-target="#distance-based-neighbors">Distance-Based Neighbors</a></li>
   <li><a href="#spatial-autocorrelation" id="toc-spatial-autocorrelation" class="nav-link" data-scroll-target="#spatial-autocorrelation">Spatial Autocorrelation</a></li>
   <li><a href="#morans-i" id="toc-morans-i" class="nav-link" data-scroll-target="#morans-i">Moran’s <span class="math inline">\(I\)</span></a></li>
   <li><a href="#local-indicators-of-spatial-autocorrelation-lisa" id="toc-local-indicators-of-spatial-autocorrelation-lisa" class="nav-link" data-scroll-target="#local-indicators-of-spatial-autocorrelation-lisa">Local Indicators of Spatial Autocorrelation (LISA)</a></li>
+  </ul></li>
+  <li><a href="#our-null-hypothesis-complete-spatial-randomness-csr" id="toc-our-null-hypothesis-complete-spatial-randomness-csr" class="nav-link" data-scroll-target="#our-null-hypothesis-complete-spatial-randomness-csr">Our Null Hypothesis: Complete Spatial Randomness (CSR)</a>
+  <ul class="collapse">
+  <li><a href="#leaving-you-with-a-challenge" id="toc-leaving-you-with-a-challenge" class="nav-link" data-scroll-target="#leaving-you-with-a-challenge">Leaving You With a Challenge</a></li>
+  <li><a href="#leaving-you-with-a-challenge-1" id="toc-leaving-you-with-a-challenge-1" class="nav-link" data-scroll-target="#leaving-you-with-a-challenge-1">Leaving You With a Challenge</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
@@ -370,9 +413,9 @@ window.Quarto = {
 </div>
 <table class="caption-top table" data-quarto-postprocess="true">
 <colgroup>
-<col style="width: 10%">
+<col style="width: 9%">
 <col style="width: 30%">
-<col style="width: 30%">
+<col style="width: 31%">
 <col style="width: 30%">
 </colgroup>
 <thead>
@@ -380,7 +423,7 @@ window.Quarto = {
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">Geostatistical Data</th>
 <th data-quarto-table-cell-role="th">Lattice/Region Data</th>
-<th data-quarto-table-cell-role="th">Point Process</th>
+<th data-quarto-table-cell-role="th">Point Pattern</th>
 </tr>
 </thead>
 <tbody>
@@ -388,11 +431,11 @@ window.Quarto = {
 <td><strong>Criteria</strong></td>
 <td>Fixed <span class="math inline">\(D\)</span>, Continuous</td>
 <td>Fixed <span class="math inline">\(D\)</span>, Discrete</td>
-<td><span class="math inline">\(D\)</span> Itself is Random</td>
+<td>Random subset <span class="math inline">\(D^* \subseteq D\)</span></td>
 </tr>
 <tr class="even">
 <td><strong>Interest</strong></td>
-<td>Infer non-observed parts of <span class="math inline">\(D\)</span></td>
+<td>Infer <strong>non-observed</strong> parts of <span class="math inline">\(D\)</span></td>
 <td>Autocorrelation, clustering</td>
 <td>Point-generating process</td>
 </tr>
@@ -405,20 +448,22 @@ window.Quarto = {
 </ul></td>
 <td class="tdvt"><ul>
 <li><p><span class="math inline">\(Z(\mathbf{s})\)</span> observed over <span class="math inline">\(N \times N\)</span> grid of <strong>plots</strong></p></li>
-<li><p><span class="math inline">\(\implies\)</span> Contiguity, Neighbors (next section of slides!)</p></li>
+<li><p><span class="math inline">\(\Rightarrow\)</span> Contiguity, Neighbors (next section of slides!)</p></li>
+<li><p><span class="math inline">\(\Rightarrow\)</span> Autocorrelation: Are points <strong>around</strong> <span class="math inline">\(\mathbf{s}_i\)</span> likely to have values similar to <span class="math inline">\(Z(\mathbf{s}_i)\)</span>?</p></li>
 </ul></td>
 <td class="tdvt"><ul>
-<li><p>Data on unknown number of lightning strikes <span class="math inline">\(\mathbf{s}_1, \mathbf{s}_2, \ldots\)</span></p></li>
-<li><p>“Unmarked”: Just locations</p></li>
-<li><p>“Marked”: Locations+info (e.g., intensity of strike)</p></li>
+<li>Unknown number of lightning strikes <span class="math inline">\(\mathbf{s}_1, \mathbf{s}_2, \ldots\)</span></li>
+<li>Contrast with geostatistical: all of <span class="math inline">\(D\)</span> is observed, but what determines the subset <span class="math inline">\(D^*\)</span> where <strong>events</strong> occur?</li>
+<li>“Unmarked”: Just locations</li>
+<li>“Marked”: Locations+info (e.g., intensity of strike)</li>
 </ul></td>
 </tr>
 </tbody>
 </table>
 <!-- * Note the **lack of subscript** on $Z$! Important, not a typo! -->
 </section>
-<section id="geospatial-data-dumping-sand-onto-a-table" class="level2 smaller crunch-title crunch-ul crunch-quarto-figure crunch-img crunch-figcaption crunch-quarto-layout-cell crunch-quarto-layout-panel title-11">
-<h2 class="smaller crunch-title crunch-ul crunch-quarto-figure crunch-img crunch-figcaption crunch-quarto-layout-cell crunch-quarto-layout-panel title-11 anchored" data-anchor-id="geospatial-data-dumping-sand-onto-a-table">Geospatial Data: Dumping Sand onto a Table</h2>
+<section id="geostatistical-data-dumping-sand-onto-a-table" class="level2 smaller crunch-title crunch-ul crunch-quarto-figure crunch-img crunch-figcaption crunch-quarto-layout-cell crunch-quarto-layout-panel title-11">
+<h2 class="smaller crunch-title crunch-ul crunch-quarto-figure crunch-img crunch-figcaption crunch-quarto-layout-cell crunch-quarto-layout-panel title-11 anchored" data-anchor-id="geostatistical-data-dumping-sand-onto-a-table">Geostatistical Data: Dumping Sand onto a Table</h2>
 <ul>
 <li>Domain <span class="math inline">\(D\)</span>: <strong>tabletop</strong>; Random process: <strong>dumping sand</strong> onto the tabletop</li>
 <li><span class="math inline">\(\Omega\)</span>: All possible realizations of process. <span class="math inline">\(\omega_i \in \Omega\)</span> Particular realization</li>
@@ -481,6 +526,233 @@ Figure&nbsp;4: <span class="math inline">\(\omega_4 \in \Omega\)</span>
 </div>
 </div>
 </section>
+<section id="geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes" class="level2 smaller crunch-title title-12">
+<h2 class="smaller crunch-title title-12 anchored" data-anchor-id="geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes">Geostatistical <em>Modeling</em>: Terrains Are <em>Not</em> Spiky Chaotic Landscapes!</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/w2_missing.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="geostatistical-data-rightarrow-point-pattern" class="level2 crunch-title crunch-ul smaller crunch-quarto-layout-panel crunch-img crunch-quarto-figure">
+<h2 class="crunch-title crunch-ul smaller crunch-quarto-layout-panel crunch-img crunch-quarto-figure anchored" data-anchor-id="geostatistical-data-rightarrow-point-pattern">Geostatistical Data <span class="math inline">\(\rightarrow\)</span> Point Pattern</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>Indicator function</strong>: <span class="math inline">\(\mathbb{1}\left[Z(\mathbf{s}) &gt; 860\text{m}\right]\)</span></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>terra 1.7.78
+
+Attaching package: 'terra'
+
+The following object is masked from 'package:tidyr':
+
+    extract</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(latex2exp)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">#### Define area</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>lat_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">5.0</span>, <span class="sc">-</span><span class="fl">6.0</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>lon_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#lon_center &lt;- -5.4</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#lat_center &lt;- 36.75</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># And the window around this centroid</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>lat_radius <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>lon_radius <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>gen_random_table <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">world_num=</span><span class="dv">1</span>, <span class="at">return_data=</span><span class="cn">FALSE</span>, <span class="at">rand_seed=</span><span class="cn">NULL</span>) {</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(rand_seed)) {</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(rand_seed)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    rand_seed <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9999</span>, <span class="at">size=</span><span class="dv">1</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(rand_seed)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  lat_center <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="fu">min</span>(lat_range), <span class="at">max=</span><span class="fu">max</span>(lat_range))</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  lon_center <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="fu">min</span>(lon_range), <span class="at">max=</span><span class="fu">max</span>(lon_range))</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  lon_lower <span class="ot">&lt;-</span> lon_center <span class="sc">-</span> lon_radius</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  lon_upper <span class="ot">&lt;-</span> lon_center <span class="sc">+</span> lon_radius</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  lat_lower <span class="ot">&lt;-</span> lat_center <span class="sc">-</span> lat_radius</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  lat_upper <span class="ot">&lt;-</span> lat_center <span class="sc">+</span> lat_radius</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  coords <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(lon_lower, lon_lower, lon_upper, lon_upper),</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> <span class="fu">c</span>(lat_lower, lat_upper, lat_lower, lat_upper))</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  coords_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(coords, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Using geodata</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  elev <span class="ot">&lt;-</span> geodata<span class="sc">::</span><span class="fu">elevation_3s</span>(<span class="at">lon =</span> lon_center, <span class="at">lat =</span> lat_center, <span class="at">res=</span><span class="fl">2.5</span>, <span class="at">path =</span> <span class="fu">getwd</span>())</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  elev <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(elev, coords_sf)</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(elev)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>compute_hillshade <span class="ot">&lt;-</span> <span class="cf">function</span>(elev) {</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate hillshade</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  slopes <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">terrain</span>(elev, <span class="st">"slope"</span>, <span class="at">unit =</span> <span class="st">"radians"</span>)</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  aspect <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">terrain</span>(elev, <span class="st">"aspect"</span>, <span class="at">unit =</span> <span class="st">"radians"</span>)</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>  hs <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">shade</span>(slopes, aspect)</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(hs)</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>plot_hillshade <span class="ot">&lt;-</span> <span class="cf">function</span>(elev, hs, <span class="at">title=</span><span class="cn">NULL</span>) {</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Plot hillshading as basemap</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (here using terra::plot, but could use tmap)</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># lat_upper_trimmed &lt;- lat_upper - 0.001*lat_upper</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># lat_lower_trimmed &lt;- lat_lower - 0.001*lat_lower</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>  base_plot <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">plot</span>(</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    hs, <span class="at">col =</span> <span class="fu">gray</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span> <span class="sc">/</span> <span class="dv">100</span>), <span class="at">legend =</span> <span class="cn">FALSE</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">grid=</span><span class="cn">TRUE</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>  <span class="co">#    xlim = c(elev_xmin, elev_xmax), ylim = c(elev_ymin, elev_ymax))</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># overlay with elevation</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>  color_vec <span class="ot">&lt;-</span> <span class="fu">terrain.colors</span>(<span class="dv">25</span>)</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(elev, <span class="at">col =</span> color_vec, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add contour lines</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>  terra<span class="sc">::</span><span class="fu">contour</span>(elev, <span class="at">col =</span> <span class="st">"grey30"</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(title)) {</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>    world_name <span class="ot">&lt;-</span> <span class="fu">TeX</span>(<span class="fu">sprintf</span>(r<span class="st">"(World $\omega_{%d} \in \Omega$)"</span>, world_num))</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">title</span>(world_name)</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>elev_r1 <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6810</span>)</span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>hs_r1 <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(elev_r1)</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_hillshade</span>(elev_r1, hs_r1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/geostat-to-point-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>elev_indic_r1 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">ifel</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  elev_r1 <span class="sc">&gt;</span> <span class="dv">860</span>, elev_r1, <span class="cn">NA</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elev_indic_r1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/after-indicator-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>elev_r2 <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6815</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>hs_r2 <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(elev_r2)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_hillshade</span>(elev_r2, hs_r2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/before-indicator-r2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>my_quant <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">quantile</span>(x, <span class="fl">0.99</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>elev_99 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">global</span>(elev_r2, my_quant)[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>elev_indic_r2 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">ifel</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  elev_r2 <span class="sc">&gt;</span> elev_99, elev_r2, <span class="cn">NA</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elev_indic_r2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/after-indicator-r2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="geospatial-data-rightarrow-latticeregion-data" class="level2 crunch-title crunch-quarto-layout-cell">
+<h2 class="crunch-title crunch-quarto-layout-cell anchored" data-anchor-id="geospatial-data-rightarrow-latticeregion-data">Geospatial Data <span class="math inline">\(\rightarrow\)</span> Lattice/Region Data</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>table_elev <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6805</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>table_hs <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(table_elev)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#plot_hillshade(table_elev, table_hs)</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#par(mfrow=c(1,2), mar=c(0,0,1,1))</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(table_elev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/table-to-lattice-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>(Pretend this is infinite-resolution) Infinite number of neighbors around each point!</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>elev_coarse <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">aggregate</span>(table_elev, <span class="dv">12</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elev_coarse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/coarsened-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Finite number of neighbors around each observation <span class="math inline">\(\implies\)</span> Can study correlations between <em>neighboring</em> cells!</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="doing-things-with-nbdep" class="level1" data-stack-name="Autocorrelation">
 <h1 data-stack-name="Autocorrelation">Doing Things with <code>nbdep</code></h1>
@@ -491,20 +763,38 @@ Figure&nbsp;4: <span class="math inline">\(\omega_4 \in \Omega\)</span>
 <section id="who-are-my-neighbors" class="level2">
 <h2 class="anchored" data-anchor-id="who-are-my-neighbors">Who Are My Neighbors?</h2>
 <ul>
-<li>Contiguity-Based:
-<ul>
-<li>Queen Definition</li>
-<li>Rook Definition</li>
-</ul></li>
-<li>Distance-Based</li>
-<li><span class="math inline">\(K\)</span>-Nearest Neighbors</li>
+<li><p>Contiguity-Based:</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><img src="images/queen.png" class="img-fluid"></td>
+<td><img src="images/rook.png" class="img-fluid"></td>
+</tr>
+</tbody>
+</table></li>
+<li><p>Distance-Based</p></li>
+<li><p><span class="math inline">\(K\)</span>-Nearest Neighbors</p></li>
 </ul>
+</section>
+<section id="distance-based-neighbors" class="level2">
+<h2 class="anchored" data-anchor-id="distance-based-neighbors">Distance-Based Neighbors</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/dist-based.jpeg" class="img-fluid figure-img"></p>
+<figcaption>From <span class="citation" data-cites="xie_analyzing_2023">Xie (<a href="#ref-xie_analyzing_2023" role="doc-biblioref">2023</a>)</span></figcaption>
+</figure>
+</div>
 </section>
 <section id="spatial-autocorrelation" class="level2">
 <h2 class="anchored" data-anchor-id="spatial-autocorrelation">Spatial Autocorrelation</h2>
 <ul>
 <li>Location <span class="math inline">\(i\)</span> has high value <span class="math inline">\(\implies\)</span> locations <strong>near</strong> <span class="math inline">\(i\)</span> more likely to have high values</li>
 </ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/autocorr.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
 </section>
 <section id="morans-i" class="level2">
 <h2 class="anchored" data-anchor-id="morans-i">Moran’s <span class="math inline">\(I\)</span></h2>
@@ -533,11 +823,36 @@ I =
 I_i = \frac{y_i - \overline{y}}{S_i^2}\sum_{j=1}^{n}w_{ij}(y_j - \overline{y})
 \]</span></p>
 </section>
+</section>
+<section id="our-null-hypothesis-complete-spatial-randomness-csr" class="level1" data-stack-name="Spatial Randomness">
+<h1 data-stack-name="Spatial Randomness">Our Null Hypothesis: Complete Spatial Randomness (CSR)</h1>
+<section id="leaving-you-with-a-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="leaving-you-with-a-challenge">Leaving You With a Challenge</h2>
+<ul>
+<li>These point patterns can be <strong>classified</strong> as clustered or regular:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/simple_clust.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="transform: rotate(90deg);"></p>
+</figure>
+</div>
+</section>
+<section id="leaving-you-with-a-challenge-1" class="level2">
+<h2 class="anchored" data-anchor-id="leaving-you-with-a-challenge-1">Leaving You With a Challenge</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clusters.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-schabenberger_statistical_2004" class="csl-entry" role="listitem">
 Schabenberger, Oliver, and Carol A. Gotway. 2004. <em>Statistical <span>Methods</span> for <span>Spatial Data Analysis</span></em>. CRC Press.
+</div>
+<div id="ref-xie_analyzing_2023" class="csl-entry" role="listitem">
+Xie, Sherrie. 2023. <span>“Analyzing <span>Geospatial Data</span> in <span>R</span>.”</span>
 </div>
 </div>
 

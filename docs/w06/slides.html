@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     /* CSS for citations */
     div.csl-bib-body { }
     div.csl-entry {
@@ -390,9 +455,9 @@ Jeff Jacobs
 </div>
 <table data-quarto-postprocess="true">
 <colgroup>
-<col style="width: 10%">
+<col style="width: 9%">
 <col style="width: 30%">
-<col style="width: 30%">
+<col style="width: 31%">
 <col style="width: 30%">
 </colgroup>
 <thead>
@@ -400,7 +465,7 @@ Jeff Jacobs
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">Geostatistical Data</th>
 <th data-quarto-table-cell-role="th">Lattice/Region Data</th>
-<th data-quarto-table-cell-role="th">Point Process</th>
+<th data-quarto-table-cell-role="th">Point Pattern</th>
 </tr>
 </thead>
 <tbody>
@@ -408,11 +473,11 @@ Jeff Jacobs
 <td><strong>Criteria</strong></td>
 <td>Fixed <span class="math inline">\(D\)</span>, Continuous</td>
 <td>Fixed <span class="math inline">\(D\)</span>, Discrete</td>
-<td><span class="math inline">\(D\)</span> Itself is Random</td>
+<td>Random subset <span class="math inline">\(D^* \subseteq D\)</span></td>
 </tr>
 <tr class="even">
 <td><strong>Interest</strong></td>
-<td>Infer non-observed parts of <span class="math inline">\(D\)</span></td>
+<td>Infer <strong>non-observed</strong> parts of <span class="math inline">\(D\)</span></td>
 <td>Autocorrelation, clustering</td>
 <td>Point-generating process</td>
 </tr>
@@ -425,20 +490,22 @@ Jeff Jacobs
 </ul></td>
 <td class="tdvt"><ul>
 <li><p><span class="math inline">\(Z(\mathbf{s})\)</span> observed over <span class="math inline">\(N \times N\)</span> grid of <strong>plots</strong></p></li>
-<li><p><span class="math inline">\(\implies\)</span> Contiguity, Neighbors (next section of slides!)</p></li>
+<li><p><span class="math inline">\(\Rightarrow\)</span> Contiguity, Neighbors (next section of slides!)</p></li>
+<li><p><span class="math inline">\(\Rightarrow\)</span> Autocorrelation: Are points <strong>around</strong> <span class="math inline">\(\mathbf{s}_i\)</span> likely to have values similar to <span class="math inline">\(Z(\mathbf{s}_i)\)</span>?</p></li>
 </ul></td>
 <td class="tdvt"><ul>
-<li><p>Data on unknown number of lightning strikes <span class="math inline">\(\mathbf{s}_1, \mathbf{s}_2, \ldots\)</span></p></li>
-<li><p>“Unmarked”: Just locations</p></li>
-<li><p>“Marked”: Locations+info (e.g., intensity of strike)</p></li>
+<li>Unknown number of lightning strikes <span class="math inline">\(\mathbf{s}_1, \mathbf{s}_2, \ldots\)</span></li>
+<li>Contrast with geostatistical: all of <span class="math inline">\(D\)</span> is observed, but what determines the subset <span class="math inline">\(D^*\)</span> where <strong>events</strong> occur?</li>
+<li>“Unmarked”: Just locations</li>
+<li>“Marked”: Locations+info (e.g., intensity of strike)</li>
 </ul></td>
 </tr>
 </tbody>
 </table>
 <!-- * Note the **lack of subscript** on $Z$! Important, not a typo! -->
 </section>
-<section id="geospatial-data-dumping-sand-onto-a-table" class="slide level2 smaller crunch-title crunch-ul crunch-quarto-figure crunch-img crunch-figcaption crunch-quarto-layout-cell crunch-quarto-layout-panel title-11">
-<h2>Geospatial Data: Dumping Sand onto a Table</h2>
+<section id="geostatistical-data-dumping-sand-onto-a-table" class="slide level2 smaller crunch-title crunch-ul crunch-quarto-figure crunch-img crunch-figcaption crunch-quarto-layout-cell crunch-quarto-layout-panel title-11">
+<h2>Geostatistical Data: Dumping Sand onto a Table</h2>
 <ul>
 <li>Domain <span class="math inline">\(D\)</span>: <strong>tabletop</strong>; Random process: <strong>dumping sand</strong> onto the tabletop</li>
 <li><span class="math inline">\(\Omega\)</span>: All possible realizations of process. <span class="math inline">\(\omega_i \in \Omega\)</span> Particular realization</li>
@@ -500,6 +567,193 @@ Figure&nbsp;4: <span class="math inline">\(\omega_4 \in \Omega\)</span>
 </div>
 </div>
 </div>
+</section>
+<section id="geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes" class="slide level2 smaller crunch-title title-12">
+<h2>Geostatistical <em>Modeling</em>: Terrains Are <em>Not</em> Spiky Chaotic Landscapes!</h2>
+
+<img data-src="images/w2_missing.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="geostatistical-data-rightarrow-point-pattern" class="slide level2 crunch-title crunch-ul smaller crunch-quarto-layout-panel crunch-img crunch-quarto-figure">
+<h2>Geostatistical Data <span class="math inline">\(\rightarrow\)</span> Point Pattern</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>Indicator function</strong>: <span class="math inline">\(\mathbb{1}\left[Z(\mathbf{s}) &gt; 860\text{m}\right]\)</span></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-4"><a></a><span class="fu">library</span>(terra)</span>
+<span id="cb1-5"><a></a><span class="fu">library</span>(latex2exp)</span>
+<span id="cb1-6"><a></a><span class="do">#### Define area</span></span>
+<span id="cb1-7"><a></a>lat_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">5.0</span>, <span class="sc">-</span><span class="fl">6.0</span>)</span>
+<span id="cb1-8"><a></a>lon_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>)</span>
+<span id="cb1-9"><a></a><span class="co">#lon_center &lt;- -5.4</span></span>
+<span id="cb1-10"><a></a><span class="co">#lat_center &lt;- 36.75</span></span>
+<span id="cb1-11"><a></a><span class="co"># And the window around this centroid</span></span>
+<span id="cb1-12"><a></a>lat_radius <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb1-13"><a></a>lon_radius <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb1-14"><a></a></span>
+<span id="cb1-15"><a></a>gen_random_table <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">world_num=</span><span class="dv">1</span>, <span class="at">return_data=</span><span class="cn">FALSE</span>, <span class="at">rand_seed=</span><span class="cn">NULL</span>) {</span>
+<span id="cb1-16"><a></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(rand_seed)) {</span>
+<span id="cb1-17"><a></a>    <span class="fu">set.seed</span>(rand_seed)</span>
+<span id="cb1-18"><a></a>  } <span class="cf">else</span> {</span>
+<span id="cb1-19"><a></a>    rand_seed <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9999</span>, <span class="at">size=</span><span class="dv">1</span>)</span>
+<span id="cb1-20"><a></a>    <span class="fu">set.seed</span>(rand_seed)</span>
+<span id="cb1-21"><a></a>  }</span>
+<span id="cb1-22"><a></a>  lat_center <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="fu">min</span>(lat_range), <span class="at">max=</span><span class="fu">max</span>(lat_range))</span>
+<span id="cb1-23"><a></a>  lon_center <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="fu">min</span>(lon_range), <span class="at">max=</span><span class="fu">max</span>(lon_range))</span>
+<span id="cb1-24"><a></a>  lon_lower <span class="ot">&lt;-</span> lon_center <span class="sc">-</span> lon_radius</span>
+<span id="cb1-25"><a></a>  lon_upper <span class="ot">&lt;-</span> lon_center <span class="sc">+</span> lon_radius</span>
+<span id="cb1-26"><a></a>  lat_lower <span class="ot">&lt;-</span> lat_center <span class="sc">-</span> lat_radius</span>
+<span id="cb1-27"><a></a>  lat_upper <span class="ot">&lt;-</span> lat_center <span class="sc">+</span> lat_radius</span>
+<span id="cb1-28"><a></a>  coords <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(lon_lower, lon_lower, lon_upper, lon_upper),</span>
+<span id="cb1-29"><a></a>                       <span class="at">y =</span> <span class="fu">c</span>(lat_lower, lat_upper, lat_lower, lat_upper))</span>
+<span id="cb1-30"><a></a>  coords_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(coords, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb1-31"><a></a>  <span class="co"># Using geodata</span></span>
+<span id="cb1-32"><a></a>  elev <span class="ot">&lt;-</span> geodata<span class="sc">::</span><span class="fu">elevation_3s</span>(<span class="at">lon =</span> lon_center, <span class="at">lat =</span> lat_center, <span class="at">res=</span><span class="fl">2.5</span>, <span class="at">path =</span> <span class="fu">getwd</span>())</span>
+<span id="cb1-33"><a></a>  elev <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(elev, coords_sf)</span>
+<span id="cb1-34"><a></a>  <span class="fu">return</span>(elev)</span>
+<span id="cb1-35"><a></a>}</span>
+<span id="cb1-36"><a></a></span>
+<span id="cb1-37"><a></a>compute_hillshade <span class="ot">&lt;-</span> <span class="cf">function</span>(elev) {</span>
+<span id="cb1-38"><a></a>  <span class="co"># Calculate hillshade</span></span>
+<span id="cb1-39"><a></a>  slopes <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">terrain</span>(elev, <span class="st">"slope"</span>, <span class="at">unit =</span> <span class="st">"radians"</span>)</span>
+<span id="cb1-40"><a></a>  aspect <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">terrain</span>(elev, <span class="st">"aspect"</span>, <span class="at">unit =</span> <span class="st">"radians"</span>)</span>
+<span id="cb1-41"><a></a>  hs <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">shade</span>(slopes, aspect)</span>
+<span id="cb1-42"><a></a>  <span class="fu">return</span>(hs)</span>
+<span id="cb1-43"><a></a>}</span>
+<span id="cb1-44"><a></a></span>
+<span id="cb1-45"><a></a>plot_hillshade <span class="ot">&lt;-</span> <span class="cf">function</span>(elev, hs, <span class="at">title=</span><span class="cn">NULL</span>) {</span>
+<span id="cb1-46"><a></a>  <span class="do">## Plot hillshading as basemap</span></span>
+<span id="cb1-47"><a></a>  <span class="co"># (here using terra::plot, but could use tmap)</span></span>
+<span id="cb1-48"><a></a>  <span class="co"># lat_upper_trimmed &lt;- lat_upper - 0.001*lat_upper</span></span>
+<span id="cb1-49"><a></a>  <span class="co"># lat_lower_trimmed &lt;- lat_lower - 0.001*lat_lower</span></span>
+<span id="cb1-50"><a></a>  base_plot <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">plot</span>(</span>
+<span id="cb1-51"><a></a>    hs, <span class="at">col =</span> <span class="fu">gray</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span> <span class="sc">/</span> <span class="dv">100</span>), <span class="at">legend =</span> <span class="cn">FALSE</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">grid=</span><span class="cn">TRUE</span></span>
+<span id="cb1-52"><a></a>  )</span>
+<span id="cb1-53"><a></a>  <span class="co">#    xlim = c(elev_xmin, elev_xmax), ylim = c(elev_ymin, elev_ymax))</span></span>
+<span id="cb1-54"><a></a>  <span class="co"># overlay with elevation</span></span>
+<span id="cb1-55"><a></a>  </span>
+<span id="cb1-56"><a></a>  color_vec <span class="ot">&lt;-</span> <span class="fu">terrain.colors</span>(<span class="dv">25</span>)</span>
+<span id="cb1-57"><a></a>  <span class="fu">plot</span>(elev, <span class="at">col =</span> color_vec, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-58"><a></a>  </span>
+<span id="cb1-59"><a></a>  <span class="co"># add contour lines</span></span>
+<span id="cb1-60"><a></a>  terra<span class="sc">::</span><span class="fu">contour</span>(elev, <span class="at">col =</span> <span class="st">"grey30"</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-61"><a></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(title)) {</span>
+<span id="cb1-62"><a></a>    world_name <span class="ot">&lt;-</span> <span class="fu">TeX</span>(<span class="fu">sprintf</span>(r<span class="st">"(World $\omega_{%d} \in \Omega$)"</span>, world_num))</span>
+<span id="cb1-63"><a></a>    <span class="fu">title</span>(world_name)</span>
+<span id="cb1-64"><a></a>  }</span>
+<span id="cb1-65"><a></a>}</span>
+<span id="cb1-66"><a></a>elev_r1 <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6810</span>)</span>
+<span id="cb1-67"><a></a>hs_r1 <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(elev_r1)</span>
+<span id="cb1-68"><a></a><span class="fu">plot_hillshade</span>(elev_r1, hs_r1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/geostat-to-point-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>elev_indic_r1 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">ifel</span>(</span>
+<span id="cb2-2"><a></a>  elev_r1 <span class="sc">&gt;</span> <span class="dv">860</span>, elev_r1, <span class="cn">NA</span></span>
+<span id="cb2-3"><a></a>)</span>
+<span id="cb2-4"><a></a><span class="fu">plot</span>(elev_indic_r1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/after-indicator-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>elev_r2 <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6815</span>)</span>
+<span id="cb3-2"><a></a>hs_r2 <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(elev_r2)</span>
+<span id="cb3-3"><a></a><span class="fu">plot_hillshade</span>(elev_r2, hs_r2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/before-indicator-r2-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>my_quant <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">quantile</span>(x, <span class="fl">0.99</span>)</span>
+<span id="cb4-2"><a></a>elev_99 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">global</span>(elev_r2, my_quant)[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb4-3"><a></a>elev_indic_r2 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">ifel</span>(</span>
+<span id="cb4-4"><a></a>  elev_r2 <span class="sc">&gt;</span> elev_99, elev_r2, <span class="cn">NA</span></span>
+<span id="cb4-5"><a></a>)</span>
+<span id="cb4-6"><a></a><span class="fu">plot</span>(elev_indic_r2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/after-indicator-r2-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="geospatial-data-rightarrow-latticeregion-data" class="slide level2 crunch-title crunch-quarto-layout-cell">
+<h2>Geospatial Data <span class="math inline">\(\rightarrow\)</span> Lattice/Region Data</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>table_elev <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6805</span>)</span>
+<span id="cb5-2"><a></a>table_hs <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(table_elev)</span>
+<span id="cb5-3"><a></a><span class="co">#plot_hillshade(table_elev, table_hs)</span></span>
+<span id="cb5-4"><a></a><span class="co">#par(mfrow=c(1,2), mar=c(0,0,1,1))</span></span>
+<span id="cb5-5"><a></a><span class="fu">plot</span>(table_elev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/table-to-lattice-1.png" width="960"></p>
+<figcaption>(Pretend this is infinite-resolution) Infinite number of neighbors around each point!</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>elev_coarse <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">aggregate</span>(table_elev, <span class="dv">12</span>)</span>
+<span id="cb6-2"><a></a><span class="fu">plot</span>(elev_coarse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/coarsened-1.png" width="960"></p>
+<figcaption>Finite number of neighbors around each observation <span class="math inline">\(\implies\)</span> Can study correlations between <em>neighboring</em> cells!</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
 </section></section>
 <section>
 <section id="doing-things-with-nbdep" class="title-slide slide level1 center" data-stack-name="Autocorrelation">
@@ -512,21 +766,30 @@ Figure&nbsp;4: <span class="math inline">\(\omega_4 \in \Omega\)</span>
 <section id="who-are-my-neighbors" class="slide level2">
 <h2>Who Are My Neighbors?</h2>
 <ul>
-<li>Contiguity-Based:
-<ul>
-<li>Queen Definition</li>
-<li>Rook Definition</li>
-</ul></li>
-<li>Distance-Based</li>
-<li><span class="math inline">\(K\)</span>-Nearest Neighbors</li>
+<li><p>Contiguity-Based:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><img data-src="images/queen.png"></td>
+<td><img data-src="images/rook.png"></td>
+</tr>
+</tbody>
+</table></li>
+<li><p>Distance-Based</p></li>
+<li><p><span class="math inline">\(K\)</span>-Nearest Neighbors</p></li>
 </ul>
 </section>
+<section id="distance-based-neighbors" class="slide level2">
+<h2>Distance-Based Neighbors</h2>
+
+<img data-src="images/dist-based.jpeg" class="r-stretch quarto-figure-center"><p class="caption">From <span class="citation" data-cites="xie_analyzing_2023">Xie (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span></p></section>
 <section id="spatial-autocorrelation" class="slide level2">
 <h2>Spatial Autocorrelation</h2>
 <ul>
 <li>Location <span class="math inline">\(i\)</span> has high value <span class="math inline">\(\implies\)</span> locations <strong>near</strong> <span class="math inline">\(i\)</span> more likely to have high values</li>
 </ul>
-</section>
+
+<img data-src="images/autocorr.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="morans-i" class="slide level2">
 <h2>Moran’s <span class="math inline">\(I\)</span></h2>
 <p><span class="math display">\[
@@ -553,12 +816,31 @@ I =
 <p><span class="math display">\[
 I_i = \frac{y_i - \overline{y}}{S_i^2}\sum_{j=1}^{n}w_{ij}(y_j - \overline{y})
 \]</span></p>
+</section></section>
+<section>
+<section id="our-null-hypothesis-complete-spatial-randomness-csr" class="title-slide slide level1 center" data-stack-name="Spatial Randomness">
+<h1>Our Null Hypothesis: Complete Spatial Randomness (CSR)</h1>
+
 </section>
+<section id="leaving-you-with-a-challenge" class="slide level2">
+<h2>Leaving You With a Challenge</h2>
+<ul>
+<li>These point patterns can be <strong>classified</strong> as clustered or regular:</li>
+</ul>
+
+<img data-src="images/simple_clust.svg" class="quarto-figure quarto-figure-center r-stretch" style="transform: rotate(90deg);"></section>
+<section id="leaving-you-with-a-challenge-1" class="slide level2">
+<h2>Leaving You With a Challenge</h2>
+
+<img data-src="images/clusters.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-schabenberger_statistical_2004" class="csl-entry" role="listitem">
 Schabenberger, Oliver, and Carol A. Gotway. 2004. <em>Statistical <span>Methods</span> for <span>Spatial Data Analysis</span></em>. CRC Press.
+</div>
+<div id="ref-xie_analyzing_2023" class="csl-entry" role="listitem">
+Xie, Sherrie. 2023. <span>“Analyzing <span>Geospatial Data</span> in <span>R</span>.”</span>
 </div>
 </div>
 
@@ -780,6 +1062,44 @@ Schabenberger, Oliver, and Carol A. Gotway. 2004. <em>Statistical <span>Methods<
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

@@ -54,21 +54,49 @@
     "href": "w06/slides.html#key-notation-definition",
     "title": "Week 6: Random Fields and Spatial Autocorrelation",
     "section": "Key Notation / Definition",
-    "text": "Key Notation / Definition\n\n\n\\(d\\)-Dimensional “Spatial Process” (Schabenberger and Gotway 2004, 6)\n\n\\[\n\\text{Data} = \\left\\{Z(\\mathbf{s}) \\mid \\mathbf{s} \\in D \\subset \\mathbb{R}^d\\right\\}\n\\]\n\n\\(d &gt; 1\\): Data forms a Random Field (this class: \\(d = 2\\)!)\n\n\n\n\n\n\n\n\n\n\n\n\nGeostatistical Data\nLattice/Region Data\nPoint Process\n\n\n\n\nCriteria\nFixed \\(D\\), Continuous\nFixed \\(D\\), Discrete\n\\(D\\) Itself is Random\n\n\nInterest\nInfer non-observed parts of \\(D\\)\nAutocorrelation, clustering\nPoint-generating process\n\n\nExample\n\n\\(N\\) trees \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots, \\mathbf{s}_N\\), observed within a sample window \\(D \\subset \\mathbb{R}^2\\), (\\(D\\) some finite plot of land)\n\\(Z(\\mathbf{s}_i)\\): Attribute(s) at site \\(\\mathbf{s}_i\\)\nExample: Height. \\(Z(\\mathbf{s}_1) = 500\\text{m}\\), \\(Z(\\mathbf{s}_2) = 850\\text{m}\\), \\(\\ldots\\)\n\n\n\\(Z(\\mathbf{s})\\) observed over \\(N \\times N\\) grid of plots\n\\(\\implies\\) Contiguity, Neighbors (next section of slides!)\n\n\nData on unknown number of lightning strikes \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots\\)\n“Unmarked”: Just locations\n“Marked”: Locations+info (e.g., intensity of strike)"
+    "text": "Key Notation / Definition\n\n\n\\(d\\)-Dimensional “Spatial Process” (Schabenberger and Gotway 2004, 6)\n\n\\[\n\\text{Data} = \\left\\{Z(\\mathbf{s}) \\mid \\mathbf{s} \\in D \\subset \\mathbb{R}^d\\right\\}\n\\]\n\n\\(d &gt; 1\\): Data forms a Random Field (this class: \\(d = 2\\)!)\n\n\n\n\n\n\n\n\n\n\n\n\nGeostatistical Data\nLattice/Region Data\nPoint Pattern\n\n\n\n\nCriteria\nFixed \\(D\\), Continuous\nFixed \\(D\\), Discrete\nRandom subset \\(D^* \\subseteq D\\)\n\n\nInterest\nInfer non-observed parts of \\(D\\)\nAutocorrelation, clustering\nPoint-generating process\n\n\nExample\n\n\\(N\\) trees \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots, \\mathbf{s}_N\\), observed within a sample window \\(D \\subset \\mathbb{R}^2\\), (\\(D\\) some finite plot of land)\n\\(Z(\\mathbf{s}_i)\\): Attribute(s) at site \\(\\mathbf{s}_i\\)\nExample: Height. \\(Z(\\mathbf{s}_1) = 500\\text{m}\\), \\(Z(\\mathbf{s}_2) = 850\\text{m}\\), \\(\\ldots\\)\n\n\n\\(Z(\\mathbf{s})\\) observed over \\(N \\times N\\) grid of plots\n\\(\\Rightarrow\\) Contiguity, Neighbors (next section of slides!)\n\\(\\Rightarrow\\) Autocorrelation: Are points around \\(\\mathbf{s}_i\\) likely to have values similar to \\(Z(\\mathbf{s}_i)\\)?\n\n\nUnknown number of lightning strikes \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots\\)\nContrast with geostatistical: all of \\(D\\) is observed, but what determines the subset \\(D^*\\) where events occur?\n“Unmarked”: Just locations\n“Marked”: Locations+info (e.g., intensity of strike)"
   },
   {
-    "objectID": "w06/slides.html#geospatial-data-dumping-sand-onto-a-table",
-    "href": "w06/slides.html#geospatial-data-dumping-sand-onto-a-table",
+    "objectID": "w06/slides.html#geostatistical-data-dumping-sand-onto-a-table",
+    "href": "w06/slides.html#geostatistical-data-dumping-sand-onto-a-table",
     "title": "Week 6: Random Fields and Spatial Autocorrelation",
-    "section": "Geospatial Data: Dumping Sand onto a Table",
-    "text": "Geospatial Data: Dumping Sand onto a Table\n\nDomain \\(D\\): tabletop; Random process: dumping sand onto the tabletop\n\\(\\Omega\\): All possible realizations of process. \\(\\omega_i \\in \\Omega\\) Particular realization\n\n\n\n\n\n\n\n\n\n\nFigure 1: \\(\\omega_1 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: \\(\\omega_2 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: \\(\\omega_3 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: \\(\\omega_4 \\in \\Omega\\)"
+    "section": "Geostatistical Data: Dumping Sand onto a Table",
+    "text": "Geostatistical Data: Dumping Sand onto a Table\n\nDomain \\(D\\): tabletop; Random process: dumping sand onto the tabletop\n\\(\\Omega\\): All possible realizations of process. \\(\\omega_i \\in \\Omega\\) Particular realization\n\n\n\n\n\n\n\n\n\n\nFigure 1: \\(\\omega_1 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: \\(\\omega_2 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: \\(\\omega_3 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: \\(\\omega_4 \\in \\Omega\\)"
+  },
+  {
+    "objectID": "w06/slides.html#geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes",
+    "href": "w06/slides.html#geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes",
+    "title": "Week 6: Random Fields and Spatial Autocorrelation",
+    "section": "Geostatistical Modeling: Terrains Are Not Spiky Chaotic Landscapes!",
+    "text": "Geostatistical Modeling: Terrains Are Not Spiky Chaotic Landscapes!"
+  },
+  {
+    "objectID": "w06/slides.html#geostatistical-data-rightarrow-point-pattern",
+    "href": "w06/slides.html#geostatistical-data-rightarrow-point-pattern",
+    "title": "Week 6: Random Fields and Spatial Autocorrelation",
+    "section": "Geostatistical Data \\(\\rightarrow\\) Point Pattern",
+    "text": "Geostatistical Data \\(\\rightarrow\\) Point Pattern\n\n\n\nIndicator function: \\(\\mathbb{1}\\left[Z(\\mathbf{s}) &gt; 860\\text{m}\\right]\\)\n\n\n\nCode\nset.seed(6805)\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(terra)\nlibrary(latex2exp)\n#### Define area\nlat_range &lt;- c(-5.0, -6.0)\nlon_range &lt;- c(15, 20)\n#lon_center &lt;- -5.4\n#lat_center &lt;- 36.75\n# And the window around this centroid\nlat_radius &lt;- 0.05\nlon_radius &lt;- 0.1\n\ngen_random_table &lt;- function(world_num=1, return_data=FALSE, rand_seed=NULL) {\n  if (!is.null(rand_seed)) {\n    set.seed(rand_seed)\n  } else {\n    rand_seed &lt;- sample(1:9999, size=1)\n    set.seed(rand_seed)\n  }\n  lat_center &lt;- runif(1, min=min(lat_range), max=max(lat_range))\n  lon_center &lt;- runif(1, min=min(lon_range), max=max(lon_range))\n  lon_lower &lt;- lon_center - lon_radius\n  lon_upper &lt;- lon_center + lon_radius\n  lat_lower &lt;- lat_center - lat_radius\n  lat_upper &lt;- lat_center + lat_radius\n  coords &lt;- data.frame(x = c(lon_lower, lon_lower, lon_upper, lon_upper),\n                       y = c(lat_lower, lat_upper, lat_lower, lat_upper))\n  coords_sf &lt;- st_as_sf(coords, coords = c(\"x\", \"y\"), crs = 4326)\n  # Using geodata\n  elev &lt;- geodata::elevation_3s(lon = lon_center, lat = lat_center, res=2.5, path = getwd())\n  elev &lt;- terra::crop(elev, coords_sf)\n  return(elev)\n}\n\ncompute_hillshade &lt;- function(elev) {\n  # Calculate hillshade\n  slopes &lt;- terra::terrain(elev, \"slope\", unit = \"radians\")\n  aspect &lt;- terra::terrain(elev, \"aspect\", unit = \"radians\")\n  hs &lt;- terra::shade(slopes, aspect)\n  return(hs)\n}\n\nplot_hillshade &lt;- function(elev, hs, title=NULL) {\n  ## Plot hillshading as basemap\n  # (here using terra::plot, but could use tmap)\n  # lat_upper_trimmed &lt;- lat_upper - 0.001*lat_upper\n  # lat_lower_trimmed &lt;- lat_lower - 0.001*lat_lower\n  base_plot &lt;- terra::plot(\n    hs, col = gray(0:100 / 100), legend = FALSE, axes = FALSE, mar=c(0,0,1,0), grid=TRUE\n  )\n  #    xlim = c(elev_xmin, elev_xmax), ylim = c(elev_ymin, elev_ymax))\n  # overlay with elevation\n  \n  color_vec &lt;- terrain.colors(25)\n  plot(elev, col = color_vec, alpha = 0.5, legend = FALSE, axes = FALSE, add = TRUE)\n  \n  # add contour lines\n  terra::contour(elev, col = \"grey30\", add = TRUE)\n  if (!is.null(title)) {\n    world_name &lt;- TeX(sprintf(r\"(World $\\omega_{%d} \\in \\Omega$)\", world_num))\n    title(world_name)\n  }\n}\nelev_r1 &lt;- gen_random_table(rand_seed=6810)\nhs_r1 &lt;- compute_hillshade(elev_r1)\nplot_hillshade(elev_r1, hs_r1)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nelev_indic_r1 &lt;- terra::ifel(\n  elev_r1 &gt; 860, elev_r1, NA\n)\nplot(elev_indic_r1)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nelev_r2 &lt;- gen_random_table(rand_seed=6815)\nhs_r2 &lt;- compute_hillshade(elev_r2)\nplot_hillshade(elev_r2, hs_r2)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nmy_quant &lt;- function(x) quantile(x, 0.99)\nelev_99 &lt;- terra::global(elev_r2, my_quant)[1,1]\nelev_indic_r2 &lt;- terra::ifel(\n  elev_r2 &gt; elev_99, elev_r2, NA\n)\nplot(elev_indic_r2)"
+  },
+  {
+    "objectID": "w06/slides.html#geospatial-data-rightarrow-latticeregion-data",
+    "href": "w06/slides.html#geospatial-data-rightarrow-latticeregion-data",
+    "title": "Week 6: Random Fields and Spatial Autocorrelation",
+    "section": "Geospatial Data \\(\\rightarrow\\) Lattice/Region Data",
+    "text": "Geospatial Data \\(\\rightarrow\\) Lattice/Region Data\n\n\n\n\nCode\ntable_elev &lt;- gen_random_table(rand_seed=6805)\ntable_hs &lt;- compute_hillshade(table_elev)\n#plot_hillshade(table_elev, table_hs)\n#par(mfrow=c(1,2), mar=c(0,0,1,1))\nplot(table_elev)\n\n\n\n\n\n(Pretend this is infinite-resolution) Infinite number of neighbors around each point!\n\n\n\n\n\n\n\nCode\nelev_coarse &lt;- terra::aggregate(table_elev, 12)\nplot(elev_coarse)\n\n\n\n\n\nFinite number of neighbors around each observation \\(\\implies\\) Can study correlations between neighboring cells!"
   },
   {
     "objectID": "w06/slides.html#who-are-my-neighbors",
     "href": "w06/slides.html#who-are-my-neighbors",
     "title": "Week 6: Random Fields and Spatial Autocorrelation",
     "section": "Who Are My Neighbors?",
-    "text": "Who Are My Neighbors?\n\nContiguity-Based:\n\nQueen Definition\nRook Definition\n\nDistance-Based\n\\(K\\)-Nearest Neighbors"
+    "text": "Who Are My Neighbors?\n\nContiguity-Based:\n\n\n\n\n\n\n\n\nDistance-Based\n\\(K\\)-Nearest Neighbors"
+  },
+  {
+    "objectID": "w06/slides.html#distance-based-neighbors",
+    "href": "w06/slides.html#distance-based-neighbors",
+    "title": "Week 6: Random Fields and Spatial Autocorrelation",
+    "section": "Distance-Based Neighbors",
+    "text": "Distance-Based Neighbors\n\nFrom Xie (2023)"
   },
   {
     "objectID": "w06/slides.html#spatial-autocorrelation",
@@ -92,11 +120,25 @@
     "text": "Local Indicators of Spatial Autocorrelation (LISA)\n\ntldr: See how much a given location \\(\\mathbf{s}\\) contributes to overall Moran’s \\(I\\)\nLocal Moran’s \\(I\\):\n\n\\[\nI_i = \\frac{y_i - \\overline{y}}{S_i^2}\\sum_{j=1}^{n}w_{ij}(y_j - \\overline{y})\n\\]"
   },
   {
+    "objectID": "w06/slides.html#leaving-you-with-a-challenge",
+    "href": "w06/slides.html#leaving-you-with-a-challenge",
+    "title": "Week 6: Random Fields and Spatial Autocorrelation",
+    "section": "Leaving You With a Challenge",
+    "text": "Leaving You With a Challenge\n\nThese point patterns can be classified as clustered or regular:"
+  },
+  {
+    "objectID": "w06/slides.html#leaving-you-with-a-challenge-1",
+    "href": "w06/slides.html#leaving-you-with-a-challenge-1",
+    "title": "Week 6: Random Fields and Spatial Autocorrelation",
+    "section": "Leaving You With a Challenge",
+    "text": "Leaving You With a Challenge"
+  },
+  {
     "objectID": "w06/slides.html#references",
     "href": "w06/slides.html#references",
     "title": "Week 6: Random Fields and Spatial Autocorrelation",
     "section": "References",
-    "text": "References\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.\n\n\n\n\n\nPPOL 6805 Week 6: Random Fields"
+    "text": "References\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.\n\n\nXie, Sherrie. 2023. “Analyzing Geospatial Data in R.”\n\n\n\n\n\nPPOL 6805 Week 6: Random Fields"
   },
   {
     "objectID": "w06/index.html",
@@ -113,17 +155,47 @@
     "href": "w06/index.html#key-notation-definition",
     "title": "Week 6: Random Fields and Spatial Autocorrelation",
     "section": "Key Notation / Definition",
-    "text": "Key Notation / Definition\n\n\n\\(d\\)-Dimensional “Spatial Process” (Schabenberger and Gotway 2004, 6)\n\n\\[\n\\text{Data} = \\left\\{Z(\\mathbf{s}) \\mid \\mathbf{s} \\in D \\subset \\mathbb{R}^d\\right\\}\n\\]\n\n\\(d &gt; 1\\): Data forms a Random Field (this class: \\(d = 2\\)!)\n\n\n\n\n\n\n\n\n\n\n\n\nGeostatistical Data\nLattice/Region Data\nPoint Process\n\n\n\n\nCriteria\nFixed \\(D\\), Continuous\nFixed \\(D\\), Discrete\n\\(D\\) Itself is Random\n\n\nInterest\nInfer non-observed parts of \\(D\\)\nAutocorrelation, clustering\nPoint-generating process\n\n\nExample\n\n\\(N\\) trees \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots, \\mathbf{s}_N\\), observed within a sample window \\(D \\subset \\mathbb{R}^2\\), (\\(D\\) some finite plot of land)\n\\(Z(\\mathbf{s}_i)\\): Attribute(s) at site \\(\\mathbf{s}_i\\)\nExample: Height. \\(Z(\\mathbf{s}_1) = 500\\text{m}\\), \\(Z(\\mathbf{s}_2) = 850\\text{m}\\), \\(\\ldots\\)\n\n\n\\(Z(\\mathbf{s})\\) observed over \\(N \\times N\\) grid of plots\n\\(\\implies\\) Contiguity, Neighbors (next section of slides!)\n\n\nData on unknown number of lightning strikes \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots\\)\n“Unmarked”: Just locations\n“Marked”: Locations+info (e.g., intensity of strike)",
+    "text": "Key Notation / Definition\n\n\n\\(d\\)-Dimensional “Spatial Process” (Schabenberger and Gotway 2004, 6)\n\n\\[\n\\text{Data} = \\left\\{Z(\\mathbf{s}) \\mid \\mathbf{s} \\in D \\subset \\mathbb{R}^d\\right\\}\n\\]\n\n\\(d &gt; 1\\): Data forms a Random Field (this class: \\(d = 2\\)!)\n\n\n\n\n\n\n\n\n\n\n\n\nGeostatistical Data\nLattice/Region Data\nPoint Pattern\n\n\n\n\nCriteria\nFixed \\(D\\), Continuous\nFixed \\(D\\), Discrete\nRandom subset \\(D^* \\subseteq D\\)\n\n\nInterest\nInfer non-observed parts of \\(D\\)\nAutocorrelation, clustering\nPoint-generating process\n\n\nExample\n\n\\(N\\) trees \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots, \\mathbf{s}_N\\), observed within a sample window \\(D \\subset \\mathbb{R}^2\\), (\\(D\\) some finite plot of land)\n\\(Z(\\mathbf{s}_i)\\): Attribute(s) at site \\(\\mathbf{s}_i\\)\nExample: Height. \\(Z(\\mathbf{s}_1) = 500\\text{m}\\), \\(Z(\\mathbf{s}_2) = 850\\text{m}\\), \\(\\ldots\\)\n\n\n\\(Z(\\mathbf{s})\\) observed over \\(N \\times N\\) grid of plots\n\\(\\Rightarrow\\) Contiguity, Neighbors (next section of slides!)\n\\(\\Rightarrow\\) Autocorrelation: Are points around \\(\\mathbf{s}_i\\) likely to have values similar to \\(Z(\\mathbf{s}_i)\\)?\n\n\nUnknown number of lightning strikes \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots\\)\nContrast with geostatistical: all of \\(D\\) is observed, but what determines the subset \\(D^*\\) where events occur?\n“Unmarked”: Just locations\n“Marked”: Locations+info (e.g., intensity of strike)",
     "crumbs": [
       "Week 6: Oct 2"
     ]
   },
   {
-    "objectID": "w06/index.html#geospatial-data-dumping-sand-onto-a-table",
-    "href": "w06/index.html#geospatial-data-dumping-sand-onto-a-table",
+    "objectID": "w06/index.html#geostatistical-data-dumping-sand-onto-a-table",
+    "href": "w06/index.html#geostatistical-data-dumping-sand-onto-a-table",
     "title": "Week 6: Random Fields and Spatial Autocorrelation",
-    "section": "Geospatial Data: Dumping Sand onto a Table",
-    "text": "Geospatial Data: Dumping Sand onto a Table\n\nDomain \\(D\\): tabletop; Random process: dumping sand onto the tabletop\n\\(\\Omega\\): All possible realizations of process. \\(\\omega_i \\in \\Omega\\) Particular realization\n\n\n\n\n\n\n\n\n\n\nFigure 1: \\(\\omega_1 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: \\(\\omega_2 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: \\(\\omega_3 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: \\(\\omega_4 \\in \\Omega\\)",
+    "section": "Geostatistical Data: Dumping Sand onto a Table",
+    "text": "Geostatistical Data: Dumping Sand onto a Table\n\nDomain \\(D\\): tabletop; Random process: dumping sand onto the tabletop\n\\(\\Omega\\): All possible realizations of process. \\(\\omega_i \\in \\Omega\\) Particular realization\n\n\n\n\n\n\n\n\n\n\nFigure 1: \\(\\omega_1 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: \\(\\omega_2 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: \\(\\omega_3 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: \\(\\omega_4 \\in \\Omega\\)",
+    "crumbs": [
+      "Week 6: Oct 2"
+    ]
+  },
+  {
+    "objectID": "w06/index.html#geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes",
+    "href": "w06/index.html#geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes",
+    "title": "Week 6: Random Fields and Spatial Autocorrelation",
+    "section": "Geostatistical Modeling: Terrains Are Not Spiky Chaotic Landscapes!",
+    "text": "Geostatistical Modeling: Terrains Are Not Spiky Chaotic Landscapes!",
+    "crumbs": [
+      "Week 6: Oct 2"
+    ]
+  },
+  {
+    "objectID": "w06/index.html#geostatistical-data-rightarrow-point-pattern",
+    "href": "w06/index.html#geostatistical-data-rightarrow-point-pattern",
+    "title": "Week 6: Random Fields and Spatial Autocorrelation",
+    "section": "Geostatistical Data \\(\\rightarrow\\) Point Pattern",
+    "text": "Geostatistical Data \\(\\rightarrow\\) Point Pattern\n\n\n\nIndicator function: \\(\\mathbb{1}\\left[Z(\\mathbf{s}) &gt; 860\\text{m}\\right]\\)\n\n\n\nCode\nset.seed(6805)\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\nlibrary(sf)\n\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\n\nCode\nlibrary(terra)\n\n\nterra 1.7.78\n\nAttaching package: 'terra'\n\nThe following object is masked from 'package:tidyr':\n\n    extract\n\n\nCode\nlibrary(latex2exp)\n#### Define area\nlat_range &lt;- c(-5.0, -6.0)\nlon_range &lt;- c(15, 20)\n#lon_center &lt;- -5.4\n#lat_center &lt;- 36.75\n# And the window around this centroid\nlat_radius &lt;- 0.05\nlon_radius &lt;- 0.1\n\ngen_random_table &lt;- function(world_num=1, return_data=FALSE, rand_seed=NULL) {\n  if (!is.null(rand_seed)) {\n    set.seed(rand_seed)\n  } else {\n    rand_seed &lt;- sample(1:9999, size=1)\n    set.seed(rand_seed)\n  }\n  lat_center &lt;- runif(1, min=min(lat_range), max=max(lat_range))\n  lon_center &lt;- runif(1, min=min(lon_range), max=max(lon_range))\n  lon_lower &lt;- lon_center - lon_radius\n  lon_upper &lt;- lon_center + lon_radius\n  lat_lower &lt;- lat_center - lat_radius\n  lat_upper &lt;- lat_center + lat_radius\n  coords &lt;- data.frame(x = c(lon_lower, lon_lower, lon_upper, lon_upper),\n                       y = c(lat_lower, lat_upper, lat_lower, lat_upper))\n  coords_sf &lt;- st_as_sf(coords, coords = c(\"x\", \"y\"), crs = 4326)\n  # Using geodata\n  elev &lt;- geodata::elevation_3s(lon = lon_center, lat = lat_center, res=2.5, path = getwd())\n  elev &lt;- terra::crop(elev, coords_sf)\n  return(elev)\n}\n\ncompute_hillshade &lt;- function(elev) {\n  # Calculate hillshade\n  slopes &lt;- terra::terrain(elev, \"slope\", unit = \"radians\")\n  aspect &lt;- terra::terrain(elev, \"aspect\", unit = \"radians\")\n  hs &lt;- terra::shade(slopes, aspect)\n  return(hs)\n}\n\nplot_hillshade &lt;- function(elev, hs, title=NULL) {\n  ## Plot hillshading as basemap\n  # (here using terra::plot, but could use tmap)\n  # lat_upper_trimmed &lt;- lat_upper - 0.001*lat_upper\n  # lat_lower_trimmed &lt;- lat_lower - 0.001*lat_lower\n  base_plot &lt;- terra::plot(\n    hs, col = gray(0:100 / 100), legend = FALSE, axes = FALSE, mar=c(0,0,1,0), grid=TRUE\n  )\n  #    xlim = c(elev_xmin, elev_xmax), ylim = c(elev_ymin, elev_ymax))\n  # overlay with elevation\n  \n  color_vec &lt;- terrain.colors(25)\n  plot(elev, col = color_vec, alpha = 0.5, legend = FALSE, axes = FALSE, add = TRUE)\n  \n  # add contour lines\n  terra::contour(elev, col = \"grey30\", add = TRUE)\n  if (!is.null(title)) {\n    world_name &lt;- TeX(sprintf(r\"(World $\\omega_{%d} \\in \\Omega$)\", world_num))\n    title(world_name)\n  }\n}\nelev_r1 &lt;- gen_random_table(rand_seed=6810)\nhs_r1 &lt;- compute_hillshade(elev_r1)\nplot_hillshade(elev_r1, hs_r1)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nelev_indic_r1 &lt;- terra::ifel(\n  elev_r1 &gt; 860, elev_r1, NA\n)\nplot(elev_indic_r1)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nelev_r2 &lt;- gen_random_table(rand_seed=6815)\nhs_r2 &lt;- compute_hillshade(elev_r2)\nplot_hillshade(elev_r2, hs_r2)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nmy_quant &lt;- function(x) quantile(x, 0.99)\nelev_99 &lt;- terra::global(elev_r2, my_quant)[1,1]\nelev_indic_r2 &lt;- terra::ifel(\n  elev_r2 &gt; elev_99, elev_r2, NA\n)\nplot(elev_indic_r2)",
+    "crumbs": [
+      "Week 6: Oct 2"
+    ]
+  },
+  {
+    "objectID": "w06/index.html#geospatial-data-rightarrow-latticeregion-data",
+    "href": "w06/index.html#geospatial-data-rightarrow-latticeregion-data",
+    "title": "Week 6: Random Fields and Spatial Autocorrelation",
+    "section": "Geospatial Data \\(\\rightarrow\\) Lattice/Region Data",
+    "text": "Geospatial Data \\(\\rightarrow\\) Lattice/Region Data\n\n\n\n\nCode\ntable_elev &lt;- gen_random_table(rand_seed=6805)\ntable_hs &lt;- compute_hillshade(table_elev)\n#plot_hillshade(table_elev, table_hs)\n#par(mfrow=c(1,2), mar=c(0,0,1,1))\nplot(table_elev)\n\n\n\n\n\n(Pretend this is infinite-resolution) Infinite number of neighbors around each point!\n\n\n\n\n\n\n\nCode\nelev_coarse &lt;- terra::aggregate(table_elev, 12)\nplot(elev_coarse)\n\n\n\n\n\nFinite number of neighbors around each observation \\(\\implies\\) Can study correlations between neighboring cells!",
     "crumbs": [
       "Week 6: Oct 2"
     ]
@@ -133,7 +205,17 @@
     "href": "w06/index.html#who-are-my-neighbors",
     "title": "Week 6: Random Fields and Spatial Autocorrelation",
     "section": "Who Are My Neighbors?",
-    "text": "Who Are My Neighbors?\n\nContiguity-Based:\n\nQueen Definition\nRook Definition\n\nDistance-Based\n\\(K\\)-Nearest Neighbors",
+    "text": "Who Are My Neighbors?\n\nContiguity-Based:\n\n\n\n\n\n\n\n\nDistance-Based\n\\(K\\)-Nearest Neighbors",
+    "crumbs": [
+      "Week 6: Oct 2"
+    ]
+  },
+  {
+    "objectID": "w06/index.html#distance-based-neighbors",
+    "href": "w06/index.html#distance-based-neighbors",
+    "title": "Week 6: Random Fields and Spatial Autocorrelation",
+    "section": "Distance-Based Neighbors",
+    "text": "Distance-Based Neighbors\n\n\n\nFrom Xie (2023)",
     "crumbs": [
       "Week 6: Oct 2"
     ]
@@ -169,11 +251,31 @@
     ]
   },
   {
+    "objectID": "w06/index.html#leaving-you-with-a-challenge",
+    "href": "w06/index.html#leaving-you-with-a-challenge",
+    "title": "Week 6: Random Fields and Spatial Autocorrelation",
+    "section": "Leaving You With a Challenge",
+    "text": "Leaving You With a Challenge\n\nThese point patterns can be classified as clustered or regular:",
+    "crumbs": [
+      "Week 6: Oct 2"
+    ]
+  },
+  {
+    "objectID": "w06/index.html#leaving-you-with-a-challenge-1",
+    "href": "w06/index.html#leaving-you-with-a-challenge-1",
+    "title": "Week 6: Random Fields and Spatial Autocorrelation",
+    "section": "Leaving You With a Challenge",
+    "text": "Leaving You With a Challenge",
+    "crumbs": [
+      "Week 6: Oct 2"
+    ]
+  },
+  {
     "objectID": "w06/index.html#references",
     "href": "w06/index.html#references",
     "title": "Week 6: Random Fields and Spatial Autocorrelation",
     "section": "References",
-    "text": "References\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.",
+    "text": "References\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.\n\n\nXie, Sherrie. 2023. “Analyzing Geospatial Data in R.”",
     "crumbs": [
       "Week 6: Oct 2"
     ]
@@ -1657,7 +1759,7 @@
     "href": "w05/index.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (17.91376 -10.65691)\n83.80673\n\n\nPOINT (24.80766 -27.68016)\n90.01560\n\n\nPOINT (0.5970117 5.793237)\n25.91638\n\n\nPOINT (35.50214 22.88776)\n28.86089\n\n\nPOINT (23.72839 -33.20152)\n74.28854\n\n\nPOINT (-8.796578 25.03099)\n66.78145\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n104\nMAR\nMorocco\nMULTIPOLYGON (((-2.219629 3…\n\n\n112\nMRT\nMauritania\nMULTIPOLYGON (((-16.37334 1…",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (26.38023 23.43983)\n35.70506\n\n\nPOINT (46.43272 -20.99383)\n60.40158\n\n\nPOINT (23.57827 -0.007758215)\n18.99287\n\n\nPOINT (13.99703 28.90452)\n58.35732\n\n\nPOINT (15.49231 -3.236287)\n63.55183\n\n\nPOINT (15.00375 -21.93284)\n67.74204\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n59\n-99\nSomaliland\nMULTIPOLYGON (((48.93857 11…\n\n\n102\nNAM\nNamibia\nMULTIPOLYGON (((23.38066 -1…\n\n\n114\nMLI\nMali\nMULTIPOLYGON (((-11.3894 12…",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -1667,7 +1769,7 @@
     "href": "w05/index.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n53\nSDN\nSudan\n59.742969\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\n90.015598\nMULTIPOLYGON (((29.36484 -2…\n\n\n57.1\nZAF\nSouth Africa\n74.288538\nMULTIPOLYGON (((29.36484 -2…\n\n\n104\nMAR\nMorocco\n8.006187\nMULTIPOLYGON (((-2.219629 3…\n\n\n112\nMRT\nMauritania\n66.781447\nMULTIPOLYGON (((-16.37334 1…\n\n\n118\nMDG\nMadagascar\n58.678512\nMULTIPOLYGON (((49.53828 -1…",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n53\nSDN\nSudan\n45.56011\nMULTIPOLYGON (((34.07812 9….\n\n\n59\n-99\nSomaliland\n62.96003\nMULTIPOLYGON (((48.93857 11…\n\n\n102\nNAM\nNamibia\n67.74204\nMULTIPOLYGON (((23.38066 -1…\n\n\n114\nMLI\nMali\n65.05712\nMULTIPOLYGON (((-11.3894 12…\n\n\n118\nMDG\nMadagascar\n60.40158\nMULTIPOLYGON (((49.53828 -1…\n\n\n123\nLBY\nLibya\n58.35732\nMULTIPOLYGON (((9.51875 30….",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -1764,14 +1866,14 @@
     "href": "w05/slides.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (15.31891 -22.34064)\n29.89222\n\n\nPOINT (31.56669 27.40982)\n35.74189\n\n\nPOINT (19.08914 -20.48023)\n35.64607\n\n\nPOINT (-7.804353 4.752463)\n71.35095\n\n\nPOINT (9.891625 23.97303)\n85.21011\n\n\nPOINT (46.49331 -24.00178)\n88.32512\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n59\n-99\nSomaliland\nMULTIPOLYGON (((48.93857 11…\n\n\n102\nNAM\nNamibia\nMULTIPOLYGON (((23.38066 -1…"
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-7.157584 4.974775)\n74.23983\n\n\nPOINT (15.79101 -14.92935)\n78.62954\n\n\nPOINT (20.55883 -31.90344)\n90.01280\n\n\nPOINT (23.56554 -10.68255)\n94.04780\n\n\nPOINT (11.08104 33.22248)\n68.13116\n\n\nPOINT (25.84792 15.63366)\n93.27448\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n38\nTUN\nTunisia\nMULTIPOLYGON (((11.50459 33…\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n58\nSOM\nSomalia\nMULTIPOLYGON (((41.53271 -1…"
   },
   {
     "objectID": "w05/slides.html#our-first-real-spatial-join-st_join",
     "href": "w05/slides.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n53\nSDN\nSudan\n63.11230\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\n76.38463\nMULTIPOLYGON (((29.36484 -2…\n\n\n59\n-99\nSomaliland\n63.05261\nMULTIPOLYGON (((48.93857 11…\n\n\n102\nNAM\nNamibia\n29.89222\nMULTIPOLYGON (((23.38066 -1…\n\n\n102.1\nNAM\nNamibia\n35.64607\nMULTIPOLYGON (((23.38066 -1…\n\n\n118\nMDG\nMadagascar\n88.32512\nMULTIPOLYGON (((49.53828 -1…"
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n38\nTUN\nTunisia\n68.13116\nMULTIPOLYGON (((11.50459 33…\n\n\n53\nSDN\nSudan\n93.27448\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\n90.01280\nMULTIPOLYGON (((29.36484 -2…\n\n\n58\nSOM\nSomalia\n84.07712\nMULTIPOLYGON (((41.53271 -1…\n\n\n92\nNER\nNiger\n83.04846\nMULTIPOLYGON (((13.60635 13…\n\n\n190\nCIV\nIvory Coast\n74.23983\nMULTIPOLYGON (((-3.086719 5…"
   },
   {
     "objectID": "w05/slides.html#but-we-were-still-in-easy-mode",

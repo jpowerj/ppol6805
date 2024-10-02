@@ -72,9 +72,9 @@ $$
 ```{=html}
 <table>
 <colgroup>
-  <col style="width: 10%;">
+  <col style="width: 9%;">
   <col style="width: 30%;">
-  <col style="width: 30%;">
+  <col style="width: 31%;">
   <col style="width: 30%;">
 </colgroup>
 <thead>
@@ -82,7 +82,7 @@ $$
     <th></th>
     <th>Geostatistical Data</th>
     <th>Lattice/Region Data</th>
-    <th>Point Process</th>
+    <th>Point Pattern</th>
 </tr>
 </thead>
 <tbody>
@@ -90,12 +90,12 @@ $$
     <td><b>Criteria</b></td>
     <td><span data-qmd="Fixed $D$, Continuous"></span></td>
     <td><span data-qmd="Fixed $D$, Discrete"></span></td>
-    <td><span data-qmd="$D$ Itself is Random"></span></td>
+    <td><span data-qmd="Random subset $D^* \subseteq D$"></span></td>
     <td></td>
 </tr>
 <tr>
     <td><b>Interest</b></td>
-    <td><span data-qmd="Infer non-observed parts of $D$"></span></td>
+    <td><span data-qmd="Infer **non-observed** parts of $D$"></span></td>
     <td><span data-qmd="Autocorrelation, clustering"></span></td>
     <td><span data-qmd="Point-generating process"></span></td>
     <td></td>
@@ -107,9 +107,10 @@ $$
 * Example: **Height**. $Z(\mathbf{s}_1) = 500\text{m}$, $Z(\mathbf{s}_2) = 850\text{m}$, $\ldots$"></div></td>
     <td class='tdvt'><div data-qmd="* $Z(\mathbf{s})$ observed over $N \times N$ grid of **plots**
     
-* $\implies$ Contiguity, Neighbors (next section of slides!)"></div></td>
-    <td class='tdvt'><div data-qmd='* Data on unknown number of lightning strikes $\mathbf{s}_1, \mathbf{s}_2, \ldots$
-    
+* $\Rightarrow$ Contiguity, Neighbors (next section of slides!)
+* $\Rightarrow$ Autocorrelation: Are points **around** $\mathbf{s}_i$ likely to have values similar to $Z(\mathbf{s}_i)$?"></div></td>
+    <td class='tdvt'><div data-qmd='* Unknown number of lightning strikes $\mathbf{s}_1, \mathbf{s}_2, \ldots$
+* Contrast with geostatistical: all of $D$ is observed, but what determines the subset $D^*$ where **events** occur?
 * "Unmarked": Just locations
 * "Marked": Locations+info (e.g., intensity of strike)'></div></td>
 </tr>
@@ -119,7 +120,7 @@ $$
 
 <!-- * Note the **lack of subscript** on $Z$! Important, not a typo! -->
 
-## Geospatial Data: Dumping Sand onto a Table {.smaller .crunch-title .crunch-ul .crunch-quarto-figure .crunch-img .crunch-figcaption .crunch-quarto-layout-cell .crunch-quarto-layout-panel .title-11}
+## Geostatistical Data: Dumping Sand onto a Table {.smaller .crunch-title .crunch-ul .crunch-quarto-figure .crunch-img .crunch-figcaption .crunch-quarto-layout-cell .crunch-quarto-layout-panel .title-11}
 
 * Domain $D$: **tabletop**; Random process: **dumping sand** onto the tabletop
 * $\Omega$: All possible realizations of process. $\omega_i \in \Omega$ Particular realization
@@ -136,6 +137,166 @@ $$
 
 :::
 
+## Geostatistical *Modeling*: Terrains Are *Not* Spiky Chaotic Landscapes! {.smaller .crunch-title .title-12}
+
+![](images/w2_missing.jpeg){fig-align="center"}
+
+## Geostatistical Data $\rightarrow$ Point Pattern {.crunch-title .crunch-ul .smaller .crunch-quarto-layout-panel .crunch-img .crunch-quarto-figure}
+
+:::: {.columns}
+::: {.column width="50%"}
+
+* **Indicator function**: $\mathbb{1}\left[Z(\mathbf{s}) > 860\text{m}\right]$
+
+```{r}
+#| label: geostat-to-point
+#| code-fold: true
+#| fig-align: center
+set.seed(6805)
+library(tidyverse)
+library(sf)
+library(terra)
+library(latex2exp)
+#### Define area
+lat_range <- c(-5.0, -6.0)
+lon_range <- c(15, 20)
+#lon_center <- -5.4
+#lat_center <- 36.75
+# And the window around this centroid
+lat_radius <- 0.05
+lon_radius <- 0.1
+
+gen_random_table <- function(world_num=1, return_data=FALSE, rand_seed=NULL) {
+  if (!is.null(rand_seed)) {
+    set.seed(rand_seed)
+  } else {
+    rand_seed <- sample(1:9999, size=1)
+    set.seed(rand_seed)
+  }
+  lat_center <- runif(1, min=min(lat_range), max=max(lat_range))
+  lon_center <- runif(1, min=min(lon_range), max=max(lon_range))
+  lon_lower <- lon_center - lon_radius
+  lon_upper <- lon_center + lon_radius
+  lat_lower <- lat_center - lat_radius
+  lat_upper <- lat_center + lat_radius
+  coords <- data.frame(x = c(lon_lower, lon_lower, lon_upper, lon_upper),
+                       y = c(lat_lower, lat_upper, lat_lower, lat_upper))
+  coords_sf <- st_as_sf(coords, coords = c("x", "y"), crs = 4326)
+  # Using geodata
+  elev <- geodata::elevation_3s(lon = lon_center, lat = lat_center, res=2.5, path = getwd())
+  elev <- terra::crop(elev, coords_sf)
+  return(elev)
+}
+
+compute_hillshade <- function(elev) {
+  # Calculate hillshade
+  slopes <- terra::terrain(elev, "slope", unit = "radians")
+  aspect <- terra::terrain(elev, "aspect", unit = "radians")
+  hs <- terra::shade(slopes, aspect)
+  return(hs)
+}
+
+plot_hillshade <- function(elev, hs, title=NULL) {
+  ## Plot hillshading as basemap
+  # (here using terra::plot, but could use tmap)
+  # lat_upper_trimmed <- lat_upper - 0.001*lat_upper
+  # lat_lower_trimmed <- lat_lower - 0.001*lat_lower
+  base_plot <- terra::plot(
+    hs, col = gray(0:100 / 100), legend = FALSE, axes = FALSE, mar=c(0,0,1,0), grid=TRUE
+  )
+  #    xlim = c(elev_xmin, elev_xmax), ylim = c(elev_ymin, elev_ymax))
+  # overlay with elevation
+  
+  color_vec <- terrain.colors(25)
+  plot(elev, col = color_vec, alpha = 0.5, legend = FALSE, axes = FALSE, add = TRUE)
+  
+  # add contour lines
+  terra::contour(elev, col = "grey30", add = TRUE)
+  if (!is.null(title)) {
+    world_name <- TeX(sprintf(r"(World $\omega_{%d} \in \Omega$)", world_num))
+    title(world_name)
+  }
+}
+elev_r1 <- gen_random_table(rand_seed=6810)
+hs_r1 <- compute_hillshade(elev_r1)
+plot_hillshade(elev_r1, hs_r1)
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: after-indicator
+elev_indic_r1 <- terra::ifel(
+  elev_r1 > 860, elev_r1, NA
+)
+plot(elev_indic_r1)
+```
+
+:::
+::::
+
+:::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| label: before-indicator-r2
+#| fig-align: center
+#| code-fold: true
+elev_r2 <- gen_random_table(rand_seed=6815)
+hs_r2 <- compute_hillshade(elev_r2)
+plot_hillshade(elev_r2, hs_r2)
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: after-indicator-r2
+#| code-fold: true
+my_quant <- function(x) quantile(x, 0.99)
+elev_99 <- terra::global(elev_r2, my_quant)[1,1]
+elev_indic_r2 <- terra::ifel(
+  elev_r2 > elev_99, elev_r2, NA
+)
+plot(elev_indic_r2)
+```
+
+:::
+::::
+
+## Geospatial Data $\rightarrow$ Lattice/Region Data {.crunch-title .crunch-quarto-layout-cell}
+
+:::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| label: table-to-lattice
+#| code-fold: true
+#| fig-align: center
+#| fig-cap: "(Pretend this is infinite-resolution) Infinite number of neighbors around each point!"
+table_elev <- gen_random_table(rand_seed=6805)
+table_hs <- compute_hillshade(table_elev)
+#plot_hillshade(table_elev, table_hs)
+#par(mfrow=c(1,2), mar=c(0,0,1,1))
+plot(table_elev)
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: coarsened
+#| fig-align: center
+#| code-fold: true
+#| fig-cap: "Finite number of neighbors around each observation $\\implies$ Can study correlations between *neighboring* cells!"
+elev_coarse <- terra::aggregate(table_elev, 12)
+plot(elev_coarse)
+```
+
+:::
+::::
+
 # Doing Things with `nbdep` {data-stack-name="Autocorrelation"}
 
 * "Neighbor" Definitions
@@ -144,14 +305,23 @@ $$
 ## Who Are My Neighbors?
 
 * Contiguity-Based:
-    * Queen Definition
-    * Rook Definition
+
+  | | |
+  |-|-|
+  | ![](images/queen.png) | ![](images/rook.png) |
+
 * Distance-Based
 * $K$-Nearest Neighbors
+
+## Distance-Based Neighbors
+
+![From @xie_analyzing_2023](images/dist-based.jpeg){fig-align="center"}
 
 ## Spatial Autocorrelation
 
 * Location $i$ has high value $\implies$ locations **near** $i$ more likely to have high values
+
+![](images/autocorr.jpeg){fig-align="center"}
 
 ## Moran's $I$
 
@@ -175,6 +345,18 @@ $$
 $$
 I_i = \frac{y_i - \overline{y}}{S_i^2}\sum_{j=1}^{n}w_{ij}(y_j - \overline{y})
 $$
+
+# Our Null Hypothesis: Complete Spatial Randomness (CSR) {data-stack-name="Spatial Randomness"}
+
+## Leaving You With a Challenge
+
+* These point patterns can be **classified** as clustered or regular:
+
+![](images/simple_clust.svg){fig-align="center" style="transform: rotate(90deg);"}
+
+## Leaving You With a Challenge
+
+![](images/clusters.svg){fig-align="center"}
 
 ## References
 
