@@ -1,0 +1,479 @@
+---
+title: "Week 7: {{< var weeks.7.title >}}"
+subtitle: "{{< var course.slides-subtitle >}}"
+author: "{{< var course.author >}}"
+institute: "{{< var course.institute >}}"
+date: "October 9, 2024"
+date-format: full
+lecnum: 7
+categories:
+  - "Class Sessions"
+bibliography: "../_PPOL6805.bib"
+# Shared across formats:
+echo: true
+code-fold: show
+css: "../dsan-globals/jjstyles.css"
+html-math-method: mathjax
+# Format-specific settings:
+format:
+  revealjs:
+    output-file: "slides.html"
+    df-print: kable
+    slide-number: true
+    scrollable: true
+    tbl-cap-location: bottom
+    link-external-icon: true
+    link-external-newwindow: true
+    footer: "{{< var weeks.7.footer >}}"
+    include-in-header:
+      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>"
+    theme: [default]
+    revealjs-plugins:
+      - simplemenu
+    simplemenu:
+      flat: true
+      barhtml:
+        header: "<div class='menubar'><span style='position: absolute; left: 8; padding-left: 8px;'><a href='./index.html'>&larr; Return to Notes</a></span><ul class='menu'></ul></div>"
+      scale: 0.5
+  html:
+    output-file: "index.html"
+    html-math-method: mathjax
+    df-print: kable
+---
+
+::: {.content-visible unless-format="revealjs"}
+
+<center class='mb-3'>
+<a class="h2" href="./slides.html" target="_blank">Open slides in new tab &rarr;</a>
+</center>
+
+:::
+
+# Naïve Clustering {.smaller .smaller-table data-stack-name="Naïve Clustering"}
+
+```{=html}
+<table style="width: 100%;">
+<colgroup>
+  <col style="width: 15%;">
+  <col style="width: 15%;">
+  <col style="width: 5%;">
+  <col style="width: 20%;">
+  <col style="width: 5%;">
+  <col style="width: 15%;">
+  <col style="width: 5%;">
+  <col style="width: 20%;">
+</colgroup>
+<thead>
+</thead>
+<tbody>
+<tr>
+    <td class='tdvc'><span data-qmd="**Weeks 6-8**<br>(My labels)"></span></td>
+    <td class='tdvc'>Naïve Clustering</td>
+    <td class='tdvc'>&rarr;</td>
+    <td class='tdvc'><span data-qmd="Point Process **Models**"></span></td>
+    <td class='tdvc'>&rarr;</td>
+    <td class='tdvc'>Autocorrelation in Point Data</td>
+    <td class='tdvc'>&rarr;</td>
+    <td class='tdvc'>Autocorrelation in Lattice Data</td>
+</tr>
+<tr>
+    <td class='tdvc'><span data-qmd="**@waller_applied_2004**"></span></td>
+    <td class='tdvc'><span data-qmd="*(A bunch of stuff we already learned)*"></span></td>
+    <td class='tdvc'>&rarr;</td>
+    <td class='tdvc' style='border: 3px solid black;'>Ch 5: Analysis of Spatial Point Patterns</td>
+    <td class='tdvc'>&rarr;</td>
+    <td class='tdvc' style='border: 3px solid black;'>Ch 6: Point Data (Cases and Controls)</td>
+    <td class='tdvc'>&rarr;</td>
+    <td class='tdvc' style='border: 3px solid black;'><span data-qmd="Ch 7: Regional Count Data<br>*(First mention of autocorrelation on page 227)*"></span></td>
+</tr>
+<tr>
+    <td class='tdvc'><span data-qmd="**@schabenberger_statistical_2004**"></span></td>
+    <td class='tdvc' style='border: 3px solid black;'>Ch 1 (Page 14): Autocorrelation</td>
+    <td class='tdvc'>&rarr;</td>
+    <td class='tdvc' align='center' colspan="5"><span data-qmd="*(A bunch of more complicated stuff we'll learn later)*"></span></td>
+</tr>
+</tbody>
+</table>
+```
+
+::: {.hidden}
+
+```{r}
+#| label: r-source-globals
+source("../dsan-globals/_globals.r")
+library(sf)
+```
+
+:::
+
+## Why "Naïve"?
+
+* [Continuing from last week] **Lattice data**: easiest way to visualize / operationalize simple measures of **clustering** via **spatial autocorrelation**
+* So, we develop **intuitions** for measures like Moran's $I$ by looking at **lattice** data, but...
+* Naïve because **we're not modeling the lattice regions (cells) themselves!**
+* Non-naïve clustering: Knowing the **clusters** but also **what process led to their formation**!
+
+## Spatial Randomness {.smaller .smaller-table .crunch-title .crunch-img}
+
+```{r}
+#| label: sr-plot
+#| fig-align: center
+#| code-fold: true
+#| output: false
+library(tidyverse)
+library(spatstat)
+set.seed(6805)
+N <- 60
+r_core <- 0.05
+obs_window <- square(1)
+# Regularity via Inhibition
+#reg_sims <- rMaternI(N, r=r_core, win=obs_window)
+cond_reg_sims <- rSSI(r=r_core, N)
+# CSR data
+#csr_sims <- rpoispp(N, win=obs_window)
+cond_sr_sims <- rpoint(N, win=obs_window)
+### Clustered data
+#clust_sims <- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)
+#clust_sims <- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)
+#clust_sims <- rclusterBKBC(clusters="MatClust", kappa=10, mu=10, scale=0.05, verbose=FALSE)
+# Each cluster consist of 10 points in a disc of radius 0.2
+nclust <- function(x0, y0, radius, n) {
+    #print(n)
+    return(runifdisc(10, radius, centre=c(x0, y0)))
+}
+cond_clust_sims <- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)
+# And PLOT
+plot_w <- 400
+plot_h <- 400
+plot_scale <- 2.25
+cond_reg_plot <- cond_reg_sims |> sf::st_as_sf() |>
+  ggplot() +
+  geom_sf() +
+  dsan_theme()
+ggsave("images/cond_reg.png", cond_reg_plot, width=plot_w, height=plot_h, units="px", scale=plot_scale)
+cond_sr_plot <- cond_sr_sims |> sf::st_as_sf() |>
+  ggplot() +
+  geom_sf() +
+  dsan_theme()
+ggsave("images/cond_sr.png", cond_sr_plot, width=plot_w, height=plot_h, units="px", scale=plot_scale)
+cond_clust_plot <- cond_clust_sims |> sf::st_as_sf() |>
+  ggplot() +
+  geom_sf() +
+  dsan_theme()
+ggsave("images/cond_clust.png", cond_clust_plot, width=plot_w, height=plot_h, units="px", scale=plot_scale)
+```
+
+```{=html}
+<table style="width: 100%;">
+<colgroup>
+  <col style="width: 20%;">
+  <col style="width: 25%;">
+  <col style="width: 2%;">
+  <col style="width: 25%;">
+  <col style="width: 2%;">
+  <col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+    <th><span data-qmd="Autocorrelation"></span></th>
+    <th align="center" class='tdvc'><span data-qmd="$I = -1$"></span></th>
+    <th align="center" class='tdvc'>&larr;</th>
+    <th align="center" class='tdvc'><span data-qmd="$I = 0$"></span></th>
+    <th align="center" class='tdvc'>&rarr;</th>
+    <th align="center" class='tdvc'><span data-qmd="$I = 1$"></span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td><span data-qmd="**Description**"></span></td>
+    <td align="center"><span data-qmd="*Negative* Autocorr"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="*No* Autocorr"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="*Positive* Autocorr"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="**Event at $\mathbf{s} = (x,y)$ Implies**"></span></td>
+    <td align="center"><span data-qmd="*Less* likely to find another point nearby"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="No information about nearby points"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="*More* likely to find another point nearby"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="**Resulting Pattern**"></span></td>
+    <td align="center">Regularity</td>
+    <td></td>
+    <td align="center">Reg/Clustered Mix</td>
+    <td></td>
+    <td align="center">Clustering</td>
+</tr>
+<tr>
+    <td><span data-qmd="**Process(es) Which Could Produce Pattern**"></span></td>
+    <td align="left"><span data-qmd="**1st Order**: Random within even-spaced grid<br>**2nd Order**: Competition"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="**1st Order**: i.i.d. points<br>**2nd Order**: i.i.d. distances"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="**1st Order**: Tasty food at clust centers<br>**2nd Order**: Cooperation"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="**Fixed $N$**"></span></td>
+    <td align="center">60</td>
+    <td></td>
+    <td align="center">60</td>
+    <td></td>
+    <td align="center">60</td>
+</tr>
+<tr>
+    <td></td>
+    <td align="center"><img src="images/cond_reg.png" width="400px"></img></td>
+    <td></td>
+    <td align="center"><img src="images/cond_sr.png" width="400px"></img></td>
+    <td></td>
+    <td align="center"><img src="images/cond_clust.png" width="400px"></img></td>
+</tr>
+</tbody>
+</table>
+```
+
+## *Complete* Spatial Randomness (CSR) {.smaller .smaller-table .crunch-title .crunch-img}
+
+```{r}
+#| label: csr-plot
+#| fig-align: center
+#| code-fold: true
+#| output: false
+library(tidyverse)
+library(spatstat)
+set.seed(6807)
+lambda <- 60
+r_core <- 0.05
+obs_window <- square(1)
+# Regularity via Inhibition
+# Regularity via Inhibition
+reg_sims <- rMaternI(lambda, r=r_core, win=obs_window)
+# CSR data
+csr_sims <- rpoispp(N, win=obs_window)
+### Clustered data
+clust_mu <- 10
+clust_sims <- rMatClust(kappa=lambda / clust_mu, scale=2*r_core, mu=10, win=obs_window)
+# And PLOT
+plot_w <- 400
+plot_h <- 400
+plot_scale <- 2.25
+reg_plot <- reg_sims |> sf::st_as_sf() |>
+  ggplot() +
+  geom_sf() +
+  labs(title=paste0("N = ",reg_sims$n)) +
+  dsan_theme()
+ggsave("images/reg.png", reg_plot, width=plot_w, height=plot_h, units="px", scale=plot_scale)
+csr_plot <- csr_sims |> sf::st_as_sf() |>
+  ggplot() +
+  geom_sf() +
+  labs(title=paste0("N = ",csr_sims$n)) +
+  dsan_theme()
+ggsave("images/csr.png", csr_plot, width=plot_w, height=plot_h, units="px", scale=plot_scale)
+clust_plot <- clust_sims |> sf::st_as_sf() |>
+  ggplot() +
+  geom_sf() +
+  labs(title=paste0("N = ",clust_sims$n)) +
+  dsan_theme()
+ggsave("images/clust.png", clust_plot, width=plot_w, height=plot_h, units="px", scale=plot_scale)
+```
+
+```{=html}
+<table style="width: 100%;">
+<colgroup>
+  <col style="width: 20%;">
+  <col style="width: 25%;">
+  <col style="width: 2%;">
+  <col style="width: 25%;">
+  <col style="width: 2%;">
+  <col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+    <th><span data-qmd="Autocorrelation"></span></th>
+    <th align="center" class='tdvc'><span data-qmd="$I = -1$"></span></th>
+    <th align="center" class='tdvc'>&larr;</th>
+    <th align="center" class='tdvc'><span data-qmd="$I = 0$"></span></th>
+    <th align="center" class='tdvc'>&rarr;</th>
+    <th align="center" class='tdvc'><span data-qmd="$I = 1$"></span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td><span data-qmd="**Description**"></span></td>
+    <td align="center"><span data-qmd="*Negative* Autocorr"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="*No* Autocorr"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="*Positive* Autocorr"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="**Event at $\mathbf{s} = (x,y)$ Implies**"></span></td>
+    <td align="center"><span data-qmd="*Less* likely to find another point nearby"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="No information about nearby points"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="*More* likely to find another point nearby"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="**Resulting Pattern**"></span></td>
+    <td align="center">Regularity</td>
+    <td></td>
+    <td align="center">Reg/Clustered Mix</td>
+    <td></td>
+    <td align="center">Clustering</td>
+</tr>
+<tr>
+    <td><span data-qmd="**Process(es) Which Could Produce Pattern**"></span></td>
+    <td align="left"><span data-qmd="**1st Order**: Random within even-spaced grid<br>**2nd Order**: Competition"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="**1st Order**: i.i.d. points<br>**2nd Order**: i.i.d. distances"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="**1st Order**: Tasty food at clust centers<br>**2nd Order**: Cooperation"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="**Fixed Intensity $\lambda$**"></span></td>
+    <td align="center">60</td>
+    <td></td>
+    <td align="center">60</td>
+    <td></td>
+    <td align="center">60</td>
+</tr>
+<tr>
+    <td class='tdvt'><span data-qmd="**Random $N$**"></span></td>
+    <td align="center"><img src="images/reg.png" width="400px"></img></td>
+    <td></td>
+    <td align="center"><img src="images/csr.png" width="400px"></img></td>
+    <td></td>
+    <td align="center"><img src="images/clust.png" width="400px"></img></td>
+</tr>
+</tbody>
+</table>
+```
+
+## Measures are *Relative* to Window of Observation {.smaller .title-11}
+
+* Same data can be **spatially random** within one window, **clustered** or **regular** in others!
+
+
+```{r}
+#| label: obs-windows
+#| code-fold: true
+#| output: false
+N <- 60
+obs_window <- square(1)
+window_scale <- 3.5
+csr_sims_square <- rpoispp(N, win=obs_window)
+# Triangular window
+obs_window_tri <- st_sfc(st_polygon(list(
+    matrix(c(0.3,0.1,0.7,0.1,0.5,0.5,0.3,0.1), byrow=TRUE, nrow=4)
+)))
+obs_window_geom <- st_sfc(st_linestring(
+    matrix(c(0,0,1,0,1,1,0,1,0,0), byrow=TRUE, nrow=5)
+))
+csr_sims_tri <- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_tri))
+tri_plot <- csr_sims_tri |> sf::st_as_sf() |>
+  ggplot() +
+  geom_sf() +
+  dsan_theme("quarter");
+ggsave("images/window_tri.png", tri_plot, width=plot_w, height=plot_h, units="px", scale=window_scale)
+# Square window
+square_plot <- csr_sims_square |> sf::st_as_sf() |>
+  ggplot() +
+  geom_sf() +
+  geom_sf(data=obs_window_tri |> sf::st_boundary()) +
+  dsan_theme("quarter")
+ggsave("images/window_square.png", square_plot, width=plot_w, height=plot_h, units="px", scale=window_scale)
+# Circular window
+obs_window_disc <- st_sfc(st_point(c(1, 0.5))) |> st_buffer(1.2)
+csr_sims_circ <- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_disc))
+circ_plot <- csr_sims_circ |> sf::st_as_sf() |>
+  ggplot() +
+  geom_sf() +
+  geom_sf(data=obs_window_geom) +
+  dsan_theme("quarter")
+ggsave("images/window_circ.png", circ_plot, width=plot_w, height=plot_h, units="px", scale=window_scale)
+```
+
+| Regular | CSR | Clustered |
+|:-:|:-:|:-:|
+| ![](images/window_tri.png){fig-align="center"} | ![](images/window_square.png){fig-align="center"} | ![](images/window_circ.png){fig-align="center"} |
+
+
+# Point Process Models {data-stack-name="Point Process Models"}
+
+## Our New Library: `spatstat`! {.crunch-title}
+
+:::: {.columns}
+::: {.column width="50%"}
+
+* Homepage: [spatstat.org](https://spatstat.org/){target='_blank'}
+* GitHub: [github.com/spatstat](https://github.com/spatstat){target='_blank'}
+* Book: @baddeley_spatial_2015 \[[Companion website](http://book.spatstat.org/){target='_blank'}\]
+* PDF: [here](https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&dl=1)
+
+:::
+::: {.column width="50%"}
+
+![](images/spatstat_book.jpg){fig-align="center" width="75%"}
+
+:::
+::::
+
+## *Why* Do Events Appear Where They Do? {.smaller .title-12 .inline-90}
+
+```{r}
+#| label: intensity-est
+#| code-fold: true
+#| fig-width: 2
+#| fig-height: 2
+#| output: false
+center_l_function <- function(x, ...) {
+
+  if (!spatstat.geom::is.ppp(x) && !spatstat.geom::is.fv(x)) {
+    stop("Please provide either ppp or fv object.")
+  }
+
+  if (spatstat.geom::is.ppp(x)) {
+    x <- spatstat.explore::Lest(x, ...)
+  }
+
+  r <- x$r
+
+  l_centered <- spatstat.explore::eval.fv(x - r)
+
+  return(l_centered)
+}
+cond_clust_sf <- cond_clust_sims |> sf::st_as_sf()
+pines_plot <- cond_clust_sf |>
+  ggplot() +
+  geom_sf() +
+  dsan_theme("full")
+ggsave("images/pines.png", pines_plot)
+# density() calls density.ppp() if the argument is a ppp object
+den <- density(cond_clust_sims, sigma = 0.1)
+#summary(den)
+png("images/intensity_plot.png")
+plot(den, main = "Intensity λ(s)")
+contour(den, add = TRUE) # contour plot
+dev.off()
+# And Kest / Lest
+kest_result <- Kest(cond_clust_sims, rmax=0.5, correction="best")
+lest_result <- center_l_function(cond_clust_sims, rmax=0.5)
+png("images/lest.png")
+plot(lest_result, main="K(h)")
+dev.off()
+```
+
+| | First-Order | Second-Order |
+|-|-|-|
+| | Events considered **individually** $\implies$ **Intensity function $\lambda(\mathbf{s})$** | **Second-Order**: Events considered **pairwise** $\implies$ **$K$-function $K(\vec{h})$** |
+| ![](images/pines.png) | ![](images/intensity_plot.png) | ![](images/lest.png) |
+
+## References
+
+::: {#refs}
+:::

@@ -1,0 +1,128 @@
+
+## Spatial Randomness {.smaller .crunch-title}
+
+```{r}
+#| label: csr-plot
+#| fig-align: center
+#| code-fold: true
+library(spatstat)
+set.seed(6805)
+N <- 60
+r_core <- 0.05
+obs_window <- square(1)
+# Regularity via Inhibition
+#reg_sims <- rMaternI(N, r=r_core, win=obs_window)
+reg_sims <- rSSI(r=r_core, N)
+# CSR data
+#csr_sims <- rpoispp(N, win=obs_window)
+csr_sims <- rpoint(N, win=obs_window)
+### Clustered data
+#clust_sims <- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)
+#clust_sims <- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)
+#clust_sims <- rclusterBKBC(clusters="MatClust", kappa=10, mu=10, scale=0.05, verbose=FALSE)
+# Each cluster consist of 10 points in a disc of radius 0.2
+nclust <- function(x0, y0, radius, n) {
+    #print(n)
+    return(runifdisc(10, radius, centre=c(x0, y0)))
+}
+clust_sims <- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)
+# And PLOT
+par(mfrow=c(1,3), mar=c(0,0,2,1))
+plot(reg_sims, main=paste0("Spatial Regularity: N = ",reg_sims$n))
+plot(csr_sims, main=paste0("Complete Spatial Randomness: N = ",csr_sims$n))
+plot(clust_sims, main=paste0("Spatial Clustering: N = ",clust_sims$n))
+```
+
+---
+
+
+## Spatial Randomness {.smaller .crunch-title}
+
+```{r}
+#| label: csr-setup
+#| fig-align: center
+#| code-fold: true
+library(spatstat)
+set.seed(6805)
+N <- 60
+r_core <- 0.05
+obs_window <- square(1)
+# Regularity via Inhibition
+#reg_sims <- rMaternI(N, r=r_core, win=obs_window)
+reg_sims <- rSSI(r=r_core, N)
+# CSR data
+#csr_sims <- rpoispp(N, win=obs_window)
+csr_sims <- rpoint(N, win=obs_window)
+### Clustered data
+#clust_sims <- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)
+#clust_sims <- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)
+#clust_sims <- rclusterBKBC(clusters="MatClust", kappa=10, mu=10, scale=0.05, verbose=FALSE)
+# Each cluster consist of 10 points in a disc of radius 0.2
+nclust <- function(x0, y0, radius, n) {
+    #print(n)
+    return(runifdisc(10, radius, centre=c(x0, y0)))
+}
+clust_sims <- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)
+```
+
+:::: {.columns}
+::: {.column width="33%"}
+
+```{r}
+#| label: regular-plot
+#| echo: false
+plot(reg_sims, main=paste0("Spatial Regularity: N = ",reg_sims$n))
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: sr-plot
+#| echo: false
+plot(csr_sims, main=paste0("Complete Spatial Randomness: N = ",csr_sims$n))
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: cluster-plot
+#| echo: false
+par(mar=c(0,0,0,0))
+plot(clust_sims, main=paste0("Spatial Clustering: N = ",clust_sims$n))
+```
+
+:::
+::::
+
+----
+
+
+
+## *Complete* Spatial Randomness (CSR) {.smaller .crunch-title}
+
+```{r}
+#| label: true-csr-plot
+#| fig-align: center
+#| code-fold: true
+library(spatstat)
+set.seed(6805)
+lambda <- 60
+r_core <- 0.05
+obs_window <- square(1)
+# Regularity via Inhibition
+reg_sims <- rMaternI(lambda, r=r_core, win=obs_window)
+#reg_sims <- rSSI(r=r_core, N)
+# CSR data
+csr_sims <- rpoispp(N, win=obs_window)
+#csr_sims <- rpoint(N, win=obs_window)
+### Clustered data
+clust_mu <- 10
+clust_sims <- rMatClust(kappa=lambda / clust_mu, scale=2*r_core, mu=10, win=obs_window)
+# And PLOT
+par(mfrow=c(1,3), mar=c(0,0,2,1))
+plot(reg_sims, main=paste0("Spatial Regularity: N = ",reg_sims$n))
+plot(csr_sims, main=paste0("Complete Spatial Randomness: N = ",csr_sims$n))
+plot(clust_sims, main=paste0("Spatial Clustering: N = ",clust_sims$n))
+```

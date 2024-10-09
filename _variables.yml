@@ -36,8 +36,8 @@ weeks:
     footer: "PPOL 6805 Week 6: Random Fields"
     date-md: "Oct 2"
   - weeknum: 7
-    title: "Point Data and Clustering"
-    footer: "PPOL 6805 Week 7: Point Patterns"
+    title: "Point Processes, Clustering, and Regularity"
+    footer: "PPOL 6805 Week 7: Point Processes, Clustering, Regularity"
     date-md: "Oct 9"
   - weeknum: 8
     title: "Areal Data and Diffusion Models"
