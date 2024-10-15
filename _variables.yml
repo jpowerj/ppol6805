@@ -40,15 +40,15 @@ weeks:
     footer: "PPOL 6805 Week 7: Point Processes, Clustering, Regularity"
     date-md: "Oct 9"
   - weeknum: 8
-    title: "Areal Data and Diffusion Models"
+    title: "Null Models and Marked Point Processes"
     footer: "PPOL 6805 Week 8: Spatial Prediction"
     date-md: "Oct 16"
   - weeknum: 9
-    title: "Geostatistical Data and Spatial Prediction"
+    title: "Diffusion Models for Point and Areal Data"
     footer: "PPOL 6805 Week 7"
     date-md: "Oct 23"
   - weeknum: 10
-    title: "Spatial Regression"
+    title: "Geostatistical Data and Spatial Prediction"
     footer: "PPOL 6805 Week 8"
     date-md: "Oct 30"
   - weeknum: 11
