@@ -92,10 +92,6 @@ On the basis of the guidelines we've developed for courses offered through DSAN,
     <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW4**: {{< var hw.4.title >}}"></span></td>
     <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.4.pct >}}%"></span></td>
 </tr>
-<tr>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW5**: {{< var hw.5.title >}}"></span></td>
-    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.5.pct >}}%"></span></td>
-</tr>
 </tbody>
 </table>
 ```
@@ -189,27 +185,27 @@ If you find any discrepancies between this schedule and Georgetown's [official c
 </tr>
 <tr>
     <td></td>
-    <td></td>
-    <td><span data-qmd="*Oct 11 (Fri), 5:59pm*"></span></td>
-    <td><span data-qmd="*[Deliverable] HW4: {{< var hw.4.title >}}*"></span></td>
-</tr>
-<tr>
-    <td></td>
     <td>8</td>
     <td><span data-qmd="{{< var weeks.8.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var weeks.8.title >}}](./w08/)"></span><br><span data-qmd="*HW5 Release*"></span></td>
+    <td><span data-qmd="[{{< var weeks.8.title >}}](./w08/)"></span></td>
 </tr>
 <tr>
     <td></td>
     <td>9</td>
     <td><span data-qmd="{{< var weeks.9.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var weeks.9.title >}}](./w09/)"></span><br><span data-qmd="*[Deliverable] HW5: {{< var hw.5.title >}}*"></span></td>
+    <td><span data-qmd="[{{< var weeks.9.title >}}](./w09/)"></span></td>
 </tr>
 <tr>
     <td></td>
     <td>10</td>
     <td><span data-qmd="{{< var weeks.10.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var weeks.10.title >}}](./w10/)"></span><br><span data-qmd="*Midterm Practice Problems Release*"></span></td>
+    <td><span data-qmd="[{{< var weeks.10.title >}}](./w10/)"></span><br><span data-qmd="*[Deliverable, 11:59pm] HW4: {{< var hw.4.title >}}*"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td></td>
+    <td><span data-qmd="*Nov 1 (Fri)*"></span></td>
+    <td><span data-qmd="*Midterm Practice Problems Release*"></span></td>
 </tr>
 <tr>
     <td></td>

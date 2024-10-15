@@ -74,19 +74,16 @@ weeks:
 hw:
   - hw-num: 1
     title: "GIS Concepts"
-    pct: 8
+    pct: 10
   - hw-num: 2
     title: "Unary Operations"
-    pct: 8
+    pct: 10
   - hw-num: 3
     title: "Binary Operations and Spatial Joins"
-    pct: 8
+    pct: 10
   - hw-num: 4
-    title: "Random Fields, Autocorrelation, and Clustering"
-    pct: 8
-  - hw-num: 5
-    title: "Areal Data and Diffusion Models"
-    pct: 8
+    title: "Autocorrelation, Clustering, and Point Processes"
+    pct: 10
   # - hw-num: 5
   #   title: "Spatial Regression"
   #   pct: 8
