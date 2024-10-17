@@ -65,6 +65,8 @@ library(tidyverse) |> suppressPackageStartupMessages()
 library(sf) |> suppressPackageStartupMessages()
 library(spatstat) |> suppressPackageStartupMessages()
 library(mdthemes) |> suppressPackageStartupMessages()
+library(mapview) |> suppressPackageStartupMessages()
+library(leaflet) |> suppressPackageStartupMessages()
 ```
 
 :::
@@ -204,6 +206,7 @@ tree_ppp_sf |> ggplot() +
 #| label: tree-mystery
 #| echo: false
 #| code-fold: true
+#| crop: true
 square_sf <- sf::st_as_sf(spatstat.geom::square(1))
 grid_sf <- sf::st_as_sf(sf::st_make_grid(square_sf))
 grid_buffer_sf <- grid_sf |> sf::st_buffer(dist=-0.01, singleSide = TRUE)
@@ -405,7 +408,7 @@ ggsave("images/clust_pcf.png", clust_pcf_plot, width=3, height=3)
 </thead>
 <tbody>
 <tr>
-  <td><span data-qmd="$N = 60$ Events"></span></td>
+  <td class='tdvc'><span data-qmd="$N = 60$ Events"></span></td>
   <td><span data-qmd="Events modeled **individually**<br>$\implies$ **Intensity function $\lambda(\mathbf{s})$**"></span></td>
   <td><span data-qmd="Events modeled **pairwise** $\implies$ **$K$-function $K(\vec{h})$**"></span></td>
 </tr>
@@ -564,6 +567,7 @@ spatstat.random::rpoispp(lambda, win)
 ```{r}
 #| label: pois-ppp-sims
 #| code-fold: true
+#| crop: true
 sim_base <- 22
 sim_psize <- 2
 sim_xticks <- seq(from=0.0, to=1.0, by=0.2)
@@ -611,6 +615,7 @@ spatstat.random::rSSI(r, n=Inf, giveup=1000, win)
 #| label: ssi-sims
 #| code-fold: true
 #| warning: false
+#| crop: true
 capture.output(ssi_sims <- spatstat.random::rSSI(
   r = 0.05, n=60, nsim=3
 ), file=nullfile())
@@ -625,48 +630,204 @@ combined_df |> ggplot(aes(x=x, y=y)) +
   scale_y_continuous(breaks=sim_yticks)
 ```
 
-## Matérn Cluster Process
+## Matérn Cluster Process {.crunch-title .smaller}
+
+:::: {.columns}
+::: {.column width="75%"}
 
 ``` {.r}
 spatstat.random::rMatClust(kappa, scale, mu, win)
 ```
 
-## Matérn Inhibition Process (I and II)
+:::
+::: {.column width="25%"}
 
-```{.r}
-spatstat.random::rMaternI()
-spatstat.random::rMaternII()
+[Docs](https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMatClust.html){target='_blank'}
+
+:::
+::::
+
+```{r}
+#| label: matclust-plot
+#| code-fold: true
+#| crop: true
+matclust_sims <- rMatClust(
+  kappa = 6,
+  scale = 0.075,
+  mu = 10,
+  nsim = 3
+)
+matclust_df <- imap(.x=matclust_sims, .f=to_sim_df) |> bind_rows()
+matclust_plot <- matclust_df |> ggplot(aes(x=x, y=y)) +
+  geom_point(size=sim_psize) +
+  facet_wrap(vars(sim), nrow=1) +
+  coord_equal() +
+  theme_classic(base_size=sim_base) +
+  theme(panel.spacing.x = unit(2, "lines")) +
+  scale_x_continuous(breaks=sim_xticks) +
+  scale_y_continuous(breaks=sim_yticks)
+matclust_plot
 ```
 
-## Cox Processes: Random Points *plus* Random Intensity
+## Matérn Inhibition Process (I and II) {.smaller .crunch-title .inline-90 .crunch-ul}
 
-[`rLGCP()`](https://search.r-project.org/CRAN/refmans/spatstat.random/html/rLGCP.html){target='_blank'}
+```{.r}
+spatstat.random::rMaternI(kappa, r, win)
+spatstat.random::rMaternII(kappa, r, win)
+```
+
+```{=html}
+<table>
+<thead>
+<tr>
+  <th align="center"><span data-qmd="**`rMaternI()`** \[[Docs](https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMaternI.html){target='_blank'}\]"></span></th>
+  <th align="center"><span data-qmd="**`rMaternII()`** \[[Docs](https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMaternII.html){target='_blank'}\]
+</center>"></span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td class='tdvt'><div data-qmd="* <i class='bi bi-1-circle'></i> Generate events $\mathbf{S} = \{\mathbf{s}_1, \ldots, \mathbf{s}_{N(\lambda)}\}$ via Poisson point process with $\lambda = \kappa$"></div></td>
+  <td class='tdvt'><div data-qmd="* <i class='bi bi-1-circle'></i> Generate events $\mathbf{S} = \{\mathbf{s}_1, \ldots, \mathbf{s}_{N(\lambda)}\}$ via Poisson point process with $\lambda = \kappa$, plus **timestamp** $t_i \sim \mathcal{U}(0,1)$ for each $\mathbf{s}_i$"></div></td>
+</tr>
+<tr>
+  <td class='tdvt'><div data-qmd="* <i class='bi bi-2-circle'></i> Delete all **pairs** of points $\mathbf{s}_i$, $\mathbf{s}_j$ for which $\textsf{dist}(\mathbf{s}_i, \mathbf{s}_j) < \texttt{r}$"></div></td>
+  <td><div data-qmd="* <i class='bi bi-2-circle'></i> For each pair of points $\mathbf{s}_i$, $\mathbf{s}_j$: if $\textsf{dist}(\mathbf{s}_i, \mathbf{s}_j) < \texttt{r}$, delete the **later** point"></div></td>
+</tr>
+</tbody>
+</table>
+```
+
+```{r}
+#| label: matern-inhib-plots
+#| code-fold: true
+#| crop: true
+mI_sims <- rMaternI(
+  kappa = 60, r = 0.075, nsim=2
+)
+mII_sims <- rMaternII(
+  kappa = 60, r = 0.075, nsim=2
+)
+mI_combined_df <- imap(.x=mI_sims, .f=to_sim_df) |> bind_rows() |> mutate(sim=paste0("MI ",sim))
+mII_combined_df <- imap(.x=mII_sims, .f=to_sim_df) |> bind_rows() |> mutate(sim=paste0("MII ",sim))
+m_combined_df <- bind_rows(mI_combined_df, mII_combined_df)
+m_plot <- m_combined_df |> ggplot(aes(x=x, y=y)) +
+  geom_point(size=sim_psize) +
+  facet_wrap(vars(sim), nrow=1) +
+  coord_equal() +
+  theme_classic(base_size=sim_base) +
+  theme(panel.spacing.x = unit(2, "lines")) +
+  scale_x_continuous(breaks=sim_xticks) +
+  scale_y_continuous(breaks=sim_yticks)
+m_plot
+```
+
+## Cox Processes: Random Intensity &rarr; Random Events {.smaller .crunch-title .title-10 .code-90}
+
+:::: {.columns}
+::: {.column width="60%"}
+
+``` {.r}
+spatstat.random::rLGCP(model, mu, param, win)
+models=c("exponential", "gauss", "stable", "gencauchy", "matern")
+```
+
+:::
+::: {.column width="40%"}
+
+[Docs](https://search.r-project.org/CRAN/refmans/spatstat.random/html/rLGCP.html){target='_blank'}
+
+:::
+::::
 
 ```{r}
 #| label: lgcp-sim
 #| code-fold: true
+#| crop: true
+cox_pcol <- "black"
+cox_bg <- "grey90"
+cox_pch <- 21
 # inhomogeneous LGCP with Gaussian covariance function
 m <- as.im(function(x, y){
   5 - 1.5 * (x - 0.5)^2 + 2 * (y - 0.5)^2
 }, W=owin())
 lgcp_sims <- rLGCP("gauss", m, var=0.15, scale =0.5, nsim=3)
 # lgcp_combined_df <- imap(.x=ssi_sims, .f=to_sim_df) |> bind_rows()
-par(mfrow=c(1,3))
-plot(attr(lgcp_sims[[1]], "Lambda"))
-points(lgcp_sims[[1]], col='grey90', pch=19)
-plot(attr(lgcp_sims[[2]], "Lambda"))
-points(lgcp_sims[[2]], col='grey90', pch=19)
-plot(attr(lgcp_sims[[3]], "Lambda"))
-points(lgcp_sims[[3]], col='grey90', pch=19)
+plot_lgcp <- function(lgcp_sim) {
+  plot(attr(lgcp_sim, "Lambda"), main=NULL)
+  points(lgcp_sim, col=cox_pcol, bg=cox_bg, pch=cox_pch)
+}
+par(mfrow=c(1,3), mar=c(0,0,0,2), oma=c(0,0,0,0), las=2)
+nulls <- lapply(X=lgcp_sims, FUN=plot_lgcp)
 ```
 
-# Fitting Models to Data {data-stack-name="Fitting Models"}
+# The Point of All This: Null Models via Base Rates! {data-stack-name="Null Models"}
 
-## Maximum Likelihood Estimation (MLE) Refresher
+* Given an **intensity function**, we can compute a bunch of simulated **point patterns** (**in**homogeneous Poisson Point Process)...
+* How does an **observed** point pattern **differ** from the simulated point patterns?
 
-# Testing Hypotheses
+## Constant Risk Hypothesis: Motivation {.smaller .crunch-title}
 
-## 
+* Here is a (fictional) map of flu cases in the US "Midwest"
+* Are people in Chicago and Detroit equally "at risk"?
+
+```{r}
+#| label: midwest-cases-plot
+#| code-fold: true
+city_df <- tibble::tribble(
+  ~city, ~lon, ~lat, ~pop,
+  "Chicago", 41.950567516553896, -87.93011127491978, 2746388,
+  "Detroit", 42.45123004999075, -83.18402319217698, 631524
+)
+city_sf <- sf::st_as_sf(
+  city_df,
+  coords = c("lat", "lon"),
+  crs=4326
+)
+city_buf_sf <- city_sf |> sf::st_buffer(20000)
+city_cases_sf <- city_buf_sf |> sf::st_sample(size=rep(10,2)) |> sf::st_as_sf()
+city_cases_sf$city <- "Detroit (10 Cases)"
+city_cases_sf[1:10, 'city'] <- "Chicago (10 Cases)"
+city_cases_sf$sample <- "Flu"
+mapview(city_cases_sf, zcol="city")
+```
+
+## Constant Risk Hypothesis: Base Rates {.smaller .crunch-title}
+
+| | Chicago | Detroit |
+|-|-|-|
+| **Population** | 2,746,388 | 631,524 |
+
+```{r}
+#| label: midwest-pop-plot
+#| code-fold: true
+city_pop_sf <- city_buf_sf |> sf::st_sample(size=c(16, 4)) |> sf::st_as_sf()
+city_pop_sf$city <- "Detroit"
+city_pop_sf[1:16, 'city'] <- "Chicago"
+city_pop_sf$sample <- "People"
+city_combined_sf <- bind_rows(city_cases_sf, city_pop_sf)
+# mapview(city_combined_sf, zcol="city", marker="sample")
+Flu = makeIcon(
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png",
+    20,
+    20
+)
+People = makeIcon(
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png",
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png",
+  20,
+  20
+)
+
+city_combined_sf$r <- ifelse(city_combined_sf$sample == "Flu", 0, 4)
+city_flu_sf <- city_combined_sf |> filter(sample == "Flu")
+city_ppl_sf <- city_combined_sf |> filter(sample == "People")
+leaflet(city_flu_sf) |>
+  addProviderTiles("CartoDB.Positron") |>
+  addMarkers(data=city_flu_sf, icon = Flu) |>
+  addMarkers(data=city_ppl_sf, icon = People)
+```
 
 ## References
 

@@ -348,28 +348,35 @@
     "href": "w08/slides.html#matérn-cluster-process",
     "title": "Week 8: Null Models and Marked Point Processes",
     "section": "Matérn Cluster Process",
-    "text": "Matérn Cluster Process\nspatstat.random::rMatClust(kappa, scale, mu, win)"
+    "text": "Matérn Cluster Process\n\n\nspatstat.random::rMatClust(kappa, scale, mu, win)\n\nDocs\n\n\n\nCode\nmatclust_sims &lt;- rMatClust(\n  kappa = 6,\n  scale = 0.075,\n  mu = 10,\n  nsim = 3\n)\nmatclust_df &lt;- imap(.x=matclust_sims, .f=to_sim_df) |&gt; bind_rows()\nmatclust_plot &lt;- matclust_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim), nrow=1) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks)\nmatclust_plot"
   },
   {
     "objectID": "w08/slides.html#matérn-inhibition-process-i-and-ii",
     "href": "w08/slides.html#matérn-inhibition-process-i-and-ii",
     "title": "Week 8: Null Models and Marked Point Processes",
     "section": "Matérn Inhibition Process (I and II)",
-    "text": "Matérn Inhibition Process (I and II)\nspatstat.random::rMaternI()\nspatstat.random::rMaternII()"
+    "text": "Matérn Inhibition Process (I and II)\nspatstat.random::rMaternI(kappa, r, win)\nspatstat.random::rMaternII(kappa, r, win)\n\n\n\n\n\n\n\nrMaternI() [Docs]\nrMaternII() [Docs]\n\n\n\n\n\n\n Generate events \\(\\mathbf{S} = \\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{N(\\lambda)}\\}\\) via Poisson point process with \\(\\lambda = \\kappa\\)\n\n\n Generate events \\(\\mathbf{S} = \\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{N(\\lambda)}\\}\\) via Poisson point process with \\(\\lambda = \\kappa\\), plus timestamp \\(t_i \\sim \\mathcal{U}(0,1)\\) for each \\(\\mathbf{s}_i\\)\n\n\n\n\n Delete all pairs of points \\(\\mathbf{s}_i\\), \\(\\mathbf{s}_j\\) for which \\(\\textsf{dist}(\\mathbf{s}_i, \\mathbf{s}_j) &lt; \\texttt{r}\\)\n\n\n For each pair of points \\(\\mathbf{s}_i\\), \\(\\mathbf{s}_j\\): if \\(\\textsf{dist}(\\mathbf{s}_i, \\mathbf{s}_j) &lt; \\texttt{r}\\), delete the later point\n\n\n\n\n\n\nCode\nmI_sims &lt;- rMaternI(\n  kappa = 60, r = 0.075, nsim=2\n)\nmII_sims &lt;- rMaternII(\n  kappa = 60, r = 0.075, nsim=2\n)\nmI_combined_df &lt;- imap(.x=mI_sims, .f=to_sim_df) |&gt; bind_rows() |&gt; mutate(sim=paste0(\"MI \",sim))\nmII_combined_df &lt;- imap(.x=mII_sims, .f=to_sim_df) |&gt; bind_rows() |&gt; mutate(sim=paste0(\"MII \",sim))\nm_combined_df &lt;- bind_rows(mI_combined_df, mII_combined_df)\nm_plot &lt;- m_combined_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim), nrow=1) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks)\nm_plot"
   },
   {
-    "objectID": "w08/slides.html#cox-processes-random-points-plus-random-intensity",
-    "href": "w08/slides.html#cox-processes-random-points-plus-random-intensity",
+    "objectID": "w08/slides.html#cox-processes-random-intensity-random-events",
+    "href": "w08/slides.html#cox-processes-random-intensity-random-events",
     "title": "Week 8: Null Models and Marked Point Processes",
-    "section": "Cox Processes: Random Points plus Random Intensity",
-    "text": "Cox Processes: Random Points plus Random Intensity\nrLGCP()\n\n\nCode\n# inhomogeneous LGCP with Gaussian covariance function\nm &lt;- as.im(function(x, y){\n  5 - 1.5 * (x - 0.5)^2 + 2 * (y - 0.5)^2\n}, W=owin())\nlgcp_sims &lt;- rLGCP(\"gauss\", m, var=0.15, scale =0.5, nsim=3)\n# lgcp_combined_df &lt;- imap(.x=ssi_sims, .f=to_sim_df) |&gt; bind_rows()\npar(mfrow=c(1,3))\nplot(attr(lgcp_sims[[1]], \"Lambda\"))\npoints(lgcp_sims[[1]], col='grey90', pch=19)\nplot(attr(lgcp_sims[[2]], \"Lambda\"))\npoints(lgcp_sims[[2]], col='grey90', pch=19)\nplot(attr(lgcp_sims[[3]], \"Lambda\"))\npoints(lgcp_sims[[3]], col='grey90', pch=19)"
+    "section": "Cox Processes: Random Intensity → Random Events",
+    "text": "Cox Processes: Random Intensity → Random Events\n\n\nspatstat.random::rLGCP(model, mu, param, win)\nmodels=c(\"exponential\", \"gauss\", \"stable\", \"gencauchy\", \"matern\")\n\nDocs\n\n\n\nCode\ncox_pcol &lt;- \"black\"\ncox_bg &lt;- \"grey90\"\ncox_pch &lt;- 21\n# inhomogeneous LGCP with Gaussian covariance function\nm &lt;- as.im(function(x, y){\n  5 - 1.5 * (x - 0.5)^2 + 2 * (y - 0.5)^2\n}, W=owin())\nlgcp_sims &lt;- rLGCP(\"gauss\", m, var=0.15, scale =0.5, nsim=3)\n# lgcp_combined_df &lt;- imap(.x=ssi_sims, .f=to_sim_df) |&gt; bind_rows()\nplot_lgcp &lt;- function(lgcp_sim) {\n  plot(attr(lgcp_sim, \"Lambda\"), main=NULL)\n  points(lgcp_sim, col=cox_pcol, bg=cox_bg, pch=cox_pch)\n}\npar(mfrow=c(1,3), mar=c(0,0,0,2), oma=c(0,0,0,0), las=2)\nnulls &lt;- lapply(X=lgcp_sims, FUN=plot_lgcp)"
   },
   {
-    "objectID": "w08/slides.html#maximum-likelihood-estimation-mle-refresher",
-    "href": "w08/slides.html#maximum-likelihood-estimation-mle-refresher",
+    "objectID": "w08/slides.html#constant-risk-hypothesis-motivation",
+    "href": "w08/slides.html#constant-risk-hypothesis-motivation",
     "title": "Week 8: Null Models and Marked Point Processes",
-    "section": "Maximum Likelihood Estimation (MLE) Refresher",
-    "text": "Maximum Likelihood Estimation (MLE) Refresher"
+    "section": "Constant Risk Hypothesis: Motivation",
+    "text": "Constant Risk Hypothesis: Motivation\n\nHere is a (fictional) map of flu cases in the US “Midwest”\nAre people in Chicago and Detroit equally “at risk”?\n\n\n\nCode\ncity_df &lt;- tibble::tribble(\n  ~city, ~lon, ~lat, ~pop,\n  \"Chicago\", 41.950567516553896, -87.93011127491978, 2746388,\n  \"Detroit\", 42.45123004999075, -83.18402319217698, 631524\n)\ncity_sf &lt;- sf::st_as_sf(\n  city_df,\n  coords = c(\"lat\", \"lon\"),\n  crs=4326\n)\ncity_buf_sf &lt;- city_sf |&gt; sf::st_buffer(20000)\ncity_cases_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=rep(10,2)) |&gt; sf::st_as_sf()\ncity_cases_sf$city &lt;- \"Detroit (10 Cases)\"\ncity_cases_sf[1:10, 'city'] &lt;- \"Chicago (10 Cases)\"\ncity_cases_sf$sample &lt;- \"Flu\"\nmapview(city_cases_sf, zcol=\"city\")"
+  },
+  {
+    "objectID": "w08/slides.html#constant-risk-hypothesis-base-rates",
+    "href": "w08/slides.html#constant-risk-hypothesis-base-rates",
+    "title": "Week 8: Null Models and Marked Point Processes",
+    "section": "Constant Risk Hypothesis: Base Rates",
+    "text": "Constant Risk Hypothesis: Base Rates\n\n\n\n\nChicago\nDetroit\n\n\n\n\nPopulation\n2,746,388\n631,524\n\n\n\n\n\nCode\ncity_pop_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=c(16, 4)) |&gt; sf::st_as_sf()\ncity_pop_sf$city &lt;- \"Detroit\"\ncity_pop_sf[1:16, 'city'] &lt;- \"Chicago\"\ncity_pop_sf$sample &lt;- \"People\"\ncity_combined_sf &lt;- bind_rows(city_cases_sf, city_pop_sf)\n# mapview(city_combined_sf, zcol=\"city\", marker=\"sample\")\nFlu = makeIcon(\n    \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png\",\n    \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png\",\n    20,\n    20\n)\nPeople = makeIcon(\n  \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png\",\n  \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png\",\n  20,\n  20\n)\n\ncity_combined_sf$r &lt;- ifelse(city_combined_sf$sample == \"Flu\", 0, 4)\ncity_flu_sf &lt;- city_combined_sf |&gt; filter(sample == \"Flu\")\ncity_ppl_sf &lt;- city_combined_sf |&gt; filter(sample == \"People\")\nleaflet(city_flu_sf) |&gt;\n  addProviderTiles(\"CartoDB.Positron\") |&gt;\n  addMarkers(data=city_flu_sf, icon = Flu) |&gt;\n  addMarkers(data=city_ppl_sf, icon = People)"
   },
   {
     "objectID": "w08/slides.html#references",
@@ -453,28 +460,35 @@
     "href": "w08/index.html#matérn-cluster-process",
     "title": "Week 8: Null Models and Marked Point Processes",
     "section": "Matérn Cluster Process",
-    "text": "Matérn Cluster Process\nspatstat.random::rMatClust(kappa, scale, mu, win)"
+    "text": "Matérn Cluster Process\n\n\nspatstat.random::rMatClust(kappa, scale, mu, win)\n\nDocs\n\n\n\n\nCode\nmatclust_sims &lt;- rMatClust(\n  kappa = 6,\n  scale = 0.075,\n  mu = 10,\n  nsim = 3\n)\nmatclust_df &lt;- imap(.x=matclust_sims, .f=to_sim_df) |&gt; bind_rows()\nmatclust_plot &lt;- matclust_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim), nrow=1) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks)\nmatclust_plot"
   },
   {
     "objectID": "w08/index.html#matérn-inhibition-process-i-and-ii",
     "href": "w08/index.html#matérn-inhibition-process-i-and-ii",
     "title": "Week 8: Null Models and Marked Point Processes",
     "section": "Matérn Inhibition Process (I and II)",
-    "text": "Matérn Inhibition Process (I and II)\nspatstat.random::rMaternI()\nspatstat.random::rMaternII()"
+    "text": "Matérn Inhibition Process (I and II)\nspatstat.random::rMaternI(kappa, r, win)\nspatstat.random::rMaternII(kappa, r, win)\n\n\n\n\n\n\n\nrMaternI() [Docs]\nrMaternII() [Docs]\n\n\n\n\n\n\n Generate events \\(\\mathbf{S} = \\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{N(\\lambda)}\\}\\) via Poisson point process with \\(\\lambda = \\kappa\\)\n\n\n Generate events \\(\\mathbf{S} = \\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{N(\\lambda)}\\}\\) via Poisson point process with \\(\\lambda = \\kappa\\), plus timestamp \\(t_i \\sim \\mathcal{U}(0,1)\\) for each \\(\\mathbf{s}_i\\)\n\n\n\n\n Delete all pairs of points \\(\\mathbf{s}_i\\), \\(\\mathbf{s}_j\\) for which \\(\\textsf{dist}(\\mathbf{s}_i, \\mathbf{s}_j) &lt; \\texttt{r}\\)\n\n\n For each pair of points \\(\\mathbf{s}_i\\), \\(\\mathbf{s}_j\\): if \\(\\textsf{dist}(\\mathbf{s}_i, \\mathbf{s}_j) &lt; \\texttt{r}\\), delete the later point\n\n\n\n\n\n\nCode\nmI_sims &lt;- rMaternI(\n  kappa = 60, r = 0.075, nsim=2\n)\nmII_sims &lt;- rMaternII(\n  kappa = 60, r = 0.075, nsim=2\n)\nmI_combined_df &lt;- imap(.x=mI_sims, .f=to_sim_df) |&gt; bind_rows() |&gt; mutate(sim=paste0(\"MI \",sim))\nmII_combined_df &lt;- imap(.x=mII_sims, .f=to_sim_df) |&gt; bind_rows() |&gt; mutate(sim=paste0(\"MII \",sim))\nm_combined_df &lt;- bind_rows(mI_combined_df, mII_combined_df)\nm_plot &lt;- m_combined_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim), nrow=1) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks)\nm_plot"
   },
   {
-    "objectID": "w08/index.html#cox-processes-random-points-plus-random-intensity",
-    "href": "w08/index.html#cox-processes-random-points-plus-random-intensity",
+    "objectID": "w08/index.html#cox-processes-random-intensity-random-events",
+    "href": "w08/index.html#cox-processes-random-intensity-random-events",
     "title": "Week 8: Null Models and Marked Point Processes",
-    "section": "Cox Processes: Random Points plus Random Intensity",
-    "text": "Cox Processes: Random Points plus Random Intensity\nrLGCP()\n\n\nCode\n# inhomogeneous LGCP with Gaussian covariance function\nm &lt;- as.im(function(x, y){\n  5 - 1.5 * (x - 0.5)^2 + 2 * (y - 0.5)^2\n}, W=owin())\nlgcp_sims &lt;- rLGCP(\"gauss\", m, var=0.15, scale =0.5, nsim=3)\n\n\nWarning: 32750 out of 65536 terms (50%) in FFT calculation of matrix square\nroot were negative, and were set to zero. Range: [-2.96, 1910]\n\n\nCode\n# lgcp_combined_df &lt;- imap(.x=ssi_sims, .f=to_sim_df) |&gt; bind_rows()\npar(mfrow=c(1,3))\nplot(attr(lgcp_sims[[1]], \"Lambda\"))\npoints(lgcp_sims[[1]], col='grey90', pch=19)\nplot(attr(lgcp_sims[[2]], \"Lambda\"))\npoints(lgcp_sims[[2]], col='grey90', pch=19)\nplot(attr(lgcp_sims[[3]], \"Lambda\"))\npoints(lgcp_sims[[3]], col='grey90', pch=19)"
+    "section": "Cox Processes: Random Intensity → Random Events",
+    "text": "Cox Processes: Random Intensity → Random Events\n\n\nspatstat.random::rLGCP(model, mu, param, win)\nmodels=c(\"exponential\", \"gauss\", \"stable\", \"gencauchy\", \"matern\")\n\nDocs\n\n\n\n\nCode\ncox_pcol &lt;- \"black\"\ncox_bg &lt;- \"grey90\"\ncox_pch &lt;- 21\n# inhomogeneous LGCP with Gaussian covariance function\nm &lt;- as.im(function(x, y){\n  5 - 1.5 * (x - 0.5)^2 + 2 * (y - 0.5)^2\n}, W=owin())\nlgcp_sims &lt;- rLGCP(\"gauss\", m, var=0.15, scale =0.5, nsim=3)\n\n\nWarning: 32750 out of 65536 terms (50%) in FFT calculation of matrix square\nroot were negative, and were set to zero. Range: [-2.96, 1910]\n\n\nCode\n# lgcp_combined_df &lt;- imap(.x=ssi_sims, .f=to_sim_df) |&gt; bind_rows()\nplot_lgcp &lt;- function(lgcp_sim) {\n  plot(attr(lgcp_sim, \"Lambda\"), main=NULL)\n  points(lgcp_sim, col=cox_pcol, bg=cox_bg, pch=cox_pch)\n}\npar(mfrow=c(1,3), mar=c(0,0,0,2), oma=c(0,0,0,0), las=2)\nnulls &lt;- lapply(X=lgcp_sims, FUN=plot_lgcp)"
   },
   {
-    "objectID": "w08/index.html#maximum-likelihood-estimation-mle-refresher",
-    "href": "w08/index.html#maximum-likelihood-estimation-mle-refresher",
+    "objectID": "w08/index.html#constant-risk-hypothesis-motivation",
+    "href": "w08/index.html#constant-risk-hypothesis-motivation",
     "title": "Week 8: Null Models and Marked Point Processes",
-    "section": "Maximum Likelihood Estimation (MLE) Refresher",
-    "text": "Maximum Likelihood Estimation (MLE) Refresher"
+    "section": "Constant Risk Hypothesis: Motivation",
+    "text": "Constant Risk Hypothesis: Motivation\n\nHere is a (fictional) map of flu cases in the US “Midwest”\nAre people in Chicago and Detroit equally “at risk”?\n\n\n\nCode\ncity_df &lt;- tibble::tribble(\n  ~city, ~lon, ~lat, ~pop,\n  \"Chicago\", 41.950567516553896, -87.93011127491978, 2746388,\n  \"Detroit\", 42.45123004999075, -83.18402319217698, 631524\n)\ncity_sf &lt;- sf::st_as_sf(\n  city_df,\n  coords = c(\"lat\", \"lon\"),\n  crs=4326\n)\ncity_buf_sf &lt;- city_sf |&gt; sf::st_buffer(20000)\ncity_cases_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=rep(10,2)) |&gt; sf::st_as_sf()\ncity_cases_sf$city &lt;- \"Detroit (10 Cases)\"\ncity_cases_sf[1:10, 'city'] &lt;- \"Chicago (10 Cases)\"\ncity_cases_sf$sample &lt;- \"Flu\"\nmapview(city_cases_sf, zcol=\"city\")"
+  },
+  {
+    "objectID": "w08/index.html#constant-risk-hypothesis-base-rates",
+    "href": "w08/index.html#constant-risk-hypothesis-base-rates",
+    "title": "Week 8: Null Models and Marked Point Processes",
+    "section": "Constant Risk Hypothesis: Base Rates",
+    "text": "Constant Risk Hypothesis: Base Rates\n\n\n\n\nChicago\nDetroit\n\n\n\n\nPopulation\n2,746,388\n631,524\n\n\n\n\n\nCode\ncity_pop_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=c(16, 4)) |&gt; sf::st_as_sf()\ncity_pop_sf$city &lt;- \"Detroit\"\ncity_pop_sf[1:16, 'city'] &lt;- \"Chicago\"\ncity_pop_sf$sample &lt;- \"People\"\ncity_combined_sf &lt;- bind_rows(city_cases_sf, city_pop_sf)\n# mapview(city_combined_sf, zcol=\"city\", marker=\"sample\")\nFlu = makeIcon(\n    \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png\",\n    \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png\",\n    20,\n    20\n)\nPeople = makeIcon(\n  \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png\",\n  \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png\",\n  20,\n  20\n)\n\ncity_combined_sf$r &lt;- ifelse(city_combined_sf$sample == \"Flu\", 0, 4)\ncity_flu_sf &lt;- city_combined_sf |&gt; filter(sample == \"Flu\")\ncity_ppl_sf &lt;- city_combined_sf |&gt; filter(sample == \"People\")\nleaflet(city_flu_sf) |&gt;\n  addProviderTiles(\"CartoDB.Positron\") |&gt;\n  addMarkers(data=city_flu_sf, icon = Flu) |&gt;\n  addMarkers(data=city_ppl_sf, icon = People)"
   },
   {
     "objectID": "w08/index.html#references",
@@ -2061,7 +2075,7 @@
     "href": "w05/index.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (46.622 -23.01422)\n27.93329\n\n\nPOINT (-1.424876 5.743208)\n22.84313\n\n\nPOINT (35.81085 22.01388)\n45.85726\n\n\nPOINT (18.88352 25.23303)\n73.74356\n\n\nPOINT (34.37802 1.403476)\n84.63116\n\n\nPOINT (47.47537 6.079216)\n84.04724\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n35\nUGA\nUganda\nMULTIPOLYGON (((33.90322 -1…\n\n\n44\nTZA\nTanzania\nMULTIPOLYGON (((39.49648 -6…\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n58\nSOM\nSomalia\nMULTIPOLYGON (((41.53271 -1…",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-7.217735 23.90845)\n78.328204\n\n\nPOINT (19.83603 29.2735)\n73.014963\n\n\nPOINT (-14.21671 20.53577)\n10.869055\n\n\nPOINT (37.3059 14.21546)\n73.392120\n\n\nPOINT (-13.64714 25.96125)\n5.704036\n\n\nPOINT (22.42251 -7.409311)\n17.762270\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n104\nMAR\nMorocco\nMULTIPOLYGON (((-2.219629 3…\n\n\n112\nMRT\nMauritania\nMULTIPOLYGON (((-16.37334 1…\n\n\n123\nLBY\nLibya\nMULTIPOLYGON (((9.51875 30….\n\n\n172\nETH\nEthiopia\nMULTIPOLYGON (((35.26836 5….",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -2071,7 +2085,7 @@
     "href": "w05/index.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n35\nUGA\nUganda\n84.63116\nMULTIPOLYGON (((33.90322 -1…\n\n\n44\nTZA\nTanzania\n46.61009\nMULTIPOLYGON (((39.49648 -6…\n\n\n53\nSDN\nSudan\n23.06537\nMULTIPOLYGON (((34.07812 9….\n\n\n58\nSOM\nSomalia\n84.04724\nMULTIPOLYGON (((41.53271 -1…\n\n\n91\nNGA\nNigeria\n37.86962\nMULTIPOLYGON (((7.300781 4….\n\n\n112\nMRT\nMauritania\n31.03910\nMULTIPOLYGON (((-16.37334 1…",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n104\nMAR\nMorocco\n5.704036\nMULTIPOLYGON (((-2.219629 3…\n\n\n112\nMRT\nMauritania\n78.328204\nMULTIPOLYGON (((-16.37334 1…\n\n\n112.1\nMRT\nMauritania\n10.869055\nMULTIPOLYGON (((-16.37334 1…\n\n\n112.2\nMRT\nMauritania\n33.175867\nMULTIPOLYGON (((-16.37334 1…\n\n\n123\nLBY\nLibya\n73.014963\nMULTIPOLYGON (((9.51875 30….\n\n\n172\nETH\nEthiopia\n73.392120\nMULTIPOLYGON (((35.26836 5….",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -2168,14 +2182,14 @@
     "href": "w05/slides.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (40.03108 -15.95858)\n20.689861\n\n\nPOINT (-0.9783773 31.55465)\n43.067352\n\n\nPOINT (10.98445 10.8647)\n61.867548\n\n\nPOINT (22.61897 20.88943)\n6.621852\n\n\nPOINT (37.42935 -11.64643)\n7.322813\n\n\nPOINT (21.87357 27.6927)\n75.571615\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n44\nTZA\nTanzania\nMULTIPOLYGON (((39.49648 -6…\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n91\nNGA\nNigeria\nMULTIPOLYGON (((7.300781 4….\n\n\n103\nMOZ\nMozambique\nMULTIPOLYGON (((31.28789 -2…"
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-6.070407 12.72059)\n99.082808\n\n\nPOINT (34.45662 28.43867)\n0.401906\n\n\nPOINT (15.03447 11.45055)\n10.294601\n\n\nPOINT (26.7031 -26.93209)\n6.343333\n\n\nPOINT (13.00606 -4.779246)\n27.629363\n\n\nPOINT (9.43508 14.21364)\n73.461287\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n92\nNER\nNiger\nMULTIPOLYGON (((13.60635 13…\n\n\n114\nMLI\nMali\nMULTIPOLYGON (((-11.3894 12…\n\n\n177\nEGY\nEgypt\nMULTIPOLYGON (((36.87139 21…"
   },
   {
     "objectID": "w05/slides.html#our-first-real-spatial-join-st_join",
     "href": "w05/slides.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n44\nTZA\nTanzania\n7.322813\nMULTIPOLYGON (((39.49648 -6…\n\n\n53\nSDN\nSudan\n97.919917\nMULTIPOLYGON (((34.07812 9….\n\n\n53.1\nSDN\nSudan\n1.994860\nMULTIPOLYGON (((34.07812 9….\n\n\n91\nNGA\nNigeria\n61.867548\nMULTIPOLYGON (((7.300781 4….\n\n\n103\nMOZ\nMozambique\n20.689861\nMULTIPOLYGON (((31.28789 -2…\n\n\n123\nLBY\nLibya\n6.621852\nMULTIPOLYGON (((9.51875 30…."
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n57\nZAF\nSouth Africa\n6.343333\nMULTIPOLYGON (((29.36484 -2…\n\n\n92\nNER\nNiger\n73.461287\nMULTIPOLYGON (((13.60635 13…\n\n\n92.1\nNER\nNiger\n61.145986\nMULTIPOLYGON (((13.60635 13…\n\n\n92.2\nNER\nNiger\n44.201074\nMULTIPOLYGON (((13.60635 13…\n\n\n114\nMLI\nMali\n99.082808\nMULTIPOLYGON (((-11.3894 12…\n\n\n114.1\nMLI\nMali\n8.070259\nMULTIPOLYGON (((-11.3894 12…"
   },
   {
     "objectID": "w05/slides.html#but-we-were-still-in-easy-mode",

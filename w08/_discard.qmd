@@ -72,3 +72,30 @@ tree_ppp |> sf::st_as_sf() |> ggplot() +
 | ![](images/pines.png){fig-align="center" width="100%"} | ![](images/intensity_plot.png) | ![](images/lest.png) |
 
 : {tbl-colwidths="[29,38,33]"}
+
+---
+
+
+:::: {.columns}
+::: {.column width="50%"}
+
+<center style='margin-top: 12px;'>
+**`rMaternI()`** \[[Docs](https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMaternI.html){target='_blank'}\]
+</center>
+
+* <i class='bi bi-1-circle'></i> Generate events $\mathbf{S} = \{\mathbf{s}_1, \ldots, \mathbf{s}_{N(\lambda)}\}$ via Poisson point process with $\lambda = \kappa$
+* <i class='bi bi-2-circle'></i> Delete all **pairs** of points $\mathbf{s}_i$, $\mathbf{s}_j$ for which $\textsf{dist}(\mathbf{s}_i, \mathbf{s}_j) < \texttt{r}$
+
+:::
+::: {.column width="50%"}
+
+<center style='margin-top: 12px;'>
+**`rMaternII()`** \[[Docs](https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMaternII.html){target='_blank'}\]
+</center>
+
+* <i class='bi bi-1-circle'></i> Generate events $\mathbf{S} = \{\mathbf{s}_1, \ldots, \mathbf{s}_{N(\lambda)}\}$ via Poisson point process with $\lambda = \kappa$.
+  * Each event $\mathbf{s}_i$ has a **timestamp** $t_i \sim \mathcal{U}(0,1)$
+* <i class='bi bi-2-circle'></i> Delete all **pairs** of points $\mathbf{s}_i$, $\mathbf{s}_j$ for which $\textsf{dist}(\mathbf{s}_i, \mathbf{s}_j) < \texttt{r}$
+
+:::
+::::
