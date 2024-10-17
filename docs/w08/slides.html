@@ -433,33 +433,28 @@ Jeff Jacobs
   <p class="date">Wednesday, October 16, 2024</p>
 </section>
 <section>
-<section id="summary-statistics-vs.-models" class="title-slide slide level1 smaller smaller-table center" data-stack-name="W07 Recap">
-<h1>Summary Statistics vs.&nbsp;Models</h1>
+<section id="hw4-tips" class="title-slide slide level1 center">
+<h1>HW4 Tips!</h1>
 <ul>
-<li>tldr: Moran’s <span class="math inline">\(I\)</span> is to <strong>GISers</strong> as a thermometer is to a <strong>doctors</strong>:
-<ul>
-<li>Reveals <strong>symptoms</strong> only; many possible underlying <strong>causes!</strong></li>
-</ul></li>
+<li><code>ppp</code> Objects</li>
+<li>Converting between <code>ppp</code> and <code>sf</code></li>
+<li>Plotting</li>
 </ul>
 <div class="hidden">
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
+<span id="cb1-2"><a></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb1-3"><a></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-4"><a></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-5"><a></a><span class="fu">library</span>(spatstat) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
 </section>
-<section id="same-points-vastly-different-processes" class="slide level2">
-<h2>Same Points, Vastly Different Processes</h2>
-</section></section>
-<section>
-<section id="point-process-models" class="title-slide slide level1 center" data-stack-name="Point Process Models">
-<h1>Point Process Models</h1>
-
-</section>
-<section id="our-new-library-spatstat" class="slide level2 crunch-title">
-<h2>Our New Library: <code>spatstat</code>!</h2>
+<section id="from-last-week-our-new-library-spatstat" class="slide level2 crunch-title">
+<h2>[From Last Week] Our New Library: <code>spatstat</code>!</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -476,68 +471,1079 @@ Jeff Jacobs
 </div>
 </div></div>
 </section>
+<section id="ppp-objects" class="slide level2 smaller crunch-title crunch-ul smaller-table">
+<h2><code>ppp</code> Objects</h2>
+<ul>
+<li>The <strong>main</strong> datatype used to represent <strong>P</strong>lanar <strong>P</strong>oint <strong>P</strong>atterns [<code>spatstat</code> book p.&nbsp;41]</li>
+<li>Unlike <code>sf</code> objects, which contain data+geometries for any desired collection of <span class="math inline">\(N\)</span> entities, <code>ppp</code> objects are <strong>required</strong> to have at least an <strong>observation window</strong>!</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><code>sf</code> Creation:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>tree_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">lon=</span><span class="fu">runif</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">lat=</span><span class="fu">runif</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">age=</span><span class="fu">runif</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb2-2"><a></a>tree_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(</span>
+<span id="cb2-3"><a></a>  tree_df,</span>
+<span id="cb2-4"><a></a>  <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">'lon'</span>, <span class="st">'lat'</span>)</span>
+<span id="cb2-5"><a></a>)</span>
+<span id="cb2-6"><a></a>tree_sf <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">age</th>
+<th style="text-align: left;">geometry</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.0233144</td>
+<td style="text-align: left;">POINT (0.1487039 0.5640943)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.6882371</td>
+<td style="text-align: left;">POINT (0.1248064 0.8612631)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.3889197</td>
+<td style="text-align: left;">POINT (0.6370261 0.5268693)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.6638135</td>
+<td style="text-align: left;">POINT (0.5211425 0.4551448)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><code>ppp</code> Creation:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>pois_ppp <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
+<span id="cb3-2"><a></a>  <span class="at">lambda=</span><span class="dv">100</span>, <span class="at">win=</span>spatstat.geom<span class="sc">::</span><span class="fu">square</span>(<span class="dv">1</span>)</span>
+<span id="cb3-3"><a></a>)</span>
+<span id="cb3-4"><a></a>pois_ppp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Planar point pattern: 91 points
+window: rectangle = [0, 1] x [0, 1] units</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">attributes</span>(pois_ppp)<span class="sc">$</span>names</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "window"     "n"          "x"          "y"          "markformat"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>pois_ppp<span class="sc">$</span>x <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5735346 0.7526621 0.8129999 0.7419696</code></pre>
+</div>
+</div>
+</div></div>
+</section>
+<section id="ppp-leftrightarrow-sf-conversion" class="slide level2 smaller smaller-table crunch-title crunch-details">
+<h2><code>ppp</code> <span class="math inline">\(\leftrightarrow\)</span> <code>sf</code> Conversion</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><code>ppp</code> to <code>sf</code> Conversion:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>pois_sf <span class="ot">&lt;-</span> pois_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb9-2"><a></a>pois_sf <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">label</th>
+<th style="text-align: left;">geom</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">window</td>
+<td style="text-align: left;">POLYGON ((0 0, 1 0, 1 1, 0 …</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5735346 0.6204983)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.7526621 0.4205887)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8129999 0.6844816)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>pois_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-2"><a></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>pois_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label<span class="sc">==</span><span class="st">"window"</span>), <span class="fu">aes</span>(<span class="at">fill=</span><span class="st">'grey'</span>)) <span class="sc">+</span></span>
+<span id="cb10-3"><a></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>pois_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">!=</span> <span class="st">"window"</span>), <span class="fu">aes</span>(<span class="at">color=</span><span class="st">'black'</span>)) <span class="sc">+</span></span>
+<span id="cb10-4"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">28</span>) <span class="sc">+</span></span>
+<span id="cb10-5"><a></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"gray90"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"label == 'window'"</span>)) <span class="sc">+</span></span>
+<span id="cb10-6"><a></a>  <span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"label == 'point'"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/converted-sf-plot-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><code>sf</code> to <code>ppp</code> Conversion:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>square_sfc <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_polygon</span>(<span class="fu">list</span>(</span>
+<span id="cb11-2"><a></a>  <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">nrow=</span><span class="dv">5</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb11-3"><a></a>)) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_sfc</span>()</span>
+<span id="cb11-4"><a></a>tree_ppp <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(</span>
+<span id="cb11-5"><a></a>  sf<span class="sc">::</span><span class="fu">st_as_sfc</span>(tree_sf),</span>
+<span id="cb11-6"><a></a>  <span class="at">W=</span><span class="fu">as.owin</span>(square_sfc)</span>
+<span id="cb11-7"><a></a>)</span>
+<span id="cb11-8"><a></a>tree_ppp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Planar point pattern: 100 points
+window: polygonal boundary
+enclosing rectangle: [0, 1] x [0, 1] units</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>tree_ppp_sf <span class="ot">&lt;-</span> tree_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb13-2"><a></a>tree_ppp_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-3"><a></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill=</span><span class="st">'gray90'</span>)) <span class="sc">+</span></span>
+<span id="cb13-4"><a></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>tree_ppp_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">!=</span> <span class="st">"window"</span>), <span class="fu">aes</span>(<span class="at">color=</span><span class="st">'black'</span>)) <span class="sc">+</span></span>
+<span id="cb13-5"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">28</span>) <span class="sc">+</span></span>
+<span id="cb13-6"><a></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"gray90"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"tree_ppp$window"</span>)) <span class="sc">+</span></span>
+<span id="cb13-7"><a></a>  <span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"tree_ppp$x, tree_ppp$y"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/converted-ppp-plot-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="summary-statistics-vs.-models" class="title-slide slide level1 smaller smaller-table center" data-stack-name="W07 Recap">
+<h1>Summary Statistics vs.&nbsp;Models</h1>
+<ul>
+<li>tldr: Moran’s <span class="math inline">\(I\)</span> is to <strong>GISers</strong> what a thermometer is to a <strong>doctors</strong>:
+<ul>
+<li>Reveals <strong>symptoms</strong> only; many possible underlying <strong>causes!</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="the-tree-grid-mystery" class="slide level2">
+<h2>The Tree-Grid Mystery</h2>
+<ul>
+<li>You’ve been hired as an archaeologist—congratulations! Your job: determine whether arrangement of <strong>trees</strong> formed:
+<ul>
+<li><strong>Naturally</strong>, via a process of <strong>resource competition</strong>, or</li>
+<li><strong>Artificially</strong>, via an ancient civilization planting in a <strong>grid</strong>…</li>
+</ul></li>
+</ul>
+
+<img data-src="index_files/figure-revealjs/tree-mystery-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="two-possible-histories" class="slide level2">
+<h2>Two Possible Histories…</h2>
+<center>
+Artificial
+</center>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>square_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(spatstat.geom<span class="sc">::</span><span class="fu">square</span>(<span class="dv">1</span>))</span>
+<span id="cb14-2"><a></a>grid_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(sf<span class="sc">::</span><span class="fu">st_make_grid</span>(square_sf))</span>
+<span id="cb14-3"><a></a>grid_buffer_sf <span class="ot">&lt;-</span> grid_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_buffer</span>(<span class="at">dist=</span><span class="sc">-</span><span class="fl">0.01</span>, <span class="at">singleSide =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-4"><a></a>grid_buffer_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-5"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb14-6"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">32</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/artificial-grid-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>grid_points <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(grid_buffer_sf, <span class="at">size=</span><span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">100</span>))</span>
+<span id="cb15-2"><a></a>grid_buffer_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb15-3"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb15-4"><a></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>grid_points) <span class="sc">+</span></span>
+<span id="cb15-5"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">32</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/artificial-grid-points-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>grid_ppp <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(grid_points, <span class="at">W=</span>spatstat.geom<span class="sc">::</span><span class="fu">square</span>(<span class="dv">1</span>))</span>
+<span id="cb16-2"><a></a>grid_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb16-3"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb16-4"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">32</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/artificial-grid-result-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<center>
+Natural
+</center>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>r <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb17-2"><a></a>pois_ppp <span class="ot">&lt;-</span> <span class="fu">rpoispp</span>(<span class="dv">150</span>)</span>
+<span id="cb17-3"><a></a>pois_sf <span class="ot">&lt;-</span> pois_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb17-4"><a></a>pois_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb17-5"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb17-6"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">32</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/gen-trees-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>age <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fu">npoints</span>(pois_ppp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>pair_dists <span class="ot">&lt;-</span> <span class="fu">pairdist</span>(pois_ppp)</span>
+<span id="cb19-2"><a></a>close <span class="ot">&lt;-</span> (pair_dists <span class="sc">&lt;</span> r)</span>
+<span id="cb19-3"><a></a>earlier <span class="ot">&lt;-</span> <span class="fu">outer</span>(age, age, <span class="st">"&lt;"</span>)</span>
+<span id="cb19-4"><a></a>kill_younger <span class="ot">&lt;-</span> <span class="fu">apply</span>(close <span class="sc">&amp;</span> earlier, <span class="dv">1</span>, any)</span>
+<span id="cb19-5"><a></a>kill_younger</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE
+ [13]  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE
+ [25]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE
+ [37]  TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE
+ [49]  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+ [61]  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
+ [73] FALSE  TRUE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE
+ [85]  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+ [97] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
+[109]  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE
+[121] FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE
+[133] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE FALSE
+[145]  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE
+[157] FALSE FALSE  TRUE FALSE FALSE  TRUE</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>pois_sf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">label</th>
+<th style="text-align: left;">geom</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">window</td>
+<td style="text-align: left;">POLYGON ((0 0, 1 0, 1 1, 0 …</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8440522 0.4045792)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.6075552 0.9573304)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.4987798 0.05945179)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3594386 0.8196886)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3192883 0.09144979)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3339818 0.3519297)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.9960586 0.2352039)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5023149 0.1463213)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2031453 0.9329884)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3195649 0.7788332)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.6374641 0.6609577)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.866306 0.9406098)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3500509 0.9349553)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.1386412 0.7930098)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2270282 0.5936232)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.0007603387 0.8939324)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.6639978 0.07291845)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.04183751 0.7953254)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.7692919 0.07420316)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8966734 0.5669067)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.680173 0.1047129)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.1029554 0.5973225)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.678082 0.618449)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.9426387 0.6377815)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.1930129 0.2079815)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.00687689 0.6295399)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.7579211 0.8084702)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.7935303 0.4226018)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.1110797 0.4496461)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.814119 0.7271356)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8333765 0.9778866)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.4452431 0.236835)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3725147 0.9793204)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5484615 0.8496407)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.7018008 0.8867349)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8467595 0.8799697)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.7890788 0.8195922)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.05701163 0.2473253)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3989724 0.9759088)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8151907 0.8496833)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.9505571 0.3174932)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.9718602 0.1682263)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.1384563 0.04891575)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3898292 0.257269)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3245741 0.3526058)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.413617 0.7345036)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2107101 0.02047935)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.854959 0.2839288)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.9669026 0.7876686)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8824994 0.1197676)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.4415755 0.7620077)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3260848 0.3700436)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.7920838 0.9057427)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.994449 0.7551598)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3259606 0.8891382)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2505911 0.7855123)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.1032182 0.3241149)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.4791999 0.4080105)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.9621832 0.9952471)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3692764 0.2047879)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.6434393 0.4059393)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2513965 0.5776309)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5370047 0.8789696)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3944789 0.4572028)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2483371 0.9371469)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2904896 0.5697633)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.102515 0.6681046)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2422721 0.3443844)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.4246714 0.7562044)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8690251 0.31807)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.7230102 0.6977789)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.4551215 0.9631864)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8062577 0.5720152)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.9050335 0.6909647)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8696058 0.6788358)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.02830173 0.1118417)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2610091 0.5631683)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.6405869 0.1636256)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5881439 0.411886)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5219839 0.7971373)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8112785 0.6867056)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.4825621 0.1213937)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.05407231 0.6873451)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.9916155 0.04101249)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.7303618 0.7671472)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2844643 0.3147539)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5109602 0.3519364)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.02804164 0.1932839)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.1829147 0.6975817)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8944286 0.1340684)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2587953 0.384634)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.4715034 0.9724619)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.1617179 0.1695654)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3770462 0.9643419)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8753687 0.05342488)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.0351449 0.1315847)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.02500562 0.438485)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.9286492 0.5828054)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.271905 0.9164324)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.05726638 0.9948268)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5409185 0.9735742)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.03613954 0.5372254)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.1073173 0.8248645)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2387985 0.2209484)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.484284 0.8799838)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.1403762 0.3733169)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8219424 0.6994979)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8760778 0.01935782)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8569616 0.2893711)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2049525 0.3508076)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5670545 0.065923)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5311441 0.3319065)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5134974 0.373112)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.9105045 0.6575949)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.9524611 0.4945584)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.6030209 0.5303973)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.9571634 0.1390215)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.9743885 0.7257924)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.4755921 0.938798)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2591782 0.6020617)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5598867 0.4133512)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.1093762 0.9244295)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.7661875 0.9383103)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2337924 0.7940842)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.7332217 0.9353052)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5392077 0.302269)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.9126574 0.9752172)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5730841 0.7460921)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.4806421 0.2713818)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.6336667 0.3452001)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.1970004 0.7140906)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.07140515 0.2119658)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.999474 0.6393323)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.4685001 0.5590801)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3755957 0.744466)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.2673546 0.8768559)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.008979971 0.9035345)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.4605666 0.3648888)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.676427 0.1104338)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.6728238 0.7625206)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.430173 0.1319295)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3409953 0.261931)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.367188 0.8111216)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.4020791 0.1416748)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3702866 0.1976611)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.1233179 0.5722665)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.4842088 0.8011827)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5227724 0.2677362)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.7920813 0.7556165)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3392952 0.7939991)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.0736078 0.2124699)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.00712279 0.3062591)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.9154066 0.3369133)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.7352944 0.9006699)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.1624203 0.5013679)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.09934338 0.1220048)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.3927792 0.01115892)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.86163 0.5111103)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8586673 0.4514921)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.6287814 0.4000175)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.04775872 0.4831958)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.6090938 0.5011616)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co">#pois_sf &lt;- pois_sf |&gt; mutate(kill_younger=kill_younger)</span></span>
+<span id="cb22-2"><a></a><span class="co"># pois_sf</span></span>
+<span id="cb22-3"><a></a><span class="co"># pois_sf |&gt; ggplot() +</span></span>
+<span id="cb22-4"><a></a><span class="co">#   geom_sf() +</span></span>
+<span id="cb22-5"><a></a><span class="co">#   theme_classic(base_size=32)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div><div class="column" style="width:33%;">
+
+</div></div>
+</section></section>
+<section>
+<section id="point-process-models" class="title-slide slide level1 center" data-stack-name="Point Process Models">
+<h1>Point Process Models</h1>
+
+</section>
 <section id="why-do-events-appear-where-they-do" class="slide level2 smaller title-12 inline-90">
 <h2><em>Why</em> Do Events Appear Where They Do?</h2>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-2"><a></a><span class="fu">library</span>(spatstat)</span>
-<span id="cb2-3"><a></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
-<span id="cb2-4"><a></a>N <span class="ot">&lt;-</span> <span class="dv">60</span></span>
-<span id="cb2-5"><a></a>r_core <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb2-6"><a></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
-<span id="cb2-7"><a></a><span class="co"># Regularity via Inhibition</span></span>
-<span id="cb2-8"><a></a><span class="co">#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)</span></span>
-<span id="cb2-9"><a></a>cond_reg_sims <span class="ot">&lt;-</span> <span class="fu">rSSI</span>(<span class="at">r=</span>r_core, N)</span>
-<span id="cb2-10"><a></a><span class="co"># CSR data</span></span>
-<span id="cb2-11"><a></a><span class="co">#csr_sims &lt;- rpoispp(N, win=obs_window)</span></span>
-<span id="cb2-12"><a></a>cond_sr_sims <span class="ot">&lt;-</span> <span class="fu">rpoint</span>(N, <span class="at">win=</span>obs_window)</span>
-<span id="cb2-13"><a></a><span class="do">### Clustered data</span></span>
-<span id="cb2-14"><a></a><span class="co">#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)</span></span>
-<span id="cb2-15"><a></a><span class="co">#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)</span></span>
-<span id="cb2-16"><a></a><span class="co">#clust_sims &lt;- rclusterBKBC(clusters="MatClust", kappa=10, mu=10, scale=0.05, verbose=FALSE)</span></span>
-<span id="cb2-17"><a></a><span class="co"># Each cluster consist of 10 points in a disc of radius 0.2</span></span>
-<span id="cb2-18"><a></a>nclust <span class="ot">&lt;-</span> <span class="cf">function</span>(x0, y0, radius, n) {</span>
-<span id="cb2-19"><a></a>    <span class="co">#print(n)</span></span>
-<span id="cb2-20"><a></a>    <span class="fu">return</span>(<span class="fu">runifdisc</span>(<span class="dv">10</span>, radius, <span class="at">centre=</span><span class="fu">c</span>(x0, y0)))</span>
-<span id="cb2-21"><a></a>}</span>
-<span id="cb2-22"><a></a>cond_clust_sims <span class="ot">&lt;-</span> <span class="fu">rNeymanScott</span>(<span class="at">kappa=</span><span class="dv">5</span>, <span class="at">expand=</span><span class="fl">0.0</span>, <span class="at">rclust=</span>nclust, <span class="at">radius=</span><span class="dv">2</span><span class="sc">*</span>r_core, <span class="at">n=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb23-2"><a></a><span class="fu">library</span>(spatstat)</span>
+<span id="cb23-3"><a></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb23-4"><a></a>N <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb23-5"><a></a>r_core <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb23-6"><a></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
+<span id="cb23-7"><a></a><span class="co"># Regularity via Inhibition</span></span>
+<span id="cb23-8"><a></a><span class="co">#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)</span></span>
+<span id="cb23-9"><a></a>cond_reg_sims <span class="ot">&lt;-</span> <span class="fu">rSSI</span>(<span class="at">r=</span>r_core, N)</span>
+<span id="cb23-10"><a></a><span class="co"># CSR data</span></span>
+<span id="cb23-11"><a></a><span class="co">#csr_sims &lt;- rpoispp(N, win=obs_window)</span></span>
+<span id="cb23-12"><a></a>cond_sr_sims <span class="ot">&lt;-</span> <span class="fu">rpoint</span>(N, <span class="at">win=</span>obs_window)</span>
+<span id="cb23-13"><a></a><span class="do">### Clustered data</span></span>
+<span id="cb23-14"><a></a><span class="co">#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)</span></span>
+<span id="cb23-15"><a></a><span class="co">#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)</span></span>
+<span id="cb23-16"><a></a><span class="co">#clust_sims &lt;- rclusterBKBC(clusters="MatClust", kappa=10, mu=10, scale=0.05, verbose=FALSE)</span></span>
+<span id="cb23-17"><a></a><span class="co"># Each cluster consist of 10 points in a disc of radius 0.2</span></span>
+<span id="cb23-18"><a></a>nclust <span class="ot">&lt;-</span> <span class="cf">function</span>(x0, y0, radius, n) {</span>
+<span id="cb23-19"><a></a>    <span class="co">#print(n)</span></span>
+<span id="cb23-20"><a></a>    <span class="fu">return</span>(<span class="fu">runifdisc</span>(<span class="dv">10</span>, radius, <span class="at">centre=</span><span class="fu">c</span>(x0, y0)))</span>
+<span id="cb23-21"><a></a>}</span>
+<span id="cb23-22"><a></a>cond_clust_sims <span class="ot">&lt;-</span> <span class="fu">rNeymanScott</span>(<span class="at">kappa=</span><span class="dv">5</span>, <span class="at">expand=</span><span class="fl">0.0</span>, <span class="at">rclust=</span>nclust, <span class="at">radius=</span><span class="dv">2</span><span class="sc">*</span>r_core, <span class="at">n=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>center_l_function <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
-<span id="cb3-2"><a></a>  <span class="cf">if</span> (<span class="sc">!</span>spatstat.geom<span class="sc">::</span><span class="fu">is.ppp</span>(x) <span class="sc">&amp;&amp;</span> <span class="sc">!</span>spatstat.geom<span class="sc">::</span><span class="fu">is.fv</span>(x)) {</span>
-<span id="cb3-3"><a></a>    <span class="fu">stop</span>(<span class="st">"Please provide either ppp or fv object."</span>)</span>
-<span id="cb3-4"><a></a>  }</span>
-<span id="cb3-5"><a></a>  <span class="cf">if</span> (spatstat.geom<span class="sc">::</span><span class="fu">is.ppp</span>(x)) {</span>
-<span id="cb3-6"><a></a>    x <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">Lest</span>(x, ...)</span>
-<span id="cb3-7"><a></a>  }</span>
-<span id="cb3-8"><a></a>  r <span class="ot">&lt;-</span> x<span class="sc">$</span>r</span>
-<span id="cb3-9"><a></a>  l_centered <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">eval.fv</span>(x <span class="sc">-</span> r)</span>
-<span id="cb3-10"><a></a>  <span class="fu">return</span>(l_centered)</span>
-<span id="cb3-11"><a></a>}</span>
-<span id="cb3-12"><a></a>cond_clust_sf <span class="ot">&lt;-</span> cond_clust_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
-<span id="cb3-13"><a></a>pines_plot <span class="ot">&lt;-</span> cond_clust_sf <span class="sc">|&gt;</span></span>
-<span id="cb3-14"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb3-15"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb3-16"><a></a>  <span class="fu">dsan_theme</span>(<span class="st">"full"</span>)</span>
-<span id="cb3-17"><a></a><span class="fu">ggsave</span>(<span class="st">"images/pines.png"</span>, pines_plot)</span>
-<span id="cb3-18"><a></a><span class="co"># density() calls density.ppp() if the argument is a ppp object</span></span>
-<span id="cb3-19"><a></a>den <span class="ot">&lt;-</span> <span class="fu">density</span>(cond_clust_sims, <span class="at">sigma =</span> <span class="fl">0.1</span>)</span>
-<span id="cb3-20"><a></a><span class="co">#summary(den)</span></span>
-<span id="cb3-21"><a></a><span class="fu">png</span>(<span class="st">"images/intensity_plot.png"</span>)</span>
-<span id="cb3-22"><a></a><span class="fu">plot</span>(den, <span class="at">main =</span> <span class="st">"Intensity λ(s)"</span>)</span>
-<span id="cb3-23"><a></a><span class="fu">contour</span>(den, <span class="at">add =</span> <span class="cn">TRUE</span>) <span class="co"># contour plot</span></span>
-<span id="cb3-24"><a></a><span class="fu">dev.off</span>()</span>
-<span id="cb3-25"><a></a><span class="co"># And Kest / Lest</span></span>
-<span id="cb3-26"><a></a>kest_result <span class="ot">&lt;-</span> <span class="fu">Kest</span>(cond_clust_sims, <span class="at">rmax=</span><span class="fl">0.5</span>, <span class="at">correction=</span><span class="st">"best"</span>)</span>
-<span id="cb3-27"><a></a>lest_result <span class="ot">&lt;-</span> <span class="fu">center_l_function</span>(cond_clust_sims, <span class="at">rmax=</span><span class="fl">0.5</span>)</span>
-<span id="cb3-28"><a></a><span class="fu">png</span>(<span class="st">"images/lest.png"</span>)</span>
-<span id="cb3-29"><a></a><span class="fu">plot</span>(lest_result, <span class="at">main=</span><span class="st">"K(h)"</span>)</span>
-<span id="cb3-30"><a></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>center_l_function <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
+<span id="cb24-2"><a></a>  <span class="cf">if</span> (<span class="sc">!</span>spatstat.geom<span class="sc">::</span><span class="fu">is.ppp</span>(x) <span class="sc">&amp;&amp;</span> <span class="sc">!</span>spatstat.geom<span class="sc">::</span><span class="fu">is.fv</span>(x)) {</span>
+<span id="cb24-3"><a></a>    <span class="fu">stop</span>(<span class="st">"Please provide either ppp or fv object."</span>)</span>
+<span id="cb24-4"><a></a>  }</span>
+<span id="cb24-5"><a></a>  <span class="cf">if</span> (spatstat.geom<span class="sc">::</span><span class="fu">is.ppp</span>(x)) {</span>
+<span id="cb24-6"><a></a>    x <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">Lest</span>(x, ...)</span>
+<span id="cb24-7"><a></a>  }</span>
+<span id="cb24-8"><a></a>  r <span class="ot">&lt;-</span> x<span class="sc">$</span>r</span>
+<span id="cb24-9"><a></a>  l_centered <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">eval.fv</span>(x <span class="sc">-</span> r)</span>
+<span id="cb24-10"><a></a>  <span class="fu">return</span>(l_centered)</span>
+<span id="cb24-11"><a></a>}</span>
+<span id="cb24-12"><a></a>cond_clust_sf <span class="ot">&lt;-</span> cond_clust_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb24-13"><a></a>pines_plot <span class="ot">&lt;-</span> cond_clust_sf <span class="sc">|&gt;</span></span>
+<span id="cb24-14"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb24-15"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb24-16"><a></a>  <span class="fu">dsan_theme</span>(<span class="st">"full"</span>)</span>
+<span id="cb24-17"><a></a><span class="fu">ggsave</span>(<span class="st">"images/pines.png"</span>, pines_plot)</span>
+<span id="cb24-18"><a></a><span class="co"># density() calls density.ppp() if the argument is a ppp object</span></span>
+<span id="cb24-19"><a></a>den <span class="ot">&lt;-</span> <span class="fu">density</span>(cond_clust_sims, <span class="at">sigma =</span> <span class="fl">0.1</span>)</span>
+<span id="cb24-20"><a></a><span class="co">#summary(den)</span></span>
+<span id="cb24-21"><a></a><span class="fu">png</span>(<span class="st">"images/intensity_plot.png"</span>)</span>
+<span id="cb24-22"><a></a><span class="fu">plot</span>(den, <span class="at">main =</span> <span class="st">"Intensity λ(s)"</span>)</span>
+<span id="cb24-23"><a></a><span class="fu">contour</span>(den, <span class="at">add =</span> <span class="cn">TRUE</span>) <span class="co"># contour plot</span></span>
+<span id="cb24-24"><a></a><span class="fu">dev.off</span>()</span>
+<span id="cb24-25"><a></a><span class="co"># And Kest / Lest</span></span>
+<span id="cb24-26"><a></a>kest_result <span class="ot">&lt;-</span> <span class="fu">Kest</span>(cond_clust_sims, <span class="at">rmax=</span><span class="fl">0.5</span>, <span class="at">correction=</span><span class="st">"best"</span>)</span>
+<span id="cb24-27"><a></a>lest_result <span class="ot">&lt;-</span> <span class="fu">center_l_function</span>(cond_clust_sims, <span class="at">rmax=</span><span class="fl">0.5</span>)</span>
+<span id="cb24-28"><a></a><span class="fu">png</span>(<span class="st">"images/lest.png"</span>)</span>
+<span id="cb24-29"><a></a><span class="fu">plot</span>(lest_result, <span class="at">main=</span><span class="st">"K(h)"</span>)</span>
+<span id="cb24-30"><a></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <table>
@@ -591,6 +1597,14 @@ Jeff Jacobs
 </section>
 <section id="maximum-likelihood-estimation-mle-refresher" class="slide level2">
 <h2>Maximum Likelihood Estimation (MLE) Refresher</h2>
+</section></section>
+<section>
+<section id="testing-hypotheses" class="title-slide slide level1 center">
+<h1>Testing Hypotheses</h1>
+
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>

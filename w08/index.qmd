@@ -49,25 +49,26 @@ format:
 
 :::
 
-# Summary Statistics vs. Models {.smaller .smaller-table data-stack-name="W07 Recap"}
+# HW4 Tips!
 
-* tldr: Moran's $I$ is to **GISers** as a thermometer is to a **doctors**:
-    * Reveals **symptoms** only; many possible underlying **causes!**
+* `ppp` Objects
+* Converting between `ppp` and `sf`
+* Plotting
 
 ::: {.hidden}
 
 ```{r}
 #| label: r-source-globals
 source("../dsan-globals/_globals.r")
+set.seed(6805)
+library(tidyverse) |> suppressPackageStartupMessages()
+library(sf) |> suppressPackageStartupMessages()
+library(spatstat) |> suppressPackageStartupMessages()
 ```
 
 :::
 
-## Same Points, Vastly Different Processes
-
-# Point Process Models {data-stack-name="Point Process Models"}
-
-## Our New Library: `spatstat`! {.crunch-title}
+## [From Last Week] Our New Library: `spatstat`! {.crunch-title}
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -84,6 +85,228 @@ source("../dsan-globals/_globals.r")
 
 :::
 ::::
+
+## `ppp` Objects {.smaller .crunch-title .crunch-ul .smaller-table}
+
+* The **main** datatype used to represent **P**lanar **P**oint **P**atterns [`spatstat` book p. 41]
+* Unlike `sf` objects, which contain data+geometries for any desired collection of $N$ entities, `ppp` objects are **required** to have at least an **observation window**!
+
+:::: {.columns}
+::: {.column width="50%"}
+
+`sf` Creation:
+
+```{r}
+#| label: sf-creation
+tree_df <- tibble::tibble(lon=runif(100,0,1), lat=runif(100,0,1), age=runif(100,0,1))
+tree_sf <- sf::st_as_sf(
+  tree_df,
+  coords = c('lon', 'lat')
+)
+tree_sf |> head(4)
+```
+
+:::
+::: {.column width="50%"}
+
+`ppp` Creation:
+
+```{r}
+#| label: ppp-creation
+pois_ppp <- spatstat.random::rpoispp(
+  lambda=100, win=spatstat.geom::square(1)
+)
+pois_ppp
+attributes(pois_ppp)$names
+pois_ppp$x |> head(4)
+```
+
+:::
+::::
+
+## `ppp` $\leftrightarrow$ `sf` Conversion {.smaller .smaller-table .crunch-title .crunch-details}
+
+:::: {.columns}
+::: {.column width="50%"}
+
+`ppp` to `sf` Conversion:
+
+```{r}
+#| label: ppp-to-sf-conversion
+pois_sf <- pois_ppp |> sf::st_as_sf()
+pois_sf |> head(4)
+```
+
+```{r}
+#| label: converted-sf-plot
+#| code-fold: true
+pois_sf |> ggplot() +
+  geom_sf(data=pois_sf |> filter(label=="window"), aes(fill='grey')) +
+  geom_sf(data=pois_sf |> filter(label != "window"), aes(color='black')) +
+  theme_classic(base_size=28) +
+  scale_fill_manual(name=NULL, values=c("gray90"), labels=c("label == 'window'")) +
+  scale_color_manual(name=NULL, values=c("black"), labels=c("label == 'point'"))
+```
+
+:::
+::: {.column width="50%"}
+
+`sf` to `ppp` Conversion:
+
+```{r}
+#| label: sf-to-ppp-conversion
+square_sfc <- sf::st_polygon(list(
+  matrix(c(0,0,1,0,1,1,0,1,0,0), nrow=5, byrow=TRUE)
+)) |> sf::st_sfc()
+tree_ppp <- as.ppp(
+  sf::st_as_sfc(tree_sf),
+  W=as.owin(square_sfc)
+)
+tree_ppp
+```
+
+```{r}
+#| label: converted-ppp-plot
+#| code-fold: true
+tree_ppp_sf <- tree_ppp |> sf::st_as_sf()
+tree_ppp_sf |> ggplot() +
+  geom_sf(aes(fill='gray90')) +
+  geom_sf(data=tree_ppp_sf |> filter(label != "window"), aes(color='black')) +
+  theme_classic(base_size=28) +
+  scale_fill_manual(name=NULL, values=c("gray90"), labels=c("tree_ppp$window")) +
+  scale_color_manual(name=NULL, values=c("black"), labels=c("tree_ppp$x, tree_ppp$y"))
+```
+
+:::
+::::
+
+# Summary Statistics vs. Models {.smaller .smaller-table data-stack-name="W07 Recap"}
+
+* tldr: Moran's $I$ is to **GISers** what a thermometer is to a **doctors**:
+    * Reveals **symptoms** only; many possible underlying **causes!**
+
+## The Tree-Grid Mystery
+
+* You've been hired as an archaeologist---congratulations! Your job: determine whether arrangement of **trees** formed:
+  * **Naturally**, via a process of **resource competition**, or
+  * **Artificially**, via an ancient civilization planting in a **grid**...
+
+```{r}
+#| label: tree-mystery
+#| echo: false
+#| code-fold: true
+square_sf <- sf::st_as_sf(spatstat.geom::square(1))
+grid_sf <- sf::st_as_sf(sf::st_make_grid(square_sf))
+grid_buffer_sf <- grid_sf |> sf::st_buffer(dist=-0.01, singleSide = TRUE)
+grid_points <- sf::st_sample(grid_buffer_sf, size=rep(1,100))
+grid_ppp <- as.ppp(grid_points, W=spatstat.geom::square(1))
+grid_ppp |> sf::st_as_sf() |> ggplot() +
+  geom_sf() +
+  theme_classic(base_size=24)
+```
+
+## Two Possible Histories...
+
+<center>
+Artificial
+</center>
+
+:::: {.columns}
+::: {.column width="33%"}
+
+```{r}
+#| label: artificial-grid
+#| code-fold: true
+square_sf <- sf::st_as_sf(spatstat.geom::square(1))
+grid_sf <- sf::st_as_sf(sf::st_make_grid(square_sf))
+grid_buffer_sf <- grid_sf |> sf::st_buffer(dist=-0.01, singleSide = TRUE)
+grid_buffer_sf |> ggplot() +
+  geom_sf() +
+  theme_classic(base_size=32)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: artificial-grid-points
+#| code-fold: true
+grid_points <- sf::st_sample(grid_buffer_sf, size=rep(1,100))
+grid_buffer_sf |> ggplot() +
+  geom_sf() +
+  geom_sf(data=grid_points) +
+  theme_classic(base_size=32)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: artificial-grid-result
+#| code-fold: true
+grid_ppp <- as.ppp(grid_points, W=spatstat.geom::square(1))
+grid_ppp |> sf::st_as_sf() |> ggplot() +
+  geom_sf() +
+  theme_classic(base_size=32)
+```
+
+:::
+::::
+
+<center>
+Natural
+</center>
+
+:::: {.columns}
+::: {.column width="33%"}
+
+```{r}
+#| label: gen-trees
+#| code-fold: true
+r <- 0.05
+pois_ppp <- rpoispp(150)
+pois_sf <- pois_ppp |> sf::st_as_sf()
+pois_sf |> ggplot() +
+  geom_sf() +
+  theme_classic(base_size=32)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: kill-trees
+#| code-fold: true
+age <- runif(npoints(pois_ppp))
+```
+
+```{r}
+pair_dists <- pairdist(pois_ppp)
+close <- (pair_dists < r)
+earlier <- outer(age, age, "<")
+kill_younger <- apply(close & earlier, 1, any)
+kill_younger
+```
+
+```{r}
+pois_sf
+```
+
+```{r}
+#pois_sf <- pois_sf |> mutate(kill_younger=kill_younger)
+# pois_sf
+# pois_sf |> ggplot() +
+#   geom_sf() +
+#   theme_classic(base_size=32)
+```
+
+:::
+::: {.column width="33%"}
+
+:::
+::::
+
+# Point Process Models {data-stack-name="Point Process Models"}
 
 ## *Why* Do Events Appear Where They Do? {.smaller .title-12 .inline-90}
 
@@ -171,6 +394,10 @@ dev.off()
 # Fitting Models to Data {data-stack-name="Fitting Models"}
 
 ## Maximum Likelihood Estimation (MLE) Refresher
+
+# Testing Hypotheses
+
+## 
 
 ## References
 

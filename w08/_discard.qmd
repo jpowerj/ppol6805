@@ -1,0 +1,65 @@
+| | `sf` Objects | `ppp` Objects |
+| - | - | - |
+| **Creation** | (From `.csv` file)<br>`school_sf <- sf::st_as_sf(
+    school_df,
+    coords = c("longitude", "latitude"), 
+    crs = 4326
+  ) | |
+| **Conversion** | | |
+
+---
+
+
+```{=html}
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th><span data-qmd="`sf` Objects"></span></th>
+  <th><span data-qmd="`ppp` Objects"></span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><span data-qmd="**Creation**"></span></td>
+  <td><div data-qmd="``` {.r}
+my_sf <- sf::st_as_sf(
+  df_with_coords,
+  coords = c('lon', 'lat'), 
+  crs = 4326
+)
+```"></div></td>
+  <td><div data-qmd="``` {.r}
+my_ppp <- spatstat.rand::rpoispp(
+  lambda=100,
+  win=spatstat.geom::square(1)
+)
+```"></div></td>
+</tr>
+<tr>
+  <td><span data-qmd="**Conversion**"></span></td>
+  <td></td>
+  <td></td>
+</tr>
+</tbody>
+</table>
+```
+
+---
+
+`sf` to `ppp` Conversion:
+
+```{r}
+#| label: sf-to-ppp-conversion
+square_sfc <- sf::st_polygon(list(
+  matrix(c(0,0,1,0,1,1,0,1,0,0), nrow=5, byrow=TRUE)
+)) |> sf::st_sfc(crs=3857)
+tree_ppp <- as.ppp(
+  sf::st_geometry(tree_sf) |> sf::st_transform(3857),
+  W=as.owin(square_sfc)
+)
+tree_ppp
+tree_ppp |> sf::st_as_sf() |> ggplot() +
+  geom_sf() +
+  theme_classic(base_size=28)
+```

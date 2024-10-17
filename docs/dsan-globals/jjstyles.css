@@ -217,6 +217,9 @@ figcaption {
 .smaller-table td {
   font-size: 80% !important;
 }
+.smaller-table th {
+  font-size: 80% !important;
+}
 
 .sticky-head {
   position: sticky;
