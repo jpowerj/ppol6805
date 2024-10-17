@@ -63,3 +63,12 @@ tree_ppp |> sf::st_as_sf() |> ggplot() +
   geom_sf() +
   theme_classic(base_size=28)
 ```
+
+---
+
+| | First-Order | Second-Order |
+|-|-|-|
+| |  |  |
+| ![](images/pines.png){fig-align="center" width="100%"} | ![](images/intensity_plot.png) | ![](images/lest.png) |
+
+: {tbl-colwidths="[29,38,33]"}

@@ -64,6 +64,7 @@ set.seed(6805)
 library(tidyverse) |> suppressPackageStartupMessages()
 library(sf) |> suppressPackageStartupMessages()
 library(spatstat) |> suppressPackageStartupMessages()
+library(mdthemes) |> suppressPackageStartupMessages()
 ```
 
 :::
@@ -124,7 +125,7 @@ pois_ppp$x |> head(4)
 :::
 ::::
 
-## `ppp` $\leftrightarrow$ `sf` Conversion {.smaller .smaller-table .crunch-title .crunch-details}
+## `ppp` $\leftrightarrow$ `sf` Conversion {.smaller .smaller-table .crunch-title .crunch-details .crunch-img .crunch-quarto-figure}
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -143,9 +144,10 @@ pois_sf |> head(4)
 pois_sf |> ggplot() +
   geom_sf(data=pois_sf |> filter(label=="window"), aes(fill='grey')) +
   geom_sf(data=pois_sf |> filter(label != "window"), aes(color='black')) +
-  theme_classic(base_size=28) +
-  scale_fill_manual(name=NULL, values=c("gray90"), labels=c("label == 'window'")) +
-  scale_color_manual(name=NULL, values=c("black"), labels=c("label == 'point'"))
+  md_theme_classic(base_size=26) +
+  scale_fill_manual(name=NULL, values=c("gray90"), labels=c("<span style='font-family: mono'>label == 'window'</span>")) +
+  scale_color_manual(name=NULL, values=c("black"), labels=c("<span style='font-family: mono'>label == 'point'</span>")) +
+  labs(title = "<span style='font-family: mono'>ppp</span> &rarr; <span style='font-family: mono'>sf</span> Result")
 ```
 
 :::
@@ -172,18 +174,25 @@ tree_ppp_sf <- tree_ppp |> sf::st_as_sf()
 tree_ppp_sf |> ggplot() +
   geom_sf(aes(fill='gray90')) +
   geom_sf(data=tree_ppp_sf |> filter(label != "window"), aes(color='black')) +
-  theme_classic(base_size=28) +
-  scale_fill_manual(name=NULL, values=c("gray90"), labels=c("tree_ppp$window")) +
-  scale_color_manual(name=NULL, values=c("black"), labels=c("tree_ppp$x, tree_ppp$y"))
+  md_theme_classic(base_size=26) +
+  scale_fill_manual(name=NULL, values=c("gray90"), labels=c("<span style='font-family: mono'>tree_ppp$window</span>")) +
+  scale_color_manual(name=NULL, values=c("black"), labels=c("<span style='font-family: mono'>tree_ppp${x,y}</span>")) +
+  labs(
+    title = "<span style='font-family: mono'>sf</span> &rarr; <span style='font-family: mono'>ppp</span> Result",
+    x="<span style='font-family: mono'>tree_ppp$x</span>",
+    y="<span style='font-family: mono'>tree_ppp$y</span>"
+  ) + 
+  guides(fill = guide_legend(order = 1), 
+              color = guide_legend(order = 2))
 ```
 
 :::
 ::::
 
-# Summary Statistics vs. Models {.smaller .smaller-table data-stack-name="W07 Recap"}
+# Summary Statistics vs. Models {.smaller-table data-stack-name="W07 Recap"}
 
-* tldr: Moran's $I$ is to **GISers** what a thermometer is to a **doctors**:
-    * Reveals **symptoms** only; many possible underlying **causes!**
+* Moran's $I$ is to **GISers** what a thermometer is to **doctors**
+* Measures **symptoms**; many possible underlying **causes!**
 
 ## The Tree-Grid Mystery
 
@@ -205,10 +214,10 @@ grid_ppp |> sf::st_as_sf() |> ggplot() +
   theme_classic(base_size=24)
 ```
 
-## Two Possible Histories...
+## Two Possible Histories... {.crunch-title .inline-90 .smaller .crunch-img .crunch-quarto-figure}
 
 <center>
-Artificial
+Hypothesis $\mathcal{H}_{\textsf{Art}}$: Artificial Formation
 </center>
 
 :::: {.columns}
@@ -217,12 +226,15 @@ Artificial
 ```{r}
 #| label: artificial-grid
 #| code-fold: true
+#| code-summary: "Code (Step 1: Grid Creation)"
+#| fig-width: 7
+ha_base <- 28
 square_sf <- sf::st_as_sf(spatstat.geom::square(1))
 grid_sf <- sf::st_as_sf(sf::st_make_grid(square_sf))
 grid_buffer_sf <- grid_sf |> sf::st_buffer(dist=-0.01, singleSide = TRUE)
 grid_buffer_sf |> ggplot() +
   geom_sf() +
-  theme_classic(base_size=32)
+  theme_classic(base_size=ha_base)
 ```
 
 :::
@@ -231,11 +243,13 @@ grid_buffer_sf |> ggplot() +
 ```{r}
 #| label: artificial-grid-points
 #| code-fold: true
+#| code-summary: "Code (Step 2: Point Generation)"
+#| fig-width: 7
 grid_points <- sf::st_sample(grid_buffer_sf, size=rep(1,100))
 grid_buffer_sf |> ggplot() +
   geom_sf() +
   geom_sf(data=grid_points) +
-  theme_classic(base_size=32)
+  theme_classic(base_size=ha_base)
 ```
 
 :::
@@ -244,17 +258,19 @@ grid_buffer_sf |> ggplot() +
 ```{r}
 #| label: artificial-grid-result
 #| code-fold: true
+#| code-summary: "Code (Step 3: Observed Result)"
+#| fig-width: 7
 grid_ppp <- as.ppp(grid_points, W=spatstat.geom::square(1))
 grid_ppp |> sf::st_as_sf() |> ggplot() +
   geom_sf() +
-  theme_classic(base_size=32)
+  theme_classic(base_size=ha_base)
 ```
 
 :::
 ::::
 
 <center>
-Natural
+Hypothesis $\mathcal{H}_{\textsf{Nat}}$: Natural Formation
 </center>
 
 :::: {.columns}
@@ -263,133 +279,386 @@ Natural
 ```{r}
 #| label: gen-trees
 #| code-fold: true
+#| code-summary: "Code (Step 1: Tree Generation)"
+#| fig-width: 7
+hn_base <- 28
 r <- 0.05
 pois_ppp <- rpoispp(150)
 pois_sf <- pois_ppp |> sf::st_as_sf()
 pois_sf |> ggplot() +
   geom_sf() +
-  theme_classic(base_size=32)
+  theme_classic(base_size=hn_base)
 ```
 
 :::
-::: {.column width="33%"}
+::: {.column width="34%"}
 
 ```{r}
 #| label: kill-trees
 #| code-fold: true
+#| code-summary: "Code (Step 2: Competition)"
+#| fig-width: 7
+#| fig-align: center
 age <- runif(npoints(pois_ppp))
-```
-
-```{r}
 pair_dists <- pairdist(pois_ppp)
 close <- (pair_dists < r)
-earlier <- outer(age, age, "<")
-kill_younger <- apply(close & earlier, 1, any)
-kill_younger
-```
-
-```{r}
-pois_sf
-```
-
-```{r}
-#pois_sf <- pois_sf |> mutate(kill_younger=kill_younger)
-# pois_sf
-# pois_sf |> ggplot() +
-#   geom_sf() +
-#   theme_classic(base_size=32)
+later <- outer(age, age, ">")
+killed <- apply(close & later, 1, any)
+killed_ppp <- pois_ppp[killed]
+alive_ppp <- pois_ppp[!killed]
+pois_window_sf <- pois_ppp |> sf::st_as_sf() |> filter(label=="window")
+pois_killed_sf <- killed_ppp |> sf::st_as_sf() |> filter(label=="point")
+pois_alive_sf <- alive_ppp |> sf::st_as_sf() |> filter(label=="point")
+alive_buff_sf <- pois_alive_sf |> sf::st_buffer(r) |> sf::st_union() |> sf::st_intersection(pois_window_sf)
+ggplot() +
+  geom_sf(data=pois_window_sf) +
+  geom_sf(data=alive_buff_sf, aes(color='Inhibition', shape='Inhibition'), linetype='dashed') +
+  geom_sf(data=pois_killed_sf, aes(color='Dead', shape='Dead'), size=2, stroke=2) +
+  geom_sf(data=pois_alive_sf, aes(color='Alive', shape='Alive'), size=1, stroke=1) +
+  scale_shape_manual(name=NULL, values=c("Alive"=19, "Dead"=4, 'Inhibition'=21), labels=c("Alive", "Dead", "Inhibition")) +
+  scale_color_manual(name=NULL, values=c("Alive"="black", "Dead"=cb_palette[1], "Inhibition"="black"), labels=c("Alive", "Dead", "Inhibition")) +
+  guides(shape=guide_legend(override.aes=list(fill = "white"))) +
+  theme_classic(base_size = hn_base) +
+  theme(plot.margin = unit(c(0,0,0,0), "cm"))
 ```
 
 :::
-::: {.column width="33%"}
+::: {.column width="32%"}
+
+```{r}
+#| label: post-tree-killing
+#| code-fold: true
+#| code-summary: "Code (Step 3: Observed Result)"
+#| fig-width: 7
+alive_ppp |> sf::st_as_sf() |> ggplot() +
+  geom_sf() +
+  theme_classic(base_size=hn_base)
+```
 
 :::
 ::::
 
-# Point Process Models {data-stack-name="Point Process Models"}
+# What Tools Do We Have for Distinguishing Between These Cases? {data-stack-name="First and Second Moments"}
 
-## *Why* Do Events Appear Where They Do? {.smaller .title-12 .inline-90}
+## *Why* Do Events Appear Where They Do? {.smaller .title-12 .inline-90 .nostretch}
 
 ```{r}
 #| label: sr-plot
 #| code-fold: true
 #| output: false
+#| fig-align: center
+#| fig-width: 4
+#| fig-height: 4
+#| crop: true
 library(tidyverse)
 library(spatstat)
-set.seed(6805)
+set.seed(6809)
 N <- 60
 r_core <- 0.05
 obs_window <- square(1)
-# Regularity via Inhibition
-#reg_sims <- rMaternI(N, r=r_core, win=obs_window)
-cond_reg_sims <- rSSI(r=r_core, N)
-# CSR data
-#csr_sims <- rpoispp(N, win=obs_window)
-cond_sr_sims <- rpoint(N, win=obs_window)
 ### Clustered data
-#clust_sims <- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)
-#clust_sims <- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)
-#clust_sims <- rclusterBKBC(clusters="MatClust", kappa=10, mu=10, scale=0.05, verbose=FALSE)
-# Each cluster consist of 10 points in a disc of radius 0.2
-nclust <- function(x0, y0, radius, n) {
-    #print(n)
-    return(runifdisc(10, radius, centre=c(x0, y0)))
-}
-cond_clust_sims <- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)
+clust_ppp <- rMatClust(
+  kappa=6,
+  scale=r_core,
+  mu=10
+)
+clust_sf <- clust_ppp |> sf::st_as_sf()
+clust_plot <- clust_sf |>
+  ggplot() +
+  geom_sf(size=2) +
+  theme_classic(base_size=18)
+ggsave("images/clust_ppp.png", clust_plot, width=3, height=3)
+# Intensity fn
+clust_intensity <- density(clust_ppp, sigma = 0.1)
+png("images/clust_intensity.png")
+par(mar=c(0,0,0,2), las=2, oma=c(0,0,0,0), cex=2)
+plot(clust_intensity, main=NULL)
+contour(clust_intensity, add = TRUE)
+dev.off()
+### PCF
+clust_pcf <- spatstat.explore::pcf(
+  clust_ppp, divisor="d",
+  r=seq(from=0.00, to=0.50, by=0.01)
+)
+clust_pcf_plot <- clust_pcf |> ggplot(aes(x=r, y=iso)) +
+  geom_hline(yintercept=1, linetype='dashed', linewidth=1) +
+  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +
+  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +
+  labs(x="Distance", y="Density") +
+  theme_classic(base_size=14)
+ggsave("images/clust_pcf.png", clust_pcf_plot, width=3, height=3)
 ```
+
+```{=html}
+<table style='width: 100%; table-layout: fixed;'>
+<colgroup>
+  <col style='width: 32%;' />
+  <col style='width: 34%;' />
+  <col style='width: 32%;' />
+</colgroup>
+<thead>
+<tr>
+  <th>Original Data</th>
+  <th>First-Order</th>
+  <th>Second-Order</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><span data-qmd="$N = 60$ Events"></span></td>
+  <td><span data-qmd="Events modeled **individually**<br>$\implies$ **Intensity function $\lambda(\mathbf{s})$**"></span></td>
+  <td><span data-qmd="Events modeled **pairwise** $\implies$ **$K$-function $K(\vec{h})$**"></span></td>
+</tr>
+<tr>
+  <td><img src='images/clust_ppp.png' width="450px" /></td>
+  <td class='tdvc'><img src='images/clust_intensity.png' width="100%" /></td>
+  <td class='tdvc'><img src='images/clust_pcf.png' width="80%" /></td>
+</tr>
+</tbody>
+</table>
+```
+
+## What Do These Functions "Detect"? {.crunch-title .smaller .crunch-img .crunch-quarto-figure .crunch-columns}
+
+:::: {.columns}
+::: {.column width="33%"}
 
 ```{r}
-#| label: intensity-est
+#| label: sq-point-plot
 #| code-fold: true
-#| fig-width: 2
-#| fig-height: 2
-#| output: false
-center_l_function <- function(x, ...) {
-  if (!spatstat.geom::is.ppp(x) && !spatstat.geom::is.fv(x)) {
-    stop("Please provide either ppp or fv object.")
-  }
-  if (spatstat.geom::is.ppp(x)) {
-    x <- spatstat.explore::Lest(x, ...)
-  }
-  r <- x$r
-  l_centered <- spatstat.explore::eval.fv(x - r)
-  return(l_centered)
-}
-cond_clust_sf <- cond_clust_sims |> sf::st_as_sf()
-pines_plot <- cond_clust_sf |>
-  ggplot() +
-  geom_sf() +
-  dsan_theme("full")
-ggsave("images/pines.png", pines_plot)
-# density() calls density.ppp() if the argument is a ppp object
-den <- density(cond_clust_sims, sigma = 0.1)
-#summary(den)
-png("images/intensity_plot.png")
-plot(den, main = "Intensity λ(s)")
-contour(den, add = TRUE) # contour plot
-dev.off()
-# And Kest / Lest
-kest_result <- Kest(cond_clust_sims, rmax=0.5, correction="best")
-lest_result <- center_l_function(cond_clust_sims, rmax=0.5)
-png("images/lest.png")
-plot(lest_result, main="K(h)")
-dev.off()
+#| fig-width: 2.5
+#| fig-height: 2.5
+sq_base <- 16
+sq_psize <- 2.5
+obs_window <- square(1)
+r0 <- 0.2
+sq_df <- tibble::tribble(
+  ~x, ~y,
+  0.5-r0,0.5-r0,
+  0.5+r0,0.5+r0,
+  0.5-r0,0.5+r0,
+  0.5+r0,0.5-r0
+)
+sq_sf <- sf::st_as_sf(
+  sq_df,
+  coords = c("x","y")
+)
+sq_ppp <- as.ppp(sq_sf, W=obs_window)
+sq_ppp |> sf::st_as_sf() |> ggplot() +
+  geom_sf(size=sq_psize) +
+  theme_classic(base_size=sq_base)
 ```
 
-| | First-Order | Second-Order |
-|-|-|-|
-| | Events considered **individually** $\implies$ **Intensity function $\lambda(\mathbf{s})$** | **Second-Order**: Events considered **pairwise** $\implies$ **$K$-function $K(\vec{h})$** |
-| ![](images/pines.png) | ![](images/intensity_plot.png) | ![](images/lest.png) |
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: sq-intensity-plot
+#| code-fold: true
+#| fig-width: 3
+#| fig-height: 3
+#| crop: true
+par(mar=c(0,0,0,2), las=2, oma=c(0,0,1,0))
+sq_density <- density(sq_ppp)
+plot(sq_density, main=NULL, xaxs='i', yaxs='i')
+contour(sq_density, xaxs='i', yaxs='i', add = TRUE)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: sq-pcf-plot
+#| code-fold: true
+#| fig-width: 5
+#| fig-height: 4
+### PCF
+pcf_result <- spatstat.explore::pcf(
+  sq_ppp,
+  divisor="d",
+  r=seq(from=0.00, to=0.8, by=0.01)
+)
+pcf_result |> ggplot(aes(x=r, y=iso)) +
+  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +
+  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +
+  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +
+  theme_classic(base_size=sq_base)
+```
+
+:::
+::::
+
+<!-- CSR pattern -->
+
+:::: {.columns}
+::: {.column width="33%"}
+
+```{r}
+#| label: csr-properties-plot
+#| code-fold: true
+#| fig-height: 2.5
+#| fig-width: 2.5
+csr_ppp <- spatstat.random::rpoispp(
+  lambda = 60,
+  win=obs_window
+)
+csr_ppp |> sf::st_as_sf() |> ggplot() +
+  geom_sf(size=sq_psize) +
+  theme_classic(base_size=sq_base)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: csr-intensity-plot
+#| code-fold: true
+#| fig-width: 3
+#| fig-height: 3
+#| crop: true
+par(
+  mar=c(0,0,0,2),
+  las=2,
+  oma=c(0,0,1,0)
+)
+csr_density <- density(csr_ppp)
+plot(csr_density, main=NULL, xaxs="i", yaxs="i")
+contour(csr_density, xaxs="i", yaxs="i", add = TRUE, lwd=1.5)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: csr-pcf-plot
+#| code-fold: true
+#| fig-width: 5
+#| fig-height: 4
+csr_pcf_result <- spatstat.explore::pcf(
+  csr_ppp,
+  divisor="d",
+  r=seq(from=0.00, to=0.8, by=0.01)
+)
+csr_pcf_result |> ggplot(aes(x=r, y=iso)) +
+  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +
+  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +
+  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +
+  theme_classic(base_size=sq_base)
+```
+
+:::
+::::
 
 # A Menagerie of Models {data-stack-name="Point Process Models"}
 
-## Poisson Point Processes (CSR)
+## Poisson Point Processes (CSR) {.crunch-title .crunch-img .crunch-ul .inline-90}
 
-## Simple Sequential Inhibition (SSI) Processes
+``` {.r}
+spatstat.random::rpoispp(lambda, win)
+```
 
-## Matérn Cluster Processes
+* <i class='bi bi-1-circle'></i> $N \sim \text{Pois}(\lambda)$
+* <i class='bi bi-2-circle'></i> For $i \in \{1, \ldots, N\}$:
+  * Generate $X_i, Y_i \sim \mathcal{U}(\texttt{win})$
+
+```{r}
+#| label: pois-ppp-sims
+#| code-fold: true
+sim_base <- 22
+sim_psize <- 2
+sim_xticks <- seq(from=0.0, to=1.0, by=0.2)
+sim_yticks <- seq(from=0.0, to=1.0, by=0.2)
+gen_pois_df <- function(num_sims=1) {
+  pois_sims <- spatstat.random::rpoispp(
+    lambda = 60, nsim=num_sims
+  )
+  return(tibble::as_tibble(pois_sims))
+}
+#pois_dfs <- gen_pois_df()
+#pois_dfs |> head()
+pois_sims <- spatstat.random::rpoispp(
+  lambda = 60, nsim=3
+)
+to_sim_df <- function(cur_sim, sim_name) {
+  cur_df <- tibble::as_tibble(cur_sim) |> mutate(sim=sim_name)
+  return(cur_df)
+}
+combined_df <- imap(.x=pois_sims, .f=to_sim_df) |> bind_rows()
+combined_df |> ggplot(aes(x=x, y=y)) +
+  geom_point(size=sim_psize) +
+  facet_wrap(vars(sim)) +
+  coord_equal() +
+  theme_classic(base_size=sim_base) +
+  theme(panel.spacing.x = unit(2, "lines")) +
+  scale_x_continuous(breaks=sim_xticks) +
+  scale_y_continuous(breaks=sim_yticks)
+```
+
+## Simple Sequential Inhibition (SSI) {.smaller .crunch-title .title-11 .inline-90 .code-90 .crunch-img .crunch-quarto-figure .crunch-ul}
+
+``` {.r}
+spatstat.random::rSSI(r, n=Inf, giveup=1000, win)
+```
+
+* $\mathbf{S} = \varnothing$
+* While not `done`:
+  * <i class='bi bi-1-circle'></i> Generate $\mathbf{E} = (X, Y) \sim \mathcal{U}(\texttt{win})$
+  * <i class='bi bi-2-circle'></i> Check if $\mathbf{E}$ within `r` units of any existing point in $\mathbf{S}$
+    * If it is, **throw $\mathbf{E}$ away**. Otherwise, **add $\mathbf{E}$ to $\mathbf{S}$**
+  * <i class='bi bi-3-circle'></i> `done=TRUE` if $\mathbf{S}$ has `n` points OR has been the same for `giveup` steps
+
+```{r}
+#| label: ssi-sims
+#| code-fold: true
+#| warning: false
+capture.output(ssi_sims <- spatstat.random::rSSI(
+  r = 0.05, n=60, nsim=3
+), file=nullfile())
+combined_df <- imap(.x=ssi_sims, .f=to_sim_df) |> bind_rows()
+combined_df |> ggplot(aes(x=x, y=y)) +
+  geom_point(size=sim_psize) +
+  facet_wrap(vars(sim)) +
+  coord_equal() +
+  theme_classic(base_size=24) +
+  theme(panel.spacing.x = unit(3, "lines")) +
+  scale_x_continuous(breaks=sim_xticks) +
+  scale_y_continuous(breaks=sim_yticks)
+```
+
+## Matérn Cluster Process
+
+``` {.r}
+spatstat.random::rMatClust(kappa, scale, mu, win)
+```
+
+## Matérn Inhibition Process (I and II)
+
+```{.r}
+spatstat.random::rMaternI()
+spatstat.random::rMaternII()
+```
 
 ## Cox Processes: Random Points *plus* Random Intensity
+
+[`rLGCP()`](https://search.r-project.org/CRAN/refmans/spatstat.random/html/rLGCP.html){target='_blank'}
+
+```{r}
+#| label: lgcp-sim
+#| code-fold: true
+# inhomogeneous LGCP with Gaussian covariance function
+m <- as.im(function(x, y){
+  5 - 1.5 * (x - 0.5)^2 + 2 * (y - 0.5)^2
+}, W=owin())
+lgcp_sims <- rLGCP("gauss", m, var=0.15, scale =0.5, nsim=3)
+# lgcp_combined_df <- imap(.x=ssi_sims, .f=to_sim_df) |> bind_rows()
+par(mfrow=c(1,3))
+plot(attr(lgcp_sims[[1]], "Lambda"))
+points(lgcp_sims[[1]], col='grey90', pch=19)
+plot(attr(lgcp_sims[[2]], "Lambda"))
+points(lgcp_sims[[2]], col='grey90', pch=19)
+plot(attr(lgcp_sims[[3]], "Lambda"))
+points(lgcp_sims[[3]], col='grey90', pch=19)
+```
 
 # Fitting Models to Data {data-stack-name="Fitting Models"}
 
