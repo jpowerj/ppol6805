@@ -1,12 +1,65 @@
 ---
-title: "Final Project"
+title: "Final Project Details"
+subtitle: "PPOL 6805 / DSAN 6750: GIS for Spatial Data Science"
 sidebar: mainnav
+bibliography: "_PPOL6805.bib"
 format:
   html:
     df-print: kable
+    link-external-newwindow: true
+    link-external-icon: true
 ---
 
-This page will be updated with full details about the final project soon! For now, we have the following two resources for you.
+## Project Overview
+
+Your job, for the final project, will be to
+
+1. Choose an [**application area**](#application-areas) that you are interested in (this can be drawn from the list in the "Application Areas" section below, but doesn't have to be! You are very welcome to choose any area that is of interest to you!)
+2. Develop a **hypothesis** about some spatial phenomena within that application area, which can be addressed using the GIS/Spatial Data Science tools we've learned in the course. You will need to be specific about whether your hypothesis relates to a **first-order** property of the observations in your dataset, a **second-order** property of these observations, or both.
+3. Present some **initial evidence** regarding your hypothesis, whether in the form of **visualizations** or naïve clustering measures such as the global or local versions of Moran's $I$.
+4. Assess the veracity of the hypothesis using formal hypothesis-evaluation approaches. The general "template" for this formal hypothesis-evaluation would be to:
+    a. Compute and visualize the **intensity function** and/or **Pairwise Correlation Function** for your **observed** data,
+    b. Run 999 Monte Carlo simulations of the spatial patterns that would result from your **null hypothesis**, then
+    c. Compare the the intensity functions or Pairwise Correlation Functions for these 999 simulations with those of your **observed** spatial pattern from step (a).
+5. Draw an **initial conclusion** regarding your hypothesis from Step 2, on the basis of the analysis carried out in Step 4.
+6. Conclude with a "roadmap" of the next steps that you would need to take to **further explore** and/or **refine** your initial conclusion from Step 5.
+    * For example, if your dataset had missing values for important regions/time periods, here you can discuss how you might go about collecting observations to form a better dataset that would allow you to evaluate your hypothesis with greater confidence!
+
+## Application Areas
+
+### Urban Planning
+
+I put this here first only as, the application area where I have the most experience, so can probably be most helpful in terms of project guidance!
+
+Though it is a broad topic, one way to narrow your scope to make it feasible in the time we have left is to choose between a **comparative** approach and a **case study** approach:
+
+**Comparative Approach:**
+
+Here the idea is to understand a spatial phenomenon by analyzing how it is implemented **across** different urban areas. For example, you could choose a measure of transportation efficiency (on-time rate, proportion of urban population living within walking distance of a subway/bus stop, etc.), then see how it is distributed across different urban areas, whether within a specific country or internationally. Then, the project could be rooted in a hypothesis regarding *why* some urban areas have high efficiency and others have low efficiency.
+
+**Case Study Approach:**
+
+Here, rather than comparing across different urban areas, the idea would be more focused on telling a **story** about a **particular** city or urban area. The reason this approach is mentioned *after* the Comparative Approach is because, in reality, what you're doing here is still **comparative**! It's just that, in this case, the comparisons are being made between e.g. **subregions** of the urban area, or between the urban area observed at different **time periods**.
+
+For example, a famous instance of the use of GIS to study a particular urban area is the Massachusetts state government's [Logan Airport Health Study](https://www.mass.gov/info-details/logan-airport-health-study){target='_blank'}, which found significantly higher rates of asthma among children living closer to Logan Airport. Here the point is that the rates were higher for these children **relative to** children living in other parts of the same urban area. That is, it's still a "comparative" approach, just comparing areas-near-Logan with areas-not-near-Logan!
+
+![Pollution expsure areas, as estimated in [@massachusettsbureauofenvironmentalhealth_logan_2014, 46]](images/logan.svg){#fig-logan fig-align="center" width="70%"}
+
+### Climate Change / Renewable Energy
+
+
+
+### Public Policy Evaluation
+
+Here, I specify policy **evaluation** rather than just public policy studies in general, since I think that some of the tools we've learned in class can be particularly helpful for spatially-based comparison of the effectiveness of a given policy choice.
+
+That's a fairly vague statement so, as a concrete example, 
+
+### International Relations
+
+### Public Health / Global Health
+
+### Diffusion Processes
 
 ## Google Cloud Platform Credits
 

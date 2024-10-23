@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Final Project – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
+<title>Final Project Details – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -71,6 +91,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" '="" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="./sidebar.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="./dsan-globals/jjstyles.css">
 </head>
@@ -232,7 +281,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2024-10-18, 11:42:03 AM</em></p>
+<p><em>Updated 2024-10-23, 06:39:00 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -241,7 +290,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#google-cloud-platform-credits" id="toc-google-cloud-platform-credits" class="nav-link active" data-scroll-target="#google-cloud-platform-credits">Google Cloud Platform Credits</a></li>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview">Project Overview</a></li>
+  <li><a href="#application-areas" id="toc-application-areas" class="nav-link" data-scroll-target="#application-areas">Application Areas</a>
+  <ul class="collapse">
+  <li><a href="#urban-planning" id="toc-urban-planning" class="nav-link" data-scroll-target="#urban-planning">Urban Planning</a></li>
+  <li><a href="#climate-change-renewable-energy" id="toc-climate-change-renewable-energy" class="nav-link" data-scroll-target="#climate-change-renewable-energy">Climate Change / Renewable Energy</a></li>
+  <li><a href="#public-policy-evaluation" id="toc-public-policy-evaluation" class="nav-link" data-scroll-target="#public-policy-evaluation">Public Policy Evaluation</a></li>
+  <li><a href="#international-relations" id="toc-international-relations" class="nav-link" data-scroll-target="#international-relations">International Relations</a></li>
+  <li><a href="#public-health-global-health" id="toc-public-health-global-health" class="nav-link" data-scroll-target="#public-health-global-health">Public Health / Global Health</a></li>
+  <li><a href="#diffusion-processes" id="toc-diffusion-processes" class="nav-link" data-scroll-target="#diffusion-processes">Diffusion Processes</a></li>
+  </ul></li>
+  <li><a href="#google-cloud-platform-credits" id="toc-google-cloud-platform-credits" class="nav-link" data-scroll-target="#google-cloud-platform-credits">Google Cloud Platform Credits</a></li>
   <li><a href="#gis-datasetsproject-ideas-collection" id="toc-gis-datasetsproject-ideas-collection" class="nav-link" data-scroll-target="#gis-datasetsproject-ideas-collection">GIS Datasets/Project Ideas Collection</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/final-project.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -251,7 +310,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Final Project</h1>
+<h1 class="title">Final Project Details</h1>
+<p class="subtitle lead">PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</p>
 </div>
 
 
@@ -268,7 +328,66 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This page will be updated with full details about the final project soon! For now, we have the following two resources for you.</p>
+<section id="project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
+<p>Your job, for the final project, will be to</p>
+<ol type="1">
+<li>Choose an <a href="#application-areas"><strong>application area</strong></a> that you are interested in (this can be drawn from the list in the “Application Areas” section below, but doesn’t have to be! You are very welcome to choose any area that is of interest to you!)</li>
+<li>Develop a <strong>hypothesis</strong> about some spatial phenomena within that application area, which can be addressed using the GIS/Spatial Data Science tools we’ve learned in the course. You will need to be specific about whether your hypothesis relates to a <strong>first-order</strong> property of the observations in your dataset, a <strong>second-order</strong> property of these observations, or both.</li>
+<li>Present some <strong>initial evidence</strong> regarding your hypothesis, whether in the form of <strong>visualizations</strong> or naïve clustering measures such as the global or local versions of Moran’s <span class="math inline">\(I\)</span>.</li>
+<li>Assess the veracity of the hypothesis using formal hypothesis-evaluation approaches. The general “template” for this formal hypothesis-evaluation would be to:
+<ol type="a">
+<li>Compute and visualize the <strong>intensity function</strong> and/or <strong>Pairwise Correlation Function</strong> for your <strong>observed</strong> data,</li>
+<li>Run 999 Monte Carlo simulations of the spatial patterns that would result from your <strong>null hypothesis</strong>, then</li>
+<li>Compare the the intensity functions or Pairwise Correlation Functions for these 999 simulations with those of your <strong>observed</strong> spatial pattern from step (a).</li>
+</ol></li>
+<li>Draw an <strong>initial conclusion</strong> regarding your hypothesis from Step 2, on the basis of the analysis carried out in Step 4.</li>
+<li>Conclude with a “roadmap” of the next steps that you would need to take to <strong>further explore</strong> and/or <strong>refine</strong> your initial conclusion from Step 5.
+<ul>
+<li>For example, if your dataset had missing values for important regions/time periods, here you can discuss how you might go about collecting observations to form a better dataset that would allow you to evaluate your hypothesis with greater confidence!</li>
+</ul></li>
+</ol>
+</section>
+<section id="application-areas" class="level2">
+<h2 class="anchored" data-anchor-id="application-areas">Application Areas</h2>
+<section id="urban-planning" class="level3">
+<h3 class="anchored" data-anchor-id="urban-planning">Urban Planning</h3>
+<p>I put this here first only as, the application area where I have the most experience, so can probably be most helpful in terms of project guidance!</p>
+<p>Though it is a broad topic, one way to narrow your scope to make it feasible in the time we have left is to choose between a <strong>comparative</strong> approach and a <strong>case study</strong> approach:</p>
+<p><strong>Comparative Approach:</strong></p>
+<p>Here the idea is to understand a spatial phenomenon by analyzing how it is implemented <strong>across</strong> different urban areas. For example, you could choose a measure of transportation efficiency (on-time rate, proportion of urban population living within walking distance of a subway/bus stop, etc.), then see how it is distributed across different urban areas, whether within a specific country or internationally. Then, the project could be rooted in a hypothesis regarding <em>why</em> some urban areas have high efficiency and others have low efficiency.</p>
+<p><strong>Case Study Approach:</strong></p>
+<p>Here, rather than comparing across different urban areas, the idea would be more focused on telling a <strong>story</strong> about a <strong>particular</strong> city or urban area. The reason this approach is mentioned <em>after</em> the Comparative Approach is because, in reality, what you’re doing here is still <strong>comparative</strong>! It’s just that, in this case, the comparisons are being made between e.g.&nbsp;<strong>subregions</strong> of the urban area, or between the urban area observed at different <strong>time periods</strong>.</p>
+<p>For example, a famous instance of the use of GIS to study a particular urban area is the Massachusetts state government’s <a href="https://www.mass.gov/info-details/logan-airport-health-study" target="_blank">Logan Airport Health Study</a>, which found significantly higher rates of asthma among children living closer to Logan Airport. Here the point is that the rates were higher for these children <strong>relative to</strong> children living in other parts of the same urban area. That is, it’s still a “comparative” approach, just comparing areas-near-Logan with areas-not-near-Logan!</p>
+<div id="fig-logan" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-logan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/logan.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-logan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Pollution expsure areas, as estimated in <span class="citation" data-cites="massachusettsbureauofenvironmentalhealth_logan_2014">(<a href="#ref-massachusettsbureauofenvironmentalhealth_logan_2014" role="doc-biblioref">Massachusetts Bureau of Environmental Health 2014, 46</a>)</span>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="climate-change-renewable-energy" class="level3">
+<h3 class="anchored" data-anchor-id="climate-change-renewable-energy">Climate Change / Renewable Energy</h3>
+</section>
+<section id="public-policy-evaluation" class="level3">
+<h3 class="anchored" data-anchor-id="public-policy-evaluation">Public Policy Evaluation</h3>
+<p>Here, I specify policy <strong>evaluation</strong> rather than just public policy studies in general, since I think that some of the tools we’ve learned in class can be particularly helpful for spatially-based comparison of the effectiveness of a given policy choice.</p>
+<p>That’s a fairly vague statement so, as a concrete example,</p>
+</section>
+<section id="international-relations" class="level3">
+<h3 class="anchored" data-anchor-id="international-relations">International Relations</h3>
+</section>
+<section id="public-health-global-health" class="level3">
+<h3 class="anchored" data-anchor-id="public-health-global-health">Public Health / Global Health</h3>
+</section>
+<section id="diffusion-processes" class="level3">
+<h3 class="anchored" data-anchor-id="diffusion-processes">Diffusion Processes</h3>
+</section>
+</section>
 <section id="google-cloud-platform-credits" class="level2">
 <h2 class="anchored" data-anchor-id="google-cloud-platform-credits">Google Cloud Platform Credits</h2>
 <p>You should have received the Google Cloud Platform credits at your <code>@georgetown.edu</code> email address if you’re enrolled in this course. The code in the email should add a new billing account to your Google Cloud Console, with $50 for:</p>
@@ -289,9 +408,14 @@ ul.task-list li input[type="checkbox"] {
 </iframe>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-massachusettsbureauofenvironmentalhealth_logan_2014" class="csl-entry" role="listitem">
+Massachusetts Bureau of Environmental Health. 2014. <span>“Logan <span>Airport Health Study</span>.”</span> <a href="https://www.mass.gov/doc/logan-airport-health-study-english-0/download">https://www.mass.gov/doc/logan-airport-health-study-english-0/download</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -542,6 +666,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

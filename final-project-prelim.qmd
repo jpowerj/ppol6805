@@ -1,0 +1,27 @@
+---
+title: "Final Project"
+sidebar: mainnav
+format:
+  html:
+    df-print: kable
+---
+
+This page will be updated with full details about the final project soon! For now, we have the following two resources for you.
+
+## Google Cloud Platform Credits
+
+You should have received the Google Cloud Platform credits at your `@georgetown.edu` email address if you're enrolled in this course. The code in the email should add a new billing account to your Google Cloud Console, with $50 for:
+
+* Creating a full-on Virtual Machine for the project, if you think that you'll need a bunch of storage or computing power or GPU usage, and/or
+* For use with Google Maps Engine, if you think that one of their Maps Engine datasets/tools may be useful!
+
+As mentioned in the email: A reasonable choice, which ensures that you'll stay within-budget even if you run the VM instance from now until the semester, is to create an instance (you can name it "gis-project", for example) with all of the default options except:
+
+* Choose **ec2-small** for the Machine Type (ec2-medium is the default, but based on the estimated cost for this type, it would run out of $ before the semester ends)
+* Click the "Change" button under "Boot Disk" and then set the size to **25 GB** (this is what I meant by "trying a few different options": with the $ saved moving from ec2-medium to ec2-small, you can increase from the default 10 GB disk to a 25 GB disk without the expected cost going over $50 for the semester).
+
+## GIS Datasets/Project Ideas Collection
+
+Once we get to the Spatial Data Science unit, I'm hoping that you will have lots of inspiration in terms of the different methods that can be used for drawing **inferences** about spatial phenomena! Until then, me and TA Billy will add links to the following [Raindrop.io collection](https://raindrop.io/jpowerj/gis-47891594){target='_blank'}, which you can browse to potentially draw inspiration for your own final project topic:
+
+<iframe style="border: 0; width: 100%; height: 450px;" allowfullscreen frameborder="0" src="https://raindrop.io/jpowerj/gis-47891594/embed/sort=-created"></iframe>

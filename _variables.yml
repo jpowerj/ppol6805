@@ -44,12 +44,12 @@ weeks:
     footer: "PPOL 6805 Week 8: Spatial Prediction"
     date-md: "Oct 16"
   - weeknum: 9
-    title: "Diffusion Models for Point and Areal Data"
-    footer: "PPOL 6805 Week 7"
+    title: "Evaluating Spatial Hypotheses I: Point Data"
+    footer: "PPOL 6805 Week 9: Evaluating Point Data Hypotheses"
     date-md: "Oct 23"
   - weeknum: 10
-    title: "Geostatistical Data and Spatial Prediction"
-    footer: "PPOL 6805 Week 8"
+    title: "Evaluating Spatial Hypotheses II: Areal Data"
+    footer: "PPOL 6805 Week 10: Evaluating Areal Data Hypotheses"
     date-md: "Oct 30"
   - weeknum: 11
     title: "In-Class Midterm"

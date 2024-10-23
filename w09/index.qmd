@@ -1,0 +1,506 @@
+---
+title: "Week 9: {{< var weeks.8.title >}}"
+subtitle: "{{< var course.slides-subtitle >}}"
+author: "{{< var course.author >}}"
+institute: "{{< var course.institute >}}"
+date: "October 23, 2024"
+date-format: full
+lecnum: 9
+categories:
+  - "Class Sessions"
+bibliography: "../_PPOL6805.bib"
+# Shared across formats:
+echo: true
+code-fold: show
+css: "../dsan-globals/jjstyles.css"
+html-math-method: mathjax
+# Format-specific settings:
+format:
+  revealjs:
+    output-file: "slides.html"
+    df-print: kable
+    slide-number: true
+    scrollable: true
+    tbl-cap-location: bottom
+    link-external-icon: true
+    link-external-newwindow: true
+    footer: "{{< var weeks.9.footer >}}"
+    include-in-header:
+      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>"
+    theme: [default]
+    revealjs-plugins:
+      - simplemenu
+    simplemenu:
+      flat: true
+      barhtml:
+        header: "<div class='menubar'><span style='position: absolute; left: 8; padding-left: 8px;'><a href='./index.html'>&larr; Return to Notes</a></span><ul class='menu'></ul></div>"
+      scale: 0.5
+  html:
+    output-file: "index.html"
+    html-math-method: mathjax
+    df-print: kable
+---
+
+::: {.content-visible unless-format="revealjs"}
+
+<center class='mb-3'>
+<a class="h2" href="./slides.html" target="_blank">Open slides in new tab &rarr;</a>
+</center>
+
+:::
+
+# Roadmap to the Midterm!
+
+* This Week (**Oct 23**): Evaluating Hypotheses for **Point Data**
+* Next Week (**Oct 30**): Evaluating Hypotheses for **Areal Data**
+* In-Class Midterm (**Nov 6**): Basically a "mini-homework" on Spatial Data Science unit (topics from HW4 onwards)!
+
+# Our GIS Mystery-Solving Toolkit {data-stack-name="First and Second Moments"}
+
+::: {.hidden}
+
+```{r}
+#| label: r-source-globals
+source("../dsan-globals/_globals.r")
+set.seed(6805)
+library(tidyverse) |> suppressPackageStartupMessages()
+library(sf) |> suppressPackageStartupMessages()
+library(spatstat) |> suppressPackageStartupMessages()
+library(mdthemes) |> suppressPackageStartupMessages()
+library(mapview) |> suppressPackageStartupMessages()
+library(leaflet) |> suppressPackageStartupMessages()
+```
+
+:::
+
+## *Why* Do Events Appear Where They Do? {.smaller .title-12 .inline-90 .nostretch}
+
+```{r}
+#| label: sr-plot
+#| code-fold: true
+#| output: false
+#| fig-align: center
+#| fig-width: 4
+#| fig-height: 4
+#| crop: true
+set.seed(6809)
+N <- 60
+r_core <- 0.05
+obs_window <- square(1)
+### Clustered data
+clust_ppp <- rMatClust(
+  kappa=6,
+  scale=r_core,
+  mu=10
+)
+clust_sf <- clust_ppp |> sf::st_as_sf()
+clust_plot <- clust_sf |>
+  ggplot() +
+  geom_sf(size=2) +
+  theme_classic(base_size=18)
+ggsave("images/clust_ppp.png", clust_plot, width=3, height=3)
+# Intensity fn
+clust_intensity <- density(clust_ppp, sigma = 0.1)
+png("images/clust_intensity.png")
+par(mar=c(0,0,0,2), las=2, oma=c(0,0,0,0), cex=2)
+plot(clust_intensity, main=NULL)
+contour(clust_intensity, add = TRUE)
+dev.off()
+### PCF
+clust_pcf <- spatstat.explore::pcf(
+  clust_ppp, divisor="d",
+  r=seq(from=0.00, to=0.50, by=0.01)
+)
+clust_pcf_plot <- clust_pcf |> ggplot(aes(x=r, y=iso)) +
+  geom_hline(yintercept=1, linetype='dashed', linewidth=1) +
+  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +
+  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +
+  labs(x="Distance", y="Density") +
+  theme_classic(base_size=14)
+ggsave("images/clust_pcf.png", clust_pcf_plot, width=3, height=3)
+```
+
+```{=html}
+<table style='width: 100%; table-layout: fixed;'>
+<colgroup>
+  <col style='width: 32%;' />
+  <col style='width: 34%;' />
+  <col style='width: 32%;' />
+</colgroup>
+<thead>
+<tr>
+  <th>Original Data</th>
+  <th>First-Order</th>
+  <th>Second-Order</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td class='tdvc'><span data-qmd="$N = 60$ Events"></span></td>
+  <td><span data-qmd="Events modeled **individually**<br>$\implies$ **Intensity function $\lambda(\mathbf{s})$**"></span></td>
+  <td><span data-qmd="Events modeled **pairwise** $\implies$ **$K$-function $K(\vec{h})$**"></span></td>
+</tr>
+<tr>
+  <td><img src='images/clust_ppp.png' width="450px" /></td>
+  <td class='tdvc'><img src='images/clust_intensity.png' width="100%" /></td>
+  <td class='tdvc'><img src='images/clust_pcf.png' width="80%" /></td>
+</tr>
+</tbody>
+</table>
+```
+
+## What Do These Functions "Detect"? {.crunch-title .smaller .crunch-img .crunch-quarto-figure .crunch-columns}
+
+:::: {.columns}
+::: {.column width="33%"}
+
+```{r}
+#| label: sq-point-plot
+#| code-fold: true
+#| fig-width: 2.5
+#| fig-height: 2.5
+sq_base <- 16
+sq_psize <- 2.5
+obs_window <- square(1)
+r0 <- 0.2
+sq_df <- tibble::tribble(
+  ~x, ~y,
+  0.5-r0,0.5-r0,
+  0.5+r0,0.5+r0,
+  0.5-r0,0.5+r0,
+  0.5+r0,0.5-r0
+)
+sq_sf <- sf::st_as_sf(
+  sq_df,
+  coords = c("x","y")
+)
+sq_ppp <- as.ppp(sq_sf, W=obs_window)
+sq_ppp |> sf::st_as_sf() |> ggplot() +
+  geom_sf(size=sq_psize) +
+  theme_classic(base_size=sq_base)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: sq-intensity-plot
+#| code-fold: true
+#| fig-width: 3
+#| fig-height: 3
+#| crop: true
+par(mar=c(0,0,0,2), las=2, oma=c(0,0,1,0))
+sq_density <- density(sq_ppp)
+plot(sq_density, main=NULL, xaxs='i', yaxs='i')
+contour(sq_density, xaxs='i', yaxs='i', add = TRUE)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: sq-pcf-plot
+#| code-fold: true
+#| fig-width: 5
+#| fig-height: 4
+### PCF
+pcf_result <- spatstat.explore::pcf(
+  sq_ppp,
+  divisor="d",
+  r=seq(from=0.00, to=0.8, by=0.01)
+)
+pcf_result |> ggplot(aes(x=r, y=iso)) +
+  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +
+  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +
+  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +
+  theme_classic(base_size=sq_base)
+```
+
+:::
+::::
+
+<!-- CSR pattern -->
+
+:::: {.columns}
+::: {.column width="33%"}
+
+```{r}
+#| label: csr-properties-plot
+#| code-fold: true
+#| fig-height: 2.5
+#| fig-width: 2.5
+csr_ppp <- spatstat.random::rpoispp(
+  lambda = 60,
+  win=obs_window
+)
+csr_ppp |> sf::st_as_sf() |> ggplot() +
+  geom_sf(size=sq_psize) +
+  theme_classic(base_size=sq_base)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: csr-intensity-plot
+#| code-fold: true
+#| fig-width: 3
+#| fig-height: 3
+#| crop: true
+par(
+  mar=c(0,0,0,2),
+  las=2,
+  oma=c(0,0,1,0)
+)
+csr_density <- density(csr_ppp)
+plot(csr_density, main=NULL, xaxs="i", yaxs="i")
+contour(csr_density, xaxs="i", yaxs="i", add = TRUE, lwd=1.5)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: csr-pcf-plot
+#| code-fold: true
+#| fig-width: 5
+#| fig-height: 4
+csr_pcf_result <- spatstat.explore::pcf(
+  csr_ppp,
+  divisor="d",
+  r=seq(from=0.00, to=0.8, by=0.01)
+)
+csr_pcf_result |> ggplot(aes(x=r, y=iso)) +
+  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +
+  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +
+  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +
+  theme_classic(base_size=sq_base)
+```
+
+:::
+::::
+
+## The Point of All This: Null Models via Base Rates!
+
+* Given an **intensity function**, we can compute a bunch of simulated **point patterns** (**in**homogeneous Poisson Point Process)...
+* How does an **observed** point pattern **differ** from the simulated point patterns?
+
+## Constant Risk Hypothesis: Motivation {.smaller .crunch-title}
+
+* Here is a (fictional) map of flu cases in the US "Midwest"
+* Are people in Chicago and Detroit equally "at risk"?
+
+```{r}
+#| label: midwest-cases-plot
+#| code-fold: true
+city_df <- tibble::tribble(
+  ~city, ~lon, ~lat, ~pop,
+  "Chicago", 41.950567516553896, -87.93011127491978, 2746388,
+  "Detroit", 42.45123004999075, -83.18402319217698, 631524
+)
+city_sf <- sf::st_as_sf(
+  city_df,
+  coords = c("lat", "lon"),
+  crs=4326
+)
+city_buf_sf <- city_sf |> sf::st_buffer(20000)
+city_cases_sf <- city_buf_sf |> sf::st_sample(size=rep(10,2)) |> sf::st_as_sf()
+city_cases_sf$city <- "Detroit (10 Cases)"
+city_cases_sf[1:10, 'city'] <- "Chicago (10 Cases)"
+city_cases_sf$sample <- "Flu"
+mapview(city_cases_sf, zcol="city")
+```
+
+## Constant Risk Hypothesis: Base Rates {.smaller .crunch-title}
+
+| | Chicago | Detroit |
+|-|-|-|
+| **Population** | 2,746,388 | 631,524 |
+
+```{r}
+#| label: midwest-pop-plot
+#| code-fold: true
+city_pop_sf <- city_buf_sf |> sf::st_sample(size=c(16, 4)) |> sf::st_as_sf()
+city_pop_sf$city <- "Detroit"
+city_pop_sf[1:16, 'city'] <- "Chicago"
+city_pop_sf$sample <- "People"
+city_combined_sf <- bind_rows(city_cases_sf, city_pop_sf)
+# mapview(city_combined_sf, zcol="city", marker="sample")
+Flu = makeIcon(
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png",
+    20,
+    20
+)
+People = makeIcon(
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png",
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png",
+  20,
+  20
+)
+
+city_combined_sf$r <- ifelse(city_combined_sf$sample == "Flu", 0, 4)
+city_flu_sf <- city_combined_sf |> filter(sample == "Flu")
+city_ppl_sf <- city_combined_sf |> filter(sample == "People")
+leaflet(city_flu_sf) |>
+  addProviderTiles("CartoDB.Positron") |>
+  addMarkers(data=city_flu_sf, icon = Flu) |>
+  addMarkers(data=city_ppl_sf, icon = People)
+```
+
+## Meaningful Results $\leftrightarrow$ *Comparisons* with Null Model(s) {.crunch-title .title-10 .smaller}
+
+* **Cases** of disease form an intensity function $\lambda(\mathbf{s})$
+* **Controls** form an "ambient" intensity function $\lambda_0(\mathbf{s})$
+* $\implies$ The following model allows us to separate the quantities we **really** care about from the **base rate** information:
+
+    $$
+    \lambda(\mathbf{s}) = \alpha \overbrace{\lambda_0(\mathbf{s})}^{\mathclap{\text{Base Rate}}} \underbrace{\rho(\mathbf{s})}_{\mathclap{\text{Relative Risk}}},
+    $$
+
+    where
+
+    $$
+    \alpha = \frac{\# \text{Cases}}{\# \text{Controls}}
+    $$
+
+* (Remember: **unit** of $\lambda(\mathbf{s})$ is **number of cases**; **not** a probability density!)
+
+## Example from Moraga (2024) {.smaller .crunch-title .crunch-ul .crunch-quarto-figure}
+
+* [Data](https://tilmandavies.github.io/sparr/reference/pbc.html){target='_blank'}: 761 [primary biliary cirrhosis (PBC) cases](https://pubmed.ncbi.nlm.nih.gov/11731995/){target='_blank'}, 3020 controls, England 1987-94
+
+:::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| label: plot-raw-controls
+#| code-fold: true
+#| crop: true
+#| fig-width: 3
+library(sparr) |> suppressPackageStartupMessages()
+data(pbc)
+controls <- unmark(pbc[which(pbc$marks == "control"), ])
+controls |> sf::st_as_sf() |> ggplot() +
+  geom_sf() +
+  theme_classic() +
+  labs(title="Controls (Population Sample)")
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: plot-raw-cases
+#| code-fold: true
+#| crop: true
+#| fig-width: 3
+cases <- unmark(pbc[which(pbc$marks == "case"), ])
+cases |> sf::st_as_sf() |> ggplot() +
+  geom_sf() +
+  theme_classic() +
+  labs(title="PBC Cases")
+```
+
+:::
+::::
+
+## Estimating Comparable Intensity Surfaces {.title-11 .crunch-title .smaller}
+
+* To ensure comparable **intensity functions**, we need a common **bandwidth** parameter.
+* `density()` from `spatstat` makes "smart" choices for this bandwidth, so for now we just **average** the bandwidths estimated for cases and controls:
+
+```{r}
+#| label: mean-density
+#| code-fold: true
+library(sparr)
+data(pbc)
+cases <- unmark(pbc[which(pbc$marks == "case"), ])
+controls <- unmark(pbc[which(pbc$marks == "control"), ])
+bwcases <- attr(density(cases), "sigma")
+bwcontr <- attr(density(controls), "sigma")
+(bw <- (bwcases + bwcontr)/2)
+```
+
+:::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| label: plot-controls-density
+#| crop: true
+#| fig-width: 3
+int_controls <- density(controls, sigma = bw)
+plot(int_controls, main = NULL)
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: plot-cases-density
+#| crop: true
+#| fig-width: 3
+int_cases <- density(cases, sigma = bw)
+plot(int_cases, main = NULL)
+```
+
+:::
+::::
+
+## Visualizing Relative Risk Surface {.smaller .crunch-title .crunch-ul}
+
+* All that's left is $\alpha = \# \text{Controls} / \# \text{Cases}$!
+
+```{r}
+#| label: cases-controls-plot
+#| code-fold: true
+#| crop: true
+library(fields)
+(alpha_hat <- cases$n/controls$n)
+x <- int_cases$xcol
+y <- int_cases$yrow
+rr <- t(int_cases$v)/t(alpha_hat * int_controls$v)
+image.plot(x, y, rr, asp = 1)
+title(xlab = "Easting", ylab = "Northing")
+```
+
+# From Exploratory to Confirmatory Data Analysis {data-stack-name="Evaluation"}
+
+* How do we know whether this raised risk around **North Newcastle** could be attributed to "chance"? Maybe relative risk is actually constant, and people in Newcastle are just **unlucky**...
+* Approach: compare with two possible **null models**:
+    * Random Labeling Hypothesis
+    * Constant Risk Hypothesis
+
+## The *Random Labeling Hypothesis* {.smaller}
+
+* Randomly apply 761 "sick" labels to the 3781 points!
+
+## The *Constant Risk Hypothesis* {.smaller}
+
+* Everyone in the population is **equally at risk** of contracting the disease, **regardless** of their spatial location
+* Here, since we have 761 cases and 3020 controls, the estimated **constant risk** would be $\frac{761}{3020+761} \approx 0.201$:
+
+```{r}
+#| label: monte-carlo-sim
+#| code-fold: true
+#| crop: true
+pbc_win_sf <- pbc |> sf::st_as_sf() |> filter(label == "window")
+gen_pbc_sim <- function() {
+    pbc_sim <- spatstat.random::rpoispp(
+        lambda = 761 / sf::st_area(pbc_win_sf),
+        win=Window(pbc)
+    )
+    return(pbc_sim)
+}
+pbc_1 <- gen_pbc_sim()
+pbc_2 <- gen_pbc_sim()
+pbc_3 <- gen_pbc_sim()
+pbc_1 |> sf::st_as_sf() |> ggplot() +
+  geom_sf() +
+  theme_classic()
+```
+
+## References
+
+::: {#refs}
+:::

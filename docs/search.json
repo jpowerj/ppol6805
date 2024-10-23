@@ -546,132 +546,188 @@
     ]
   },
   {
-    "objectID": "w07/slides.html#why-naïve",
-    "href": "w07/slides.html#why-naïve",
-    "title": "Week 7: Point Processes, Clustering, and Regularity",
-    "section": "Why “Naïve”?",
-    "text": "Why “Naïve”?\n\n[Continuing from last week] Lattice data: easiest way to visualize / operationalize simple measures of clustering via spatial autocorrelation\nSo, we develop intuitions for measures like Moran’s \\(I\\) by looking at lattice data, but…\nNaïve because we’re not modeling the lattice regions (cells) themselves!\nNon-naïve clustering: Knowing the clusters but also what process led to their formation!"
-  },
-  {
-    "objectID": "w07/slides.html#spatial-randomness",
-    "href": "w07/slides.html#spatial-randomness",
-    "title": "Week 7: Point Processes, Clustering, and Regularity",
-    "section": "Spatial Randomness",
-    "text": "Spatial Randomness\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6805)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)\ncond_reg_sims &lt;- rSSI(r=r_core, N)\n# CSR data\n#csr_sims &lt;- rpoispp(N, win=obs_window)\ncond_sr_sims &lt;- rpoint(N, win=obs_window)\n### Clustered data\n#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)\n#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)\n#clust_sims &lt;- rclusterBKBC(clusters=\"MatClust\", kappa=10, mu=10, scale=0.05, verbose=FALSE)\n# Each cluster consist of 10 points in a disc of radius 0.2\nnclust &lt;- function(x0, y0, radius, n) {\n    #print(n)\n    return(runifdisc(10, radius, centre=c(x0, y0)))\n}\ncond_clust_sims &lt;- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\ncond_reg_plot &lt;- cond_reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_reg.png\", cond_reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_sr_plot &lt;- cond_sr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_sr.png\", cond_sr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_clust_plot &lt;- cond_clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_clust.png\", cond_clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed \\(N\\)\n60\n\n60\n\n60"
-  },
-  {
-    "objectID": "w07/slides.html#complete-spatial-randomness-csr",
-    "href": "w07/slides.html#complete-spatial-randomness-csr",
-    "title": "Week 7: Point Processes, Clustering, and Regularity",
-    "section": "Complete Spatial Randomness (CSR)",
-    "text": "Complete Spatial Randomness (CSR)\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6807)\nlambda &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n# Regularity via Inhibition\nreg_sims &lt;- rMaternI(lambda, r=r_core, win=obs_window)\n# CSR data\ncsr_sims &lt;- rpoispp(N, win=obs_window)\n### Clustered data\nclust_mu &lt;- 10\nclust_sims &lt;- rMatClust(kappa=lambda / clust_mu, scale=2*r_core, mu=10, win=obs_window)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\nreg_plot &lt;- reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",reg_sims$n)) +\n  dsan_theme()\nggsave(\"images/reg.png\", reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncsr_plot &lt;- csr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",csr_sims$n)) +\n  dsan_theme()\nggsave(\"images/csr.png\", csr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\nclust_plot &lt;- clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",clust_sims$n)) +\n  dsan_theme()\nggsave(\"images/clust.png\", clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed Intensity \\(\\lambda\\)\n60\n\n60\n\n60\n\n\nRandom \\(N\\)"
-  },
-  {
-    "objectID": "w07/slides.html#measures-are-relative-to-window-of-observation",
-    "href": "w07/slides.html#measures-are-relative-to-window-of-observation",
-    "title": "Week 7: Point Processes, Clustering, and Regularity",
-    "section": "Measures are Relative to Window of Observation",
-    "text": "Measures are Relative to Window of Observation\n\nSame data can be spatially random within one window, clustered or regular in others!\n\n\n\nCode\nN &lt;- 60\nobs_window &lt;- square(1)\nwindow_scale &lt;- 3.5\ncsr_sims_square &lt;- rpoispp(N, win=obs_window)\n# Triangular window\nobs_window_tri &lt;- st_sfc(st_polygon(list(\n    matrix(c(0.3,0.1,0.7,0.1,0.5,0.5,0.3,0.1), byrow=TRUE, nrow=4)\n)))\nobs_window_geom &lt;- st_sfc(st_linestring(\n    matrix(c(0,0,1,0,1,1,0,1,0,0), byrow=TRUE, nrow=5)\n))\ncsr_sims_tri &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_tri))\ntri_plot &lt;- csr_sims_tri |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"quarter\");\nggsave(\"images/window_tri.png\", tri_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Square window\nsquare_plot &lt;- csr_sims_square |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_tri |&gt; sf::st_boundary()) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_square.png\", square_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Circular window\nobs_window_disc &lt;- st_sfc(st_point(c(1, 0.5))) |&gt; st_buffer(1.2)\ncsr_sims_circ &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_disc))\ncirc_plot &lt;- csr_sims_circ |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_geom) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_circ.png\", circ_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n\n\n\n\n\n\n\n\n\n\nRegular\nCSR\nClustered"
-  },
-  {
-    "objectID": "w07/slides.html#our-new-library-spatstat",
-    "href": "w07/slides.html#our-new-library-spatstat",
-    "title": "Week 7: Point Processes, Clustering, and Regularity",
-    "section": "Our New Library: spatstat!",
-    "text": "Our New Library: spatstat!\n\n\n\nHomepage: spatstat.org\nGitHub: github.com/spatstat\nBook: Baddeley, Rubak, and Turner (2015) [Companion website]\nPDF: here"
-  },
-  {
-    "objectID": "w07/slides.html#why-do-events-appear-where-they-do",
-    "href": "w07/slides.html#why-do-events-appear-where-they-do",
-    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "objectID": "w09/slides.html#why-do-events-appear-where-they-do",
+    "href": "w09/slides.html#why-do-events-appear-where-they-do",
+    "title": "Week 9: Null Models and Marked Point Processes",
     "section": "Why Do Events Appear Where They Do?",
-    "text": "Why Do Events Appear Where They Do?\n\n\nCode\ncenter_l_function &lt;- function(x, ...) {\n\n  if (!spatstat.geom::is.ppp(x) && !spatstat.geom::is.fv(x)) {\n    stop(\"Please provide either ppp or fv object.\")\n  }\n\n  if (spatstat.geom::is.ppp(x)) {\n    x &lt;- spatstat.explore::Lest(x, ...)\n  }\n\n  r &lt;- x$r\n\n  l_centered &lt;- spatstat.explore::eval.fv(x - r)\n\n  return(l_centered)\n}\ncond_clust_sf &lt;- cond_clust_sims |&gt; sf::st_as_sf()\npines_plot &lt;- cond_clust_sf |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"full\")\nggsave(\"images/pines.png\", pines_plot)\n# density() calls density.ppp() if the argument is a ppp object\nden &lt;- density(cond_clust_sims, sigma = 0.1)\n#summary(den)\npng(\"images/intensity_plot.png\")\nplot(den, main = \"Intensity λ(s)\")\ncontour(den, add = TRUE) # contour plot\ndev.off()\n# And Kest / Lest\nkest_result &lt;- Kest(cond_clust_sims, rmax=0.5, correction=\"best\")\nlest_result &lt;- center_l_function(cond_clust_sims, rmax=0.5)\npng(\"images/lest.png\")\nplot(lest_result, main=\"K(h)\")\ndev.off()\n\n\n\n\n\n\n\n\n\n\n\nFirst-Order\nSecond-Order\n\n\n\n\n\nEvents considered individually \\(\\implies\\) Intensity function \\(\\lambda(\\mathbf{s})\\)\nSecond-Order: Events considered pairwise \\(\\implies\\) \\(K\\)-function \\(K(\\vec{h})\\)"
+    "text": "Why Do Events Appear Where They Do?\n\n\nCode\nset.seed(6809)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n### Clustered data\nclust_ppp &lt;- rMatClust(\n  kappa=6,\n  scale=r_core,\n  mu=10\n)\nclust_sf &lt;- clust_ppp |&gt; sf::st_as_sf()\nclust_plot &lt;- clust_sf |&gt;\n  ggplot() +\n  geom_sf(size=2) +\n  theme_classic(base_size=18)\nggsave(\"images/clust_ppp.png\", clust_plot, width=3, height=3)\n# Intensity fn\nclust_intensity &lt;- density(clust_ppp, sigma = 0.1)\npng(\"images/clust_intensity.png\")\npar(mar=c(0,0,0,2), las=2, oma=c(0,0,0,0), cex=2)\nplot(clust_intensity, main=NULL)\ncontour(clust_intensity, add = TRUE)\ndev.off()\n### PCF\nclust_pcf &lt;- spatstat.explore::pcf(\n  clust_ppp, divisor=\"d\",\n  r=seq(from=0.00, to=0.50, by=0.01)\n)\nclust_pcf_plot &lt;- clust_pcf |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  labs(x=\"Distance\", y=\"Density\") +\n  theme_classic(base_size=14)\nggsave(\"images/clust_pcf.png\", clust_pcf_plot, width=3, height=3)\n\n\n\n\n\n\n\n\n\n\nOriginal Data\nFirst-Order\nSecond-Order\n\n\n\n\n\\(N = 60\\) Events\nEvents modeled individually\\(\\implies\\) Intensity function \\(\\lambda(\\mathbf{s})\\)\nEvents modeled pairwise \\(\\implies\\) \\(K\\)-function \\(K(\\vec{h})\\)"
   },
   {
-    "objectID": "w07/slides.html#references",
-    "href": "w07/slides.html#references",
-    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "objectID": "w09/slides.html#what-do-these-functions-detect",
+    "href": "w09/slides.html#what-do-these-functions-detect",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "What Do These Functions “Detect”?",
+    "text": "What Do These Functions “Detect”?\n\n\n\n\nCode\nsq_base &lt;- 16\nsq_psize &lt;- 2.5\nobs_window &lt;- square(1)\nr0 &lt;- 0.2\nsq_df &lt;- tibble::tribble(\n  ~x, ~y,\n  0.5-r0,0.5-r0,\n  0.5+r0,0.5+r0,\n  0.5-r0,0.5+r0,\n  0.5+r0,0.5-r0\n)\nsq_sf &lt;- sf::st_as_sf(\n  sq_df,\n  coords = c(\"x\",\"y\")\n)\nsq_ppp &lt;- as.ppp(sq_sf, W=obs_window)\nsq_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(mar=c(0,0,0,2), las=2, oma=c(0,0,1,0))\nsq_density &lt;- density(sq_ppp)\nplot(sq_density, main=NULL, xaxs='i', yaxs='i')\ncontour(sq_density, xaxs='i', yaxs='i', add = TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\n### PCF\npcf_result &lt;- spatstat.explore::pcf(\n  sq_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\npcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncsr_ppp &lt;- spatstat.random::rpoispp(\n  lambda = 60,\n  win=obs_window\n)\ncsr_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(\n  mar=c(0,0,0,2),\n  las=2,\n  oma=c(0,0,1,0)\n)\ncsr_density &lt;- density(csr_ppp)\nplot(csr_density, main=NULL, xaxs=\"i\", yaxs=\"i\")\ncontour(csr_density, xaxs=\"i\", yaxs=\"i\", add = TRUE, lwd=1.5)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncsr_pcf_result &lt;- spatstat.explore::pcf(\n  csr_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\ncsr_pcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base)"
+  },
+  {
+    "objectID": "w09/slides.html#the-point-of-all-this-null-models-via-base-rates",
+    "href": "w09/slides.html#the-point-of-all-this-null-models-via-base-rates",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "The Point of All This: Null Models via Base Rates!",
+    "text": "The Point of All This: Null Models via Base Rates!\n\nGiven an intensity function, we can compute a bunch of simulated point patterns (inhomogeneous Poisson Point Process)…\nHow does an observed point pattern differ from the simulated point patterns?"
+  },
+  {
+    "objectID": "w09/slides.html#constant-risk-hypothesis-motivation",
+    "href": "w09/slides.html#constant-risk-hypothesis-motivation",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "Constant Risk Hypothesis: Motivation",
+    "text": "Constant Risk Hypothesis: Motivation\n\nHere is a (fictional) map of flu cases in the US “Midwest”\nAre people in Chicago and Detroit equally “at risk”?\n\n\n\nCode\ncity_df &lt;- tibble::tribble(\n  ~city, ~lon, ~lat, ~pop,\n  \"Chicago\", 41.950567516553896, -87.93011127491978, 2746388,\n  \"Detroit\", 42.45123004999075, -83.18402319217698, 631524\n)\ncity_sf &lt;- sf::st_as_sf(\n  city_df,\n  coords = c(\"lat\", \"lon\"),\n  crs=4326\n)\ncity_buf_sf &lt;- city_sf |&gt; sf::st_buffer(20000)\ncity_cases_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=rep(10,2)) |&gt; sf::st_as_sf()\ncity_cases_sf$city &lt;- \"Detroit (10 Cases)\"\ncity_cases_sf[1:10, 'city'] &lt;- \"Chicago (10 Cases)\"\ncity_cases_sf$sample &lt;- \"Flu\"\nmapview(city_cases_sf, zcol=\"city\")"
+  },
+  {
+    "objectID": "w09/slides.html#constant-risk-hypothesis-base-rates",
+    "href": "w09/slides.html#constant-risk-hypothesis-base-rates",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "Constant Risk Hypothesis: Base Rates",
+    "text": "Constant Risk Hypothesis: Base Rates\n\n\n\n\nChicago\nDetroit\n\n\n\n\nPopulation\n2,746,388\n631,524\n\n\n\n\n\nCode\ncity_pop_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=c(16, 4)) |&gt; sf::st_as_sf()\ncity_pop_sf$city &lt;- \"Detroit\"\ncity_pop_sf[1:16, 'city'] &lt;- \"Chicago\"\ncity_pop_sf$sample &lt;- \"People\"\ncity_combined_sf &lt;- bind_rows(city_cases_sf, city_pop_sf)\n# mapview(city_combined_sf, zcol=\"city\", marker=\"sample\")\nFlu = makeIcon(\n    \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png\",\n    \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png\",\n    20,\n    20\n)\nPeople = makeIcon(\n  \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png\",\n  \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png\",\n  20,\n  20\n)\n\ncity_combined_sf$r &lt;- ifelse(city_combined_sf$sample == \"Flu\", 0, 4)\ncity_flu_sf &lt;- city_combined_sf |&gt; filter(sample == \"Flu\")\ncity_ppl_sf &lt;- city_combined_sf |&gt; filter(sample == \"People\")\nleaflet(city_flu_sf) |&gt;\n  addProviderTiles(\"CartoDB.Positron\") |&gt;\n  addMarkers(data=city_flu_sf, icon = Flu) |&gt;\n  addMarkers(data=city_ppl_sf, icon = People)"
+  },
+  {
+    "objectID": "w09/slides.html#meaningful-results-leftrightarrow-comparisons-with-null-models",
+    "href": "w09/slides.html#meaningful-results-leftrightarrow-comparisons-with-null-models",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "Meaningful Results \\(\\leftrightarrow\\) Comparisons with Null Model(s)",
+    "text": "Meaningful Results \\(\\leftrightarrow\\) Comparisons with Null Model(s)\n\nCases of disease form an intensity function \\(\\lambda(\\mathbf{s})\\)\nControls form an “ambient” intensity function \\(\\lambda_0(\\mathbf{s})\\)\n\\(\\implies\\) The following model allows us to separate the quantities we really care about from the base rate information:\n\\[\n  \\lambda(\\mathbf{s}) = \\alpha \\overbrace{\\lambda_0(\\mathbf{s})}^{\\mathclap{\\text{Base Rate}}} \\underbrace{\\rho(\\mathbf{s})}_{\\mathclap{\\text{Relative Risk}}},\n  \\]\nwhere\n\\[\n  \\alpha = \\frac{\\# \\text{Cases}}{\\# \\text{Controls}}\n  \\]\n(Remember: unit of \\(\\lambda(\\mathbf{s})\\) is number of cases; not a probability density!)"
+  },
+  {
+    "objectID": "w09/slides.html#example-from-moraga-2024",
+    "href": "w09/slides.html#example-from-moraga-2024",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "Example from Moraga (2024)",
+    "text": "Example from Moraga (2024)\n\nData: 761 primary biliary cirrhosis (PBC) cases, 3020 controls, England 1987-94\n\n\n\n\n\nCode\nlibrary(sparr) |&gt; suppressPackageStartupMessages()\ndata(pbc)\ncontrols &lt;- unmark(pbc[which(pbc$marks == \"control\"), ])\ncontrols |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic() +\n  labs(title=\"Controls (Population Sample)\")\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncases &lt;- unmark(pbc[which(pbc$marks == \"case\"), ])\ncases |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic() +\n  labs(title=\"PBC Cases\")"
+  },
+  {
+    "objectID": "w09/slides.html#estimating-comparable-intensity-surfaces",
+    "href": "w09/slides.html#estimating-comparable-intensity-surfaces",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "Estimating Comparable Intensity Surfaces",
+    "text": "Estimating Comparable Intensity Surfaces\n\nTo ensure comparable intensity functions, we need a common bandwidth parameter.\ndensity() from spatstat makes “smart” choices for this bandwidth, so for now we just average the bandwidths estimated for cases and controls:\n\n\n\nCode\nlibrary(sparr)\ndata(pbc)\ncases &lt;- unmark(pbc[which(pbc$marks == \"case\"), ])\ncontrols &lt;- unmark(pbc[which(pbc$marks == \"control\"), ])\nbwcases &lt;- attr(density(cases), \"sigma\")\nbwcontr &lt;- attr(density(controls), \"sigma\")\n(bw &lt;- (bwcases + bwcontr)/2)\n\n\n[1] 11.45837\n\n\n\n\n\n\nCode\nint_controls &lt;- density(controls, sigma = bw)\nplot(int_controls, main = NULL)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nint_cases &lt;- density(cases, sigma = bw)\nplot(int_cases, main = NULL)"
+  },
+  {
+    "objectID": "w09/slides.html#visualizing-relative-risk-surface",
+    "href": "w09/slides.html#visualizing-relative-risk-surface",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "Visualizing Relative Risk Surface",
+    "text": "Visualizing Relative Risk Surface\n\nAll that’s left is \\(\\alpha = \\# \\text{Controls} / \\# \\text{Cases}\\)!\n\n\n\nCode\nlibrary(fields)\n(alpha_hat &lt;- cases$n/controls$n)\n\n\n[1] 0.2519868\n\n\nCode\nx &lt;- int_cases$xcol\ny &lt;- int_cases$yrow\nrr &lt;- t(int_cases$v)/t(alpha_hat * int_controls$v)\nimage.plot(x, y, rr, asp = 1)\ntitle(xlab = \"Easting\", ylab = \"Northing\")"
+  },
+  {
+    "objectID": "w09/slides.html#the-random-labeling-hypothesis",
+    "href": "w09/slides.html#the-random-labeling-hypothesis",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "The Random Labeling Hypothesis",
+    "text": "The Random Labeling Hypothesis\n\nRandomly apply 761 “sick” labels to the 3781 points!"
+  },
+  {
+    "objectID": "w09/slides.html#the-constant-risk-hypothesis",
+    "href": "w09/slides.html#the-constant-risk-hypothesis",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "The Constant Risk Hypothesis",
+    "text": "The Constant Risk Hypothesis\n\nEveryone in the population is equally at risk of contracting the disease, regardless of their spatial location\nHere, since we have 761 cases and 3020 controls, the estimated constant risk would be \\(\\frac{761}{3020+761} \\approx 0.201\\):\n\n\n\nCode\npbc_win_sf &lt;- pbc |&gt; sf::st_as_sf() |&gt; filter(label == \"window\")\ngen_pbc_sim &lt;- function() {\n    pbc_sim &lt;- spatstat.random::rpoispp(\n        lambda = 761 / sf::st_area(pbc_win_sf),\n        win=Window(pbc)\n    )\n    return(pbc_sim)\n}\npbc_1 &lt;- gen_pbc_sim()\npbc_2 &lt;- gen_pbc_sim()\npbc_3 &lt;- gen_pbc_sim()\npbc_1 |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic()"
+  },
+  {
+    "objectID": "w09/slides.html#references",
+    "href": "w09/slides.html#references",
+    "title": "Week 9: Null Models and Marked Point Processes",
     "section": "References",
-    "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.\n\n\nWaller, Lance A., and Carol A. Gotway. 2004. Applied Spatial Statistics for Public Health Data. John Wiley & Sons.\n\n\n\n\n\nPPOL 6805 Week 7: Point Processes, Clustering, Regularity"
+    "text": "References\n\n\n\n\n\n\nPPOL 6805 Week 9: Evaluating Point Data Hypotheses"
   },
   {
-    "objectID": "w07/index.html",
-    "href": "w07/index.html",
-    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "objectID": "w09/index.html",
+    "href": "w09/index.html",
+    "title": "Week 9: Null Models and Marked Point Processes",
     "section": "",
-    "text": "Open slides in new tab →",
-    "crumbs": [
-      "Week 7: Oct 9"
-    ]
+    "text": "Open slides in new tab →"
   },
   {
-    "objectID": "w07/index.html#why-naïve",
-    "href": "w07/index.html#why-naïve",
-    "title": "Week 7: Point Processes, Clustering, and Regularity",
-    "section": "Why “Naïve”?",
-    "text": "Why “Naïve”?\n\n[Continuing from last week] Lattice data: easiest way to visualize / operationalize simple measures of clustering via spatial autocorrelation\nSo, we develop intuitions for measures like Moran’s \\(I\\) by looking at lattice data, but…\nNaïve because we’re not modeling the lattice regions (cells) themselves!\nNon-naïve clustering: Knowing the clusters but also what process led to their formation!",
-    "crumbs": [
-      "Week 7: Oct 9"
-    ]
-  },
-  {
-    "objectID": "w07/index.html#spatial-randomness",
-    "href": "w07/index.html#spatial-randomness",
-    "title": "Week 7: Point Processes, Clustering, and Regularity",
-    "section": "Spatial Randomness",
-    "text": "Spatial Randomness\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6805)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)\ncond_reg_sims &lt;- rSSI(r=r_core, N)\n# CSR data\n#csr_sims &lt;- rpoispp(N, win=obs_window)\ncond_sr_sims &lt;- rpoint(N, win=obs_window)\n### Clustered data\n#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)\n#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)\n#clust_sims &lt;- rclusterBKBC(clusters=\"MatClust\", kappa=10, mu=10, scale=0.05, verbose=FALSE)\n# Each cluster consist of 10 points in a disc of radius 0.2\nnclust &lt;- function(x0, y0, radius, n) {\n    #print(n)\n    return(runifdisc(10, radius, centre=c(x0, y0)))\n}\ncond_clust_sims &lt;- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\ncond_reg_plot &lt;- cond_reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_reg.png\", cond_reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_sr_plot &lt;- cond_sr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_sr.png\", cond_sr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_clust_plot &lt;- cond_clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_clust.png\", cond_clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed \\(N\\)\n60\n\n60\n\n60",
-    "crumbs": [
-      "Week 7: Oct 9"
-    ]
-  },
-  {
-    "objectID": "w07/index.html#complete-spatial-randomness-csr",
-    "href": "w07/index.html#complete-spatial-randomness-csr",
-    "title": "Week 7: Point Processes, Clustering, and Regularity",
-    "section": "Complete Spatial Randomness (CSR)",
-    "text": "Complete Spatial Randomness (CSR)\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6807)\nlambda &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n# Regularity via Inhibition\nreg_sims &lt;- rMaternI(lambda, r=r_core, win=obs_window)\n# CSR data\ncsr_sims &lt;- rpoispp(N, win=obs_window)\n### Clustered data\nclust_mu &lt;- 10\nclust_sims &lt;- rMatClust(kappa=lambda / clust_mu, scale=2*r_core, mu=10, win=obs_window)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\nreg_plot &lt;- reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",reg_sims$n)) +\n  dsan_theme()\nggsave(\"images/reg.png\", reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncsr_plot &lt;- csr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",csr_sims$n)) +\n  dsan_theme()\nggsave(\"images/csr.png\", csr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\nclust_plot &lt;- clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",clust_sims$n)) +\n  dsan_theme()\nggsave(\"images/clust.png\", clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed Intensity \\(\\lambda\\)\n60\n\n60\n\n60\n\n\nRandom \\(N\\)",
-    "crumbs": [
-      "Week 7: Oct 9"
-    ]
-  },
-  {
-    "objectID": "w07/index.html#measures-are-relative-to-window-of-observation",
-    "href": "w07/index.html#measures-are-relative-to-window-of-observation",
-    "title": "Week 7: Point Processes, Clustering, and Regularity",
-    "section": "Measures are Relative to Window of Observation",
-    "text": "Measures are Relative to Window of Observation\n\nSame data can be spatially random within one window, clustered or regular in others!\n\n\n\nCode\nN &lt;- 60\nobs_window &lt;- square(1)\nwindow_scale &lt;- 3.5\ncsr_sims_square &lt;- rpoispp(N, win=obs_window)\n# Triangular window\nobs_window_tri &lt;- st_sfc(st_polygon(list(\n    matrix(c(0.3,0.1,0.7,0.1,0.5,0.5,0.3,0.1), byrow=TRUE, nrow=4)\n)))\nobs_window_geom &lt;- st_sfc(st_linestring(\n    matrix(c(0,0,1,0,1,1,0,1,0,0), byrow=TRUE, nrow=5)\n))\ncsr_sims_tri &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_tri))\ntri_plot &lt;- csr_sims_tri |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"quarter\");\nggsave(\"images/window_tri.png\", tri_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Square window\nsquare_plot &lt;- csr_sims_square |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_tri |&gt; sf::st_boundary()) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_square.png\", square_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Circular window\nobs_window_disc &lt;- st_sfc(st_point(c(1, 0.5))) |&gt; st_buffer(1.2)\ncsr_sims_circ &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_disc))\ncirc_plot &lt;- csr_sims_circ |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_geom) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_circ.png\", circ_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n\n\n\n\n\n\n\n\n\n\nRegular\nCSR\nClustered",
-    "crumbs": [
-      "Week 7: Oct 9"
-    ]
-  },
-  {
-    "objectID": "w07/index.html#our-new-library-spatstat",
-    "href": "w07/index.html#our-new-library-spatstat",
-    "title": "Week 7: Point Processes, Clustering, and Regularity",
-    "section": "Our New Library: spatstat!",
-    "text": "Our New Library: spatstat!\n\n\n\nHomepage: spatstat.org\nGitHub: github.com/spatstat\nBook: Baddeley, Rubak, and Turner (2015) [Companion website]\nPDF: here",
-    "crumbs": [
-      "Week 7: Oct 9"
-    ]
-  },
-  {
-    "objectID": "w07/index.html#why-do-events-appear-where-they-do",
-    "href": "w07/index.html#why-do-events-appear-where-they-do",
-    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "objectID": "w09/index.html#why-do-events-appear-where-they-do",
+    "href": "w09/index.html#why-do-events-appear-where-they-do",
+    "title": "Week 9: Null Models and Marked Point Processes",
     "section": "Why Do Events Appear Where They Do?",
-    "text": "Why Do Events Appear Where They Do?\n\n\nCode\ncenter_l_function &lt;- function(x, ...) {\n\n  if (!spatstat.geom::is.ppp(x) && !spatstat.geom::is.fv(x)) {\n    stop(\"Please provide either ppp or fv object.\")\n  }\n\n  if (spatstat.geom::is.ppp(x)) {\n    x &lt;- spatstat.explore::Lest(x, ...)\n  }\n\n  r &lt;- x$r\n\n  l_centered &lt;- spatstat.explore::eval.fv(x - r)\n\n  return(l_centered)\n}\ncond_clust_sf &lt;- cond_clust_sims |&gt; sf::st_as_sf()\npines_plot &lt;- cond_clust_sf |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"full\")\nggsave(\"images/pines.png\", pines_plot)\n# density() calls density.ppp() if the argument is a ppp object\nden &lt;- density(cond_clust_sims, sigma = 0.1)\n#summary(den)\npng(\"images/intensity_plot.png\")\nplot(den, main = \"Intensity λ(s)\")\ncontour(den, add = TRUE) # contour plot\ndev.off()\n# And Kest / Lest\nkest_result &lt;- Kest(cond_clust_sims, rmax=0.5, correction=\"best\")\nlest_result &lt;- center_l_function(cond_clust_sims, rmax=0.5)\npng(\"images/lest.png\")\nplot(lest_result, main=\"K(h)\")\ndev.off()\n\n\n\n\n\n\n\n\n\n\n\nFirst-Order\nSecond-Order\n\n\n\n\n\nEvents considered individually \\(\\implies\\) Intensity function \\(\\lambda(\\mathbf{s})\\)\nSecond-Order: Events considered pairwise \\(\\implies\\) \\(K\\)-function \\(K(\\vec{h})\\)",
-    "crumbs": [
-      "Week 7: Oct 9"
-    ]
+    "text": "Why Do Events Appear Where They Do?\n\n\nCode\nset.seed(6809)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n### Clustered data\nclust_ppp &lt;- rMatClust(\n  kappa=6,\n  scale=r_core,\n  mu=10\n)\nclust_sf &lt;- clust_ppp |&gt; sf::st_as_sf()\nclust_plot &lt;- clust_sf |&gt;\n  ggplot() +\n  geom_sf(size=2) +\n  theme_classic(base_size=18)\nggsave(\"images/clust_ppp.png\", clust_plot, width=3, height=3)\n# Intensity fn\nclust_intensity &lt;- density(clust_ppp, sigma = 0.1)\npng(\"images/clust_intensity.png\")\npar(mar=c(0,0,0,2), las=2, oma=c(0,0,0,0), cex=2)\nplot(clust_intensity, main=NULL)\ncontour(clust_intensity, add = TRUE)\ndev.off()\n### PCF\nclust_pcf &lt;- spatstat.explore::pcf(\n  clust_ppp, divisor=\"d\",\n  r=seq(from=0.00, to=0.50, by=0.01)\n)\nclust_pcf_plot &lt;- clust_pcf |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  labs(x=\"Distance\", y=\"Density\") +\n  theme_classic(base_size=14)\nggsave(\"images/clust_pcf.png\", clust_pcf_plot, width=3, height=3)\n\n\n\n\n\n\n\n\n\n\nOriginal Data\nFirst-Order\nSecond-Order\n\n\n\n\n\\(N = 60\\) Events\nEvents modeled individually\\(\\implies\\) Intensity function \\(\\lambda(\\mathbf{s})\\)\nEvents modeled pairwise \\(\\implies\\) \\(K\\)-function \\(K(\\vec{h})\\)"
   },
   {
-    "objectID": "w07/index.html#references",
-    "href": "w07/index.html#references",
-    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "objectID": "w09/index.html#what-do-these-functions-detect",
+    "href": "w09/index.html#what-do-these-functions-detect",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "What Do These Functions “Detect”?",
+    "text": "What Do These Functions “Detect”?\n\n\n\n\nCode\nsq_base &lt;- 16\nsq_psize &lt;- 2.5\nobs_window &lt;- square(1)\nr0 &lt;- 0.2\nsq_df &lt;- tibble::tribble(\n  ~x, ~y,\n  0.5-r0,0.5-r0,\n  0.5+r0,0.5+r0,\n  0.5-r0,0.5+r0,\n  0.5+r0,0.5-r0\n)\nsq_sf &lt;- sf::st_as_sf(\n  sq_df,\n  coords = c(\"x\",\"y\")\n)\nsq_ppp &lt;- as.ppp(sq_sf, W=obs_window)\nsq_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(mar=c(0,0,0,2), las=2, oma=c(0,0,1,0))\nsq_density &lt;- density(sq_ppp)\nplot(sq_density, main=NULL, xaxs='i', yaxs='i')\ncontour(sq_density, xaxs='i', yaxs='i', add = TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\n### PCF\npcf_result &lt;- spatstat.explore::pcf(\n  sq_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\npcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncsr_ppp &lt;- spatstat.random::rpoispp(\n  lambda = 60,\n  win=obs_window\n)\ncsr_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(\n  mar=c(0,0,0,2),\n  las=2,\n  oma=c(0,0,1,0)\n)\ncsr_density &lt;- density(csr_ppp)\nplot(csr_density, main=NULL, xaxs=\"i\", yaxs=\"i\")\ncontour(csr_density, xaxs=\"i\", yaxs=\"i\", add = TRUE, lwd=1.5)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncsr_pcf_result &lt;- spatstat.explore::pcf(\n  csr_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\ncsr_pcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base)"
+  },
+  {
+    "objectID": "w09/index.html#the-point-of-all-this-null-models-via-base-rates",
+    "href": "w09/index.html#the-point-of-all-this-null-models-via-base-rates",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "The Point of All This: Null Models via Base Rates!",
+    "text": "The Point of All This: Null Models via Base Rates!\n\nGiven an intensity function, we can compute a bunch of simulated point patterns (inhomogeneous Poisson Point Process)…\nHow does an observed point pattern differ from the simulated point patterns?"
+  },
+  {
+    "objectID": "w09/index.html#constant-risk-hypothesis-motivation",
+    "href": "w09/index.html#constant-risk-hypothesis-motivation",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "Constant Risk Hypothesis: Motivation",
+    "text": "Constant Risk Hypothesis: Motivation\n\nHere is a (fictional) map of flu cases in the US “Midwest”\nAre people in Chicago and Detroit equally “at risk”?\n\n\n\nCode\ncity_df &lt;- tibble::tribble(\n  ~city, ~lon, ~lat, ~pop,\n  \"Chicago\", 41.950567516553896, -87.93011127491978, 2746388,\n  \"Detroit\", 42.45123004999075, -83.18402319217698, 631524\n)\ncity_sf &lt;- sf::st_as_sf(\n  city_df,\n  coords = c(\"lat\", \"lon\"),\n  crs=4326\n)\ncity_buf_sf &lt;- city_sf |&gt; sf::st_buffer(20000)\ncity_cases_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=rep(10,2)) |&gt; sf::st_as_sf()\ncity_cases_sf$city &lt;- \"Detroit (10 Cases)\"\ncity_cases_sf[1:10, 'city'] &lt;- \"Chicago (10 Cases)\"\ncity_cases_sf$sample &lt;- \"Flu\"\nmapview(city_cases_sf, zcol=\"city\")"
+  },
+  {
+    "objectID": "w09/index.html#constant-risk-hypothesis-base-rates",
+    "href": "w09/index.html#constant-risk-hypothesis-base-rates",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "Constant Risk Hypothesis: Base Rates",
+    "text": "Constant Risk Hypothesis: Base Rates\n\n\n\n\nChicago\nDetroit\n\n\n\n\nPopulation\n2,746,388\n631,524\n\n\n\n\n\nCode\ncity_pop_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=c(16, 4)) |&gt; sf::st_as_sf()\ncity_pop_sf$city &lt;- \"Detroit\"\ncity_pop_sf[1:16, 'city'] &lt;- \"Chicago\"\ncity_pop_sf$sample &lt;- \"People\"\ncity_combined_sf &lt;- bind_rows(city_cases_sf, city_pop_sf)\n# mapview(city_combined_sf, zcol=\"city\", marker=\"sample\")\nFlu = makeIcon(\n    \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png\",\n    \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png\",\n    20,\n    20\n)\nPeople = makeIcon(\n  \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png\",\n  \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png\",\n  20,\n  20\n)\n\ncity_combined_sf$r &lt;- ifelse(city_combined_sf$sample == \"Flu\", 0, 4)\ncity_flu_sf &lt;- city_combined_sf |&gt; filter(sample == \"Flu\")\ncity_ppl_sf &lt;- city_combined_sf |&gt; filter(sample == \"People\")\nleaflet(city_flu_sf) |&gt;\n  addProviderTiles(\"CartoDB.Positron\") |&gt;\n  addMarkers(data=city_flu_sf, icon = Flu) |&gt;\n  addMarkers(data=city_ppl_sf, icon = People)"
+  },
+  {
+    "objectID": "w09/index.html#meaningful-results-leftrightarrow-comparisons-with-null-models",
+    "href": "w09/index.html#meaningful-results-leftrightarrow-comparisons-with-null-models",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "Meaningful Results \\(\\leftrightarrow\\) Comparisons with Null Model(s)",
+    "text": "Meaningful Results \\(\\leftrightarrow\\) Comparisons with Null Model(s)\n\nCases of disease form an intensity function \\(\\lambda(\\mathbf{s})\\)\nControls form an “ambient” intensity function \\(\\lambda_0(\\mathbf{s})\\)\n\\(\\implies\\) The following model allows us to separate the quantities we really care about from the base rate information:\n\\[\n  \\lambda(\\mathbf{s}) = \\alpha \\overbrace{\\lambda_0(\\mathbf{s})}^{\\mathclap{\\text{Base Rate}}} \\underbrace{\\rho(\\mathbf{s})}_{\\mathclap{\\text{Relative Risk}}},\n  \\]\nwhere\n\\[\n  \\alpha = \\frac{\\# \\text{Cases}}{\\# \\text{Controls}}\n  \\]\n(Remember: unit of \\(\\lambda(\\mathbf{s})\\) is number of cases; not a probability density!)"
+  },
+  {
+    "objectID": "w09/index.html#example-from-moraga-2024",
+    "href": "w09/index.html#example-from-moraga-2024",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "Example from Moraga (2024)",
+    "text": "Example from Moraga (2024)\n\nData: 761 primary biliary cirrhosis (PBC) cases, 3020 controls, England 1987-94\n\n\n\n\n\nCode\nlibrary(sparr) |&gt; suppressPackageStartupMessages()\ndata(pbc)\ncontrols &lt;- unmark(pbc[which(pbc$marks == \"control\"), ])\ncontrols |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic() +\n  labs(title=\"Controls (Population Sample)\")\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncases &lt;- unmark(pbc[which(pbc$marks == \"case\"), ])\ncases |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic() +\n  labs(title=\"PBC Cases\")"
+  },
+  {
+    "objectID": "w09/index.html#estimating-comparable-intensity-surfaces",
+    "href": "w09/index.html#estimating-comparable-intensity-surfaces",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "Estimating Comparable Intensity Surfaces",
+    "text": "Estimating Comparable Intensity Surfaces\n\nTo ensure comparable intensity functions, we need a common bandwidth parameter.\ndensity() from spatstat makes “smart” choices for this bandwidth, so for now we just average the bandwidths estimated for cases and controls:\n\n\n\nCode\nlibrary(sparr)\ndata(pbc)\ncases &lt;- unmark(pbc[which(pbc$marks == \"case\"), ])\ncontrols &lt;- unmark(pbc[which(pbc$marks == \"control\"), ])\nbwcases &lt;- attr(density(cases), \"sigma\")\nbwcontr &lt;- attr(density(controls), \"sigma\")\n(bw &lt;- (bwcases + bwcontr)/2)\n\n\n[1] 11.45837\n\n\n\n\n\n\nCode\nint_controls &lt;- density(controls, sigma = bw)\nplot(int_controls, main = NULL)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nint_cases &lt;- density(cases, sigma = bw)\nplot(int_cases, main = NULL)"
+  },
+  {
+    "objectID": "w09/index.html#visualizing-relative-risk-surface",
+    "href": "w09/index.html#visualizing-relative-risk-surface",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "Visualizing Relative Risk Surface",
+    "text": "Visualizing Relative Risk Surface\n\nAll that’s left is \\(\\alpha = \\# \\text{Controls} / \\# \\text{Cases}\\)!\n\n\n\nCode\nlibrary(fields)\n\n\nLoading required package: spam\n\n\nSpam version 2.10-0 (2023-10-23) is loaded.\nType 'help( Spam)' or 'demo( spam)' for a short introduction \nand overview of this package.\nHelp for individual functions is also obtained by adding the\nsuffix '.spam' to the function name, e.g. 'help( chol.spam)'.\n\n\n\nAttaching package: 'spam'\n\n\nThe following objects are masked from 'package:base':\n\n    backsolve, forwardsolve\n\n\nLoading required package: viridisLite\n\n\n\nTry help(fields) to get started.\n\n\n\nAttaching package: 'fields'\n\n\nThe following object is masked from 'package:leaflet':\n\n    addLegend\n\n\nCode\n(alpha_hat &lt;- cases$n/controls$n)\n\n\n[1] 0.2519868\n\n\nCode\nx &lt;- int_cases$xcol\ny &lt;- int_cases$yrow\nrr &lt;- t(int_cases$v)/t(alpha_hat * int_controls$v)\nimage.plot(x, y, rr, asp = 1)\ntitle(xlab = \"Easting\", ylab = \"Northing\")"
+  },
+  {
+    "objectID": "w09/index.html#the-random-labeling-hypothesis",
+    "href": "w09/index.html#the-random-labeling-hypothesis",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "The Random Labeling Hypothesis",
+    "text": "The Random Labeling Hypothesis\n\nRandomly apply 761 “sick” labels to the 3781 points!"
+  },
+  {
+    "objectID": "w09/index.html#the-constant-risk-hypothesis",
+    "href": "w09/index.html#the-constant-risk-hypothesis",
+    "title": "Week 9: Null Models and Marked Point Processes",
+    "section": "The Constant Risk Hypothesis",
+    "text": "The Constant Risk Hypothesis\n\nEveryone in the population is equally at risk of contracting the disease, regardless of their spatial location\nHere, since we have 761 cases and 3020 controls, the estimated constant risk would be \\(\\frac{761}{3020+761} \\approx 0.201\\):\n\n\n\nCode\npbc_win_sf &lt;- pbc |&gt; sf::st_as_sf() |&gt; filter(label == \"window\")\ngen_pbc_sim &lt;- function() {\n    pbc_sim &lt;- spatstat.random::rpoispp(\n        lambda = 761 / sf::st_area(pbc_win_sf),\n        win=Window(pbc)\n    )\n    return(pbc_sim)\n}\npbc_1 &lt;- gen_pbc_sim()\npbc_2 &lt;- gen_pbc_sim()\npbc_3 &lt;- gen_pbc_sim()\npbc_1 |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic()"
+  },
+  {
+    "objectID": "w09/index.html#references",
+    "href": "w09/index.html#references",
+    "title": "Week 9: Null Models and Marked Point Processes",
     "section": "References",
-    "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.\n\n\nWaller, Lance A., and Carol A. Gotway. 2004. Applied Spatial Statistics for Public Health Data. John Wiley & Sons.",
+    "text": "References"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science",
+    "section": "",
+    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2024, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn Room 204. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 28\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 4\n\n\n\n\nWeek 3: Unary Operations\n\n\nSep 11\n\n\n\n\nWeek 4: Binary Operations\n\n\nSep 18\n\n\n\n\nWeek 5: Spatial Data Science!\n\n\nSep 25\n\n\n\n\nWeek 6: Random Fields and Spatial Autocorrelation\n\n\nOct 2\n\n\n\n\nWeek 7: Point Processes, Clustering, and Regularity\n\n\nOct 9\n\n\n\n\nWeek 8: Null Models and Marked Point Processes\n\n\nOct 16\n\n\n\n\nWeek 9: Null Models and Marked Point Processes\n\n\nOct 23\n\n\n\n\n\nNo matching items",
     "crumbs": [
-      "Week 7: Oct 9"
+      "Home"
     ]
   },
   {
@@ -2123,7 +2179,7 @@
     "href": "w05/index.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (27.57203 -17.79491)\n21.019655\n\n\nPOINT (-3.512863 19.26761)\n15.984744\n\n\nPOINT (-16.05947 13.8834)\n48.677779\n\n\nPOINT (42.49225 6.350422)\n28.806281\n\n\nPOINT (5.892575 22.84716)\n4.405375\n\n\nPOINT (16.56534 29.55133)\n29.553756\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n1\nZWE\nZimbabwe\nMULTIPOLYGON (((31.28789 -2…\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n67\nSEN\nSenegal\nMULTIPOLYGON (((-12.28062 1…\n\n\n114\nMLI\nMali\nMULTIPOLYGON (((-11.3894 12…",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (13.41118 -8.47209)\n31.40523\n\n\nPOINT (50.17577 11.43574)\n18.84194\n\n\nPOINT (36.4892 1.934743)\n1.50600\n\n\nPOINT (-13.12157 22.2789)\n49.40244\n\n\nPOINT (23.7616 29.83817)\n53.77309\n\n\nPOINT (14.13212 -13.35206)\n38.03971\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n58\nSOM\nSomalia\nMULTIPOLYGON (((41.53271 -1…\n\n\n92\nNER\nNiger\nMULTIPOLYGON (((13.60635 13…\n\n\n105\nESH\nWestern Sahara\nMULTIPOLYGON (((-8.817773 2…\n\n\n123\nLBY\nLibya\nMULTIPOLYGON (((9.51875 30….",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -2133,7 +2189,7 @@
     "href": "w05/index.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n1\nZWE\nZimbabwe\n21.01965\nMULTIPOLYGON (((31.28789 -2…\n\n\n53\nSDN\nSudan\n18.56697\nMULTIPOLYGON (((34.07812 9….\n\n\n67\nSEN\nSenegal\n48.67778\nMULTIPOLYGON (((-12.28062 1…\n\n\n114\nMLI\nMali\n15.98474\nMULTIPOLYGON (((-11.3894 12…\n\n\n114.1\nMLI\nMali\n36.94394\nMULTIPOLYGON (((-11.3894 12…\n\n\n123\nLBY\nLibya\n29.55376\nMULTIPOLYGON (((9.51875 30….",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n58\nSOM\nSomalia\n18.84194\nMULTIPOLYGON (((41.53271 -1…\n\n\n92\nNER\nNiger\n35.30246\nMULTIPOLYGON (((13.60635 13…\n\n\n105\nESH\nWestern Sahara\n49.40244\nMULTIPOLYGON (((-8.817773 2…\n\n\n123\nLBY\nLibya\n53.77309\nMULTIPOLYGON (((9.51875 30….\n\n\n133\nKEN\nKenya\n1.50600\nMULTIPOLYGON (((40.99443 -2…\n\n\n204\nCMR\nCameroon\n93.40654\nMULTIPOLYGON (((8.555859 4….",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -2230,14 +2286,14 @@
     "href": "w05/slides.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (3.737508 32.48858)\n34.545487\n\n\nPOINT (2.267465 10.80611)\n79.987433\n\n\nPOINT (-2.540453 14.41437)\n17.093311\n\n\nPOINT (-10.05298 9.385763)\n44.196628\n\n\nPOINT (25.29335 -22.41041)\n4.160469\n\n\nPOINT (4.591455 10.9723)\n49.748864\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n44\nTZA\nTanzania\nMULTIPOLYGON (((39.49648 -6…\n\n\n91\nNGA\nNigeria\nMULTIPOLYGON (((7.300781 4….\n\n\n104\nMAR\nMorocco\nMULTIPOLYGON (((-2.219629 3…"
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-14.55562 18.70556)\n60.80865\n\n\nPOINT (10.18266 2.232381)\n10.14786\n\n\nPOINT (20.19947 -34.23721)\n38.62227\n\n\nPOINT (24.29612 13.66545)\n18.24336\n\n\nPOINT (28.46481 -23.95331)\n41.44496\n\n\nPOINT (8.377104 22.32626)\n96.44354\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n112\nMRT\nMauritania\nMULTIPOLYGON (((-16.37334 1…\n\n\n114\nMLI\nMali\nMULTIPOLYGON (((-11.3894 12…"
   },
   {
     "objectID": "w05/slides.html#our-first-real-spatial-join-st_join",
     "href": "w05/slides.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n2\nZMB\nZambia\n8.441880\nMULTIPOLYGON (((30.39609 -1…\n\n\n44\nTZA\nTanzania\n22.412761\nMULTIPOLYGON (((39.49648 -6…\n\n\n91\nNGA\nNigeria\n49.748864\nMULTIPOLYGON (((7.300781 4….\n\n\n104\nMAR\nMorocco\n1.571727\nMULTIPOLYGON (((-2.219629 3…\n\n\n114\nMLI\nMali\n17.093311\nMULTIPOLYGON (((-11.3894 12…\n\n\n152\nGIN\nGuinea\n44.196628\nMULTIPOLYGON (((-10.2832 8…."
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n53\nSDN\nSudan\n18.24336\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\n38.62227\nMULTIPOLYGON (((29.36484 -2…\n\n\n57.1\nZAF\nSouth Africa\n41.44496\nMULTIPOLYGON (((29.36484 -2…\n\n\n57.2\nZAF\nSouth Africa\n58.61389\nMULTIPOLYGON (((29.36484 -2…\n\n\n112\nMRT\nMauritania\n60.80865\nMULTIPOLYGON (((-16.37334 1…\n\n\n114\nMLI\nMali\n54.73798\nMULTIPOLYGON (((-11.3894 12…"
   },
   {
     "objectID": "w05/slides.html#but-we-were-still-in-easy-mode",
@@ -2296,21 +2352,181 @@
     "text": "References\n\n\n\n\n\n\nPPOL 6805 Week 5: Spatial Data Science"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science",
+    "objectID": "final-project-prelim.html",
+    "href": "final-project-prelim.html",
+    "title": "Final Project",
     "section": "",
-    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2024, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn Room 204. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 28\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 4\n\n\n\n\nWeek 3: Unary Operations\n\n\nSep 11\n\n\n\n\nWeek 4: Binary Operations\n\n\nSep 18\n\n\n\n\nWeek 5: Spatial Data Science!\n\n\nSep 25\n\n\n\n\nWeek 6: Random Fields and Spatial Autocorrelation\n\n\nOct 2\n\n\n\n\nWeek 7: Point Processes, Clustering, and Regularity\n\n\nOct 9\n\n\n\n\nWeek 8: Null Models and Marked Point Processes\n\n\nOct 16\n\n\n\n\n\nNo matching items",
+    "text": "This page will be updated with full details about the final project soon! For now, we have the following two resources for you."
+  },
+  {
+    "objectID": "final-project-prelim.html#google-cloud-platform-credits",
+    "href": "final-project-prelim.html#google-cloud-platform-credits",
+    "title": "Final Project",
+    "section": "Google Cloud Platform Credits",
+    "text": "Google Cloud Platform Credits\nYou should have received the Google Cloud Platform credits at your @georgetown.edu email address if you’re enrolled in this course. The code in the email should add a new billing account to your Google Cloud Console, with $50 for:\n\nCreating a full-on Virtual Machine for the project, if you think that you’ll need a bunch of storage or computing power or GPU usage, and/or\nFor use with Google Maps Engine, if you think that one of their Maps Engine datasets/tools may be useful!\n\nAs mentioned in the email: A reasonable choice, which ensures that you’ll stay within-budget even if you run the VM instance from now until the semester, is to create an instance (you can name it “gis-project”, for example) with all of the default options except:\n\nChoose ec2-small for the Machine Type (ec2-medium is the default, but based on the estimated cost for this type, it would run out of $ before the semester ends)\nClick the “Change” button under “Boot Disk” and then set the size to 25 GB (this is what I meant by “trying a few different options”: with the $ saved moving from ec2-medium to ec2-small, you can increase from the default 10 GB disk to a 25 GB disk without the expected cost going over $50 for the semester)."
+  },
+  {
+    "objectID": "final-project-prelim.html#gis-datasetsproject-ideas-collection",
+    "href": "final-project-prelim.html#gis-datasetsproject-ideas-collection",
+    "title": "Final Project",
+    "section": "GIS Datasets/Project Ideas Collection",
+    "text": "GIS Datasets/Project Ideas Collection\nOnce we get to the Spatial Data Science unit, I’m hoping that you will have lots of inspiration in terms of the different methods that can be used for drawing inferences about spatial phenomena! Until then, me and TA Billy will add links to the following Raindrop.io collection, which you can browse to potentially draw inspiration for your own final project topic:"
+  },
+  {
+    "objectID": "w07/index.html",
+    "href": "w07/index.html",
+    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "section": "",
+    "text": "Open slides in new tab →",
     "crumbs": [
-      "Home"
+      "Week 7: Oct 9"
     ]
+  },
+  {
+    "objectID": "w07/index.html#why-naïve",
+    "href": "w07/index.html#why-naïve",
+    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "section": "Why “Naïve”?",
+    "text": "Why “Naïve”?\n\n[Continuing from last week] Lattice data: easiest way to visualize / operationalize simple measures of clustering via spatial autocorrelation\nSo, we develop intuitions for measures like Moran’s \\(I\\) by looking at lattice data, but…\nNaïve because we’re not modeling the lattice regions (cells) themselves!\nNon-naïve clustering: Knowing the clusters but also what process led to their formation!",
+    "crumbs": [
+      "Week 7: Oct 9"
+    ]
+  },
+  {
+    "objectID": "w07/index.html#spatial-randomness",
+    "href": "w07/index.html#spatial-randomness",
+    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "section": "Spatial Randomness",
+    "text": "Spatial Randomness\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6805)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)\ncond_reg_sims &lt;- rSSI(r=r_core, N)\n# CSR data\n#csr_sims &lt;- rpoispp(N, win=obs_window)\ncond_sr_sims &lt;- rpoint(N, win=obs_window)\n### Clustered data\n#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)\n#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)\n#clust_sims &lt;- rclusterBKBC(clusters=\"MatClust\", kappa=10, mu=10, scale=0.05, verbose=FALSE)\n# Each cluster consist of 10 points in a disc of radius 0.2\nnclust &lt;- function(x0, y0, radius, n) {\n    #print(n)\n    return(runifdisc(10, radius, centre=c(x0, y0)))\n}\ncond_clust_sims &lt;- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\ncond_reg_plot &lt;- cond_reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_reg.png\", cond_reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_sr_plot &lt;- cond_sr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_sr.png\", cond_sr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_clust_plot &lt;- cond_clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_clust.png\", cond_clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed \\(N\\)\n60\n\n60\n\n60",
+    "crumbs": [
+      "Week 7: Oct 9"
+    ]
+  },
+  {
+    "objectID": "w07/index.html#complete-spatial-randomness-csr",
+    "href": "w07/index.html#complete-spatial-randomness-csr",
+    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "section": "Complete Spatial Randomness (CSR)",
+    "text": "Complete Spatial Randomness (CSR)\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6807)\nlambda &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n# Regularity via Inhibition\nreg_sims &lt;- rMaternI(lambda, r=r_core, win=obs_window)\n# CSR data\ncsr_sims &lt;- rpoispp(N, win=obs_window)\n### Clustered data\nclust_mu &lt;- 10\nclust_sims &lt;- rMatClust(kappa=lambda / clust_mu, scale=2*r_core, mu=10, win=obs_window)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\nreg_plot &lt;- reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",reg_sims$n)) +\n  dsan_theme()\nggsave(\"images/reg.png\", reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncsr_plot &lt;- csr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",csr_sims$n)) +\n  dsan_theme()\nggsave(\"images/csr.png\", csr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\nclust_plot &lt;- clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",clust_sims$n)) +\n  dsan_theme()\nggsave(\"images/clust.png\", clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed Intensity \\(\\lambda\\)\n60\n\n60\n\n60\n\n\nRandom \\(N\\)",
+    "crumbs": [
+      "Week 7: Oct 9"
+    ]
+  },
+  {
+    "objectID": "w07/index.html#measures-are-relative-to-window-of-observation",
+    "href": "w07/index.html#measures-are-relative-to-window-of-observation",
+    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "section": "Measures are Relative to Window of Observation",
+    "text": "Measures are Relative to Window of Observation\n\nSame data can be spatially random within one window, clustered or regular in others!\n\n\n\nCode\nN &lt;- 60\nobs_window &lt;- square(1)\nwindow_scale &lt;- 3.5\ncsr_sims_square &lt;- rpoispp(N, win=obs_window)\n# Triangular window\nobs_window_tri &lt;- st_sfc(st_polygon(list(\n    matrix(c(0.3,0.1,0.7,0.1,0.5,0.5,0.3,0.1), byrow=TRUE, nrow=4)\n)))\nobs_window_geom &lt;- st_sfc(st_linestring(\n    matrix(c(0,0,1,0,1,1,0,1,0,0), byrow=TRUE, nrow=5)\n))\ncsr_sims_tri &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_tri))\ntri_plot &lt;- csr_sims_tri |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"quarter\");\nggsave(\"images/window_tri.png\", tri_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Square window\nsquare_plot &lt;- csr_sims_square |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_tri |&gt; sf::st_boundary()) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_square.png\", square_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Circular window\nobs_window_disc &lt;- st_sfc(st_point(c(1, 0.5))) |&gt; st_buffer(1.2)\ncsr_sims_circ &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_disc))\ncirc_plot &lt;- csr_sims_circ |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_geom) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_circ.png\", circ_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n\n\n\n\n\n\n\n\n\n\nRegular\nCSR\nClustered",
+    "crumbs": [
+      "Week 7: Oct 9"
+    ]
+  },
+  {
+    "objectID": "w07/index.html#our-new-library-spatstat",
+    "href": "w07/index.html#our-new-library-spatstat",
+    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "section": "Our New Library: spatstat!",
+    "text": "Our New Library: spatstat!\n\n\n\nHomepage: spatstat.org\nGitHub: github.com/spatstat\nBook: Baddeley, Rubak, and Turner (2015) [Companion website]\nPDF: here",
+    "crumbs": [
+      "Week 7: Oct 9"
+    ]
+  },
+  {
+    "objectID": "w07/index.html#why-do-events-appear-where-they-do",
+    "href": "w07/index.html#why-do-events-appear-where-they-do",
+    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "section": "Why Do Events Appear Where They Do?",
+    "text": "Why Do Events Appear Where They Do?\n\n\nCode\ncenter_l_function &lt;- function(x, ...) {\n\n  if (!spatstat.geom::is.ppp(x) && !spatstat.geom::is.fv(x)) {\n    stop(\"Please provide either ppp or fv object.\")\n  }\n\n  if (spatstat.geom::is.ppp(x)) {\n    x &lt;- spatstat.explore::Lest(x, ...)\n  }\n\n  r &lt;- x$r\n\n  l_centered &lt;- spatstat.explore::eval.fv(x - r)\n\n  return(l_centered)\n}\ncond_clust_sf &lt;- cond_clust_sims |&gt; sf::st_as_sf()\npines_plot &lt;- cond_clust_sf |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"full\")\nggsave(\"images/pines.png\", pines_plot)\n# density() calls density.ppp() if the argument is a ppp object\nden &lt;- density(cond_clust_sims, sigma = 0.1)\n#summary(den)\npng(\"images/intensity_plot.png\")\nplot(den, main = \"Intensity λ(s)\")\ncontour(den, add = TRUE) # contour plot\ndev.off()\n# And Kest / Lest\nkest_result &lt;- Kest(cond_clust_sims, rmax=0.5, correction=\"best\")\nlest_result &lt;- center_l_function(cond_clust_sims, rmax=0.5)\npng(\"images/lest.png\")\nplot(lest_result, main=\"K(h)\")\ndev.off()\n\n\n\n\n\n\n\n\n\n\n\nFirst-Order\nSecond-Order\n\n\n\n\n\nEvents considered individually \\(\\implies\\) Intensity function \\(\\lambda(\\mathbf{s})\\)\nSecond-Order: Events considered pairwise \\(\\implies\\) \\(K\\)-function \\(K(\\vec{h})\\)",
+    "crumbs": [
+      "Week 7: Oct 9"
+    ]
+  },
+  {
+    "objectID": "w07/index.html#references",
+    "href": "w07/index.html#references",
+    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "section": "References",
+    "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.\n\n\nWaller, Lance A., and Carol A. Gotway. 2004. Applied Spatial Statistics for Public Health Data. John Wiley & Sons.",
+    "crumbs": [
+      "Week 7: Oct 9"
+    ]
+  },
+  {
+    "objectID": "w07/slides.html#why-naïve",
+    "href": "w07/slides.html#why-naïve",
+    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "section": "Why “Naïve”?",
+    "text": "Why “Naïve”?\n\n[Continuing from last week] Lattice data: easiest way to visualize / operationalize simple measures of clustering via spatial autocorrelation\nSo, we develop intuitions for measures like Moran’s \\(I\\) by looking at lattice data, but…\nNaïve because we’re not modeling the lattice regions (cells) themselves!\nNon-naïve clustering: Knowing the clusters but also what process led to their formation!"
+  },
+  {
+    "objectID": "w07/slides.html#spatial-randomness",
+    "href": "w07/slides.html#spatial-randomness",
+    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "section": "Spatial Randomness",
+    "text": "Spatial Randomness\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6805)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)\ncond_reg_sims &lt;- rSSI(r=r_core, N)\n# CSR data\n#csr_sims &lt;- rpoispp(N, win=obs_window)\ncond_sr_sims &lt;- rpoint(N, win=obs_window)\n### Clustered data\n#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)\n#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)\n#clust_sims &lt;- rclusterBKBC(clusters=\"MatClust\", kappa=10, mu=10, scale=0.05, verbose=FALSE)\n# Each cluster consist of 10 points in a disc of radius 0.2\nnclust &lt;- function(x0, y0, radius, n) {\n    #print(n)\n    return(runifdisc(10, radius, centre=c(x0, y0)))\n}\ncond_clust_sims &lt;- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\ncond_reg_plot &lt;- cond_reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_reg.png\", cond_reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_sr_plot &lt;- cond_sr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_sr.png\", cond_sr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_clust_plot &lt;- cond_clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_clust.png\", cond_clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed \\(N\\)\n60\n\n60\n\n60"
+  },
+  {
+    "objectID": "w07/slides.html#complete-spatial-randomness-csr",
+    "href": "w07/slides.html#complete-spatial-randomness-csr",
+    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "section": "Complete Spatial Randomness (CSR)",
+    "text": "Complete Spatial Randomness (CSR)\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6807)\nlambda &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n# Regularity via Inhibition\nreg_sims &lt;- rMaternI(lambda, r=r_core, win=obs_window)\n# CSR data\ncsr_sims &lt;- rpoispp(N, win=obs_window)\n### Clustered data\nclust_mu &lt;- 10\nclust_sims &lt;- rMatClust(kappa=lambda / clust_mu, scale=2*r_core, mu=10, win=obs_window)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\nreg_plot &lt;- reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",reg_sims$n)) +\n  dsan_theme()\nggsave(\"images/reg.png\", reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncsr_plot &lt;- csr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",csr_sims$n)) +\n  dsan_theme()\nggsave(\"images/csr.png\", csr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\nclust_plot &lt;- clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",clust_sims$n)) +\n  dsan_theme()\nggsave(\"images/clust.png\", clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed Intensity \\(\\lambda\\)\n60\n\n60\n\n60\n\n\nRandom \\(N\\)"
+  },
+  {
+    "objectID": "w07/slides.html#measures-are-relative-to-window-of-observation",
+    "href": "w07/slides.html#measures-are-relative-to-window-of-observation",
+    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "section": "Measures are Relative to Window of Observation",
+    "text": "Measures are Relative to Window of Observation\n\nSame data can be spatially random within one window, clustered or regular in others!\n\n\n\nCode\nN &lt;- 60\nobs_window &lt;- square(1)\nwindow_scale &lt;- 3.5\ncsr_sims_square &lt;- rpoispp(N, win=obs_window)\n# Triangular window\nobs_window_tri &lt;- st_sfc(st_polygon(list(\n    matrix(c(0.3,0.1,0.7,0.1,0.5,0.5,0.3,0.1), byrow=TRUE, nrow=4)\n)))\nobs_window_geom &lt;- st_sfc(st_linestring(\n    matrix(c(0,0,1,0,1,1,0,1,0,0), byrow=TRUE, nrow=5)\n))\ncsr_sims_tri &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_tri))\ntri_plot &lt;- csr_sims_tri |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"quarter\");\nggsave(\"images/window_tri.png\", tri_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Square window\nsquare_plot &lt;- csr_sims_square |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_tri |&gt; sf::st_boundary()) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_square.png\", square_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Circular window\nobs_window_disc &lt;- st_sfc(st_point(c(1, 0.5))) |&gt; st_buffer(1.2)\ncsr_sims_circ &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_disc))\ncirc_plot &lt;- csr_sims_circ |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_geom) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_circ.png\", circ_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n\n\n\n\n\n\n\n\n\n\nRegular\nCSR\nClustered"
+  },
+  {
+    "objectID": "w07/slides.html#our-new-library-spatstat",
+    "href": "w07/slides.html#our-new-library-spatstat",
+    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "section": "Our New Library: spatstat!",
+    "text": "Our New Library: spatstat!\n\n\n\nHomepage: spatstat.org\nGitHub: github.com/spatstat\nBook: Baddeley, Rubak, and Turner (2015) [Companion website]\nPDF: here"
+  },
+  {
+    "objectID": "w07/slides.html#why-do-events-appear-where-they-do",
+    "href": "w07/slides.html#why-do-events-appear-where-they-do",
+    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "section": "Why Do Events Appear Where They Do?",
+    "text": "Why Do Events Appear Where They Do?\n\n\nCode\ncenter_l_function &lt;- function(x, ...) {\n\n  if (!spatstat.geom::is.ppp(x) && !spatstat.geom::is.fv(x)) {\n    stop(\"Please provide either ppp or fv object.\")\n  }\n\n  if (spatstat.geom::is.ppp(x)) {\n    x &lt;- spatstat.explore::Lest(x, ...)\n  }\n\n  r &lt;- x$r\n\n  l_centered &lt;- spatstat.explore::eval.fv(x - r)\n\n  return(l_centered)\n}\ncond_clust_sf &lt;- cond_clust_sims |&gt; sf::st_as_sf()\npines_plot &lt;- cond_clust_sf |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"full\")\nggsave(\"images/pines.png\", pines_plot)\n# density() calls density.ppp() if the argument is a ppp object\nden &lt;- density(cond_clust_sims, sigma = 0.1)\n#summary(den)\npng(\"images/intensity_plot.png\")\nplot(den, main = \"Intensity λ(s)\")\ncontour(den, add = TRUE) # contour plot\ndev.off()\n# And Kest / Lest\nkest_result &lt;- Kest(cond_clust_sims, rmax=0.5, correction=\"best\")\nlest_result &lt;- center_l_function(cond_clust_sims, rmax=0.5)\npng(\"images/lest.png\")\nplot(lest_result, main=\"K(h)\")\ndev.off()\n\n\n\n\n\n\n\n\n\n\n\nFirst-Order\nSecond-Order\n\n\n\n\n\nEvents considered individually \\(\\implies\\) Intensity function \\(\\lambda(\\mathbf{s})\\)\nSecond-Order: Events considered pairwise \\(\\implies\\) \\(K\\)-function \\(K(\\vec{h})\\)"
+  },
+  {
+    "objectID": "w07/slides.html#references",
+    "href": "w07/slides.html#references",
+    "title": "Week 7: Point Processes, Clustering, and Regularity",
+    "section": "References",
+    "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.\n\n\nWaller, Lance A., and Carol A. Gotway. 2004. Applied Spatial Statistics for Public Health Data. John Wiley & Sons.\n\n\n\n\n\nPPOL 6805 Week 7: Point Processes, Clustering, Regularity"
   },
   {
     "objectID": "final-project.html",
     "href": "final-project.html",
-    "title": "Final Project",
+    "title": "Final Project Details",
     "section": "",
-    "text": "This page will be updated with full details about the final project soon! For now, we have the following two resources for you.",
+    "text": "Your job, for the final project, will be to\n\nChoose an application area that you are interested in (this can be drawn from the list in the “Application Areas” section below, but doesn’t have to be! You are very welcome to choose any area that is of interest to you!)\nDevelop a hypothesis about some spatial phenomena within that application area, which can be addressed using the GIS/Spatial Data Science tools we’ve learned in the course. You will need to be specific about whether your hypothesis relates to a first-order property of the observations in your dataset, a second-order property of these observations, or both.\nPresent some initial evidence regarding your hypothesis, whether in the form of visualizations or naïve clustering measures such as the global or local versions of Moran’s \\(I\\).\nAssess the veracity of the hypothesis using formal hypothesis-evaluation approaches. The general “template” for this formal hypothesis-evaluation would be to:\n\nCompute and visualize the intensity function and/or Pairwise Correlation Function for your observed data,\nRun 999 Monte Carlo simulations of the spatial patterns that would result from your null hypothesis, then\nCompare the the intensity functions or Pairwise Correlation Functions for these 999 simulations with those of your observed spatial pattern from step (a).\n\nDraw an initial conclusion regarding your hypothesis from Step 2, on the basis of the analysis carried out in Step 4.\nConclude with a “roadmap” of the next steps that you would need to take to further explore and/or refine your initial conclusion from Step 5.\n\nFor example, if your dataset had missing values for important regions/time periods, here you can discuss how you might go about collecting observations to form a better dataset that would allow you to evaluate your hypothesis with greater confidence!",
+    "crumbs": [
+      "Final Project"
+    ]
+  },
+  {
+    "objectID": "final-project.html#project-overview",
+    "href": "final-project.html#project-overview",
+    "title": "Final Project Details",
+    "section": "",
+    "text": "Your job, for the final project, will be to\n\nChoose an application area that you are interested in (this can be drawn from the list in the “Application Areas” section below, but doesn’t have to be! You are very welcome to choose any area that is of interest to you!)\nDevelop a hypothesis about some spatial phenomena within that application area, which can be addressed using the GIS/Spatial Data Science tools we’ve learned in the course. You will need to be specific about whether your hypothesis relates to a first-order property of the observations in your dataset, a second-order property of these observations, or both.\nPresent some initial evidence regarding your hypothesis, whether in the form of visualizations or naïve clustering measures such as the global or local versions of Moran’s \\(I\\).\nAssess the veracity of the hypothesis using formal hypothesis-evaluation approaches. The general “template” for this formal hypothesis-evaluation would be to:\n\nCompute and visualize the intensity function and/or Pairwise Correlation Function for your observed data,\nRun 999 Monte Carlo simulations of the spatial patterns that would result from your null hypothesis, then\nCompare the the intensity functions or Pairwise Correlation Functions for these 999 simulations with those of your observed spatial pattern from step (a).\n\nDraw an initial conclusion regarding your hypothesis from Step 2, on the basis of the analysis carried out in Step 4.\nConclude with a “roadmap” of the next steps that you would need to take to further explore and/or refine your initial conclusion from Step 5.\n\nFor example, if your dataset had missing values for important regions/time periods, here you can discuss how you might go about collecting observations to form a better dataset that would allow you to evaluate your hypothesis with greater confidence!",
+    "crumbs": [
+      "Final Project"
+    ]
+  },
+  {
+    "objectID": "final-project.html#application-areas",
+    "href": "final-project.html#application-areas",
+    "title": "Final Project Details",
+    "section": "Application Areas",
+    "text": "Application Areas\n\nUrban Planning\nI put this here first only as, the application area where I have the most experience, so can probably be most helpful in terms of project guidance!\nThough it is a broad topic, one way to narrow your scope to make it feasible in the time we have left is to choose between a comparative approach and a case study approach:\nComparative Approach:\nHere the idea is to understand a spatial phenomenon by analyzing how it is implemented across different urban areas. For example, you could choose a measure of transportation efficiency (on-time rate, proportion of urban population living within walking distance of a subway/bus stop, etc.), then see how it is distributed across different urban areas, whether within a specific country or internationally. Then, the project could be rooted in a hypothesis regarding why some urban areas have high efficiency and others have low efficiency.\nCase Study Approach:\nHere, rather than comparing across different urban areas, the idea would be more focused on telling a story about a particular city or urban area. The reason this approach is mentioned after the Comparative Approach is because, in reality, what you’re doing here is still comparative! It’s just that, in this case, the comparisons are being made between e.g. subregions of the urban area, or between the urban area observed at different time periods.\nFor example, a famous instance of the use of GIS to study a particular urban area is the Massachusetts state government’s Logan Airport Health Study, which found significantly higher rates of asthma among children living closer to Logan Airport. Here the point is that the rates were higher for these children relative to children living in other parts of the same urban area. That is, it’s still a “comparative” approach, just comparing areas-near-Logan with areas-not-near-Logan!\n\n\n\n\n\n\nFigure 1: Pollution expsure areas, as estimated in (Massachusetts Bureau of Environmental Health 2014, 46)\n\n\n\n\n\nClimate Change / Renewable Energy\n\n\nPublic Policy Evaluation\nHere, I specify policy evaluation rather than just public policy studies in general, since I think that some of the tools we’ve learned in class can be particularly helpful for spatially-based comparison of the effectiveness of a given policy choice.\nThat’s a fairly vague statement so, as a concrete example,\n\n\nInternational Relations\n\n\nPublic Health / Global Health\n\n\nDiffusion Processes",
     "crumbs": [
       "Final Project"
     ]
@@ -2318,7 +2534,7 @@
   {
     "objectID": "final-project.html#google-cloud-platform-credits",
     "href": "final-project.html#google-cloud-platform-credits",
-    "title": "Final Project",
+    "title": "Final Project Details",
     "section": "Google Cloud Platform Credits",
     "text": "Google Cloud Platform Credits\nYou should have received the Google Cloud Platform credits at your @georgetown.edu email address if you’re enrolled in this course. The code in the email should add a new billing account to your Google Cloud Console, with $50 for:\n\nCreating a full-on Virtual Machine for the project, if you think that you’ll need a bunch of storage or computing power or GPU usage, and/or\nFor use with Google Maps Engine, if you think that one of their Maps Engine datasets/tools may be useful!\n\nAs mentioned in the email: A reasonable choice, which ensures that you’ll stay within-budget even if you run the VM instance from now until the semester, is to create an instance (you can name it “gis-project”, for example) with all of the default options except:\n\nChoose ec2-small for the Machine Type (ec2-medium is the default, but based on the estimated cost for this type, it would run out of $ before the semester ends)\nClick the “Change” button under “Boot Disk” and then set the size to 25 GB (this is what I meant by “trying a few different options”: with the $ saved moving from ec2-medium to ec2-small, you can increase from the default 10 GB disk to a 25 GB disk without the expected cost going over $50 for the semester).",
     "crumbs": [
@@ -2328,7 +2544,7 @@
   {
     "objectID": "final-project.html#gis-datasetsproject-ideas-collection",
     "href": "final-project.html#gis-datasetsproject-ideas-collection",
-    "title": "Final Project",
+    "title": "Final Project Details",
     "section": "GIS Datasets/Project Ideas Collection",
     "text": "GIS Datasets/Project Ideas Collection\nOnce we get to the Spatial Data Science unit, I’m hoping that you will have lots of inspiration in terms of the different methods that can be used for drawing inferences about spatial phenomena! Until then, me and TA Billy will add links to the following Raindrop.io collection, which you can browse to potentially draw inspiration for your own final project topic:",
     "crumbs": [
@@ -2934,7 +3150,7 @@
     "href": "syllabus.html#course-topics-calendar",
     "title": "PPOL 6805 / DSAN 6750",
     "section": "Course Topics / Calendar",
-    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, please let me know.\n\n\n\n\n\n\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Concepts\n1\nAug 28\nIntroduction to GIS\n\n\n\n2\nSep 4\nHow Do Maps Work?\nHW1 Release\n\n\nUnit 2: Geospatial Operations\n3\nSep 11\nUnary Operations\n[Deliverable] HW1: GIS Concepts\n\n\n\n\nSep 13 (Fri)\nHW2 Release\n\n\n\n4\nSep 18\nBinary Operations\n\n\n\n\nSep 20 (Fri), 5:59pm\n[Deliverable] HW2: Unary Operations\n\n\nUnit 3: Spatial Data Science I: Foundations\n5\nSep 25\nSpatial Data Science!\nHW3 Release\n\n\n\n6\nOct 2\nRandom Fields and Spatial Autocorrelation\nHW4 Release\n\n\n\n\nOct 4 (Fri), 5:59pm\n[Deliverable] HW3: Binary Operations and Spatial Joins\n\n\nUnit 4: Spatial Data Science II: Methods\n7\nOct 9\nPoint Processes, Clustering, and Regularity\n\n\n\n8\nOct 16\nNull Models and Marked Point Processes\n\n\n\n9\nOct 23\nDiffusion Models for Point and Areal Data\n\n\n\n10\nOct 30\nGeostatistical Data and Spatial Prediction\n[Deliverable, 11:59pm] HW4: Autocorrelation, Clustering, and Point Processes\n\n\n\n\nNov 1 (Fri)\nMidterm Practice Problems Release\n\n\n\n11\nNov 6\nIn-Class Midterm\n\n\nUnit 5: Mapping and Applications\n12\nNov 13\nStatic and Interactive Mapping\n\n\n\n13\nNov 20\nApplications: Urban Planning\n\n\n\n\nNov 27\nNo Class (Fall Break)\n\n\n\n14\nDec 4\nApplications: Climate Change and Ecological Data\n\n\n\n15\nDec 11\nFinal Presentations\n\n\n\n\nDec 13 (Friday), 5:59pm\n[Deliverable] Final Project",
+    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, please let me know.\n\n\n\n\n\n\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Concepts\n1\nAug 28\nIntroduction to GIS\n\n\n\n2\nSep 4\nHow Do Maps Work?\nHW1 Release\n\n\nUnit 2: Geospatial Operations\n3\nSep 11\nUnary Operations\n[Deliverable] HW1: GIS Concepts\n\n\n\n\nSep 13 (Fri)\nHW2 Release\n\n\n\n4\nSep 18\nBinary Operations\n\n\n\n\nSep 20 (Fri), 5:59pm\n[Deliverable] HW2: Unary Operations\n\n\nUnit 3: Spatial Data Science I: Foundations\n5\nSep 25\nSpatial Data Science!\nHW3 Release\n\n\n\n6\nOct 2\nRandom Fields and Spatial Autocorrelation\nHW4 Release\n\n\n\n\nOct 4 (Fri), 5:59pm\n[Deliverable] HW3: Binary Operations and Spatial Joins\n\n\nUnit 4: Spatial Data Science II: Methods\n7\nOct 9\nPoint Processes, Clustering, and Regularity\n\n\n\n8\nOct 16\nNull Models and Marked Point Processes\n\n\n\n9\nOct 23\nEvaluating Spatial Hypotheses I: Point Data\n\n\n\n10\nOct 30\nEvaluating Spatial Hypotheses II: Areal Data\n[Deliverable, 11:59pm] HW4: Autocorrelation, Clustering, and Point Processes\n\n\n\n\nNov 1 (Fri)\nMidterm Practice Problems Release\n\n\n\n11\nNov 6\nIn-Class Midterm\n\n\nUnit 5: Mapping and Applications\n12\nNov 13\nStatic and Interactive Mapping\n\n\n\n13\nNov 20\nApplications: Urban Planning\n\n\n\n\nNov 27\nNo Class (Fall Break)\n\n\n\n14\nDec 4\nApplications: Climate Change and Ecological Data\n\n\n\n15\nDec 11\nFinal Presentations\n\n\n\n\nDec 13 (Friday), 5:59pm\n[Deliverable] Final Project",
     "crumbs": [
       "Syllabus"
     ]
