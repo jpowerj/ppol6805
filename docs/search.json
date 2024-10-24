@@ -548,198 +548,240 @@
   {
     "objectID": "w09/slides.html#why-do-events-appear-where-they-do",
     "href": "w09/slides.html#why-do-events-appear-where-they-do",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Why Do Events Appear Where They Do?",
     "text": "Why Do Events Appear Where They Do?\n\n\nCode\nset.seed(6809)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n### Clustered data\nclust_ppp &lt;- rMatClust(\n  kappa=6,\n  scale=r_core,\n  mu=10\n)\nclust_sf &lt;- clust_ppp |&gt; sf::st_as_sf()\nclust_plot &lt;- clust_sf |&gt;\n  ggplot() +\n  geom_sf(size=2) +\n  theme_classic(base_size=18)\nggsave(\"images/clust_ppp.png\", clust_plot, width=3, height=3)\n# Intensity fn\nclust_intensity &lt;- density(clust_ppp, sigma = 0.1)\npng(\"images/clust_intensity.png\")\npar(mar=c(0,0,0,2), las=2, oma=c(0,0,0,0), cex=2)\nplot(clust_intensity, main=NULL)\ncontour(clust_intensity, add = TRUE)\ndev.off()\n### PCF\nclust_pcf &lt;- spatstat.explore::pcf(\n  clust_ppp, divisor=\"d\",\n  r=seq(from=0.00, to=0.50, by=0.01)\n)\nclust_pcf_plot &lt;- clust_pcf |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  labs(x=\"Distance\", y=\"Density\") +\n  theme_classic(base_size=14)\nggsave(\"images/clust_pcf.png\", clust_pcf_plot, width=3, height=3)\n\n\n\n\n\n\n\n\n\n\nOriginal Data\nFirst-Order\nSecond-Order\n\n\n\n\n\\(N = 60\\) Events\nEvents modeled individually\\(\\implies\\) Intensity function \\(\\lambda(\\mathbf{s})\\)\nEvents modeled pairwise \\(\\implies\\) \\(K\\)-function \\(K(\\vec{h})\\)"
   },
   {
     "objectID": "w09/slides.html#what-do-these-functions-detect",
     "href": "w09/slides.html#what-do-these-functions-detect",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "What Do These Functions “Detect”?",
     "text": "What Do These Functions “Detect”?\n\n\n\n\nCode\nsq_base &lt;- 16\nsq_psize &lt;- 2.5\nobs_window &lt;- square(1)\nr0 &lt;- 0.2\nsq_df &lt;- tibble::tribble(\n  ~x, ~y,\n  0.5-r0,0.5-r0,\n  0.5+r0,0.5+r0,\n  0.5-r0,0.5+r0,\n  0.5+r0,0.5-r0\n)\nsq_sf &lt;- sf::st_as_sf(\n  sq_df,\n  coords = c(\"x\",\"y\")\n)\nsq_ppp &lt;- as.ppp(sq_sf, W=obs_window)\nsq_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(mar=c(0,0,0,2), las=2, oma=c(0,0,1,0))\nsq_density &lt;- density(sq_ppp)\nplot(sq_density, main=NULL, xaxs='i', yaxs='i')\ncontour(sq_density, xaxs='i', yaxs='i', add = TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\n### PCF\npcf_result &lt;- spatstat.explore::pcf(\n  sq_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\npcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncsr_ppp &lt;- spatstat.random::rpoispp(\n  lambda = 60,\n  win=obs_window\n)\ncsr_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(\n  mar=c(0,0,0,2),\n  las=2,\n  oma=c(0,0,1,0)\n)\ncsr_density &lt;- density(csr_ppp)\nplot(csr_density, main=NULL, xaxs=\"i\", yaxs=\"i\")\ncontour(csr_density, xaxs=\"i\", yaxs=\"i\", add = TRUE, lwd=1.5)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncsr_pcf_result &lt;- spatstat.explore::pcf(\n  csr_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\ncsr_pcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base)"
   },
   {
     "objectID": "w09/slides.html#null-models",
     "href": "w09/slides.html#null-models",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Null Models",
     "text": "Null Models\n\nGiven an intensity function, we can compute a bunch of simulated point patterns (inhomogeneous Poisson Point Process)…\nHow does an observed point pattern differ from the simulated point patterns?"
   },
   {
     "objectID": "w09/slides.html#constant-risk-hypothesis-motivation",
     "href": "w09/slides.html#constant-risk-hypothesis-motivation",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Constant Risk Hypothesis: Motivation",
     "text": "Constant Risk Hypothesis: Motivation\n\nHere is a (fictional) map of flu cases in the US “Midwest”\nAre people in Chicago and Detroit equally “at risk”?\n\n\n\nCode\ncity_df &lt;- tibble::tribble(\n  ~city, ~lon, ~lat, ~pop,\n  \"Chicago\", 41.950567516553896, -87.93011127491978, 2746388,\n  \"Detroit\", 42.45123004999075, -83.18402319217698, 631524\n)\ncity_sf &lt;- sf::st_as_sf(\n  city_df,\n  coords = c(\"lat\", \"lon\"),\n  crs=4326\n)\ncity_buf_sf &lt;- city_sf |&gt; sf::st_buffer(20000)\ncity_cases_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=rep(10,2)) |&gt; sf::st_as_sf()\ncity_cases_sf$city &lt;- \"Detroit (10 Cases)\"\ncity_cases_sf[1:10, 'city'] &lt;- \"Chicago (10 Cases)\"\ncity_cases_sf$sample &lt;- \"Flu\"\nmapview(city_cases_sf, zcol=\"city\")"
   },
   {
     "objectID": "w09/slides.html#constant-risk-hypothesis-base-rates",
     "href": "w09/slides.html#constant-risk-hypothesis-base-rates",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Constant Risk Hypothesis: Base Rates",
     "text": "Constant Risk Hypothesis: Base Rates\n\n\n\n\nChicago\nDetroit\n\n\n\n\nPopulation\n2,746,388\n631,524\n\n\n\n\n\nCode\ncity_pop_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=c(16, 4)) |&gt; sf::st_as_sf()\ncity_pop_sf$city &lt;- \"Detroit\"\ncity_pop_sf[1:16, 'city'] &lt;- \"Chicago\"\ncity_pop_sf$sample &lt;- \"People\"\ncity_combined_sf &lt;- bind_rows(city_cases_sf, city_pop_sf)\n# mapview(city_combined_sf, zcol=\"city\", marker=\"sample\")\nFlu = makeIcon(\n    \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png\",\n    \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png\",\n    20,\n    20\n)\nPeople = makeIcon(\n  \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png\",\n  \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png\",\n  20,\n  20\n)\n\ncity_combined_sf$r &lt;- ifelse(city_combined_sf$sample == \"Flu\", 0, 4)\ncity_flu_sf &lt;- city_combined_sf |&gt; filter(sample == \"Flu\")\ncity_ppl_sf &lt;- city_combined_sf |&gt; filter(sample == \"People\")\nleaflet(city_flu_sf) |&gt;\n  addProviderTiles(\"CartoDB.Positron\") |&gt;\n  addMarkers(data=city_flu_sf, icon = Flu) |&gt;\n  addMarkers(data=city_ppl_sf, icon = People)"
   },
   {
     "objectID": "w09/slides.html#meaningful-results-leftrightarrow-comparisons-with-null-models",
     "href": "w09/slides.html#meaningful-results-leftrightarrow-comparisons-with-null-models",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Meaningful Results \\(\\leftrightarrow\\) Comparisons with Null Model(s)",
     "text": "Meaningful Results \\(\\leftrightarrow\\) Comparisons with Null Model(s)\n\nCases of disease form an intensity function \\(\\lambda(\\mathbf{s})\\)\nControls form an “ambient” intensity function \\(\\lambda_0(\\mathbf{s})\\)\n\\(\\implies\\) The following model allows us to separate the quantities we really care about from the base rate information:\n\\[\n  \\lambda(\\mathbf{s}) = \\alpha \\overbrace{\\lambda_0(\\mathbf{s})}^{\\mathclap{\\text{Base Rate}}} \\underbrace{\\rho(\\mathbf{s})}_{\\mathclap{\\text{Relative Risk}}},\n  \\]\nwhere\n\\[\n  \\alpha = \\frac{\\# \\text{Cases}}{\\# \\text{Controls}}\n  \\]\n(Remember: unit of \\(\\lambda(\\mathbf{s})\\) is number of cases; not a probability density!)"
   },
   {
     "objectID": "w09/slides.html#example-from-moraga-2024",
     "href": "w09/slides.html#example-from-moraga-2024",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Example from Moraga (2024)",
     "text": "Example from Moraga (2024)\n\nData: 761 primary biliary cirrhosis (PBC) cases, 3020 controls, England 1987-94\n\n\n\n\n\nCode\nlibrary(sparr) |&gt; suppressPackageStartupMessages()\ndata(pbc)\ncontrols &lt;- unmark(pbc[which(pbc$marks == \"control\"), ])\ncontrols |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic() +\n  labs(title=\"Controls (Population Sample)\")\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncases &lt;- unmark(pbc[which(pbc$marks == \"case\"), ])\ncases |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic() +\n  labs(title=\"PBC Cases\")"
   },
   {
     "objectID": "w09/slides.html#estimating-comparable-intensity-surfaces",
     "href": "w09/slides.html#estimating-comparable-intensity-surfaces",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Estimating Comparable Intensity Surfaces",
     "text": "Estimating Comparable Intensity Surfaces\n\nTo ensure comparable intensity functions, we need a common bandwidth parameter.\ndensity() from spatstat makes “smart” choices for this bandwidth, so for now we just average the bandwidths estimated for cases and controls:\n\n\n\nCode\nlibrary(sparr)\ndata(pbc)\ncases &lt;- unmark(pbc[which(pbc$marks == \"case\"), ])\ncontrols &lt;- unmark(pbc[which(pbc$marks == \"control\"), ])\nbwcases &lt;- attr(density(cases), \"sigma\")\nbwcontr &lt;- attr(density(controls), \"sigma\")\n(bw &lt;- (bwcases + bwcontr)/2)\n\n\n[1] 11.45837\n\n\n\n\n\n\nCode\nint_controls &lt;- density(controls, sigma = bw, eps=0.25)\nplot(int_controls, main = NULL)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nint_cases &lt;- density(cases, sigma = bw, eps=0.25)\nplot(int_cases, main = NULL)"
   },
   {
     "objectID": "w09/slides.html#visualizing-relative-risk-surface",
     "href": "w09/slides.html#visualizing-relative-risk-surface",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Visualizing Relative Risk Surface",
     "text": "Visualizing Relative Risk Surface\n\nAll that’s left is \\(\\alpha = \\# \\text{Controls} / \\# \\text{Cases}\\)!\n\n\n\nCode\nlibrary(fields)\n(alpha_hat &lt;- cases$n/controls$n)\n\n\n[1] 0.2519868\n\n\nCode\nx &lt;- int_cases$xcol\ny &lt;- int_cases$yrow\nrr &lt;- t(int_cases$v)/t(alpha_hat * int_controls$v)\nimage.plot(x, y, rr, asp = 1)\ntitle(xlab = \"Easting\", ylab = \"Northing\")"
   },
   {
     "objectID": "w09/slides.html#null-model-csr",
     "href": "w09/slides.html#null-model-csr",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Null Model: CSR",
     "text": "Null Model: CSR\n\nFigure from Gimond (2024)"
   },
   {
     "objectID": "w09/slides.html#the-random-labeling-hypothesis",
     "href": "w09/slides.html#the-random-labeling-hypothesis",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "The Random Labeling Hypothesis",
     "text": "The Random Labeling Hypothesis\n\n\nRandomly apply 761 “sick” labels to the 3781 points!\n\n\n\n\n\n\nCode\nset.seed(6810)\npbc_1 &lt;- rlabel(pbc)\nplot(pbc_1)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nset.seed(6811)\npbc_2 &lt;- rlabel(pbc)\nplot(pbc_2)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nset.seed(6812)\npbc_3 &lt;- rlabel(pbc)\nplot(pbc_3)"
   },
   {
     "objectID": "w09/slides.html#the-constant-risk-hypothesis",
     "href": "w09/slides.html#the-constant-risk-hypothesis",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "The Constant Risk Hypothesis",
     "text": "The Constant Risk Hypothesis\n\nEveryone equally at risk of contracting disease, regardless of location: \\(\\rho(\\mathbf{s}) = 1\\)\nIn this case: \\(\\lambda_{CR}(\\mathbf{s}) = \\alpha \\lambda_0(\\mathbf{s})\\)\n\n\n\n\n\nCode\npbc_win_sf &lt;- pbc |&gt; sf::st_as_sf() |&gt; filter(label == \"window\")\nplot_pbc_sim &lt;- function() {\n    pbc_sim &lt;- spatstat.random::rpoispp(\n        lambda = alpha_hat * int_controls\n    )\n    # Separate window and points\n    pbc_sf &lt;- pbc_sim |&gt; sf::st_as_sf()\n    pbc_point_sf &lt;- pbc_sf |&gt; filter(label == \"point\")\n    pbc_win_sf &lt;- pbc_sf |&gt; filter(label == \"window\")\n    pbc_plot &lt;- ggplot() +\n      geom_sf(data=pbc_win_sf) +\n      geom_sf(data=pbc_point_sf, size=0.5, alpha=0.5) +\n      theme_classic()\n    return(pbc_plot)\n}\nplot_pbc_sim()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nplot_pbc_sim()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nplot_pbc_sim()"
   },
   {
     "objectID": "w09/slides.html#references",
     "href": "w09/slides.html#references",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "References",
     "text": "References\n\n\nGimond, Manuel. 2024. Introduction to GIS and Spatial Analysis. Colby College (ES214). https://mgimond.github.io/Spatial/.\n\n\n\n\n\nPPOL 6805 Week 9: Evaluating Point Data Hypotheses"
   },
   {
     "objectID": "w09/index.html",
     "href": "w09/index.html",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "",
-    "text": "Open slides in new tab →"
+    "text": "Open slides in new tab →",
+    "crumbs": [
+      "Week 9: Oct 23"
+    ]
   },
   {
     "objectID": "w09/index.html#why-do-events-appear-where-they-do",
     "href": "w09/index.html#why-do-events-appear-where-they-do",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Why Do Events Appear Where They Do?",
-    "text": "Why Do Events Appear Where They Do?\n\n\nCode\nset.seed(6809)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n### Clustered data\nclust_ppp &lt;- rMatClust(\n  kappa=6,\n  scale=r_core,\n  mu=10\n)\nclust_sf &lt;- clust_ppp |&gt; sf::st_as_sf()\nclust_plot &lt;- clust_sf |&gt;\n  ggplot() +\n  geom_sf(size=2) +\n  theme_classic(base_size=18)\nggsave(\"images/clust_ppp.png\", clust_plot, width=3, height=3)\n# Intensity fn\nclust_intensity &lt;- density(clust_ppp, sigma = 0.1)\npng(\"images/clust_intensity.png\")\npar(mar=c(0,0,0,2), las=2, oma=c(0,0,0,0), cex=2)\nplot(clust_intensity, main=NULL)\ncontour(clust_intensity, add = TRUE)\ndev.off()\n### PCF\nclust_pcf &lt;- spatstat.explore::pcf(\n  clust_ppp, divisor=\"d\",\n  r=seq(from=0.00, to=0.50, by=0.01)\n)\nclust_pcf_plot &lt;- clust_pcf |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  labs(x=\"Distance\", y=\"Density\") +\n  theme_classic(base_size=14)\nggsave(\"images/clust_pcf.png\", clust_pcf_plot, width=3, height=3)\n\n\n\n\n\n\n\n\n\n\nOriginal Data\nFirst-Order\nSecond-Order\n\n\n\n\n\\(N = 60\\) Events\nEvents modeled individually\\(\\implies\\) Intensity function \\(\\lambda(\\mathbf{s})\\)\nEvents modeled pairwise \\(\\implies\\) \\(K\\)-function \\(K(\\vec{h})\\)"
+    "text": "Why Do Events Appear Where They Do?\n\n\nCode\nset.seed(6809)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n### Clustered data\nclust_ppp &lt;- rMatClust(\n  kappa=6,\n  scale=r_core,\n  mu=10\n)\nclust_sf &lt;- clust_ppp |&gt; sf::st_as_sf()\nclust_plot &lt;- clust_sf |&gt;\n  ggplot() +\n  geom_sf(size=2) +\n  theme_classic(base_size=18)\nggsave(\"images/clust_ppp.png\", clust_plot, width=3, height=3)\n# Intensity fn\nclust_intensity &lt;- density(clust_ppp, sigma = 0.1)\npng(\"images/clust_intensity.png\")\npar(mar=c(0,0,0,2), las=2, oma=c(0,0,0,0), cex=2)\nplot(clust_intensity, main=NULL)\ncontour(clust_intensity, add = TRUE)\ndev.off()\n### PCF\nclust_pcf &lt;- spatstat.explore::pcf(\n  clust_ppp, divisor=\"d\",\n  r=seq(from=0.00, to=0.50, by=0.01)\n)\nclust_pcf_plot &lt;- clust_pcf |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  labs(x=\"Distance\", y=\"Density\") +\n  theme_classic(base_size=14)\nggsave(\"images/clust_pcf.png\", clust_pcf_plot, width=3, height=3)\n\n\n\n\n\n\n\n\n\n\nOriginal Data\nFirst-Order\nSecond-Order\n\n\n\n\n\\(N = 60\\) Events\nEvents modeled individually\\(\\implies\\) Intensity function \\(\\lambda(\\mathbf{s})\\)\nEvents modeled pairwise \\(\\implies\\) \\(K\\)-function \\(K(\\vec{h})\\)",
+    "crumbs": [
+      "Week 9: Oct 23"
+    ]
   },
   {
     "objectID": "w09/index.html#what-do-these-functions-detect",
     "href": "w09/index.html#what-do-these-functions-detect",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "What Do These Functions “Detect”?",
-    "text": "What Do These Functions “Detect”?\n\n\n\n\nCode\nsq_base &lt;- 16\nsq_psize &lt;- 2.5\nobs_window &lt;- square(1)\nr0 &lt;- 0.2\nsq_df &lt;- tibble::tribble(\n  ~x, ~y,\n  0.5-r0,0.5-r0,\n  0.5+r0,0.5+r0,\n  0.5-r0,0.5+r0,\n  0.5+r0,0.5-r0\n)\nsq_sf &lt;- sf::st_as_sf(\n  sq_df,\n  coords = c(\"x\",\"y\")\n)\nsq_ppp &lt;- as.ppp(sq_sf, W=obs_window)\nsq_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(mar=c(0,0,0,2), las=2, oma=c(0,0,1,0))\nsq_density &lt;- density(sq_ppp)\nplot(sq_density, main=NULL, xaxs='i', yaxs='i')\ncontour(sq_density, xaxs='i', yaxs='i', add = TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\n### PCF\npcf_result &lt;- spatstat.explore::pcf(\n  sq_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\npcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncsr_ppp &lt;- spatstat.random::rpoispp(\n  lambda = 60,\n  win=obs_window\n)\ncsr_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(\n  mar=c(0,0,0,2),\n  las=2,\n  oma=c(0,0,1,0)\n)\ncsr_density &lt;- density(csr_ppp)\nplot(csr_density, main=NULL, xaxs=\"i\", yaxs=\"i\")\ncontour(csr_density, xaxs=\"i\", yaxs=\"i\", add = TRUE, lwd=1.5)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncsr_pcf_result &lt;- spatstat.explore::pcf(\n  csr_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\ncsr_pcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base)"
+    "text": "What Do These Functions “Detect”?\n\n\n\n\nCode\nsq_base &lt;- 16\nsq_psize &lt;- 2.5\nobs_window &lt;- square(1)\nr0 &lt;- 0.2\nsq_df &lt;- tibble::tribble(\n  ~x, ~y,\n  0.5-r0,0.5-r0,\n  0.5+r0,0.5+r0,\n  0.5-r0,0.5+r0,\n  0.5+r0,0.5-r0\n)\nsq_sf &lt;- sf::st_as_sf(\n  sq_df,\n  coords = c(\"x\",\"y\")\n)\nsq_ppp &lt;- as.ppp(sq_sf, W=obs_window)\nsq_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(mar=c(0,0,0,2), las=2, oma=c(0,0,1,0))\nsq_density &lt;- density(sq_ppp)\nplot(sq_density, main=NULL, xaxs='i', yaxs='i')\ncontour(sq_density, xaxs='i', yaxs='i', add = TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\n### PCF\npcf_result &lt;- spatstat.explore::pcf(\n  sq_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\npcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncsr_ppp &lt;- spatstat.random::rpoispp(\n  lambda = 60,\n  win=obs_window\n)\ncsr_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(\n  mar=c(0,0,0,2),\n  las=2,\n  oma=c(0,0,1,0)\n)\ncsr_density &lt;- density(csr_ppp)\nplot(csr_density, main=NULL, xaxs=\"i\", yaxs=\"i\")\ncontour(csr_density, xaxs=\"i\", yaxs=\"i\", add = TRUE, lwd=1.5)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncsr_pcf_result &lt;- spatstat.explore::pcf(\n  csr_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\ncsr_pcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base)",
+    "crumbs": [
+      "Week 9: Oct 23"
+    ]
   },
   {
     "objectID": "w09/index.html#null-models",
     "href": "w09/index.html#null-models",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Null Models",
-    "text": "Null Models\n\nGiven an intensity function, we can compute a bunch of simulated point patterns (inhomogeneous Poisson Point Process)…\nHow does an observed point pattern differ from the simulated point patterns?"
+    "text": "Null Models\n\nGiven an intensity function, we can compute a bunch of simulated point patterns (inhomogeneous Poisson Point Process)…\nHow does an observed point pattern differ from the simulated point patterns?",
+    "crumbs": [
+      "Week 9: Oct 23"
+    ]
   },
   {
     "objectID": "w09/index.html#constant-risk-hypothesis-motivation",
     "href": "w09/index.html#constant-risk-hypothesis-motivation",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Constant Risk Hypothesis: Motivation",
-    "text": "Constant Risk Hypothesis: Motivation\n\nHere is a (fictional) map of flu cases in the US “Midwest”\nAre people in Chicago and Detroit equally “at risk”?\n\n\n\nCode\ncity_df &lt;- tibble::tribble(\n  ~city, ~lon, ~lat, ~pop,\n  \"Chicago\", 41.950567516553896, -87.93011127491978, 2746388,\n  \"Detroit\", 42.45123004999075, -83.18402319217698, 631524\n)\ncity_sf &lt;- sf::st_as_sf(\n  city_df,\n  coords = c(\"lat\", \"lon\"),\n  crs=4326\n)\ncity_buf_sf &lt;- city_sf |&gt; sf::st_buffer(20000)\ncity_cases_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=rep(10,2)) |&gt; sf::st_as_sf()\ncity_cases_sf$city &lt;- \"Detroit (10 Cases)\"\ncity_cases_sf[1:10, 'city'] &lt;- \"Chicago (10 Cases)\"\ncity_cases_sf$sample &lt;- \"Flu\"\nmapview(city_cases_sf, zcol=\"city\")"
+    "text": "Constant Risk Hypothesis: Motivation\n\nHere is a (fictional) map of flu cases in the US “Midwest”\nAre people in Chicago and Detroit equally “at risk”?\n\n\n\nCode\ncity_df &lt;- tibble::tribble(\n  ~city, ~lon, ~lat, ~pop,\n  \"Chicago\", 41.950567516553896, -87.93011127491978, 2746388,\n  \"Detroit\", 42.45123004999075, -83.18402319217698, 631524\n)\ncity_sf &lt;- sf::st_as_sf(\n  city_df,\n  coords = c(\"lat\", \"lon\"),\n  crs=4326\n)\ncity_buf_sf &lt;- city_sf |&gt; sf::st_buffer(20000)\ncity_cases_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=rep(10,2)) |&gt; sf::st_as_sf()\ncity_cases_sf$city &lt;- \"Detroit (10 Cases)\"\ncity_cases_sf[1:10, 'city'] &lt;- \"Chicago (10 Cases)\"\ncity_cases_sf$sample &lt;- \"Flu\"\nmapview(city_cases_sf, zcol=\"city\")",
+    "crumbs": [
+      "Week 9: Oct 23"
+    ]
   },
   {
     "objectID": "w09/index.html#constant-risk-hypothesis-base-rates",
     "href": "w09/index.html#constant-risk-hypothesis-base-rates",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Constant Risk Hypothesis: Base Rates",
-    "text": "Constant Risk Hypothesis: Base Rates\n\n\n\n\nChicago\nDetroit\n\n\n\n\nPopulation\n2,746,388\n631,524\n\n\n\n\n\nCode\ncity_pop_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=c(16, 4)) |&gt; sf::st_as_sf()\ncity_pop_sf$city &lt;- \"Detroit\"\ncity_pop_sf[1:16, 'city'] &lt;- \"Chicago\"\ncity_pop_sf$sample &lt;- \"People\"\ncity_combined_sf &lt;- bind_rows(city_cases_sf, city_pop_sf)\n# mapview(city_combined_sf, zcol=\"city\", marker=\"sample\")\nFlu = makeIcon(\n    \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png\",\n    \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png\",\n    20,\n    20\n)\nPeople = makeIcon(\n  \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png\",\n  \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png\",\n  20,\n  20\n)\n\ncity_combined_sf$r &lt;- ifelse(city_combined_sf$sample == \"Flu\", 0, 4)\ncity_flu_sf &lt;- city_combined_sf |&gt; filter(sample == \"Flu\")\ncity_ppl_sf &lt;- city_combined_sf |&gt; filter(sample == \"People\")\nleaflet(city_flu_sf) |&gt;\n  addProviderTiles(\"CartoDB.Positron\") |&gt;\n  addMarkers(data=city_flu_sf, icon = Flu) |&gt;\n  addMarkers(data=city_ppl_sf, icon = People)"
+    "text": "Constant Risk Hypothesis: Base Rates\n\n\n\n\nChicago\nDetroit\n\n\n\n\nPopulation\n2,746,388\n631,524\n\n\n\n\n\nCode\ncity_pop_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=c(16, 4)) |&gt; sf::st_as_sf()\ncity_pop_sf$city &lt;- \"Detroit\"\ncity_pop_sf[1:16, 'city'] &lt;- \"Chicago\"\ncity_pop_sf$sample &lt;- \"People\"\ncity_combined_sf &lt;- bind_rows(city_cases_sf, city_pop_sf)\n# mapview(city_combined_sf, zcol=\"city\", marker=\"sample\")\nFlu = makeIcon(\n    \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png\",\n    \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png\",\n    20,\n    20\n)\nPeople = makeIcon(\n  \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png\",\n  \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png\",\n  20,\n  20\n)\n\ncity_combined_sf$r &lt;- ifelse(city_combined_sf$sample == \"Flu\", 0, 4)\ncity_flu_sf &lt;- city_combined_sf |&gt; filter(sample == \"Flu\")\ncity_ppl_sf &lt;- city_combined_sf |&gt; filter(sample == \"People\")\nleaflet(city_flu_sf) |&gt;\n  addProviderTiles(\"CartoDB.Positron\") |&gt;\n  addMarkers(data=city_flu_sf, icon = Flu) |&gt;\n  addMarkers(data=city_ppl_sf, icon = People)",
+    "crumbs": [
+      "Week 9: Oct 23"
+    ]
   },
   {
     "objectID": "w09/index.html#meaningful-results-leftrightarrow-comparisons-with-null-models",
     "href": "w09/index.html#meaningful-results-leftrightarrow-comparisons-with-null-models",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Meaningful Results \\(\\leftrightarrow\\) Comparisons with Null Model(s)",
-    "text": "Meaningful Results \\(\\leftrightarrow\\) Comparisons with Null Model(s)\n\nCases of disease form an intensity function \\(\\lambda(\\mathbf{s})\\)\nControls form an “ambient” intensity function \\(\\lambda_0(\\mathbf{s})\\)\n\\(\\implies\\) The following model allows us to separate the quantities we really care about from the base rate information:\n\\[\n  \\lambda(\\mathbf{s}) = \\alpha \\overbrace{\\lambda_0(\\mathbf{s})}^{\\mathclap{\\text{Base Rate}}} \\underbrace{\\rho(\\mathbf{s})}_{\\mathclap{\\text{Relative Risk}}},\n  \\]\nwhere\n\\[\n  \\alpha = \\frac{\\# \\text{Cases}}{\\# \\text{Controls}}\n  \\]\n(Remember: unit of \\(\\lambda(\\mathbf{s})\\) is number of cases; not a probability density!)"
+    "text": "Meaningful Results \\(\\leftrightarrow\\) Comparisons with Null Model(s)\n\nCases of disease form an intensity function \\(\\lambda(\\mathbf{s})\\)\nControls form an “ambient” intensity function \\(\\lambda_0(\\mathbf{s})\\)\n\\(\\implies\\) The following model allows us to separate the quantities we really care about from the base rate information:\n\\[\n  \\lambda(\\mathbf{s}) = \\alpha \\overbrace{\\lambda_0(\\mathbf{s})}^{\\mathclap{\\text{Base Rate}}} \\underbrace{\\rho(\\mathbf{s})}_{\\mathclap{\\text{Relative Risk}}},\n  \\]\nwhere\n\\[\n  \\alpha = \\frac{\\# \\text{Cases}}{\\# \\text{Controls}}\n  \\]\n(Remember: unit of \\(\\lambda(\\mathbf{s})\\) is number of cases; not a probability density!)",
+    "crumbs": [
+      "Week 9: Oct 23"
+    ]
   },
   {
     "objectID": "w09/index.html#example-from-moraga-2024",
     "href": "w09/index.html#example-from-moraga-2024",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Example from Moraga (2024)",
-    "text": "Example from Moraga (2024)\n\nData: 761 primary biliary cirrhosis (PBC) cases, 3020 controls, England 1987-94\n\n\n\n\n\nCode\nlibrary(sparr) |&gt; suppressPackageStartupMessages()\ndata(pbc)\ncontrols &lt;- unmark(pbc[which(pbc$marks == \"control\"), ])\ncontrols |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic() +\n  labs(title=\"Controls (Population Sample)\")\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncases &lt;- unmark(pbc[which(pbc$marks == \"case\"), ])\ncases |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic() +\n  labs(title=\"PBC Cases\")"
+    "text": "Example from Moraga (2024)\n\nData: 761 primary biliary cirrhosis (PBC) cases, 3020 controls, England 1987-94\n\n\n\n\n\nCode\nlibrary(sparr) |&gt; suppressPackageStartupMessages()\ndata(pbc)\ncontrols &lt;- unmark(pbc[which(pbc$marks == \"control\"), ])\ncontrols |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic() +\n  labs(title=\"Controls (Population Sample)\")\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncases &lt;- unmark(pbc[which(pbc$marks == \"case\"), ])\ncases |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic() +\n  labs(title=\"PBC Cases\")",
+    "crumbs": [
+      "Week 9: Oct 23"
+    ]
   },
   {
     "objectID": "w09/index.html#estimating-comparable-intensity-surfaces",
     "href": "w09/index.html#estimating-comparable-intensity-surfaces",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Estimating Comparable Intensity Surfaces",
-    "text": "Estimating Comparable Intensity Surfaces\n\nTo ensure comparable intensity functions, we need a common bandwidth parameter.\ndensity() from spatstat makes “smart” choices for this bandwidth, so for now we just average the bandwidths estimated for cases and controls:\n\n\n\nCode\nlibrary(sparr)\ndata(pbc)\ncases &lt;- unmark(pbc[which(pbc$marks == \"case\"), ])\ncontrols &lt;- unmark(pbc[which(pbc$marks == \"control\"), ])\nbwcases &lt;- attr(density(cases), \"sigma\")\nbwcontr &lt;- attr(density(controls), \"sigma\")\n(bw &lt;- (bwcases + bwcontr)/2)\n\n\n[1] 11.45837\n\n\n\n\n\n\nCode\nint_controls &lt;- density(controls, sigma = bw, eps=0.25)\nplot(int_controls, main = NULL)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nint_cases &lt;- density(cases, sigma = bw, eps=0.25)\nplot(int_cases, main = NULL)"
+    "text": "Estimating Comparable Intensity Surfaces\n\nTo ensure comparable intensity functions, we need a common bandwidth parameter.\ndensity() from spatstat makes “smart” choices for this bandwidth, so for now we just average the bandwidths estimated for cases and controls:\n\n\n\nCode\nlibrary(sparr)\ndata(pbc)\ncases &lt;- unmark(pbc[which(pbc$marks == \"case\"), ])\ncontrols &lt;- unmark(pbc[which(pbc$marks == \"control\"), ])\nbwcases &lt;- attr(density(cases), \"sigma\")\nbwcontr &lt;- attr(density(controls), \"sigma\")\n(bw &lt;- (bwcases + bwcontr)/2)\n\n\n[1] 11.45837\n\n\n\n\n\n\nCode\nint_controls &lt;- density(controls, sigma = bw, eps=0.25)\nplot(int_controls, main = NULL)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nint_cases &lt;- density(cases, sigma = bw, eps=0.25)\nplot(int_cases, main = NULL)",
+    "crumbs": [
+      "Week 9: Oct 23"
+    ]
   },
   {
     "objectID": "w09/index.html#visualizing-relative-risk-surface",
     "href": "w09/index.html#visualizing-relative-risk-surface",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Visualizing Relative Risk Surface",
-    "text": "Visualizing Relative Risk Surface\n\nAll that’s left is \\(\\alpha = \\# \\text{Controls} / \\# \\text{Cases}\\)!\n\n\n\nCode\nlibrary(fields)\n\n\nLoading required package: spam\n\n\nSpam version 2.10-0 (2023-10-23) is loaded.\nType 'help( Spam)' or 'demo( spam)' for a short introduction \nand overview of this package.\nHelp for individual functions is also obtained by adding the\nsuffix '.spam' to the function name, e.g. 'help( chol.spam)'.\n\n\n\nAttaching package: 'spam'\n\n\nThe following objects are masked from 'package:base':\n\n    backsolve, forwardsolve\n\n\nLoading required package: viridisLite\n\n\n\nTry help(fields) to get started.\n\n\n\nAttaching package: 'fields'\n\n\nThe following object is masked from 'package:leaflet':\n\n    addLegend\n\n\nCode\n(alpha_hat &lt;- cases$n/controls$n)\n\n\n[1] 0.2519868\n\n\nCode\nx &lt;- int_cases$xcol\ny &lt;- int_cases$yrow\nrr &lt;- t(int_cases$v)/t(alpha_hat * int_controls$v)\nimage.plot(x, y, rr, asp = 1)\ntitle(xlab = \"Easting\", ylab = \"Northing\")"
+    "text": "Visualizing Relative Risk Surface\n\nAll that’s left is \\(\\alpha = \\# \\text{Controls} / \\# \\text{Cases}\\)!\n\n\n\nCode\nlibrary(fields)\n\n\nLoading required package: spam\n\n\nSpam version 2.10-0 (2023-10-23) is loaded.\nType 'help( Spam)' or 'demo( spam)' for a short introduction \nand overview of this package.\nHelp for individual functions is also obtained by adding the\nsuffix '.spam' to the function name, e.g. 'help( chol.spam)'.\n\n\n\nAttaching package: 'spam'\n\n\nThe following objects are masked from 'package:base':\n\n    backsolve, forwardsolve\n\n\nLoading required package: viridisLite\n\n\n\nTry help(fields) to get started.\n\n\n\nAttaching package: 'fields'\n\n\nThe following object is masked from 'package:leaflet':\n\n    addLegend\n\n\nCode\n(alpha_hat &lt;- cases$n/controls$n)\n\n\n[1] 0.2519868\n\n\nCode\nx &lt;- int_cases$xcol\ny &lt;- int_cases$yrow\nrr &lt;- t(int_cases$v)/t(alpha_hat * int_controls$v)\nimage.plot(x, y, rr, asp = 1)\ntitle(xlab = \"Easting\", ylab = \"Northing\")",
+    "crumbs": [
+      "Week 9: Oct 23"
+    ]
   },
   {
     "objectID": "w09/index.html#null-model-csr",
     "href": "w09/index.html#null-model-csr",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "Null Model: CSR",
-    "text": "Null Model: CSR\n\n\n\nFigure from Gimond (2024)"
+    "text": "Null Model: CSR\n\n\n\nFigure from Gimond (2024)",
+    "crumbs": [
+      "Week 9: Oct 23"
+    ]
   },
   {
     "objectID": "w09/index.html#the-random-labeling-hypothesis",
     "href": "w09/index.html#the-random-labeling-hypothesis",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "The Random Labeling Hypothesis",
-    "text": "The Random Labeling Hypothesis\n\n\nRandomly apply 761 “sick” labels to the 3781 points!\n\n\n\n\n\n\nCode\nset.seed(6810)\npbc_1 &lt;- rlabel(pbc)\nplot(pbc_1)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nset.seed(6811)\npbc_2 &lt;- rlabel(pbc)\nplot(pbc_2)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nset.seed(6812)\npbc_3 &lt;- rlabel(pbc)\nplot(pbc_3)"
+    "text": "The Random Labeling Hypothesis\n\n\nRandomly apply 761 “sick” labels to the 3781 points!\n\n\n\n\n\n\nCode\nset.seed(6810)\npbc_1 &lt;- rlabel(pbc)\nplot(pbc_1)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nset.seed(6811)\npbc_2 &lt;- rlabel(pbc)\nplot(pbc_2)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nset.seed(6812)\npbc_3 &lt;- rlabel(pbc)\nplot(pbc_3)",
+    "crumbs": [
+      "Week 9: Oct 23"
+    ]
   },
   {
     "objectID": "w09/index.html#the-constant-risk-hypothesis",
     "href": "w09/index.html#the-constant-risk-hypothesis",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "The Constant Risk Hypothesis",
-    "text": "The Constant Risk Hypothesis\n\nEveryone equally at risk of contracting disease, regardless of location: \\(\\rho(\\mathbf{s}) = 1\\)\nIn this case: \\(\\lambda_{CR}(\\mathbf{s}) = \\alpha \\lambda_0(\\mathbf{s})\\)\n\n\n\n\n\nCode\npbc_win_sf &lt;- pbc |&gt; sf::st_as_sf() |&gt; filter(label == \"window\")\nplot_pbc_sim &lt;- function() {\n    pbc_sim &lt;- spatstat.random::rpoispp(\n        lambda = alpha_hat * int_controls\n    )\n    # Separate window and points\n    pbc_sf &lt;- pbc_sim |&gt; sf::st_as_sf()\n    pbc_point_sf &lt;- pbc_sf |&gt; filter(label == \"point\")\n    pbc_win_sf &lt;- pbc_sf |&gt; filter(label == \"window\")\n    pbc_plot &lt;- ggplot() +\n      geom_sf(data=pbc_win_sf) +\n      geom_sf(data=pbc_point_sf, size=0.5, alpha=0.5) +\n      theme_classic()\n    return(pbc_plot)\n}\nplot_pbc_sim()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nplot_pbc_sim()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nplot_pbc_sim()"
+    "text": "The Constant Risk Hypothesis\n\nEveryone equally at risk of contracting disease, regardless of location: \\(\\rho(\\mathbf{s}) = 1\\)\nIn this case: \\(\\lambda_{CR}(\\mathbf{s}) = \\alpha \\lambda_0(\\mathbf{s})\\)\n\n\n\n\n\nCode\npbc_win_sf &lt;- pbc |&gt; sf::st_as_sf() |&gt; filter(label == \"window\")\nplot_pbc_sim &lt;- function() {\n    pbc_sim &lt;- spatstat.random::rpoispp(\n        lambda = alpha_hat * int_controls\n    )\n    # Separate window and points\n    pbc_sf &lt;- pbc_sim |&gt; sf::st_as_sf()\n    pbc_point_sf &lt;- pbc_sf |&gt; filter(label == \"point\")\n    pbc_win_sf &lt;- pbc_sf |&gt; filter(label == \"window\")\n    pbc_plot &lt;- ggplot() +\n      geom_sf(data=pbc_win_sf) +\n      geom_sf(data=pbc_point_sf, size=0.5, alpha=0.5) +\n      theme_classic()\n    return(pbc_plot)\n}\nplot_pbc_sim()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nplot_pbc_sim()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nplot_pbc_sim()",
+    "crumbs": [
+      "Week 9: Oct 23"
+    ]
   },
   {
     "objectID": "w09/index.html#references",
     "href": "w09/index.html#references",
-    "title": "Week 9: Null Models and Marked Point Processes",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Point Data",
     "section": "References",
-    "text": "References\n\n\nGimond, Manuel. 2024. Introduction to GIS and Spatial Analysis. Colby College (ES214). https://mgimond.github.io/Spatial/."
+    "text": "References\n\n\nGimond, Manuel. 2024. Introduction to GIS and Spatial Analysis. Colby College (ES214). https://mgimond.github.io/Spatial/.",
+    "crumbs": [
+      "Week 9: Oct 23"
+    ]
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science",
     "section": "",
-    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2024, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn Room 204. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 28\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 4\n\n\n\n\nWeek 3: Unary Operations\n\n\nSep 11\n\n\n\n\nWeek 4: Binary Operations\n\n\nSep 18\n\n\n\n\nWeek 5: Spatial Data Science!\n\n\nSep 25\n\n\n\n\nWeek 6: Random Fields and Spatial Autocorrelation\n\n\nOct 2\n\n\n\n\nWeek 7: Point Processes, Clustering, and Regularity\n\n\nOct 9\n\n\n\n\nWeek 8: Null Models and Marked Point Processes\n\n\nOct 16\n\n\n\n\nWeek 9: Null Models and Marked Point Processes\n\n\nOct 23\n\n\n\n\n\nNo matching items",
+    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2024, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn Room 204. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 28\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 4\n\n\n\n\nWeek 3: Unary Operations\n\n\nSep 11\n\n\n\n\nWeek 4: Binary Operations\n\n\nSep 18\n\n\n\n\nWeek 5: Spatial Data Science!\n\n\nSep 25\n\n\n\n\nWeek 6: Random Fields and Spatial Autocorrelation\n\n\nOct 2\n\n\n\n\nWeek 7: Point Processes, Clustering, and Regularity\n\n\nOct 9\n\n\n\n\nWeek 8: Null Models and Marked Point Processes\n\n\nOct 16\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Point Data\n\n\nOct 23\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Home"
     ]
@@ -2193,7 +2235,7 @@
     "href": "w05/index.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-3.745906 31.23956)\n61.073500\n\n\nPOINT (11.57988 11.2147)\n3.199291\n\n\nPOINT (29.63129 -13.14516)\n18.046498\n\n\nPOINT (29.72633 -0.4965157)\n67.909112\n\n\nPOINT (1.798219 12.6822)\n4.471327\n\n\nPOINT (16.94973 14.47671)\n88.239686\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n35\nUGA\nUganda\nMULTIPOLYGON (((33.90322 -1…\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n91\nNGA\nNigeria\nMULTIPOLYGON (((7.300781 4….",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-7.550254 11.08339)\n26.77128\n\n\nPOINT (-10.16639 23.63988)\n88.75476\n\n\nPOINT (26.75775 -18.65037)\n46.02447\n\n\nPOINT (39.56198 9.734234)\n90.12059\n\n\nPOINT (32.22328 -13.09389)\n90.99472\n\n\nPOINT (0.3215684 15.62076)\n37.93164\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n1\nZWE\nZimbabwe\nMULTIPOLYGON (((31.28789 -2…\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n92\nNER\nNiger\nMULTIPOLYGON (((13.60635 13…",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -2203,7 +2245,7 @@
     "href": "w05/index.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n35\nUGA\nUganda\n67.909112\nMULTIPOLYGON (((33.90322 -1…\n\n\n53\nSDN\nSudan\n20.625134\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\n70.025591\nMULTIPOLYGON (((29.36484 -2…\n\n\n91\nNGA\nNigeria\n3.199291\nMULTIPOLYGON (((7.300781 4….\n\n\n92\nNER\nNiger\n4.471327\nMULTIPOLYGON (((13.60635 13…\n\n\n114\nMLI\nMali\n72.634013\nMULTIPOLYGON (((-11.3894 12…",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n1\nZWE\nZimbabwe\n46.02447\nMULTIPOLYGON (((31.28789 -2…\n\n\n2\nZMB\nZambia\n90.99472\nMULTIPOLYGON (((30.39609 -1…\n\n\n57\nZAF\nSouth Africa\n54.09228\nMULTIPOLYGON (((29.36484 -2…\n\n\n57.1\nZAF\nSouth Africa\n96.07288\nMULTIPOLYGON (((29.36484 -2…\n\n\n92\nNER\nNiger\n90.72238\nMULTIPOLYGON (((13.60635 13…\n\n\n112\nMRT\nMauritania\n88.75476\nMULTIPOLYGON (((-16.37334 1…",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -2300,14 +2342,14 @@
     "href": "w05/slides.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (34.54276 -21.95568)\n99.095545\n\n\nPOINT (4.85114 19.62091)\n11.775906\n\n\nPOINT (31.52391 10.33288)\n98.510773\n\n\nPOINT (18.43744 -8.366659)\n4.959803\n\n\nPOINT (31.19317 -5.052038)\n99.096566\n\n\nPOINT (22.09523 -23.40719)\n5.122891\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n44\nTZA\nTanzania\nMULTIPOLYGON (((39.49648 -6…\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n103\nMOZ\nMozambique\nMULTIPOLYGON (((31.28789 -2…\n\n\n123\nLBY\nLibya\nMULTIPOLYGON (((9.51875 30…."
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (38.96888 2.445293)\n40.51890\n\n\nPOINT (18.15564 15.63719)\n67.36077\n\n\nPOINT (29.9169 7.544326)\n82.34735\n\n\nPOINT (31.45696 27.53406)\n81.08349\n\n\nPOINT (38.7536 -1.922179)\n42.98620\n\n\nPOINT (25.90472 -29.90133)\n52.57422\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n52\nSSD\nSouth Sudan\nMULTIPOLYGON (((33.97607 4….\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n114\nMLI\nMali\nMULTIPOLYGON (((-11.3894 12…\n\n\n123\nLBY\nLibya\nMULTIPOLYGON (((9.51875 30…."
   },
   {
     "objectID": "w05/slides.html#our-first-real-spatial-join-st_join",
     "href": "w05/slides.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n44\nTZA\nTanzania\n99.096566\nMULTIPOLYGON (((39.49648 -6…\n\n\n53\nSDN\nSudan\n98.510773\nMULTIPOLYGON (((34.07812 9….\n\n\n53.1\nSDN\nSudan\n54.406761\nMULTIPOLYGON (((34.07812 9….\n\n\n103\nMOZ\nMozambique\n99.095545\nMULTIPOLYGON (((31.28789 -2…\n\n\n123\nLBY\nLibya\n35.241639\nMULTIPOLYGON (((9.51875 30….\n\n\n212\nBWA\nBotswana\n5.122891\nMULTIPOLYGON (((25.25879 -1…"
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n52\nSSD\nSouth Sudan\n82.34735\nMULTIPOLYGON (((33.97607 4….\n\n\n57\nZAF\nSouth Africa\n52.57422\nMULTIPOLYGON (((29.36484 -2…\n\n\n114\nMLI\nMali\n17.27337\nMULTIPOLYGON (((-11.3894 12…\n\n\n123\nLBY\nLibya\n72.10274\nMULTIPOLYGON (((9.51875 30….\n\n\n133\nKEN\nKenya\n40.51890\nMULTIPOLYGON (((40.99443 -2…\n\n\n133.1\nKEN\nKenya\n42.98620\nMULTIPOLYGON (((40.99443 -2…"
   },
   {
     "objectID": "w05/slides.html#but-we-were-still-in-easy-mode",
