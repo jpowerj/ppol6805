@@ -280,7 +280,9 @@ csr_pcf_result |> ggplot(aes(x=r, y=iso)) +
 :::
 ::::
 
-## The Point of All This: Null Models via Base Rates!
+# The Point of All This: Null Models via Base Rates! {data-stack-name="Base Rates"}
+
+## Null Models
 
 * Given an **intensity function**, we can compute a bunch of simulated **point patterns** (**in**homogeneous Poisson Point Process)...
 * How does an **observed** point pattern **differ** from the simulated point patterns?
@@ -429,7 +431,7 @@ bwcontr <- attr(density(controls), "sigma")
 #| label: plot-controls-density
 #| crop: true
 #| fig-width: 3
-int_controls <- density(controls, sigma = bw)
+int_controls <- density(controls, sigma = bw, eps=0.25)
 plot(int_controls, main = NULL)
 ```
 
@@ -440,7 +442,7 @@ plot(int_controls, main = NULL)
 #| label: plot-cases-density
 #| crop: true
 #| fig-width: 3
-int_cases <- density(cases, sigma = bw)
+int_cases <- density(cases, sigma = bw, eps=0.25)
 plot(int_cases, main = NULL)
 ```
 
@@ -467,38 +469,109 @@ title(xlab = "Easting", ylab = "Northing")
 # From Exploratory to Confirmatory Data Analysis {data-stack-name="Evaluation"}
 
 * How do we know whether this raised risk around **North Newcastle** could be attributed to "chance"? Maybe relative risk is actually constant, and people in Newcastle are just **unlucky**...
-* Approach: compare with two possible **null models**:
-    * Random Labeling Hypothesis
-    * Constant Risk Hypothesis
+* Approach: compare with **null model**
+
+## Null Model: CSR
+
+![Figure from @gimond_introduction_2024](images/IRP_CSR.png){fig-align="center"}
 
 ## The *Random Labeling Hypothesis* {.smaller}
 
+<div style="width: 100%;">
+
 * Randomly apply 761 "sick" labels to the 3781 points!
+
+</div>
+
+:::: {.columns}
+::: {.column width="33%"}
+
+```{r}
+#| label: random-labeling
+#| crop: true
+set.seed(6810)
+pbc_1 <- rlabel(pbc)
+plot(pbc_1)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: random-labeling-2
+#| crop: true
+set.seed(6811)
+pbc_2 <- rlabel(pbc)
+plot(pbc_2)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: random-labeling-3
+#| crop: true
+set.seed(6812)
+pbc_3 <- rlabel(pbc)
+plot(pbc_3)
+```
+
+:::
+::::
 
 ## The *Constant Risk Hypothesis* {.smaller}
 
-* Everyone in the population is **equally at risk** of contracting the disease, **regardless** of their spatial location
-* Here, since we have 761 cases and 3020 controls, the estimated **constant risk** would be $\frac{761}{3020+761} \approx 0.201$:
+* Everyone **equally at risk** of contracting disease, **regardless** of location: $\rho(\mathbf{s}) = 1$
+* In this case: $\lambda_{CR}(\mathbf{s}) = \alpha \lambda_0(\mathbf{s})$
+
+:::: {.columns}
+::: {.column width="33%"}
 
 ```{r}
 #| label: monte-carlo-sim
 #| code-fold: true
+#| fig-width: 2.5
 #| crop: true
 pbc_win_sf <- pbc |> sf::st_as_sf() |> filter(label == "window")
-gen_pbc_sim <- function() {
+plot_pbc_sim <- function() {
     pbc_sim <- spatstat.random::rpoispp(
-        lambda = 761 / sf::st_area(pbc_win_sf),
-        win=Window(pbc)
+        lambda = alpha_hat * int_controls
     )
-    return(pbc_sim)
+    # Separate window and points
+    pbc_sf <- pbc_sim |> sf::st_as_sf()
+    pbc_point_sf <- pbc_sf |> filter(label == "point")
+    pbc_win_sf <- pbc_sf |> filter(label == "window")
+    pbc_plot <- ggplot() +
+      geom_sf(data=pbc_win_sf) +
+      geom_sf(data=pbc_point_sf, size=0.5, alpha=0.5) +
+      theme_classic()
+    return(pbc_plot)
 }
-pbc_1 <- gen_pbc_sim()
-pbc_2 <- gen_pbc_sim()
-pbc_3 <- gen_pbc_sim()
-pbc_1 |> sf::st_as_sf() |> ggplot() +
-  geom_sf() +
-  theme_classic()
+plot_pbc_sim()
 ```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| code-fold: true
+#| fig-width: 2.5
+#| crop: true
+plot_pbc_sim()
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| code-fold: true
+#| fig-width: 2.5
+#| crop: true
+plot_pbc_sim()
+```
+
+:::
+::::
 
 ## References
 

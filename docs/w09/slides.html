@@ -99,6 +99,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -690,9 +691,14 @@ Jeff Jacobs
 </div>
 </div>
 </div></div>
+</section></section>
+<section>
+<section id="the-point-of-all-this-null-models-via-base-rates" class="title-slide slide level1 center" data-stack-name="Base Rates">
+<h1>The Point of All This: Null Models via Base Rates!</h1>
+
 </section>
-<section id="the-point-of-all-this-null-models-via-base-rates" class="slide level2">
-<h2>The Point of All This: Null Models via Base Rates!</h2>
+<section id="null-models" class="slide level2">
+<h2>Null Models</h2>
 <ul>
 <li>Given an <strong>intensity function</strong>, we can compute a bunch of simulated <strong>point patterns</strong> (<strong>in</strong>homogeneous Poisson Point Process)…</li>
 <li>How does an <strong>observed</strong> point pattern <strong>differ</strong> from the simulated point patterns?</li>
@@ -872,7 +878,7 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center" data-crop="true">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>int_controls <span class="ot">&lt;-</span> <span class="fu">density</span>(controls, <span class="at">sigma =</span> bw)</span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>int_controls <span class="ot">&lt;-</span> <span class="fu">density</span>(controls, <span class="at">sigma =</span> bw, <span class="at">eps=</span><span class="fl">0.25</span>)</span>
 <span id="cb15-2"><a></a><span class="fu">plot</span>(int_controls, <span class="at">main =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
@@ -887,7 +893,7 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center" data-crop="true">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>int_cases <span class="ot">&lt;-</span> <span class="fu">density</span>(cases, <span class="at">sigma =</span> bw)</span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>int_cases <span class="ot">&lt;-</span> <span class="fu">density</span>(cases, <span class="at">sigma =</span> bw, <span class="at">eps=</span><span class="fl">0.25</span>)</span>
 <span id="cb16-2"><a></a><span class="fu">plot</span>(int_cases, <span class="at">main =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
@@ -930,50 +936,143 @@ Jeff Jacobs
 <h1>From Exploratory to Confirmatory Data Analysis</h1>
 <ul>
 <li>How do we know whether this raised risk around <strong>North Newcastle</strong> could be attributed to “chance”? Maybe relative risk is actually constant, and people in Newcastle are just <strong>unlucky</strong>…</li>
-<li>Approach: compare with two possible <strong>null models</strong>:
-<ul>
-<li>Random Labeling Hypothesis</li>
-<li>Constant Risk Hypothesis</li>
-</ul></li>
+<li>Approach: compare with <strong>null model</strong></li>
 </ul>
 </section>
+<section id="null-model-csr" class="slide level2">
+<h2>Null Model: CSR</h2>
+
+<img data-src="images/IRP_CSR.png" class="r-stretch quarto-figure-center"><p class="caption">Figure from <span class="citation" data-cites="gimond_introduction_2024">Gimond (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></p></section>
 <section id="the-random-labeling-hypothesis" class="slide level2 smaller">
 <h2>The <em>Random Labeling Hypothesis</em></h2>
+<div style="width: 100%;">
 <ul>
 <li>Randomly apply 761 “sick” labels to the 3781 points!</li>
 </ul>
+</div>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center" data-crop="true">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">set.seed</span>(<span class="dv">6810</span>)</span>
+<span id="cb20-2"><a></a>pbc_1 <span class="ot">&lt;-</span> <span class="fu">rlabel</span>(pbc)</span>
+<span id="cb20-3"><a></a><span class="fu">plot</span>(pbc_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/random-labeling-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center" data-crop="true">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">set.seed</span>(<span class="dv">6811</span>)</span>
+<span id="cb21-2"><a></a>pbc_2 <span class="ot">&lt;-</span> <span class="fu">rlabel</span>(pbc)</span>
+<span id="cb21-3"><a></a><span class="fu">plot</span>(pbc_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/random-labeling-2-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center" data-crop="true">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">set.seed</span>(<span class="dv">6812</span>)</span>
+<span id="cb22-2"><a></a>pbc_3 <span class="ot">&lt;-</span> <span class="fu">rlabel</span>(pbc)</span>
+<span id="cb22-3"><a></a><span class="fu">plot</span>(pbc_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/random-labeling-3-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
 </section>
 <section id="the-constant-risk-hypothesis" class="slide level2 smaller">
 <h2>The <em>Constant Risk Hypothesis</em></h2>
 <ul>
-<li>Everyone in the population is <strong>equally at risk</strong> of contracting the disease, <strong>regardless</strong> of their spatial location</li>
-<li>Here, since we have 761 cases and 3020 controls, the estimated <strong>constant risk</strong> would be <span class="math inline">\(\frac{761}{3020+761} \approx 0.201\)</span>:</li>
+<li>Everyone <strong>equally at risk</strong> of contracting disease, <strong>regardless</strong> of location: <span class="math inline">\(\rho(\mathbf{s}) = 1\)</span></li>
+<li>In this case: <span class="math inline">\(\lambda_{CR}(\mathbf{s}) = \alpha \lambda_0(\mathbf{s})\)</span></li>
 </ul>
+<div class="columns">
+<div class="column" style="width:33%;">
 <div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>pbc_win_sf <span class="ot">&lt;-</span> pbc <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"window"</span>)</span>
-<span id="cb20-2"><a></a>gen_pbc_sim <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb20-3"><a></a>    pbc_sim <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
-<span id="cb20-4"><a></a>        <span class="at">lambda =</span> <span class="dv">761</span> <span class="sc">/</span> sf<span class="sc">::</span><span class="fu">st_area</span>(pbc_win_sf),</span>
-<span id="cb20-5"><a></a>        <span class="at">win=</span><span class="fu">Window</span>(pbc)</span>
-<span id="cb20-6"><a></a>    )</span>
-<span id="cb20-7"><a></a>    <span class="fu">return</span>(pbc_sim)</span>
-<span id="cb20-8"><a></a>}</span>
-<span id="cb20-9"><a></a>pbc_1 <span class="ot">&lt;-</span> <span class="fu">gen_pbc_sim</span>()</span>
-<span id="cb20-10"><a></a>pbc_2 <span class="ot">&lt;-</span> <span class="fu">gen_pbc_sim</span>()</span>
-<span id="cb20-11"><a></a>pbc_3 <span class="ot">&lt;-</span> <span class="fu">gen_pbc_sim</span>()</span>
-<span id="cb20-12"><a></a>pbc_1 <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb20-13"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb20-14"><a></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>pbc_win_sf <span class="ot">&lt;-</span> pbc <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"window"</span>)</span>
+<span id="cb23-2"><a></a>plot_pbc_sim <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb23-3"><a></a>    pbc_sim <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
+<span id="cb23-4"><a></a>        <span class="at">lambda =</span> alpha_hat <span class="sc">*</span> int_controls</span>
+<span id="cb23-5"><a></a>    )</span>
+<span id="cb23-6"><a></a>    <span class="co"># Separate window and points</span></span>
+<span id="cb23-7"><a></a>    pbc_sf <span class="ot">&lt;-</span> pbc_sim <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb23-8"><a></a>    pbc_point_sf <span class="ot">&lt;-</span> pbc_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"point"</span>)</span>
+<span id="cb23-9"><a></a>    pbc_win_sf <span class="ot">&lt;-</span> pbc_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"window"</span>)</span>
+<span id="cb23-10"><a></a>    pbc_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb23-11"><a></a>      <span class="fu">geom_sf</span>(<span class="at">data=</span>pbc_win_sf) <span class="sc">+</span></span>
+<span id="cb23-12"><a></a>      <span class="fu">geom_sf</span>(<span class="at">data=</span>pbc_point_sf, <span class="at">size=</span><span class="fl">0.5</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb23-13"><a></a>      <span class="fu">theme_classic</span>()</span>
+<span id="cb23-14"><a></a>    <span class="fu">return</span>(pbc_plot)</span>
+<span id="cb23-15"><a></a>}</span>
+<span id="cb23-16"><a></a><span class="fu">plot_pbc_sim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/monte-carlo-sim-1.png" class="quarto-figure quarto-figure-center" width="240"></p>
+</figure>
 </div>
-<img data-src="index_files/figure-revealjs/monte-carlo-sim-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">plot_pbc_sim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-21-1.png" class="quarto-figure quarto-figure-center" width="240"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">plot_pbc_sim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-22-1.png" class="quarto-figure quarto-figure-center" width="240"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
-<div id="refs" role="list">
-
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-gimond_introduction_2024" class="csl-entry" role="listitem">
+Gimond, Manuel. 2024. <em>Introduction to <span>GIS</span> and <span>Spatial Analysis</span></em>. Colby College (ES214). <a href="https://mgimond.github.io/Spatial/">https://mgimond.github.io/Spatial/</a>.
+</div>
 </div>
 
 <div class="quarto-auto-generated-content">

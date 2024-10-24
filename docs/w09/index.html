@@ -59,6 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -194,7 +195,10 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#why-do-events-appear-where-they-do" id="toc-why-do-events-appear-where-they-do" class="nav-link" data-scroll-target="#why-do-events-appear-where-they-do"><em>Why</em> Do Events Appear Where They Do?</a></li>
   <li><a href="#what-do-these-functions-detect" id="toc-what-do-these-functions-detect" class="nav-link" data-scroll-target="#what-do-these-functions-detect">What Do These Functions “Detect”?</a></li>
-  <li><a href="#the-point-of-all-this-null-models-via-base-rates" id="toc-the-point-of-all-this-null-models-via-base-rates" class="nav-link" data-scroll-target="#the-point-of-all-this-null-models-via-base-rates">The Point of All This: Null Models via Base Rates!</a></li>
+  </ul></li>
+  <li><a href="#the-point-of-all-this-null-models-via-base-rates" id="toc-the-point-of-all-this-null-models-via-base-rates" class="nav-link" data-scroll-target="#the-point-of-all-this-null-models-via-base-rates">The Point of All This: Null Models via Base Rates!</a>
+  <ul class="collapse">
+  <li><a href="#null-models" id="toc-null-models" class="nav-link" data-scroll-target="#null-models">Null Models</a></li>
   <li><a href="#constant-risk-hypothesis-motivation" id="toc-constant-risk-hypothesis-motivation" class="nav-link" data-scroll-target="#constant-risk-hypothesis-motivation">Constant Risk Hypothesis: Motivation</a></li>
   <li><a href="#constant-risk-hypothesis-base-rates" id="toc-constant-risk-hypothesis-base-rates" class="nav-link" data-scroll-target="#constant-risk-hypothesis-base-rates">Constant Risk Hypothesis: Base Rates</a></li>
   <li><a href="#meaningful-results-leftrightarrow-comparisons-with-null-models" id="toc-meaningful-results-leftrightarrow-comparisons-with-null-models" class="nav-link" data-scroll-target="#meaningful-results-leftrightarrow-comparisons-with-null-models">Meaningful Results <span class="math inline">\(\leftrightarrow\)</span> <em>Comparisons</em> with Null Model(s)</a></li>
@@ -204,6 +208,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#from-exploratory-to-confirmatory-data-analysis" id="toc-from-exploratory-to-confirmatory-data-analysis" class="nav-link" data-scroll-target="#from-exploratory-to-confirmatory-data-analysis">From Exploratory to Confirmatory Data Analysis</a>
   <ul class="collapse">
+  <li><a href="#null-model-csr" id="toc-null-model-csr" class="nav-link" data-scroll-target="#null-model-csr">Null Model: CSR</a></li>
   <li><a href="#the-random-labeling-hypothesis" id="toc-the-random-labeling-hypothesis" class="nav-link" data-scroll-target="#the-random-labeling-hypothesis">The <em>Random Labeling Hypothesis</em></a></li>
   <li><a href="#the-constant-risk-hypothesis" id="toc-the-constant-risk-hypothesis" class="nav-link" data-scroll-target="#the-constant-risk-hypothesis">The <em>Constant Risk Hypothesis</em></a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -500,8 +505,11 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="the-point-of-all-this-null-models-via-base-rates" class="level2">
-<h2 class="anchored" data-anchor-id="the-point-of-all-this-null-models-via-base-rates">The Point of All This: Null Models via Base Rates!</h2>
+</section>
+<section id="the-point-of-all-this-null-models-via-base-rates" class="level1" data-stack-name="Base Rates">
+<h1 data-stack-name="Base Rates">The Point of All This: Null Models via Base Rates!</h1>
+<section id="null-models" class="level2">
+<h2 class="anchored" data-anchor-id="null-models">Null Models</h2>
 <ul>
 <li>Given an <strong>intensity function</strong>, we can compute a bunch of simulated <strong>point patterns</strong> (<strong>in</strong>homogeneous Poisson Point Process)…</li>
 <li>How does an <strong>observed</strong> point pattern <strong>differ</strong> from the simulated point patterns?</li>
@@ -682,7 +690,7 @@ window.Quarto = {
 <div class="cell" data-layout-align="center" data-crop="true">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>int_controls <span class="ot">&lt;-</span> <span class="fu">density</span>(controls, <span class="at">sigma =</span> bw)</span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>int_controls <span class="ot">&lt;-</span> <span class="fu">density</span>(controls, <span class="at">sigma =</span> bw, <span class="at">eps=</span><span class="fl">0.25</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(int_controls, <span class="at">main =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
@@ -697,7 +705,7 @@ window.Quarto = {
 <div class="cell" data-layout-align="center" data-crop="true">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>int_cases <span class="ot">&lt;-</span> <span class="fu">density</span>(cases, <span class="at">sigma =</span> bw)</span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>int_cases <span class="ot">&lt;-</span> <span class="fu">density</span>(cases, <span class="at">sigma =</span> bw, <span class="at">eps=</span><span class="fl">0.25</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(int_cases, <span class="at">main =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
@@ -785,55 +793,149 @@ Attaching package: 'fields'</code></pre>
 <h1 data-stack-name="Evaluation">From Exploratory to Confirmatory Data Analysis</h1>
 <ul>
 <li>How do we know whether this raised risk around <strong>North Newcastle</strong> could be attributed to “chance”? Maybe relative risk is actually constant, and people in Newcastle are just <strong>unlucky</strong>…</li>
-<li>Approach: compare with two possible <strong>null models</strong>:
-<ul>
-<li>Random Labeling Hypothesis</li>
-<li>Constant Risk Hypothesis</li>
-</ul></li>
+<li>Approach: compare with <strong>null model</strong></li>
 </ul>
+<section id="null-model-csr" class="level2">
+<h2 class="anchored" data-anchor-id="null-model-csr">Null Model: CSR</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/IRP_CSR.png" class="img-fluid figure-img"></p>
+<figcaption>Figure from <span class="citation" data-cites="gimond_introduction_2024">Gimond (<a href="#ref-gimond_introduction_2024" role="doc-biblioref">2024</a>)</span></figcaption>
+</figure>
+</div>
+</section>
 <section id="the-random-labeling-hypothesis" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="the-random-labeling-hypothesis">The <em>Random Labeling Hypothesis</em></h2>
+<div style="width: 100%;">
 <ul>
 <li>Randomly apply 761 “sick” labels to the 3781 points!</li>
 </ul>
-</section>
-<section id="the-constant-risk-hypothesis" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="the-constant-risk-hypothesis">The <em>Constant Risk Hypothesis</em></h2>
-<ul>
-<li>Everyone in the population is <strong>equally at risk</strong> of contracting the disease, <strong>regardless</strong> of their spatial location</li>
-<li>Here, since we have 761 cases and 3020 controls, the estimated <strong>constant risk</strong> would be <span class="math inline">\(\frac{761}{3020+761} \approx 0.201\)</span>:</li>
-</ul>
+</div>
+<div class="columns">
+<div class="column" style="width:33%;">
 <div class="cell" data-layout-align="center" data-crop="true">
-<details class="code-fold">
+<details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pbc_win_sf <span class="ot">&lt;-</span> pbc <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"window"</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>gen_pbc_sim <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    pbc_sim <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">lambda =</span> <span class="dv">761</span> <span class="sc">/</span> sf<span class="sc">::</span><span class="fu">st_area</span>(pbc_win_sf),</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">win=</span><span class="fu">Window</span>(pbc)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(pbc_sim)</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>pbc_1 <span class="ot">&lt;-</span> <span class="fu">gen_pbc_sim</span>()</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>pbc_2 <span class="ot">&lt;-</span> <span class="fu">gen_pbc_sim</span>()</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>pbc_3 <span class="ot">&lt;-</span> <span class="fu">gen_pbc_sim</span>()</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>pbc_1 <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6810</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pbc_1 <span class="ot">&lt;-</span> <span class="fu">rlabel</span>(pbc)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pbc_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/monte-carlo-sim-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="index_files/figure-html/random-labeling-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center" data-crop="true">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6811</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>pbc_2 <span class="ot">&lt;-</span> <span class="fu">rlabel</span>(pbc)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pbc_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/random-labeling-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center" data-crop="true">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6812</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>pbc_3 <span class="ot">&lt;-</span> <span class="fu">rlabel</span>(pbc)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pbc_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/random-labeling-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-constant-risk-hypothesis" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="the-constant-risk-hypothesis">The <em>Constant Risk Hypothesis</em></h2>
+<ul>
+<li>Everyone <strong>equally at risk</strong> of contracting disease, <strong>regardless</strong> of location: <span class="math inline">\(\rho(\mathbf{s}) = 1\)</span></li>
+<li>In this case: <span class="math inline">\(\lambda_{CR}(\mathbf{s}) = \alpha \lambda_0(\mathbf{s})\)</span></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>pbc_win_sf <span class="ot">&lt;-</span> pbc <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"window"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>plot_pbc_sim <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    pbc_sim <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">lambda =</span> alpha_hat <span class="sc">*</span> int_controls</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Separate window and points</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    pbc_sf <span class="ot">&lt;-</span> pbc_sim <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    pbc_point_sf <span class="ot">&lt;-</span> pbc_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"point"</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    pbc_win_sf <span class="ot">&lt;-</span> pbc_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"window"</span>)</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    pbc_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_sf</span>(<span class="at">data=</span>pbc_win_sf) <span class="sc">+</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_sf</span>(<span class="at">data=</span>pbc_point_sf, <span class="at">size=</span><span class="fl">0.5</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_classic</span>()</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(pbc_plot)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_pbc_sim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/monte-carlo-sim-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="240"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_pbc_sim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="240"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_pbc_sim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="240"></p>
+</figure>
+</div>
+</div>
 </div>
 </div>
 </div>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
-<div id="refs" role="list">
-
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-gimond_introduction_2024" class="csl-entry" role="listitem">
+Gimond, Manuel. 2024. <em>Introduction to <span>GIS</span> and <span>Spatial Analysis</span></em>. Colby College (ES214). <a href="https://mgimond.github.io/Spatial/">https://mgimond.github.io/Spatial/</a>.
+</div>
 </div>
 
 
