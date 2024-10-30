@@ -1,0 +1,134 @@
+---
+title: "Week 10: {{< var weeks.10.title >}}"
+subtitle: "{{< var course.slides-subtitle >}}"
+author: "{{< var course.author >}}"
+institute: "{{< var course.institute >}}"
+date: "October 30, 2024"
+date-format: full
+lecnum: 10
+categories:
+  - "Class Sessions"
+bibliography: "../_PPOL6805.bib"
+# Shared across formats:
+echo: true
+code-fold: show
+css: "../dsan-globals/jjstyles.css"
+html-math-method: mathjax
+# Format-specific settings:
+format:
+  revealjs:
+    output-file: "slides.html"
+    df-print: kable
+    slide-number: true
+    scrollable: true
+    tbl-cap-location: bottom
+    link-external-icon: true
+    link-external-newwindow: true
+    footer: "{{< var weeks.10.footer >}}"
+    include-in-header:
+      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>"
+    theme: [default]
+    revealjs-plugins:
+      - simplemenu
+    simplemenu:
+      flat: true
+      barhtml:
+        header: "<div class='menubar'><span style='position: absolute; left: 8; padding-left: 8px;'><a href='./index.html'>&larr; Return to Notes</a></span><ul class='menu'></ul></div>"
+      scale: 0.5
+  html:
+    output-file: "index.html"
+    html-math-method: mathjax
+    df-print: kable
+---
+
+::: {.content-visible unless-format="revealjs"}
+
+<center class='mb-3'>
+<a class="h2" href="./slides.html" target="_blank">Open slides in new tab &rarr;</a>
+</center>
+
+:::
+
+# Roadmap to the Midterm!
+
+* Last Week (**Oct 23**): Evaluating Hypotheses for **Point Data**
+* Today (**Oct 30**): Evaluating Hypotheses for **Areal Data**
+* In-Class Midterm (**Nov 6**): Basically a "mini-homework" on Spatial Data Science unit (topics from HW4 onwards)!
+
+# Point Processes $\rightarrow$ Areal Processes
+
+::: {.hidden}
+
+```{r}
+#| label: r-source-globals
+source("../dsan-globals/_globals.r")
+set.seed(6805)
+library(tidyverse) |> suppressPackageStartupMessages()
+library(sf) |> suppressPackageStartupMessages()
+library(spatstat) |> suppressPackageStartupMessages()
+library(mdthemes) |> suppressPackageStartupMessages()
+library(mapview) |> suppressPackageStartupMessages()
+library(leaflet) |> suppressPackageStartupMessages()
+```
+
+:::
+
+* The "Complete" Part of Complete Spatial Randomness (CSR)
+* Bringing **Neighbors** Back In
+* Spatial Regression
+
+# Aggregating Point Processes {data-stack-name="Points &rarr; Areas"}
+
+* Recall the **two** "stages" of our Poisson-based point processes
+  * A **Poisson**-distributed number of points, then
+  * **Uniformly**-distributed coordinates for each point
+* One way to see **areal** data modeling: we *keep* the Poisson part, but we **no longer observe** the coordinates for the points!
+* So... why is it still helpful for you to have sat through those lectures on Point Processes? Two reasons...
+
+## (1) Areal Patterns = Aggregated Point Patterns
+
+* One application, mentioned last week: **areal-weighted interpolation** using actual **models** of how the points are distributed within the area!
+  * Regularly-spaced points is rarely a good "default" model!
+  * Humans, for example, rarely live at perfect evenly-spaced intervals... they form **households**, **villages**, **cities**
+  * Regularly-spaced points (we now know) $\implies$ **negative autocorrelation** $\implies$ typically due to **inhibition process** (competition)
+
+## (2) Spatial Scan Statistics
+
+* Areal regions often the result of **artificial** / "arbitrary" human divisions
+  * (Particulate matter doesn't pass through customs)
+* $\implies$ If we care about processes which don't "adhere to" borders (like disease spread), we want to "scan" **buffers** around points regardless of areal borders
+
+![](images/scan_stat.jpg){fig-align="center"}
+
+## (3) Hierarchical Bayesian Smoothing
+
+* Here, the issue might just be **not enough data** for some areas, while we have an **abundance** of data in nearby areas...
+
+![From Kramer (2023), [*Spatial Epidemiology*](https://mkram01.github.io/EPI563-SpatialEPI/disease-mapping-iii-introduction-to-fully-bayesian-mapping.html){target='_blank'}](images/bayes_smoothing.png){fig-align="center"}
+
+# Autocorrelation on Networks {data-stack-name="Areal Autocorrelation"}
+
+## Moran's $I$ One More Time
+
+# Spatial Regression {data-stack-name="Spatial Regression"}
+
+* (We made it! This is the last Spatial Data Science topic!)
+* (Nearly all extremely-fancy applied GIS models can be implemented via Spatial Regression!)
+
+## Case 1: No Residual Spatial Autocorrelation
+
+* Example: Residuals have Moran's $I$ near 0...
+* ...Don't need GIS at all!
+
+## Case 2: Conditional Autoregressive Model (CAR)
+
+* GIS, but... only for "fixing" your regression
+
+## Case 3: Simultaneous Autoregressive Model (SAR)
+
+* The main event! Here we are **explicitly** modeling "spatially lagged" versions of our covariates $X$!
+
+## References
+
+::: {#refs}
+:::

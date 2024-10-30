@@ -1144,7 +1144,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 
 </div>
 <img data-src="index_files/figure-revealjs/ssi-sims-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="matérn-cluster-process" class="slide level2 crunch-title smaller">
+<section id="matérn-cluster-process" class="slide level2 crunch-title smaller code-90">
 <h2>Matérn Cluster Process</h2>
 <div class="columns">
 <div class="column" style="width:75%;">
@@ -1152,6 +1152,14 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 </div><div class="column" style="width:25%;">
 <p><a href="https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMatClust.html" target="_blank">Docs</a></p>
 </div></div>
+<ul>
+<li><i class="bi bi-1-circle"></i> Generate <span class="math inline">\(K(\kappa)\)</span> <strong>parent points</strong> via Poisson Point Process with intensity <span class="math inline">\(\lambda = \kappa\)</span></li>
+<li><i class="bi bi-2-circle"></i> For each parent point <span class="math inline">\(\mathbf{s}_i \in \left\{\mathbf{s}_1, \ldots, \mathbf{s}_{K(\kappa)}\right\}\)</span>:
+<ul>
+<li>Generate <span class="math inline">\(N(\mu)\)</span> <strong>offspring points</strong> via Poisson Point Process with intensity <span class="math inline">\(\lambda = \mu\)</span>, distributed uniformly within a <strong>circle of radius <code>scale</code></strong> centered at <span class="math inline">\(\mathbf{s}_i\)</span></li>
+</ul></li>
+<li><i class="bi bi-3-circle"></i> <strong>Offspring points</strong> form the outcome (parent points are thrown away)</li>
+</ul>
 <div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>

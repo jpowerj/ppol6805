@@ -294,6 +294,24 @@ window.Quarto = {
  <span class="menu-text">Week 9: Oct 23</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10: Oct 30</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w11/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11: Nov 6</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w12/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12: Nov 13</span></a>
+  </div>
+</li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -341,7 +359,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2024-10-24, 01:42:39 AM</em></p>
+<p><em>Updated 2024-10-30, 05:47:04 AM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -1145,8 +1163,8 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 </div>
 </div>
 </section>
-<section id="matérn-cluster-process" class="level2 crunch-title smaller">
-<h2 class="crunch-title smaller anchored" data-anchor-id="matérn-cluster-process">Matérn Cluster Process</h2>
+<section id="matérn-cluster-process" class="level2 crunch-title smaller code-90">
+<h2 class="crunch-title smaller code-90 anchored" data-anchor-id="matérn-cluster-process">Matérn Cluster Process</h2>
 <div class="columns">
 <div class="column" style="width:75%;">
 <div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>spatstat.random<span class="sc">::</span><span class="fu">rMatClust</span>(kappa, scale, mu, win)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1154,6 +1172,14 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <p><a href="https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMatClust.html" target="_blank">Docs</a></p>
 </div>
 </div>
+<ul>
+<li><i class="bi bi-1-circle"></i> Generate <span class="math inline">\(K(\kappa)\)</span> <strong>parent points</strong> via Poisson Point Process with intensity <span class="math inline">\(\lambda = \kappa\)</span></li>
+<li><i class="bi bi-2-circle"></i> For each parent point <span class="math inline">\(\mathbf{s}_i \in \left\{\mathbf{s}_1, \ldots, \mathbf{s}_{K(\kappa)}\right\}\)</span>:
+<ul>
+<li>Generate <span class="math inline">\(N(\mu)\)</span> <strong>offspring points</strong> via Poisson Point Process with intensity <span class="math inline">\(\lambda = \mu\)</span>, distributed uniformly within a <strong>circle of radius <code>scale</code></strong> centered at <span class="math inline">\(\mathbf{s}_i\)</span></li>
+</ul></li>
+<li><i class="bi bi-3-circle"></i> <strong>Offspring points</strong> form the outcome (parent points are thrown away)</li>
+</ul>
 <div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>

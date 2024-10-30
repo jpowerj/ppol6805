@@ -630,7 +630,7 @@ combined_df |> ggplot(aes(x=x, y=y)) +
   scale_y_continuous(breaks=sim_yticks)
 ```
 
-## Matérn Cluster Process {.crunch-title .smaller}
+## Matérn Cluster Process {.crunch-title .smaller .code-90}
 
 :::: {.columns}
 ::: {.column width="75%"}
@@ -646,6 +646,11 @@ spatstat.random::rMatClust(kappa, scale, mu, win)
 
 :::
 ::::
+
+* <i class='bi bi-1-circle'></i> Generate $K(\kappa)$ **parent points** via Poisson Point Process with intensity $\lambda = \kappa$
+* <i class='bi bi-2-circle'></i> For each parent point $\mathbf{s}_i \in \left\{\mathbf{s}_1, \ldots, \mathbf{s}_{K(\kappa)}\right\}$:
+  * Generate $N(\mu)$ **offspring points** via Poisson Point Process with intensity $\lambda = \mu$, distributed uniformly within a **circle of radius `scale`** centered at $\mathbf{s}_i$
+* <i class='bi bi-3-circle'></i> **Offspring points** form the outcome (parent points are thrown away)
 
 ```{r}
 #| label: matclust-plot
