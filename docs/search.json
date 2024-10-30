@@ -860,6 +860,13 @@
     ]
   },
   {
+    "objectID": "w10/slides.html#aggregating-point-processes",
+    "href": "w10/slides.html#aggregating-point-processes",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Aggregating Point Processes",
+    "text": "Aggregating Point Processes\n\nRecall the two “stages” of our Poisson-based point processes\n\nA Poisson-distributed number of points, then\nUniformly-distributed coordinates for each point\n\nOne way to see areal data modeling: we keep the Poisson part, but we no longer observe the coordinates for the points!\nSo… why is it still helpful for you to have sat through those lectures on Point Processes? Two reasons…"
+  },
+  {
     "objectID": "w10/slides.html#areal-patterns-aggregated-point-patterns",
     "href": "w10/slides.html#areal-patterns-aggregated-point-patterns",
     "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
@@ -878,14 +885,70 @@
     "href": "w10/slides.html#hierarchical-bayesian-smoothing",
     "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
     "section": "(3) Hierarchical Bayesian Smoothing",
-    "text": "(3) Hierarchical Bayesian Smoothing\n\nHere, the issue might just be not enough data for some areas, while we have an abundance of data in nearby areas…\n\n\nFrom Kramer (2023), Spatial Epidemiology"
+    "text": "(3) Hierarchical Bayesian Smoothing\n\nThe issue might just be not enough data for some areas, while we have an abundance of data in nearby areas…\n\n\nFrom Kramer (2023), Spatial Epidemiology"
+  },
+  {
+    "objectID": "w10/slides.html#reminder-weight-matrix-defines-neighbors",
+    "href": "w10/slides.html#reminder-weight-matrix-defines-neighbors",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Reminder: Weight Matrix Defines “Neighbors”",
+    "text": "Reminder: Weight Matrix Defines “Neighbors”\n\nFrom Canadian Rockies Exploration Guide"
+  },
+  {
+    "objectID": "w10/slides.html#choices-available-in-spdep",
+    "href": "w10/slides.html#choices-available-in-spdep",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Choices Available in spdep",
+    "text": "Choices Available in spdep\n\n\\(w_{ij} = 1\\) if \\(i\\) and \\(j\\) “overlap”\n\nRook: Overlap is 1 or 2-dimensional\nQueen: Overlap is 0, 1, or 2-dimensional\n\n\\(w_{ij} = \\frac{1}{\\text{dist}(i, j)}\\)\n\\(w_{ij} = 1\\) if \\(dist(i, j) &lt; \\overline{D}\\)\n\\(w_{ij} = 1\\) for \\(K\\) nearest neighbors"
   },
   {
     "objectID": "w10/slides.html#morans-i-one-more-time",
     "href": "w10/slides.html#morans-i-one-more-time",
     "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
     "section": "Moran’s \\(I\\) One More Time",
-    "text": "Moran’s \\(I\\) One More Time"
+    "text": "Moran’s \\(I\\) One More Time\n\nRound 1 (Week 6): Moran’s \\(I\\) as “thermometer”\nRound 2 (Today): Could an \\(I\\) value this extreme occur due to random noise?"
+  },
+  {
+    "objectID": "w10/slides.html#example-bolshevik-revolution-rightarrow-bipolar-world",
+    "href": "w10/slides.html#example-bolshevik-revolution-rightarrow-bipolar-world",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Example: Bolshevik Revolution \\(\\rightarrow\\) “Bipolar” World",
+    "text": "Example: Bolshevik Revolution \\(\\rightarrow\\) “Bipolar” World\n\n\nNull hypothesis: no spatial effect of democratization/de-democratization on neighboring countries\nIf null hypothesis is true, and countries democratize/de-democratize independently… could this pattern still arise?"
+  },
+  {
+    "objectID": "w10/slides.html#motivation-when-does-non-spatial-regression-work",
+    "href": "w10/slides.html#motivation-when-does-non-spatial-regression-work",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Motivation: When Does Non-Spatial Regression “Work”?",
+    "text": "Motivation: When Does Non-Spatial Regression “Work”?\n\\[\nY_i = \\beta_0 + \\beta_1X_{i,1} + \\beta_2X_{i,2} + \\cdots + \\beta_MX_{i,M} + \\varepsilon_i\n\\]\n\nImportance of OLS regression: can give us the Best Linear Unbiased Estimator (BLUE)\nThis is only true if the Gauss-Markov assumptions hold—one of these is that the error terms are uncorrelated:\n\\[\n\\text{Cov}[\\varepsilon_i, \\varepsilon_j] = 0 \\; \\forall i \\neq j\n\\]"
+  },
+  {
+    "objectID": "w10/slides.html#spatial-autocorrelation-in-residuals",
+    "href": "w10/slides.html#spatial-autocorrelation-in-residuals",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Spatial Autocorrelation in Residuals",
+    "text": "Spatial Autocorrelation in Residuals\n\nWe have now seen several models / datasets where effect of some variable \\(X\\) (say, population) on another variable \\(Y\\) (say, disease count) is spatial! (Kind of the whole point of the class 😜)\nSo, to see when OLS will “work”, vs. when you need to incorporate GIS, key step is plotting the spatial distribution of regression residuals!"
+  },
+  {
+    "objectID": "w10/slides.html#example-italian-elections",
+    "href": "w10/slides.html#example-italian-elections",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Example: Italian Elections",
+    "text": "Example: Italian Elections\n\n\n\n\n\nWard and Gleditsch (2018), Figure 2.3\n\n\n\n\n\n\nWard and Gleditsch (2018), Figure 2.4"
+  },
+  {
+    "objectID": "w10/slides.html#will-ols-work-here",
+    "href": "w10/slides.html#will-ols-work-here",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Will OLS “Work” Here?",
+    "text": "Will OLS “Work” Here?\n\nCan we use OLS to derive the BLUE of the effect of GDP on voting?\n\n\n\n\nPlain OLS\n\n\n\n\n\\(N = 477\\)\n\\(\\widehat{\\beta}\\)\nSE\n\\(t\\)\n\n\n\n\nIntercept\n35.30\n2.21\n15.96\n\n\nLog GDP per cap\n13.46\n0.65\n20.84\n\n\n\nMoran’s \\(I\\) for residuals = 0.47(!)\n\n \n\n\nSpatial Regression\n\n\n\n\n\\(N = 477\\)\n\\(\\widehat{\\beta}\\)\nSE\n\\(t\\)\n\n\n\n\nIntercept\n4.70\n1.66\n2.80\n\n\nLog GDP per cap\n1.77\n0.48\n3.66\n\n\n\\(\\rho\\)\n0.87\n0.02\n36.7"
+  },
+  {
+    "objectID": "w10/slides.html#what-does-it-mean-that-spatial-effect-is-significant",
+    "href": "w10/slides.html#what-does-it-mean-that-spatial-effect-is-significant",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "What Does it Mean that “Spatial Effect” is Significant?",
+    "text": "What Does it Mean that “Spatial Effect” is Significant?\n\nWard and Gleditsch (2018), Figure 2.5"
   },
   {
     "objectID": "w10/slides.html#case-1-no-residual-spatial-autocorrelation",
@@ -899,21 +962,21 @@
     "href": "w10/slides.html#case-2-conditional-autoregressive-model-car",
     "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
     "section": "Case 2: Conditional Autoregressive Model (CAR)",
-    "text": "Case 2: Conditional Autoregressive Model (CAR)\n\nGIS, but… only for “fixing” your regression"
+    "text": "Case 2: Conditional Autoregressive Model (CAR)\n\nGIS, but… only for “fixing” your regression\n\n\\[\nY_i = \\underbrace{\\mu_i}_{\\text{Non-spatial model}} + \\underbrace{\\frac{1}{w_{i,cdot}}\\sum_{j \\neq i}(Y_j - \\mu_j)}_{\\text{Spatial Autocorrelation}} + \\varepsilon_i\n\\]"
   },
   {
     "objectID": "w10/slides.html#case-3-simultaneous-autoregressive-model-sar",
     "href": "w10/slides.html#case-3-simultaneous-autoregressive-model-sar",
     "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
     "section": "Case 3: Simultaneous Autoregressive Model (SAR)",
-    "text": "Case 3: Simultaneous Autoregressive Model (SAR)\n\nThe main event! Here we are explicitly modeling “spatially lagged” versions of our covariates \\(X\\)!"
+    "text": "Case 3: Simultaneous Autoregressive Model (SAR)\n\nThe main event! Here we are explicitly modeling “spatially lagged” versions of our dependent variable \\(Y\\)!\n\n\\[\nY = \\mathbf{X}\\beta + \\rho \\underbrace{\\mathbf{W}Y}_{\\mathclap{\\text{Spatially-lagged }Y}} + \\boldsymbol\\varepsilon\n\\]"
   },
   {
     "objectID": "w10/slides.html#references",
     "href": "w10/slides.html#references",
     "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
     "section": "References",
-    "text": "References\n\n\n\n\n\n\nPPOL 6805 Week 10: Areal Data Hypotheses"
+    "text": "References\n\n\nWard, Michael D., and Kristian Skrede Gleditsch. 2018. Spatial Regression Models. SAGE Publications.\n\n\n\n\n\nPPOL 6805 Week 10: Areal Data Hypotheses"
   },
   {
     "objectID": "w10/index.html",
@@ -921,6 +984,16 @@
     "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
     "section": "",
     "text": "Open slides in new tab →",
+    "crumbs": [
+      "Week 10: Oct 30"
+    ]
+  },
+  {
+    "objectID": "w10/index.html#aggregating-point-processes",
+    "href": "w10/index.html#aggregating-point-processes",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Aggregating Point Processes",
+    "text": "Aggregating Point Processes\n\nRecall the two “stages” of our Poisson-based point processes\n\nA Poisson-distributed number of points, then\nUniformly-distributed coordinates for each point\n\nOne way to see areal data modeling: we keep the Poisson part, but we no longer observe the coordinates for the points!\nSo… why is it still helpful for you to have sat through those lectures on Point Processes? Two reasons…",
     "crumbs": [
       "Week 10: Oct 30"
     ]
@@ -950,7 +1023,27 @@
     "href": "w10/index.html#hierarchical-bayesian-smoothing",
     "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
     "section": "(3) Hierarchical Bayesian Smoothing",
-    "text": "(3) Hierarchical Bayesian Smoothing\n\nHere, the issue might just be not enough data for some areas, while we have an abundance of data in nearby areas…\n\n\n\n\nFrom Kramer (2023), Spatial Epidemiology",
+    "text": "(3) Hierarchical Bayesian Smoothing\n\nThe issue might just be not enough data for some areas, while we have an abundance of data in nearby areas…\n\n\n\n\nFrom Kramer (2023), Spatial Epidemiology",
+    "crumbs": [
+      "Week 10: Oct 30"
+    ]
+  },
+  {
+    "objectID": "w10/index.html#reminder-weight-matrix-defines-neighbors",
+    "href": "w10/index.html#reminder-weight-matrix-defines-neighbors",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Reminder: Weight Matrix Defines “Neighbors”",
+    "text": "Reminder: Weight Matrix Defines “Neighbors”\n\n\n\nFrom Canadian Rockies Exploration Guide",
+    "crumbs": [
+      "Week 10: Oct 30"
+    ]
+  },
+  {
+    "objectID": "w10/index.html#choices-available-in-spdep",
+    "href": "w10/index.html#choices-available-in-spdep",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Choices Available in spdep",
+    "text": "Choices Available in spdep\n\n\\(w_{ij} = 1\\) if \\(i\\) and \\(j\\) “overlap”\n\nRook: Overlap is 1 or 2-dimensional\nQueen: Overlap is 0, 1, or 2-dimensional\n\n\\(w_{ij} = \\frac{1}{\\text{dist}(i, j)}\\)\n\\(w_{ij} = 1\\) if \\(dist(i, j) &lt; \\overline{D}\\)\n\\(w_{ij} = 1\\) for \\(K\\) nearest neighbors",
     "crumbs": [
       "Week 10: Oct 30"
     ]
@@ -960,7 +1053,67 @@
     "href": "w10/index.html#morans-i-one-more-time",
     "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
     "section": "Moran’s \\(I\\) One More Time",
-    "text": "Moran’s \\(I\\) One More Time",
+    "text": "Moran’s \\(I\\) One More Time\n\nRound 1 (Week 6): Moran’s \\(I\\) as “thermometer”\nRound 2 (Today): Could an \\(I\\) value this extreme occur due to random noise?",
+    "crumbs": [
+      "Week 10: Oct 30"
+    ]
+  },
+  {
+    "objectID": "w10/index.html#example-bolshevik-revolution-rightarrow-bipolar-world",
+    "href": "w10/index.html#example-bolshevik-revolution-rightarrow-bipolar-world",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Example: Bolshevik Revolution \\(\\rightarrow\\) “Bipolar” World",
+    "text": "Example: Bolshevik Revolution \\(\\rightarrow\\) “Bipolar” World\n\n\n\n\n\n\nNull hypothesis: no spatial effect of democratization/de-democratization on neighboring countries\nIf null hypothesis is true, and countries democratize/de-democratize independently… could this pattern still arise?",
+    "crumbs": [
+      "Week 10: Oct 30"
+    ]
+  },
+  {
+    "objectID": "w10/index.html#motivation-when-does-non-spatial-regression-work",
+    "href": "w10/index.html#motivation-when-does-non-spatial-regression-work",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Motivation: When Does Non-Spatial Regression “Work”?",
+    "text": "Motivation: When Does Non-Spatial Regression “Work”?\n\\[\nY_i = \\beta_0 + \\beta_1X_{i,1} + \\beta_2X_{i,2} + \\cdots + \\beta_MX_{i,M} + \\varepsilon_i\n\\]\n\nImportance of OLS regression: can give us the Best Linear Unbiased Estimator (BLUE)\nThis is only true if the Gauss-Markov assumptions hold—one of these is that the error terms are uncorrelated:\n\\[\n\\text{Cov}[\\varepsilon_i, \\varepsilon_j] = 0 \\; \\forall i \\neq j\n\\]",
+    "crumbs": [
+      "Week 10: Oct 30"
+    ]
+  },
+  {
+    "objectID": "w10/index.html#spatial-autocorrelation-in-residuals",
+    "href": "w10/index.html#spatial-autocorrelation-in-residuals",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Spatial Autocorrelation in Residuals",
+    "text": "Spatial Autocorrelation in Residuals\n\nWe have now seen several models / datasets where effect of some variable \\(X\\) (say, population) on another variable \\(Y\\) (say, disease count) is spatial! (Kind of the whole point of the class 😜)\nSo, to see when OLS will “work”, vs. when you need to incorporate GIS, key step is plotting the spatial distribution of regression residuals!",
+    "crumbs": [
+      "Week 10: Oct 30"
+    ]
+  },
+  {
+    "objectID": "w10/index.html#example-italian-elections",
+    "href": "w10/index.html#example-italian-elections",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Example: Italian Elections",
+    "text": "Example: Italian Elections\n\n\n\n\n\nWard and Gleditsch (2018), Figure 2.3\n\n\n\n\n\n\nWard and Gleditsch (2018), Figure 2.4",
+    "crumbs": [
+      "Week 10: Oct 30"
+    ]
+  },
+  {
+    "objectID": "w10/index.html#will-ols-work-here",
+    "href": "w10/index.html#will-ols-work-here",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "Will OLS “Work” Here?",
+    "text": "Will OLS “Work” Here?\n\nCan we use OLS to derive the BLUE of the effect of GDP on voting?\n\n\n\n\nPlain OLS\n\n\n\n\n\\(N = 477\\)\n\\(\\widehat{\\beta}\\)\nSE\n\\(t\\)\n\n\n\n\nIntercept\n35.30\n2.21\n15.96\n\n\nLog GDP per cap\n13.46\n0.65\n20.84\n\n\n\nMoran’s \\(I\\) for residuals = 0.47(!)\n\n \n\n\nSpatial Regression\n\n\n\n\n\\(N = 477\\)\n\\(\\widehat{\\beta}\\)\nSE\n\\(t\\)\n\n\n\n\nIntercept\n4.70\n1.66\n2.80\n\n\nLog GDP per cap\n1.77\n0.48\n3.66\n\n\n\\(\\rho\\)\n0.87\n0.02\n36.7",
+    "crumbs": [
+      "Week 10: Oct 30"
+    ]
+  },
+  {
+    "objectID": "w10/index.html#what-does-it-mean-that-spatial-effect-is-significant",
+    "href": "w10/index.html#what-does-it-mean-that-spatial-effect-is-significant",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "section": "What Does it Mean that “Spatial Effect” is Significant?",
+    "text": "What Does it Mean that “Spatial Effect” is Significant?\n\n\n\nWard and Gleditsch (2018), Figure 2.5",
     "crumbs": [
       "Week 10: Oct 30"
     ]
@@ -980,7 +1133,7 @@
     "href": "w10/index.html#case-2-conditional-autoregressive-model-car",
     "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
     "section": "Case 2: Conditional Autoregressive Model (CAR)",
-    "text": "Case 2: Conditional Autoregressive Model (CAR)\n\nGIS, but… only for “fixing” your regression",
+    "text": "Case 2: Conditional Autoregressive Model (CAR)\n\nGIS, but… only for “fixing” your regression\n\n\\[\nY_i = \\underbrace{\\mu_i}_{\\text{Non-spatial model}} + \\underbrace{\\frac{1}{w_{i,cdot}}\\sum_{j \\neq i}(Y_j - \\mu_j)}_{\\text{Spatial Autocorrelation}} + \\varepsilon_i\n\\]",
     "crumbs": [
       "Week 10: Oct 30"
     ]
@@ -990,7 +1143,7 @@
     "href": "w10/index.html#case-3-simultaneous-autoregressive-model-sar",
     "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
     "section": "Case 3: Simultaneous Autoregressive Model (SAR)",
-    "text": "Case 3: Simultaneous Autoregressive Model (SAR)\n\nThe main event! Here we are explicitly modeling “spatially lagged” versions of our covariates \\(X\\)!",
+    "text": "Case 3: Simultaneous Autoregressive Model (SAR)\n\nThe main event! Here we are explicitly modeling “spatially lagged” versions of our dependent variable \\(Y\\)!\n\n\\[\nY = \\mathbf{X}\\beta + \\rho \\underbrace{\\mathbf{W}Y}_{\\mathclap{\\text{Spatially-lagged }Y}} + \\boldsymbol\\varepsilon\n\\]",
     "crumbs": [
       "Week 10: Oct 30"
     ]
@@ -1000,7 +1153,7 @@
     "href": "w10/index.html#references",
     "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
     "section": "References",
-    "text": "References",
+    "text": "References\n\n\nWard, Michael D., and Kristian Skrede Gleditsch. 2018. Spatial Regression Models. SAGE Publications.",
     "crumbs": [
       "Week 10: Oct 30"
     ]
@@ -1038,14 +1191,14 @@
     "href": "w05/slides.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (34.53032 -8.201691)\n15.309013\n\n\nPOINT (32.14245 15.43679)\n57.004231\n\n\nPOINT (24.6244 30.90451)\n1.437912\n\n\nPOINT (31.21277 1.446624)\n28.789506\n\n\nPOINT (47.95785 -18.89719)\n66.856691\n\n\nPOINT (23.29555 -14.28824)\n36.503675\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n35\nUGA\nUganda\nMULTIPOLYGON (((33.90322 -1…\n\n\n44\nTZA\nTanzania\nMULTIPOLYGON (((39.49648 -6…\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9…."
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (33.64714 5.418183)\n10.735976\n\n\nPOINT (0.6116364 25.0898)\n59.687009\n\n\nPOINT (19.68826 -6.775749)\n78.973318\n\n\nPOINT (23.66823 -25.31257)\n54.363495\n\n\nPOINT (29.30595 -30.44762)\n19.737223\n\n\nPOINT (19.70481 -30.75251)\n2.003718\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n52\nSSD\nSouth Sudan\nMULTIPOLYGON (((33.97607 4….\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n103\nMOZ\nMozambique\nMULTIPOLYGON (((31.28789 -2…"
   },
   {
     "objectID": "w05/slides.html#our-first-real-spatial-join-st_join",
     "href": "w05/slides.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n2\nZMB\nZambia\n36.50367\nMULTIPOLYGON (((30.39609 -1…\n\n\n35\nUGA\nUganda\n28.78951\nMULTIPOLYGON (((33.90322 -1…\n\n\n44\nTZA\nTanzania\n15.30901\nMULTIPOLYGON (((39.49648 -6…\n\n\n44.1\nTZA\nTanzania\n79.93160\nMULTIPOLYGON (((39.49648 -6…\n\n\n53\nSDN\nSudan\n57.00423\nMULTIPOLYGON (((34.07812 9….\n\n\n114\nMLI\nMali\n24.93999\nMULTIPOLYGON (((-11.3894 12…"
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n2\nZMB\nZambia\n70.100628\nMULTIPOLYGON (((30.39609 -1…\n\n\n52\nSSD\nSouth Sudan\n10.735976\nMULTIPOLYGON (((33.97607 4….\n\n\n57\nZAF\nSouth Africa\n19.737223\nMULTIPOLYGON (((29.36484 -2…\n\n\n57.1\nZAF\nSouth Africa\n2.003718\nMULTIPOLYGON (((29.36484 -2…\n\n\n103\nMOZ\nMozambique\n20.949434\nMULTIPOLYGON (((31.28789 -2…\n\n\n118\nMDG\nMadagascar\n12.551431\nMULTIPOLYGON (((49.53828 -1…"
   },
   {
     "objectID": "w05/slides.html#but-we-were-still-in-easy-mode",
@@ -1128,7 +1281,7 @@
     "href": "w05/index.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (29.2101 -6.145754)\n28.83683\n\n\nPOINT (19.77299 -4.31787)\n92.32098\n\n\nPOINT (5.703947 34.81887)\n27.09611\n\n\nPOINT (20.53409 -0.5099878)\n12.20229\n\n\nPOINT (38.23683 8.883836)\n87.13245\n\n\nPOINT (1.157734 11.32188)\n85.41378\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n123\nLBY\nLibya\nMULTIPOLYGON (((9.51875 30….\n\n\n172\nETH\nEthiopia\nMULTIPOLYGON (((35.26836 5….\n\n\n192\nCOD\nDemocratic Republic of the Congo\nMULTIPOLYGON (((30.75117 -8…",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-12.50145 19.15921)\n68.30464\n\n\nPOINT (-15.04814 17.48973)\n21.60919\n\n\nPOINT (16.77036 -3.604793)\n7.85162\n\n\nPOINT (27.07941 15.91279)\n30.12923\n\n\nPOINT (26.67448 -1.528596)\n92.91193\n\n\nPOINT (-13.47272 21.55279)\n14.06515\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n91\nNGA\nNigeria\nMULTIPOLYGON (((7.300781 4….\n\n\n102\nNAM\nNamibia\nMULTIPOLYGON (((23.38066 -1…\n\n\n105\nESH\nWestern Sahara\nMULTIPOLYGON (((-8.817773 2…",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -1138,7 +1291,7 @@
     "href": "w05/index.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n2\nZMB\nZambia\n44.518383\nMULTIPOLYGON (((30.39609 -1…\n\n\n123\nLBY\nLibya\n4.021376\nMULTIPOLYGON (((9.51875 30….\n\n\n172\nETH\nEthiopia\n87.132452\nMULTIPOLYGON (((35.26836 5….\n\n\n192\nCOD\nDemocratic Republic of the Congo\n28.836828\nMULTIPOLYGON (((30.75117 -8…\n\n\n192.1\nCOD\nDemocratic Republic of the Congo\n92.320981\nMULTIPOLYGON (((30.75117 -8…\n\n\n192.2\nCOD\nDemocratic Republic of the Congo\n12.202293\nMULTIPOLYGON (((30.75117 -8…",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n53\nSDN\nSudan\n30.12923\nMULTIPOLYGON (((34.07812 9….\n\n\n91\nNGA\nNigeria\n50.08624\nMULTIPOLYGON (((7.300781 4….\n\n\n102\nNAM\nNamibia\n77.92744\nMULTIPOLYGON (((23.38066 -1…\n\n\n105\nESH\nWestern Sahara\n14.06515\nMULTIPOLYGON (((-8.817773 2…\n\n\n112\nMRT\nMauritania\n68.30464\nMULTIPOLYGON (((-16.37334 1…\n\n\n112.1\nMRT\nMauritania\n21.60919\nMULTIPOLYGON (((-16.37334 1…",
     "crumbs": [
       "Week 5: Sep 25"
     ]

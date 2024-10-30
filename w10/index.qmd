@@ -77,7 +77,9 @@ library(leaflet) |> suppressPackageStartupMessages()
 * Bringing **Neighbors** Back In
 * Spatial Regression
 
-# Aggregating Point Processes {data-stack-name="Points &rarr; Areas"}
+# Points $\rightarrow$ Areas {data-stack-name="Points &rarr; Areas"}
+
+## Aggregating Point Processes
 
 * Recall the **two** "stages" of our Poisson-based point processes
   * A **Poisson**-distributed number of points, then
@@ -85,14 +87,14 @@ library(leaflet) |> suppressPackageStartupMessages()
 * One way to see **areal** data modeling: we *keep* the Poisson part, but we **no longer observe** the coordinates for the points!
 * So... why is it still helpful for you to have sat through those lectures on Point Processes? Two reasons...
 
-## (1) Areal Patterns = Aggregated Point Patterns
+## (1) Areal Patterns = Aggregated Point Patterns {.title-09}
 
 * One application, mentioned last week: **areal-weighted interpolation** using actual **models** of how the points are distributed within the area!
   * Regularly-spaced points is rarely a good "default" model!
   * Humans, for example, rarely live at perfect evenly-spaced intervals... they form **households**, **villages**, **cities**
   * Regularly-spaced points (we now know) $\implies$ **negative autocorrelation** $\implies$ typically due to **inhibition process** (competition)
 
-## (2) Spatial Scan Statistics
+## (2) Spatial Scan Statistics {.smaller}
 
 * Areal regions often the result of **artificial** / "arbitrary" human divisions
   * (Particulate matter doesn't pass through customs)
@@ -102,18 +104,117 @@ library(leaflet) |> suppressPackageStartupMessages()
 
 ## (3) Hierarchical Bayesian Smoothing
 
-* Here, the issue might just be **not enough data** for some areas, while we have an **abundance** of data in nearby areas...
+* The issue might just be **not enough data** for some areas, while we have an **abundance** of data in nearby areas...
 
 ![From Kramer (2023), [*Spatial Epidemiology*](https://mkram01.github.io/EPI563-SpatialEPI/disease-mapping-iii-introduction-to-fully-bayesian-mapping.html){target='_blank'}](images/bayes_smoothing.png){fig-align="center"}
 
 # Autocorrelation on Networks {data-stack-name="Areal Autocorrelation"}
 
+## Reminder: Weight Matrix Defines "Neighbors"
+
+![From [Canadian Rockies Exploration Guide](http://www.canadianrockies.net/maps/){target='_blank'}](images/canada_dist.gif){fig-align="center"}
+
+## Choices Available in `spdep`
+
+* $w_{ij} = 1$ if $i$ and $j$ "overlap"
+  * Rook: Overlap is 1 or 2-dimensional
+  * Queen: Overlap is 0, 1, or 2-dimensional
+* $w_{ij} = \frac{1}{\text{dist}(i, j)}$
+* $w_{ij} = 1$ if $dist(i, j) < \overline{D}$
+* $w_{ij} = 1$ for $K$ nearest neighbors
+
 ## Moran's $I$ One More Time
+
+* Round 1 (Week 6): Moran's $I$ as "thermometer"
+* Round 2 (Today): Could an $I$ value this extreme occur due to random noise?
+
+## Example: Bolshevik Revolution $\rightarrow$ "Bipolar" World
+
+![](images/democracy.jpg){fig-align="center"}
+
+* Null hypothesis: no spatial effect of democratization/de-democratization on neighboring countries
+* If null hypothesis is true, and countries democratize/de-democratize independently... could this pattern still arise?
 
 # Spatial Regression {data-stack-name="Spatial Regression"}
 
 * (We made it! This is the last Spatial Data Science topic!)
 * (Nearly all extremely-fancy applied GIS models can be implemented via Spatial Regression!)
+
+## Motivation: When Does Non-Spatial Regression "Work"?
+
+$$
+Y_i = \beta_0 + \beta_1X_{i,1} + \beta_2X_{i,2} + \cdots + \beta_MX_{i,M} + \varepsilon_i
+$$
+
+* Importance of OLS regression: can give us the **Best Linear Unbiased Estimator (BLUE)**
+* This is only true **if** the Gauss-Markov assumptions hold---one of these is that the error terms are **uncorrelated**:
+
+  $$
+  \text{Cov}[\varepsilon_i, \varepsilon_j] = 0 \; \forall i \neq j
+  $$
+
+## Spatial Autocorrelation in Residuals
+
+* We have now seen several models / datasets where effect of some variable $X$ (say, population) on another variable $Y$ (say, disease count) is **spatial**! (Kind of the whole point of the class 😜)
+* So, to see when OLS will "work", vs. when you need to incorporate GIS, key step is **plotting the spatial distribution of regression residuals!**
+
+## Example: Italian Elections
+
+:::: {.columns}
+::: {.column width="50%"}
+
+![@ward_spatial_2018, Figure 2.3](images/italy_gdp.svg){fig-align="center" width="100%"}
+
+:::
+::: {.column width="50%"}
+
+![@ward_spatial_2018, Figure 2.4](images/italy_turnout.svg){fig-align="center" width="100%"}
+
+:::
+::::
+
+## Will OLS "Work" Here? {.smaller}
+
+* Can we use OLS to derive the BLUE of the effect of GDP on voting?
+
+:::: {.columns}
+::: {.column width="48%"}
+
+<center>
+Plain OLS
+</center>
+
+| $N = 477$ | $\widehat{\beta}$ | SE | $t$ |
+| - | - | - | - |
+| Intercept | 35.30 | 2.21 | 15.96 |
+| Log GDP per cap | 13.46 | 0.65 | 20.84 |
+
+Moran's $I$ for residuals = **0.47**(!)
+
+:::
+::: {.column width="4%"}
+
+&nbsp;
+
+:::
+::: {.column width="48%"}
+
+<center>
+Spatial Regression
+</center>
+
+| $N = 477$ | $\widehat{\beta}$ | SE | $t$ |
+| - | - | - | - |
+| Intercept | 4.70 | 1.66 | 2.80 |
+| Log GDP per cap | 1.77 | 0.48 | 3.66 |
+| $\rho$ | 0.87 | 0.02 | 36.7 |
+
+:::
+::::
+
+## What Does it Mean that "Spatial Effect" is Significant?
+
+![@ward_spatial_2018, Figure 2.5](images/italy_effect.svg){fig-align="center" width="100%"}
 
 ## Case 1: No Residual Spatial Autocorrelation
 
@@ -124,9 +225,17 @@ library(leaflet) |> suppressPackageStartupMessages()
 
 * GIS, but... only for "fixing" your regression
 
+$$
+Y_i = \underbrace{\mu_i}_{\text{Non-spatial model}} + \underbrace{\frac{1}{w_{i,cdot}}\sum_{j \neq i}(Y_j - \mu_j)}_{\text{Spatial Autocorrelation}} + \varepsilon_i
+$$
+
 ## Case 3: Simultaneous Autoregressive Model (SAR)
 
-* The main event! Here we are **explicitly** modeling "spatially lagged" versions of our covariates $X$!
+* The main event! Here we are **explicitly** modeling "spatially lagged" versions of our dependent variable $Y$!
+
+$$
+Y = \mathbf{X}\beta + \rho \underbrace{\mathbf{W}Y}_{\mathclap{\text{Spatially-lagged }Y}} + \boldsymbol\varepsilon
+$$
 
 ## References
 

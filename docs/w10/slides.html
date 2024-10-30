@@ -99,6 +99,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -465,8 +466,12 @@ Jeff Jacobs
 </section>
 
 <section>
-<section id="aggregating-point-processes" class="title-slide slide level1 center" data-stack-name="Points → Areas">
-<h1>Aggregating Point Processes</h1>
+<section id="points-rightarrow-areas" class="title-slide slide level1 center" data-stack-name="Points → Areas">
+<h1>Points <span class="math inline">\(\rightarrow\)</span> Areas</h1>
+
+</section>
+<section id="aggregating-point-processes" class="slide level2">
+<h2>Aggregating Point Processes</h2>
 <ul>
 <li>Recall the <strong>two</strong> “stages” of our Poisson-based point processes
 <ul>
@@ -477,7 +482,7 @@ Jeff Jacobs
 <li>So… why is it still helpful for you to have sat through those lectures on Point Processes? Two reasons…</li>
 </ul>
 </section>
-<section id="areal-patterns-aggregated-point-patterns" class="slide level2">
+<section id="areal-patterns-aggregated-point-patterns" class="slide level2 title-09">
 <h2>(1) Areal Patterns = Aggregated Point Patterns</h2>
 <ul>
 <li>One application, mentioned last week: <strong>areal-weighted interpolation</strong> using actual <strong>models</strong> of how the points are distributed within the area!
@@ -488,7 +493,7 @@ Jeff Jacobs
 </ul></li>
 </ul>
 </section>
-<section id="spatial-scan-statistics" class="slide level2">
+<section id="spatial-scan-statistics" class="slide level2 smaller">
 <h2>(2) Spatial Scan Statistics</h2>
 <ul>
 <li>Areal regions often the result of <strong>artificial</strong> / “arbitrary” human divisions
@@ -502,7 +507,7 @@ Jeff Jacobs
 <section id="hierarchical-bayesian-smoothing" class="slide level2">
 <h2>(3) Hierarchical Bayesian Smoothing</h2>
 <ul>
-<li>Here, the issue might just be <strong>not enough data</strong> for some areas, while we have an <strong>abundance</strong> of data in nearby areas…</li>
+<li>The issue might just be <strong>not enough data</strong> for some areas, while we have an <strong>abundance</strong> of data in nearby areas…</li>
 </ul>
 
 <img data-src="images/bayes_smoothing.png" class="r-stretch quarto-figure-center"><p class="caption">From Kramer (2023), <a href="https://mkram01.github.io/EPI563-SpatialEPI/disease-mapping-iii-introduction-to-fully-bayesian-mapping.html" target="_blank"><em>Spatial Epidemiology</em></a></p></section></section>
@@ -511,8 +516,37 @@ Jeff Jacobs
 <h1>Autocorrelation on Networks</h1>
 
 </section>
+<section id="reminder-weight-matrix-defines-neighbors" class="slide level2">
+<h2>Reminder: Weight Matrix Defines “Neighbors”</h2>
+
+<img data-src="images/canada_dist.gif" class="r-stretch quarto-figure-center"><p class="caption">From <a href="http://www.canadianrockies.net/maps/" target="_blank">Canadian Rockies Exploration Guide</a></p></section>
+<section id="choices-available-in-spdep" class="slide level2">
+<h2>Choices Available in <code>spdep</code></h2>
+<ul>
+<li><span class="math inline">\(w_{ij} = 1\)</span> if <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> “overlap”
+<ul>
+<li>Rook: Overlap is 1 or 2-dimensional</li>
+<li>Queen: Overlap is 0, 1, or 2-dimensional</li>
+</ul></li>
+<li><span class="math inline">\(w_{ij} = \frac{1}{\text{dist}(i, j)}\)</span></li>
+<li><span class="math inline">\(w_{ij} = 1\)</span> if <span class="math inline">\(dist(i, j) &lt; \overline{D}\)</span></li>
+<li><span class="math inline">\(w_{ij} = 1\)</span> for <span class="math inline">\(K\)</span> nearest neighbors</li>
+</ul>
+</section>
 <section id="morans-i-one-more-time" class="slide level2">
 <h2>Moran’s <span class="math inline">\(I\)</span> One More Time</h2>
+<ul>
+<li>Round 1 (Week 6): Moran’s <span class="math inline">\(I\)</span> as “thermometer”</li>
+<li>Round 2 (Today): Could an <span class="math inline">\(I\)</span> value this extreme occur due to random noise?</li>
+</ul>
+</section>
+<section id="example-bolshevik-revolution-rightarrow-bipolar-world" class="slide level2">
+<h2>Example: Bolshevik Revolution <span class="math inline">\(\rightarrow\)</span> “Bipolar” World</h2>
+
+<img data-src="images/democracy.jpg" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>Null hypothesis: no spatial effect of democratization/de-democratization on neighboring countries</li>
+<li>If null hypothesis is true, and countries democratize/de-democratize independently… could this pattern still arise?</li>
+</ul>
 </section></section>
 <section>
 <section id="spatial-regression" class="title-slide slide level1 center" data-stack-name="Spatial Regression">
@@ -522,6 +556,122 @@ Jeff Jacobs
 <li>(Nearly all extremely-fancy applied GIS models can be implemented via Spatial Regression!)</li>
 </ul>
 </section>
+<section id="motivation-when-does-non-spatial-regression-work" class="slide level2">
+<h2>Motivation: When Does Non-Spatial Regression “Work”?</h2>
+<p><span class="math display">\[
+Y_i = \beta_0 + \beta_1X_{i,1} + \beta_2X_{i,2} + \cdots + \beta_MX_{i,M} + \varepsilon_i
+\]</span></p>
+<ul>
+<li><p>Importance of OLS regression: can give us the <strong>Best Linear Unbiased Estimator (BLUE)</strong></p></li>
+<li><p>This is only true <strong>if</strong> the Gauss-Markov assumptions hold—one of these is that the error terms are <strong>uncorrelated</strong>:</p>
+<p><span class="math display">\[
+\text{Cov}[\varepsilon_i, \varepsilon_j] = 0 \; \forall i \neq j
+\]</span></p></li>
+</ul>
+</section>
+<section id="spatial-autocorrelation-in-residuals" class="slide level2">
+<h2>Spatial Autocorrelation in Residuals</h2>
+<ul>
+<li>We have now seen several models / datasets where effect of some variable <span class="math inline">\(X\)</span> (say, population) on another variable <span class="math inline">\(Y\)</span> (say, disease count) is <strong>spatial</strong>! (Kind of the whole point of the class 😜)</li>
+<li>So, to see when OLS will “work”, vs.&nbsp;when you need to incorporate GIS, key step is <strong>plotting the spatial distribution of regression residuals!</strong></li>
+</ul>
+</section>
+<section id="example-italian-elections" class="slide level2">
+<h2>Example: Italian Elections</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/italy_gdp.svg" style="width:100.0%"></p>
+<figcaption><span class="citation" data-cites="ward_spatial_2018">Ward and Gleditsch (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>, Figure 2.3</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/italy_turnout.svg" style="width:100.0%"></p>
+<figcaption><span class="citation" data-cites="ward_spatial_2018">Ward and Gleditsch (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>, Figure 2.4</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="will-ols-work-here" class="slide level2 smaller">
+<h2>Will OLS “Work” Here?</h2>
+<ul>
+<li>Can we use OLS to derive the BLUE of the effect of GDP on voting?</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:48%;">
+<center>
+Plain OLS
+</center>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(N = 477\)</span></th>
+<th><span class="math inline">\(\widehat{\beta}\)</span></th>
+<th>SE</th>
+<th><span class="math inline">\(t\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Intercept</td>
+<td>35.30</td>
+<td>2.21</td>
+<td>15.96</td>
+</tr>
+<tr class="even">
+<td>Log GDP per cap</td>
+<td>13.46</td>
+<td>0.65</td>
+<td>20.84</td>
+</tr>
+</tbody>
+</table>
+<p>Moran’s <span class="math inline">\(I\)</span> for residuals = <strong>0.47</strong>(!)</p>
+</div><div class="column" style="width:4%;">
+<p>&nbsp;</p>
+</div><div class="column" style="width:48%;">
+<center>
+Spatial Regression
+</center>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(N = 477\)</span></th>
+<th><span class="math inline">\(\widehat{\beta}\)</span></th>
+<th>SE</th>
+<th><span class="math inline">\(t\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Intercept</td>
+<td>4.70</td>
+<td>1.66</td>
+<td>2.80</td>
+</tr>
+<tr class="even">
+<td>Log GDP per cap</td>
+<td>1.77</td>
+<td>0.48</td>
+<td>3.66</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\rho\)</span></td>
+<td>0.87</td>
+<td>0.02</td>
+<td>36.7</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</section>
+<section id="what-does-it-mean-that-spatial-effect-is-significant" class="slide level2">
+<h2>What Does it Mean that “Spatial Effect” is Significant?</h2>
+
+<img data-src="images/italy_effect.svg" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption"><span class="citation" data-cites="ward_spatial_2018">Ward and Gleditsch (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>, Figure 2.5</p></section>
 <section id="case-1-no-residual-spatial-autocorrelation" class="slide level2">
 <h2>Case 1: No Residual Spatial Autocorrelation</h2>
 <ul>
@@ -534,17 +684,25 @@ Jeff Jacobs
 <ul>
 <li>GIS, but… only for “fixing” your regression</li>
 </ul>
+<p><span class="math display">\[
+Y_i = \underbrace{\mu_i}_{\text{Non-spatial model}} + \underbrace{\frac{1}{w_{i,cdot}}\sum_{j \neq i}(Y_j - \mu_j)}_{\text{Spatial Autocorrelation}} + \varepsilon_i
+\]</span></p>
 </section>
 <section id="case-3-simultaneous-autoregressive-model-sar" class="slide level2">
 <h2>Case 3: Simultaneous Autoregressive Model (SAR)</h2>
 <ul>
-<li>The main event! Here we are <strong>explicitly</strong> modeling “spatially lagged” versions of our covariates <span class="math inline">\(X\)</span>!</li>
+<li>The main event! Here we are <strong>explicitly</strong> modeling “spatially lagged” versions of our dependent variable <span class="math inline">\(Y\)</span>!</li>
 </ul>
+<p><span class="math display">\[
+Y = \mathbf{X}\beta + \rho \underbrace{\mathbf{W}Y}_{\mathclap{\text{Spatially-lagged }Y}} + \boldsymbol\varepsilon
+\]</span></p>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
-<div id="refs" role="list">
-
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-ward_spatial_2018" class="csl-entry" role="listitem">
+Ward, Michael D., and Kristian Skrede Gleditsch. 2018. <em>Spatial <span>Regression Models</span></em>. SAGE Publications.
+</div>
 </div>
 
 <div class="quarto-auto-generated-content">
