@@ -24,5 +24,5 @@ format:
 
 # Midterm
 
-* The midterm will be available on Posit.Cloud from **3:30pm to 6:30pm** on **Wednesday, November 6th, 2024**.
+* The midterm will be available on Posit.Cloud from **6:30pm to 9:30pm** on **Wednesday, November 6th, 2024**.
 
