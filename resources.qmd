@@ -10,6 +10,7 @@ format:
 
 ::: {.callout-note title="Update Log" collapse="true"}
 
+* 2024 Nov 4: Added @baddeley_spatial_2015 to the [GIS with R](#gis-with-r) section
 * 2024 Sep 26: Added [collection of links to R and Python libraries](#libraries)
 * 2024 Sep 18: Added [*Geocomputation with Python*](https://py.geocompx.org/){target='_blank'}, the Python version of @lovelace_geocomputation_2024
 
@@ -25,6 +26,8 @@ All of the following textbooks have been chosen specifically because they are av
 
 The course's R material is drawn mainly from the following books, where I've tried to put them in order from most-used to least-used (in terms of the slides and assignments!):
 
+* **@baddeley_spatial_2015**: [*Spatial Point Patterns: Methodology and Applications with R*](https://spatstat.org/){target='_blank'} \[[PDF](https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&dl=1){target='_blank'}\]
+  * This is the "companion" book for the `spatstat` library, but also ends up having ~50% of the course material in it! Everything you would ever want to know about modeling point processes.
 * **@moraga_spatial_2024**: [*Spatial Statistics for Data Science: Theory and Practice with R*](https://www.paulamoraga.com/book-spatial/){target='_blank'}
   * This book, along with the video tutorial from Sherrie Xie linked below, will get you up-to-speed on the main topics in this course!
 * **@lovelace_geocomputation_2024**: *[Geocomputation with R](https://r.geocompx.org/preface){target='_blank'}*
