@@ -49,9 +49,109 @@ format:
 
 :::
 
-# The Most Immediately-Relevant Topics for Final Projects!
+# Midterm Post-Mortem {data-stack-name="Midterm Postmortem"}
 
+* **On the one hand**: You will be able to "complete" missed parts and receive credit for "completing" them!
+* **On the other hand**: You can also lean into **spatial regression** and use bonus HW to make up missed midterm points instead!
+
+## Choose Your Own Adventure
+
+* **Bonus HW5A**: Re-doing Midterm Q3-Q5 (with new dataset)
+  * You've incurred "fixed cost" of understanding Q1-Q3...
+  * $\implies$ **Build on** this fixed cost and complete \~Q4 + \~Q5 **without time limit**!
+* **Bonus HW5B**: Spatial Regression
+  * Your final project uses **areal** rather than point data...
+  * $\implies$ To prepare, do HW5B to learn/practice **spatial regression** and **earn bonus points** for doing so!
+
+# Final Project Details {data-stack-name="Final Project"}
+
+* **Presentations**: 6:30-9pm, Wed, **4 December**, 2024
+* **Reports**: Due 5:59pm, Fri, **13 December**, 2024
+
+## Presentation Setup
+
+* Each of your desks becomes a **"table"** at a GIS conference!
+* Everyone can go around and ask others about their projects 😻
+* Once I have grilled you on yours (~2-5mins), you are free to leave
+* But, **FOOD** $\implies$ you can also stay!
+
+## Report Setup
+
+* [**GitHub repository**](https://github.com/) (for your portfolio!)
+  * GH Pages site: `your_username.github.io/gis_project`
+* ...What do you put in that GitHub repository?
+* [**Quarto Manuscript**](https://quarto.org/docs/manuscripts/)
+* What do you put in the Quarto manuscript?
+* **Writeup** + **Visualizations** + **Code**, interspersed!
+  * "Literate Programming" $\implies$ **Reproducible Results!**
+
+# Immediately-Relevant Tools for Final Projects! {data-stack-name="Tools"}
+
+* Research Methodology (**Hypotheses**)
+* Visualizing Spatial Data
+* Weighted Connection Matrices $\mathbf{W}$
+* Remote-Sensed / Raster Data
 * Data Anonymization / Synthetic Datasets
+
+## Research Methodology: Hypotheses
+
+<center>
+**Social Science (McCourt):**
+
+![](images/explanatory.svg){width="40%"}
+</center>
+
+<center>
+**Machine Learning (DSAN):**
+
+![](images/predictive.svg){width="40%"}
+</center>
+
+## (Secretly My Opportunity to do More Spatial Regression!)
+
+* What **explains** previously-observed instances of **separatist insurgencies**?
+* Can we **predict** separatist insurgencies?
+* One (spatial) idea: **how far away** are [centers of power] from [regions of countervailing power]?
+* $X$ = Distance from capital, $Y$ = Insurgency
+* Unit of observation: Regions? Insurgent uprisings? Countries?
+
+## Operationalizing {.crunch-ul}
+
+* The variables in previous slide are **conceptual**
+* Operationalizing = "Turning into measurable quantities"
+* $X$ = MeanDistance(Capital, Insurgent Region), $Y = \mathbf{1}[\text{Insurgency}]$
+* Alternative:
+
+$$
+Y = \begin{cases}
+2 &\text{if Successful Insurgency} \\
+1 &\text{if Failed Insurgency} \\
+0 &\text{if No Insurgency}
+\end{cases}
+$$
+
+## Connection Matrices
+
+* `spdep`
+* Neighbors if **Centroids** are close
+* Neighbors if **Capitals** are close
+* 🤔
+
+## Visualizing Spatial Data
+
+* My recommendation for final presentations: **Leaflet**
+
+## Remote-Sensed / Raster Data
+
+* You've seen (to some extent) `terra`
+* [`stars`](https://r-spatial.github.io/stars/): Same group behind `sf`
+* Google solar panel data
+* `.tif` files: Dynamically loaded
+
+## Anonymization / Synthetic Datasets
+
+* Differential privacy
+* Used by the US Census(!) Since 2020
 
 ## References
 

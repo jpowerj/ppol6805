@@ -1,15 +1,85 @@
 [
   {
+    "objectID": "w12/slides.html#choose-your-own-adventure",
+    "href": "w12/slides.html#choose-your-own-adventure",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Choose Your Own Adventure",
+    "text": "Choose Your Own Adventure\n\nBonus HW5A: Re-doing Midterm Q3-Q5 (with new dataset)\n\nYou’ve incurred “fixed cost” of understanding Q1-Q3…\n\\(\\implies\\) Build on this fixed cost and complete ~Q4 + ~Q5 without time limit!\n\nBonus HW5B: Spatial Regression\n\nYour final project uses areal rather than point data…\n\\(\\implies\\) To prepare, do HW5B to learn/practice spatial regression and earn bonus points for doing so!"
+  },
+  {
+    "objectID": "w12/slides.html#presentation-setup",
+    "href": "w12/slides.html#presentation-setup",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Presentation Setup",
+    "text": "Presentation Setup\n\nEach of your desks becomes a “table” at a GIS conference!\nEveryone can go around and ask others about their projects 😻\nOnce I have grilled you on yours (~2-5mins), you are free to leave\nBut, FOOD \\(\\implies\\) you can also stay!"
+  },
+  {
+    "objectID": "w12/slides.html#report-setup",
+    "href": "w12/slides.html#report-setup",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Report Setup",
+    "text": "Report Setup\n\nGitHub repository (for your portfolio!)\n\nGH Pages site: your_username.github.io/gis_project\n\n…What do you put in that GitHub repository?\nQuarto Manuscript\nWhat do you put in the Quarto manuscript?\nWriteup + Visualizations + Code, interspersed!\n\n“Literate Programming” \\(\\implies\\) Reproducible Results!"
+  },
+  {
+    "objectID": "w12/slides.html#research-methodology-hypotheses",
+    "href": "w12/slides.html#research-methodology-hypotheses",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Research Methodology: Hypotheses",
+    "text": "Research Methodology: Hypotheses\n\nSocial Science (McCourt):\n\n\n\nMachine Learning (DSAN):"
+  },
+  {
+    "objectID": "w12/slides.html#secretly-my-opportunity-to-do-more-spatial-regression",
+    "href": "w12/slides.html#secretly-my-opportunity-to-do-more-spatial-regression",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "(Secretly My Opportunity to do More Spatial Regression!)",
+    "text": "(Secretly My Opportunity to do More Spatial Regression!)\n\nWhat explains previously-observed instances of separatist insurgencies?\nCan we predict separatist insurgencies?\nOne (spatial) idea: how far away are [centers of power] from [regions of countervailing power]?\n\\(X\\) = Distance from capital, \\(Y\\) = Insurgency\nUnit of observation: Regions? Insurgent uprisings? Countries?"
+  },
+  {
+    "objectID": "w12/slides.html#operationalizing",
+    "href": "w12/slides.html#operationalizing",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Operationalizing",
+    "text": "Operationalizing\n\nThe variables in previous slide are conceptual\nOperationalizing = “Turning into measurable quantities”\n\\(X\\) = MeanDistance(Capital, Insurgent Region), \\(Y = \\mathbf{1}[\\text{Insurgency}]\\)\nAlternative:\n\n\\[\nY = \\begin{cases}\n2 &\\text{if Successful Insurgency} \\\\\n1 &\\text{if Failed Insurgency} \\\\\n0 &\\text{if No Insurgency}\n\\end{cases}\n\\]"
+  },
+  {
+    "objectID": "w12/slides.html#connection-matrices",
+    "href": "w12/slides.html#connection-matrices",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Connection Matrices",
+    "text": "Connection Matrices\n\nspdep\nNeighbors if Centroids are close\nNeighbors if Capitals are close\n🤔"
+  },
+  {
+    "objectID": "w12/slides.html#visualizing-spatial-data",
+    "href": "w12/slides.html#visualizing-spatial-data",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Visualizing Spatial Data",
+    "text": "Visualizing Spatial Data\n\nMy recommendation for final presentations: Leaflet"
+  },
+  {
+    "objectID": "w12/slides.html#remote-sensed-raster-data",
+    "href": "w12/slides.html#remote-sensed-raster-data",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Remote-Sensed / Raster Data",
+    "text": "Remote-Sensed / Raster Data\n\nYou’ve seen (to some extent) terra\nstars: Same group behind sf\nGoogle solar panel data\n.tif files: Dynamically loaded"
+  },
+  {
+    "objectID": "w12/slides.html#anonymization-synthetic-datasets",
+    "href": "w12/slides.html#anonymization-synthetic-datasets",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Anonymization / Synthetic Datasets",
+    "text": "Anonymization / Synthetic Datasets\n\nDifferential privacy\nUsed by the US Census(!) Since 2020"
+  },
+  {
     "objectID": "w12/slides.html#references",
     "href": "w12/slides.html#references",
-    "title": "Week 12: Static and Interactive Mapping",
+    "title": "Week 12: Tools for Final Projects",
     "section": "References",
-    "text": "References\n\n\n\n\n\n\nPPOL 6805 Week 12: Mapping Libraries"
+    "text": "References\n\n\n\n\n\n\nPPOL 6805 Week 12: Tools for Final Projects"
   },
   {
     "objectID": "w12/index.html",
     "href": "w12/index.html",
-    "title": "Week 12: Static and Interactive Mapping",
+    "title": "Week 12: Tools for Final Projects",
     "section": "",
     "text": "Open slides in new tab →",
     "crumbs": [
@@ -17,9 +87,109 @@
     ]
   },
   {
+    "objectID": "w12/index.html#choose-your-own-adventure",
+    "href": "w12/index.html#choose-your-own-adventure",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Choose Your Own Adventure",
+    "text": "Choose Your Own Adventure\n\nBonus HW5A: Re-doing Midterm Q3-Q5 (with new dataset)\n\nYou’ve incurred “fixed cost” of understanding Q1-Q3…\n\\(\\implies\\) Build on this fixed cost and complete ~Q4 + ~Q5 without time limit!\n\nBonus HW5B: Spatial Regression\n\nYour final project uses areal rather than point data…\n\\(\\implies\\) To prepare, do HW5B to learn/practice spatial regression and earn bonus points for doing so!",
+    "crumbs": [
+      "Week 12: Nov 13"
+    ]
+  },
+  {
+    "objectID": "w12/index.html#presentation-setup",
+    "href": "w12/index.html#presentation-setup",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Presentation Setup",
+    "text": "Presentation Setup\n\nEach of your desks becomes a “table” at a GIS conference!\nEveryone can go around and ask others about their projects 😻\nOnce I have grilled you on yours (~2-5mins), you are free to leave\nBut, FOOD \\(\\implies\\) you can also stay!",
+    "crumbs": [
+      "Week 12: Nov 13"
+    ]
+  },
+  {
+    "objectID": "w12/index.html#report-setup",
+    "href": "w12/index.html#report-setup",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Report Setup",
+    "text": "Report Setup\n\nGitHub repository (for your portfolio!)\n\nGH Pages site: your_username.github.io/gis_project\n\n…What do you put in that GitHub repository?\nQuarto Manuscript\nWhat do you put in the Quarto manuscript?\nWriteup + Visualizations + Code, interspersed!\n\n“Literate Programming” \\(\\implies\\) Reproducible Results!",
+    "crumbs": [
+      "Week 12: Nov 13"
+    ]
+  },
+  {
+    "objectID": "w12/index.html#research-methodology-hypotheses",
+    "href": "w12/index.html#research-methodology-hypotheses",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Research Methodology: Hypotheses",
+    "text": "Research Methodology: Hypotheses\n\nSocial Science (McCourt):\n\n\n\nMachine Learning (DSAN):",
+    "crumbs": [
+      "Week 12: Nov 13"
+    ]
+  },
+  {
+    "objectID": "w12/index.html#secretly-my-opportunity-to-do-more-spatial-regression",
+    "href": "w12/index.html#secretly-my-opportunity-to-do-more-spatial-regression",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "(Secretly My Opportunity to do More Spatial Regression!)",
+    "text": "(Secretly My Opportunity to do More Spatial Regression!)\n\nWhat explains previously-observed instances of separatist insurgencies?\nCan we predict separatist insurgencies?\nOne (spatial) idea: how far away are [centers of power] from [regions of countervailing power]?\n\\(X\\) = Distance from capital, \\(Y\\) = Insurgency\nUnit of observation: Regions? Insurgent uprisings? Countries?",
+    "crumbs": [
+      "Week 12: Nov 13"
+    ]
+  },
+  {
+    "objectID": "w12/index.html#operationalizing",
+    "href": "w12/index.html#operationalizing",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Operationalizing",
+    "text": "Operationalizing\n\nThe variables in previous slide are conceptual\nOperationalizing = “Turning into measurable quantities”\n\\(X\\) = MeanDistance(Capital, Insurgent Region), \\(Y = \\mathbf{1}[\\text{Insurgency}]\\)\nAlternative:\n\n\\[\nY = \\begin{cases}\n2 &\\text{if Successful Insurgency} \\\\\n1 &\\text{if Failed Insurgency} \\\\\n0 &\\text{if No Insurgency}\n\\end{cases}\n\\]",
+    "crumbs": [
+      "Week 12: Nov 13"
+    ]
+  },
+  {
+    "objectID": "w12/index.html#connection-matrices",
+    "href": "w12/index.html#connection-matrices",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Connection Matrices",
+    "text": "Connection Matrices\n\nspdep\nNeighbors if Centroids are close\nNeighbors if Capitals are close\n🤔",
+    "crumbs": [
+      "Week 12: Nov 13"
+    ]
+  },
+  {
+    "objectID": "w12/index.html#visualizing-spatial-data",
+    "href": "w12/index.html#visualizing-spatial-data",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Visualizing Spatial Data",
+    "text": "Visualizing Spatial Data\n\nMy recommendation for final presentations: Leaflet",
+    "crumbs": [
+      "Week 12: Nov 13"
+    ]
+  },
+  {
+    "objectID": "w12/index.html#remote-sensed-raster-data",
+    "href": "w12/index.html#remote-sensed-raster-data",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Remote-Sensed / Raster Data",
+    "text": "Remote-Sensed / Raster Data\n\nYou’ve seen (to some extent) terra\nstars: Same group behind sf\nGoogle solar panel data\n.tif files: Dynamically loaded",
+    "crumbs": [
+      "Week 12: Nov 13"
+    ]
+  },
+  {
+    "objectID": "w12/index.html#anonymization-synthetic-datasets",
+    "href": "w12/index.html#anonymization-synthetic-datasets",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Anonymization / Synthetic Datasets",
+    "text": "Anonymization / Synthetic Datasets\n\nDifferential privacy\nUsed by the US Census(!) Since 2020",
+    "crumbs": [
+      "Week 12: Nov 13"
+    ]
+  },
+  {
     "objectID": "w12/index.html#references",
     "href": "w12/index.html#references",
-    "title": "Week 12: Static and Interactive Mapping",
+    "title": "Week 12: Tools for Final Projects",
     "section": "References",
     "text": "References",
     "crumbs": [
@@ -71,7 +241,7 @@
     "href": "syllabus.html#course-topics-calendar",
     "title": "PPOL 6805 / DSAN 6750",
     "section": "Course Topics / Calendar",
-    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, please let me know.\n\n\n\n\n\n\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Concepts\n1\nAug 28\nIntroduction to GIS\n\n\n\n2\nSep 4\nHow Do Maps Work?\nHW1 Release\n\n\nUnit 2: Geospatial Operations\n3\nSep 11\nUnary Operations\n[Deliverable] HW1: GIS Concepts\n\n\n\n\nSep 13 (Fri)\nHW2 Release\n\n\n\n4\nSep 18\nBinary Operations\n\n\n\n\nSep 20 (Fri), 5:59pm\n[Deliverable] HW2: Unary Operations\n\n\nUnit 3: Spatial Data Science I: Foundations\n5\nSep 25\nSpatial Data Science!\nHW3 Release\n\n\n\n6\nOct 2\nRandom Fields and Spatial Autocorrelation\nHW4 Release\n\n\n\n\nOct 4 (Fri), 5:59pm\n[Deliverable] HW3: Binary Operations and Spatial Joins\n\n\nUnit 4: Spatial Data Science II: Methods\n7\nOct 9\nPoint Processes, Clustering, and Regularity\n\n\n\n8\nOct 16\nNull Models and Marked Point Processes\n\n\n\n9\nOct 23\nEvaluating Spatial Hypotheses I: Point Data\n\n\n\n10\nOct 30\nEvaluating Spatial Hypotheses II: Areal Data\n[Deliverable, 11:59pm] HW4: Autocorrelation, Clustering, and Point Processes\n\n\n\n\nNov 1 (Fri)\nMidterm Practice Problems Release\n\n\n\n11\nNov 6\nIn-Class Midterm\n\n\nUnit 5: Mapping and Applications\n12\nNov 13\nStatic and Interactive Mapping\n\n\n\n13\nNov 20\nApplications: Urban Planning\n\n\n\n\nNov 27\nNo Class (Fall Break)\n\n\n\n14\nDec 4\nApplications: Climate Change and Ecological Data\n\n\n\n15\nDec 11\nFinal Presentations\n\n\n\n\nDec 13 (Friday), 5:59pm\n[Deliverable] Final Project",
+    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, please let me know.\n\n\n\n\n\n\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Concepts\n1\nAug 28\nIntroduction to GIS\n\n\n\n2\nSep 4\nHow Do Maps Work?\nHW1 Release\n\n\nUnit 2: Geospatial Operations\n3\nSep 11\nUnary Operations\n[Deliverable] HW1: GIS Concepts\n\n\n\n\nSep 13 (Fri)\nHW2 Release\n\n\n\n4\nSep 18\nBinary Operations\n\n\n\n\nSep 20 (Fri), 5:59pm\n[Deliverable] HW2: Unary Operations\n\n\nUnit 3: Spatial Data Science I: Foundations\n5\nSep 25\nSpatial Data Science!\nHW3 Release\n\n\n\n6\nOct 2\nRandom Fields and Spatial Autocorrelation\nHW4 Release\n\n\n\n\nOct 4 (Fri), 5:59pm\n[Deliverable] HW3: Binary Operations and Spatial Joins\n\n\nUnit 4: Spatial Data Science II: Methods\n7\nOct 9\nPoint Processes, Clustering, and Regularity\n\n\n\n8\nOct 16\nNull Models and Marked Point Processes\n\n\n\n9\nOct 23\nEvaluating Spatial Hypotheses I: Point Data\n\n\n\n10\nOct 30\nEvaluating Spatial Hypotheses II: Areal Data\n[Deliverable, 11:59pm] HW4: Autocorrelation, Clustering, and Point Processes\n\n\n\n\nNov 1 (Fri)\nMidterm Practice Problems Release\n\n\n\n11\nNov 6\nIn-Class Midterm\n\n\nUnit 5: Mapping and Applications\n12\nNov 13\nTools for Final Projects\n\n\n\n13\nNov 20\nApplications: Urban Planning\n\n\n\n\nNov 27\nNo Class (Fall Break)\n\n\n\n14\nDec 4\nApplications: Climate Change and Ecological Data\n\n\n\n15\nDec 11\nFinal Presentations\n\n\n\n\nDec 13 (Friday), 5:59pm\n[Deliverable] Final Project",
     "crumbs": [
       "Syllabus"
     ]
@@ -1191,14 +1361,14 @@
     "href": "w05/slides.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (34.35488 -1.3186)\n97.735573\n\n\nPOINT (39.88316 11.32601)\n82.247312\n\n\nPOINT (32.19073 -15.81004)\n7.005327\n\n\nPOINT (-5.334084 30.26281)\n79.544161\n\n\nPOINT (10.6449 5.692709)\n40.779358\n\n\nPOINT (42.39907 0.1108377)\n65.120713\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n44\nTZA\nTanzania\nMULTIPOLYGON (((39.49648 -6…\n\n\n52\nSSD\nSouth Sudan\nMULTIPOLYGON (((33.97607 4….\n\n\n58\nSOM\nSomalia\nMULTIPOLYGON (((41.53271 -1…\n\n\n103\nMOZ\nMozambique\nMULTIPOLYGON (((31.28789 -2…"
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (36.75732 2.445738)\n26.046663\n\n\nPOINT (21.35785 -1.863695)\n71.238264\n\n\nPOINT (27.16849 25.25473)\n92.820181\n\n\nPOINT (-3.069629 8.798227)\n2.254003\n\n\nPOINT (3.248394 24.06513)\n97.812956\n\n\nPOINT (8.131082 26.01343)\n3.260112\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n38\nTUN\nTunisia\nMULTIPOLYGON (((11.50459 33…\n\n\n91\nNGA\nNigeria\nMULTIPOLYGON (((7.300781 4….\n\n\n102\nNAM\nNamibia\nMULTIPOLYGON (((23.38066 -1…\n\n\n118\nMDG\nMadagascar\nMULTIPOLYGON (((49.53828 -1…"
   },
   {
     "objectID": "w05/slides.html#our-first-real-spatial-join-st_join",
     "href": "w05/slides.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n44\nTZA\nTanzania\n97.735573\nMULTIPOLYGON (((39.49648 -6…\n\n\n52\nSSD\nSouth Sudan\n92.604641\nMULTIPOLYGON (((33.97607 4….\n\n\n58\nSOM\nSomalia\n65.120713\nMULTIPOLYGON (((41.53271 -1…\n\n\n103\nMOZ\nMozambique\n7.005327\nMULTIPOLYGON (((31.28789 -2…\n\n\n104\nMAR\nMorocco\n79.544161\nMULTIPOLYGON (((-2.219629 3…\n\n\n112\nMRT\nMauritania\n27.526909\nMULTIPOLYGON (((-16.37334 1…"
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n38\nTUN\nTunisia\n36.33485\nMULTIPOLYGON (((11.50459 33…\n\n\n91\nNGA\nNigeria\n42.19338\nMULTIPOLYGON (((7.300781 4….\n\n\n102\nNAM\nNamibia\n14.98781\nMULTIPOLYGON (((23.38066 -1…\n\n\n118\nMDG\nMadagascar\n13.59941\nMULTIPOLYGON (((49.53828 -1…\n\n\n133\nKEN\nKenya\n26.04666\nMULTIPOLYGON (((40.99443 -2…\n\n\n177\nEGY\nEgypt\n92.82018\nMULTIPOLYGON (((36.87139 21…"
   },
   {
     "objectID": "w05/slides.html#but-we-were-still-in-easy-mode",
@@ -1281,7 +1451,7 @@
     "href": "w05/index.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-10.18206 14.73462)\n49.548553\n\n\nPOINT (-0.9176572 17.45561)\n17.374557\n\n\nPOINT (37.8848 14.97081)\n98.343588\n\n\nPOINT (25.67567 -3.659563)\n6.825902\n\n\nPOINT (22.14977 1.928142)\n64.021110\n\n\nPOINT (36.92303 13.36163)\n47.860439\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n52\nSSD\nSouth Sudan\nMULTIPOLYGON (((33.97607 4….\n\n\n58\nSOM\nSomalia\nMULTIPOLYGON (((41.53271 -1…\n\n\n114\nMLI\nMali\nMULTIPOLYGON (((-11.3894 12…\n\n\n156\nGHA\nGhana\nMULTIPOLYGON (((-0.06860352…",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-14.78459 21.8602)\n9.566285\n\n\nPOINT (19.22184 -7.860099)\n76.046094\n\n\nPOINT (17.56247 19.14144)\n70.000416\n\n\nPOINT (3.869355 27.05118)\n11.345776\n\n\nPOINT (34.59731 7.619234)\n7.186874\n\n\nPOINT (23.00621 8.547459)\n69.730564\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n92\nNER\nNiger\nMULTIPOLYGON (((13.60635 13…\n\n\n103\nMOZ\nMozambique\nMULTIPOLYGON (((31.28789 -2…\n\n\n104\nMAR\nMorocco\nMULTIPOLYGON (((-2.219629 3…\n\n\n112\nMRT\nMauritania\nMULTIPOLYGON (((-16.37334 1…",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -1291,7 +1461,7 @@
     "href": "w05/index.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n52\nSSD\nSouth Sudan\n94.00240\nMULTIPOLYGON (((33.97607 4….\n\n\n58\nSOM\nSomalia\n66.37352\nMULTIPOLYGON (((41.53271 -1…\n\n\n114\nMLI\nMali\n49.54855\nMULTIPOLYGON (((-11.3894 12…\n\n\n114.1\nMLI\nMali\n17.37456\nMULTIPOLYGON (((-11.3894 12…\n\n\n156\nGHA\nGhana\n90.49906\nMULTIPOLYGON (((-0.06860352…\n\n\n172\nETH\nEthiopia\n47.86044\nMULTIPOLYGON (((35.26836 5….",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n92\nNER\nNiger\n79.456693\nMULTIPOLYGON (((13.60635 13…\n\n\n103\nMOZ\nMozambique\n52.658794\nMULTIPOLYGON (((31.28789 -2…\n\n\n104\nMAR\nMorocco\n9.566285\nMULTIPOLYGON (((-2.219629 3…\n\n\n112\nMRT\nMauritania\n43.462255\nMULTIPOLYGON (((-16.37334 1…\n\n\n172\nETH\nEthiopia\n7.186874\nMULTIPOLYGON (((35.26836 5….\n\n\n192\nCOD\nDemocratic Republic of the Congo\n76.046094\nMULTIPOLYGON (((30.75117 -8…",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -2815,7 +2985,7 @@
     "href": "index.html",
     "title": "PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science",
     "section": "",
-    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2024, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn Room 204. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 28\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 4\n\n\n\n\nWeek 3: Unary Operations\n\n\nSep 11\n\n\n\n\nWeek 4: Binary Operations\n\n\nSep 18\n\n\n\n\nWeek 5: Spatial Data Science!\n\n\nSep 25\n\n\n\n\nWeek 6: Random Fields and Spatial Autocorrelation\n\n\nOct 2\n\n\n\n\nWeek 7: Point Processes, Clustering, and Regularity\n\n\nOct 9\n\n\n\n\nWeek 8: Null Models and Marked Point Processes\n\n\nOct 16\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Point Data\n\n\nOct 23\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Areal Data\n\n\nOct 30\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 6\n\n\n\n\nWeek 12: Static and Interactive Mapping\n\n\nNov 13\n\n\n\n\n\nNo matching items",
+    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2024, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn Room 204. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 28\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 4\n\n\n\n\nWeek 3: Unary Operations\n\n\nSep 11\n\n\n\n\nWeek 4: Binary Operations\n\n\nSep 18\n\n\n\n\nWeek 5: Spatial Data Science!\n\n\nSep 25\n\n\n\n\nWeek 6: Random Fields and Spatial Autocorrelation\n\n\nOct 2\n\n\n\n\nWeek 7: Point Processes, Clustering, and Regularity\n\n\nOct 9\n\n\n\n\nWeek 8: Null Models and Marked Point Processes\n\n\nOct 16\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Point Data\n\n\nOct 23\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Areal Data\n\n\nOct 30\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 6\n\n\n\n\nWeek 12: Tools for Final Projects\n\n\nNov 13\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Home"
     ]

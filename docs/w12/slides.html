@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Jeff Jacobs">
-  <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 12: Static and Interactive Mapping</title>
+  <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 12: Tools for Final Projects</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -350,7 +350,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Week 12: Static and Interactive Mapping</h1>
+  <h1 class="title">Week 12: Tools for Final Projects</h1>
   <p class="subtitle"><em>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</em><br>Fall 2024</p>
 
 <div class="quarto-title-authors">
@@ -367,10 +367,138 @@ Jeff Jacobs
   <p class="date">Wednesday, November 13, 2024</p>
 </section>
 <section>
-<section id="the-most-immediately-relevant-topics-for-final-projects" class="title-slide slide level1 center">
-<h1>The Most Immediately-Relevant Topics for Final Projects!</h1>
+<section id="midterm-post-mortem" class="title-slide slide level1 center" data-stack-name="Midterm Postmortem">
+<h1>Midterm Post-Mortem</h1>
 <ul>
+<li><strong>On the one hand</strong>: You will be able to “complete” missed parts and receive credit for “completing” them!</li>
+<li><strong>On the other hand</strong>: You can also lean into <strong>spatial regression</strong> and use bonus HW to make up missed midterm points instead!</li>
+</ul>
+</section>
+<section id="choose-your-own-adventure" class="slide level2">
+<h2>Choose Your Own Adventure</h2>
+<ul>
+<li><strong>Bonus HW5A</strong>: Re-doing Midterm Q3-Q5 (with new dataset)
+<ul>
+<li>You’ve incurred “fixed cost” of understanding Q1-Q3…</li>
+<li><span class="math inline">\(\implies\)</span> <strong>Build on</strong> this fixed cost and complete ~Q4 + ~Q5 <strong>without time limit</strong>!</li>
+</ul></li>
+<li><strong>Bonus HW5B</strong>: Spatial Regression
+<ul>
+<li>Your final project uses <strong>areal</strong> rather than point data…</li>
+<li><span class="math inline">\(\implies\)</span> To prepare, do HW5B to learn/practice <strong>spatial regression</strong> and <strong>earn bonus points</strong> for doing so!</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="final-project-details" class="title-slide slide level1 center" data-stack-name="Final Project">
+<h1>Final Project Details</h1>
+<ul>
+<li><strong>Presentations</strong>: 6:30-9pm, Wed, <strong>4 December</strong>, 2024</li>
+<li><strong>Reports</strong>: Due 5:59pm, Fri, <strong>13 December</strong>, 2024</li>
+</ul>
+</section>
+<section id="presentation-setup" class="slide level2">
+<h2>Presentation Setup</h2>
+<ul>
+<li>Each of your desks becomes a <strong>“table”</strong> at a GIS conference!</li>
+<li>Everyone can go around and ask others about their projects 😻</li>
+<li>Once I have grilled you on yours (~2-5mins), you are free to leave</li>
+<li>But, <strong>FOOD</strong> <span class="math inline">\(\implies\)</span> you can also stay!</li>
+</ul>
+</section>
+<section id="report-setup" class="slide level2">
+<h2>Report Setup</h2>
+<ul>
+<li><a href="https://github.com/"><strong>GitHub repository</strong></a> (for your portfolio!)
+<ul>
+<li>GH Pages site: <code>your_username.github.io/gis_project</code></li>
+</ul></li>
+<li>…What do you put in that GitHub repository?</li>
+<li><a href="https://quarto.org/docs/manuscripts/"><strong>Quarto Manuscript</strong></a></li>
+<li>What do you put in the Quarto manuscript?</li>
+<li><strong>Writeup</strong> + <strong>Visualizations</strong> + <strong>Code</strong>, interspersed!
+<ul>
+<li>“Literate Programming” <span class="math inline">\(\implies\)</span> <strong>Reproducible Results!</strong></li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="immediately-relevant-tools-for-final-projects" class="title-slide slide level1 center" data-stack-name="Tools">
+<h1>Immediately-Relevant Tools for Final Projects!</h1>
+<ul>
+<li>Research Methodology (<strong>Hypotheses</strong>)</li>
+<li>Visualizing Spatial Data</li>
+<li>Weighted Connection Matrices <span class="math inline">\(\mathbf{W}\)</span></li>
+<li>Remote-Sensed / Raster Data</li>
 <li>Data Anonymization / Synthetic Datasets</li>
+</ul>
+</section>
+<section id="research-methodology-hypotheses" class="slide level2">
+<h2>Research Methodology: Hypotheses</h2>
+<center>
+<p><strong>Social Science (McCourt):</strong></p>
+<img data-src="images/explanatory.svg" style="width:40.0%">
+</center>
+<center>
+<p><strong>Machine Learning (DSAN):</strong></p>
+<img data-src="images/predictive.svg" style="width:40.0%">
+</center>
+</section>
+<section id="secretly-my-opportunity-to-do-more-spatial-regression" class="slide level2">
+<h2>(Secretly My Opportunity to do More Spatial Regression!)</h2>
+<ul>
+<li>What <strong>explains</strong> previously-observed instances of <strong>separatist insurgencies</strong>?</li>
+<li>Can we <strong>predict</strong> separatist insurgencies?</li>
+<li>One (spatial) idea: <strong>how far away</strong> are [centers of power] from [regions of countervailing power]?</li>
+<li><span class="math inline">\(X\)</span> = Distance from capital, <span class="math inline">\(Y\)</span> = Insurgency</li>
+<li>Unit of observation: Regions? Insurgent uprisings? Countries?</li>
+</ul>
+</section>
+<section id="operationalizing" class="slide level2 crunch-ul">
+<h2>Operationalizing</h2>
+<ul>
+<li>The variables in previous slide are <strong>conceptual</strong></li>
+<li>Operationalizing = “Turning into measurable quantities”</li>
+<li><span class="math inline">\(X\)</span> = MeanDistance(Capital, Insurgent Region), <span class="math inline">\(Y = \mathbf{1}[\text{Insurgency}]\)</span></li>
+<li>Alternative:</li>
+</ul>
+<p><span class="math display">\[
+Y = \begin{cases}
+2 &amp;\text{if Successful Insurgency} \\
+1 &amp;\text{if Failed Insurgency} \\
+0 &amp;\text{if No Insurgency}
+\end{cases}
+\]</span></p>
+</section>
+<section id="connection-matrices" class="slide level2">
+<h2>Connection Matrices</h2>
+<ul>
+<li><code>spdep</code></li>
+<li>Neighbors if <strong>Centroids</strong> are close</li>
+<li>Neighbors if <strong>Capitals</strong> are close</li>
+<li>🤔</li>
+</ul>
+</section>
+<section id="visualizing-spatial-data" class="slide level2">
+<h2>Visualizing Spatial Data</h2>
+<ul>
+<li>My recommendation for final presentations: <strong>Leaflet</strong></li>
+</ul>
+</section>
+<section id="remote-sensed-raster-data" class="slide level2">
+<h2>Remote-Sensed / Raster Data</h2>
+<ul>
+<li>You’ve seen (to some extent) <code>terra</code></li>
+<li><a href="https://r-spatial.github.io/stars/"><code>stars</code></a>: Same group behind <code>sf</code></li>
+<li>Google solar panel data</li>
+<li><code>.tif</code> files: Dynamically loaded</li>
+</ul>
+</section>
+<section id="anonymization-synthetic-datasets" class="slide level2">
+<h2>Anonymization / Synthetic Datasets</h2>
+<ul>
+<li>Differential privacy</li>
+<li>Used by the US Census(!) Since 2020</li>
 </ul>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
@@ -381,7 +509,7 @@ Jeff Jacobs
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p>PPOL 6805 Week 12: Mapping Libraries</p>
+<p>PPOL 6805 Week 12: Tools for Final Projects</p>
 </div>
 </div>
 </section></section>
