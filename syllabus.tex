@@ -1,0 +1,526 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={PPOL 6805 / DSAN 6750 Syllabus - Fall 2024},
+  pdfauthor={Prof.~Jeff Jacobs},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{PPOL 6805 / DSAN 6750}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Geographic Information Systems (GIS) for Spatial Data
+Science \\ \textit{Wednesdays 6:30-9pm, Car Barn 204}}
+\author{Prof.~Jeff
+Jacobs \\[-0.2em] \normalsize{\href{mailto:jj1088@georgetown.edu}{\texttt{jj1088@georgetown.edu}}}}
+\date{\normalsize{Fall 2024, Georgetown University}}
+% 
+\begin{document}
+\maketitle
+
+
+Welcome to the Fall 2024 version of \textbf{Geographic Information
+Systems (GIS) for Spatial Data Science} at Georgetown University! Please
+note that the most up-to-date version of this syllabus will always be
+available at \href{https://jjacobs.me/ppol6805}{jjacobs.me/ppol6805}
+
+\begin{tcolorbox}[enhanced jigsaw, left=2mm, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Course Numbering}, toprule=.15mm, breakable, opacityback=0, colback=white, colframe=quarto-callout-note-color-frame, arc=.35mm, leftrule=.75mm, bottomtitle=1mm, toptitle=1mm, rightrule=.15mm, bottomrule=.15mm, coltitle=black, titlerule=0mm]
+
+\begin{itemize}
+\tightlist
+\item
+  For \emph{Public Policy} students (McCourt): the course number is
+  \textbf{PPOL 6805}
+\item
+  For \emph{Data Science and Analytics} students: the course number is
+  \textbf{DSAN 6750}
+\end{itemize}
+
+\end{tcolorbox}
+
+\subsection{Course Staff and Office
+Hours}\label{course-staff-and-office-hours}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Prof.~Jeff Jacobs},
+  \href{mailto:jj1088@georgetown.edu}{\texttt{jj1088@georgetown.edu}}:
+  \emph{Schedule office hour slots at
+  \href{https://jjacobs.me/meet}{\texttt{jjacobs.me/meet}}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Mondays 4:30-6:30pm
+  \item
+    Tuesdays 3-5:30pm
+  \item
+    \emph{(Please try to schedule at least 8 hours in advance, and let
+    me know briefly what you'd like to discuss, so I have time to
+    prepare)}
+  \end{itemize}
+\item
+  \textbf{TA Billy McGloin},
+  \href{mailto:wtm30@georgetown.edu}{\texttt{wtm30@georgetown.edu}}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    By appointment (Email)
+  \end{itemize}
+\end{itemize}
+
+\subsection{Course Description}\label{course-description}
+
+This course provides students with an overview of Geographic Information
+Systems (GIS), encompassing both general principles of geospatial data
+analysis and their applications for studying important issues of climate
+change, international conflict, economic development, and urban
+planning, among other areas of application.
+
+The beginning of the course emphasizes fundamentals of GIS design and
+use, such as projection systems, raster and vector data, and efficient
+representation and storage of geospatial data. As students become more
+comfortable with these foundations, the course will shift to a greater
+emphasis on applications during the second half of the semester.
+Particular emphasis will be placed on effective visualization of spatial
+data, through creation of static publication-quality maps as well as
+interactive maps for web applications and data dashboards.
+
+The course will utilize libraries from R, Python, and JavaScript as
+needed, so experience using any of these languages will be helpful, but
+is not required. Pre-requisites \emph{(for PPOL students)}: PPOL 564 or
+PPOL 670.
+
+\subsection{Assignment Structure}\label{assignment-structure}
+
+On the basis of the guidelines we've developed for courses offered
+through DSAN, this course will have one in-class midterm but \textbf{no}
+final exam! Instead, you will work on a final project throughout the
+second half of the course. Each of the four units will involve a
+homework assignment, and final grades will be determined using the
+following weighting scheme:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Category & Percent of Final Grade \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+In-Class Midterm (Nov 6) & 30\% \\
+Final Project & 30\% \\
+Homeworks & 40\% \\
+\textbf{HW1}: GIS Concepts & 10\% \\
+\textbf{HW2}: Unary Operations & 10\% \\
+\textbf{HW3}: Binary Operations and Spatial Joins & 10\% \\
+\textbf{HW4}: Autocorrelation, Clustering, and Point Processes & 10\% \\
+\textbf{HW5A}: Point Hypothesis Evaluation & {[}+50 Bonus Points{]} \\
+\textbf{HW5B}: Spatial Regression & {[}+50 Bonus Points{]} \\
+\end{longtable}
+
+The course does not have any ``official'' prerequisites, but a general
+comfort with \textbf{R} and/or \textbf{Python} is strongly recommended.
+If you have never used Python before, however (or if you haven't used it
+in a while and feel like your skills are rusty), you can browse the
+materials on the \href{resources.qmd}{Resources page}!
+
+\subsection{Course Topics / Calendar}\label{course-topics-calendar}
+
+The following is a rough map of what we will work through together
+throughout the semester; given that \textbf{everyone learns at a
+different pace}, my aim is to leave us with a good amount of
+\textbf{flexibility} in terms of how much time we spend on each topic.
+
+If I find that it takes me longer than a week to convey a certain topic
+in sufficient depth, for example, then I view it as a strength rather
+than a weakness of the course that we can then rearrange the calendar
+below by adding an extra week on that particular topic! Similarly, if it
+seems like I am spending too much time on a topic, to the point that
+students seem bored or impatient to move onto the next topic, we can
+move a topic intended for the next week to the current week!
+
+If you find any discrepancies between this schedule and Georgetown's
+\href{https://registrar.georgetown.edu/academic-calendar/maincampus/}{official
+calendar}, please let me know.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.4500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Unit
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Week
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Date
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Topic
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Unit 1}: GIS Concepts & 1 & Aug 28 & \href{./w01/}{Introduction
+to GIS} \\
+& 2 & Sep 4 & \begin{minipage}[t]{\linewidth}\raggedright
+\href{./w02/}{How Do Maps Work?}\\
+\emph{HW1 Release}\strut
+\end{minipage} \\
+\textbf{Unit 2:} Geospatial Operations & 3 & Sep 11 &
+\begin{minipage}[t]{\linewidth}\raggedright
+\href{./w03/}{Unary Operations}\\
+\emph{{[}Deliverable{]} HW1: GIS Concepts}\strut
+\end{minipage} \\
+& & \emph{Sep 13 (Fri)} & \emph{HW2 Release} \\
+& 4 & Sep 18 & \href{./w04/}{Binary Operations} \\
+& & \emph{Sep 20 (Fri), 5:59pm} & \emph{{[}Deliverable{]} HW2: Unary
+Operations} \\
+\textbf{Unit 3:} Spatial Data Science I: Foundations & 5 & Sep 25 &
+\begin{minipage}[t]{\linewidth}\raggedright
+\href{./w05/}{Spatial Data Science!}\\
+\emph{HW3 Release}\strut
+\end{minipage} \\
+& 6 & Oct 2 & \begin{minipage}[t]{\linewidth}\raggedright
+\href{./w06/}{Random Fields and Spatial Autocorrelation}\\
+\emph{HW4 Release}\strut
+\end{minipage} \\
+& & \emph{Oct 4 (Fri), 5:59pm} & \emph{{[}Deliverable{]} HW3: Binary
+Operations and Spatial Joins} \\
+\textbf{Unit 4:} Spatial Data Science II: Methods & 7 & Oct 9 &
+\href{./w07/}{Point Processes, Clustering, and Regularity} \\
+& 8 & Oct 16 & \href{./w08/}{Null Models and Marked Point Processes} \\
+& 9 & Oct 23 & \href{./w09/}{Evaluating Spatial Hypotheses I: Point
+Data} \\
+& 10 & Oct 30 & \begin{minipage}[t]{\linewidth}\raggedright
+\href{./w10/}{Evaluating Spatial Hypotheses II: Areal Data}\\
+\emph{{[}Deliverable, 11:59pm{]} HW4: Autocorrelation, Clustering, and
+Point Processes}\strut
+\end{minipage} \\
+& & \emph{Nov 1 (Fri)} & \emph{Midterm Practice Problems Release} \\
+& 11 & Nov 6 & \href{./w11/}{In-Class Midterm} \\
+\textbf{Unit 5}: Final Projects & 12 & Nov 13 & \href{./w12/}{Tools for
+Final Projects} \\
+& 13 & Nov 20 & \href{./w13/}{In-Class Office Hours} \\
+& & \emph{Nov 27} & \emph{No Class (Fall Break)} \\
+& 14 & Dec 4 & \href{./w14/}{Final Presentations I} \\
+& 15 & Dec 11 & \href{./w15/}{Final Presentations II} \\
+& & \emph{Dec 13 (Friday), 5:59pm} & \emph{{[}Deliverable{]} Final
+Project} \\
+\end{longtable}
+
+\subsection{Assignment Distribution, Submission, and
+Grading}\label{assignment-distribution-submission-and-grading}
+
+The programming assignments for the course will be managed through
+\href{https://posit.cloud/spaces/547750/join?access_code=pxoi5atXz19sdp1N9e2X2qUbtxGV8yqRTtN5MeeD}{Posit.Cloud}
+This means that, to work on and submit the assignments, you will use the
+following workflow:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Click the ``Start'' button for the assignment within the Posit.Cloud
+  interface, which should immediately create and display a new
+  in-browser RStudio workspace for you.
+\item
+  Work on the problems within the project's \texttt{.qmd} file, saving
+  your progress early and often! You can \textbf{try things out} or
+  \textbf{create drafts} of your solutions locally if you'd like (for
+  example, in VSCode or JupyterLab or any other IDE), but the
+  \texttt{.qmd} file within your RStudio project will be considered your
+  ``official'' submission for each assignment.
+\end{enumerate}
+
+\subsection{Late Policy}\label{late-policy}
+
+After the due date, for each \textbf{homework} assignment, you will have
+a grace period of 24 hours to submit the assignment without a lateness
+penalty. After this 24 hour grace period, late penalties will be applied
+up until 66 hours after the due date. Specifically, late penalties will
+be applied based on the following scale (unless you obtain an excused
+lateness from one of the instructional staff!):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{0 to 24 hours} after due date: no penalty
+\item
+  \textbf{24 to 30 hours} after due date: 2.5\% penalty
+\item
+  \textbf{30 to 42 hours} after due date: 5\% penalty
+\item
+  \textbf{42 to 54 hours} after due date: 10\% penalty
+\item
+  \textbf{54 to 66 hours} after due date: 20\% penalty
+\item
+  \textbf{More than 66 hours} after due date: Assignment submissions no
+  longer accepted (without instructor approval)
+\end{itemize}
+
+\subsection{Final Letter Grade
+Determination}\label{final-letter-grade-determination}
+
+Once all assignments have been graded, we will compute your final
+\textbf{numeric grade} according to the above weighting, rounded to two
+decimal places. The \textbf{letter grade} that we report to Georgetown
+on the basis of this numeric grade will then follow the DSAN letter
+grade policy as follows, where the start and end points for each range
+are \textbf{inclusive}:
+
+\begin{longtable}[]{@{}rrl@{}}
+\toprule\noalign{}
+Range Start & Range End & Letter Grade \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+92.50 & 100.00 & A \\
+89.50 & 92.49 & A- \\
+87.99 & 89.49 & B+ \\
+81.50 & 87.98 & B \\
+79.50 & 81.49 & B- \\
+69.50 & 79.49 & C \\
+59.50 & 69.49 & D \\
+0.00 & 59.49 & F \\
+\end{longtable}
+
+\subsection{Title IX/Sexual Misconduct
+Statement}\label{title-ixsexual-misconduct-statement}
+
+Georgetown University and its faculty are committed to supporting
+survivors and those impacted by sexual misconduct, which includes sexual
+assault, sexual harassment, relationship violence, and stalking.
+Georgetown requires faculty members, unless otherwise designated as
+confidential, to report all disclosures of sexual misconduct to the
+University Title IX Coordinator or a Deputy Title IX Coordinator.
+
+If you disclose an incident of sexual misconduct to a professor in or
+outside of the classroom (with the exception of disclosures in papers),
+that faculty member must report the incident to the Title IX
+Coordinator, or Deputy Title IX Coordinator. The coordinator will, in
+turn, reach out to the student to provide support, resources, and the
+option to meet. {[}Please note that the student is not required to meet
+with the Title IX coordinator.{]}. More information about reporting
+options and resources can be found in the Sexual Misconduct Resource
+Center.
+
+If you would prefer to speak to someone confidentially, Georgetown has a
+number of fully confidential professional resources that can provide
+support and assistance. These resources include:
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Health Education Services for Sexual Assault Response and
+  Prevention}: Confidential email \texttt{sarp@georgetown.edu}
+\item
+  \emph{Counseling and Psychiatric Services (CAPS)}: 202-687-6985
+
+  \begin{itemize}
+  \tightlist
+  \item
+    After hours you can call 833-960-3006 to reach Fonemed, a telehealth
+    service, and ask for the on-call CAPS clinician
+  \end{itemize}
+\end{itemize}
+
+\subsection{GSAS and McCourt Resources and
+Policies}\label{gsas-and-mccourt-resources-and-policies}
+
+You can find a collection of relevant resources and policies for
+students on the GSAS website, and the Provost's policy on accommodating
+students' religious observances on the Campus Ministry website.
+
+You can also make use of the Student Academic Resource Center. In
+particular, within the Resource Center there is a link to Georgetown's
+Disability Support page. If you believe you have a disability, you can
+contact the Academic Resource Center (\texttt{arc@georgetown.edu}) for
+further information. The ARC is located in the Leavey Center, Suite 335
+(202-687-8354), and it is the campus office responsible for reviewing
+documentation provided by students with disabilities and for determining
+reasonable accommodations in accordance with the Americans with
+Disabilities Act (ADA) and University policies.
+
+\subsubsection{McCourt Academic Integrity
+Policy}\label{mccourt-academic-integrity-policy}
+
+McCourt School students are expected to uphold the academic policies set
+forth by Georgetown University and the Graduate School of Arts and
+Sciences. Students should therefore familiarize themselves with all the
+rules, regulations, and procedures relevant to their pursuit of a
+Graduate School degree. The relevant policies are listed at
+\href{https://sites.google.com/a/georgetown.edu/gsas-graduate-bulletin/vi-academic-integrity-policies-procedures}{this
+link}.
+
+
+
+
+\end{document}

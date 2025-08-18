@@ -16,13 +16,13 @@ format:
     # link-external-icon: true
     link-external-newwindow: true
     # link-external-filter: '^(?:http:|https:)\/\/jjacobs\.me\/dsan6750'
-  pdf:
-    output-file: "PPOL6805_Fall_2024_Syllabus.pdf"
-    template-partials:
-      - title.tex
-    title-meta: "PPOL 6805 / DSAN 6750 Syllabus - Fall 2024"
-    documentclass: "scrartcl"
-    # documentclass: "scrreprt"
+#   pdf:
+#     output-file: "PPOL6805_Fall_2024_Syllabus.pdf"
+#     template-partials:
+#       - title.tex
+#     title-meta: "PPOL 6805 / DSAN 6750 Syllabus - Fall 2024"
+#     documentclass: "scrartcl"
+#     # documentclass: "scrreprt"
 ---
 
 Welcome to the Fall 2024 version of **Geographic Information Systems (GIS) for Spatial Data Science** at Georgetown University! Please note that the most up-to-date version of this syllabus will always be available at [jjacobs.me/ppol6805](https://jjacobs.me/ppol6805){target='_blank'}
