@@ -1,5 +1,5 @@
 ---
-title: "Week 1: {{< var weeks.1.title >}}"
+title: "Week 1: Introduction to GIS"
 subtitle: "{{< var course.slides-subtitle >}}"
 author: "{{< var course.author >}}"
 institute: "{{< var course.institute >}}"

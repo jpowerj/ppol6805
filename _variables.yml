@@ -2,7 +2,7 @@ course:
   author: "Jeff Jacobs"
   institute: "<a href='mailto:jj1088@georgetown.edu' target='_blank'>`jj1088@georgetown.edu`</a>"
   slides-subtitle: "*PPOL 6805 / DSAN 6750: GIS for Spatial Data Science*<br>Fall 2024"
-  zoom_url: "https://georgetown.zoom.us/j/94074713027"
+  zoom_url: "https://georgetown.zoom.us/j/92295251878?pwd=K8nOs3w9uRlj3mfn63bh0yazBpBbsC.1"
   feedback_url: "https://forms.gle/1qmHmeXo94BaoN7d8"
   intro_survey_url: "https://forms.gle/kAyGvsMYSoLjZUtbA"
   name: "Geographic Information Systems (GIS) for Spatial Data Science"
@@ -14,7 +14,7 @@ weeks:
   - weeknum: 1
     title: "Introduction to GIS"
     footer: "PPOL 6805 Week 1: GIS Overview"
-    date-md: "Aug 28"
+    date-md: "Aug 27"
   - weeknum: 2
     title: "How Do Maps Work?"
     footer: "PPOL 6805 Week 2: How Do Maps Work?"

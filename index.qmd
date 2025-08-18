@@ -16,4 +16,4 @@ format:
     link-external-newwindow: true
 ---
 
-Welcome to the homepage for **{{< var course.code >}}: {{< var course.name >}}**, Fall 2024, at Georgetown University! The course takes place on **Wednesdays** from **6:30 to 9:00pm** in **Car Barn Room 204**. More details are provided on the [syllabus](syllabus.qmd).
+Welcome to the homepage for **{{< var course.code >}}: {{< var course.name >}}**, Fall 2025, at Georgetown University! The course takes place on **Wednesdays** from **6:30 to 9:00pm** in **Healy 105**. More details are provided on the [syllabus](syllabus.qmd).
