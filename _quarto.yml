@@ -2,6 +2,8 @@ project:
   type: website
   output-dir: docs
   pre-render: _pre-set-updated.py
+  preview:
+    port: 4321
 
 website:
   title: "PPOL 6805 / DSAN 6750: GIS for Spatial Data Science"
@@ -11,10 +13,11 @@ website:
   repo-link-target: "_blank"
   sidebar:
     id: mainnav
+    title: "PPOL 6805 / DSAN 6750: GIS for Spatial Data Science"
     footer: "*Updated {{< env PPOL6805_LAST_UPDATED \"2024-08-28\" >}}*"
     contents:
       - href: index.qmd
-        text: Home
+        text: "<i class='bi bi-house pe-1'></i> Home"
       - href: syllabus.qmd
         text: Syllabus
       - href: resources.qmd
@@ -81,6 +84,8 @@ format:
       dark: darkly
     css: "/dsan-globals/jjstyles.css"
     toc: true
+    link-external-newwindow: true
+    link-external-icon: true
     include-in-header:
-      text: "<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js' integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='' crossorigin='anonymous' referrerpolicy='no-referrer'></script><script src='/sidebar.js'></script>"
+      text: "<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js' integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='' crossorigin='anonymous' referrerpolicy='no-referrer'></script><link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css'><script src='/sidebar.js'></script>"
 
