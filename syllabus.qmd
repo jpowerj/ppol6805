@@ -92,6 +92,14 @@ On the basis of the guidelines we've developed for courses offered through DSAN,
     <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW4**: {{< var hw.4.title >}}"></span></td>
     <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.4.pct >}}%"></span></td>
 </tr>
+<tr>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW5A**: {{< var hw.5.title >}}"></span></td>
+    <td><span data-qmd="{{< var hw.5.pct >}}"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW5B**: {{< var hw.6.title >}}"></span></td>
+    <td><span data-qmd="{{< var hw.6.pct >}}"></span></td>
+</tr>
 </tbody>
 </table>
 ```
@@ -214,7 +222,7 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="[{{< var weeks.11.title >}}](./w11/)"></span></td>
 </tr>
 <tr class='new-unit'>
-    <td><span data-qmd="**Unit 5**: Mapping and Applications"></span></td>
+    <td><span data-qmd="**Unit 5**: Final Projects"></span></td>
     <td>12</td>
     <td><span data-qmd="{{< var weeks.12.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var weeks.12.title >}}](./w12/)"></span></td>

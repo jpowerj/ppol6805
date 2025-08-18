@@ -60,15 +60,15 @@ weeks:
     footer: "PPOL 6805 Week 12: Tools for Final Projects"
     date-md: "Nov 13"
   - weeknum: 13
-    title: "Applications: Urban Planning"
+    title: "In-Class Office Hours"
     footer: "PPOL 6805 Week 13"
     date-md: "Nov 20"
   - weeknum: 14
-    title: "Applications: Climate Change and Ecological Data"
+    title: "Final Presentations I"
     footer: "PPOL 6805 Week 14"
     date-md: "Dec 4"
   - weeknum: 15
-    title: "Final Presentations"
+    title: "Final Presentations II"
     footer: "PPOL 6805 Week 15"
     date-md: "Dec 11"
 hw:
@@ -84,6 +84,9 @@ hw:
   - hw-num: 4
     title: "Autocorrelation, Clustering, and Point Processes"
     pct: 10
-  # - hw-num: 5
-  #   title: "Spatial Regression"
-  #   pct: 8
+  - hw-num: "5A"
+    title: "Point Hypothesis Evaluation"
+    pct: "[+50 Bonus Points]"
+  - hw-num: "5B"
+    title: "Spatial Regression"
+    pct: "[+50 Bonus Points]"

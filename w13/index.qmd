@@ -1,0 +1,93 @@
+---
+title: "Week 13: {{< var weeks.13.title >}}"
+subtitle: "{{< var course.slides-subtitle >}}"
+author: "{{< var course.author >}}"
+institute: "{{< var course.institute >}}"
+date: "November 20, 2024"
+date-format: full
+lecnum: 13
+categories:
+  - "Class Sessions"
+bibliography: "../_PPOL6805.bib"
+# Shared across formats:
+echo: true
+code-fold: show
+css: "../dsan-globals/jjstyles.css"
+html-math-method: mathjax
+# Format-specific settings:
+format:
+  revealjs:
+    output-file: "slides.html"
+    df-print: kable
+    slide-number: true
+    scrollable: true
+    tbl-cap-location: bottom
+    link-external-icon: true
+    link-external-newwindow: true
+    footer: "{{< var weeks.13.footer >}}"
+    include-in-header:
+      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>"
+    theme: [default]
+    revealjs-plugins:
+      - simplemenu
+    simplemenu:
+      flat: true
+      barhtml:
+        header: "<div class='menubar'><span style='position: absolute; left: 8; padding-left: 8px;'><a href='./index.html'>&larr; Return to Notes</a></span><ul class='menu'></ul></div>"
+      scale: 0.5
+  html:
+    output-file: "index.html"
+    html-math-method: mathjax
+    df-print: kable
+---
+
+::: {.content-visible unless-format="revealjs"}
+
+<center class='mb-3'>
+<a class="h2" href="./slides.html" target="_blank">Open slides in new tab &rarr;</a>
+</center>
+
+:::
+
+# Bonus Homeworks {data-stack-name="Midterm Postmortem"}
+
+## Choose Your Own Adventure
+
+* **Bonus HW5A**: Re-doing Midterm Q4-Q5 (with new dataset)
+  * You've incurred "fixed cost" of understanding Q1-Q3...
+  * $\implies$ **Build on** this fixed cost and complete \~Q4 + \~Q5 **without time limit**!
+* **Bonus HW5B**: Spatial Regression
+  * Your final project uses **areal** rather than point data...
+  * $\implies$ To prepare, do HW5B to learn/practice **spatial regression** and **earn bonus points** for doing so!
+
+# Final Project Details {data-stack-name="Final Project"}
+
+* **Presentations**: 6:30-9pm, Wed, **4 December**, 2024
+* **Reports**: Due 5:59pm, Fri, **13 December**, 2024
+
+# Immediately-Relevant Tools for Final Projects! {data-stack-name="Tools"}
+
+* New Visualization Tool: **Leaflet**
+* Remote-Sensed / Raster Data
+* Data Anonymization / Synthetic Datasets
+
+## Visualizing Spatial Data
+
+* My recommendation for final presentations: **Leaflet**
+
+## Remote-Sensed / Raster Data
+
+* You've seen (to some extent) `terra`
+* [`stars`](https://r-spatial.github.io/stars/): Same group behind `sf`
+* Google solar panel data
+* `.tif` files: Dynamically loaded
+
+## Anonymization / Synthetic Datasets
+
+* Differential privacy
+* Used by the US Census(!) Since 2020
+
+## References
+
+::: {#refs}
+:::
