@@ -335,7 +335,7 @@
     "href": "w06/slides.html#geostatistical-data-dumping-sand-onto-a-table",
     "title": "Week 6: Random Fields and Spatial Autocorrelation",
     "section": "Geostatistical Data: Dumping Sand onto a Table",
-    "text": "Geostatistical Data: Dumping Sand onto a Table\n\nDomain \\(D\\): tabletop; Random process: dumping sand onto the tabletop\n\\(\\Omega\\): All possible realizations of process. \\(\\omega_i \\in \\Omega\\) Particular realization\n\n\n\n\n\n\n\n\n\n\nFigure 1: \\(\\omega_1 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: \\(\\omega_2 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: \\(\\omega_3 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: \\(\\omega_4 \\in \\Omega\\)"
+    "text": "Geostatistical Data: Dumping Sand onto a Table\n\nDomain \\(D\\): tabletop; Random process: dumping sand onto the tabletop\n\\(\\Omega\\): All possible realizations of process. \\(\\omega_i \\in \\Omega\\) Particular realization\n\n\n\n\n\n\n\nFigure 1: \\(\\omega_1 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: \\(\\omega_2 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: \\(\\omega_3 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: \\(\\omega_4 \\in \\Omega\\)"
   },
   {
     "objectID": "w06/slides.html#geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes",
@@ -439,7 +439,7 @@
     "href": "w06/index.html#geostatistical-data-dumping-sand-onto-a-table",
     "title": "Week 6: Random Fields and Spatial Autocorrelation",
     "section": "Geostatistical Data: Dumping Sand onto a Table",
-    "text": "Geostatistical Data: Dumping Sand onto a Table\n\nDomain \\(D\\): tabletop; Random process: dumping sand onto the tabletop\n\\(\\Omega\\): All possible realizations of process. \\(\\omega_i \\in \\Omega\\) Particular realization\n\n\n\n\n\n\n\n\n\n\nFigure 1: \\(\\omega_1 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: \\(\\omega_2 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: \\(\\omega_3 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: \\(\\omega_4 \\in \\Omega\\)",
+    "text": "Geostatistical Data: Dumping Sand onto a Table\n\nDomain \\(D\\): tabletop; Random process: dumping sand onto the tabletop\n\\(\\Omega\\): All possible realizations of process. \\(\\omega_i \\in \\Omega\\) Particular realization\n\n\n\n\n\n\n\nFigure 1: \\(\\omega_1 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: \\(\\omega_2 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: \\(\\omega_3 \\in \\Omega\\)\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: \\(\\omega_4 \\in \\Omega\\)",
     "crumbs": [
       "Week 6: Oct 2"
     ]
@@ -1055,7 +1055,7 @@
     "href": "index.html",
     "title": "PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science",
     "section": "",
-    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2025, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Healy 105. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDate\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nSep 2\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 4\n\n\n\n\nWeek 3: Unary Operations\n\n\nSep 11\n\n\n\n\nWeek 4: Binary Operations\n\n\nSep 18\n\n\n\n\nWeek 5: Spatial Data Science!\n\n\nSep 25\n\n\n\n\nWeek 6: Random Fields and Spatial Autocorrelation\n\n\nOct 2\n\n\n\n\nWeek 7: Point Processes, Clustering, and Regularity\n\n\nOct 9\n\n\n\n\nWeek 8: Null Models and Marked Point Processes\n\n\nOct 16\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Point Data\n\n\nOct 23\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Areal Data\n\n\nOct 30\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 6\n\n\n\n\nWeek 12: Tools for Final Projects\n\n\nNov 13\n\n\n\n\nWeek 13: In-Class Office Hours\n\n\nNov 20\n\n\n\n\nWeek 14: Final Presentations I\n\n\nDec 4\n\n\n\n\n\nNo matching items",
+    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2025, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Healy 105. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\n\nDate\n\n\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 27\n\n\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 4\n\n\n\n\n\n\nWeek 3: Unary Operations\n\n\nSep 11\n\n\n\n\n\n\nWeek 4: Binary Operations\n\n\nSep 18\n\n\n\n\n\n\nWeek 5: Spatial Data Science!\n\n\nSep 25\n\n\n\n\n\n\nWeek 6: Random Fields and Spatial Autocorrelation\n\n\nOct 2\n\n\n\n\n\n\nWeek 7: Point Processes, Clustering, and Regularity\n\n\nOct 9\n\n\n\n\n\n\nWeek 8: Null Models and Marked Point Processes\n\n\nOct 16\n\n\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Point Data\n\n\nOct 23\n\n\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Areal Data\n\n\nOct 30\n\n\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 6\n\n\n\n\n\n\nWeek 12: Tools for Final Projects\n\n\nNov 13\n\n\n\n\n\n\nWeek 13: In-Class Office Hours\n\n\nNov 20\n\n\n\n\n\n\nWeek 14: Final Presentations I\n\n\nDec 4\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "<i class='bi bi-house pe-1'></i> Home"
     ]
@@ -1691,7 +1691,7 @@
     "href": "w04/slides.html#the-bad-kind-of-overthinking-will-my-life-just-get-harder-and-harder",
     "title": "Week 4: Binary Operations",
     "section": "The Bad Kind of Overthinking: Will My Life Just Get Harder and Harder?",
-    "text": "The Bad Kind of Overthinking: Will My Life Just Get Harder and Harder?\n\n\n\n\n\n\n\n\n\n\n\n\n\nUnary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBinary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTernary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuaternary Operations"
+    "text": "The Bad Kind of Overthinking: Will My Life Just Get Harder and Harder?\n\n\n\n\n\n\n\n\n\n\nUnary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nBinary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nTernary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuaternary Operations"
   },
   {
     "objectID": "w04/slides.html#good-news-and-bad-news",
@@ -1874,7 +1874,7 @@
     "href": "w04/index.html#the-bad-kind-of-overthinking-will-my-life-just-get-harder-and-harder",
     "title": "Week 4: Binary Operations",
     "section": "The Bad Kind of Overthinking: Will My Life Just Get Harder and Harder?",
-    "text": "The Bad Kind of Overthinking: Will My Life Just Get Harder and Harder?\n\n\n\n\n\n\n\n\n\n\n\n\n\nUnary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBinary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTernary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuaternary Operations",
+    "text": "The Bad Kind of Overthinking: Will My Life Just Get Harder and Harder?\n\n\n\n\n\n\n\n\n\n\nUnary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nBinary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nTernary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuaternary Operations",
     "crumbs": [
       "Week 4: Sep 18"
     ]
@@ -2519,7 +2519,7 @@
     "href": "w05/index.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (24.58927 -11.74174)\n0.705168\n\n\nPOINT (34.80372 -12.7463)\n80.204560\n\n\nPOINT (-12.32878 8.804283)\n62.032777\n\n\nPOINT (24.54341 1.856583)\n72.838893\n\n\nPOINT (12.3119 21.93096)\n43.944937\n\n\nPOINT (30.30776 2.456251)\n57.520450\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n58\nSOM\nSomalia\nMULTIPOLYGON (((41.53271 -1…\n\n\n64\nSLE\nSierra Leone\nMULTIPOLYGON (((-10.2832 8….\n\n\n91\nNGA\nNigeria\nMULTIPOLYGON (((7.300781 4….",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (29.40938 6.4872)\n54.738500\n\n\nPOINT (21.36471 -26.77456)\n28.154802\n\n\nPOINT (4.4285 17.31054)\n6.537747\n\n\nPOINT (6.3683 10.32048)\n75.187674\n\n\nPOINT (28.76818 -6.21396)\n27.050807\n\n\nPOINT (23.43284 -16.49423)\n40.338662\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n1\nZWE\nZimbabwe\nMULTIPOLYGON (((31.28789 -2…\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n52\nSSD\nSouth Sudan\nMULTIPOLYGON (((33.97607 4….\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -2529,7 +2529,7 @@
     "href": "w05/index.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n2\nZMB\nZambia\n0.705168\nMULTIPOLYGON (((30.39609 -1…\n\n\n58\nSOM\nSomalia\n83.452243\nMULTIPOLYGON (((41.53271 -1…\n\n\n64\nSLE\nSierra Leone\n62.032777\nMULTIPOLYGON (((-10.2832 8….\n\n\n91\nNGA\nNigeria\n9.258355\nMULTIPOLYGON (((7.300781 4….\n\n\n92\nNER\nNiger\n43.944937\nMULTIPOLYGON (((13.60635 13…\n\n\n103\nMOZ\nMozambique\n80.204560\nMULTIPOLYGON (((31.28789 -2…",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n1\nZWE\nZimbabwe\n10.061180\nMULTIPOLYGON (((31.28789 -2…\n\n\n2\nZMB\nZambia\n40.338662\nMULTIPOLYGON (((30.39609 -1…\n\n\n52\nSSD\nSouth Sudan\n54.738500\nMULTIPOLYGON (((33.97607 4….\n\n\n53\nSDN\nSudan\n72.156372\nMULTIPOLYGON (((34.07812 9….\n\n\n91\nNGA\nNigeria\n75.187674\nMULTIPOLYGON (((7.300781 4….\n\n\n92\nNER\nNiger\n6.537747\nMULTIPOLYGON (((13.60635 13…",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -2626,14 +2626,14 @@
     "href": "w05/slides.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-10.93495 7.428974)\n7.185674\n\n\nPOINT (15.05374 -22.95435)\n26.842684\n\n\nPOINT (31.29403 -9.491486)\n79.006816\n\n\nPOINT (15.86045 11.7159)\n22.400880\n\n\nPOINT (11.48721 29.97605)\n9.079944\n\n\nPOINT (31.12582 -27.01544)\n73.233756\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n50\nSWZ\neSwatini\nMULTIPOLYGON (((31.94824 -2…\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n102\nNAM\nNamibia\nMULTIPOLYGON (((23.38066 -1…"
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (22.43341 10.85628)\n12.280356\n\n\nPOINT (13.046 -16.78457)\n57.674716\n\n\nPOINT (0.9214377 10.7397)\n83.376030\n\n\nPOINT (21.61674 0.2314314)\n32.246767\n\n\nPOINT (35.01889 18.56194)\n26.668909\n\n\nPOINT (15.21028 -11.02569)\n8.034289\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n44\nTZA\nTanzania\nMULTIPOLYGON (((39.49648 -6…\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n104\nMAR\nMorocco\nMULTIPOLYGON (((-2.219629 3…\n\n\n192\nCOD\nDemocratic Republic of the Congo\nMULTIPOLYGON (((30.75117 -8…"
   },
   {
     "objectID": "w05/slides.html#our-first-real-spatial-join-st_join",
     "href": "w05/slides.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n2\nZMB\nZambia\n79.006816\nMULTIPOLYGON (((30.39609 -1…\n\n\n50\nSWZ\neSwatini\n73.233756\nMULTIPOLYGON (((31.94824 -2…\n\n\n53\nSDN\nSudan\n75.893867\nMULTIPOLYGON (((34.07812 9….\n\n\n53.1\nSDN\nSudan\n1.219041\nMULTIPOLYGON (((34.07812 9….\n\n\n102\nNAM\nNamibia\n26.842684\nMULTIPOLYGON (((23.38066 -1…\n\n\n114\nMLI\nMali\n70.724493\nMULTIPOLYGON (((-11.3894 12…"
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n44\nTZA\nTanzania\n63.0187953\nMULTIPOLYGON (((39.49648 -6…\n\n\n53\nSDN\nSudan\n26.6689091\nMULTIPOLYGON (((34.07812 9….\n\n\n104\nMAR\nMorocco\n0.4158938\nMULTIPOLYGON (((-2.219629 3…\n\n\n192\nCOD\nDemocratic Republic of the Congo\n32.2467675\nMULTIPOLYGON (((30.75117 -8…\n\n\n193\nCOG\nRepublic of the Congo\n32.5531433\nMULTIPOLYGON (((11.13018 -3…\n\n\n201\nCAF\nCentral African Republic\n12.2803563\nMULTIPOLYGON (((24.14736 8…."
   },
   {
     "objectID": "w05/slides.html#but-we-were-still-in-easy-mode",
@@ -3251,7 +3251,7 @@
     "href": "w01/index.html#my-gis-moment",
     "title": "Week 1: Introduction to GIS",
     "section": "My GIS 🤯 Moment",
-    "text": "My GIS 🤯 Moment\n\n\n\nHorrors of “Vietnam War” did not end in 1975… Casualties from unexploded ordnance (cluster bombs) continue to devastate the region, over 220,000 victims:\n\n&gt;105K in Vietnam\n&gt;50K in Laos\n&gt;65K in Cambodia\n\n\n\n\n\n\nFrom Robert (2016)",
+    "text": "My GIS 🤯 Moment\n\n\n\nHorrors of “Vietnam War” did not end in 1975…\nCasualties from unexploded ordnance (cluster bombs) continue to devastate the region, over 220,000 victims:\n\n&gt;105K in Vietnam\n&gt;50K in Laos\n&gt;65K in Cambodia\n\n\n\n\n\n\nFrom Robert (2016)",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3281,7 +3281,7 @@
     "href": "w01/index.html#distance-vs.-distance",
     "title": "Week 1: Introduction to GIS",
     "section": "“Distance” vs. Distance!",
-    "text": "“Distance” vs. Distance!\n\nYou’ve just been hired as a fine art curator at The Whitney… Congratulations!\n\n\n\n\n\n\n\n\nCommuting 1 mile to the Whitney\n\n\n\nAlso commuting 1 mile to the Whitney",
+    "text": "“Distance” vs. Distance!\nYou’ve just been hired as a fine art curator at The Whitney… Congratulations!\n\n\n\n\n\n\n\nCommuting 1 mile to the Whitney\n\n\n\nAlso commuting 1 mile to the Whitney",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3301,7 +3301,7 @@
     "href": "w01/index.html#as-data-scientists",
     "title": "Week 1: Introduction to GIS",
     "section": "As Data Scientists",
-    "text": "As Data Scientists\n\nAll data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)\nHowever, you can differentiate yourself in the scary scary job market by developing a particular focus on some “non-standard” type:\n\n\nHello Mr. Google Musk, yes, indeed, I have a wealth of experience working with [text data / temporal data / signal processing / geospatial data]. This job will be no problem for me.",
+    "text": "As Data Scientists\n\nAll data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)\nHowever, you can differentiate yourself in the scary scary job market by developing a particular focus on some “non-standard” type:\n\n\nHello Mrs. Google Meta OpenAI, yes, indeed, I have a wealth of experience working with [text data / temporal data / signal processing / geospatial data]. This job will be no problem for me.",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3321,7 +3321,7 @@
     "href": "w01/index.html#its-completely-made-up",
     "title": "Week 1: Introduction to GIS",
     "section": "It’s Completely Made Up",
-    "text": "It’s Completely Made Up\nLike, even more made up than other made-up technical terms… 😵‍💫",
+    "text": "It’s Completely Made Up\nLike, even more made up than other made-up tech terms… Almost as bad as “AI” 😵‍💫",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3340,8 +3340,8 @@
     "objectID": "w01/index.html#arcgis",
     "href": "w01/index.html#arcgis",
     "title": "Week 1: Introduction to GIS",
-    "section": "ArcGIS",
-    "text": "ArcGIS\n\nFor info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the Library Guide\n\n\n\n\nUkraine Level-1 Administrative Regions Map (see CDTO talk)",
+    "section": "ArcGIS…",
+    "text": "ArcGIS…\n\nFor info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the Library Guide\n\n\n\n\nUkraine Level-1 Administrative Regions Map (see CDTO talk)",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3361,7 +3361,7 @@
     "href": "w01/index.html#the-spatial-data-science-universe",
     "title": "Week 1: Introduction to GIS",
     "section": "The Spatial Data Science Universe",
-    "text": "The Spatial Data Science Universe\n\n\n\n\n\n\nWe’ll cover key “pieces”:  GDAL (Geospatial Data Abstraction Library),  PROJ for converting between projections,  GEOS for computational geometry",
+    "text": "The Spatial Data Science Universe\n\n\n\n\n\n\nWe’ll cover key pieces:  GDAL (Geospatial Data Abstraction Library),  PROJ to convert between projections,  GEOS for computational geometry",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3553,7 +3553,7 @@
     "href": "w01/slides.html#my-gis-moment",
     "title": "Week 1: Introduction to GIS",
     "section": "My GIS 🤯 Moment",
-    "text": "My GIS 🤯 Moment\n\n\n\nHorrors of “Vietnam War” did not end in 1975… Casualties from unexploded ordnance (cluster bombs) continue to devastate the region, over 220,000 victims:\n\n&gt;105K in Vietnam\n&gt;50K in Laos\n&gt;65K in Cambodia\n\n\n\n\n\n\nFrom Robert (2016)"
+    "text": "My GIS 🤯 Moment\n\n\n\nHorrors of “Vietnam War” did not end in 1975…\nCasualties from unexploded ordnance (cluster bombs) continue to devastate the region, over 220,000 victims:\n\n&gt;105K in Vietnam\n&gt;50K in Laos\n&gt;65K in Cambodia\n\n\n\n\n\n\nFrom Robert (2016)"
   },
   {
     "objectID": "w01/slides.html#huawei-optimizing-cell-tower-placement",
@@ -3574,7 +3574,7 @@
     "href": "w01/slides.html#distance-vs.-distance",
     "title": "Week 1: Introduction to GIS",
     "section": "“Distance” vs. Distance!",
-    "text": "“Distance” vs. Distance!\n\nYou’ve just been hired as a fine art curator at The Whitney… Congratulations!\n\n\n\n\n\n\n\n\nCommuting 1 mile to the Whitney\n\n\n\nAlso commuting 1 mile to the Whitney"
+    "text": "“Distance” vs. Distance!\nYou’ve just been hired as a fine art curator at The Whitney… Congratulations!\n\n\n\n\n\n\n\nCommuting 1 mile to the Whitney\n\n\n\nAlso commuting 1 mile to the Whitney"
   },
   {
     "objectID": "w01/slides.html#as-humans",
@@ -3588,7 +3588,7 @@
     "href": "w01/slides.html#as-data-scientists",
     "title": "Week 1: Introduction to GIS",
     "section": "As Data Scientists",
-    "text": "As Data Scientists\n\nAll data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)\nHowever, you can differentiate yourself in the scary scary job market by developing a particular focus on some “non-standard” type:\n\n\nHello Mr. Google Musk, yes, indeed, I have a wealth of experience working with [text data / temporal data / signal processing / geospatial data]. This job will be no problem for me."
+    "text": "As Data Scientists\n\nAll data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)\nHowever, you can differentiate yourself in the scary scary job market by developing a particular focus on some “non-standard” type:\n\n\nHello Mrs. Google Meta OpenAI, yes, indeed, I have a wealth of experience working with [text data / temporal data / signal processing / geospatial data]. This job will be no problem for me."
   },
   {
     "objectID": "w01/slides.html#as-public-policy-experts",
@@ -3602,7 +3602,7 @@
     "href": "w01/slides.html#its-completely-made-up",
     "title": "Week 1: Introduction to GIS",
     "section": "It’s Completely Made Up",
-    "text": "It’s Completely Made Up\nLike, even more made up than other made-up technical terms… 😵‍💫"
+    "text": "It’s Completely Made Up\nLike, even more made up than other made-up tech terms… Almost as bad as “AI” 😵‍💫"
   },
   {
     "objectID": "w01/slides.html#what-i-mean-by-made-up",
@@ -3615,8 +3615,8 @@
     "objectID": "w01/slides.html#arcgis",
     "href": "w01/slides.html#arcgis",
     "title": "Week 1: Introduction to GIS",
-    "section": "ArcGIS",
-    "text": "ArcGIS\n\nFor info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the Library Guide\n\n\nUkraine Level-1 Administrative Regions Map (see CDTO talk)"
+    "section": "ArcGIS…",
+    "text": "ArcGIS…\n\nFor info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the Library Guide\n\n\nUkraine Level-1 Administrative Regions Map (see CDTO talk)"
   },
   {
     "objectID": "w01/slides.html#then-why-cant-we-just-use-arcgis",
@@ -3630,7 +3630,7 @@
     "href": "w01/slides.html#the-spatial-data-science-universe",
     "title": "Week 1: Introduction to GIS",
     "section": "The Spatial Data Science Universe",
-    "text": "The Spatial Data Science Universe\n\n\nWe’ll cover key “pieces”:  GDAL (Geospatial Data Abstraction Library),  PROJ for converting between projections,  GEOS for computational geometry"
+    "text": "The Spatial Data Science Universe\n\n\nWe’ll cover key pieces:  GDAL (Geospatial Data Abstraction Library),  PROJ to convert between projections,  GEOS for computational geometry"
   },
   {
     "objectID": "w01/slides.html#pedagogical-principles",

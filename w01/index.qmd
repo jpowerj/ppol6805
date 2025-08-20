@@ -3,7 +3,7 @@ title: "Week 1: Introduction to GIS"
 subtitle: "{{< var course.slides-subtitle >}}"
 author: "{{< var course.author >}}"
 institute: "{{< var course.institute >}}"
-date: 2025-09-02
+date: 2025-08-27
 date-format: full
 lecnum: 1
 categories:
@@ -45,7 +45,7 @@ format:
 
 :::
 
-# Welcome to The Wonderful World of GIS! {data-stack-name="Welcome!" .title-09}
+# Welcome to The Wonderful World of GIS! {data-stack-name="Welcome!" .title-08}
 
 <!-- * **Unit 1**: Maps
 * **Unit 2**: Maps + Coding
@@ -53,7 +53,7 @@ format:
   * Drawing inferences about spatial phenomena using coding
 * **Unit 4**: Applying Units 1-3 to Issues in the World! -->
 
-![](images/Euler.svg){fig-align="center"}
+![](images/Euler.svg){fig-align="center" width="90%"}
 
 ## Your Final Project {background-color="black" background-image="images/goku_final.jpeg" background-size="100%" background-repeat="no-repeat" .title-center}
 
@@ -128,12 +128,13 @@ dev.off()
 * As an **Urban Economist** at UC Berkeley
   * Used, e.g., Google Maps API to evaluate effects of [**Suburbanization of Poverty**](https://www.brookings.edu/wp-content/uploads/2016/06/0120_poverty_paper.pdf){target='_blank'}
 
-## My GIS 🤯 Moment {.crunch-title .crunch-ul}
+## My GIS 🤯 Moment {.crunch-title .crunch-ul .crunch-li-8}
 
-::: {.columns}
+:::: {.columns}
 ::: {.column width="50%"}
 
-* Horrors of "Vietnam War" did not end in 1975... Casualties from unexploded ordnance (cluster bombs) continue to devastate the region, over 220,000 victims:
+* Horrors of "Vietnam War" did not end in 1975...
+* Casualties from unexploded ordnance (cluster bombs) continue to devastate the region, over 220,000 victims:
   * [>105K in Vietnam](https://www.baldwin.senate.gov/imo/media/doc/Legacies%20of%20War%20Recognition%20and%20UXO%20Removal%20Act.pdf){target='_blank'}
   * [>50K in Laos](https://www.cnn.com/2016/09/05/asia/united-states-laos-secret-war/index.html){target='_blank'}
   * [>65K in Cambodia](https://apnews.com/article/bombs-land-mines-unexploded-ordnance-demining-564f0203aeb53aa95118a1396b907246){target='_blank'}
@@ -141,10 +142,10 @@ dev.off()
 :::
 ::: {.column width="50%"}
 
-![From @robert_heart_2016](images/indochina.png){fig-align="center" width="90%"}
+![From @robert_heart_2016](images/indochina.png){fig-align="center" width="80%"}
 
 :::
-:::
+::::
 
 ## Huawei: Optimizing Cell Tower Placement {.smaller .title-12}
 
@@ -159,9 +160,9 @@ dev.off()
 * My job: computing "suburban accessibility indices"
 * Does commuting = straight line distance?
 
-## "Distance" vs. Distance! {.smaller .crunch-title .crunch-ul .crunch-quarto-figure}
+## "Distance" vs. Distance! {.smaller .crunch-title .crunch-ul .crunch-quarto-figure .crunch-p}
 
-* You've just been hired as a fine art curator at [The Whitney](https://en.wikipedia.org/wiki/Whitney_Museum){target='_blank'}... Congratulations!
+You've just been hired as a fine art curator at [The Whitney](https://en.wikipedia.org/wiki/Whitney_Museum){target='_blank'}... Congratulations!
 
 | | |
 | - | - |
@@ -176,7 +177,7 @@ dev.off()
 * As a Data Scientist
 * As a Public Policy Expert
 
-## As Humans {.smaller .crunch-title}
+## As Humans {.smaller .crunch-title .crunch-ul}
 
 * To understand the world around you!
 
@@ -184,14 +185,14 @@ dev.off()
 
 * $\implies$ Crucial landmark in the [**genesis of social science**](https://read.dukeupress.edu/french-historical-studies/article-abstract/33/2/307/9657/Charles-Tilly-s-Vende-e-as-a-Model-for-Social?redirectedFrom=PDF){target='_blank'}
 
-## As Data Scientists {.crunch-ul .crunch-title}
+## As Data Scientists {.crunch-ul .crunch-title .crunch-blockquote}
 
 * All data scientists are expected to know how to analyze "standard" types of data: tabular, numeric data (think spreadsheets)
 * However, you can **differentiate yourself** in the scary scary job market by developing a particular focus on some "non-standard" type:
 
-> *Hello Mr. Google Musk, yes, indeed, I have a wealth of experience working with [**text** data / **temporal** data / **signal** processing / **geospatial** data]. This job will be no problem for me.*
+> *Hello Mrs. Google Meta OpenAI, yes, indeed, I have a wealth of experience working with [**text** data / **temporal** data / **signal** processing / **geospatial** data]. This job will be no problem for me.*
 
-## As Public Policy Experts {.smaller .crunch-ul .crunch-quarto-figure}
+## As Public Policy Experts {.smaller .crunch-title .crunch-ul .crunch-quarto-figure}
 
 * Oftentimes, all it takes is one map to see why a policy has failed 😱
 
@@ -207,7 +208,7 @@ http://www.radicalcartography.net/index.html?chicagodots, then adapted to DC: "[
 
 ## It's Completely Made Up {.smaller .crunch-title}
 
-*Like, even more made up than other made-up technical terms...* 😵‍💫
+*Like, even more made up than other made-up tech terms... Almost as bad as "AI"* 😵‍💫
 
 {{< video https://www.youtube.com/watch?v=yjw_DuNkOUw height="500" width="100%" >}}
 
@@ -253,7 +254,7 @@ http://www.radicalcartography.net/index.html?chicagodots, then adapted to DC: "[
 </table>
 ```
 
-## ArcGIS {.crunch-title .crunch-ul}
+## ArcGIS... {.crunch-title .crunch-ul}
 
 * For info on Georgetown's provision of ArcGIS (Online, Pro, and Desktop), see the [Library Guide](https://guides.library.georgetown.edu/esri_software){target='_blank'}
 
@@ -412,7 +413,7 @@ df.plot()
 
 ![](images/sf_deps.png){fig-align="center"}
 
-* We'll cover key "pieces": <i class='bi bi-1-circle'></i> [GDAL](https://gdal.org/index.html){target='_blank'} (Geospatial Data Abstraction Library), <i class='bi bi-2-circle'></i> [PROJ](https://proj.org/en/9.4/){target='_blank'} for converting between projections, <i class='bi bi-3-circle'></i> [GEOS](https://libgeos.org/){target='_blank'} for computational geometry
+* We'll cover key pieces: <i class='bi bi-1-circle'></i> [GDAL](https://gdal.org/index.html){target='_blank'} (Geospatial Data Abstraction Library), <i class='bi bi-2-circle'></i> [PROJ](https://proj.org/en/9.4/){target='_blank'} to convert between projections, <i class='bi bi-3-circle'></i> [GEOS](https://libgeos.org/){target='_blank'} for computational geometry
 
 # Course Policy Things {data-stack-name="Prereqs / Policies"}
 

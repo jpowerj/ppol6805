@@ -7,10 +7,10 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/quarto-contrib/videojs/video.min.js"></script>
 <link href="../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.40">
+  <meta name="generator" content="quarto-1.7.33">
 
   <meta name="author" content="Jeff Jacobs">
   <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 1: Introduction to GIS</title>
@@ -32,8 +32,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -44,7 +45,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -117,7 +118,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-0ba57519f6ec69054f1c33bbde2e5ac2.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-f1a2fbe10646af64ab771edae1b2cadf.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -232,10 +233,10 @@ Jeff Jacobs
     </div>
 </div>
 
-  <p class="date">Tuesday, September 2, 2025</p>
+  <p class="date">Wednesday, August 27, 2025</p>
 </section>
 <section>
-<section id="welcome-to-the-wonderful-world-of-gis" class="title-slide slide level1 title-09 center" data-stack-name="Welcome!">
+<section id="welcome-to-the-wonderful-world-of-gis" class="title-slide slide level1 title-08 center" data-stack-name="Welcome!">
 <h1>Welcome to The Wonderful World of GIS!</h1>
 <!-- * **Unit 1**: Maps
 * **Unit 2**: Maps + Coding
@@ -243,7 +244,7 @@ Jeff Jacobs
   * Drawing inferences about spatial phenomena using coding
 * **Unit 4**: Applying Units 1-3 to Issues in the World! -->
 
-<img data-src="images/Euler.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<img data-src="images/Euler.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:90.0%"></section>
 <section id="your-final-project" class="slide level2 title-center" data-background-color="black" data-background-image="images/goku_final.jpeg" data-background-size="100%" data-background-repeat="no-repeat">
 <h2>Your Final Project</h2>
 </section>
@@ -339,12 +340,13 @@ Jeff Jacobs
 </ul></li>
 </ul>
 </section>
-<section id="my-gis-moment" class="slide level2 crunch-title crunch-ul">
+<section id="my-gis-moment" class="slide level2 crunch-title crunch-ul crunch-li-8">
 <h2>My GIS 🤯 Moment</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li>Horrors of “Vietnam War” did not end in 1975… Casualties from unexploded ordnance (cluster bombs) continue to devastate the region, over 220,000 victims:
+<li>Horrors of “Vietnam War” did not end in 1975…</li>
+<li>Casualties from unexploded ordnance (cluster bombs) continue to devastate the region, over 220,000 victims:
 <ul>
 <li><a href="https://www.baldwin.senate.gov/imo/media/doc/Legacies%20of%20War%20Recognition%20and%20UXO%20Removal%20Act.pdf" target="_blank">&gt;105K in Vietnam</a></li>
 <li><a href="https://www.cnn.com/2016/09/05/asia/united-states-laos-secret-war/index.html" target="_blank">&gt;50K in Laos</a></li>
@@ -354,7 +356,7 @@ Jeff Jacobs
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/indochina.png" style="width:90.0%"></p>
+<p><img data-src="images/indochina.png" style="width:80.0%"></p>
 <figcaption>From <span class="citation" data-cites="robert_heart_2016">Robert (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span></figcaption>
 </figure>
 </div>
@@ -377,11 +379,9 @@ Jeff Jacobs
 <li>Does commuting = straight line distance?</li>
 </ul>
 </section>
-<section id="distance-vs.-distance" class="slide level2 smaller crunch-title crunch-ul crunch-quarto-figure">
+<section id="distance-vs.-distance" class="slide level2 smaller crunch-title crunch-ul crunch-quarto-figure crunch-p">
 <h2>“Distance” vs.&nbsp;Distance!</h2>
-<ul>
-<li>You’ve just been hired as a fine art curator at <a href="https://en.wikipedia.org/wiki/Whitney_Museum" target="_blank">The Whitney</a>… Congratulations!</li>
-</ul>
+<p>You’ve just been hired as a fine art curator at <a href="https://en.wikipedia.org/wiki/Whitney_Museum" target="_blank">The Whitney</a>… Congratulations!</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 25%">
@@ -408,7 +408,7 @@ Jeff Jacobs
 <li>As a Public Policy Expert</li>
 </ul>
 </section>
-<section id="as-humans" class="slide level2 smaller crunch-title">
+<section id="as-humans" class="slide level2 smaller crunch-title crunch-ul">
 <h2>As Humans</h2>
 <ul>
 <li>To understand the world around you!</li>
@@ -418,17 +418,17 @@ Jeff Jacobs
 <li><span class="math inline">\(\implies\)</span> Crucial landmark in the <a href="https://read.dukeupress.edu/french-historical-studies/article-abstract/33/2/307/9657/Charles-Tilly-s-Vende-e-as-a-Model-for-Social?redirectedFrom=PDF" target="_blank"><strong>genesis of social science</strong></a></li>
 </ul>
 </section>
-<section id="as-data-scientists" class="slide level2 crunch-ul crunch-title">
+<section id="as-data-scientists" class="slide level2 crunch-ul crunch-title crunch-blockquote">
 <h2>As Data Scientists</h2>
 <ul>
 <li>All data scientists are expected to know how to analyze “standard” types of data: tabular, numeric data (think spreadsheets)</li>
 <li>However, you can <strong>differentiate yourself</strong> in the scary scary job market by developing a particular focus on some “non-standard” type:</li>
 </ul>
 <blockquote>
-<p><em>Hello Mr.&nbsp;Google Musk, yes, indeed, I have a wealth of experience working with [<strong>text</strong> data / <strong>temporal</strong> data / <strong>signal</strong> processing / <strong>geospatial</strong> data]. This job will be no problem for me.</em></p>
+<p><em>Hello Mrs.&nbsp;Google Meta OpenAI, yes, indeed, I have a wealth of experience working with [<strong>text</strong> data / <strong>temporal</strong> data / <strong>signal</strong> processing / <strong>geospatial</strong> data]. This job will be no problem for me.</em></p>
 </blockquote>
 </section>
-<section id="as-public-policy-experts" class="slide level2 smaller crunch-ul crunch-quarto-figure">
+<section id="as-public-policy-experts" class="slide level2 smaller crunch-title crunch-ul crunch-quarto-figure">
 <h2>As Public Policy Experts</h2>
 <ul>
 <li>Oftentimes, all it takes is one map to see why a policy has failed 😱</li>
@@ -455,7 +455,7 @@ Jeff Jacobs
 </section>
 <section id="its-completely-made-up" class="slide level2 smaller crunch-title">
 <h2>It’s Completely Made Up</h2>
-<p><em>Like, even more made up than other made-up technical terms…</em> 😵‍💫</p>
+<p><em>Like, even more made up than other made-up tech terms… Almost as bad as “AI”</em> 😵‍💫</p>
 <iframe data-external="1" src="https://www.youtube.com/embed/yjw_DuNkOUw" width="100%" height="500" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
 </section>
 <section id="what-i-mean-by-made-up" class="slide level2 smaller crunch-title crunch-ul">
@@ -508,7 +508,7 @@ Jeff Jacobs
 </table>
 </section>
 <section id="arcgis" class="slide level2 crunch-title crunch-ul">
-<h2>ArcGIS</h2>
+<h2>ArcGIS…</h2>
 <ul>
 <li>For info on Georgetown’s provision of ArcGIS (Online, Pro, and Desktop), see the <a href="https://guides.library.georgetown.edu/esri_software" target="_blank">Library Guide</a></li>
 </ul>
@@ -638,7 +638,7 @@ Jeff Jacobs
 <h2>The Spatial Data Science Universe</h2>
 
 <img data-src="images/sf_deps.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
-<li>We’ll cover key “pieces”: <i class="bi bi-1-circle"></i> <a href="https://gdal.org/index.html" target="_blank">GDAL</a> (Geospatial Data Abstraction Library), <i class="bi bi-2-circle"></i> <a href="https://proj.org/en/9.4/" target="_blank">PROJ</a> for converting between projections, <i class="bi bi-3-circle"></i> <a href="https://libgeos.org/" target="_blank">GEOS</a> for computational geometry</li>
+<li>We’ll cover key pieces: <i class="bi bi-1-circle"></i> <a href="https://gdal.org/index.html" target="_blank">GDAL</a> (Geospatial Data Abstraction Library), <i class="bi bi-2-circle"></i> <a href="https://proj.org/en/9.4/" target="_blank">PROJ</a> to convert between projections, <i class="bi bi-3-circle"></i> <a href="https://libgeos.org/" target="_blank">GEOS</a> for computational geometry</li>
 </ul>
 </section></section>
 <section>
@@ -1238,197 +1238,179 @@ Robert, Amélie. 2016. <span>“At the <span>Heart</span> of the <span>Vietnam W
     </script>
 
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
-          }
-        }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
             }
           }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          return false;
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
             }
-              // target, if specified
-              link.setAttribute("target", "_blank");
-              if (link.getAttribute("rel") === null) {
-                link.setAttribute("rel", "noopener");
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
               }
-              // default icon
-              link.classList.add("external");
-          }
+            }
+            return codeEl.innerText;
         }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
-          }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
         });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
               }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+                // target, if specified
+                link.setAttribute("target", "_blank");
+                if (link.getAttribute("rel") === null) {
+                  link.setAttribute("rel", "noopener");
+                }
+                // default icon
+                link.classList.add("external");
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     <script>videojs(video_shortcode_videojs_video1);</script>
     
 
