@@ -1055,7 +1055,7 @@
     "href": "index.html",
     "title": "PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science",
     "section": "",
-    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2025, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Healy 105. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\n\nDate\n\n\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 27\n\n\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 4\n\n\n\n\n\n\nWeek 3: Unary Operations\n\n\nSep 11\n\n\n\n\n\n\nWeek 4: Binary Operations\n\n\nSep 18\n\n\n\n\n\n\nWeek 5: Spatial Data Science!\n\n\nSep 25\n\n\n\n\n\n\nWeek 6: Random Fields and Spatial Autocorrelation\n\n\nOct 2\n\n\n\n\n\n\nWeek 7: Point Processes, Clustering, and Regularity\n\n\nOct 9\n\n\n\n\n\n\nWeek 8: Null Models and Marked Point Processes\n\n\nOct 16\n\n\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Point Data\n\n\nOct 23\n\n\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Areal Data\n\n\nOct 30\n\n\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 6\n\n\n\n\n\n\nWeek 12: Tools for Final Projects\n\n\nNov 13\n\n\n\n\n\n\nWeek 13: In-Class Office Hours\n\n\nNov 20\n\n\n\n\n\n\nWeek 14: Final Presentations I\n\n\nDec 4\n\n\n\n\n\n\nNo matching items",
+    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2025, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Healy 105. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\n\nDate\n\n\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 27\n\n\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 3\n\n\n\n\n\n\nWeek 3: Unary Operations\n\n\nSep 11\n\n\n\n\n\n\nWeek 4: Binary Operations\n\n\nSep 18\n\n\n\n\n\n\nWeek 5: Spatial Data Science!\n\n\nSep 25\n\n\n\n\n\n\nWeek 6: Random Fields and Spatial Autocorrelation\n\n\nOct 2\n\n\n\n\n\n\nWeek 7: Point Processes, Clustering, and Regularity\n\n\nOct 9\n\n\n\n\n\n\nWeek 8: Null Models and Marked Point Processes\n\n\nOct 16\n\n\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Point Data\n\n\nOct 23\n\n\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Areal Data\n\n\nOct 30\n\n\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 6\n\n\n\n\n\n\nWeek 12: Tools for Final Projects\n\n\nNov 13\n\n\n\n\n\n\nWeek 13: In-Class Office Hours\n\n\nNov 20\n\n\n\n\n\n\nWeek 14: Final Presentations I\n\n\nDec 4\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "<i class='bi bi-house pe-1'></i> Home"
     ]
@@ -2519,7 +2519,7 @@
     "href": "w05/index.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (29.40938 6.4872)\n54.738500\n\n\nPOINT (21.36471 -26.77456)\n28.154802\n\n\nPOINT (4.4285 17.31054)\n6.537747\n\n\nPOINT (6.3683 10.32048)\n75.187674\n\n\nPOINT (28.76818 -6.21396)\n27.050807\n\n\nPOINT (23.43284 -16.49423)\n40.338662\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n1\nZWE\nZimbabwe\nMULTIPOLYGON (((31.28789 -2…\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n52\nSSD\nSouth Sudan\nMULTIPOLYGON (((33.97607 4….\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (21.10901 10.78471)\n51.945502\n\n\nPOINT (31.45748 20.69542)\n50.113098\n\n\nPOINT (34.55583 1.135065)\n7.849226\n\n\nPOINT (7.424328 35.3084)\n50.284099\n\n\nPOINT (37.72581 -4.782198)\n40.617045\n\n\nPOINT (-0.502579 32.99429)\n52.543460\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n35\nUGA\nUganda\nMULTIPOLYGON (((33.90322 -1…\n\n\n44\nTZA\nTanzania\nMULTIPOLYGON (((39.49648 -6…\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -2529,7 +2529,7 @@
     "href": "w05/index.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n1\nZWE\nZimbabwe\n10.061180\nMULTIPOLYGON (((31.28789 -2…\n\n\n2\nZMB\nZambia\n40.338662\nMULTIPOLYGON (((30.39609 -1…\n\n\n52\nSSD\nSouth Sudan\n54.738500\nMULTIPOLYGON (((33.97607 4….\n\n\n53\nSDN\nSudan\n72.156372\nMULTIPOLYGON (((34.07812 9….\n\n\n91\nNGA\nNigeria\n75.187674\nMULTIPOLYGON (((7.300781 4….\n\n\n92\nNER\nNiger\n6.537747\nMULTIPOLYGON (((13.60635 13…",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n35\nUGA\nUganda\n7.849226\nMULTIPOLYGON (((33.90322 -1…\n\n\n44\nTZA\nTanzania\n40.617045\nMULTIPOLYGON (((39.49648 -6…\n\n\n53\nSDN\nSudan\n50.113098\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\n68.492071\nMULTIPOLYGON (((29.36484 -2…\n\n\n114\nMLI\nMali\n41.831084\nMULTIPOLYGON (((-11.3894 12…\n\n\n123\nLBY\nLibya\n65.353395\nMULTIPOLYGON (((9.51875 30….",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -2626,14 +2626,14 @@
     "href": "w05/slides.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (22.43341 10.85628)\n12.280356\n\n\nPOINT (13.046 -16.78457)\n57.674716\n\n\nPOINT (0.9214377 10.7397)\n83.376030\n\n\nPOINT (21.61674 0.2314314)\n32.246767\n\n\nPOINT (35.01889 18.56194)\n26.668909\n\n\nPOINT (15.21028 -11.02569)\n8.034289\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n44\nTZA\nTanzania\nMULTIPOLYGON (((39.49648 -6…\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n104\nMAR\nMorocco\nMULTIPOLYGON (((-2.219629 3…\n\n\n192\nCOD\nDemocratic Republic of the Congo\nMULTIPOLYGON (((30.75117 -8…"
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (27.04457 -22.65583)\n59.74337\n\n\nPOINT (44.86951 -18.64988)\n46.89641\n\n\nPOINT (9.337115 5.078613)\n48.85518\n\n\nPOINT (35.16264 -3.674904)\n46.94874\n\n\nPOINT (13.40678 22.21138)\n64.69358\n\n\nPOINT (27.77552 -12.90871)\n3.69029\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n44\nTZA\nTanzania\nMULTIPOLYGON (((39.49648 -6…\n\n\n58\nSOM\nSomalia\nMULTIPOLYGON (((41.53271 -1…\n\n\n92\nNER\nNiger\nMULTIPOLYGON (((13.60635 13…"
   },
   {
     "objectID": "w05/slides.html#our-first-real-spatial-join-st_join",
     "href": "w05/slides.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n44\nTZA\nTanzania\n63.0187953\nMULTIPOLYGON (((39.49648 -6…\n\n\n53\nSDN\nSudan\n26.6689091\nMULTIPOLYGON (((34.07812 9….\n\n\n104\nMAR\nMorocco\n0.4158938\nMULTIPOLYGON (((-2.219629 3…\n\n\n192\nCOD\nDemocratic Republic of the Congo\n32.2467675\nMULTIPOLYGON (((30.75117 -8…\n\n\n193\nCOG\nRepublic of the Congo\n32.5531433\nMULTIPOLYGON (((11.13018 -3…\n\n\n201\nCAF\nCentral African Republic\n12.2803563\nMULTIPOLYGON (((24.14736 8…."
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n2\nZMB\nZambia\n3.69029\nMULTIPOLYGON (((30.39609 -1…\n\n\n44\nTZA\nTanzania\n46.94874\nMULTIPOLYGON (((39.49648 -6…\n\n\n58\nSOM\nSomalia\n40.79491\nMULTIPOLYGON (((41.53271 -1…\n\n\n92\nNER\nNiger\n64.69358\nMULTIPOLYGON (((13.60635 13…\n\n\n92.1\nNER\nNiger\n87.07873\nMULTIPOLYGON (((13.60635 13…\n\n\n118\nMDG\nMadagascar\n46.89641\nMULTIPOLYGON (((49.53828 -1…"
   },
   {
     "objectID": "w05/slides.html#but-we-were-still-in-easy-mode",
@@ -3201,7 +3201,7 @@
     "href": "w01/index.html#unit-1-maps",
     "title": "Week 1: Introduction to GIS",
     "section": "Unit 1: Maps",
-    "text": "Unit 1: Maps\n\nYour least favorite part of the course (per survey 😜)\nMy favorite part of the course (because I love overthinking things)\nMy goal given survey results: Let’s think of this unit like learning languages for expressing spatial information:\n\n\nlibrary(sf)\nlibrary(svglite)\nsvglite(\"images/st_polygon.svg\", width = 6, height = 4.5)\npoly_blob &lt;- st_polygon(\n  list(\n    rbind(c(2,1), c(3,1), c(5,2), c(6,3), c(5,3), c(4,4), c(3,4), c(1,3), c(2,1)),\n    rbind(c(2,2), c(3,3), c(4,3), c(4,2), c(2,2))\n  )\n)\nplot(poly_blob,\n  border = 'black', col = '#ff8888', lwd = 4\n)\ndev.off()\n\n\n\n\n\n\n\n\nTemporal Information\nSpatial Information\n\n\n\n\n\n\n\n\n\\(\\Rightarrow\\) 22.5 seconds\n\\(\\Rightarrow\\) POLYGON ((2 1, 3 1, 5 2, 6 3, 5 3, 4 4, 3 4, 1 3, 2 1),(2 2, 3 3, 4 3, 4 2, 2 2))\n\n\n\n\nI think you’ll be surprised at how, complexity of geospatial/spatio-temporal data \\(\\implies\\) need for programming-language-independent representations",
+    "text": "Unit 1: Maps\n\n\nsource(\"../dsan-globals/_globals.r\")\n\n\n\nYour least favorite part of the course (per survey 😜)\nMy favorite part of the course (because I love overthinking things)\nMy goal given survey results: Let’s think of this unit like learning languages for expressing spatial information:\n\n\nlibrary(sf)\nlibrary(svglite)\nsvglite(\"images/st_polygon.svg\", width = 6, height = 4.5)\npoly_blob &lt;- st_polygon(\n  list(\n    rbind(c(2,1), c(3,1), c(5,2), c(6,3), c(5,3), c(4,4), c(3,4), c(1,3), c(2,1)),\n    rbind(c(2,2), c(3,3), c(4,3), c(4,2), c(2,2))\n  )\n)\nplot(poly_blob,\n  border = 'black', col = '#ff8888', lwd = 4\n)\ndev.off()\n\n\n\n\n\n\n\n\nTemporal Information\nSpatial Information\n\n\n\n\n\n\n\n\n\\(\\Rightarrow\\) 22.5 seconds\n\\(\\Rightarrow\\) POLYGON ((2 1, 3 1, 5 2, 6 3, 5 3, 4 4, 3 4, 1 3, 2 1),(2 2, 3 3, 4 3, 4 2, 2 2))\n\n\n\n\nI think you’ll be surprised at how, complexity of geospatial/spatio-temporal data \\(\\implies\\) need for programming-language-independent representations",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3232,6 +3232,16 @@
     "title": "Week 1: Introduction to GIS",
     "section": "Unit 4: Applications / Final Project",
     "text": "Unit 4: Applications / Final Project\n\nTake everything you’ve learned in Units 1-3 and Kamehameha them onto something you care about in the world!\nPublic Policy: Which counties are most in need of more transportation infrastructure?\nUrban Planning: Which neighborhoods are most in need of a new bus stop?\nEpidemiology: What properties of a region make it more/less susceptible to infectious diseases? Where should we intervene to “cut the chain” of a disease vector?",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#who-am-i-why-am-i-teaching-you",
+    "href": "w01/index.html#who-am-i-why-am-i-teaching-you",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Who Am I? Why Am I Teaching You?",
+    "text": "Who Am I? Why Am I Teaching You?\n\nStarted out as PhD student in Computer Science\n\nUCLA: Algorithmic Game Theory\nStanford (MS): Economic Network Analysis\n\nEnded up with PhD in Political Economy\n\nColumbia: “Computational Political Theory”",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3317,21 +3327,11 @@
     ]
   },
   {
-    "objectID": "w01/index.html#its-completely-made-up",
-    "href": "w01/index.html#its-completely-made-up",
+    "objectID": "w01/index.html#gis-as-an-umbrella-term",
+    "href": "w01/index.html#gis-as-an-umbrella-term",
     "title": "Week 1: Introduction to GIS",
-    "section": "It’s Completely Made Up",
-    "text": "It’s Completely Made Up\nLike, even more made up than other made-up tech terms… Almost as bad as “AI” 😵‍💫",
-    "crumbs": [
-      "Week 1: Aug 28"
-    ]
-  },
-  {
-    "objectID": "w01/index.html#what-i-mean-by-made-up",
-    "href": "w01/index.html#what-i-mean-by-made-up",
-    "title": "Week 1: Introduction to GIS",
-    "section": "What I Mean By “Made Up”",
-    "text": "What I Mean By “Made Up”\n\nThe libraries and tools we’ll use are specific systems/methods for analyzing geospatial data\nGIS is an “umbrella term”, which just vaguely refers to this entire universe of libraries/tools/techniques/approaches\n\n\n\n\n\n\n\n\n\nUmbrella Term\nConcepts\nSpecific Skills\n\n\n\n\nCoding\n\nVariables\nControl Flow\nAlgorithms\n\n\nPython\nR\nJavaScript\n\n\n\nGIS\n\nProjections\nVector vs. Raster\nSpatial Data Formats (shapefiles, .geojson)\n\n\nArcGIS\nGeoPandas (Python)\nsf (R)",
+    "section": "GIS as an “Umbrella Term”",
+    "text": "GIS as an “Umbrella Term”\n\nLibraries and tools we’ll use: specific systems/methods for geospatial analysis\nGIS is an “umbrella term”, which just vaguely refers to this entire universe of libraries/tools/techniques/approaches\n\n\n\n\n\n\n\n\n\nUmbrella Term\nConcepts\nSpecific Skills\n\n\n\n\nCoding\n\nVariables\nControl Flow\nAlgorithms\n\n\nPython\nR\nJavaScript\n\n\n\nGIS\n\nProjections\nVector vs. Raster\nSpatial Data Formats (shapefiles, .geojson)\n\n\nArcGIS\nGeoPandas (Python)\nsf (R)",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3387,11 +3387,11 @@
     ]
   },
   {
-    "objectID": "w01/index.html#i-am-the-opposite-of-a-prereq-stickler",
-    "href": "w01/index.html#i-am-the-opposite-of-a-prereq-stickler",
+    "objectID": "w01/index.html#on-not-worrying-about-prereqs",
+    "href": "w01/index.html#on-not-worrying-about-prereqs",
     "title": "Week 1: Introduction to GIS",
-    "section": "I Am The Opposite of a Prereq-Stickler",
-    "text": "I Am The Opposite of a Prereq-Stickler\n\nI genuinely believe that I can make the course accessible to you, meeting you wherever you’re at, no matter what!\nEveryone learns at their own pace (who says 14 weeks is “correct” amount of time to learn GIS?), and I structure my courses as best as I possibly can to adapt to your pace\n\\(\\Rightarrow\\) Assessments (HW, Midterm) valuable in two ways:\n[Valuable for you] As an accountability mechanism to make sure you’re learn the material (how do we know when we’ve learned something? When we can answer questions about it / use it to accomplish things!)\n[Valuable for me] For assessing and updating pace",
+    "section": "On Not Worrying About Prereqs",
+    "text": "On Not Worrying About Prereqs\n\nI genuinely believe that I can make the course accessible to you, meeting you wherever you’re at, no matter what!\nEveryone learns at their own pace (who says 14 weeks is “correct” amount of time to learn GIS?), and I structure my courses as best as I possibly can to adapt to your pace\n\\(\\Rightarrow\\) Assessments (HW, Midterm) valuable in two ways:\n[Valuable for you] As an accountability mechanism to make sure you’re learn the material (how do we know when we’ve learned something? When we can answer questions about it / use it to accomplish things!)\n[Valuable for me] For assessing and updating pace",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3437,11 +3437,11 @@
     ]
   },
   {
-    "objectID": "w01/index.html#what-is-an-sf-object",
-    "href": "w01/index.html#what-is-an-sf-object",
+    "objectID": "w01/index.html#sf-objects",
+    "href": "w01/index.html#sf-objects",
     "title": "Week 1: Introduction to GIS",
-    "section": "What is an sf Object?",
-    "text": "What is an sf Object?\n\ndc_sf is an object of type sf (short for “simple feature”), which extends data.frame, and contains features which have type POLYGON\n\n\nclass(dc_sf)\n\n[1] \"sf\"         \"data.frame\"\n\nhead(dc_sf)\n\nSimple feature collection with 6 features and 12 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8577962 ymin: 4708107 xmax: -8572564 ymax: 4716136\nProjected CRS: WGS 84 / Pseudo-Mercator\n  OBJECTID  TRACT       GEOID  ALAND AWATER STUSAB SUMLEV     GEOCODE STATE\n1        1 002002 11001002002 849376      0     DC    140 11001002002    11\n2        2 002101 11001002101 600992      0     DC    140 11001002101    11\n3        3 002102 11001002102 725975      0     DC    140 11001002102    11\n4        4 002201 11001002201 415173      0     DC    140 11001002201    11\n5        5 002202 11001002202 698895    566     DC    140 11001002202    11\n6        6 000101 11001000101 199776   5261     DC    140 11001000101    11\n                NAME POP100 HU100                       geometry\n1 Census Tract 20.02   4072  1532 POLYGON ((-8575655 4714476,...\n2 Census Tract 21.01   5687  2335 POLYGON ((-8574745 4715676,...\n3 Census Tract 21.02   5099  2221 POLYGON ((-8573824 4715684,...\n4 Census Tract 22.01   3485  1229 POLYGON ((-8574654 4714781,...\n5 Census Tract 22.02   3339  1454 POLYGON ((-8573792 4714811,...\n6  Census Tract 1.01   1406   999 POLYGON ((-8577962 4708867,...",
+    "section": "sf Objects",
+    "text": "sf Objects\ndc_sf is an object of type sf (short for “simple feature”), which extends data.frame, and contains features which have type POLYGON\n\nclass(dc_sf)\n\n[1] \"sf\"         \"data.frame\"\n\nhead(dc_sf)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOBJECTID\nTRACT\nGEOID\nALAND\nAWATER\nSTUSAB\nSUMLEV\nGEOCODE\nSTATE\nNAME\nPOP100\nHU100\ngeometry\n\n\n\n\n1\n002002\n11001002002\n849376\n0\nDC\n140\n11001002002\n11\nCensus Tract 20.02\n4072\n1532\nPOLYGON ((-8575655 4714476,…\n\n\n2\n002101\n11001002101\n600992\n0\nDC\n140\n11001002101\n11\nCensus Tract 21.01\n5687\n2335\nPOLYGON ((-8574745 4715676,…\n\n\n3\n002102\n11001002102\n725975\n0\nDC\n140\n11001002102\n11\nCensus Tract 21.02\n5099\n2221\nPOLYGON ((-8573824 4715684,…\n\n\n4\n002201\n11001002201\n415173\n0\nDC\n140\n11001002201\n11\nCensus Tract 22.01\n3485\n1229\nPOLYGON ((-8574654 4714781,…\n\n\n5\n002202\n11001002202\n698895\n566\nDC\n140\n11001002202\n11\nCensus Tract 22.02\n3339\n1454\nPOLYGON ((-8573792 4714811,…\n\n\n6\n000101\n11001000101\n199776\n5261\nDC\n140\n11001000101\n11\nCensus Tract 1.01\n1406\n999\nPOLYGON ((-8577962 4708867,…",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3451,7 +3451,7 @@
     "href": "w01/index.html#working-with-sf-objects",
     "title": "Week 1: Introduction to GIS",
     "section": "Working With sf Objects",
-    "text": "Working With sf Objects\n\nWith some rare but important exceptions (which we’ll learn!), can be used just like a data.frame / tibble:\n\n\n\nCode\nstr(dc_sf)   # view structure\n\n\nClasses 'sf' and 'data.frame':  206 obs. of  13 variables:\n $ OBJECTID: int  1 2 3 4 5 6 7 8 9 10 ...\n $ TRACT   : chr  \"002002\" \"002101\" \"002102\" \"002201\" ...\n $ GEOID   : chr  \"11001002002\" \"11001002101\" \"11001002102\" \"11001002201\" ...\n $ ALAND   : int  849376 600992 725975 415173 698895 199776 1706484 505004 776435 1042157 ...\n $ AWATER  : int  0 0 0 0 566 5261 516665 0 439661 2305 ...\n $ STUSAB  : chr  \"DC\" \"DC\" \"DC\" \"DC\" ...\n $ SUMLEV  : int  140 140 140 140 140 140 140 140 140 140 ...\n $ GEOCODE : chr  \"11001002002\" \"11001002101\" \"11001002102\" \"11001002201\" ...\n $ STATE   : int  11 11 11 11 11 11 11 11 11 11 ...\n $ NAME    : chr  \"Census Tract 20.02\" \"Census Tract 21.01\" \"Census Tract 21.02\" \"Census Tract 22.01\" ...\n $ POP100  : int  4072 5687 5099 3485 3339 1406 3417 4108 4672 6161 ...\n $ HU100   : int  1532 2335 2221 1229 1454 999 2053 11 2169 2845 ...\n $ geometry:sfc_POLYGON of length 206; first list element: List of 1\n  ..$ : num [1:155, 1:2] -8575655 -8575655 -8575655 -8575655 -8575655 ...\n  ..- attr(*, \"class\")= chr [1:3] \"XY\" \"POLYGON\" \"sfg\"\n - attr(*, \"sf_column\")= chr \"geometry\"\n - attr(*, \"agr\")= Factor w/ 3 levels \"constant\",\"aggregate\",..: NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"names\")= chr [1:12] \"OBJECTID\" \"TRACT\" \"GEOID\" \"ALAND\" ...",
+    "text": "Working With sf Objects\nWith some rare but important exceptions (which we’ll learn!), can be used just like a data.frame / tibble:\n\n\nCode\nstr(dc_sf)   # view structure\n\n\nClasses 'sf' and 'data.frame':  206 obs. of  13 variables:\n $ OBJECTID: int  1 2 3 4 5 6 7 8 9 10 ...\n $ TRACT   : chr  \"002002\" \"002101\" \"002102\" \"002201\" ...\n $ GEOID   : chr  \"11001002002\" \"11001002101\" \"11001002102\" \"11001002201\" ...\n $ ALAND   : int  849376 600992 725975 415173 698895 199776 1706484 505004 776435 1042157 ...\n $ AWATER  : int  0 0 0 0 566 5261 516665 0 439661 2305 ...\n $ STUSAB  : chr  \"DC\" \"DC\" \"DC\" \"DC\" ...\n $ SUMLEV  : int  140 140 140 140 140 140 140 140 140 140 ...\n $ GEOCODE : chr  \"11001002002\" \"11001002101\" \"11001002102\" \"11001002201\" ...\n $ STATE   : int  11 11 11 11 11 11 11 11 11 11 ...\n $ NAME    : chr  \"Census Tract 20.02\" \"Census Tract 21.01\" \"Census Tract 21.02\" \"Census Tract 22.01\" ...\n $ POP100  : int  4072 5687 5099 3485 3339 1406 3417 4108 4672 6161 ...\n $ HU100   : int  1532 2335 2221 1229 1454 999 2053 11 2169 2845 ...\n $ geometry:sfc_POLYGON of length 206; first list element: List of 1\n  ..$ : num [1:155, 1:2] -8575655 -8575655 -8575655 -8575655 -8575655 ...\n  ..- attr(*, \"class\")= chr [1:3] \"XY\" \"POLYGON\" \"sfg\"\n - attr(*, \"sf_column\")= chr \"geometry\"\n - attr(*, \"agr\")= Factor w/ 3 levels \"constant\",\"aggregate\",..: NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"names\")= chr [1:12] \"OBJECTID\" \"TRACT\" \"GEOID\" \"ALAND\" ...",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3461,7 +3461,7 @@
     "href": "w01/index.html#working-with-sf-objects-1",
     "title": "Week 1: Introduction to GIS",
     "section": "Working With sf Objects",
-    "text": "Working With sf Objects\n\n\nCode\nhead(dc_sf)  # view first several rows\n\n\nSimple feature collection with 6 features and 12 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8577962 ymin: 4708107 xmax: -8572564 ymax: 4716136\nProjected CRS: WGS 84 / Pseudo-Mercator\n  OBJECTID  TRACT       GEOID  ALAND AWATER STUSAB SUMLEV     GEOCODE STATE\n1        1 002002 11001002002 849376      0     DC    140 11001002002    11\n2        2 002101 11001002101 600992      0     DC    140 11001002101    11\n3        3 002102 11001002102 725975      0     DC    140 11001002102    11\n4        4 002201 11001002201 415173      0     DC    140 11001002201    11\n5        5 002202 11001002202 698895    566     DC    140 11001002202    11\n6        6 000101 11001000101 199776   5261     DC    140 11001000101    11\n                NAME POP100 HU100                       geometry\n1 Census Tract 20.02   4072  1532 POLYGON ((-8575655 4714476,...\n2 Census Tract 21.01   5687  2335 POLYGON ((-8574745 4715676,...\n3 Census Tract 21.02   5099  2221 POLYGON ((-8573824 4715684,...\n4 Census Tract 22.01   3485  1229 POLYGON ((-8574654 4714781,...\n5 Census Tract 22.02   3339  1454 POLYGON ((-8573792 4714811,...\n6  Census Tract 1.01   1406   999 POLYGON ((-8577962 4708867,...",
+    "text": "Working With sf Objects\n\n\nCode\nhead(dc_sf)  # view first several rows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOBJECTID\nTRACT\nGEOID\nALAND\nAWATER\nSTUSAB\nSUMLEV\nGEOCODE\nSTATE\nNAME\nPOP100\nHU100\ngeometry\n\n\n\n\n1\n002002\n11001002002\n849376\n0\nDC\n140\n11001002002\n11\nCensus Tract 20.02\n4072\n1532\nPOLYGON ((-8575655 4714476,…\n\n\n2\n002101\n11001002101\n600992\n0\nDC\n140\n11001002101\n11\nCensus Tract 21.01\n5687\n2335\nPOLYGON ((-8574745 4715676,…\n\n\n3\n002102\n11001002102\n725975\n0\nDC\n140\n11001002102\n11\nCensus Tract 21.02\n5099\n2221\nPOLYGON ((-8573824 4715684,…\n\n\n4\n002201\n11001002201\n415173\n0\nDC\n140\n11001002201\n11\nCensus Tract 22.01\n3485\n1229\nPOLYGON ((-8574654 4714781,…\n\n\n5\n002202\n11001002202\n698895\n566\nDC\n140\n11001002202\n11\nCensus Tract 22.02\n3339\n1454\nPOLYGON ((-8573792 4714811,…\n\n\n6\n000101\n11001000101\n199776\n5261\nDC\n140\n11001000101\n11\nCensus Tract 1.01\n1406\n999\nPOLYGON ((-8577962 4708867,…",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3471,7 +3471,7 @@
     "href": "w01/index.html#working-with-sf-objects-2",
     "title": "Week 1: Introduction to GIS",
     "section": "Working With sf Objects",
-    "text": "Working With sf Objects\n\n\nCode\ndim(dc_sf)   # view dimensions\n\n\n[1] 206  13\n\n\nCode\ndc_sf[1,]    # select first row\n\n\nSimple feature collection with 1 feature and 12 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8575656 ymin: 4713958 xmax: -8574562 ymax: 4716136\nProjected CRS: WGS 84 / Pseudo-Mercator\n  OBJECTID  TRACT       GEOID  ALAND AWATER STUSAB SUMLEV     GEOCODE STATE\n1        1 002002 11001002002 849376      0     DC    140 11001002002    11\n                NAME POP100 HU100                       geometry\n1 Census Tract 20.02   4072  1532 POLYGON ((-8575655 4714476,...",
+    "text": "Working With sf Objects\n\n\nCode\ndim(dc_sf)   # view dimensions\n\n\n[1] 206  13\n\n\nCode\ndc_sf[1,]    # select first row\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOBJECTID\nTRACT\nGEOID\nALAND\nAWATER\nSTUSAB\nSUMLEV\nGEOCODE\nSTATE\nNAME\nPOP100\nHU100\ngeometry\n\n\n\n\n1\n002002\n11001002002\n849376\n0\nDC\n140\n11001002002\n11\nCensus Tract 20.02\n4072\n1532\nPOLYGON ((-8575655 4714476,…",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3481,7 +3481,7 @@
     "href": "w01/index.html#working-with-sf-objects-3",
     "title": "Week 1: Introduction to GIS",
     "section": "Working With sf Objects",
-    "text": "Working With sf Objects\n\n\nCode\nhead(dc_sf$NAME)  # select column by name  \n\n\n[1] \"Census Tract 20.02\" \"Census Tract 21.01\" \"Census Tract 21.02\"\n[4] \"Census Tract 22.01\" \"Census Tract 22.02\" \"Census Tract 1.01\" \n\n\nCode\nhead(dc_sf[,4])         # select column by number\n\n\nSimple feature collection with 6 features and 1 field\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8577962 ymin: 4708107 xmax: -8572564 ymax: 4716136\nProjected CRS: WGS 84 / Pseudo-Mercator\n   ALAND                       geometry\n1 849376 POLYGON ((-8575655 4714476,...\n2 600992 POLYGON ((-8574745 4715676,...\n3 725975 POLYGON ((-8573824 4715684,...\n4 415173 POLYGON ((-8574654 4714781,...\n5 698895 POLYGON ((-8573792 4714811,...\n6 199776 POLYGON ((-8577962 4708867,...",
+    "text": "Working With sf Objects\n\n\nCode\nhead(dc_sf$NAME)  # select column by name  \n\n\n[1] \"Census Tract 20.02\" \"Census Tract 21.01\" \"Census Tract 21.02\"\n[4] \"Census Tract 22.01\" \"Census Tract 22.02\" \"Census Tract 1.01\" \n\n\nCode\nhead(dc_sf[,4])         # select column by number\n\n\n\n\n\n\nALAND\ngeometry\n\n\n\n\n849376\nPOLYGON ((-8575655 4714476,…\n\n\n600992\nPOLYGON ((-8574745 4715676,…\n\n\n725975\nPOLYGON ((-8573824 4715684,…\n\n\n415173\nPOLYGON ((-8574654 4714781,…\n\n\n698895\nPOLYGON ((-8573792 4714811,…\n\n\n199776\nPOLYGON ((-8577962 4708867,…",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3497,11 +3497,41 @@
     ]
   },
   {
+    "objectID": "w01/index.html#key-notation-definition",
+    "href": "w01/index.html#key-notation-definition",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Key Notation / Definition",
+    "text": "Key Notation / Definition\n\n\n\\(d\\)-Dimensional “Spatial Process” (Schabenberger and Gotway 2004, 6)\n\n\\[\n\\text{Data} = \\left\\{Z(\\mathbf{s}) \\mid \\mathbf{s} \\in D \\subset \\mathbb{R}^d\\right\\}\n\\]\n\n\\(d &gt; 1\\): Data forms a Random Field (this class: \\(d = 2\\)!)\n\n\n\n\n\n\n\n\n\n\n\n\nGeostatistical Data\nLattice/Region Data\nPoint Pattern\n\n\n\n\nCriteria\nFixed \\(D\\), Continuous\nFixed \\(D\\), Discrete\nRandom subset \\(D^* \\subseteq D\\)\n\n\nInterest\nInfer non-observed parts of \\(D\\)\nAutocorrelation, clustering\nPoint-generating process\n\n\nExample\n\n\\(N\\) trees \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots, \\mathbf{s}_N\\), observed within a sample window \\(D \\subset \\mathbb{R}^2\\), (\\(D\\) some finite plot of land)\n\\(Z(\\mathbf{s}_i)\\): Attribute(s) at site \\(\\mathbf{s}_i\\)\nExample: Height. \\(Z(\\mathbf{s}_1) = 500\\text{m}\\), \\(Z(\\mathbf{s}_2) = 850\\text{m}\\), \\(\\ldots\\)\n\n\n\\(Z(\\mathbf{s})\\) observed over \\(N \\times N\\) grid of plots\n\\(\\Rightarrow\\) Contiguity, Neighbors (next section of slides!)\n\\(\\Rightarrow\\) Autocorrelation: Are points around \\(\\mathbf{s}_i\\) likely to have values similar to \\(Z(\\mathbf{s}_i)\\)?\n\n\nUnknown number of lightning strikes \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots\\)\nContrast with geostatistical: all of \\(D\\) is observed, but what determines the subset \\(D^*\\) where events occur?\n“Unmarked”: Just locations\n“Marked”: Locations+info (e.g., intensity of strike)",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#spatial-randomness",
+    "href": "w01/index.html#spatial-randomness",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Spatial Randomness",
+    "text": "Spatial Randomness\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6805)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)\ncond_reg_sims &lt;- rSSI(r=r_core, N)\n# CSR data\n#csr_sims &lt;- rpoispp(N, win=obs_window)\ncond_sr_sims &lt;- rpoint(N, win=obs_window)\n### Clustered data\n#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)\n#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)\n#clust_sims &lt;- rclusterBKBC(clusters=\"MatClust\", kappa=10, mu=10, scale=0.05, verbose=FALSE)\n# Each cluster consist of 10 points in a disc of radius 0.2\nnclust &lt;- function(x0, y0, radius, n) {\n    #print(n)\n    return(runifdisc(10, radius, centre=c(x0, y0)))\n}\ncond_clust_sims &lt;- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\ncond_reg_plot &lt;- cond_reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_reg.png\", cond_reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_sr_plot &lt;- cond_sr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_sr.png\", cond_sr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_clust_plot &lt;- cond_clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_clust.png\", cond_clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed \\(N\\)\n60\n\n60\n\n60",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
+    "objectID": "w01/index.html#complete-spatial-randomness-csr",
+    "href": "w01/index.html#complete-spatial-randomness-csr",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Complete Spatial Randomness (CSR)",
+    "text": "Complete Spatial Randomness (CSR)\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6807)\nlambda &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n# Regularity via Inhibition\nreg_sims &lt;- rMaternI(lambda, r=r_core, win=obs_window)\n# CSR data\ncsr_sims &lt;- rpoispp(N, win=obs_window)\n### Clustered data\nclust_mu &lt;- 10\nclust_sims &lt;- rMatClust(kappa=lambda / clust_mu, scale=2*r_core, mu=10, win=obs_window)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\nreg_plot &lt;- reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",reg_sims$n)) +\n  dsan_theme()\nggsave(\"images/reg.png\", reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncsr_plot &lt;- csr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",csr_sims$n)) +\n  dsan_theme()\nggsave(\"images/csr.png\", csr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\nclust_plot &lt;- clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",clust_sims$n)) +\n  dsan_theme()\nggsave(\"images/clust.png\", clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed Intensity \\(\\lambda\\)\n60\n\n60\n\n60\n\n\nRandom \\(N\\)",
+    "crumbs": [
+      "Week 1: Aug 28"
+    ]
+  },
+  {
     "objectID": "w01/index.html#references",
     "href": "w01/index.html#references",
     "title": "Week 1: Introduction to GIS",
     "section": "References",
-    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.\n\n\nRobert, Amélie. 2016. “At the Heart of the Vietnam War: Herbicides, Napalm and Bulldozers Against the A Lưới Mountains.” Journal of Alpine Research  Revue de géographie Alpine, no. 104-1 (April). https://doi.org/10.4000/rga.3266.",
+    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.\n\n\nRobert, Amélie. 2016. “At the Heart of the Vietnam War: Herbicides, Napalm and Bulldozers Against the A Lưới Mountains.” Journal of Alpine Research  Revue de géographie Alpine, no. 104-1 (April). https://doi.org/10.4000/rga.3266.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.",
     "crumbs": [
       "Week 1: Aug 28"
     ]
@@ -3518,7 +3548,7 @@
     "href": "w01/slides.html#unit-1-maps",
     "title": "Week 1: Introduction to GIS",
     "section": "Unit 1: Maps",
-    "text": "Unit 1: Maps\n\nYour least favorite part of the course (per survey 😜)\nMy favorite part of the course (because I love overthinking things)\nMy goal given survey results: Let’s think of this unit like learning languages for expressing spatial information:\n\n\n\n\n\n\n\n\nTemporal Information\nSpatial Information\n\n\n\n\n\n\n\n\n\\(\\Rightarrow\\) 22.5 seconds\n\\(\\Rightarrow\\) POLYGON ((2 1, 3 1, 5 2, 6 3, 5 3, 4 4, 3 4, 1 3, 2 1),(2 2, 3 3, 4 3, 4 2, 2 2))\n\n\n\n\nI think you’ll be surprised at how, complexity of geospatial/spatio-temporal data \\(\\implies\\) need for programming-language-independent representations"
+    "text": "Unit 1: Maps\n\n\n\n\nYour least favorite part of the course (per survey 😜)\nMy favorite part of the course (because I love overthinking things)\nMy goal given survey results: Let’s think of this unit like learning languages for expressing spatial information:\n\n\n\n\n\n\n\n\nTemporal Information\nSpatial Information\n\n\n\n\n\n\n\n\n\\(\\Rightarrow\\) 22.5 seconds\n\\(\\Rightarrow\\) POLYGON ((2 1, 3 1, 5 2, 6 3, 5 3, 4 4, 3 4, 1 3, 2 1),(2 2, 3 3, 4 3, 4 2, 2 2))\n\n\n\n\nI think you’ll be surprised at how, complexity of geospatial/spatio-temporal data \\(\\implies\\) need for programming-language-independent representations"
   },
   {
     "objectID": "w01/slides.html#unit-2-using-code-to-make-maps",
@@ -3540,6 +3570,13 @@
     "title": "Week 1: Introduction to GIS",
     "section": "Unit 4: Applications / Final Project",
     "text": "Unit 4: Applications / Final Project\n\nTake everything you’ve learned in Units 1-3 and Kamehameha them onto something you care about in the world!\nPublic Policy: Which counties are most in need of more transportation infrastructure?\nUrban Planning: Which neighborhoods are most in need of a new bus stop?\nEpidemiology: What properties of a region make it more/less susceptible to infectious diseases? Where should we intervene to “cut the chain” of a disease vector?"
+  },
+  {
+    "objectID": "w01/slides.html#who-am-i-why-am-i-teaching-you",
+    "href": "w01/slides.html#who-am-i-why-am-i-teaching-you",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Who Am I? Why Am I Teaching You?",
+    "text": "Who Am I? Why Am I Teaching You?\n\nStarted out as PhD student in Computer Science\n\nUCLA: Algorithmic Game Theory\nStanford (MS): Economic Network Analysis\n\nEnded up with PhD in Political Economy\n\nColumbia: “Computational Political Theory”"
   },
   {
     "objectID": "w01/slides.html#my-gis-adventures",
@@ -3598,18 +3635,11 @@
     "text": "As Public Policy Experts\n\nOftentimes, all it takes is one map to see why a policy has failed 😱\n\n\nWho can guess what this map represents? (Source)\nhttp://www.radicalcartography.net/index.html?chicagodots, then adapted to DC: “[Eric Fisher] was astounded by Bill Rankin’s map of Chicago’s racial and ethnic divides and wanted to see what other cities looked like mapped the same way. To match his map, Red is White, Blue is Black, Green is Asian, Orange is Hispanic, Gray is Other, and each dot is 25 people. Data from Census 2000. Base map © OpenStreetMap, CC-BY-SA” https://commons.wikimedia.org/wiki/File:Race_and_ethnicity_map_of_Washington,_D.C..png"
   },
   {
-    "objectID": "w01/slides.html#its-completely-made-up",
-    "href": "w01/slides.html#its-completely-made-up",
+    "objectID": "w01/slides.html#gis-as-an-umbrella-term",
+    "href": "w01/slides.html#gis-as-an-umbrella-term",
     "title": "Week 1: Introduction to GIS",
-    "section": "It’s Completely Made Up",
-    "text": "It’s Completely Made Up\nLike, even more made up than other made-up tech terms… Almost as bad as “AI” 😵‍💫"
-  },
-  {
-    "objectID": "w01/slides.html#what-i-mean-by-made-up",
-    "href": "w01/slides.html#what-i-mean-by-made-up",
-    "title": "Week 1: Introduction to GIS",
-    "section": "What I Mean By “Made Up”",
-    "text": "What I Mean By “Made Up”\n\nThe libraries and tools we’ll use are specific systems/methods for analyzing geospatial data\nGIS is an “umbrella term”, which just vaguely refers to this entire universe of libraries/tools/techniques/approaches\n\n\n\n\n\n\n\n\n\nUmbrella Term\nConcepts\nSpecific Skills\n\n\n\n\nCoding\n\nVariables\nControl Flow\nAlgorithms\n\n\nPython\nR\nJavaScript\n\n\n\nGIS\n\nProjections\nVector vs. Raster\nSpatial Data Formats (shapefiles, .geojson)\n\n\nArcGIS\nGeoPandas (Python)\nsf (R)"
+    "section": "GIS as an “Umbrella Term”",
+    "text": "GIS as an “Umbrella Term”\n\nLibraries and tools we’ll use: specific systems/methods for geospatial analysis\nGIS is an “umbrella term”, which just vaguely refers to this entire universe of libraries/tools/techniques/approaches\n\n\n\n\n\n\n\n\n\nUmbrella Term\nConcepts\nSpecific Skills\n\n\n\n\nCoding\n\nVariables\nControl Flow\nAlgorithms\n\n\nPython\nR\nJavaScript\n\n\n\nGIS\n\nProjections\nVector vs. Raster\nSpatial Data Formats (shapefiles, .geojson)\n\n\nArcGIS\nGeoPandas (Python)\nsf (R)"
   },
   {
     "objectID": "w01/slides.html#arcgis",
@@ -3647,11 +3677,11 @@
     "text": "ChatGPT and Whatnot\n\nIf you feel like ChatGPT will help you learn something in the course, then use it!\nIf you feel like you’re using it as a “crutch”, try to hold yourself accountable for not using it!\n\n\n\n\n\n\n\n\nTake the time/energy you're using to worry about...\nUse it instead to worry about...\n\n\n\n\n\nChatGPT\nCollaboration Policies\nPlagiarism\n\nLearning GIS"
   },
   {
-    "objectID": "w01/slides.html#i-am-the-opposite-of-a-prereq-stickler",
-    "href": "w01/slides.html#i-am-the-opposite-of-a-prereq-stickler",
+    "objectID": "w01/slides.html#on-not-worrying-about-prereqs",
+    "href": "w01/slides.html#on-not-worrying-about-prereqs",
     "title": "Week 1: Introduction to GIS",
-    "section": "I Am The Opposite of a Prereq-Stickler",
-    "text": "I Am The Opposite of a Prereq-Stickler\n\nI genuinely believe that I can make the course accessible to you, meeting you wherever you’re at, no matter what!\nEveryone learns at their own pace (who says 14 weeks is “correct” amount of time to learn GIS?), and I structure my courses as best as I possibly can to adapt to your pace\n\\(\\Rightarrow\\) Assessments (HW, Midterm) valuable in two ways:\n[Valuable for you] As an accountability mechanism to make sure you’re learn the material (how do we know when we’ve learned something? When we can answer questions about it / use it to accomplish things!)\n[Valuable for me] For assessing and updating pace"
+    "section": "On Not Worrying About Prereqs",
+    "text": "On Not Worrying About Prereqs\n\nI genuinely believe that I can make the course accessible to you, meeting you wherever you’re at, no matter what!\nEveryone learns at their own pace (who says 14 weeks is “correct” amount of time to learn GIS?), and I structure my courses as best as I possibly can to adapt to your pace\n\\(\\Rightarrow\\) Assessments (HW, Midterm) valuable in two ways:\n[Valuable for you] As an accountability mechanism to make sure you’re learn the material (how do we know when we’ve learned something? When we can answer questions about it / use it to accomplish things!)\n[Valuable for me] For assessing and updating pace"
   },
   {
     "objectID": "w01/slides.html#r-andor-python-andor-js",
@@ -3682,18 +3712,18 @@
     "text": "Our First Map: Polygons!\n(Quick demo adapted from Sherry Xie’s R Consortium Workshop: Analyzing Geospatial Data in R, using DC rather than Philadelphia open data.)\n\n\nCode\nlibrary(sf)\n# Load DC tracts data\ndc_sf_fpath &lt;- \"data/DC_Census_2020/Census_Tracts_in_2020.shp\"\ndc_sf &lt;- st_read(dc_sf_fpath);\n\n\nReading layer `Census_Tracts_in_2020' from data source \n  `/Users/jpj/gtown-local/ppol6805/w01/data/DC_Census_2020/Census_Tracts_in_2020.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 206 features and 315 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8584933 ymin: 4691871 xmax: -8561515 ymax: 4721078\nProjected CRS: WGS 84 / Pseudo-Mercator\n\n\nCode\ncols_to_keep &lt;- c(\"OBJECTID\", \"TRACT\", \"GEOID\", \"ALAND\", \"AWATER\", \"STUSAB\", \"SUMLEV\", \"GEOCODE\", \"STATE\", \"NAME\", \"POP100\", \"HU100\", \"geometry\")\ndc_sf &lt;- dc_sf |&gt; select(cols_to_keep)"
   },
   {
-    "objectID": "w01/slides.html#what-is-an-sf-object",
-    "href": "w01/slides.html#what-is-an-sf-object",
+    "objectID": "w01/slides.html#sf-objects",
+    "href": "w01/slides.html#sf-objects",
     "title": "Week 1: Introduction to GIS",
-    "section": "What is an sf Object?",
-    "text": "What is an sf Object?\n\ndc_sf is an object of type sf (short for “simple feature”), which extends data.frame, and contains features which have type POLYGON\n\n\n\n[1] \"sf\"         \"data.frame\"\n\n\nSimple feature collection with 6 features and 12 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8577962 ymin: 4708107 xmax: -8572564 ymax: 4716136\nProjected CRS: WGS 84 / Pseudo-Mercator\n  OBJECTID  TRACT       GEOID  ALAND AWATER STUSAB SUMLEV     GEOCODE STATE\n1        1 002002 11001002002 849376      0     DC    140 11001002002    11\n2        2 002101 11001002101 600992      0     DC    140 11001002101    11\n3        3 002102 11001002102 725975      0     DC    140 11001002102    11\n4        4 002201 11001002201 415173      0     DC    140 11001002201    11\n5        5 002202 11001002202 698895    566     DC    140 11001002202    11\n6        6 000101 11001000101 199776   5261     DC    140 11001000101    11\n                NAME POP100 HU100                       geometry\n1 Census Tract 20.02   4072  1532 POLYGON ((-8575655 4714476,...\n2 Census Tract 21.01   5687  2335 POLYGON ((-8574745 4715676,...\n3 Census Tract 21.02   5099  2221 POLYGON ((-8573824 4715684,...\n4 Census Tract 22.01   3485  1229 POLYGON ((-8574654 4714781,...\n5 Census Tract 22.02   3339  1454 POLYGON ((-8573792 4714811,...\n6  Census Tract 1.01   1406   999 POLYGON ((-8577962 4708867,..."
+    "section": "sf Objects",
+    "text": "sf Objects\ndc_sf is an object of type sf (short for “simple feature”), which extends data.frame, and contains features which have type POLYGON\n\n\n[1] \"sf\"         \"data.frame\"\n\n\nSimple feature collection with 6 features and 12 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8577962 ymin: 4708107 xmax: -8572564 ymax: 4716136\nProjected CRS: WGS 84 / Pseudo-Mercator\n  OBJECTID  TRACT       GEOID  ALAND AWATER STUSAB SUMLEV     GEOCODE STATE\n1        1 002002 11001002002 849376      0     DC    140 11001002002    11\n2        2 002101 11001002101 600992      0     DC    140 11001002101    11\n3        3 002102 11001002102 725975      0     DC    140 11001002102    11\n4        4 002201 11001002201 415173      0     DC    140 11001002201    11\n5        5 002202 11001002202 698895    566     DC    140 11001002202    11\n6        6 000101 11001000101 199776   5261     DC    140 11001000101    11\n                NAME POP100 HU100                       geometry\n1 Census Tract 20.02   4072  1532 POLYGON ((-8575655 4714476,...\n2 Census Tract 21.01   5687  2335 POLYGON ((-8574745 4715676,...\n3 Census Tract 21.02   5099  2221 POLYGON ((-8573824 4715684,...\n4 Census Tract 22.01   3485  1229 POLYGON ((-8574654 4714781,...\n5 Census Tract 22.02   3339  1454 POLYGON ((-8573792 4714811,...\n6  Census Tract 1.01   1406   999 POLYGON ((-8577962 4708867,..."
   },
   {
     "objectID": "w01/slides.html#working-with-sf-objects",
     "href": "w01/slides.html#working-with-sf-objects",
     "title": "Week 1: Introduction to GIS",
     "section": "Working With sf Objects",
-    "text": "Working With sf Objects\n\nWith some rare but important exceptions (which we’ll learn!), can be used just like a data.frame / tibble:\n\n\n\nCode\nstr(dc_sf)   # view structure\n\n\nClasses 'sf' and 'data.frame':  206 obs. of  13 variables:\n $ OBJECTID: int  1 2 3 4 5 6 7 8 9 10 ...\n $ TRACT   : chr  \"002002\" \"002101\" \"002102\" \"002201\" ...\n $ GEOID   : chr  \"11001002002\" \"11001002101\" \"11001002102\" \"11001002201\" ...\n $ ALAND   : int  849376 600992 725975 415173 698895 199776 1706484 505004 776435 1042157 ...\n $ AWATER  : int  0 0 0 0 566 5261 516665 0 439661 2305 ...\n $ STUSAB  : chr  \"DC\" \"DC\" \"DC\" \"DC\" ...\n $ SUMLEV  : int  140 140 140 140 140 140 140 140 140 140 ...\n $ GEOCODE : chr  \"11001002002\" \"11001002101\" \"11001002102\" \"11001002201\" ...\n $ STATE   : int  11 11 11 11 11 11 11 11 11 11 ...\n $ NAME    : chr  \"Census Tract 20.02\" \"Census Tract 21.01\" \"Census Tract 21.02\" \"Census Tract 22.01\" ...\n $ POP100  : int  4072 5687 5099 3485 3339 1406 3417 4108 4672 6161 ...\n $ HU100   : int  1532 2335 2221 1229 1454 999 2053 11 2169 2845 ...\n $ geometry:sfc_POLYGON of length 206; first list element: List of 1\n  ..$ : num [1:155, 1:2] -8575655 -8575655 -8575655 -8575655 -8575655 ...\n  ..- attr(*, \"class\")= chr [1:3] \"XY\" \"POLYGON\" \"sfg\"\n - attr(*, \"sf_column\")= chr \"geometry\"\n - attr(*, \"agr\")= Factor w/ 3 levels \"constant\",\"aggregate\",..: NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"names\")= chr [1:12] \"OBJECTID\" \"TRACT\" \"GEOID\" \"ALAND\" ..."
+    "text": "Working With sf Objects\nWith some rare but important exceptions (which we’ll learn!), can be used just like a data.frame / tibble:\n\n\nCode\nstr(dc_sf)   # view structure\n\n\nClasses 'sf' and 'data.frame':  206 obs. of  13 variables:\n $ OBJECTID: int  1 2 3 4 5 6 7 8 9 10 ...\n $ TRACT   : chr  \"002002\" \"002101\" \"002102\" \"002201\" ...\n $ GEOID   : chr  \"11001002002\" \"11001002101\" \"11001002102\" \"11001002201\" ...\n $ ALAND   : int  849376 600992 725975 415173 698895 199776 1706484 505004 776435 1042157 ...\n $ AWATER  : int  0 0 0 0 566 5261 516665 0 439661 2305 ...\n $ STUSAB  : chr  \"DC\" \"DC\" \"DC\" \"DC\" ...\n $ SUMLEV  : int  140 140 140 140 140 140 140 140 140 140 ...\n $ GEOCODE : chr  \"11001002002\" \"11001002101\" \"11001002102\" \"11001002201\" ...\n $ STATE   : int  11 11 11 11 11 11 11 11 11 11 ...\n $ NAME    : chr  \"Census Tract 20.02\" \"Census Tract 21.01\" \"Census Tract 21.02\" \"Census Tract 22.01\" ...\n $ POP100  : int  4072 5687 5099 3485 3339 1406 3417 4108 4672 6161 ...\n $ HU100   : int  1532 2335 2221 1229 1454 999 2053 11 2169 2845 ...\n $ geometry:sfc_POLYGON of length 206; first list element: List of 1\n  ..$ : num [1:155, 1:2] -8575655 -8575655 -8575655 -8575655 -8575655 ...\n  ..- attr(*, \"class\")= chr [1:3] \"XY\" \"POLYGON\" \"sfg\"\n - attr(*, \"sf_column\")= chr \"geometry\"\n - attr(*, \"agr\")= Factor w/ 3 levels \"constant\",\"aggregate\",..: NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"names\")= chr [1:12] \"OBJECTID\" \"TRACT\" \"GEOID\" \"ALAND\" ..."
   },
   {
     "objectID": "w01/slides.html#working-with-sf-objects-1",
@@ -3724,11 +3754,32 @@
     "text": "And… Actually Displaying the Map!\n\n\nCode\n# We can extract the geometry with the st_geometry function\ndc_geo &lt;- st_geometry(dc_sf)\n#pt_geo\n\n# Plot the geometry with base R's plot() function\nplot(dc_geo)"
   },
   {
+    "objectID": "w01/slides.html#key-notation-definition",
+    "href": "w01/slides.html#key-notation-definition",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Key Notation / Definition",
+    "text": "Key Notation / Definition\n\n\n\\(d\\)-Dimensional “Spatial Process” (Schabenberger and Gotway 2004, 6)\n\n\\[\n\\text{Data} = \\left\\{Z(\\mathbf{s}) \\mid \\mathbf{s} \\in D \\subset \\mathbb{R}^d\\right\\}\n\\]\n\n\\(d &gt; 1\\): Data forms a Random Field (this class: \\(d = 2\\)!)\n\n\n\n\n\n\n\n\n\n\n\n\nGeostatistical Data\nLattice/Region Data\nPoint Pattern\n\n\n\n\nCriteria\nFixed \\(D\\), Continuous\nFixed \\(D\\), Discrete\nRandom subset \\(D^* \\subseteq D\\)\n\n\nInterest\nInfer non-observed parts of \\(D\\)\nAutocorrelation, clustering\nPoint-generating process\n\n\nExample\n\n\\(N\\) trees \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots, \\mathbf{s}_N\\), observed within a sample window \\(D \\subset \\mathbb{R}^2\\), (\\(D\\) some finite plot of land)\n\\(Z(\\mathbf{s}_i)\\): Attribute(s) at site \\(\\mathbf{s}_i\\)\nExample: Height. \\(Z(\\mathbf{s}_1) = 500\\text{m}\\), \\(Z(\\mathbf{s}_2) = 850\\text{m}\\), \\(\\ldots\\)\n\n\n\\(Z(\\mathbf{s})\\) observed over \\(N \\times N\\) grid of plots\n\\(\\Rightarrow\\) Contiguity, Neighbors (next section of slides!)\n\\(\\Rightarrow\\) Autocorrelation: Are points around \\(\\mathbf{s}_i\\) likely to have values similar to \\(Z(\\mathbf{s}_i)\\)?\n\n\nUnknown number of lightning strikes \\(\\mathbf{s}_1, \\mathbf{s}_2, \\ldots\\)\nContrast with geostatistical: all of \\(D\\) is observed, but what determines the subset \\(D^*\\) where events occur?\n“Unmarked”: Just locations\n“Marked”: Locations+info (e.g., intensity of strike)"
+  },
+  {
+    "objectID": "w01/slides.html#spatial-randomness",
+    "href": "w01/slides.html#spatial-randomness",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Spatial Randomness",
+    "text": "Spatial Randomness\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed \\(N\\)\n60\n\n60\n\n60"
+  },
+  {
+    "objectID": "w01/slides.html#complete-spatial-randomness-csr",
+    "href": "w01/slides.html#complete-spatial-randomness-csr",
+    "title": "Week 1: Introduction to GIS",
+    "section": "Complete Spatial Randomness (CSR)",
+    "text": "Complete Spatial Randomness (CSR)\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed Intensity \\(\\lambda\\)\n60\n\n60\n\n60\n\n\nRandom \\(N\\)"
+  },
+  {
     "objectID": "w01/slides.html#references",
     "href": "w01/slides.html#references",
     "title": "Week 1: Introduction to GIS",
     "section": "References",
-    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.\n\n\nRobert, Amélie. 2016. “At the Heart of the Vietnam War: Herbicides, Napalm and Bulldozers Against the A Lưới Mountains.” Journal of Alpine Research  Revue de géographie Alpine, no. 104-1 (April). https://doi.org/10.4000/rga.3266."
+    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.\n\n\nRobert, Amélie. 2016. “At the Heart of the Vietnam War: Herbicides, Napalm and Bulldozers Against the A Lưới Mountains.” Journal of Alpine Research  Revue de géographie Alpine, no. 104-1 (April). https://doi.org/10.4000/rga.3266.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press."
   },
   {
     "objectID": "git_submodules.html",

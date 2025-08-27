@@ -246,3 +246,11 @@ lyme_nb[[1]]
 lyme$NAME[1]
 lyme$NAME[c(11, 20, 42, 45, 46, 47)]
 ```
+
+---
+
+## It's Completely Made Up {.smaller .crunch-title}
+
+*Like, even more made up than other made-up tech terms... Almost as bad as "AI"* 😵‍💫
+
+{{< video https://www.youtube.com/watch?v=yjw_DuNkOUw height="500" width="100%" >}}
