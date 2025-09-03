@@ -21,3 +21,13 @@ osmdata
 leaflet
 wbstats
 mapview
+spatstat.data
+spatstat.univar
+spatstat.geom
+spatstat.random
+nlme
+spatstat.explore
+rpart
+spatstat.model
+spatstat.linnet
+spatstat

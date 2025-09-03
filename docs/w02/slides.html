@@ -118,7 +118,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-b92f69f301b2c1bb785b64f55f1b1447.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-f1a2fbe10646af64ab771edae1b2cadf.css">
   <link rel="stylesheet" href="../dsan-globals/jjstyles.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -231,7 +231,7 @@
   <script src="../site_libs/clipboard-0.0.1/setClipboardText.js"></script>
   <link href="../site_libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet">
   <link href="../site_libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -254,49 +254,508 @@ Jeff Jacobs
 
   <p class="date">Wednesday, September 3, 2025</p>
 </section>
+<section id="schedule" class="title-slide slide level1 smaller small-title crunch-title crunch-callout center" data-name="Schedule">
+<h1>Schedule</h1>
+<p>Today’s Planned Schedule:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 64%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Start</th>
+<th style="text-align: left;">End</th>
+<th style="text-align: left;">Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Lecture</strong></td>
+<td style="text-align: left;">6:30pm</td>
+<td style="text-align: left;">6:50pm</td>
+<td style="text-align: left;"><a href="#/logistics-1-jupyterhub-x-positron">Logistics 1: JupyterHub x Positron →</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">6:50pm</td>
+<td style="text-align: left;">7:15pm</td>
+<td style="text-align: left;"><a href="#/model-selection">Logistics 2: Reducing Fear →</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">7:20pm</td>
+<td style="text-align: left;">7:50pm</td>
+<td style="text-align: left;"><a href="#/lets-make-some-dang-maps">Building Our First Map! →</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Break!</strong></td>
+<td style="text-align: left;">7:50pm</td>
+<td style="text-align: left;">8:00pm</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">8:00pm</td>
+<td style="text-align: left;">8:30pm</td>
+<td style="text-align: left;"><a href="#/raster-data">Raster Data →</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">8:30pm</td>
+<td style="text-align: left;">9:00pm</td>
+<td style="text-align: left;"><a href="#/finding-gis-data">Finding GIS Data →</a></td>
+</tr>
+</tbody>
+</table>
+<div class="hidden">
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
+<span id="cb1-2"><a></a><span class="fu">set.seed</span>(<span class="dv">5300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<div class="hidden">
+<p><span class="math display">\[
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+\newcommand{\bigexp}[1]{\exp\mkern-4mu\left[ #1 \right]}
+\newcommand{\bigexpect}[1]{\mathbb{E}\mkern-4mu \left[ #1 \right]}
+\newcommand{\definedas}{\overset{\small\text{def}}{=}}
+\newcommand{\definedalign}{\overset{\phantom{\text{defn}}}{=}}
+\newcommand{\eqeventual}{\overset{\text{eventually}}{=}}
+\newcommand{\Err}{\text{Err}}
+\newcommand{\expect}[1]{\mathbb{E}[#1]}
+\newcommand{\expectsq}[1]{\mathbb{E}^2[#1]}
+\newcommand{\fw}[1]{\texttt{#1}}
+\newcommand{\given}{\mid}
+\newcommand{\green}[1]{\color{green}{#1}}
+\newcommand{\heads}{\outcome{heads}}
+\newcommand{\iid}{\overset{\text{\small{iid}}}{\sim}}
+\newcommand{\lik}{\mathcal{L}}
+\newcommand{\loglik}{\ell}
+\DeclareMathOperator*{\maximize}{maximize}
+\DeclareMathOperator*{\minimize}{minimize}
+\newcommand{\mle}{\textsf{ML}}
+\newcommand{\nimplies}{\;\not\!\!\!\!\implies}
+\newcommand{\orange}[1]{\color{orange}{#1}}
+\newcommand{\outcome}[1]{\textsf{#1}}
+\newcommand{\param}[1]{{\color{purple} #1}}
+\newcommand{\pgsamplespace}{\{\green{1},\green{2},\green{3},\purp{4},\purp{5},\purp{6}\}}
+\newcommand{\pedge}[2]{\require{enclose}\enclose{circle}{~{#1}~} \rightarrow \; \enclose{circle}{\kern.01em {#2}~\kern.01em}}
+\newcommand{\pnode}[1]{\require{enclose}\enclose{circle}{\kern.1em {#1} \kern.1em}}
+\newcommand{\ponode}[1]{\require{enclose}\enclose{box}[background=lightgray]{{#1}}}
+\newcommand{\pnodesp}[1]{\require{enclose}\enclose{circle}{~{#1}~}}
+\newcommand{\purp}[1]{\color{purple}{#1}}
+\newcommand{\sign}{\text{Sign}}
+\newcommand{\spacecap}{\; \cap \;}
+\newcommand{\spacewedge}{\; \wedge \;}
+\newcommand{\tails}{\outcome{tails}}
+\newcommand{\Var}[1]{\text{Var}[#1]}
+\newcommand{\bigVar}[1]{\text{Var}\mkern-4mu \left[ #1 \right]}
+\]</span></p>
+</div>
+</section>
+
+<section id="logistics-1-jupyterhub-x-positron" class="title-slide slide level1 center" data-stack-name="Logistics">
+<h1>Logistics 1: JupyterHub x Positron</h1>
+
+</section>
+
+<section>
+<section id="logistics-2-reducing-fear" class="title-slide slide level1 title-10 center">
+<h1>Logistics 2: Reducing Fear 💆</h1>
+<ul>
+<li>Jeff’s Post-Week 1 自我革命</li>
+<li>Weekly Coding Workshops</li>
+<li>How To Not Be Scared of Prerequisites</li>
+<li>ChatGPT</li>
+<li>Learning How To Learn</li>
+</ul>
+<aside class="notes">
+<p>Top secret translation for me: zi4 wo2 ge1 ming4</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="helpful-feedback" class="slide level2 crunch-title text-90">
+<h2>Helpful Feedback!</h2>
+<ul>
+<li>Sry for machine-gunning words/concepts at you last week
+<ul>
+<li><span class="math inline">\(\leadsto\)</span> Talking more slowly!</li>
+<li><span class="math inline">\(\leadsto\)</span> Less colloquial language!</li>
+<li>Pls give me grace as I enact <a href="https://www.tiktok.com/@only1jdugg/video/6898153811450383621">this video</a> in reverse</li>
+</ul></li>
+<li>More importantly: <strong>weekly coding workshops!</strong>
+<ul>
+<li>Not only will they “cancel out” my too-fast DC-slang-poisoned pace, but also…</li>
+<li>Focus will be on <strong>specific blocks of code</strong> rather than higher-level concepts [but see also: “forgetting curve” diagram a few slides ahead]</li>
+</ul></li>
+</ul>
+</section>
+<section id="pedagogical-principles" class="slide level2 crunch-title crunch-ul crunch-li crunch-blockquote">
+<h2>Pedagogical Principles</h2>
+<ul>
+<li>There’s literally <a href="http://bactra.org/weblog/523.html" target="_blank">no such thing as “intelligence”</a></li>
+<li>Anyone is capable of learning anything (neural plasticity)</li>
+<li>Growth mindset: “I can’t do this” <span class="math inline">\(\leadsto\)</span> “I can’t do this <strong>yet</strong>!”</li>
+<li>The point of a class is <strong>learning</strong>: understanding something about the world, either (a) For its own sake (<strong>end in itself</strong>) or (b) Because it’s relevant to something you care about (<strong>means to an end</strong>)</li>
+</ul>
+<div class="text-90">
+<blockquote>
+<p>Our teaching should be governed, not by a desire to <strong>make</strong> students learn things, but by the endeavor to keep burning within them that light which is called <strong>curiosity</strong>. <span class="citation" data-cites="montessori_spontaneous_1916">(<a href="#/references" role="doc-biblioref" onclick="">Montessori 1916</a>)</span></p>
+</blockquote>
+</div>
+</section>
+<section id="chatgpt-and-whatnot" class="slide level2 crunch-title crunch-ul smaller">
+<h2>ChatGPT and Whatnot</h2>
+<ul>
+<li>If you feel like ChatGPT will help you learn something in the course, then <strong>use it</strong>!</li>
+<li>If you feel like you’re using it as a “crutch”, try to hold yourself accountable for <strong>not</strong> using it!</li>
+</ul>
+<table class="caption-top" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Take the time/energy you're using to worry about...</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Use it instead to worry about...</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><ul>
+<li>ChatGPT</li>
+<li>Collaboration Policies</li>
+<li>Plagiarism</li>
+</ul></td>
+<td style="text-align: center; vertical-align: middle;">Learning GIS</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="on-not-worrying-about-prereqs" class="slide level2 crunch-title crunch-li text-85">
+<h2>On Not Worrying About Prereqs</h2>
+<ul>
+<li>I genuinely believe that I can make the course accessible to you, meeting you <strong>wherever you’re at</strong>, no matter what!</li>
+<li>Everyone learns at their own pace (who says 14 weeks is “correct” amount of time to learn GIS?), and I structure my courses as best as I possibly can to adapt to your pace</li>
+<li><span class="math inline">\(\Rightarrow\)</span> Assessments (HW, Midterm) valuable in two ways:</li>
+<li><strong>[Valuable for you]</strong> As an <strong>accountability mechanism</strong> to make sure you’re learn the material (how do we know when we’ve learned something? When we can answer questions about it / use it to accomplish things!)</li>
+<li><strong>[Valuable for me]</strong> For <strong>assessing and updating</strong> pace</li>
+</ul>
+</section>
+<section id="r-andor-python-andor-js" class="slide level2 smaller crunch-title crunch-ul crunch-p crunch-img crunch-li crunch-quarto-figure crunch-math text-65">
+<h2>R and/or Python and/or JS</h2>
+<ul>
+<li>My Geometry vs.&nbsp;Algebra Rant… Euclid’s <em>Elements</em>, Book VI, Proposition 28.</li>
+<li>The problem: <em>Divide a given straight line so that the rectangle contained by its segments may be equal to a given area, not exceeding the square of half the line.</em></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="cb1">Geometers</span> solved w/<span class="cb1"><strong>geometry</strong></span> (300 BC)…</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/euclid_271_crop.jpeg" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>…<span class="cb2">Algebraists</span> solved w/<span class="cb2"><strong>algebra</strong></span> (2000 BC)…</p>
+<p><span class="math display">\[
+\begin{align*}
+&amp;ax^2 + bx + c = 0 \\
+\Rightarrow \; &amp; x_+ = \frac{-b + \sqrt{b^2 - 4ac}}{2a}
+\end{align*}
+\]</span></p>
+<p>…<a href="https://en.wikipedia.org/wiki/Cartesian_coordinate_system#History">From 1637 onwards</a>, <strong><span class="cb1">w</span><span class="cb2">h</span><span class="cb1">i</span><span class="cb2">c</span><span class="cb1">h</span><span class="cb2">e</span><span class="cb1">v</span><span class="cb2">e</span><span class="cb1">r</span> <span class="cb2">i</span><span class="cb1">s</span> <span class="cb2">e</span><span class="cb1">a</span><span class="cb2">s</span><span class="cb1">i</span><span class="cb2">e</span><span class="cb1">r</span>!</strong> 🤯🤯🤯 (<em>Isomorphism</em>)</p>
+<div id="fig-descartes" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-descartes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/descartes.jpg" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:48%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/unit_circle.svg" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-descartes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: <strong>Circle with radius 1</strong>? Or <span class="math inline">\((x,y)\)</span> satisfying <span class="math inline">\(x^2 + y^2 = 1\)</span>?
+</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="learning-how-to-learn" class="slide level2 smaller crunch-title crunch-p">
+<h2>Learning How To Learn</h2>
+<div id="fig-lilwayne" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-lilwayne-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://jpj.georgetown.domains/ppol6805-scratch/repetition.mp4"></video>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lilwayne-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: From <a href="https://en.wikipedia.org/wiki/The_Carter" target="_blank">The Carter (Documentary)</a>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="hes-literally-extremely-correct" class="slide level2">
+<h2>He’s Literally Extremely Correct!</h2>
+
+<img data-src="images/forgetting-curve.png" class="r-stretch quarto-figure-center"><p class="caption">From <em><a href="https://www.osmosis.org/learn/Spaced_repetition" target="_blank">Elsevier Osmosis: Spaced Repetition</a></em></p></section></section>
+<section>
+<section id="lets-make-some-dang-maps" class="title-slide slide level1 center" data-stack-name="First Maps">
+<h1>Let’s Make Some Dang Maps!</h1>
+
+</section>
+<section id="our-first-map-polygons" class="slide level2 smaller">
+<h2>Our First Map: Polygons!</h2>
+<p><em>(Quick demo adapted from Sherry Xie’s R Consortium Workshop: <a href="https://www.youtube.com/watch?v=DD7bXonh-_E"><em>Analyzing Geospatial Data in R</em></a>, using DC rather than Philadelphia open data.)</em></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(sf)</span>
+<span id="cb2-2"><a></a><span class="co"># Load DC tracts data</span></span>
+<span id="cb2-3"><a></a>dc_sf_fpath <span class="ot">&lt;-</span> <span class="st">"data/DC_Census_2020/Census_Tracts_in_2020.shp"</span></span>
+<span id="cb2-4"><a></a>dc_sf <span class="ot">&lt;-</span> <span class="fu">st_read</span>(dc_sf_fpath);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `Census_Tracts_in_2020' from data source 
+  `/Users/jpj/gtown-local/ppol6805/w02/data/DC_Census_2020/Census_Tracts_in_2020.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 206 features and 315 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: -8584933 ymin: 4691871 xmax: -8561515 ymax: 4721078
+Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>cols_to_keep <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"OBJECTID"</span>, <span class="st">"TRACT"</span>, <span class="st">"GEOID"</span>, <span class="st">"ALAND"</span>, <span class="st">"AWATER"</span>, <span class="st">"STUSAB"</span>, <span class="st">"SUMLEV"</span>, <span class="st">"GEOCODE"</span>, <span class="st">"STATE"</span>, <span class="st">"NAME"</span>, <span class="st">"POP100"</span>, <span class="st">"HU100"</span>, <span class="st">"geometry"</span>)</span>
+<span id="cb4-2"><a></a>dc_sf <span class="ot">&lt;-</span> dc_sf <span class="sc">|&gt;</span> <span class="fu">select</span>(cols_to_keep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="sf-objects" class="slide level2">
+<h2><code>sf</code> Objects</h2>
+<p><code>dc_sf</code> is an object of type <code>sf</code> (short for <strong>“simple feature”</strong>), which extends <code>data.frame</code>, and contains <strong>features</strong> which have type <strong><code>POLYGON</code></strong></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">class</span>(dc_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "sf"         "data.frame"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">head</span>(dc_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 6 features and 12 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: -8577962 ymin: 4708107 xmax: -8572564 ymax: 4716136
+Projected CRS: WGS 84 / Pseudo-Mercator
+  OBJECTID  TRACT       GEOID  ALAND AWATER STUSAB SUMLEV     GEOCODE STATE
+1        1 002002 11001002002 849376      0     DC    140 11001002002    11
+2        2 002101 11001002101 600992      0     DC    140 11001002101    11
+3        3 002102 11001002102 725975      0     DC    140 11001002102    11
+4        4 002201 11001002201 415173      0     DC    140 11001002201    11
+5        5 002202 11001002202 698895    566     DC    140 11001002202    11
+6        6 000101 11001000101 199776   5261     DC    140 11001000101    11
+                NAME POP100 HU100                       geometry
+1 Census Tract 20.02   4072  1532 POLYGON ((-8575655 4714476,...
+2 Census Tract 21.01   5687  2335 POLYGON ((-8574745 4715676,...
+3 Census Tract 21.02   5099  2221 POLYGON ((-8573824 4715684,...
+4 Census Tract 22.01   3485  1229 POLYGON ((-8574654 4714781,...
+5 Census Tract 22.02   3339  1454 POLYGON ((-8573792 4714811,...
+6  Census Tract 1.01   1406   999 POLYGON ((-8577962 4708867,...</code></pre>
+</div>
+</div>
+</section>
+<section id="working-with-sf-objects" class="slide level2 smaller">
+<h2>Working With <code>sf</code> Objects</h2>
+<p>With some rare but important exceptions (which we’ll learn!), can be used just like a <code>data.frame</code> / <code>tibble</code>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">str</span>(dc_sf)   <span class="co"># view structure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Classes 'sf' and 'data.frame':  206 obs. of  13 variables:
+ $ OBJECTID: int  1 2 3 4 5 6 7 8 9 10 ...
+ $ TRACT   : chr  "002002" "002101" "002102" "002201" ...
+ $ GEOID   : chr  "11001002002" "11001002101" "11001002102" "11001002201" ...
+ $ ALAND   : int  849376 600992 725975 415173 698895 199776 1706484 505004 776435 1042157 ...
+ $ AWATER  : int  0 0 0 0 566 5261 516665 0 439661 2305 ...
+ $ STUSAB  : chr  "DC" "DC" "DC" "DC" ...
+ $ SUMLEV  : int  140 140 140 140 140 140 140 140 140 140 ...
+ $ GEOCODE : chr  "11001002002" "11001002101" "11001002102" "11001002201" ...
+ $ STATE   : int  11 11 11 11 11 11 11 11 11 11 ...
+ $ NAME    : chr  "Census Tract 20.02" "Census Tract 21.01" "Census Tract 21.02" "Census Tract 22.01" ...
+ $ POP100  : int  4072 5687 5099 3485 3339 1406 3417 4108 4672 6161 ...
+ $ HU100   : int  1532 2335 2221 1229 1454 999 2053 11 2169 2845 ...
+ $ geometry:sfc_POLYGON of length 206; first list element: List of 1
+  ..$ : num [1:155, 1:2] -8575655 -8575655 -8575655 -8575655 -8575655 ...
+  ..- attr(*, "class")= chr [1:3] "XY" "POLYGON" "sfg"
+ - attr(*, "sf_column")= chr "geometry"
+ - attr(*, "agr")= Factor w/ 3 levels "constant","aggregate",..: NA NA NA NA NA NA NA NA NA NA ...
+  ..- attr(*, "names")= chr [1:12] "OBJECTID" "TRACT" "GEOID" "ALAND" ...</code></pre>
+</div>
+</div>
+</section>
+<section id="working-with-sf-objects-1" class="slide level2 smaller">
+<h2>Working With <code>sf</code> Objects</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">head</span>(dc_sf)  <span class="co"># view first several rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 6 features and 12 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: -8577962 ymin: 4708107 xmax: -8572564 ymax: 4716136
+Projected CRS: WGS 84 / Pseudo-Mercator
+  OBJECTID  TRACT       GEOID  ALAND AWATER STUSAB SUMLEV     GEOCODE STATE
+1        1 002002 11001002002 849376      0     DC    140 11001002002    11
+2        2 002101 11001002101 600992      0     DC    140 11001002101    11
+3        3 002102 11001002102 725975      0     DC    140 11001002102    11
+4        4 002201 11001002201 415173      0     DC    140 11001002201    11
+5        5 002202 11001002202 698895    566     DC    140 11001002202    11
+6        6 000101 11001000101 199776   5261     DC    140 11001000101    11
+                NAME POP100 HU100                       geometry
+1 Census Tract 20.02   4072  1532 POLYGON ((-8575655 4714476,...
+2 Census Tract 21.01   5687  2335 POLYGON ((-8574745 4715676,...
+3 Census Tract 21.02   5099  2221 POLYGON ((-8573824 4715684,...
+4 Census Tract 22.01   3485  1229 POLYGON ((-8574654 4714781,...
+5 Census Tract 22.02   3339  1454 POLYGON ((-8573792 4714811,...
+6  Census Tract 1.01   1406   999 POLYGON ((-8577962 4708867,...</code></pre>
+</div>
+</div>
+</section>
+<section id="working-with-sf-objects-2" class="slide level2 smaller">
+<h2>Working With <code>sf</code> Objects</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">dim</span>(dc_sf)   <span class="co"># view dimensions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 206  13</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>dc_sf[<span class="dv">1</span>,]    <span class="co"># select first row</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 1 feature and 12 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: -8575656 ymin: 4713958 xmax: -8574562 ymax: 4716136
+Projected CRS: WGS 84 / Pseudo-Mercator
+  OBJECTID  TRACT       GEOID  ALAND AWATER STUSAB SUMLEV     GEOCODE STATE
+1        1 002002 11001002002 849376      0     DC    140 11001002002    11
+                NAME POP100 HU100                       geometry
+1 Census Tract 20.02   4072  1532 POLYGON ((-8575655 4714476,...</code></pre>
+</div>
+</div>
+</section>
+<section id="working-with-sf-objects-3" class="slide level2 smaller">
+<h2>Working With <code>sf</code> Objects</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">head</span>(dc_sf<span class="sc">$</span>NAME)  <span class="co"># select column by name  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Census Tract 20.02" "Census Tract 21.01" "Census Tract 21.02"
+[4] "Census Tract 22.01" "Census Tract 22.02" "Census Tract 1.01" </code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">head</span>(dc_sf[,<span class="dv">4</span>])         <span class="co"># select column by number</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 6 features and 1 field
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: -8577962 ymin: 4708107 xmax: -8572564 ymax: 4716136
+Projected CRS: WGS 84 / Pseudo-Mercator
+   ALAND                       geometry
+1 849376 POLYGON ((-8575655 4714476,...
+2 600992 POLYGON ((-8574745 4715676,...
+3 725975 POLYGON ((-8573824 4715684,...
+4 415173 POLYGON ((-8574654 4714781,...
+5 698895 POLYGON ((-8573792 4714811,...
+6 199776 POLYGON ((-8577962 4708867,...</code></pre>
+</div>
+</div>
+</section>
+<section id="and-actually-displaying-the-map" class="slide level2 smaller crunch-quarto-figure title-12">
+<h2>And… Actually Displaying the Map!</h2>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="co"># We can extract the geometry with the st_geometry function</span></span>
+<span id="cb21-2"><a></a>dc_geo <span class="ot">&lt;-</span> <span class="fu">st_geometry</span>(dc_sf)</span>
+<span id="cb21-3"><a></a><span class="co">#pt_geo</span></span>
+<span id="cb21-4"><a></a></span>
+<span id="cb21-5"><a></a><span class="co"># Plot the geometry with base R's plot() function</span></span>
+<span id="cb21-6"><a></a><span class="fu">plot</span>(dc_geo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="and-with-ggplot" class="slide level2 crunch-title">
+<h2>And with <code>ggplot</code>!</h2>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>dc_sf <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb22-3"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb22-4"><a></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="index_files/figure-revealjs/dc-map-ggplot-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section></section>
 <section>
 <section id="vector-rightarrow-raster-data" class="title-slide slide level1 center" data-stack-name="Vector → Raster">
 <h1>Vector <span class="math inline">\(\rightarrow\)</span> Raster Data</h1>
 
 </section>
-<section id="end-of-last-week-vector-data" class="slide level2 crunch-title smaller crunch-quarto-figure">
-<h2>End of Last Week: Vector Data</h2>
-<div class="cell" data-layout-align="center">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(sf)</span>
-<span id="cb1-2"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a></a><span class="co"># Load DC tracts data</span></span>
-<span id="cb1-4"><a></a>dc_sf_fpath <span class="ot">&lt;-</span> <span class="st">"data/DC_Census_2020/Census_Tracts_in_2020.shp"</span></span>
-<span id="cb1-5"><a></a>dc_sf <span class="ot">&lt;-</span> <span class="fu">st_read</span>(dc_sf_fpath, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-6"><a></a>cols_to_keep <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"OBJECTID"</span>, <span class="st">"TRACT"</span>, <span class="st">"GEOID"</span>, <span class="st">"ALAND"</span>, <span class="st">"AWATER"</span>, <span class="st">"STUSAB"</span>, <span class="st">"SUMLEV"</span>, <span class="st">"GEOCODE"</span>, <span class="st">"STATE"</span>, <span class="st">"NAME"</span>, <span class="st">"POP100"</span>, <span class="st">"HU100"</span>, <span class="st">"geometry"</span>)</span>
-<span id="cb1-7"><a></a>dc_sf <span class="ot">&lt;-</span> dc_sf <span class="sc">|&gt;</span> <span class="fu">select</span>(cols_to_keep)</span>
-<span id="cb1-8"><a></a><span class="co"># We can extract the geometry with the st_geometry function</span></span>
-<span id="cb1-9"><a></a>dc_geo <span class="ot">&lt;-</span> <span class="fu">st_geometry</span>(dc_sf)</span>
-<span id="cb1-10"><a></a><span class="co"># And plot the geometry with base R's plot() function</span></span>
-<span id="cb1-11"><a></a><span class="fu">plot</span>(dc_geo, <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-
-</div>
-<img data-src="index_files/figure-revealjs/dc-tracts-plot-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="now-with-ggplot" class="slide level2">
-<h2>Now with <code>ggplot</code>!</h2>
-<div class="cell" data-layout-align="center">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(ggplot2<span class="sc">::</span><span class="fu">theme_classic</span>())</span>
-<span id="cb2-2"><a></a>dc_sf <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb2-4"><a></a>  <span class="fu">geom_sf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-
-</div>
-<img data-src="index_files/figure-revealjs/dc-map-ggplot-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="raster-data" class="slide level2">
+<section id="raster-data" class="slide level2 crunch-title">
 <h2>Raster Data</h2>
 <ul>
 <li>Each <strong>DC Census Tract</strong> has its own (odd) shape, which can be described by discrete coordinates forming a <code>POLYGON</code></li>
-<li>For geospatial analysis, however, we often need to compute over <strong>evenly-spaced grids</strong> rather than this odd collection of shapes</li>
+<li>For geospatial analysis, however, we often need to compute over <strong>evenly-spaced grids</strong> rather than this odd collection of shapes
+<ul>
+<li>Most common example: <strong>photos</strong> taken from an airplane/satellite! [<em>Remote sensing</em>]</li>
+</ul></li>
 <li><code>POLYGON</code>s may make sense for <strong>demographers</strong>, but how about someone studying <strong>air pollution</strong> in DC? (Smog, for example, does not confine itself to census tracts!)</li>
 </ul>
 </section>
@@ -305,47 +764,36 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>dc_union_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_union</span>(dc_sf)</span>
-<span id="cb3-2"><a></a>dc_union_sf <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb3-4"><a></a>  <span class="fu">geom_sf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>dc_union_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_union</span>(dc_sf)</span>
+<span id="cb23-2"><a></a>dc_union_sf <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb23-4"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb23-5"><a></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="step-2-rasterize-terra" class="slide level2 smaller crunch-title">
 <h2>Step 2: Rasterize (<code>terra</code>)</h2>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(terra)</span>
-<span id="cb4-2"><a></a>dc_SpatVector <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">vect</span>(dc_union_sf)</span>
-<span id="cb4-3"><a></a>rast_template <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="fu">ext</span>(dc_SpatVector), <span class="at">resolution =</span> <span class="dv">1000</span>, <span class="at">crs =</span> <span class="fu">crs</span>(dc_SpatVector))</span>
-<span id="cb4-4"><a></a>dc_SpatRaster <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rasterize</span>(dc_SpatVector, rast_template)</span>
-<span id="cb4-5"><a></a><span class="fu">dim</span>(dc_SpatRaster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">library</span>(terra)</span>
+<span id="cb24-2"><a></a>dc_SpatVector <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">vect</span>(dc_union_sf)</span>
+<span id="cb24-3"><a></a>rast_template <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="fu">ext</span>(dc_SpatVector), <span class="at">resolution =</span> <span class="dv">1000</span>, <span class="at">crs =</span> <span class="fu">crs</span>(dc_SpatVector))</span>
+<span id="cb24-4"><a></a>dc_SpatRaster <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rasterize</span>(dc_SpatVector, rast_template)</span>
+<span id="cb24-5"><a></a><span class="fu">dim</span>(dc_SpatRaster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 29 23  1</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">plot</span>(dc_SpatRaster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">plot</span>(dc_SpatRaster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
 <img data-src="index_files/figure-revealjs/rasterized-dc-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
-<section id="and-with-tidyterra" class="slide level2">
-<h2>And with <code>tidyterra</code></h2>
-<div class="cell" data-layout-align="center">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(tidyterra)</span>
-<span id="cb7-2"><a></a><span class="fu">ggplot</span>(<span class="at">data=</span>dc_SpatRaster, <span class="fu">aes</span>(<span class="at">fill=</span>layer)) <span class="sc">+</span></span>
-<span id="cb7-3"><a></a>  <span class="fu">geom_spatraster</span>(<span class="at">data=</span>dc_SpatRaster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-
-</div>
-<img data-src="index_files/figure-revealjs/rasterized-dc-tidy-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="rasters-from-scratch" class="slide level2 smaller">
 <h2>Rasters From Scratch</h2>
 <p>Welcome to Gridtown!</p>
@@ -353,19 +801,19 @@ Jeff Jacobs
 <div class="column">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
-<span id="cb8-2"><a></a><span class="fu">library</span>(terra)</span>
-<span id="cb8-3"><a></a>gridtown <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(</span>
-<span id="cb8-4"><a></a>  <span class="at">nrows =</span> <span class="dv">4</span>, <span class="at">ncols =</span> <span class="dv">4</span>,</span>
-<span id="cb8-5"><a></a>  <span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">4</span>, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> <span class="dv">4</span>,</span>
-<span id="cb8-6"><a></a>  <span class="at">vals =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>)</span>
-<span id="cb8-7"><a></a>)</span>
-<span id="cb8-8"><a></a><span class="fu">plot</span>(gridtown)</span>
-<span id="cb8-9"><a></a><span class="fu">text</span>(</span>
-<span id="cb8-10"><a></a>  gridtown,</span>
-<span id="cb8-11"><a></a>  <span class="at">labels=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>,</span>
-<span id="cb8-12"><a></a>  <span class="at">halo=</span><span class="cn">TRUE</span>, <span class="at">hc=</span><span class="st">"black"</span>, <span class="at">col=</span><span class="st">"white"</span>, <span class="at">hw=</span><span class="fl">0.2</span></span>
-<span id="cb8-13"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb27-2"><a></a><span class="fu">library</span>(terra)</span>
+<span id="cb27-3"><a></a>gridtown <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(</span>
+<span id="cb27-4"><a></a>  <span class="at">nrows =</span> <span class="dv">4</span>, <span class="at">ncols =</span> <span class="dv">4</span>,</span>
+<span id="cb27-5"><a></a>  <span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">4</span>, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> <span class="dv">4</span>,</span>
+<span id="cb27-6"><a></a>  <span class="at">vals =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>)</span>
+<span id="cb27-7"><a></a>)</span>
+<span id="cb27-8"><a></a><span class="fu">plot</span>(gridtown)</span>
+<span id="cb27-9"><a></a><span class="fu">text</span>(</span>
+<span id="cb27-10"><a></a>  gridtown,</span>
+<span id="cb27-11"><a></a>  <span class="at">labels=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>,</span>
+<span id="cb27-12"><a></a>  <span class="at">halo=</span><span class="cn">TRUE</span>, <span class="at">hc=</span><span class="st">"black"</span>, <span class="at">col=</span><span class="st">"white"</span>, <span class="at">hw=</span><span class="fl">0.2</span></span>
+<span id="cb27-13"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div><div class="column">
 <div class="cell-output-display">
@@ -375,7 +823,7 @@ Jeff Jacobs
 <img data-src="index_files/figure-revealjs/fig-gridtown-indices-1.png" class="quarto-figure quarto-figure-center" width="960">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gridtown-indices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Gridtown Indices
+Figure&nbsp;3: Gridtown Indices
 </figcaption>
 </figure>
 </div>
@@ -390,13 +838,13 @@ Figure&nbsp;1: Gridtown Indices
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">plot</span>(gridtown)</span>
-<span id="cb9-2"><a></a><span class="fu">text</span>(gridtown, <span class="at">halo=</span><span class="cn">TRUE</span>, <span class="at">hc=</span><span class="st">"black"</span>, <span class="at">col=</span><span class="st">"white"</span>, <span class="at">hw=</span><span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">plot</span>(gridtown)</span>
+<span id="cb28-2"><a></a><span class="fu">text</span>(gridtown, <span class="at">halo=</span><span class="cn">TRUE</span>, <span class="at">hc=</span><span class="st">"black"</span>, <span class="at">col=</span><span class="st">"white"</span>, <span class="at">hw=</span><span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
 <img data-src="index_files/figure-revealjs/fig-gridtown-values-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960" id="fig-gridtown-values"><p class="caption">
-Figure&nbsp;2: Gridtown Values
+Figure&nbsp;4: Gridtown Values
 </p></section></section>
 <section>
 <section id="first-things-first-coordinates" class="title-slide slide level1 center" data-stack-name="Coordinates">
@@ -426,10 +874,10 @@ Figure&nbsp;2: Gridtown Values
 <section id="avoid-getting-lost-in-the-sauce" class="slide level2">
 <h2>Avoid Getting Lost in the Sauce</h2>
 <center>
-<video id="video_shortcode_videojs_video1" width="800" height="550" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="https://jpj.georgetown.domains/dsan6750-scratch/sauce.mp4"></video>
+<video id="video_shortcode_videojs_video2" width="800" height="550" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="https://jpj.georgetown.domains/ppol6805-scratch/sauce.mp4"></video>
 </center>
 </section>
-<section id="how-to-avoid-getting-lost-in-the-sauce" class="slide level2 crunch-title title-09">
+<section id="how-to-avoid-getting-lost-in-the-sauce" class="slide level2 crunch-title title-08">
 <h2>How To Avoid Getting Lost in the Sauce</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -552,8 +1000,8 @@ Figure&nbsp;2: Gridtown Values
 
 <img data-src="images/chi-monmonier-fig03010.jpeg" class="r-stretch quarto-figure-center"><p class="caption">From <span class="citation" data-cites="monmonier_how_2018">Monmonier (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span></p></section></section>
 <section>
-<section id="finding-geospatial-data" class="title-slide slide level1 center" data-stack-name="Finding Data">
-<h1>Finding Geospatial Data</h1>
+<section id="finding-gis-data" class="title-slide slide level1 center" data-stack-name="Finding Data">
+<h1>Finding GIS Data</h1>
 <ul>
 <li>Draws heavily on <a href="https://www.paulamoraga.com/book-spatial/r-packages-to-download-open-spatial-data.html" target="_blank">Chapter 6: “R packages to download open spatial data”</a>, in Moraga (2018), <a href="https://www.paulamoraga.com/book-spatial/index.html" target="_blank">Spatial Statistics for Data Science: Theory and Practice with R</a></li>
 </ul>
@@ -564,14 +1012,14 @@ Figure&nbsp;2: Gridtown Values
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">library</span>(rnaturalearth)</span>
-<span id="cb10-2"><a></a><span class="fu">library</span>(sf)</span>
-<span id="cb10-3"><a></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb10-4"><a></a><span class="fu">library</span>(viridis)</span>
-<span id="cb10-5"><a></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb10-6"><a></a>map1 <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">type =</span> <span class="st">"countries"</span>, <span class="at">country =</span> <span class="st">"Germany"</span>, <span class="at">scale =</span> <span class="st">"medium"</span>, <span class="at">returnclass =</span> <span class="st">"sf"</span>)</span>
-<span id="cb10-7"><a></a>map2 <span class="ot">&lt;-</span> rnaturalearth<span class="sc">::</span><span class="fu">ne_states</span>(<span class="st">"Germany"</span>, <span class="at">returnclass =</span> <span class="st">"sf"</span>)</span>
-<span id="cb10-8"><a></a>(<span class="fu">ggplot</span>(map1) <span class="sc">+</span> <span class="fu">geom_sf</span>()) <span class="sc">+</span> (<span class="fu">ggplot</span>(map2) <span class="sc">+</span> <span class="fu">geom_sf</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb29-2"><a></a><span class="fu">library</span>(sf)</span>
+<span id="cb29-3"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb29-4"><a></a><span class="fu">library</span>(viridis)</span>
+<span id="cb29-5"><a></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb29-6"><a></a>map1 <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">type =</span> <span class="st">"countries"</span>, <span class="at">country =</span> <span class="st">"Germany"</span>, <span class="at">scale =</span> <span class="st">"medium"</span>, <span class="at">returnclass =</span> <span class="st">"sf"</span>)</span>
+<span id="cb29-7"><a></a>map2 <span class="ot">&lt;-</span> rnaturalearth<span class="sc">::</span><span class="fu">ne_states</span>(<span class="st">"Germany"</span>, <span class="at">returnclass =</span> <span class="st">"sf"</span>)</span>
+<span id="cb29-8"><a></a>(<span class="fu">ggplot</span>(map1) <span class="sc">+</span> <span class="fu">geom_sf</span>()) <span class="sc">+</span> (<span class="fu">ggplot</span>(map2) <span class="sc">+</span> <span class="fu">geom_sf</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -582,10 +1030,10 @@ Figure&nbsp;2: Gridtown Values
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">library</span>(geodata)</span>
-<span id="cb11-2"><a></a>d <span class="ot">&lt;-</span> <span class="fu">worldclim_country</span>(<span class="at">country =</span> <span class="st">"Jamaica"</span>, <span class="at">var =</span> <span class="st">"tmin"</span>,</span>
-<span id="cb11-3"><a></a>                       <span class="at">path =</span> <span class="fu">tempdir</span>())</span>
-<span id="cb11-4"><a></a>terra<span class="sc">::</span><span class="fu">plot</span>(<span class="fu">mean</span>(d), <span class="at">plg =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Min. temperature (C)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">library</span>(geodata)</span>
+<span id="cb30-2"><a></a>d <span class="ot">&lt;-</span> <span class="fu">worldclim_country</span>(<span class="at">country =</span> <span class="st">"Jamaica"</span>, <span class="at">var =</span> <span class="st">"tmin"</span>,</span>
+<span id="cb30-3"><a></a>                       <span class="at">path =</span> <span class="fu">tempdir</span>())</span>
+<span id="cb30-4"><a></a>terra<span class="sc">::</span><span class="fu">plot</span>(<span class="fu">mean</span>(d), <span class="at">plg =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Min. temperature (C)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -596,13 +1044,13 @@ Figure&nbsp;2: Gridtown Values
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">library</span>(rnaturalearth)</span>
-<span id="cb12-2"><a></a><span class="fu">library</span>(elevatr)</span>
-<span id="cb12-3"><a></a><span class="fu">library</span>(terra)</span>
-<span id="cb12-4"><a></a>map <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">type =</span> <span class="st">"countries"</span>, <span class="at">country =</span> <span class="st">"Switzerland"</span>,</span>
-<span id="cb12-5"><a></a>                    <span class="at">scale =</span> <span class="st">"medium"</span>, <span class="at">returnclass =</span> <span class="st">"sf"</span>)</span>
-<span id="cb12-6"><a></a>d <span class="ot">&lt;-</span> <span class="fu">get_elev_raster</span>(<span class="at">locations =</span> map, <span class="at">z =</span> <span class="dv">9</span>, <span class="at">clip =</span> <span class="st">"locations"</span>)</span>
-<span id="cb12-7"><a></a>terra<span class="sc">::</span><span class="fu">plot</span>(<span class="fu">rast</span>(d), <span class="at">plg =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Elevation (m)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb31-2"><a></a><span class="fu">library</span>(elevatr)</span>
+<span id="cb31-3"><a></a><span class="fu">library</span>(terra)</span>
+<span id="cb31-4"><a></a>map <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">type =</span> <span class="st">"countries"</span>, <span class="at">country =</span> <span class="st">"Switzerland"</span>,</span>
+<span id="cb31-5"><a></a>                    <span class="at">scale =</span> <span class="st">"medium"</span>, <span class="at">returnclass =</span> <span class="st">"sf"</span>)</span>
+<span id="cb31-6"><a></a>d <span class="ot">&lt;-</span> <span class="fu">get_elev_raster</span>(<span class="at">locations =</span> map, <span class="at">z =</span> <span class="dv">9</span>, <span class="at">clip =</span> <span class="st">"locations"</span>)</span>
+<span id="cb31-7"><a></a>terra<span class="sc">::</span><span class="fu">plot</span>(<span class="fu">rast</span>(d), <span class="at">plg =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Elevation (m)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -612,19 +1060,19 @@ Figure&nbsp;2: Gridtown Values
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">library</span>(osmdata)</span>
-<span id="cb13-2"><a></a>placebb <span class="ot">&lt;-</span> <span class="fu">getbb</span>(<span class="st">"Barcelona"</span>)</span>
-<span id="cb13-3"><a></a>hospitals <span class="ot">&lt;-</span> placebb <span class="sc">%&gt;%</span> <span class="fu">opq</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb13-4"><a></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"amenity"</span>, <span class="at">value =</span> <span class="st">"hospital"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-5"><a></a>  <span class="fu">osmdata_sf</span>()</span>
-<span id="cb13-6"><a></a>motorways <span class="ot">&lt;-</span> placebb <span class="sc">%&gt;%</span> <span class="fu">opq</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb13-7"><a></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"highway"</span>, <span class="at">value =</span> <span class="st">"motorway"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-8"><a></a>  <span class="fu">osmdata_sf</span>()</span>
-<span id="cb13-9"><a></a><span class="fu">library</span>(leaflet)</span>
-<span id="cb13-10"><a></a><span class="fu">leaflet</span>() <span class="sc">|&gt;</span>  <span class="fu">addTiles</span>() <span class="sc">|&gt;</span></span>
-<span id="cb13-11"><a></a>  <span class="fu">addPolylines</span>(<span class="at">data =</span> motorways<span class="sc">$</span>osm_lines, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb13-12"><a></a>  <span class="fu">addPolygons</span>(<span class="at">data =</span> hospitals<span class="sc">$</span>osm_polygons,</span>
-<span id="cb13-13"><a></a>              <span class="at">label =</span> hospitals<span class="sc">$</span>osm_polygons<span class="sc">$</span>name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">library</span>(osmdata)</span>
+<span id="cb32-2"><a></a>placebb <span class="ot">&lt;-</span> <span class="fu">getbb</span>(<span class="st">"Barcelona"</span>)</span>
+<span id="cb32-3"><a></a>hospitals <span class="ot">&lt;-</span> placebb <span class="sc">%&gt;%</span> <span class="fu">opq</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"amenity"</span>, <span class="at">value =</span> <span class="st">"hospital"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-5"><a></a>  <span class="fu">osmdata_sf</span>()</span>
+<span id="cb32-6"><a></a>motorways <span class="ot">&lt;-</span> placebb <span class="sc">%&gt;%</span> <span class="fu">opq</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb32-7"><a></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"highway"</span>, <span class="at">value =</span> <span class="st">"motorway"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-8"><a></a>  <span class="fu">osmdata_sf</span>()</span>
+<span id="cb32-9"><a></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb32-10"><a></a><span class="fu">leaflet</span>() <span class="sc">|&gt;</span>  <span class="fu">addTiles</span>() <span class="sc">|&gt;</span></span>
+<span id="cb32-11"><a></a>  <span class="fu">addPolylines</span>(<span class="at">data =</span> motorways<span class="sc">$</span>osm_lines, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb32-12"><a></a>  <span class="fu">addPolygons</span>(<span class="at">data =</span> hospitals<span class="sc">$</span>osm_polygons,</span>
+<span id="cb32-13"><a></a>              <span class="at">label =</span> hospitals<span class="sc">$</span>osm_polygons<span class="sc">$</span>name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-a5eb1987685ddd3edda7" style="width:960px;height:480px;"></div>
@@ -638,14 +1086,14 @@ Figure&nbsp;2: Gridtown Values
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">library</span>(wbstats)</span>
-<span id="cb14-2"><a></a>d <span class="ot">&lt;-</span> <span class="fu">wb_data</span>(<span class="at">indicator =</span> <span class="st">"MO.INDEX.HDEV.XQ"</span>,</span>
-<span id="cb14-3"><a></a>             <span class="at">start_date =</span> <span class="dv">2011</span>, <span class="at">end_date =</span> <span class="dv">2011</span>)</span>
-<span id="cb14-4"><a></a><span class="fu">library</span>(rnaturalearth)</span>
-<span id="cb14-5"><a></a><span class="fu">library</span>(mapview)</span>
-<span id="cb14-6"><a></a>map <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">continent =</span> <span class="st">"Africa"</span>, <span class="at">returnclass =</span> <span class="st">"sf"</span>)</span>
-<span id="cb14-7"><a></a>map <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(map, d, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"iso_a3"</span> <span class="ot">=</span> <span class="st">"iso3c"</span>))</span>
-<span id="cb14-8"><a></a><span class="fu">mapview</span>(map, <span class="at">zcol =</span> <span class="st">"MO.INDEX.HDEV.XQ"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">library</span>(wbstats)</span>
+<span id="cb33-2"><a></a>d <span class="ot">&lt;-</span> <span class="fu">wb_data</span>(<span class="at">indicator =</span> <span class="st">"MO.INDEX.HDEV.XQ"</span>,</span>
+<span id="cb33-3"><a></a>             <span class="at">start_date =</span> <span class="dv">2011</span>, <span class="at">end_date =</span> <span class="dv">2011</span>)</span>
+<span id="cb33-4"><a></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb33-5"><a></a><span class="fu">library</span>(mapview)</span>
+<span id="cb33-6"><a></a>map <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">continent =</span> <span class="st">"Africa"</span>, <span class="at">returnclass =</span> <span class="st">"sf"</span>)</span>
+<span id="cb33-7"><a></a>map <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(map, d, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"iso_a3"</span> <span class="ot">=</span> <span class="st">"iso3c"</span>))</span>
+<span id="cb33-8"><a></a><span class="fu">mapview</span>(map, <span class="at">zcol =</span> <span class="st">"MO.INDEX.HDEV.XQ"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-b2b062819a54f23d5ea0" style="width:960px;height:480px;"></div>
@@ -661,6 +1109,9 @@ Krygier, John, and Denis Wood. 2016. <em>Making <span>Maps</span>, <span>Third E
 </div>
 <div id="ref-monmonier_how_2018" class="csl-entry" role="listitem">
 Monmonier, Mark. 2018. <em>How to <span>Lie</span> with <span>Maps</span></em>. University of Chicago Press. <a href="https://www.dropbox.com/scl/fi/7rsqbxgge6llggnaf5tit/How-to-Lie-with-Maps-Third-Edition.pdf?rlkey=6rqxta7cjyq3oqdnskj4dtwj8&amp;dl=1">https://www.dropbox.com/scl/fi/7rsqbxgge6llggnaf5tit/How-to-Lie-with-Maps-Third-Edition.pdf?rlkey=6rqxta7cjyq3oqdnskj4dtwj8&amp;dl=1</a>.
+</div>
+<div id="ref-montessori_spontaneous_1916" class="csl-entry" role="listitem">
+Montessori, Maria. 1916. <em>Spontaneous <span>Activity</span> in <span>Education</span>: <span>A Basic Guide</span> to the <span>Montessori Methods</span> of <span>Learning</span> in the <span>Classroom</span></em>. Lulu Press.
 </div>
 </div>
 
@@ -1096,6 +1547,7 @@ Monmonier, Mark. 2018. <em>How to <span>Lie</span> with <span>Maps</span></em>. 
       });
       </script>
     <script>videojs(video_shortcode_videojs_video1);</script>
+    <script>videojs(video_shortcode_videojs_video2);</script>
     
 
 </body></html>

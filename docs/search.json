@@ -459,7 +459,7 @@
     "href": "w06/index.html#geostatistical-data-rightarrow-point-pattern",
     "title": "Week 6: Random Fields and Spatial Autocorrelation",
     "section": "Geostatistical Data \\(\\rightarrow\\) Point Pattern",
-    "text": "Geostatistical Data \\(\\rightarrow\\) Point Pattern\n\n\n\nIndicator function: \\(\\mathbb{1}\\left[Z(\\mathbf{s}) &gt; 860\\text{m}\\right]\\)\n\n\n\nCode\nset.seed(6805)\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.3.0\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\nlibrary(sf)\n\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\n\nCode\nlibrary(terra)\n\n\nterra 1.7.78\n\nAttaching package: 'terra'\n\nThe following object is masked from 'package:tidyr':\n\n    extract\n\n\nCode\nlibrary(latex2exp)\n#### Define area\nlat_range &lt;- c(-5.0, -6.0)\nlon_range &lt;- c(15, 20)\n#lon_center &lt;- -5.4\n#lat_center &lt;- 36.75\n# And the window around this centroid\nlat_radius &lt;- 0.05\nlon_radius &lt;- 0.1\n\ngen_random_table &lt;- function(world_num=1, return_data=FALSE, rand_seed=NULL) {\n  if (!is.null(rand_seed)) {\n    set.seed(rand_seed)\n  } else {\n    rand_seed &lt;- sample(1:9999, size=1)\n    set.seed(rand_seed)\n  }\n  lat_center &lt;- runif(1, min=min(lat_range), max=max(lat_range))\n  lon_center &lt;- runif(1, min=min(lon_range), max=max(lon_range))\n  lon_lower &lt;- lon_center - lon_radius\n  lon_upper &lt;- lon_center + lon_radius\n  lat_lower &lt;- lat_center - lat_radius\n  lat_upper &lt;- lat_center + lat_radius\n  coords &lt;- data.frame(x = c(lon_lower, lon_lower, lon_upper, lon_upper),\n                       y = c(lat_lower, lat_upper, lat_lower, lat_upper))\n  coords_sf &lt;- st_as_sf(coords, coords = c(\"x\", \"y\"), crs = 4326)\n  # Using geodata\n  elev &lt;- geodata::elevation_3s(lon = lon_center, lat = lat_center, res=2.5, path = getwd())\n  elev &lt;- terra::crop(elev, coords_sf)\n  return(elev)\n}\n\ncompute_hillshade &lt;- function(elev) {\n  # Calculate hillshade\n  slopes &lt;- terra::terrain(elev, \"slope\", unit = \"radians\")\n  aspect &lt;- terra::terrain(elev, \"aspect\", unit = \"radians\")\n  hs &lt;- terra::shade(slopes, aspect)\n  return(hs)\n}\n\nplot_hillshade &lt;- function(elev, hs, title=NULL) {\n  ## Plot hillshading as basemap\n  # (here using terra::plot, but could use tmap)\n  # lat_upper_trimmed &lt;- lat_upper - 0.001*lat_upper\n  # lat_lower_trimmed &lt;- lat_lower - 0.001*lat_lower\n  base_plot &lt;- terra::plot(\n    hs, col = gray(0:100 / 100), legend = FALSE, axes = FALSE, mar=c(0,0,1,0), grid=TRUE\n  )\n  #    xlim = c(elev_xmin, elev_xmax), ylim = c(elev_ymin, elev_ymax))\n  # overlay with elevation\n  \n  color_vec &lt;- terrain.colors(25)\n  plot(elev, col = color_vec, alpha = 0.5, legend = FALSE, axes = FALSE, add = TRUE)\n  \n  # add contour lines\n  terra::contour(elev, col = \"grey30\", add = TRUE)\n  if (!is.null(title)) {\n    world_name &lt;- TeX(sprintf(r\"(World $\\omega_{%d} \\in \\Omega$)\", world_num))\n    title(world_name)\n  }\n}\nelev_r1 &lt;- gen_random_table(rand_seed=6810)\nhs_r1 &lt;- compute_hillshade(elev_r1)\nplot_hillshade(elev_r1, hs_r1)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nelev_indic_r1 &lt;- terra::ifel(\n  elev_r1 &gt; 860, elev_r1, NA\n)\nplot(elev_indic_r1)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nelev_r2 &lt;- gen_random_table(rand_seed=6815)\nhs_r2 &lt;- compute_hillshade(elev_r2)\nplot_hillshade(elev_r2, hs_r2)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nmy_quant &lt;- function(x) quantile(x, 0.99)\nelev_99 &lt;- terra::global(elev_r2, my_quant)[1,1]\nelev_indic_r2 &lt;- terra::ifel(\n  elev_r2 &gt; elev_99, elev_r2, NA\n)\nplot(elev_indic_r2)",
+    "text": "Geostatistical Data \\(\\rightarrow\\) Point Pattern\n\n\n\nIndicator function: \\(\\mathbb{1}\\left[Z(\\mathbf{s}) &gt; 860\\text{m}\\right]\\)\n\n\n\nCode\nset.seed(6805)\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.3.0\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\nlibrary(sf)\n\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\n\nCode\nlibrary(terra)\n\n\nterra 1.8.60\n\nAttaching package: 'terra'\n\nThe following object is masked from 'package:tidyr':\n\n    extract\n\n\nCode\nlibrary(latex2exp)\n#### Define area\nlat_range &lt;- c(-5.0, -6.0)\nlon_range &lt;- c(15, 20)\n#lon_center &lt;- -5.4\n#lat_center &lt;- 36.75\n# And the window around this centroid\nlat_radius &lt;- 0.05\nlon_radius &lt;- 0.1\n\ngen_random_table &lt;- function(world_num=1, return_data=FALSE, rand_seed=NULL) {\n  if (!is.null(rand_seed)) {\n    set.seed(rand_seed)\n  } else {\n    rand_seed &lt;- sample(1:9999, size=1)\n    set.seed(rand_seed)\n  }\n  lat_center &lt;- runif(1, min=min(lat_range), max=max(lat_range))\n  lon_center &lt;- runif(1, min=min(lon_range), max=max(lon_range))\n  lon_lower &lt;- lon_center - lon_radius\n  lon_upper &lt;- lon_center + lon_radius\n  lat_lower &lt;- lat_center - lat_radius\n  lat_upper &lt;- lat_center + lat_radius\n  coords &lt;- data.frame(x = c(lon_lower, lon_lower, lon_upper, lon_upper),\n                       y = c(lat_lower, lat_upper, lat_lower, lat_upper))\n  coords_sf &lt;- st_as_sf(coords, coords = c(\"x\", \"y\"), crs = 4326)\n  # Using geodata\n  elev &lt;- geodata::elevation_3s(lon = lon_center, lat = lat_center, res=2.5, path = getwd())\n  elev &lt;- terra::crop(elev, coords_sf)\n  return(elev)\n}\n\ncompute_hillshade &lt;- function(elev) {\n  # Calculate hillshade\n  slopes &lt;- terra::terrain(elev, \"slope\", unit = \"radians\")\n  aspect &lt;- terra::terrain(elev, \"aspect\", unit = \"radians\")\n  hs &lt;- terra::shade(slopes, aspect)\n  return(hs)\n}\n\nplot_hillshade &lt;- function(elev, hs, title=NULL) {\n  ## Plot hillshading as basemap\n  # (here using terra::plot, but could use tmap)\n  # lat_upper_trimmed &lt;- lat_upper - 0.001*lat_upper\n  # lat_lower_trimmed &lt;- lat_lower - 0.001*lat_lower\n  base_plot &lt;- terra::plot(\n    hs, col = gray(0:100 / 100), legend = FALSE, axes = FALSE, mar=c(0,0,1,0), grid=TRUE\n  )\n  #    xlim = c(elev_xmin, elev_xmax), ylim = c(elev_ymin, elev_ymax))\n  # overlay with elevation\n  \n  color_vec &lt;- terrain.colors(25)\n  plot(elev, col = color_vec, alpha = 0.5, legend = FALSE, axes = FALSE, add = TRUE)\n  \n  # add contour lines\n  terra::contour(elev, col = \"grey30\", add = TRUE)\n  if (!is.null(title)) {\n    world_name &lt;- TeX(sprintf(r\"(World $\\omega_{%d} \\in \\Omega$)\", world_num))\n    title(world_name)\n  }\n}\nelev_r1 &lt;- gen_random_table(rand_seed=6810)\nhs_r1 &lt;- compute_hillshade(elev_r1)\nplot_hillshade(elev_r1, hs_r1)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nelev_indic_r1 &lt;- terra::ifel(\n  elev_r1 &gt; 860, elev_r1, NA\n)\nplot(elev_indic_r1)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nelev_r2 &lt;- gen_random_table(rand_seed=6815)\nhs_r2 &lt;- compute_hillshade(elev_r2)\nplot_hillshade(elev_r2, hs_r2)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nmy_quant &lt;- function(x) quantile(x, 0.99)\nelev_99 &lt;- terra::global(elev_r2, my_quant)[1,1]\nelev_indic_r2 &lt;- terra::ifel(\n  elev_r2 &gt; elev_99, elev_r2, NA\n)\nplot(elev_indic_r2)",
     "crumbs": [
       "Week 6: Oct 2"
     ]
@@ -1071,32 +1071,123 @@
     ]
   },
   {
-    "objectID": "w02/slides.html#end-of-last-week-vector-data",
-    "href": "w02/slides.html#end-of-last-week-vector-data",
+    "objectID": "w02/slides.html#helpful-feedback",
+    "href": "w02/slides.html#helpful-feedback",
     "title": "Week 2: How Do Maps Work?",
-    "section": "End of Last Week: Vector Data",
-    "text": "End of Last Week: Vector Data\n\n\nCode\nlibrary(sf)\nlibrary(tidyverse)\n# Load DC tracts data\ndc_sf_fpath &lt;- \"data/DC_Census_2020/Census_Tracts_in_2020.shp\"\ndc_sf &lt;- st_read(dc_sf_fpath, quiet = TRUE)\ncols_to_keep &lt;- c(\"OBJECTID\", \"TRACT\", \"GEOID\", \"ALAND\", \"AWATER\", \"STUSAB\", \"SUMLEV\", \"GEOCODE\", \"STATE\", \"NAME\", \"POP100\", \"HU100\", \"geometry\")\ndc_sf &lt;- dc_sf |&gt; select(cols_to_keep)\n# We can extract the geometry with the st_geometry function\ndc_geo &lt;- st_geometry(dc_sf)\n# And plot the geometry with base R's plot() function\nplot(dc_geo, mar = c(0,0,0,0))"
+    "section": "Helpful Feedback!",
+    "text": "Helpful Feedback!\n\nSry for machine-gunning words/concepts at you last week\n\n\\(\\leadsto\\) Talking more slowly!\n\\(\\leadsto\\) Less colloquial language!\nPls give me grace as I enact this video in reverse\n\nMore importantly: weekly coding workshops!\n\nNot only will they “cancel out” my too-fast DC-slang-poisoned pace, but also…\nFocus will be on specific blocks of code rather than higher-level concepts [but see also: “forgetting curve” diagram a few slides ahead]"
   },
   {
-    "objectID": "w02/slides.html#now-with-ggplot",
-    "href": "w02/slides.html#now-with-ggplot",
+    "objectID": "w02/slides.html#pedagogical-principles",
+    "href": "w02/slides.html#pedagogical-principles",
     "title": "Week 2: How Do Maps Work?",
-    "section": "Now with ggplot!",
-    "text": "Now with ggplot!\n\n\nCode\nggplot2::theme_set(ggplot2::theme_classic())\ndc_sf |&gt;\n  ggplot() +\n  geom_sf()"
+    "section": "Pedagogical Principles",
+    "text": "Pedagogical Principles\n\nThere’s literally no such thing as “intelligence”\nAnyone is capable of learning anything (neural plasticity)\nGrowth mindset: “I can’t do this” \\(\\leadsto\\) “I can’t do this yet!”\nThe point of a class is learning: understanding something about the world, either (a) For its own sake (end in itself) or (b) Because it’s relevant to something you care about (means to an end)\n\n\n\nOur teaching should be governed, not by a desire to make students learn things, but by the endeavor to keep burning within them that light which is called curiosity. (Montessori 1916)"
+  },
+  {
+    "objectID": "w02/slides.html#chatgpt-and-whatnot",
+    "href": "w02/slides.html#chatgpt-and-whatnot",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "ChatGPT and Whatnot",
+    "text": "ChatGPT and Whatnot\n\nIf you feel like ChatGPT will help you learn something in the course, then use it!\nIf you feel like you’re using it as a “crutch”, try to hold yourself accountable for not using it!\n\n\n\n\n\n\n\n\nTake the time/energy you're using to worry about...\nUse it instead to worry about...\n\n\n\n\n\nChatGPT\nCollaboration Policies\nPlagiarism\n\nLearning GIS"
+  },
+  {
+    "objectID": "w02/slides.html#on-not-worrying-about-prereqs",
+    "href": "w02/slides.html#on-not-worrying-about-prereqs",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "On Not Worrying About Prereqs",
+    "text": "On Not Worrying About Prereqs\n\nI genuinely believe that I can make the course accessible to you, meeting you wherever you’re at, no matter what!\nEveryone learns at their own pace (who says 14 weeks is “correct” amount of time to learn GIS?), and I structure my courses as best as I possibly can to adapt to your pace\n\\(\\Rightarrow\\) Assessments (HW, Midterm) valuable in two ways:\n[Valuable for you] As an accountability mechanism to make sure you’re learn the material (how do we know when we’ve learned something? When we can answer questions about it / use it to accomplish things!)\n[Valuable for me] For assessing and updating pace"
+  },
+  {
+    "objectID": "w02/slides.html#r-andor-python-andor-js",
+    "href": "w02/slides.html#r-andor-python-andor-js",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "R and/or Python and/or JS",
+    "text": "R and/or Python and/or JS\n\nMy Geometry vs. Algebra Rant… Euclid’s Elements, Book VI, Proposition 28.\nThe problem: Divide a given straight line so that the rectangle contained by its segments may be equal to a given area, not exceeding the square of half the line.\n\n\n\nGeometers solved w/geometry (300 BC)…\n\n\n\n\n\n\n…Algebraists solved w/algebra (2000 BC)…\n\\[\n\\begin{align*}\n&ax^2 + bx + c = 0 \\\\\n\\Rightarrow \\; & x_+ = \\frac{-b + \\sqrt{b^2 - 4ac}}{2a}\n\\end{align*}\n\\]\n…From 1637 onwards, whichever is easier! 🤯🤯🤯 (Isomorphism)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1: Circle with radius 1? Or \\((x,y)\\) satisfying \\(x^2 + y^2 = 1\\)?"
+  },
+  {
+    "objectID": "w02/slides.html#learning-how-to-learn",
+    "href": "w02/slides.html#learning-how-to-learn",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Learning How To Learn",
+    "text": "Learning How To Learn\n\n\n\n\n\n\nFigure 2: From The Carter (Documentary)"
+  },
+  {
+    "objectID": "w02/slides.html#hes-literally-extremely-correct",
+    "href": "w02/slides.html#hes-literally-extremely-correct",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "He’s Literally Extremely Correct!",
+    "text": "He’s Literally Extremely Correct!\n\nFrom Elsevier Osmosis: Spaced Repetition"
+  },
+  {
+    "objectID": "w02/slides.html#our-first-map-polygons",
+    "href": "w02/slides.html#our-first-map-polygons",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Our First Map: Polygons!",
+    "text": "Our First Map: Polygons!\n(Quick demo adapted from Sherry Xie’s R Consortium Workshop: Analyzing Geospatial Data in R, using DC rather than Philadelphia open data.)\n\n\nCode\nlibrary(sf)\n# Load DC tracts data\ndc_sf_fpath &lt;- \"data/DC_Census_2020/Census_Tracts_in_2020.shp\"\ndc_sf &lt;- st_read(dc_sf_fpath);\n\n\nReading layer `Census_Tracts_in_2020' from data source \n  `/Users/jpj/gtown-local/ppol6805/w02/data/DC_Census_2020/Census_Tracts_in_2020.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 206 features and 315 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8584933 ymin: 4691871 xmax: -8561515 ymax: 4721078\nProjected CRS: WGS 84 / Pseudo-Mercator\n\n\nCode\ncols_to_keep &lt;- c(\"OBJECTID\", \"TRACT\", \"GEOID\", \"ALAND\", \"AWATER\", \"STUSAB\", \"SUMLEV\", \"GEOCODE\", \"STATE\", \"NAME\", \"POP100\", \"HU100\", \"geometry\")\ndc_sf &lt;- dc_sf |&gt; select(cols_to_keep)"
+  },
+  {
+    "objectID": "w02/slides.html#sf-objects",
+    "href": "w02/slides.html#sf-objects",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "sf Objects",
+    "text": "sf Objects\ndc_sf is an object of type sf (short for “simple feature”), which extends data.frame, and contains features which have type POLYGON\n\n\nCode\nclass(dc_sf)\n\n\n[1] \"sf\"         \"data.frame\"\n\n\nCode\nhead(dc_sf)\n\n\nSimple feature collection with 6 features and 12 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8577962 ymin: 4708107 xmax: -8572564 ymax: 4716136\nProjected CRS: WGS 84 / Pseudo-Mercator\n  OBJECTID  TRACT       GEOID  ALAND AWATER STUSAB SUMLEV     GEOCODE STATE\n1        1 002002 11001002002 849376      0     DC    140 11001002002    11\n2        2 002101 11001002101 600992      0     DC    140 11001002101    11\n3        3 002102 11001002102 725975      0     DC    140 11001002102    11\n4        4 002201 11001002201 415173      0     DC    140 11001002201    11\n5        5 002202 11001002202 698895    566     DC    140 11001002202    11\n6        6 000101 11001000101 199776   5261     DC    140 11001000101    11\n                NAME POP100 HU100                       geometry\n1 Census Tract 20.02   4072  1532 POLYGON ((-8575655 4714476,...\n2 Census Tract 21.01   5687  2335 POLYGON ((-8574745 4715676,...\n3 Census Tract 21.02   5099  2221 POLYGON ((-8573824 4715684,...\n4 Census Tract 22.01   3485  1229 POLYGON ((-8574654 4714781,...\n5 Census Tract 22.02   3339  1454 POLYGON ((-8573792 4714811,...\n6  Census Tract 1.01   1406   999 POLYGON ((-8577962 4708867,..."
+  },
+  {
+    "objectID": "w02/slides.html#working-with-sf-objects",
+    "href": "w02/slides.html#working-with-sf-objects",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Working With sf Objects",
+    "text": "Working With sf Objects\nWith some rare but important exceptions (which we’ll learn!), can be used just like a data.frame / tibble:\n\n\nCode\nstr(dc_sf)   # view structure\n\n\nClasses 'sf' and 'data.frame':  206 obs. of  13 variables:\n $ OBJECTID: int  1 2 3 4 5 6 7 8 9 10 ...\n $ TRACT   : chr  \"002002\" \"002101\" \"002102\" \"002201\" ...\n $ GEOID   : chr  \"11001002002\" \"11001002101\" \"11001002102\" \"11001002201\" ...\n $ ALAND   : int  849376 600992 725975 415173 698895 199776 1706484 505004 776435 1042157 ...\n $ AWATER  : int  0 0 0 0 566 5261 516665 0 439661 2305 ...\n $ STUSAB  : chr  \"DC\" \"DC\" \"DC\" \"DC\" ...\n $ SUMLEV  : int  140 140 140 140 140 140 140 140 140 140 ...\n $ GEOCODE : chr  \"11001002002\" \"11001002101\" \"11001002102\" \"11001002201\" ...\n $ STATE   : int  11 11 11 11 11 11 11 11 11 11 ...\n $ NAME    : chr  \"Census Tract 20.02\" \"Census Tract 21.01\" \"Census Tract 21.02\" \"Census Tract 22.01\" ...\n $ POP100  : int  4072 5687 5099 3485 3339 1406 3417 4108 4672 6161 ...\n $ HU100   : int  1532 2335 2221 1229 1454 999 2053 11 2169 2845 ...\n $ geometry:sfc_POLYGON of length 206; first list element: List of 1\n  ..$ : num [1:155, 1:2] -8575655 -8575655 -8575655 -8575655 -8575655 ...\n  ..- attr(*, \"class\")= chr [1:3] \"XY\" \"POLYGON\" \"sfg\"\n - attr(*, \"sf_column\")= chr \"geometry\"\n - attr(*, \"agr\")= Factor w/ 3 levels \"constant\",\"aggregate\",..: NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"names\")= chr [1:12] \"OBJECTID\" \"TRACT\" \"GEOID\" \"ALAND\" ..."
+  },
+  {
+    "objectID": "w02/slides.html#working-with-sf-objects-1",
+    "href": "w02/slides.html#working-with-sf-objects-1",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Working With sf Objects",
+    "text": "Working With sf Objects\n\n\nCode\nhead(dc_sf)  # view first several rows\n\n\nSimple feature collection with 6 features and 12 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8577962 ymin: 4708107 xmax: -8572564 ymax: 4716136\nProjected CRS: WGS 84 / Pseudo-Mercator\n  OBJECTID  TRACT       GEOID  ALAND AWATER STUSAB SUMLEV     GEOCODE STATE\n1        1 002002 11001002002 849376      0     DC    140 11001002002    11\n2        2 002101 11001002101 600992      0     DC    140 11001002101    11\n3        3 002102 11001002102 725975      0     DC    140 11001002102    11\n4        4 002201 11001002201 415173      0     DC    140 11001002201    11\n5        5 002202 11001002202 698895    566     DC    140 11001002202    11\n6        6 000101 11001000101 199776   5261     DC    140 11001000101    11\n                NAME POP100 HU100                       geometry\n1 Census Tract 20.02   4072  1532 POLYGON ((-8575655 4714476,...\n2 Census Tract 21.01   5687  2335 POLYGON ((-8574745 4715676,...\n3 Census Tract 21.02   5099  2221 POLYGON ((-8573824 4715684,...\n4 Census Tract 22.01   3485  1229 POLYGON ((-8574654 4714781,...\n5 Census Tract 22.02   3339  1454 POLYGON ((-8573792 4714811,...\n6  Census Tract 1.01   1406   999 POLYGON ((-8577962 4708867,..."
+  },
+  {
+    "objectID": "w02/slides.html#working-with-sf-objects-2",
+    "href": "w02/slides.html#working-with-sf-objects-2",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Working With sf Objects",
+    "text": "Working With sf Objects\n\n\nCode\ndim(dc_sf)   # view dimensions\n\n\n[1] 206  13\n\n\nCode\ndc_sf[1,]    # select first row\n\n\nSimple feature collection with 1 feature and 12 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8575656 ymin: 4713958 xmax: -8574562 ymax: 4716136\nProjected CRS: WGS 84 / Pseudo-Mercator\n  OBJECTID  TRACT       GEOID  ALAND AWATER STUSAB SUMLEV     GEOCODE STATE\n1        1 002002 11001002002 849376      0     DC    140 11001002002    11\n                NAME POP100 HU100                       geometry\n1 Census Tract 20.02   4072  1532 POLYGON ((-8575655 4714476,..."
+  },
+  {
+    "objectID": "w02/slides.html#working-with-sf-objects-3",
+    "href": "w02/slides.html#working-with-sf-objects-3",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Working With sf Objects",
+    "text": "Working With sf Objects\n\n\nCode\nhead(dc_sf$NAME)  # select column by name  \n\n\n[1] \"Census Tract 20.02\" \"Census Tract 21.01\" \"Census Tract 21.02\"\n[4] \"Census Tract 22.01\" \"Census Tract 22.02\" \"Census Tract 1.01\" \n\n\nCode\nhead(dc_sf[,4])         # select column by number\n\n\nSimple feature collection with 6 features and 1 field\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8577962 ymin: 4708107 xmax: -8572564 ymax: 4716136\nProjected CRS: WGS 84 / Pseudo-Mercator\n   ALAND                       geometry\n1 849376 POLYGON ((-8575655 4714476,...\n2 600992 POLYGON ((-8574745 4715676,...\n3 725975 POLYGON ((-8573824 4715684,...\n4 415173 POLYGON ((-8574654 4714781,...\n5 698895 POLYGON ((-8573792 4714811,...\n6 199776 POLYGON ((-8577962 4708867,..."
+  },
+  {
+    "objectID": "w02/slides.html#and-actually-displaying-the-map",
+    "href": "w02/slides.html#and-actually-displaying-the-map",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "And… Actually Displaying the Map!",
+    "text": "And… Actually Displaying the Map!\n\n\nCode\n# We can extract the geometry with the st_geometry function\ndc_geo &lt;- st_geometry(dc_sf)\n#pt_geo\n\n# Plot the geometry with base R's plot() function\nplot(dc_geo)"
+  },
+  {
+    "objectID": "w02/slides.html#and-with-ggplot",
+    "href": "w02/slides.html#and-with-ggplot",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "And with ggplot!",
+    "text": "And with ggplot!\n\n\nCode\ndc_sf |&gt;\n  ggplot() +\n  geom_sf() +\n  theme_classic()"
   },
   {
     "objectID": "w02/slides.html#raster-data",
     "href": "w02/slides.html#raster-data",
     "title": "Week 2: How Do Maps Work?",
     "section": "Raster Data",
-    "text": "Raster Data\n\nEach DC Census Tract has its own (odd) shape, which can be described by discrete coordinates forming a POLYGON\nFor geospatial analysis, however, we often need to compute over evenly-spaced grids rather than this odd collection of shapes\nPOLYGONs may make sense for demographers, but how about someone studying air pollution in DC? (Smog, for example, does not confine itself to census tracts!)"
+    "text": "Raster Data\n\nEach DC Census Tract has its own (odd) shape, which can be described by discrete coordinates forming a POLYGON\nFor geospatial analysis, however, we often need to compute over evenly-spaced grids rather than this odd collection of shapes\n\nMost common example: photos taken from an airplane/satellite! [Remote sensing]\n\nPOLYGONs may make sense for demographers, but how about someone studying air pollution in DC? (Smog, for example, does not confine itself to census tracts!)"
   },
   {
     "objectID": "w02/slides.html#step-1-union-of-all-tracts",
     "href": "w02/slides.html#step-1-union-of-all-tracts",
     "title": "Week 2: How Do Maps Work?",
     "section": "Step 1: Union of All Tracts",
-    "text": "Step 1: Union of All Tracts\n\n\nCode\ndc_union_sf &lt;- sf::st_union(dc_sf)\ndc_union_sf |&gt;\n  ggplot() +\n  geom_sf()"
+    "text": "Step 1: Union of All Tracts\n\n\nCode\ndc_union_sf &lt;- sf::st_union(dc_sf)\ndc_union_sf |&gt;\n  ggplot() +\n  geom_sf() +\n  theme_classic()"
   },
   {
     "objectID": "w02/slides.html#step-2-rasterize-terra",
@@ -1106,25 +1197,18 @@
     "text": "Step 2: Rasterize (terra)\n\n\nCode\nlibrary(terra)\ndc_SpatVector &lt;- terra::vect(dc_union_sf)\nrast_template &lt;- rast(ext(dc_SpatVector), resolution = 1000, crs = crs(dc_SpatVector))\ndc_SpatRaster &lt;- terra::rasterize(dc_SpatVector, rast_template)\ndim(dc_SpatRaster)\n\n\n[1] 29 23  1\n\n\nCode\nplot(dc_SpatRaster)"
   },
   {
-    "objectID": "w02/slides.html#and-with-tidyterra",
-    "href": "w02/slides.html#and-with-tidyterra",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "And with tidyterra",
-    "text": "And with tidyterra\n\n\nCode\nlibrary(tidyterra)\nggplot(data=dc_SpatRaster, aes(fill=layer)) +\n  geom_spatraster(data=dc_SpatRaster)"
-  },
-  {
     "objectID": "w02/slides.html#rasters-from-scratch",
     "href": "w02/slides.html#rasters-from-scratch",
     "title": "Week 2: How Do Maps Work?",
     "section": "Rasters From Scratch",
-    "text": "Rasters From Scratch\nWelcome to Gridtown!\n\n\n\nCode\nset.seed(6805)\nlibrary(terra)\ngridtown &lt;- terra::rast(\n  nrows = 4, ncols = 4,\n  xmin = 0, xmax = 4, ymin = 0, ymax = 4,\n  vals = sample(1:16)\n)\nplot(gridtown)\ntext(\n  gridtown,\n  labels=1:16,\n  halo=TRUE, hc=\"black\", col=\"white\", hw=0.2\n)\n\n\n\n\n\n\n\n\n\nFigure 1: Gridtown Indices\n\n\n\n\n\n\nRaster indices vs. values: The above plot displays indices for each cell: since a raster is a regular grid, can achieve memory-efficient representation with a single index (rather than, e.g., \\((x, y)\\) coords). But what we really care about are…"
+    "text": "Rasters From Scratch\nWelcome to Gridtown!\n\n\n\nCode\nset.seed(6805)\nlibrary(terra)\ngridtown &lt;- terra::rast(\n  nrows = 4, ncols = 4,\n  xmin = 0, xmax = 4, ymin = 0, ymax = 4,\n  vals = sample(1:16)\n)\nplot(gridtown)\ntext(\n  gridtown,\n  labels=1:16,\n  halo=TRUE, hc=\"black\", col=\"white\", hw=0.2\n)\n\n\n\n\n\n\n\n\n\nFigure 3: Gridtown Indices\n\n\n\n\n\n\nRaster indices vs. values: The above plot displays indices for each cell: since a raster is a regular grid, can achieve memory-efficient representation with a single index (rather than, e.g., \\((x, y)\\) coords). But what we really care about are…"
   },
   {
     "objectID": "w02/slides.html#raster-layer-values",
     "href": "w02/slides.html#raster-layer-values",
     "title": "Week 2: How Do Maps Work?",
     "section": "Raster Layer Values",
-    "text": "Raster Layer Values\n\n\nCode\nplot(gridtown)\ntext(gridtown, halo=TRUE, hc=\"black\", col=\"white\", hw=0.2)\n\n\n\n\nFigure 2: Gridtown Values"
+    "text": "Raster Layer Values\n\n\nCode\nplot(gridtown)\ntext(gridtown, halo=TRUE, hc=\"black\", col=\"white\", hw=0.2)\n\n\n\n\nFigure 4: Gridtown Values"
   },
   {
     "objectID": "w02/slides.html#latitude-and-longitude-are-angles",
@@ -1306,7 +1390,7 @@
     "href": "w02/slides.html#references",
     "title": "Week 2: How Do Maps Work?",
     "section": "References",
-    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\nMonmonier, Mark. 2018. How to Lie with Maps. University of Chicago Press. https://www.dropbox.com/scl/fi/7rsqbxgge6llggnaf5tit/How-to-Lie-with-Maps-Third-Edition.pdf?rlkey=6rqxta7cjyq3oqdnskj4dtwj8&dl=1."
+    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\nMonmonier, Mark. 2018. How to Lie with Maps. University of Chicago Press. https://www.dropbox.com/scl/fi/7rsqbxgge6llggnaf5tit/How-to-Lie-with-Maps-Third-Edition.pdf?rlkey=6rqxta7cjyq3oqdnskj4dtwj8&dl=1.\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press."
   },
   {
     "objectID": "w02/index.html",
@@ -1319,21 +1403,151 @@
     ]
   },
   {
-    "objectID": "w02/index.html#end-of-last-week-vector-data",
-    "href": "w02/index.html#end-of-last-week-vector-data",
+    "objectID": "w02/index.html#helpful-feedback",
+    "href": "w02/index.html#helpful-feedback",
     "title": "Week 2: How Do Maps Work?",
-    "section": "End of Last Week: Vector Data",
-    "text": "End of Last Week: Vector Data\n\n\nCode\nlibrary(sf)\nlibrary(tidyverse)\n# Load DC tracts data\ndc_sf_fpath &lt;- \"data/DC_Census_2020/Census_Tracts_in_2020.shp\"\ndc_sf &lt;- st_read(dc_sf_fpath, quiet = TRUE)\ncols_to_keep &lt;- c(\"OBJECTID\", \"TRACT\", \"GEOID\", \"ALAND\", \"AWATER\", \"STUSAB\", \"SUMLEV\", \"GEOCODE\", \"STATE\", \"NAME\", \"POP100\", \"HU100\", \"geometry\")\ndc_sf &lt;- dc_sf |&gt; select(cols_to_keep)\n# We can extract the geometry with the st_geometry function\ndc_geo &lt;- st_geometry(dc_sf)\n# And plot the geometry with base R's plot() function\nplot(dc_geo, mar = c(0,0,0,0))",
+    "section": "Helpful Feedback!",
+    "text": "Helpful Feedback!\n\nSry for machine-gunning words/concepts at you last week\n\n\\(\\leadsto\\) Talking more slowly!\n\\(\\leadsto\\) Less colloquial language!\nPls give me grace as I enact this video in reverse\n\nMore importantly: weekly coding workshops!\n\nNot only will they “cancel out” my too-fast DC-slang-poisoned pace, but also…\nFocus will be on specific blocks of code rather than higher-level concepts [but see also: “forgetting curve” diagram a few slides ahead]",
     "crumbs": [
       "Week 2: Sep 4"
     ]
   },
   {
-    "objectID": "w02/index.html#now-with-ggplot",
-    "href": "w02/index.html#now-with-ggplot",
+    "objectID": "w02/index.html#pedagogical-principles",
+    "href": "w02/index.html#pedagogical-principles",
     "title": "Week 2: How Do Maps Work?",
-    "section": "Now with ggplot!",
-    "text": "Now with ggplot!\n\n\nCode\nggplot2::theme_set(ggplot2::theme_classic())\ndc_sf |&gt;\n  ggplot() +\n  geom_sf()",
+    "section": "Pedagogical Principles",
+    "text": "Pedagogical Principles\n\nThere’s literally no such thing as “intelligence”\nAnyone is capable of learning anything (neural plasticity)\nGrowth mindset: “I can’t do this” \\(\\leadsto\\) “I can’t do this yet!”\nThe point of a class is learning: understanding something about the world, either (a) For its own sake (end in itself) or (b) Because it’s relevant to something you care about (means to an end)\n\n\n\nOur teaching should be governed, not by a desire to make students learn things, but by the endeavor to keep burning within them that light which is called curiosity. (Montessori 1916)",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#chatgpt-and-whatnot",
+    "href": "w02/index.html#chatgpt-and-whatnot",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "ChatGPT and Whatnot",
+    "text": "ChatGPT and Whatnot\n\nIf you feel like ChatGPT will help you learn something in the course, then use it!\nIf you feel like you’re using it as a “crutch”, try to hold yourself accountable for not using it!\n\n\n\n\n\n\n\n\nTake the time/energy you're using to worry about...\nUse it instead to worry about...\n\n\n\n\n\nChatGPT\nCollaboration Policies\nPlagiarism\n\nLearning GIS",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#on-not-worrying-about-prereqs",
+    "href": "w02/index.html#on-not-worrying-about-prereqs",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "On Not Worrying About Prereqs",
+    "text": "On Not Worrying About Prereqs\n\nI genuinely believe that I can make the course accessible to you, meeting you wherever you’re at, no matter what!\nEveryone learns at their own pace (who says 14 weeks is “correct” amount of time to learn GIS?), and I structure my courses as best as I possibly can to adapt to your pace\n\\(\\Rightarrow\\) Assessments (HW, Midterm) valuable in two ways:\n[Valuable for you] As an accountability mechanism to make sure you’re learn the material (how do we know when we’ve learned something? When we can answer questions about it / use it to accomplish things!)\n[Valuable for me] For assessing and updating pace",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#r-andor-python-andor-js",
+    "href": "w02/index.html#r-andor-python-andor-js",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "R and/or Python and/or JS",
+    "text": "R and/or Python and/or JS\n\nMy Geometry vs. Algebra Rant… Euclid’s Elements, Book VI, Proposition 28.\nThe problem: Divide a given straight line so that the rectangle contained by its segments may be equal to a given area, not exceeding the square of half the line.\n\n\n\nGeometers solved w/geometry (300 BC)…\n\n\n\n\n\n\n…Algebraists solved w/algebra (2000 BC)…\n\\[\n\\begin{align*}\n&ax^2 + bx + c = 0 \\\\\n\\Rightarrow \\; & x_+ = \\frac{-b + \\sqrt{b^2 - 4ac}}{2a}\n\\end{align*}\n\\]\n…From 1637 onwards, whichever is easier! 🤯🤯🤯 (Isomorphism)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1: Circle with radius 1? Or \\((x,y)\\) satisfying \\(x^2 + y^2 = 1\\)?",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#learning-how-to-learn",
+    "href": "w02/index.html#learning-how-to-learn",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Learning How To Learn",
+    "text": "Learning How To Learn\n\n\n\n\n\n\nFigure 2: From The Carter (Documentary)",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#hes-literally-extremely-correct",
+    "href": "w02/index.html#hes-literally-extremely-correct",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "He’s Literally Extremely Correct!",
+    "text": "He’s Literally Extremely Correct!\n\n\n\nFrom Elsevier Osmosis: Spaced Repetition",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#our-first-map-polygons",
+    "href": "w02/index.html#our-first-map-polygons",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Our First Map: Polygons!",
+    "text": "Our First Map: Polygons!\n(Quick demo adapted from Sherry Xie’s R Consortium Workshop: Analyzing Geospatial Data in R, using DC rather than Philadelphia open data.)\n\n\nCode\nlibrary(sf)\n# Load DC tracts data\ndc_sf_fpath &lt;- \"data/DC_Census_2020/Census_Tracts_in_2020.shp\"\ndc_sf &lt;- st_read(dc_sf_fpath);\n\n\nReading layer `Census_Tracts_in_2020' from data source \n  `/Users/jpj/gtown-local/ppol6805/w02/data/DC_Census_2020/Census_Tracts_in_2020.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 206 features and 315 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: -8584933 ymin: 4691871 xmax: -8561515 ymax: 4721078\nProjected CRS: WGS 84 / Pseudo-Mercator\n\n\nCode\ncols_to_keep &lt;- c(\"OBJECTID\", \"TRACT\", \"GEOID\", \"ALAND\", \"AWATER\", \"STUSAB\", \"SUMLEV\", \"GEOCODE\", \"STATE\", \"NAME\", \"POP100\", \"HU100\", \"geometry\")\ndc_sf &lt;- dc_sf |&gt; select(cols_to_keep)\n\n\nWarning: Using an external vector in selections was deprecated in tidyselect 1.1.0.\nℹ Please use `all_of()` or `any_of()` instead.\n  # Was:\n  data %&gt;% select(cols_to_keep)\n\n  # Now:\n  data %&gt;% select(all_of(cols_to_keep))\n\nSee &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#sf-objects",
+    "href": "w02/index.html#sf-objects",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "sf Objects",
+    "text": "sf Objects\ndc_sf is an object of type sf (short for “simple feature”), which extends data.frame, and contains features which have type POLYGON\n\n\nCode\nclass(dc_sf)\n\n\n[1] \"sf\"         \"data.frame\"\n\n\nCode\nhead(dc_sf)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOBJECTID\nTRACT\nGEOID\nALAND\nAWATER\nSTUSAB\nSUMLEV\nGEOCODE\nSTATE\nNAME\nPOP100\nHU100\ngeometry\n\n\n\n\n1\n002002\n11001002002\n849376\n0\nDC\n140\n11001002002\n11\nCensus Tract 20.02\n4072\n1532\nPOLYGON ((-8575655 4714476,…\n\n\n2\n002101\n11001002101\n600992\n0\nDC\n140\n11001002101\n11\nCensus Tract 21.01\n5687\n2335\nPOLYGON ((-8574745 4715676,…\n\n\n3\n002102\n11001002102\n725975\n0\nDC\n140\n11001002102\n11\nCensus Tract 21.02\n5099\n2221\nPOLYGON ((-8573824 4715684,…\n\n\n4\n002201\n11001002201\n415173\n0\nDC\n140\n11001002201\n11\nCensus Tract 22.01\n3485\n1229\nPOLYGON ((-8574654 4714781,…\n\n\n5\n002202\n11001002202\n698895\n566\nDC\n140\n11001002202\n11\nCensus Tract 22.02\n3339\n1454\nPOLYGON ((-8573792 4714811,…\n\n\n6\n000101\n11001000101\n199776\n5261\nDC\n140\n11001000101\n11\nCensus Tract 1.01\n1406\n999\nPOLYGON ((-8577962 4708867,…",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#working-with-sf-objects",
+    "href": "w02/index.html#working-with-sf-objects",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Working With sf Objects",
+    "text": "Working With sf Objects\nWith some rare but important exceptions (which we’ll learn!), can be used just like a data.frame / tibble:\n\n\nCode\nstr(dc_sf)   # view structure\n\n\nClasses 'sf' and 'data.frame':  206 obs. of  13 variables:\n $ OBJECTID: int  1 2 3 4 5 6 7 8 9 10 ...\n $ TRACT   : chr  \"002002\" \"002101\" \"002102\" \"002201\" ...\n $ GEOID   : chr  \"11001002002\" \"11001002101\" \"11001002102\" \"11001002201\" ...\n $ ALAND   : int  849376 600992 725975 415173 698895 199776 1706484 505004 776435 1042157 ...\n $ AWATER  : int  0 0 0 0 566 5261 516665 0 439661 2305 ...\n $ STUSAB  : chr  \"DC\" \"DC\" \"DC\" \"DC\" ...\n $ SUMLEV  : int  140 140 140 140 140 140 140 140 140 140 ...\n $ GEOCODE : chr  \"11001002002\" \"11001002101\" \"11001002102\" \"11001002201\" ...\n $ STATE   : int  11 11 11 11 11 11 11 11 11 11 ...\n $ NAME    : chr  \"Census Tract 20.02\" \"Census Tract 21.01\" \"Census Tract 21.02\" \"Census Tract 22.01\" ...\n $ POP100  : int  4072 5687 5099 3485 3339 1406 3417 4108 4672 6161 ...\n $ HU100   : int  1532 2335 2221 1229 1454 999 2053 11 2169 2845 ...\n $ geometry:sfc_POLYGON of length 206; first list element: List of 1\n  ..$ : num [1:155, 1:2] -8575655 -8575655 -8575655 -8575655 -8575655 ...\n  ..- attr(*, \"class\")= chr [1:3] \"XY\" \"POLYGON\" \"sfg\"\n - attr(*, \"sf_column\")= chr \"geometry\"\n - attr(*, \"agr\")= Factor w/ 3 levels \"constant\",\"aggregate\",..: NA NA NA NA NA NA NA NA NA NA ...\n  ..- attr(*, \"names\")= chr [1:12] \"OBJECTID\" \"TRACT\" \"GEOID\" \"ALAND\" ...",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#working-with-sf-objects-1",
+    "href": "w02/index.html#working-with-sf-objects-1",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Working With sf Objects",
+    "text": "Working With sf Objects\n\n\nCode\nhead(dc_sf)  # view first several rows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOBJECTID\nTRACT\nGEOID\nALAND\nAWATER\nSTUSAB\nSUMLEV\nGEOCODE\nSTATE\nNAME\nPOP100\nHU100\ngeometry\n\n\n\n\n1\n002002\n11001002002\n849376\n0\nDC\n140\n11001002002\n11\nCensus Tract 20.02\n4072\n1532\nPOLYGON ((-8575655 4714476,…\n\n\n2\n002101\n11001002101\n600992\n0\nDC\n140\n11001002101\n11\nCensus Tract 21.01\n5687\n2335\nPOLYGON ((-8574745 4715676,…\n\n\n3\n002102\n11001002102\n725975\n0\nDC\n140\n11001002102\n11\nCensus Tract 21.02\n5099\n2221\nPOLYGON ((-8573824 4715684,…\n\n\n4\n002201\n11001002201\n415173\n0\nDC\n140\n11001002201\n11\nCensus Tract 22.01\n3485\n1229\nPOLYGON ((-8574654 4714781,…\n\n\n5\n002202\n11001002202\n698895\n566\nDC\n140\n11001002202\n11\nCensus Tract 22.02\n3339\n1454\nPOLYGON ((-8573792 4714811,…\n\n\n6\n000101\n11001000101\n199776\n5261\nDC\n140\n11001000101\n11\nCensus Tract 1.01\n1406\n999\nPOLYGON ((-8577962 4708867,…",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#working-with-sf-objects-2",
+    "href": "w02/index.html#working-with-sf-objects-2",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Working With sf Objects",
+    "text": "Working With sf Objects\n\n\nCode\ndim(dc_sf)   # view dimensions\n\n\n[1] 206  13\n\n\nCode\ndc_sf[1,]    # select first row\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOBJECTID\nTRACT\nGEOID\nALAND\nAWATER\nSTUSAB\nSUMLEV\nGEOCODE\nSTATE\nNAME\nPOP100\nHU100\ngeometry\n\n\n\n\n1\n002002\n11001002002\n849376\n0\nDC\n140\n11001002002\n11\nCensus Tract 20.02\n4072\n1532\nPOLYGON ((-8575655 4714476,…",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#working-with-sf-objects-3",
+    "href": "w02/index.html#working-with-sf-objects-3",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "Working With sf Objects",
+    "text": "Working With sf Objects\n\n\nCode\nhead(dc_sf$NAME)  # select column by name  \n\n\n[1] \"Census Tract 20.02\" \"Census Tract 21.01\" \"Census Tract 21.02\"\n[4] \"Census Tract 22.01\" \"Census Tract 22.02\" \"Census Tract 1.01\" \n\n\nCode\nhead(dc_sf[,4])         # select column by number\n\n\n\n\n\n\nALAND\ngeometry\n\n\n\n\n849376\nPOLYGON ((-8575655 4714476,…\n\n\n600992\nPOLYGON ((-8574745 4715676,…\n\n\n725975\nPOLYGON ((-8573824 4715684,…\n\n\n415173\nPOLYGON ((-8574654 4714781,…\n\n\n698895\nPOLYGON ((-8573792 4714811,…\n\n\n199776\nPOLYGON ((-8577962 4708867,…",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#and-actually-displaying-the-map",
+    "href": "w02/index.html#and-actually-displaying-the-map",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "And… Actually Displaying the Map!",
+    "text": "And… Actually Displaying the Map!\n\n\nCode\n# We can extract the geometry with the st_geometry function\ndc_geo &lt;- st_geometry(dc_sf)\n#pt_geo\n\n# Plot the geometry with base R's plot() function\nplot(dc_geo)",
+    "crumbs": [
+      "Week 2: Sep 4"
+    ]
+  },
+  {
+    "objectID": "w02/index.html#and-with-ggplot",
+    "href": "w02/index.html#and-with-ggplot",
+    "title": "Week 2: How Do Maps Work?",
+    "section": "And with ggplot!",
+    "text": "And with ggplot!\n\n\nCode\ndc_sf |&gt;\n  ggplot() +\n  geom_sf() +\n  theme_classic()",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -1343,7 +1557,7 @@
     "href": "w02/index.html#raster-data",
     "title": "Week 2: How Do Maps Work?",
     "section": "Raster Data",
-    "text": "Raster Data\n\nEach DC Census Tract has its own (odd) shape, which can be described by discrete coordinates forming a POLYGON\nFor geospatial analysis, however, we often need to compute over evenly-spaced grids rather than this odd collection of shapes\nPOLYGONs may make sense for demographers, but how about someone studying air pollution in DC? (Smog, for example, does not confine itself to census tracts!)",
+    "text": "Raster Data\n\nEach DC Census Tract has its own (odd) shape, which can be described by discrete coordinates forming a POLYGON\nFor geospatial analysis, however, we often need to compute over evenly-spaced grids rather than this odd collection of shapes\n\nMost common example: photos taken from an airplane/satellite! [Remote sensing]\n\nPOLYGONs may make sense for demographers, but how about someone studying air pollution in DC? (Smog, for example, does not confine itself to census tracts!)",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -1353,7 +1567,7 @@
     "href": "w02/index.html#step-1-union-of-all-tracts",
     "title": "Week 2: How Do Maps Work?",
     "section": "Step 1: Union of All Tracts",
-    "text": "Step 1: Union of All Tracts\n\n\nCode\ndc_union_sf &lt;- sf::st_union(dc_sf)\ndc_union_sf |&gt;\n  ggplot() +\n  geom_sf()",
+    "text": "Step 1: Union of All Tracts\n\n\nCode\ndc_union_sf &lt;- sf::st_union(dc_sf)\ndc_union_sf |&gt;\n  ggplot() +\n  geom_sf() +\n  theme_classic()",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -1369,21 +1583,11 @@
     ]
   },
   {
-    "objectID": "w02/index.html#and-with-tidyterra",
-    "href": "w02/index.html#and-with-tidyterra",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "And with tidyterra",
-    "text": "And with tidyterra\n\n\nCode\nlibrary(tidyterra)\n\n\n\nAttaching package: 'tidyterra'\n\n\nThe following object is masked from 'package:stats':\n\n    filter\n\n\nCode\nggplot(data=dc_SpatRaster, aes(fill=layer)) +\n  geom_spatraster(data=dc_SpatRaster)",
-    "crumbs": [
-      "Week 2: Sep 4"
-    ]
-  },
-  {
     "objectID": "w02/index.html#rasters-from-scratch",
     "href": "w02/index.html#rasters-from-scratch",
     "title": "Week 2: How Do Maps Work?",
     "section": "Rasters From Scratch",
-    "text": "Rasters From Scratch\nWelcome to Gridtown!\n\n\nCode\nset.seed(6805)\nlibrary(terra)\ngridtown &lt;- terra::rast(\n  nrows = 4, ncols = 4,\n  xmin = 0, xmax = 4, ymin = 0, ymax = 4,\n  vals = sample(1:16)\n)\nplot(gridtown)\ntext(\n  gridtown,\n  labels=1:16,\n  halo=TRUE, hc=\"black\", col=\"white\", hw=0.2\n)\n\n\n\n\n\n\n\n\nFigure 1: Gridtown Indices\n\n\n\n\n\n\nRaster indices vs. values: The above plot displays indices for each cell: since a raster is a regular grid, can achieve memory-efficient representation with a single index (rather than, e.g., \\((x, y)\\) coords). But what we really care about are…",
+    "text": "Rasters From Scratch\nWelcome to Gridtown!\n\n\nCode\nset.seed(6805)\nlibrary(terra)\ngridtown &lt;- terra::rast(\n  nrows = 4, ncols = 4,\n  xmin = 0, xmax = 4, ymin = 0, ymax = 4,\n  vals = sample(1:16)\n)\nplot(gridtown)\ntext(\n  gridtown,\n  labels=1:16,\n  halo=TRUE, hc=\"black\", col=\"white\", hw=0.2\n)\n\n\n\n\n\n\n\n\nFigure 3: Gridtown Indices\n\n\n\n\n\n\nRaster indices vs. values: The above plot displays indices for each cell: since a raster is a regular grid, can achieve memory-efficient representation with a single index (rather than, e.g., \\((x, y)\\) coords). But what we really care about are…",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -1393,7 +1597,7 @@
     "href": "w02/index.html#raster-layer-values",
     "title": "Week 2: How Do Maps Work?",
     "section": "Raster Layer Values",
-    "text": "Raster Layer Values\n\n\nCode\nplot(gridtown)\ntext(gridtown, halo=TRUE, hc=\"black\", col=\"white\", hw=0.2)\n\n\n\n\n\n\n\n\nFigure 2: Gridtown Values",
+    "text": "Raster Layer Values\n\n\nCode\nplot(gridtown)\ntext(gridtown, halo=TRUE, hc=\"black\", col=\"white\", hw=0.2)\n\n\n\n\n\n\n\n\nFigure 4: Gridtown Values",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -1653,7 +1857,7 @@
     "href": "w02/index.html#references",
     "title": "Week 2: How Do Maps Work?",
     "section": "References",
-    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\nMonmonier, Mark. 2018. How to Lie with Maps. University of Chicago Press. https://www.dropbox.com/scl/fi/7rsqbxgge6llggnaf5tit/How-to-Lie-with-Maps-Third-Edition.pdf?rlkey=6rqxta7cjyq3oqdnskj4dtwj8&dl=1.",
+    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\nMonmonier, Mark. 2018. How to Lie with Maps. University of Chicago Press. https://www.dropbox.com/scl/fi/7rsqbxgge6llggnaf5tit/How-to-Lie-with-Maps-Third-Edition.pdf?rlkey=6rqxta7cjyq3oqdnskj4dtwj8&dl=1.\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.",
     "crumbs": [
       "Week 2: Sep 4"
     ]
@@ -2519,7 +2723,7 @@
     "href": "w05/index.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (28.96095 7.966921)\n9.669419\n\n\nPOINT (47.77811 -21.26423)\n20.760269\n\n\nPOINT (9.324325 32.26002)\n51.122142\n\n\nPOINT (6.467304 11.86897)\n97.288600\n\n\nPOINT (17.21812 -6.18394)\n39.245510\n\n\nPOINT (23.74768 -7.872876)\n34.258138\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n38\nTUN\nTunisia\nMULTIPOLYGON (((11.50459 33…\n\n\n52\nSSD\nSouth Sudan\nMULTIPOLYGON (((33.97607 4….\n\n\n91\nNGA\nNigeria\nMULTIPOLYGON (((7.300781 4….",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-10.49619 13.55312)\n69.199390\n\n\nPOINT (6.960733 29.66689)\n29.901959\n\n\nPOINT (12.25911 -18.51402)\n68.513891\n\n\nPOINT (41.88372 11.99336)\n7.451459\n\n\nPOINT (28.41229 29.68365)\n20.605246\n\n\nPOINT (7.458544 17.35742)\n48.302846\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n92\nNER\nNiger\nMULTIPOLYGON (((13.60635 13…\n\n\n102\nNAM\nNamibia\nMULTIPOLYGON (((23.38066 -1…\n\n\n114\nMLI\nMali\nMULTIPOLYGON (((-11.3894 12…\n\n\n172\nETH\nEthiopia\nMULTIPOLYGON (((35.26836 5….",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -2529,7 +2733,7 @@
     "href": "w05/index.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n2\nZMB\nZambia\n12.685249\nMULTIPOLYGON (((30.39609 -1…\n\n\n38\nTUN\nTunisia\n51.122142\nMULTIPOLYGON (((11.50459 33…\n\n\n52\nSSD\nSouth Sudan\n9.669419\nMULTIPOLYGON (((33.97607 4….\n\n\n91\nNGA\nNigeria\n97.288600\nMULTIPOLYGON (((7.300781 4….\n\n\n112\nMRT\nMauritania\n27.238117\nMULTIPOLYGON (((-16.37334 1…\n\n\n118\nMDG\nMadagascar\n20.760269\nMULTIPOLYGON (((49.53828 -1…",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n92\nNER\nNiger\n48.302846\nMULTIPOLYGON (((13.60635 13…\n\n\n92.1\nNER\nNiger\n82.796367\nMULTIPOLYGON (((13.60635 13…\n\n\n102\nNAM\nNamibia\n68.513891\nMULTIPOLYGON (((23.38066 -1…\n\n\n102.1\nNAM\nNamibia\n65.166574\nMULTIPOLYGON (((23.38066 -1…\n\n\n114\nMLI\nMali\n69.199390\nMULTIPOLYGON (((-11.3894 12…\n\n\n172\nETH\nEthiopia\n7.451459\nMULTIPOLYGON (((35.26836 5….",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -2626,14 +2830,14 @@
     "href": "w05/slides.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (18.16491 6.499623)\n23.837539\n\n\nPOINT (15.25787 28.98582)\n4.975591\n\n\nPOINT (37.96432 -3.178541)\n53.098880\n\n\nPOINT (-12.81497 12.6588)\n61.092170\n\n\nPOINT (-0.01793647 24.17073)\n62.549472\n\n\nPOINT (10.6029 29.99977)\n94.502769\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n67\nSEN\nSenegal\nMULTIPOLYGON (((-12.28062 1…\n\n\n91\nNGA\nNigeria\nMULTIPOLYGON (((7.300781 4….\n\n\n92\nNER\nNiger\nMULTIPOLYGON (((13.60635 13…\n\n\n123\nLBY\nLibya\nMULTIPOLYGON (((9.51875 30…."
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (40.93352 12.52284)\n66.76232\n\n\nPOINT (22.91293 0.856051)\n52.42697\n\n\nPOINT (42.24246 7.381094)\n74.11974\n\n\nPOINT (26.94463 -25.47716)\n75.43317\n\n\nPOINT (35.2875 -17.29163)\n18.92055\n\n\nPOINT (23.96282 -31.15051)\n38.38277\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n92\nNER\nNiger\nMULTIPOLYGON (((13.60635 13…"
   },
   {
     "objectID": "w05/slides.html#our-first-real-spatial-join-st_join",
     "href": "w05/slides.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n67\nSEN\nSenegal\n61.092170\nMULTIPOLYGON (((-12.28062 1…\n\n\n91\nNGA\nNigeria\n59.728074\nMULTIPOLYGON (((7.300781 4….\n\n\n92\nNER\nNiger\n60.415660\nMULTIPOLYGON (((13.60635 13…\n\n\n123\nLBY\nLibya\n4.975591\nMULTIPOLYGON (((9.51875 30….\n\n\n123.1\nLBY\nLibya\n94.502769\nMULTIPOLYGON (((9.51875 30….\n\n\n133\nKEN\nKenya\n53.098880\nMULTIPOLYGON (((40.99443 -2…"
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n2\nZMB\nZambia\n50.58308\nMULTIPOLYGON (((30.39609 -1…\n\n\n53\nSDN\nSudan\n74.05629\nMULTIPOLYGON (((34.07812 9….\n\n\n57\nZAF\nSouth Africa\n75.43317\nMULTIPOLYGON (((29.36484 -2…\n\n\n57.1\nZAF\nSouth Africa\n38.38277\nMULTIPOLYGON (((29.36484 -2…\n\n\n92\nNER\nNiger\n67.12693\nMULTIPOLYGON (((13.60635 13…\n\n\n103\nMOZ\nMozambique\n18.92055\nMULTIPOLYGON (((31.28789 -2…"
   },
   {
     "objectID": "w05/slides.html#but-we-were-still-in-easy-mode",

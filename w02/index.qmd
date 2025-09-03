@@ -1,5 +1,5 @@
 ---
-title: "Week 2: {{< var weeks.2.title >}}"
+title: "Week 2: How Do Maps Work?"
 subtitle: "{{< var course.slides-subtitle >}}"
 author: "{{< var course.author >}}"
 institute: "{{< var course.institute >}}"
@@ -24,9 +24,9 @@ format:
     link-external-icon: true
     link-external-newwindow: true
     footer: "{{< var weeks.2.footer >}}"
+    theme: [default,"../dsan-globals/jjquarto.scss"]
     include-in-header:
-      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>"
-    theme: [default]
+      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'><link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css'><link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous'><script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous'></script>"
     revealjs-plugins:
       - simplemenu
     simplemenu:
@@ -48,44 +48,255 @@ format:
 
 :::
 
-# Vector $\rightarrow$ Raster Data {data-stack-name="Vector &rarr; Raster"}
+# Schedule {.smaller .small-title .crunch-title .crunch-callout data-name="Schedule"}
 
-## End of Last Week: Vector Data {.crunch-title .smaller .crunch-quarto-figure}
+Today's Planned Schedule:
+
+| | Start | End | Topic |
+|:- |:- |:- |:- |
+| **Lecture** | 6:30pm | 6:50pm | [Logistics 1: JupyterHub x Positron &rarr;](#logistics-1-jupyterhub-x-positron) |
+| | 6:50pm | 7:15pm | [Logistics 2: Reducing Fear &rarr;](#model-selection) | 
+| | 7:20pm | 7:50pm | [Building Our First Map! &rarr;](#lets-make-some-dang-maps) |
+| **Break!** | 7:50pm | 8:00pm | |
+| | 8:00pm | 8:30pm | [Raster Data &rarr;](#raster-data) |
+| | 8:30pm | 9:00pm | [Finding GIS Data &rarr;](#finding-gis-data) |
+
+: {tbl-colwidths="[12,12,12,64]"}
+
+::: {.hidden}
 
 ```{r}
-#| label: dc-tracts-plot
-#| echo: true
-#| warning: false
-#| code-fold: true
-#| fig-align: center
-library(sf)
-library(tidyverse)
-# Load DC tracts data
-dc_sf_fpath <- "data/DC_Census_2020/Census_Tracts_in_2020.shp"
-dc_sf <- st_read(dc_sf_fpath, quiet = TRUE)
-cols_to_keep <- c("OBJECTID", "TRACT", "GEOID", "ALAND", "AWATER", "STUSAB", "SUMLEV", "GEOCODE", "STATE", "NAME", "POP100", "HU100", "geometry")
-dc_sf <- dc_sf |> select(cols_to_keep)
-# We can extract the geometry with the st_geometry function
-dc_geo <- st_geometry(dc_sf)
-# And plot the geometry with base R's plot() function
-plot(dc_geo, mar = c(0,0,0,0))
+#| label: r-source-globals
+source("../dsan-globals/_globals.r")
+set.seed(5300)
 ```
 
-## Now with `ggplot`!
+:::
+
+{{< include ../dsan-globals/_globals-tex.qmd >}}
+
+# Logistics 1: JupyterHub x Positron {data-stack-name="Logistics"}
+
+# Logistics 2: Reducing Fear 💆 {.title-10}
+
+* Jeff's Post-Week 1 自我革命
+* Weekly Coding Workshops
+* How To Not Be Scared of Prerequisites
+* ChatGPT
+* Learning How To Learn
+
+::: {.notes}
+
+Top secret translation for me: zi4 wo2 ge1 ming4
+
+:::
+
+## Helpful Feedback! {.crunch-title .text-90}
+
+* Sry for machine-gunning words/concepts at you last week
+  * $\leadsto$ Talking more slowly!
+  * $\leadsto$ Less colloquial language!
+  * Pls give me grace as I enact [this video](https://www.tiktok.com/@only1jdugg/video/6898153811450383621) in reverse
+* More importantly: **weekly coding workshops!**
+  * Not only will they "cancel out" my too-fast DC-slang-poisoned pace, but also...
+  * Focus will be on **specific blocks of code** rather than higher-level concepts [but see also: "forgetting curve" diagram a few slides ahead]
+
+## Pedagogical Principles {.crunch-title .crunch-ul .crunch-li .crunch-blockquote}
+
+* There's literally [no such thing as "intelligence"](http://bactra.org/weblog/523.html){target='_blank'}
+* Anyone is capable of learning anything (neural plasticity)
+* Growth mindset: "I can't do this" $\leadsto$ "I can't do this **yet**!"
+* The point of a class is **learning**: understanding something about the world, either (a) For its own sake (**end in itself**) or (b) Because it's relevant to something you care about (**means to an end**)
+
+::: {.text-90}
+
+> Our teaching should be governed, not by a desire to **make** students learn things, but by the endeavor to keep burning within them that light which is called **curiosity**. [@montessori_spontaneous_1916]
+
+:::
+
+## ChatGPT and Whatnot {.crunch-title .crunch-ul .smaller}
+
+* If you feel like ChatGPT will help you learn something in the course, then **use it**!
+* If you feel like you're using it as a "crutch", try to hold yourself accountable for **not** using it!
+
+```{=html}
+<table>
+<thead>
+<tr>
+  <th>Take the time/energy you're using to worry about...</th>
+  <th>Use it instead to worry about...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><ul><li>ChatGPT</li><li>Collaboration Policies</li><li>Plagiarism</li></ul></td>
+  <td align="center" style="vertical-align: middle;">Learning GIS</td>
+</tr>
+</tbody>
+</table>
+```
+
+## On Not Worrying About Prereqs {.crunch-title .crunch-li .text-85}
+
+* I genuinely believe that I can make the course accessible to you, meeting you **wherever you're at**, no matter what!
+* Everyone learns at their own pace (who says 14 weeks is "correct" amount of time to learn GIS?), and I structure my courses as best as I possibly can to adapt to your pace
+* $\Rightarrow$ Assessments (HW, Midterm) valuable in two ways:
+* **[Valuable for you]** As an **accountability mechanism** to make sure you're learn the material (how do we know when we've learned something? When we can answer questions about it / use it to accomplish things!)
+* **[Valuable for me]** For **assessing and updating** pace
+
+## R and/or Python and/or JS {.smaller .crunch-title .crunch-ul .crunch-p .crunch-img .crunch-li .crunch-quarto-figure .crunch-math .text-65}
+
+* My Geometry vs. Algebra Rant... Euclid's *Elements*, Book VI, Proposition 28.
+* The problem: *Divide a given straight line so that the rectangle contained by its segments may be equal to a given area, not exceeding the square of half the line.*
+
+::: {.columns}
+::: {.column width="50%"}
+
+[Geometers]{.cb1} solved w/[**geometry**]{.cb1} (300 BC)...
+
+![](images/euclid_271_crop.jpeg){fig-align="center" width="80%"}
+
+:::
+::: {.column width="50%"}
+
+...[Algebraists]{.cb2} solved w/[**algebra**]{.cb2} (2000 BC)...
+
+$$
+\begin{align*}
+&ax^2 + bx + c = 0 \\
+\Rightarrow \; & x_+ = \frac{-b + \sqrt{b^2 - 4ac}}{2a}
+\end{align*}
+$$
+
+...[From 1637 onwards](https://en.wikipedia.org/wiki/Cartesian_coordinate_system#History), **[w]{.cb1}[h]{.cb2}[i]{.cb1}[c]{.cb2}[h]{.cb1}[e]{.cb2}[v]{.cb1}[e]{.cb2}[r]{.cb1} [i]{.cb2}[s]{.cb1} [e]{.cb2}[a]{.cb1}[s]{.cb2}[i]{.cb1}[e]{.cb2}[r]{.cb1}!** 🤯🤯🤯 (*Isomorphism*)
+
+:::: {#fig-descartes}
+::: {.columns}
+::: {.column width="48%"}
+
+![](images/descartes.jpg){fig-align="center" width="70%"}
+
+:::
+::: {.column width="48%"}
+
+![](images/unit_circle.svg){fig-align="center" width="100%"}
+
+:::
+:::
+
+**Circle with radius 1**? Or $(x,y)$ satisfying $x^2 + y^2 = 1$?
+::::
+
+:::
+:::
+
+## Learning How To Learn {.smaller .crunch-title .crunch-p}
+
+::: {#fig-lilwayne}
+
+{{< video https://jpj.georgetown.domains/ppol6805-scratch/repetition.mp4 >}}
+
+From [The Carter (Documentary)](https://en.wikipedia.org/wiki/The_Carter){target='_blank'}
+:::
+
+## He's Literally Extremely Correct!
+
+![From *[Elsevier Osmosis: Spaced Repetition](https://www.osmosis.org/learn/Spaced_repetition){target='_blank'}*](images/forgetting-curve.png){fig-align="center"}
+
+# Let's Make Some Dang Maps! {data-stack-name="First Maps"}
+
+## Our First Map: Polygons! {.smaller}
+
+*(Quick demo adapted from Sherry Xie's R Consortium Workshop: [*Analyzing Geospatial Data in R*](https://www.youtube.com/watch?v=DD7bXonh-_E), using DC rather than Philadelphia open data.)*
+
+```{r}
+#| echo: true
+#| code-fold: show
+library(sf)
+# Load DC tracts data
+dc_sf_fpath <- "data/DC_Census_2020/Census_Tracts_in_2020.shp"
+dc_sf <- st_read(dc_sf_fpath);
+cols_to_keep <- c("OBJECTID", "TRACT", "GEOID", "ALAND", "AWATER", "STUSAB", "SUMLEV", "GEOCODE", "STATE", "NAME", "POP100", "HU100", "geometry")
+dc_sf <- dc_sf |> select(cols_to_keep)
+```
+
+## `sf` Objects
+
+`dc_sf` is an object of type `sf` (short for **"simple feature"**), which extends `data.frame`, and contains **features** which have type **`POLYGON`**
+
+```{r}
+class(dc_sf)
+head(dc_sf)
+```
+
+## Working With `sf` Objects {.smaller}
+
+With some rare but important exceptions (which we'll learn!), can be used just like a `data.frame` / `tibble`:
+
+```{r}
+#| echo: true
+#| code-fold: show
+str(dc_sf)   # view structure
+```
+
+## Working With `sf` Objects {.smaller}
+
+```{r}
+#| echo: true
+#| code-fold: show
+head(dc_sf)  # view first several rows
+```
+
+## Working With `sf` Objects {.smaller}
+
+```{r}
+#| echo: true
+#| code-fold: show
+dim(dc_sf)   # view dimensions
+dc_sf[1,]    # select first row
+```
+
+## Working With `sf` Objects {.smaller}
+
+```{r}
+#| echo: true
+#| code-fold: show
+head(dc_sf$NAME)  # select column by name  
+head(dc_sf[,4])         # select column by number
+```
+
+## And... Actually Displaying the Map! {.smaller .crunch-quarto-figure .title-12}
+
+```{r}
+#| echo: true
+#| code-fold: show
+#| fig-align: center
+# We can extract the geometry with the st_geometry function
+dc_geo <- st_geometry(dc_sf)
+#pt_geo
+
+# Plot the geometry with base R's plot() function
+plot(dc_geo)
+```
+
+## And with `ggplot`! {.crunch-title}
 
 ```{r}
 #| label: dc-map-ggplot
 #| fig-align: center
-ggplot2::theme_set(ggplot2::theme_classic())
 dc_sf |>
   ggplot() +
-  geom_sf()
+  geom_sf() +
+  theme_classic()
 ```
 
-## Raster Data
+# Vector $\rightarrow$ Raster Data {data-stack-name="Vector &rarr; Raster"}
+
+## Raster Data {.crunch-title}
 
 * Each **DC Census Tract** has its own (odd) shape, which can be described by discrete coordinates forming a `POLYGON`
 * For geospatial analysis, however, we often need to compute over **evenly-spaced grids** rather than this odd collection of shapes
+  * Most common example: **photos** taken from an airplane/satellite! [*Remote sensing*]
 * `POLYGON`s may make sense for **demographers**, but how about someone studying **air pollution** in DC? (Smog, for example, does not confine itself to census tracts!)
 
 ## Step 1: Union of All Tracts {.smaller}
@@ -95,7 +306,8 @@ dc_sf |>
 dc_union_sf <- sf::st_union(dc_sf)
 dc_union_sf |>
   ggplot() +
-  geom_sf()
+  geom_sf() +
+  theme_classic()
 ```
 
 ## Step 2: Rasterize (`terra`) {.smaller .crunch-title}
@@ -109,16 +321,6 @@ rast_template <- rast(ext(dc_SpatVector), resolution = 1000, crs = crs(dc_SpatVe
 dc_SpatRaster <- terra::rasterize(dc_SpatVector, rast_template)
 dim(dc_SpatRaster)
 plot(dc_SpatRaster)
-```
-
-## And with `tidyterra`
-
-```{r}
-#| label: rasterized-dc-tidy
-#| fig-align: center
-library(tidyterra)
-ggplot(data=dc_SpatRaster, aes(fill=layer)) +
-  geom_spatraster(data=dc_SpatRaster)
 ```
 
 ## Rasters From Scratch {.smaller}
@@ -181,11 +383,11 @@ The Earth's "width" is slightly greater than its "length" 😰
 
 <center>
 
-{{< video "https://jpj.georgetown.domains/dsan6750-scratch/sauce.mp4" width="800" height="550" >}}
+{{< video "https://jpj.georgetown.domains/ppol6805-scratch/sauce.mp4" width="800" height="550" >}}
 
 </center>
 
-## How To Avoid Getting Lost in the Sauce {.crunch-title .title-09}
+## How To Avoid Getting Lost in the Sauce {.crunch-title .title-08}
 
 ::: {.columns}
 ::: {.column width="50%"}
@@ -290,7 +492,7 @@ The Earth's "width" is slightly greater than its "length" 😰
 
 ![From @monmonier_how_2018](images/chi-monmonier-fig03010.jpeg)
 
-# Finding Geospatial Data {data-stack-name="Finding Data"}
+# Finding GIS Data {data-stack-name="Finding Data"}
 
 * Draws heavily on [Chapter 6: "R packages to download open spatial data"](https://www.paulamoraga.com/book-spatial/r-packages-to-download-open-spatial-data.html){target='_blank'}, in Moraga (2018), [Spatial Statistics for Data Science: Theory and Practice with R](https://www.paulamoraga.com/book-spatial/index.html){target='_blank'}
 
