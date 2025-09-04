@@ -539,7 +539,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-09-03, 06:27:41 PM</em></p>
+<p><em>Updated 2025-09-03, 10:27:53 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -944,7 +944,7 @@ Figure&nbsp;2: From <a href="https://en.wikipedia.org/wiki/The_Carter" target="_
 <section id="our-first-map-polygons" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="our-first-map-polygons">Our First Map: Polygons!</h2>
 <p><em>(Quick demo adapted from Sherry Xie’s R Consortium Workshop: <a href="https://www.youtube.com/watch?v=DD7bXonh-_E"><em>Analyzing Geospatial Data in R</em></a>, using DC rather than Philadelphia open data.)</em></p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
@@ -983,7 +983,7 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 <section id="sf-objects" class="level2">
 <h2 class="anchored" data-anchor-id="sf-objects"><code>sf</code> Objects</h2>
 <p><code>dc_sf</code> is an object of type <code>sf</code> (short for <strong>“simple feature”</strong>), which extends <code>data.frame</code>, and contains <strong>features</strong> which have type <strong><code>POLYGON</code></strong></p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dc_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1130,7 +1130,7 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 <section id="working-with-sf-objects" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="working-with-sf-objects">Working With <code>sf</code> Objects</h2>
 <p>With some rare but important exceptions (which we’ll learn!), can be used just like a <code>data.frame</code> / <code>tibble</code>:</p>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dc_sf)   <span class="co"># view structure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1160,7 +1160,7 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 </section>
 <section id="working-with-sf-objects-1" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="working-with-sf-objects-1">Working With <code>sf</code> Objects</h2>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dc_sf)  <span class="co"># view first several rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1299,7 +1299,7 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 </section>
 <section id="working-with-sf-objects-2" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="working-with-sf-objects-2">Working With <code>sf</code> Objects</h2>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(dc_sf)   <span class="co"># view dimensions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1370,7 +1370,7 @@ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</co
 </section>
 <section id="working-with-sf-objects-3" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="working-with-sf-objects-3">Working With <code>sf</code> Objects</h2>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dc_sf<span class="sc">$</span>NAME)  <span class="co"># select column by name  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1599,8 +1599,8 @@ Figure&nbsp;4: Gridtown Values
 </div>
 </section>
 </section>
-<section id="first-things-first-coordinates" class="level1" data-stack-name="Coordinates">
-<h1 data-stack-name="Coordinates">First Things First: Coordinates</h1>
+<section id="first-things-first-coordinates" class="level1">
+<h1>First Things First: Coordinates</h1>
 <ul>
 <li>We need a way to unambiguously specify <strong>where</strong> things are on the earth</li>
 </ul>

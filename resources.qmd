@@ -41,7 +41,7 @@ This is the perfect book for anyone worried about the... **maps**-specific part 
 :::
 ::: {#baddeley-text}
 
-I first started reading this book only because it was the "companion" book for the `spatstat` library... But, it ended up being hands-down my favorite GIS book of all time! It ends up having at least 50% of the course material in it, and definitely contains everything you would ever want to know about modeling *point processes* specifically (for the other 50% of the course, on areal and geospatial data, see @pebesma_spatial_2023 above)
+I first started reading this book only because it was the "companion" book for the `spatstat` library... But, it ended up being hands-down my favorite GIS book of all time! It ends up having at least 50% of the course material in it, and definitely contains everything you would ever want to know about modeling *point processes* specifically (for the other 50% of the course, on areal and geospatial data, see @waller_applied_2004 below)
 
 :::
 ::::
@@ -49,7 +49,7 @@ I first started reading this book only because it was the "companion" book for t
 
 ::::: {.callout-tip title="<i class='bi bi-3-circle'></i> The *Spatial Stats* Book: @waller_applied_2004" icon="false" appearance="default"}
 
-**Waller and Gotway, *Applied Spatial Statistics for Public Health Data*** 
+**Waller and Gotway, *Applied Spatial Statistics for Public Health Data*** [[`pdf`](https://www.dropbox.com/scl/fi/kyq9h64e3x2zcd5qezaeh/Lance-A.-Waller-Carol-A.-Gotway-Applied-Spatial-Analysis-of-Public-Health-Data.pdf?rlkey=ajc3pfm3j01htkflidgd6jx28&dl=1)]
 
 :::: {layout="[30,70]" layout-valign="center"}
 ::: {#waller-cover style="margin-right: 8px;"}
@@ -63,6 +63,11 @@ Don't let the name fool you, this book contains a full-on tour through all major
 ::::
 :::::
 
+## Learning *Base* R
+
+Recall from Week 2 that "base" R here just means, the pieces of R that are built-in, accessible to anyone with R on their computer. This is the "skeleton" which the GIS-specific libraries we use in this class, such as `sf`, build upon!
+
+* **Lessons 1 through 9 of [Norm Matloff's "FasteR" R tutorial](https://github.com/matloff/fasteR)** will walk you gently through the basic syntax, data structures, and functions in "base" R that we'll build upon as the course progresses!
 
 ### GIS with R
 

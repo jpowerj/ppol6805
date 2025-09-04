@@ -359,7 +359,7 @@ plot(gridtown)
 text(gridtown, halo=TRUE, hc="black", col="white", hw=0.2)
 ```
 
-# First Things First: Coordinates {data-stack-name="Coordinates"}
+# First Things First: Coordinates
 
 * We need a way to unambiguously specify **where** things are on the earth
 
