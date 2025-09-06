@@ -37,9 +37,12 @@ Welcome to the Fall 2025 version of **Geographic Information Systems (GIS) for S
 ## Course Staff and Office Hours
 
 * **Prof. Jeff Jacobs**, [`jj1088@georgetown.edu`](mailto:jj1088@georgetown.edu){target='_blank'}:<br> *Schedule office hour slots at [`jjacobs.me/meet`](https://jjacobs.me/meet){target='_blank'}*
-    * Mondays 4:30-6:30pm
-    * Tuesdays 3-5:30pm
+    * Tuesdays 3:30-6:00pm
     * *(Please try to schedule at least 8 hours in advance, and let me know briefly what you'd like to discuss, so I have time to prepare! For example, you can provide links to anything you'd like me to read beforehand, via the "Additional Info" portion of the signup form)*
+* **TA Christy Hsu**, [`th1010@georgetown.edu`]
+  * Coding Workshop Coordinator (Fridays, time TBD)
+* **TA Yumi Li**, [`xl794@georgetown.edu`]
+  * Office hours by appointment
 
 ## Course Description
 
