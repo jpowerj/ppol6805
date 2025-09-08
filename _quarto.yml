@@ -22,6 +22,8 @@ website:
         text: Syllabus
       - href: resources.qmd
         text: Resources
+      - href: "writeups/index.qmd"
+        text: Writeups
       - href: final-project.qmd
         text: Final Project
       - "---"
