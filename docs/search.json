@@ -1096,14 +1096,14 @@
     "href": "w05/slides.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (9.241701 35.61976)\n44.42962\n\n\nPOINT (-3.202632 25.34056)\n65.73164\n\n\nPOINT (9.943075 23.47577)\n37.19141\n\n\nPOINT (30.00029 17.06691)\n29.03582\n\n\nPOINT (27.65515 -3.34501)\n69.83303\n\n\nPOINT (22.78302 8.98261)\n90.59186\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n38\nTUN\nTunisia\nMULTIPOLYGON (((11.50459 33…\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n91\nNGA\nNigeria\nMULTIPOLYGON (((7.300781 4….\n\n\n114\nMLI\nMali\nMULTIPOLYGON (((-11.3894 12…"
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (16.84546 27.09709)\n13.21057\n\n\nPOINT (30.8719 -13.3232)\n12.24417\n\n\nPOINT (4.073021 20.89513)\n38.79000\n\n\nPOINT (-15.833 21.97757)\n62.62309\n\n\nPOINT (17.48236 11.74078)\n97.68814\n\n\nPOINT (2.981411 22.38781)\n42.49713\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n35\nUGA\nUganda\nMULTIPOLYGON (((33.90322 -1…\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n104\nMAR\nMorocco\nMULTIPOLYGON (((-2.219629 3…"
   },
   {
     "objectID": "w05/slides.html#our-first-real-spatial-join-st_join",
     "href": "w05/slides.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n38\nTUN\nTunisia\n44.42962\nMULTIPOLYGON (((11.50459 33…\n\n\n53\nSDN\nSudan\n29.03582\nMULTIPOLYGON (((34.07812 9….\n\n\n91\nNGA\nNigeria\n85.33926\nMULTIPOLYGON (((7.300781 4….\n\n\n114\nMLI\nMali\n17.48376\nMULTIPOLYGON (((-11.3894 12…\n\n\n192\nCOD\nDemocratic Republic of the Congo\n69.83303\nMULTIPOLYGON (((30.75117 -8…\n\n\n201\nCAF\nCentral African Republic\n90.59186\nMULTIPOLYGON (((24.14736 8…."
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n2\nZMB\nZambia\n12.24417\nMULTIPOLYGON (((30.39609 -1…\n\n\n35\nUGA\nUganda\n73.54831\nMULTIPOLYGON (((33.90322 -1…\n\n\n57\nZAF\nSouth Africa\n65.97180\nMULTIPOLYGON (((29.36484 -2…\n\n\n104\nMAR\nMorocco\n62.62309\nMULTIPOLYGON (((-2.219629 3…\n\n\n123\nLBY\nLibya\n13.21057\nMULTIPOLYGON (((9.51875 30….\n\n\n133\nKEN\nKenya\n82.12488\nMULTIPOLYGON (((40.99443 -2…"
   },
   {
     "objectID": "w05/slides.html#but-we-were-still-in-easy-mode",
@@ -1186,7 +1186,7 @@
     "href": "w05/index.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (22.14634 -0.688257)\n95.608592\n\n\nPOINT (-9.919045 21.38443)\n62.300507\n\n\nPOINT (19.978 23.4481)\n2.335212\n\n\nPOINT (14.06959 -7.022452)\n92.571179\n\n\nPOINT (25.5847 -13.41402)\n22.840272\n\n\nPOINT (-7.563435 18.98443)\n20.646108\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n41\nTGO\nTogo\nMULTIPOLYGON (((0.9004883 1…\n\n\n112\nMRT\nMauritania\nMULTIPOLYGON (((-16.37334 1…\n\n\n123\nLBY\nLibya\nMULTIPOLYGON (((9.51875 30….",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-8.278068 12.16322)\n43.69781\n\n\nPOINT (41.82541 4.640816)\n40.26357\n\n\nPOINT (17.00384 -3.809393)\n98.98028\n\n\nPOINT (33.63277 -9.716981)\n92.20075\n\n\nPOINT (32.48086 5.581051)\n78.66920\n\n\nPOINT (19.2611 24.02499)\n98.47186\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n52\nSSD\nSouth Sudan\nMULTIPOLYGON (((33.97607 4….\n\n\n114\nMLI\nMali\nMULTIPOLYGON (((-11.3894 12…\n\n\n117\nMWI\nMalawi\nMULTIPOLYGON (((34.71934 -1…\n\n\n123\nLBY\nLibya\nMULTIPOLYGON (((9.51875 30….",
     "crumbs": [
       "Week 5: Sep 25"
     ]
@@ -1196,7 +1196,7 @@
     "href": "w05/index.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Data Science!",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n2\nZMB\nZambia\n22.840272\nMULTIPOLYGON (((30.39609 -1…\n\n\n41\nTGO\nTogo\n6.435689\nMULTIPOLYGON (((0.9004883 1…\n\n\n112\nMRT\nMauritania\n62.300507\nMULTIPOLYGON (((-16.37334 1…\n\n\n112.1\nMRT\nMauritania\n20.646108\nMULTIPOLYGON (((-16.37334 1…\n\n\n112.2\nMRT\nMauritania\n8.097140\nMULTIPOLYGON (((-16.37334 1…\n\n\n123\nLBY\nLibya\n2.335212\nMULTIPOLYGON (((9.51875 30….",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n52\nSSD\nSouth Sudan\n78.66920\nMULTIPOLYGON (((33.97607 4….\n\n\n114\nMLI\nMali\n43.69781\nMULTIPOLYGON (((-11.3894 12…\n\n\n114.1\nMLI\nMali\n21.03863\nMULTIPOLYGON (((-11.3894 12…\n\n\n117\nMWI\nMalawi\n92.20075\nMULTIPOLYGON (((34.71934 -1…\n\n\n123\nLBY\nLibya\n98.47186\nMULTIPOLYGON (((9.51875 30….\n\n\n123.1\nLBY\nLibya\n69.15743\nMULTIPOLYGON (((9.51875 30….",
     "crumbs": [
       "Week 5: Sep 25"
     ]

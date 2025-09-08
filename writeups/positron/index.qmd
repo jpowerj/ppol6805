@@ -19,9 +19,11 @@ For both MacOS and Windows, you can download the latest version of Positron from
 
 ## MacOS
 
-First things first, note that this guide is using a brand new installation of **MacOS Sequioa 15.6.1** from scratch:
+First things first, note that this guide used a brand new installation of **MacOS Sequioa 15.6.1** from scratch:
 
 ![](images/mac_info.jpeg)
+
+But also that, a fresh install of **Windows 11** was used separately to test that the steps here work on Windows as well!
 
 My hope is that the screenshots generated with this clean installation will therefore better resemble what you see when you first go to connect!
 
@@ -39,13 +41,15 @@ Here, after accepting the license agreement, I downloaded the MacOS 11+ (univers
 
 ### Step 2: Install Positron
 
-Once the `.dmg` file finishes downloading, double-clicking it (or opening it from within Chrome) should pop up a window that looks as follows, within which you should **drag the Posit icon over onto the Applications icon**
+On MacOS, once the `.dmg` file finishes downloading, double-clicking it (or opening it from within Chrome) should pop up a window that looks as follows, within which you should **drag the Posit icon over onto the Applications icon**
 
 ![](images/positron_install.jpeg)
 
 The installation starts once you drag the icon onto the Applications folder -- you should then see a "Copying" progress bar like the following:
 
 ![](images/positron_copying.jpeg)
+
+On Windows, instead of this dragging-to-Applications approach, you should double-click on the Positron installer and then follow the setup instructions which appear (you can just use all of the default settings!)
 
 ### Step 3: Open Positron
 
@@ -189,9 +193,3 @@ However, since I know that exiting this abrubtly can be nerve-wracking for some 
 At this point, Positron should return you back to its **local mode**, and now you can close the window without any stress about suddenly disconnecting from the server 😌
 
 From now onwards, that will be your workflow for viewing and working on assignments! Instead of using the "HW0" folder like we did here, for example, we'll add a "HW1" folder soon, and you'll be able to log in and open `ppol6805_hw1.qmd` to start work on that first *graded* assignment. Onwards and upwards!
-
-## Windows
-
-*Windows instructions coming soon!*
-
-:::
