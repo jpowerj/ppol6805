@@ -17,5 +17,11 @@
       "/w13/index.html",
       "/w14/index.html"
     ]
+  },
+  {
+    "listing": "/writeups/index.html",
+    "items": [
+      "/writeups/positron/index.html"
+    ]
   }
 ]
