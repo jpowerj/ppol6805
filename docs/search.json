@@ -258,7 +258,7 @@
     "href": "syllabus.html#assignment-structure",
     "title": "PPOL 6805 / DSAN 6750",
     "section": "Assignment Structure",
-    "text": "Assignment Structure\nOn the basis of the guidelines we’ve developed for courses offered through DSAN, this course will have one in-class midterm but no final exam! Instead, you will work on a final project throughout the second half of the course. Each of the four units will involve a homework assignment, and final grades will be determined using the following weighting scheme:\n\n\n\nCategory\nPercent of Final Grade\n\n\n\n\nIn-Class Midterm (Nov 6)\n30%\n\n\nFinal Project\n30%\n\n\nHomeworks\n40%\n\n\nHW1: GIS Concepts\n10%\n\n\nHW2: Unary Operations\n10%\n\n\nHW3: Binary Operations and Spatial Joins\n10%\n\n\nHW4: Autocorrelation, Clustering, and Point Processes\n10%\n\n\nHW5A: Point Hypothesis Evaluation\n[+50 Bonus Points]\n\n\nHW5B: Spatial Regression\n[+50 Bonus Points]\n\n\n\nThe course does not have any “official” prerequisites, but a general comfort with R and/or Python is strongly recommended. If you have never used Python before, however (or if you haven’t used it in a while and feel like your skills are rusty), you can browse the materials on the Resources page!",
+    "text": "Assignment Structure\nOn the basis of the guidelines we’ve developed for courses offered through DSAN, this course will have one in-class midterm but no final exam! Instead, you will work on a final project throughout the second half of the course. Each of the four units will involve a homework assignment, and final grades will be determined using the following weighting scheme:\n\n\n\nCategory\nPercent of Final Grade\n\n\n\n\nIn-Class Midterm (Nov 6)\n25%\n\n\nFinal Project\n30%\n\n\nHomeworks\n45%\n\n\nHW1: GIS Concepts: Fun with Vectors and Rasters\n9%\n\n\nHW2: Unary Operations\n9%\n\n\nHW3: Binary Operations and Spatial Joins\n9%\n\n\nHW4: Autocorrelation, Clustering, and Point Processes\n9%\n\n\nHW5: Point Hypothesis Evaluation and Spatial Regression\n9\n\n\n\nThe course does not have any “official” prerequisites, but a general comfort with R and/or Python is strongly recommended. If you have never used Python before, however (or if you haven’t used it in a while and feel like your skills are rusty), you can browse the materials on the Resources page!",
     "crumbs": [
       "Syllabus"
     ]
@@ -268,7 +268,7 @@
     "href": "syllabus.html#course-topics-calendar",
     "title": "PPOL 6805 / DSAN 6750",
     "section": "Course Topics / Calendar",
-    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, please let me know.\n\n\n\n\n\n\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Concepts\n1\nAug 27\nIntroduction to GIS\n\n\n\n2\nSep 4\nHow Do Maps Work?\nHW1 Release\n\n\nUnit 2: Geospatial Operations\n3\nSep 11\nUnary Operations\n[Deliverable] HW1: GIS Concepts\n\n\n\n\nSep 13 (Fri)\nHW2 Release\n\n\n\n4\nSep 18\nBinary Operations\n\n\n\n\nSep 20 (Fri), 5:59pm\n[Deliverable] HW2: Unary Operations\n\n\nUnit 3: Spatial Data Science I: Foundations\n5\nSep 25\nSpatial Data Science!\nHW3 Release\n\n\n\n6\nOct 2\nRandom Fields and Spatial Autocorrelation\nHW4 Release\n\n\n\n\nOct 4 (Fri), 5:59pm\n[Deliverable] HW3: Binary Operations and Spatial Joins\n\n\nUnit 4: Spatial Data Science II: Methods\n7\nOct 9\nPoint Processes, Clustering, and Regularity\n\n\n\n8\nOct 16\nNull Models and Marked Point Processes\n\n\n\n9\nOct 23\nEvaluating Spatial Hypotheses I: Point Data\n\n\n\n10\nOct 30\nEvaluating Spatial Hypotheses II: Areal Data\n[Deliverable, 11:59pm] HW4: Autocorrelation, Clustering, and Point Processes\n\n\n\n\nNov 1 (Fri)\nMidterm Practice Problems Release\n\n\n\n11\nNov 6\nIn-Class Midterm\n\n\nUnit 5: Final Projects\n12\nNov 13\nTools for Final Projects\n\n\n\n13\nNov 20\nIn-Class Office Hours\n\n\n\n\nNov 27\nNo Class (Fall Break)\n\n\n\n14\nDec 4\nFinal Presentations I\n\n\n\n15\nDec 11\nFinal Presentations II\n\n\n\n\nDec 13 (Friday), 5:59pm\n[Deliverable] Final Project",
+    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, please let me know.\n\n\n\n\n\n\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Concepts\n1\nAug 27\nIntroduction to GIS\n\n\n\n2\nSep 3\nHow Do Maps Work?  \n\n\nUnit 2: Geospatial Operations\n3\nSep 10\nUnary Operations  \n\n\n\n4\nSep 17\nBinary Operations\n\n\n\n\nSep 20 (Fri), 5:59pm\n\n\n\nUnit 3: Spatial Data Science I: Foundations\n5\nSep 24\nSpatial Data Science!\n\n\n\n\n6\nOct 1\nRandom Fields and Spatial Autocorrelation\nHW4 Release\n\n\n\n\nOct 4 (Fri), 5:59pm\n\n\n\nUnit 4: Spatial Data Science II: Methods\n7\nOct 8\nPoint Processes, Clustering, and Regularity\n\n\n\n8\nOct 15\nNull Models and Marked Point Processes\n\n\n\n9\nOct 22\nEvaluating Spatial Hypotheses I: Point Data\n\n\n\n10\nOct 29\nEvaluating Spatial Hypotheses II: Areal Data\n\n\n\n\n11\nNov 5\nIn-Class Midterm\n\n\nUnit 5: Final Projects\n12\nNov 12\nTools for Final Projects\n\n\n\n13\nNov 19\nIn-Class Office Hours\n\n\n\n\nNov 27\nNo Class (Fall Break)\n\n\n\n14\nDec 3\nFinal Project Poster Session\n\n\n\n\nDec 5 (Friday), 5:59pm\n[Deliverable] Final Project",
     "crumbs": [
       "Syllabus"
     ]
@@ -1286,21 +1286,21 @@
     "href": "w03/slides.html#ta-intros",
     "title": "Week 3: Unary Operations",
     "section": "TA Intros",
-    "text": "TA Intros\n(In alphabetical order by surname wohoo)\n\n\n\n\nChristy Hsuth1010@georgetown.edu\n\n\nCoding workshop leader\nSurvived the fire and flames of this class in first semester after studying history 🤯\n\n\n\n\n\n\n\n\n\nYumi Lixl794@georgetown.edu\n\n\nOmbuds-person\nSurvived fire and flames of several Jeff classes and has background in computer science (including Java!)\n\n\n\n\n\n\n\n\n\n\n\n\nRelevant Word of the Day: 山 (Shān) = Mountain"
+    "text": "TA Intros\n(In alphabetical order by surname wohoo)\n\n\n\nChristy Hsuth1010@georgetown.edu\n\n\nCoding workshop leader\nSurvived the fire and flames of this class in first semester after studying history 🤯\n\n\n\nYumi Lixl794@georgetown.edu\n\n\nOmbuds-person\nSurvived several Jeff classes + background in computer science (including Java!)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRelevant Word of the Day: 山 (Shān) = Mountain"
   },
   {
     "objectID": "w03/slides.html#coding-workshops-starting-this-friday",
     "href": "w03/slides.html#coding-workshops-starting-this-friday",
     "title": "Week 3: Unary Operations",
     "section": "Coding Workshops Starting This Friday!",
-    "text": "Coding Workshops Starting This Friday!\n\nCar Barn Room 230 (conference room across hallway from DSAN Suite 207), if you can make it in person!\nZoom Link"
+    "text": "Coding Workshops Starting This Friday!\n\nCar Barn Room 230 (conference room across hallway from DSAN Suite 207), if you can make it in person!\nZoom Link if you can join remotely!\nVideo recording to be posted on Panopto (link TBD) once processed"
   },
   {
     "objectID": "w03/slides.html#hw1-rightarrow-hw2",
     "href": "w03/slides.html#hw1-rightarrow-hw2",
     "title": "Week 3: Unary Operations",
     "section": "HW1 \\(\\rightarrow\\) HW2",
-    "text": "HW1 \\(\\rightarrow\\) HW2\n\nCongrats on finishing HW1! You now know how to create geometries with sf and terra\nSo now, what can you do with them?\nFor example, we’d like to be able to say things like:\n\n“The new lamppost cannot be placed at \\((x, y)\\), since there is already a building there!”\n“There are \\(N_1\\) lampposts in County 1, and \\(N_2\\) lampposts in County 2”\n“The average resident in Neighborhood A lives 2 km away from their nearest bus stop"
+    "text": "HW1 \\(\\rightarrow\\) HW2\n\nOnce you finish HW1, you’ll know how to create geometries with sf and terra\nSo now, what can you do with them?\nFor example, we’d like to be able to say things like:\n\n“The new lamppost cannot be placed at \\((x, y)\\), since there is already a building there!”\n“There are \\(N_1\\) lampposts in County 1, and \\(N_2\\) lampposts in County 2”\n“The average resident in Neighborhood A lives 2 km away from their nearest bus stop"
   },
   {
     "objectID": "w03/slides.html#first-things-first-loading-and-saving",
@@ -4197,5 +4197,12 @@
     "title": "Week 13: In-Class Office Hours",
     "section": "References",
     "text": "References"
+  },
+  {
+    "objectID": "w03/slides.html#hw1-fun-with-vectors-and-rasters",
+    "href": "w03/slides.html#hw1-fun-with-vectors-and-rasters",
+    "title": "Week 3: Unary Operations",
+    "section": "HW1: Fun with Vectors and Rasters",
+    "text": "HW1: Fun with Vectors and Rasters\n\nQuestion 1 [Multiple Choice!]: Understanding the WKT geometries conceptually\nQuestion 2: Using the WKT geometries to create Vectortown\nQuestion 3: Using the raster format (today’s lecture) to create Gridtopia"
   }
 ]

@@ -18,75 +18,68 @@ weeks:
   - weeknum: 2
     title: "How Do Maps Work?"
     footer: "PPOL 6805 Week 2: How Do Maps Work?"
-    date-md: "Sep 4"
+    date-md: "Sep 3"
   - weeknum: 3
     title: "Unary Operations"
     footer: "PPOL 6805 Week 3: Unary Operations"
-    date-md: "Sep 11"
+    date-md: "Sep 10"
   - weeknum: 4
     title: "Binary Operations"
     footer: "PPOL 6805 Week 4: Binary Operations"
-    date-md: "Sep 18"
+    date-md: "Sep 17"
   - weeknum: 5
     title: "Spatial Data Science!"
     footer: "PPOL 6805 Week 5: Spatial Data Science"
-    date-md: "Sep 25"
+    date-md: "Sep 24"
   - weeknum: 6
     title: "Random Fields and Spatial Autocorrelation"
     footer: "PPOL 6805 Week 6: Random Fields"
-    date-md: "Oct 2"
+    date-md: "Oct 1"
   - weeknum: 7
     title: "Point Processes, Clustering, and Regularity"
     footer: "PPOL 6805 Week 7: Point Processes, Clustering, Regularity"
-    date-md: "Oct 9"
+    date-md: "Oct 8"
   - weeknum: 8
     title: "Null Models and Marked Point Processes"
     footer: "PPOL 6805 Week 8: Spatial Prediction"
-    date-md: "Oct 16"
+    date-md: "Oct 15"
   - weeknum: 9
     title: "Evaluating Spatial Hypotheses I: Point Data"
     footer: "PPOL 6805 Week 9: Evaluating Point Data Hypotheses"
-    date-md: "Oct 23"
+    date-md: "Oct 22"
   - weeknum: 10
     title: "Evaluating Spatial Hypotheses II: Areal Data"
     footer: "PPOL 6805 Week 10: Areal Data Hypotheses"
-    date-md: "Oct 30"
+    date-md: "Oct 29"
   - weeknum: 11
     title: "In-Class Midterm"
     footer: "PPOL 6805 Week 11"
-    date-md: "Nov 6"
+    date-md: "Nov 5"
   - weeknum: 12
     title: "Tools for Final Projects"
     footer: "PPOL 6805 Week 12: Tools for Final Projects"
-    date-md: "Nov 13"
+    date-md: "Nov 12"
   - weeknum: 13
     title: "In-Class Office Hours"
     footer: "PPOL 6805 Week 13"
-    date-md: "Nov 20"
+    date-md: "Nov 19"
   - weeknum: 14
-    title: "Final Presentations I"
+    title: "Final Project Poster Session"
     footer: "PPOL 6805 Week 14"
-    date-md: "Dec 4"
-  - weeknum: 15
-    title: "Final Presentations II"
-    footer: "PPOL 6805 Week 15"
-    date-md: "Dec 11"
+    date-md: "Dec 3"
 hw:
   - hw-num: 1
-    title: "GIS Concepts"
-    pct: 10
+    title: "GIS Concepts: Fun with Vectors and Rasters"
+    pct: 9
   - hw-num: 2
     title: "Unary Operations"
-    pct: 10
+    pct: 9
   - hw-num: 3
     title: "Binary Operations and Spatial Joins"
-    pct: 10
+    pct: 9
   - hw-num: 4
     title: "Autocorrelation, Clustering, and Point Processes"
-    pct: 10
-  - hw-num: "5A"
-    title: "Point Hypothesis Evaluation"
-    pct: "[+50 Bonus Points]"
-  - hw-num: "5B"
-    title: "Spatial Regression"
-    pct: "[+50 Bonus Points]"
+    pct: 9
+  - hw-num: "5"
+    title: "Point Hypothesis Evaluation and Spatial Regression"
+    pct: 9

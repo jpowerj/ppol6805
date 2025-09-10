@@ -13,11 +13,7 @@ format:
     fig-align: center
 ---
 
-For both MacOS and Windows, you can download the latest version of Positron from [its homepage](https://positron.posit.co/). Once you have downloaded and installed it, you can click the appropriate Tab below for instructions on **connecting to your JupyterHub space through Positron**:
-
-::: {.panel-tabset}
-
-## MacOS
+For both MacOS and Windows, you can download the latest version of Positron from [its homepage](https://positron.posit.co/). Once you have downloaded and installed it follow these instructions to **connect to your JupyterHub space through Positron**:
 
 First things first, note that this guide used a brand new installation of **MacOS Sequioa 15.6.1** from scratch:
 

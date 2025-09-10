@@ -66,12 +66,12 @@ final_render <- FALSE
 
 :::
 
-## TA Intros {.text-80}
+## TA Intros {.crunch-title .smaller}
 
 *(In alphabetical order by surname wohoo)*
 
-:::: {layout="[1,1]"}
-::: {#tas-christy}
+:::: {.columns}
+::: {.column width="50%"}
 
 <center>
 
@@ -82,10 +82,8 @@ final_render <- FALSE
 * Coding workshop leader
 * Survived the fire and flames of **this class** in first semester after studying **history** 🤯
 
-![](images/ntu.jpg){fig-align="center"}
-
 :::
-::: {#tas-yumi}
+::: {.column width="50%"}
 
 <center>
 
@@ -94,7 +92,18 @@ final_render <- FALSE
 </center>
 
 * Ombuds-person
-* Survived fire and flames of several Jeff classes and has background in **computer science** (including Java!)
+* Survived several Jeff classes + background in **computer science** (including Java!)
+
+:::
+::::
+
+:::: {.columns}
+::: {.column width="50%"}
+
+![](images/ntu.jpg){fig-align="center"}
+
+:::
+::: {.column width="50%"}
 
 ![](images/newcastle_university.jpg){fig-align="center"}
 
@@ -109,8 +118,15 @@ Relevant Word of the Day: **山** (*Shān*) = **Mountain**
 
 ## Coding Workshops Starting This Friday!
 
-* **Car Barn [Room 230](https://gradadmin.georgetown.edu/reserving-meeting-space-in-the-car-barn/car-barn-230-grad-school-conf-room)** (conference room across hallway from DSAN Suite 207), if you can make it in person!
-* [Zoom Link](https://georgetown.zoom.us/j/91709606336?pwd=C7Xq1MWIBE2oaQzSO7tNjQRiPoDcgD.1)
+* **Car Barn [Room 230](https://gradadmin.georgetown.edu/reserving-meeting-space-in-the-car-barn/car-barn-230-grad-school-conf-room)** (conference room across hallway from DSAN Suite 207), if you can make it **in person**!
+* [Zoom Link](https://georgetown.zoom.us/j/91709606336?pwd=C7Xq1MWIBE2oaQzSO7tNjQRiPoDcgD.1) if you can join **remotely**!
+* Video recording to be posted on **Panopto** (link TBD) once processed
+
+## HW1: Fun with Vectors and Rasters
+
+* Question 1 [**Multiple Choice!**]: Understanding the **WKT geometries** conceptually
+* Question 2: **Using** the WKT geometries to create **Vectortown**
+* Question 3: **Using** the raster format (today's lecture) to create **Gridtopia**
 
 # How to *Do Things* with Geometries {data-stack-name="Overview"}
 
@@ -118,7 +134,7 @@ Relevant Word of the Day: **山** (*Shān*) = **Mountain**
 
 ## HW1 $\rightarrow$ HW2 {.crunch-title .crunch-ul .inline-90 .crunch-li-8}
 
-* Congrats on finishing HW1! You now know how to **create** geometries with `sf` and `terra`
+* Once you finish HW1, you'll know how to **create** geometries with `sf` and `terra`
 * So now, what can you **do** with them?
 * For example, we'd like to be able to say things like:
     * *"The new lamppost cannot be placed at $(x, y)$, since there is already a building there!"*
@@ -223,7 +239,7 @@ Let's see what's inside the shapefile we first saw in Week 1, containing data on
 * **NetCDF (`.nc4`)**
   * Used in **earth sciences**, as format for data sources measured and distributed multiple times per day over large full-country or full-continent areas.
 
-## Coordinate Reference Systems (CRS) {.crunch-title}
+## Coordinate Reference Systems (CRS) {.crunch-title .text-80}
 
 * **EPSG** (European Petroleum Survey Group) Registry: Most common way to specify a CRS
   * For example, **4326** is the EPSG code for the WGS84 coordinate system
@@ -345,6 +361,7 @@ plot(st_geometry(gr), border = '#88ff88aa', add = TRUE)
 ## Spatial Sampling {.smaller .leaflet-375}
 
 ```{r}
+#| label: spatial-sampling
 # Sample random points
 africa_points_list <- sf::st_sample(africa_union_sf, 10)
 africa_points_sf <- sf::st_sf(africa_points_list)
@@ -355,6 +372,7 @@ africa_map + africa_points_map
 ## The "Default" Predicate: `st_intersects` {.smaller .title-10}
 
 ```{r}
+#| label: st-intersects-default
 countries_w_points <- africa_sf[africa_points_sf,]
 mapview(countries_w_points, label="geounit", legend=FALSE) + africa_points_map
 ```
