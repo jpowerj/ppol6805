@@ -26,35 +26,37 @@ website:
         text: Writeups
       - href: final-project.qmd
         text: Final Project
+      - href: "https://hchristy.georgetown.domains/_site"
+        text: "Coding Workshop <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
       - "---"
       - href: w01/index.qmd
-        text: "Week 1: Aug 28"
+        text: "Week 1: Aug 27"
       - href: w02/index.qmd
-        text: "Week 2: Sep 4"
+        text: "Week 2: Sep 3"
       - href: w03/index.qmd
-        text: "Week 3: Sep 11"
+        text: "Week 3: Sep 10"
       - href: w04/index.qmd
-        text: "Week 4: Sep 18"
+        text: "Week 4: Sep 17"
       - href: w05/index.qmd
-        text: "Week 5: Sep 25"
+        text: "Week 5: Sep 24"
       - href: w06/index.qmd
-        text: "Week 6: Oct 2"
+        text: "Week 6: Oct 1"
       - href: w07/index.qmd
-        text: "Week 7: Oct 9"
+        text: "Week 7: Oct 8"
       - href: w08/index.qmd
-        text: "Week 8: Oct 16"
+        text: "Week 8: Oct 15"
       - href: w09/index.qmd
-        text: "Week 9: Oct 23"
+        text: "Week 9: Oct 22"
       - href: w10/index.qmd
-        text: "Week 10: Oct 30"
+        text: "Week 10: Oct 29"
       - href: w11/index.qmd
-        text: "Week 11: Nov 6"
+        text: "Week 11: Nov 5"
       - href: w12/index.qmd
-        text: "Week 12: Nov 13"
+        text: "Week 12: Nov 12"
       - href: w13/index.qmd
-        text: "Week 13: Nov 20"
+        text: "Week 13: Nov 19"
       - href: w14/index.qmd
-        text: "Week 14: Dec 4"
+        text: "Week 14: Dec 3"
       - "---"
       - href: "https://georgetown.zoom.us/j/92295251878?pwd=K8nOs3w9uRlj3mfn63bh0yazBpBbsC.1"
         text: "Zoom Link <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
