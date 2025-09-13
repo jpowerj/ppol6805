@@ -9,7 +9,8 @@ course:
   code: "PPOL 6805 / DSAN 6750"
   gspace_url: "https://chat.google.com/room/AAAAbGZ4pJk?cls=7"
   groups_url: "https://groups.google.com/a/georgetown.edu/g/dsan6750"
-  posit_url: "https://posit.cloud/spaces/547750/join?access_code=pxoi5atXz19sdp1N9e2X2qUbtxGV8yqRTtN5MeeD"
+  hub_url: "https://guhub.io"
+  # posit_url: "https://posit.cloud/spaces/547750/join?access_code=pxoi5atXz19sdp1N9e2X2qUbtxGV8yqRTtN5MeeD"
 weeks:
   - weeknum: 1
     title: "Introduction to GIS"
@@ -20,19 +21,19 @@ weeks:
     footer: "PPOL 6805 Week 2: How Do Maps Work?"
     date-md: "Sep 3"
   - weeknum: 3
-    title: "Unary Operations"
+    title: "Vector and Raster Representations"
     footer: "PPOL 6805 Week 3: Unary Operations"
     date-md: "Sep 10"
   - weeknum: 4
-    title: "Binary Operations"
+    title: "Unary and Binary Operations"
     footer: "PPOL 6805 Week 4: Binary Operations"
     date-md: "Sep 17"
   - weeknum: 5
-    title: "Spatial Data Science!"
+    title: "Spatial Joins"
     footer: "PPOL 6805 Week 5: Spatial Data Science"
     date-md: "Sep 24"
   - weeknum: 6
-    title: "Random Fields and Spatial Autocorrelation"
+    title: "Spatial Data Science: Random Fields and Spatial Autocorrelation"
     footer: "PPOL 6805 Week 6: Random Fields"
     date-md: "Oct 1"
   - weeknum: 7
@@ -71,15 +72,28 @@ hw:
   - hw-num: 1
     title: "GIS Concepts: Fun with Vectors and Rasters"
     pct: 9
+    release-date-md: Sep 9
+    due-date-md: Sep 24
   - hw-num: 2
-    title: "Unary Operations"
+    title: "Unary and Binary Operations, Spatial Joins"
     pct: 9
+    release-date-md: Sep 24
+    due-date-md: Oct 8
   - hw-num: 3
-    title: "Binary Operations and Spatial Joins"
+    title: "Autocorrelation and Clustering"
     pct: 9
+    release-date-md: Oct 8
+    due-date-md: Oct 22
   - hw-num: 4
-    title: "Autocorrelation, Clustering, and Point Processes"
+    title: "Point Hypothesis Evaluation"
     pct: 9
+    release-date-md: Nov 5
+    due-date-md: Nov 19
   - hw-num: "5"
-    title: "Point Hypothesis Evaluation and Spatial Regression"
+    title: "Spatial Regression"
     pct: 9
+    release-date-md: Nov 19
+    due-date-md: Dec 5
+midterm:
+  date-md: Nov 5
+  date-full: "Wednesday, November 5"

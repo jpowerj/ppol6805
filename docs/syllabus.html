@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Prof.&nbsp;Jeff Jacobs">
+<meta name="author" content="Jeff Jacobs">
 
 <title>PPOL 6805 / DSAN 6750 – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
 <style>
@@ -440,7 +440,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-09-10, 05:53:18 PM</em></p>
+<p><em>Updated 2025-09-13, 01:44:39 AM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -481,7 +481,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Prof.&nbsp;Jeff Jacobs </p>
+             <p>Jeff Jacobs </p>
           </div>
   </div>
     
@@ -521,7 +521,7 @@ Course Numbering
 </ul></li>
 <li><strong>TA Christy Hsu</strong>, [<code>th1010@georgetown.edu</code>]
 <ul>
-<li>Coding Workshop Coordinator (Fridays, time TBD)</li>
+<li>Coding Workshop Coordinator (Fridays, 2-3pm in Car Barn 230)</li>
 </ul></li>
 <li><strong>TA Yumi Li</strong>, [<code>xl794@georgetown.edu</code>]
 <ul>
@@ -547,7 +547,7 @@ Course Numbering
 </thead>
 <tbody>
 <tr class="odd">
-<td>In-Class Midterm (Nov 6)</td>
+<td>In-Class Midterm (Nov 5)</td>
 <td>25%</td>
 </tr>
 <tr class="even">
@@ -563,24 +563,29 @@ Course Numbering
 <td><i class="bi bi-arrow-return-right pe-1"></i>9%</td>
 </tr>
 <tr class="odd">
-<td><i class="bi bi-arrow-return-right pe-1"></i><strong>HW2</strong>: Unary Operations</td>
+<td><i class="bi bi-arrow-return-right pe-1"></i><strong>HW2</strong>: Unary and Binary Operations, Spatial Joins</td>
 <td><i class="bi bi-arrow-return-right pe-1"></i>9%</td>
 </tr>
 <tr class="even">
-<td><i class="bi bi-arrow-return-right pe-1"></i><strong>HW3</strong>: Binary Operations and Spatial Joins</td>
+<td><i class="bi bi-arrow-return-right pe-1"></i><strong>HW3</strong>: Autocorrelation and Clustering</td>
 <td><i class="bi bi-arrow-return-right pe-1"></i>9%</td>
 </tr>
 <tr class="odd">
-<td><i class="bi bi-arrow-return-right pe-1"></i><strong>HW4</strong>: Autocorrelation, Clustering, and Point Processes</td>
+<td><i class="bi bi-arrow-return-right pe-1"></i><strong>HW4</strong>: Point Hypothesis Evaluation</td>
 <td><i class="bi bi-arrow-return-right pe-1"></i>9%</td>
 </tr>
 <tr class="even">
-<td><i class="bi bi-arrow-return-right pe-1"></i><strong>HW5</strong>: Point Hypothesis Evaluation and Spatial Regression</td>
-<td>9</td>
+<td><i class="bi bi-arrow-return-right pe-1"></i><strong>HW5</strong>: Spatial Regression</td>
+<td><i class="bi bi-arrow-return-right pe-1"></i>9%</td>
 </tr>
 </tbody>
 </table>
-<p>The course does not have any “official” prerequisites, but a general comfort with <strong>R</strong> and/or <strong>Python</strong> is strongly recommended. If you have never used Python before, however (or if you haven’t used it in a while and feel like your skills are rusty), you can browse the materials on the <a href="./resources.html">Resources page</a>!</p>
+<p>The course does not have any “official” prerequisites, but a general comfort with <strong>R</strong> and/or <strong>Python</strong> is helpful: most of the code shown on slides is in R, but we will also discuss equivalent Python libraries you can use if you prefer!</p>
+<p>If you have never used R or Python before, however (or if you haven’t used it in a while and feel like your skills are rusty), you can:</p>
+<ul>
+<li>First <strong>browse the materials on the <a href="./resources.html">Resources page</a></strong>, and then</li>
+<li>Attend the weekly <a href="https://hchristy.georgetown.domains/_site"><strong>coding workshops</strong></a> led by TA Christy Hsu!</li>
+</ul>
 </section>
 <section id="course-topics-calendar" class="level2">
 <h2 class="anchored" data-anchor-id="course-topics-calendar">Course Topics / Calendar</h2>
@@ -613,54 +618,43 @@ Course Numbering
 <td></td>
 <td>2</td>
 <td>Sep 3</td>
-<td><a href="./w02/">How Do Maps Work?</a> <!-- <br> --> <!-- <span data-qmd="*HW1 Release*"></span> --></td>
-</tr>
-<tr class="new-unit odd">
-<td><strong>Unit 2:</strong> Geospatial Operations</td>
-<td>3</td>
-<td>Sep 10</td>
-<td><a href="./w03/">Unary Operations</a> <!-- <br> --> <!-- <span data-qmd="*[Deliverable] HW1: GIS Concepts: Fun with Vectors and Rasters*"></span> --></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>4</td>
-<td>Sep 17</td>
-<td><a href="./w04/">Binary Operations</a></td>
+<td><a href="./w02/">How Do Maps Work?</a></td>
 </tr>
 <tr class="odd">
 <td></td>
+<td>3</td>
+<td>Sep 10</td>
+<td><a href="./w03/">Vector and Raster Representations</a><br>
+<em>HW1 Released</em></td>
+</tr>
+<tr class="new-unit even">
+<td><strong>Unit 2:</strong> Geospatial Operations</td>
+<td>4</td>
+<td>Sep 17</td>
+<td><a href="./w04/">Unary and Binary Operations</a></td>
+</tr>
+<tr class="odd">
 <td></td>
-<td><em>Sep 20 (Fri), 5:59pm</em></td>
-<td><!-- <span data-qmd="*[Deliverable] HW2: Unary Operations*"></span> --></td>
+<td>5</td>
+<td>Sep 24</td>
+<td><a href="./w05/">Spatial Joins</a><br>
+<em>[Deliverable] HW1 due 11:59pm EDT; HW2 Release</em></td>
 </tr>
 <tr class="new-unit even">
 <td><strong>Unit 3:</strong> Spatial Data Science I: Foundations</td>
-<td>5</td>
-<td>Sep 24</td>
-<td><a href="./w05/">Spatial Data Science!</a><br>
-<!-- <span data-qmd="*HW3 Release*"></span> --></td>
+<td>6</td>
+<td>Oct 1</td>
+<td><a href="./w06/">Spatial Data Science: Random Fields and Spatial Autocorrelation</a></td>
 </tr>
 <tr class="odd">
 <td></td>
-<td>6</td>
-<td>Oct 1</td>
-<td><a href="./w06/">Random Fields and Spatial Autocorrelation</a><br>
-<em>HW4 Release</em></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td><em>Oct 4 (Fri), 5:59pm</em></td>
-<td><!-- <span data-qmd="*[Deliverable] HW3: Binary Operations and Spatial Joins*"></span> --></td>
-</tr>
-<tr class="new-unit odd">
-<td><strong>Unit 4:</strong> Spatial Data Science II: Methods</td>
 <td>7</td>
 <td>Oct 8</td>
-<td><a href="./w07/">Point Processes, Clustering, and Regularity</a></td>
+<td><a href="./w07/">Point Processes, Clustering, and Regularity</a><br>
+<em>[Deliverable] HW2 due 11:59pm EDT; HW3 Release</em></td>
 </tr>
-<tr class="even">
-<td></td>
+<tr class="new-unit even">
+<td><strong>Unit 4:</strong> Spatial Data Science II: Methods</td>
 <td>8</td>
 <td>Oct 15</td>
 <td><a href="./w08/">Null Models and Marked Point Processes</a></td>
@@ -669,20 +663,22 @@ Course Numbering
 <td></td>
 <td>9</td>
 <td>Oct 22</td>
-<td><a href="./w09/">Evaluating Spatial Hypotheses I: Point Data</a></td>
+<td><a href="./w09/">Evaluating Spatial Hypotheses I: Point Data</a><br>
+<em>[Deliverable] HW3 due 11:59pm EDT; Midterm Guide Release</em></td>
 </tr>
 <tr class="even">
 <td></td>
 <td>10</td>
 <td>Oct 29</td>
 <td><a href="./w10/">Evaluating Spatial Hypotheses II: Areal Data</a><br>
-<!-- <span data-qmd="*[Deliverable, 11:59pm] HW4: Autocorrelation, Clustering, and Point Processes*"></span> --></td>
+<!-- <span data-qmd="*[Deliverable, 11:59pm] HW4: Point Hypothesis Evaluation*"></span> --></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>11</td>
 <td>Nov 5</td>
-<td><a href="./w11/">In-Class Midterm</a></td>
+<td><a href="./w11/">In-Class Midterm</a><br>
+<em>HW4 Release</em></td>
 </tr>
 <tr class="new-unit even">
 <td><strong>Unit 5</strong>: Final Projects</td>
@@ -694,12 +690,13 @@ Course Numbering
 <td></td>
 <td>13</td>
 <td>Nov 19</td>
-<td><a href="./w13/">In-Class Office Hours</a></td>
+<td><a href="./w13/">In-Class Office Hours</a><br>
+<em>[Deliverable] HW4 due 11:59pm EDT; HW5 Release</em></td>
 </tr>
 <tr class="even">
 <td></td>
 <td></td>
-<td><em>Nov 27</em></td>
+<td><em>Nov 26</em></td>
 <td><em>No Class (Fall Break)</em></td>
 </tr>
 <tr class="odd">
@@ -712,18 +709,14 @@ Course Numbering
 <td></td>
 <td></td>
 <td><em>Dec 5 (Friday), 5:59pm</em></td>
-<td><em>[Deliverable] Final Project</em></td>
+<td><em>[Deliverable] Final Project, HW5</em></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="assignment-distribution-submission-and-grading" class="level2">
 <h2 class="anchored" data-anchor-id="assignment-distribution-submission-and-grading">Assignment Distribution, Submission, and Grading</h2>
-<p>The programming assignments for the course will be managed through <a href="https://posit.cloud/spaces/547750/join?access_code=pxoi5atXz19sdp1N9e2X2qUbtxGV8yqRTtN5MeeD">Posit.Cloud</a> This means that, to work on and submit the assignments, you will use the following workflow:</p>
-<ol type="1">
-<li>Click the “Start” button for the assignment within the Posit.Cloud interface, which should immediately create and display a new in-browser RStudio workspace for you.</li>
-<li>Work on the problems within the project’s <code>.qmd</code> file, saving your progress early and often! You can <strong>try things out</strong> or <strong>create drafts</strong> of your solutions locally if you’d like (for example, in VSCode or JupyterLab or any other IDE), but the <code>.qmd</code> file within your RStudio project will be considered your “official” submission for each assignment.</li>
-</ol>
+<p>The programming assignments for the course will be managed through a <a href="https://guhub.io">JupyterHub server</a>, which you will connect to in order to work on assignments with more computing power than is possible on your laptops (and with the necessary GIS libraries pre-installed)! This means that, to work on and submit the assignments, you will use the workflow described in the <a href="./writeups/positron/index.html">Positron connection guide</a>, which you can always find within the <a href="./writeups/index.html">“Writeups” section</a> linked in the sidebar.</p>
 </section>
 <section id="late-policy" class="level2">
 <h2 class="anchored" data-anchor-id="late-policy">Late Policy</h2>

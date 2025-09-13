@@ -1,0 +1,61 @@
+---
+title: "Assignments: Due Dates and Point Distributions"
+subtitle: "PPOL 6805: GIS for Spatial Data Science"
+sidebar: mainnav
+format:
+  html:
+    df-print: kable
+---
+
+The following table provides a quick overview of the due dates for each homework assignment. Then, for each, you can use the **tabs below the table** to see exactly how many points are allocated for each question.
+
+| Assignment | Release Date | Due Date |
+| - |:-:|:-:|
+| HW1: {{< var hw.1.title >}} | {{< var hw.1.release-date-md >}} | {{< var hw.1.due-date-md >}} |
+| HW2: {{< var hw.2.title >}} | {{< var hw.2.release-date-md >}} | {{< var hw.2.due-date-md >}} |
+| HW3: {{< var hw.3.title >}} | {{< var hw.3.release-date-md >}} | {{< var hw.3.due-date-md >}} |
+| HW4: {{< var hw.4.title >}} | {{< var hw.4.release-date-md >}} | {{< var hw.4.due-date-md >}} |
+| HW5: {{< var hw.5.title >}} | {{< var hw.5.release-date-md >}} | {{< var hw.5.due-date-md >}} |
+
+: {tbl-colwidths="[50, 25, 25]"}
+
+The following point distributions are imported from Google Sheets mainly for transparency: so that you can see exactly how totals are computed as a sum of the individual points allocated for each test!
+
+```{r}
+#| label: points-table-fn
+#| warning: false
+#| echo: false
+library(tidyverse)
+gen_points_table <- function(hw_url) {
+  hw_df <- read_csv(hw_url, col_types="ccdc")
+  # print(hw_df)
+  hw_df <- hw_df |> drop_na(points)
+  hw_df$points <- as.character(hw_df$points)
+  hw_df$section_total <- as.character(hw_df$section_total)
+  hw_df <- hw_df |> mutate(
+    question = replace_na(question, ""),
+    qid = replace_na(qid, ""),
+    section_total = replace_na(section_total, "")
+  )
+  return(hw_df)
+}
+```
+
+::: {.panel-tabset}
+
+## HW1
+
+<div style="height: 400px !important; max-height: 400px !important; overflow-y: scroll !important;">
+
+```{r}
+#| label: hw1-points-table
+#| warning: false
+#| echo: false
+hw1_url <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdmRJjK-1YCbLJsadNLO_uJ1UwWOnOvPqPHWtQxp1xLJFhJrELYVMRXoiT4W3img2H79fIop-_O9jp/pub?gid=0&single=true&output=csv"
+gen_points_table(hw1_url)
+```
+
+</div>
+
+:::
+
