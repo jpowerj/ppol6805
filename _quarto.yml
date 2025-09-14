@@ -65,7 +65,7 @@ website:
         text: "Recordings <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
         target: "_blank"
       - "---"
-      - href: "guhub.io"
+      - href: "https://guhub.io"
         text: "JupyterHub <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
         target: "_blank"
       - href: "https://jjacobs.me/meet"
