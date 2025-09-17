@@ -26,11 +26,11 @@ weeks:
     date-md: "Sep 10"
   - weeknum: 4
     title: "Unary and Binary Operations"
-    footer: "PPOL 6805 Week 4: Binary Operations"
+    footer: "PPOL 6805 Week 4: Unary and Binary Operations"
     date-md: "Sep 17"
   - weeknum: 5
     title: "Spatial Joins"
-    footer: "PPOL 6805 Week 5: Spatial Data Science"
+    footer: "PPOL 6805 Week 5: Spatial Joins"
     date-md: "Sep 24"
   - weeknum: 6
     title: "Spatial Data Science: Random Fields and Spatial Autocorrelation"

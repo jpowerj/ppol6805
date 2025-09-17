@@ -1,0 +1,149 @@
+---
+title: "Finding GIS Data"
+author:
+  name: "Jeff Jacobs"
+  email: "jj1088@georgetown.edu"
+date: 2025-09-17
+sidebar: mainnav
+categories:
+  - Extra Writeups
+cache: true
+format:
+  html:
+    df-print: kable
+    fig-align: center
+    link-external-newwindow: true
+    link-external-icon: true
+    code-fold: show
+---
+
+This collection of "core" data sources draws heavily on [Chapter 6: "R packages to download open spatial data"](https://www.paulamoraga.com/book-spatial/r-packages-to-download-open-spatial-data.html){target='_blank'}, in Moraga (2018), [Spatial Statistics for Data Science: Theory and Practice with R](https://www.paulamoraga.com/book-spatial/index.html){target='_blank'}
+
+## Country Boundaries
+
+Key package: [`rnaturalearth`](http://ropensci.github.io/rnaturalearth/){target='_blank'}
+
+```{r}
+#| label: de-boundaries
+#| fig-align: center
+library(rnaturalearth)
+library(sf) |> suppressPackageStartupMessages()
+library(ggplot2)
+library(viridis) |> suppressPackageStartupMessages()
+library(patchwork)
+de_national_map <- ne_countries(type = "countries", country = "Germany", scale = "medium", returnclass = "sf")
+de_states_map <- rnaturalearth::ne_states("Germany", returnclass = "sf")
+(ggplot(de_national_map) + geom_sf()) + (ggplot(de_states_map) + geom_sf())
+```
+
+## Climate Data
+
+Key package: [`geodata`](https://github.com/rspatial/geodata){target='_blank'}
+
+```{r}
+#| label: plot-climate-data
+#| fig-align: center
+library(geodata)
+jamaica_tmin <- worldclim_country(
+  country = "Jamaica",
+  var = "tmin",
+  path = tempdir()
+)
+terra::plot(
+  mean(jamaica_tmin),
+  plg = list(title = "Min. temperature (C)")
+)
+```
+
+## Elevation
+
+Key packages: `rnaturalearth` + [`elevatr`](https://github.com/jhollist/elevatr){target='_blank'}
+
+```{r}
+#| label: elevation-plot
+#| fig-align: center
+library(rnaturalearth)
+library(elevatr)
+library(terra)
+switz_sf <- ne_countries(
+  type = "countries",
+  country = "Switzerland",
+  scale = "medium",
+  returnclass = "sf"
+)
+# Special weird case with Georgetown's SaxaNet wifi... This if statement just
+# tells the R library curl that SaxaNet is indeed a valid wifi connection
+if (!curl::has_internet()) {
+  assign("has_internet_via_proxy", TRUE, environment(curl::has_internet))
+}
+switz_raster <- get_elev_raster(
+  locations = switz_sf, z = 9, clip = "locations"
+)
+terra::plot(
+  rast(switz_raster),
+  plg = list(title = "Elevation (m)")
+)
+```
+
+## Street Maps
+
+Key package: [`osmdata`](https://rspatialdata.github.io/osm.html)
+
+```{r}
+#| label: street-map-plot
+#| fig-align: center
+library(osmdata) |> suppressPackageStartupMessages()
+library(leaflet)
+placebb <- getbb("Barcelona")
+hospitals <- placebb |>
+  opq() |>
+  add_osm_feature(key = "amenity", value = "hospital") |>
+  osmdata_sf()
+assign("has_internet_via_proxy", TRUE, environment(curl::has_internet))
+motorways <- placebb |>
+  opq() |>
+  add_osm_feature(
+    key = "highway",
+    value = "motorway"
+  ) |>
+  osmdata_sf()
+leaflet() |>
+  addTiles() |>
+  addPolylines(
+    data = motorways$osm_lines,
+    color = "black"
+  ) |>
+  addPolygons(
+    data = hospitals$osm_polygons,
+    label = hospitals$osm_polygons$name
+  )
+```
+
+## World Bank Dataverse
+
+Key package: [`wbstats`](http://gshs-ornl.github.io/wbstats/){target='_blank'}
+
+```{r}
+#| label: wb-choro
+#| fig-align: center
+library(wbstats)
+d <- wb_data(
+  indicator = "MO.INDEX.HDEV.XQ",
+  start_date = 2011, end_date = 2011
+)
+library(rnaturalearth)
+library(mapview)
+map <- ne_countries(
+  continent = "Africa", returnclass = "sf"
+)
+map <- dplyr::left_join(
+  map, d, by = c("iso_a3" = "iso3c")
+)
+mapview(map, zcol = "MO.INDEX.HDEV.XQ")
+```
+
+## Additional Data Sources (Raindrop.io Bookmarks)
+
+```{=html}
+<iframe style="border: 0; width: 100%; height: 450px;" allowfullscreen frameborder="0" src="https://raindrop.io/jpowerj/data-sources-48121451/embed"></iframe>
+```

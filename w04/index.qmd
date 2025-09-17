@@ -3,17 +3,16 @@ title: "Week 4: {{< var weeks.4.title >}}"
 subtitle: "{{< var course.slides-subtitle >}}"
 author: "{{< var course.author >}}"
 institute: "{{< var course.institute >}}"
-date: "September 18, 2024"
+date: "September 17, 2024"
 date-format: full
 lecnum: 4
 categories:
   - "Class Sessions"
 bibliography: "../_PPOL6805.bib"
 # Shared across formats:
-cache: true
+cache: false
 echo: true
 code-fold: show
-css: "../dsan-globals/jjstyles.css"
 html-math-method: mathjax
 # Format-specific settings:
 format:
@@ -27,8 +26,8 @@ format:
     link-external-newwindow: true
     footer: "{{< var weeks.4.footer >}}"
     include-in-header:
-      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>"
-    theme: [default]
+      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'><link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css'><link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous'><script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous'></script>"
+    theme: [default, "../dsan-globals/jjquarto.scss"]
     revealjs-plugins:
       - simplemenu
     simplemenu:
@@ -50,19 +49,241 @@ format:
 
 :::
 
-# One More Unary Operation {data-stack-name="Buffers"}
+# Coordinate Reference Systems {data-stack-name="CRS"}
 
 ::: {.hidden}
 
 ```{r}
-#| label: source-globals
+#| label: r-source-globals
 source("../dsan-globals/_globals.r")
-set.seed(6805)
 ```
 
 :::
 
-## `st_buffer()`: An Unary Operation I Forgot to Introduce!
+* First things first... what are **coordinates?**
+* We need a way to unambiguously specify **where** things are on the earth
+
+## Latitude and Longitude are *Angles*!
+
+![From @krygier_making_2016](images/lat_lon.svg){fig-align="center"}
+
+## Angular Distance vs. Travel Distance {.crunch-title}
+
+The Earth's "width" is slightly greater than its "length" 😰
+
+![From [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:WGS84_mean_Earth_radius.svg){target='_blank'}](images/WGS84_earth.svg){fig-align="center"}
+
+# Projections
+
+## Smooshing 3D into 2D
+
+![From @monmonier_how_2018](images/chi-monmonier-fig02003.jpeg){fig-align="center"}
+
+## Avoid Getting Lost in the Sauce
+
+<center>
+
+{{< video "https://jpj.georgetown.domains/ppol6805-scratch/sauce.mp4" width="800" height="550" >}}
+
+</center>
+
+## How To Avoid Getting Lost in the Sauce {.crunch-title .title-08}
+
+::: {.columns}
+::: {.column width="50%"}
+
+![**Tissot Circles**: *Imagine infinitely small ellipses placed at regular intervals on the curved surface of the earth. Imagine these ellipses being projected along with the earth's surface. When scaled up, changes in the ellipses show the location and quality of distortions on the projected map.*](images/sphere_tissot.svg){fig-align="center" width="50%"}
+
+:::
+::: {.column width="50%"}
+
+![](images/mercator_tissot.svg){fig-align="center" width="55%"}
+
+![](images/equal_area_tissot.svg){fig-align="center" width="100%"}
+
+:::
+:::
+
+# Choropleths for Good and Evil {data-stack-name="Choropleths"}
+
+## Having *Domain Knowledge* of a Region
+
+![From [XKCD](https://xkcd.com/1138/){target='_blank'}](images/xkcd_1138.png)
+
+## Crime in Mongolia
+
+![From [Reddit](https://www.reddit.com/r/MapPorn/comments/717vkc/population_density_in_mongolia_the_least_densely/){target='_blank'}](images/mongolia.png){fig-align="center"}
+
+## Population of Mongolia
+
+![From [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Mongolia_Population_Density,_2000_%285457623300%29.jpg){target='_blank'}](images/mongolia_density_2000.jpg){fig-align="center"}
+
+## Exhibit A
+
+![From @monmonier_how_2018](images/chi-monmonier-fig03009.jpeg)
+
+## Exhibit B
+
+![From @monmonier_how_2018](images/chi-monmonier-fig03010.jpeg)
+
+# Geospatial Operations 1: Unary Operations {data-stack-name="Unary Operations"}
+
+## Getting the Geometries {.smaller .crunch-title .fix-mapview}
+
+Using [`rnaturalearth`](http://ropensci.github.io/rnaturalearth/){target='_blank'} with [`mapview`](https://r-spatial.github.io/mapview/){target='_blank'}
+
+```{r}
+#| label: france-mapview
+set.seed(6805)
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(mapview)
+france_sf <- ne_countries(country = "France", scale = 50)
+(france_map <- mapview(france_sf, label = "geounit", legend = FALSE))
+```
+
+## Centroid of France
+
+```{r}
+#| label: france-centroid
+france_cent_sf <- sf::st_centroid(france_sf)
+france_map + mapview(france_cent_sf, label = "Centroid", legend = FALSE)
+```
+
+## One We Already Saw: Union {.smaller .crunch-title .leaflet-375}
+
+Computing the **union** of all geometries in the `sf` via `sf::st_union()`
+
+```{r}
+#| label: africa-union
+library(leaflet.extras2)
+africa_sf <- ne_countries(continent = "Africa", scale = 50)
+africa_union_sf <- sf::st_union(africa_sf)
+africa_map <- mapview(africa_sf, label="geounit", legend=FALSE)
+africa_union_map <- mapview(africa_union_sf, label="st_union(africa)", legend=FALSE)
+africa_map | africa_union_map
+```
+
+## Helpful for Rasterizing: BBox
+
+```{r}
+#| label: africa-bbox
+africa_bbox_sf <- sf::st_bbox(africa_sf)
+africa_bbox_map <- mapview(africa_bbox_sf, label="st_bbox(africa)", legend=FALSE)
+africa_map | africa_bbox_map
+```
+
+## Convex Hulls by Country
+
+```{r}
+#| label: africa-countries-convex-hull
+africa_countries_cvx <- sf::st_convex_hull(africa_sf)
+africa_countries_cvx_map <- mapview(africa_countries_cvx, label="geounit", legend=FALSE)
+africa_map | africa_countries_cvx_map
+```
+
+## Convex Hull of Continent {.smaller .crunch-title .leaflet-375}
+
+Use `st_union()` first:
+
+```{r}
+#| label: africa-convex_hull
+africa_cvx <- africa_sf |> st_union() |> st_convex_hull()
+africa_cvx_map <- mapview(africa_cvx, label="geounit", legend=FALSE)
+africa_map | africa_cvx_map
+```
+
+## One We Already Saw: Centroids {.smaller .crunch-title .leaflet-375}
+
+Computing the **centroid** of all geometries in the `sf` via `sf::st_centroid()`
+
+```{r}
+#| label: africa-centroids
+africa_cents_sf <- sf::st_centroid(africa_sf)
+africa_cents_map <- mapview(africa_cents_sf, label="geounit", legend=FALSE)
+africa_map | africa_cents_map
+```
+
+# Geospatial Operations 2: Binary Operations {data-stack-name="Binary Operations"}
+
+## Spatial Joins {.smaller .crunch-title .crunch-img}
+
+```{r}
+#| label: spatial-join
+#| output-location: column
+#| fig-height: 6
+nc <- system.file("shape/nc.shp", package="sf") |>
+  read_sf() |>
+  st_transform('EPSG:2264')
+gr <- st_sf(
+         label = apply(expand.grid(1:10, LETTERS[10:1])[,2:1], 1, paste0, collapse = ""),
+         geom = st_make_grid(nc))
+gr$col <- sf.colors(10, categorical = TRUE, alpha = .3)
+# cut, to verify that NA's work out:
+gr <- gr[-(1:30),]
+suppressWarnings(nc_j <- st_join(nc, gr, largest = TRUE))
+par(mfrow = c(2,1), mar = rep(0,4))
+plot(st_geometry(nc_j), border = 'grey')
+plot(st_geometry(gr), add = TRUE, col = gr$col)
+text(st_coordinates(st_centroid(st_geometry(gr))), labels = gr$label, cex = .85)
+# the joined dataset:
+plot(st_geometry(nc_j), border = 'grey', col = nc_j$col)
+text(st_coordinates(st_centroid(st_geometry(nc_j))), labels = nc_j$label, cex = .7)
+plot(st_geometry(gr), border = '#88ff88aa', add = TRUE)
+```
+
+## Spatial Sampling {.smaller .leaflet-375}
+
+```{r}
+#| label: spatial-sampling
+# Sample random points
+africa_points_list <- sf::st_sample(africa_union_sf, 10)
+africa_points_sf <- sf::st_sf(africa_points_list)
+africa_points_map <- mapview(africa_points_sf, label="Random Point", col.regions=cb_palette[1], legend=FALSE)
+africa_map + africa_points_map
+```
+
+## The "Default" Predicate: `st_intersects` {.smaller .title-10}
+
+```{r}
+#| label: st-intersects-default
+countries_w_points <- africa_sf[africa_points_sf,]
+mapview(countries_w_points, label="geounit", legend=FALSE) + africa_points_map
+```
+
+## Counting with `lengths()` {.smaller .crunch-title}
+
+```{r}
+#| label: count-points
+country_inter <- sf::st_intersects(africa_sf, africa_points_sf)
+# Computes point counts for each polygon
+(num_intersections <- lengths(country_inter))
+africa_sf <- africa_sf |> mutate(
+  num_points = num_intersections
+) |> arrange(geounit)
+africa_sf |> select(geounit, num_points) |> head()
+```
+
+## Plotting with `mapview`
+
+```{r}
+#| label: points-choro-mapview
+mapview(africa_sf, zcol="num_points")
+```
+
+## Plotting with `ggplot2` {.smaller .crunch-title}
+
+Since we're starting to get into **data** attributes rather than **geometric** features, switching to `ggplot2` is recommended!
+
+```{r}
+#| label: points-choro-ggplot
+africa_sf |> ggplot(aes(fill=num_points)) +
+  geom_sf() +
+  theme_classic()
+```
+
+## One More Unary Operation: `st_buffer()`
 
 * Think about how you might answer questions like:
   * "How far is your house (`POINT`) from Manhattan (`POLYGON`)?"
@@ -135,8 +356,6 @@ plot(l1,col='blue',add=TRUE)
 plot(st_buffer(l1, dist = 1, nQuadSegs= 5), reset = FALSE, main = "nQuadSegs: 5")
 plot(l1,col='blue',add=TRUE)
 ```
-
-# From Unary to Binary Operations {data-stack-name="Getting Fancy"}
 
 ## What Makes Binary Operations "Fancier"? {.smaller .title-12 .crunch-title .crunch-ul}
 
@@ -311,6 +530,8 @@ plot(p0 / po, col = '#ff8888', add = TRUE)
 plot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)
 ```
 
+* The predicate `equals` corresponds to the DE-9IM string `"T*F**FFF*"`. If any two geometries obey this relationship, they are (topologically) equal!
+
 ## Slowing Down: 9IM *(no DE yet!)* {.smaller .crunch-title .crunch-img .table-va}
 
 ::: {#tbl-polys}
@@ -410,9 +631,9 @@ us
 us |> filter(touch)
 ```
 
-# Doing Things with DE-9IM (Back to Binary Operations) {data-stack-name="Binary Operations"}
+# Doing Things with DE-9IM (Back to Binary Operations)
 
-## From Last Week: *Almost* a Spatial Join {.smaller .crunch-title .leaflet-350}
+## *Almost* a Spatial Join {.smaller .crunch-title .leaflet-350}
 
 ```{r}
 library(mapview)
@@ -430,7 +651,7 @@ filtered_map <- mapview(countries_points_sf, label="geounit", legend=FALSE) + sa
 
 ## Spatial Filter $\neq$ Spatial Join {.smaller .smaller-table}
 
-* The issue: **Data attributes of `POINT`s are not merged into data attributes of `POLYGON`s**
+The issue: **Data attributes of `POINT`s are not merged into data attributes of `POLYGON`s**
 
 ::: {.columns}
 ::: {.column width="50%"}

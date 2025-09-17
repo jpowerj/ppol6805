@@ -1055,7 +1055,7 @@
     "href": "index.html",
     "title": "PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science",
     "section": "",
-    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2025, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Healy 105. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\n\nDate\n\n\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 27\n\n\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 3\n\n\n\n\n\n\nWeek 3: Vector and Raster Representations\n\n\nSep 11\n\n\n\n\n\n\nWeek 4: Unary and Binary Operations\n\n\nSep 18\n\n\n\n\n\n\nWeek 5: Spatial Joins\n\n\nSep 25\n\n\n\n\n\n\nWeek 6: Spatial Data Science: Random Fields and Spatial Autocorrelation\n\n\nOct 2\n\n\n\n\n\n\nWeek 7: Point Processes, Clustering, and Regularity\n\n\nOct 9\n\n\n\n\n\n\nWeek 8: Null Models and Marked Point Processes\n\n\nOct 16\n\n\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Point Data\n\n\nOct 23\n\n\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Areal Data\n\n\nOct 30\n\n\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 6\n\n\n\n\n\n\nWeek 12: Tools for Final Projects\n\n\nNov 13\n\n\n\n\n\n\nWeek 13: In-Class Office Hours\n\n\nNov 20\n\n\n\n\n\n\nWeek 14: Final Project Poster Session\n\n\nDec 4\n\n\n\n\n\n\nNo matching items",
+    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2025, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Healy 105. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\n\nDate\n\n\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 27\n\n\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 3\n\n\n\n\n\n\nWeek 3: Vector and Raster Representations\n\n\nSep 11\n\n\n\n\n\n\nWeek 4: Unary and Binary Operations\n\n\nSep 17\n\n\n\n\n\n\nWeek 5: Spatial Joins\n\n\nSep 25\n\n\n\n\n\n\nWeek 6: Spatial Data Science: Random Fields and Spatial Autocorrelation\n\n\nOct 2\n\n\n\n\n\n\nWeek 7: Point Processes, Clustering, and Regularity\n\n\nOct 9\n\n\n\n\n\n\nWeek 8: Null Models and Marked Point Processes\n\n\nOct 16\n\n\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Point Data\n\n\nOct 23\n\n\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Areal Data\n\n\nOct 30\n\n\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 6\n\n\n\n\n\n\nWeek 12: Tools for Final Projects\n\n\nNov 13\n\n\n\n\n\n\nWeek 13: In-Class Office Hours\n\n\nNov 20\n\n\n\n\n\n\nWeek 14: Final Project Poster Session\n\n\nDec 4\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "<i class='bi bi-house pe-1'></i> Home"
     ]
@@ -1069,6 +1069,83 @@
     "crumbs": [
       "Week 11: Nov 5"
     ]
+  },
+  {
+    "objectID": "writeups/things-on-maps/index.html",
+    "href": "writeups/things-on-maps/index.html",
+    "title": "Things We Put On Maps",
+    "section": "",
+    "text": "Scales\nPoints\nLines\nAreas\n\n\n\n\n\n\nFrom Krygier and Wood (2016)\n\n\nThis comes up immediately, since we’ll be using Natural Earth data more and more (via the rnaturalearth library) to obtain country POLYGONs\n\n\n\n\n\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "writeups/things-on-maps/index.html#scales-wrules-of-thumb",
+    "href": "writeups/things-on-maps/index.html#scales-wrules-of-thumb",
+    "title": "Things We Put On Maps",
+    "section": "",
+    "text": "From Krygier and Wood (2016)\n\n\nThis comes up immediately, since we’ll be using Natural Earth data more and more (via the rnaturalearth library) to obtain country POLYGONs"
+  },
+  {
+    "objectID": "writeups/things-on-maps/index.html#the-three-key-elements",
+    "href": "writeups/things-on-maps/index.html#the-three-key-elements",
+    "title": "Things We Put On Maps",
+    "section": "",
+    "text": "From Monmonier (2018)"
+  },
+  {
+    "objectID": "writeups/things-on-maps/index.html#what-can-happen-to-points",
+    "href": "writeups/things-on-maps/index.html#what-can-happen-to-points",
+    "title": "Things We Put On Maps",
+    "section": "What Can Happen to Points?",
+    "text": "What Can Happen to Points?\n\n\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "writeups/things-on-maps/index.html#what-can-happen-to-lines",
+    "href": "writeups/things-on-maps/index.html#what-can-happen-to-lines",
+    "title": "Things We Put On Maps",
+    "section": "What Can Happen to Lines?",
+    "text": "What Can Happen to Lines?\n\n\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "writeups/things-on-maps/index.html#what-can-happen-to-lines-1",
+    "href": "writeups/things-on-maps/index.html#what-can-happen-to-lines-1",
+    "title": "Things We Put On Maps",
+    "section": "What Can Happen to Lines?",
+    "text": "What Can Happen to Lines?\n\n\nSelection\n\n\n\nIn any map, most features from the human or natural environment are eliminated! (Krygier and Wood 2016)\n\n\n\nSimplification\n\n\n\nWithin the features that do remain, eliminate details that are unnecessary with respect to audience/context (Krygier and Wood 2016)"
+  },
+  {
+    "objectID": "writeups/things-on-maps/index.html#what-can-happen-to-areas",
+    "href": "writeups/things-on-maps/index.html#what-can-happen-to-areas",
+    "title": "Things We Put On Maps",
+    "section": "What Can Happen to Areas?",
+    "text": "What Can Happen to Areas?\n\n\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "writeups/things-on-maps/index.html#areal-dimension-change",
+    "href": "writeups/things-on-maps/index.html#areal-dimension-change",
+    "title": "Things We Put On Maps",
+    "section": "Areal Dimension Change",
+    "text": "Areal Dimension Change\n\n\n\nFrom Krygier and Wood (2016)"
+  },
+  {
+    "objectID": "writeups/things-on-maps/index.html#what-is-gained",
+    "href": "writeups/things-on-maps/index.html#what-is-gained",
+    "title": "Things We Put On Maps",
+    "section": "What Is Gained?",
+    "text": "What Is Gained?\n\n\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "writeups/things-on-maps/index.html#what-is-lost",
+    "href": "writeups/things-on-maps/index.html#what-is-lost",
+    "title": "Things We Put On Maps",
+    "section": "What Is Lost?",
+    "text": "What Is Lost?\n\n\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "writeups/things-on-maps/index.html#who-is-affected",
+    "href": "writeups/things-on-maps/index.html#who-is-affected",
+    "title": "Things We Put On Maps",
+    "section": "Who Is Affected?",
+    "text": "Who Is Affected?\n\n\n\nFrom Monmonier (2018)"
   },
   {
     "objectID": "writeups/positron/index.html",
@@ -1096,14 +1173,14 @@
     "href": "w05/slides.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Joins",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (17.18041 3.578071)\n18.686400\n\n\nPOINT (37.55122 17.8781)\n63.295952\n\n\nPOINT (-4.940633 28.9899)\n95.056956\n\n\nPOINT (33.58741 17.76415)\n8.043234\n\n\nPOINT (26.53429 7.2418)\n80.012929\n\n\nPOINT (37.02405 6.685782)\n18.382617\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n52\nSSD\nSouth Sudan\nMULTIPOLYGON (((33.97607 4….\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n58\nSOM\nSomalia\nMULTIPOLYGON (((41.53271 -1…\n\n\n133\nKEN\nKenya\nMULTIPOLYGON (((40.99443 -2…"
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (27.08501 8.151116)\n6.7348056\n\n\nPOINT (44.94241 10.18856)\n0.7728503\n\n\nPOINT (17.22098 -4.448239)\n59.0227748\n\n\nPOINT (18.72111 30.36353)\n18.1021065\n\n\nPOINT (-9.142789 16.71712)\n55.9965106\n\n\nPOINT (25.34225 21.54918)\n69.1987649\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n44\nTZA\nTanzania\nMULTIPOLYGON (((39.49648 -6…\n\n\n52\nSSD\nSouth Sudan\nMULTIPOLYGON (((33.97607 4….\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n59\n-99\nSomaliland\nMULTIPOLYGON (((48.93857 11…"
   },
   {
     "objectID": "w05/slides.html#our-first-real-spatial-join-st_join",
     "href": "w05/slides.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Joins",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n52\nSSD\nSouth Sudan\n80.012929\nMULTIPOLYGON (((33.97607 4….\n\n\n53\nSDN\nSudan\n63.295952\nMULTIPOLYGON (((34.07812 9….\n\n\n53.1\nSDN\nSudan\n8.043234\nMULTIPOLYGON (((34.07812 9….\n\n\n58\nSOM\nSomalia\n26.606223\nMULTIPOLYGON (((41.53271 -1…\n\n\n133\nKEN\nKenya\n34.830414\nMULTIPOLYGON (((40.99443 -2…\n\n\n172\nETH\nEthiopia\n18.382617\nMULTIPOLYGON (((35.26836 5…."
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n44\nTZA\nTanzania\n63.7779831\nMULTIPOLYGON (((39.49648 -6…\n\n\n52\nSSD\nSouth Sudan\n6.7348056\nMULTIPOLYGON (((33.97607 4….\n\n\n53\nSDN\nSudan\n69.1987649\nMULTIPOLYGON (((34.07812 9….\n\n\n53.1\nSDN\nSudan\n62.4328422\nMULTIPOLYGON (((34.07812 9….\n\n\n59\n-99\nSomaliland\n0.7728503\nMULTIPOLYGON (((48.93857 11…\n\n\n112\nMRT\nMauritania\n55.9965106\nMULTIPOLYGON (((-16.37334 1…"
   },
   {
     "objectID": "w05/slides.html#but-we-were-still-in-easy-mode",
@@ -1186,7 +1263,7 @@
     "href": "w05/index.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Joins",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (35.66558 -16.45727)\n14.93642\n\n\nPOINT (17.47525 18.04582)\n86.52100\n\n\nPOINT (8.395975 31.03615)\n44.16109\n\n\nPOINT (-1.883553 21.96948)\n93.76624\n\n\nPOINT (23.85638 30.07248)\n49.09756\n\n\nPOINT (-3.45705 10.86222)\n64.35117\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n103\nMOZ\nMozambique\nMULTIPOLYGON (((31.28789 -2…\n\n\n114\nMLI\nMali\nMULTIPOLYGON (((-11.3894 12…\n\n\n123\nLBY\nLibya\nMULTIPOLYGON (((9.51875 30….",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (39.34379 2.926981)\n39.40338\n\n\nPOINT (18.62264 6.513931)\n35.18329\n\n\nPOINT (14.08976 -3.716445)\n22.12226\n\n\nPOINT (20.2687 -19.02181)\n84.48096\n\n\nPOINT (-13.04405 25.79444)\n99.64294\n\n\nPOINT (13.1074 14.69842)\n34.71885\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n1\nZWE\nZimbabwe\nMULTIPOLYGON (((31.28789 -2…\n\n\n52\nSSD\nSouth Sudan\nMULTIPOLYGON (((33.97607 4….\n\n\n92\nNER\nNiger\nMULTIPOLYGON (((13.60635 13…\n\n\n102\nNAM\nNamibia\nMULTIPOLYGON (((23.38066 -1…",
     "crumbs": [
       "Week 5: Sep 24"
     ]
@@ -1196,7 +1273,7 @@
     "href": "w05/index.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Joins",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n57\nZAF\nSouth Africa\n87.80982\nMULTIPOLYGON (((29.36484 -2…\n\n\n103\nMOZ\nMozambique\n14.93642\nMULTIPOLYGON (((31.28789 -2…\n\n\n114\nMLI\nMali\n93.76624\nMULTIPOLYGON (((-11.3894 12…\n\n\n123\nLBY\nLibya\n49.09756\nMULTIPOLYGON (((9.51875 30….\n\n\n177\nEGY\nEgypt\n49.81337\nMULTIPOLYGON (((36.87139 21…\n\n\n192\nCOD\nDemocratic Republic of the Congo\n11.42467\nMULTIPOLYGON (((30.75117 -8…",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n1\nZWE\nZimbabwe\n10.75655\nMULTIPOLYGON (((31.28789 -2…\n\n\n52\nSSD\nSouth Sudan\n50.89440\nMULTIPOLYGON (((33.97607 4….\n\n\n92\nNER\nNiger\n34.71885\nMULTIPOLYGON (((13.60635 13…\n\n\n102\nNAM\nNamibia\n84.48096\nMULTIPOLYGON (((23.38066 -1…\n\n\n104\nMAR\nMorocco\n99.64294\nMULTIPOLYGON (((-2.219629 3…\n\n\n133\nKEN\nKenya\n39.40338\nMULTIPOLYGON (((40.99443 -2…",
     "crumbs": [
       "Week 5: Sep 24"
     ]
@@ -1282,11 +1359,172 @@
     ]
   },
   {
-    "objectID": "w04/slides.html#st_buffer-an-unary-operation-i-forgot-to-introduce",
-    "href": "w04/slides.html#st_buffer-an-unary-operation-i-forgot-to-introduce",
+    "objectID": "w04/slides.html#latitude-and-longitude-are-angles",
+    "href": "w04/slides.html#latitude-and-longitude-are-angles",
     "title": "Week 4: Unary and Binary Operations",
-    "section": "st_buffer(): An Unary Operation I Forgot to Introduce!",
-    "text": "st_buffer(): An Unary Operation I Forgot to Introduce!\n\nThink about how you might answer questions like:\n\n“How far is your house (POINT) from Manhattan (POLYGON)?”\n“Are there any chemical plants within a mile of this building (POLYGON) / stretch of road (LINESTRING)?”\n\nLazy mode (my favorite mode): Compute distances from the centroid\nGIS master mode: Construct the buffer!"
+    "section": "Latitude and Longitude are Angles!",
+    "text": "Latitude and Longitude are Angles!\n\nFrom Krygier and Wood (2016)"
+  },
+  {
+    "objectID": "w04/slides.html#angular-distance-vs.-travel-distance",
+    "href": "w04/slides.html#angular-distance-vs.-travel-distance",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Angular Distance vs. Travel Distance",
+    "text": "Angular Distance vs. Travel Distance\nThe Earth’s “width” is slightly greater than its “length” 😰\n\nFrom Wikimedia Commons"
+  },
+  {
+    "objectID": "w04/slides.html#smooshing-3d-into-2d",
+    "href": "w04/slides.html#smooshing-3d-into-2d",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Smooshing 3D into 2D",
+    "text": "Smooshing 3D into 2D\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w04/slides.html#avoid-getting-lost-in-the-sauce",
+    "href": "w04/slides.html#avoid-getting-lost-in-the-sauce",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Avoid Getting Lost in the Sauce",
+    "text": "Avoid Getting Lost in the Sauce"
+  },
+  {
+    "objectID": "w04/slides.html#how-to-avoid-getting-lost-in-the-sauce",
+    "href": "w04/slides.html#how-to-avoid-getting-lost-in-the-sauce",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "How To Avoid Getting Lost in the Sauce",
+    "text": "How To Avoid Getting Lost in the Sauce\n\n\n\n\n\nTissot Circles: Imagine infinitely small ellipses placed at regular intervals on the curved surface of the earth. Imagine these ellipses being projected along with the earth’s surface. When scaled up, changes in the ellipses show the location and quality of distortions on the projected map."
+  },
+  {
+    "objectID": "w04/slides.html#having-domain-knowledge-of-a-region",
+    "href": "w04/slides.html#having-domain-knowledge-of-a-region",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Having Domain Knowledge of a Region",
+    "text": "Having Domain Knowledge of a Region\n\nFrom XKCD"
+  },
+  {
+    "objectID": "w04/slides.html#crime-in-mongolia",
+    "href": "w04/slides.html#crime-in-mongolia",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Crime in Mongolia",
+    "text": "Crime in Mongolia\n\nFrom Reddit"
+  },
+  {
+    "objectID": "w04/slides.html#population-of-mongolia",
+    "href": "w04/slides.html#population-of-mongolia",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Population of Mongolia",
+    "text": "Population of Mongolia\n\nFrom Wikimedia Commons"
+  },
+  {
+    "objectID": "w04/slides.html#exhibit-a",
+    "href": "w04/slides.html#exhibit-a",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Exhibit A",
+    "text": "Exhibit A\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w04/slides.html#exhibit-b",
+    "href": "w04/slides.html#exhibit-b",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Exhibit B",
+    "text": "Exhibit B\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w04/slides.html#getting-the-geometries",
+    "href": "w04/slides.html#getting-the-geometries",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Getting the Geometries",
+    "text": "Getting the Geometries\nUsing rnaturalearth with mapview\n\n\nCode\nset.seed(6805)\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(rnaturalearth)\nlibrary(mapview)\nfrance_sf &lt;- ne_countries(country = \"France\", scale = 50)\n(france_map &lt;- mapview(france_sf, label = \"geounit\", legend = FALSE))"
+  },
+  {
+    "objectID": "w04/slides.html#centroid-of-france",
+    "href": "w04/slides.html#centroid-of-france",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Centroid of France",
+    "text": "Centroid of France\n\n\nCode\nfrance_cent_sf &lt;- sf::st_centroid(france_sf)\nfrance_map + mapview(france_cent_sf, label = \"Centroid\", legend = FALSE)"
+  },
+  {
+    "objectID": "w04/slides.html#one-we-already-saw-union",
+    "href": "w04/slides.html#one-we-already-saw-union",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "One We Already Saw: Union",
+    "text": "One We Already Saw: Union\nComputing the union of all geometries in the sf via sf::st_union()\n\n\nCode\nlibrary(leaflet.extras2)\nafrica_sf &lt;- ne_countries(continent = \"Africa\", scale = 50)\nafrica_union_sf &lt;- sf::st_union(africa_sf)\nafrica_map &lt;- mapview(africa_sf, label=\"geounit\", legend=FALSE)\nafrica_union_map &lt;- mapview(africa_union_sf, label=\"st_union(africa)\", legend=FALSE)\nafrica_map | africa_union_map"
+  },
+  {
+    "objectID": "w04/slides.html#helpful-for-rasterizing-bbox",
+    "href": "w04/slides.html#helpful-for-rasterizing-bbox",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Helpful for Rasterizing: BBox",
+    "text": "Helpful for Rasterizing: BBox\n\n\nCode\nafrica_bbox_sf &lt;- sf::st_bbox(africa_sf)\nafrica_bbox_map &lt;- mapview(africa_bbox_sf, label=\"st_bbox(africa)\", legend=FALSE)\nafrica_map | africa_bbox_map"
+  },
+  {
+    "objectID": "w04/slides.html#convex-hulls-by-country",
+    "href": "w04/slides.html#convex-hulls-by-country",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Convex Hulls by Country",
+    "text": "Convex Hulls by Country\n\n\nCode\nafrica_countries_cvx &lt;- sf::st_convex_hull(africa_sf)\nafrica_countries_cvx_map &lt;- mapview(africa_countries_cvx, label=\"geounit\", legend=FALSE)\nafrica_map | africa_countries_cvx_map"
+  },
+  {
+    "objectID": "w04/slides.html#convex-hull-of-continent",
+    "href": "w04/slides.html#convex-hull-of-continent",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Convex Hull of Continent",
+    "text": "Convex Hull of Continent\nUse st_union() first:\n\n\nCode\nafrica_cvx &lt;- africa_sf |&gt; st_union() |&gt; st_convex_hull()\nafrica_cvx_map &lt;- mapview(africa_cvx, label=\"geounit\", legend=FALSE)\nafrica_map | africa_cvx_map"
+  },
+  {
+    "objectID": "w04/slides.html#one-we-already-saw-centroids",
+    "href": "w04/slides.html#one-we-already-saw-centroids",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "One We Already Saw: Centroids",
+    "text": "One We Already Saw: Centroids\nComputing the centroid of all geometries in the sf via sf::st_centroid()\n\n\nCode\nafrica_cents_sf &lt;- sf::st_centroid(africa_sf)\nafrica_cents_map &lt;- mapview(africa_cents_sf, label=\"geounit\", legend=FALSE)\nafrica_map | africa_cents_map"
+  },
+  {
+    "objectID": "w04/slides.html#spatial-joins",
+    "href": "w04/slides.html#spatial-joins",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Spatial Joins",
+    "text": "Spatial Joins\n\n\n\nCode\nnc &lt;- system.file(\"shape/nc.shp\", package=\"sf\") |&gt;\n  read_sf() |&gt;\n  st_transform('EPSG:2264')\ngr &lt;- st_sf(\n         label = apply(expand.grid(1:10, LETTERS[10:1])[,2:1], 1, paste0, collapse = \"\"),\n         geom = st_make_grid(nc))\ngr$col &lt;- sf.colors(10, categorical = TRUE, alpha = .3)\n# cut, to verify that NA's work out:\ngr &lt;- gr[-(1:30),]\nsuppressWarnings(nc_j &lt;- st_join(nc, gr, largest = TRUE))\npar(mfrow = c(2,1), mar = rep(0,4))\nplot(st_geometry(nc_j), border = 'grey')\nplot(st_geometry(gr), add = TRUE, col = gr$col)\ntext(st_coordinates(st_centroid(st_geometry(gr))), labels = gr$label, cex = .85)\n# the joined dataset:\nplot(st_geometry(nc_j), border = 'grey', col = nc_j$col)\ntext(st_coordinates(st_centroid(st_geometry(nc_j))), labels = nc_j$label, cex = .7)\nplot(st_geometry(gr), border = '#88ff88aa', add = TRUE)"
+  },
+  {
+    "objectID": "w04/slides.html#spatial-sampling",
+    "href": "w04/slides.html#spatial-sampling",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Spatial Sampling",
+    "text": "Spatial Sampling\n\n\nCode\n# Sample random points\nafrica_points_list &lt;- sf::st_sample(africa_union_sf, 10)\nafrica_points_sf &lt;- sf::st_sf(africa_points_list)\nafrica_points_map &lt;- mapview(africa_points_sf, label=\"Random Point\", col.regions=cb_palette[1], legend=FALSE)\nafrica_map + africa_points_map"
+  },
+  {
+    "objectID": "w04/slides.html#the-default-predicate-st_intersects",
+    "href": "w04/slides.html#the-default-predicate-st_intersects",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "The “Default” Predicate: st_intersects",
+    "text": "The “Default” Predicate: st_intersects\n\n\nCode\ncountries_w_points &lt;- africa_sf[africa_points_sf,]\nmapview(countries_w_points, label=\"geounit\", legend=FALSE) + africa_points_map"
+  },
+  {
+    "objectID": "w04/slides.html#counting-with-lengths",
+    "href": "w04/slides.html#counting-with-lengths",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Counting with lengths()",
+    "text": "Counting with lengths()\n\n\nCode\ncountry_inter &lt;- sf::st_intersects(africa_sf, africa_points_sf)\n# Computes point counts for each polygon\n(num_intersections &lt;- lengths(country_inter))\n\n\n [1] 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0 1 0 0 0\n[39] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 2\n\n\nCode\nafrica_sf &lt;- africa_sf |&gt; mutate(\n  num_points = num_intersections\n) |&gt; arrange(geounit)\nafrica_sf |&gt; select(geounit, num_points) |&gt; head()\n\n\n\n\n\n\ngeounit\nnum_points\ngeometry\n\n\n\n\nAlgeria\n2\nMULTIPOLYGON (((8.576563 36…\n\n\nAngola\n2\nMULTIPOLYGON (((13.07275 -4…\n\n\nBenin\n0\nMULTIPOLYGON (((1.622656 6….\n\n\nBotswana\n0\nMULTIPOLYGON (((25.25879 -1…\n\n\nBurkina Faso\n0\nMULTIPOLYGON (((0.9004883 1…\n\n\nBurundi\n0\nMULTIPOLYGON (((30.55361 -2…"
+  },
+  {
+    "objectID": "w04/slides.html#plotting-with-mapview",
+    "href": "w04/slides.html#plotting-with-mapview",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Plotting with mapview",
+    "text": "Plotting with mapview\n\n\nCode\nmapview(africa_sf, zcol=\"num_points\")"
+  },
+  {
+    "objectID": "w04/slides.html#plotting-with-ggplot2",
+    "href": "w04/slides.html#plotting-with-ggplot2",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Plotting with ggplot2",
+    "text": "Plotting with ggplot2\nSince we’re starting to get into data attributes rather than geometric features, switching to ggplot2 is recommended!\n\n\nCode\nafrica_sf |&gt; ggplot(aes(fill=num_points)) +\n  geom_sf() +\n  theme_classic()"
+  },
+  {
+    "objectID": "w04/slides.html#one-more-unary-operation-st_buffer",
+    "href": "w04/slides.html#one-more-unary-operation-st_buffer",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "One More Unary Operation: st_buffer()",
+    "text": "One More Unary Operation: st_buffer()\n\nThink about how you might answer questions like:\n\n“How far is your house (POINT) from Manhattan (POLYGON)?”\n“Are there any chemical plants within a mile of this building (POLYGON) / stretch of road (LINESTRING)?”\n\nLazy mode (my favorite mode): Compute distances from the centroid\nGIS master mode: Construct the buffer!"
   },
   {
     "objectID": "w04/slides.html#on-polygons",
@@ -1335,7 +1573,7 @@
     "href": "w04/slides.html#de-9im-strings",
     "title": "Week 4: Unary and Binary Operations",
     "section": "DE-9IM Strings",
-    "text": "DE-9IM Strings\nEach cell here visualizes one component of the DE-9IM string 1020F1102, which describes the relationship between the following two geometries:\n\nBoxey McBoxface: POLYGON(0 0, 1 0, 1 1, 0 1, 0 0)\nLiney McLineface: LINESTRING(0.5 -0.5, 0.5 0.5)\n\n\n\nCode\nlibrary(sf)\npolygon &lt;- po &lt;- st_polygon(list(rbind(c(0,0), c(1,0), c(1,1), c(0,1), c(0,0))))\np0 &lt;- st_polygon(list(rbind(c(-1,-1), c(2,-1), c(2,2), c(-1,2), c(-1,-1))))\nline &lt;- li &lt;- st_linestring(rbind(c(.5, -.5), c(.5, 0.5)))\ns &lt;- st_sfc(po, li)\n\npar(mfrow = c(3,3))\npar(mar = c(1,1,1,1))\n\n# \"1020F1102\"\n# 1: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5,0), c(.5,.495)), col = 'red', lwd = 2)\npoints(0.5, 0.5, pch = 1)\n\n# 2: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"B(line) = 0\")))\npoints(0.5, 0.5, col = 'red', pch = 16)\n\n# 3: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"E(line) = 2\")))\nplot(po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n# 4: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"I(line) = 0\")))\npoints(.5, 0, col = 'red', pch = 16)\n\n# 5: F\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"B(line) = F\")))\n\n# 6: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"E(line) = 1\")))\nplot(po, border = 'red', col = NA, add = TRUE, lwd = 2)\n\n# 7: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5, -.5), c(.5, 0)), col = 'red', lwd = 2)\n\n# 8: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"B(line) = 0\")))\npoints(.5, -.5, col = 'red', pch = 16)\n\n# 9: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"E(line) = 2\")))\nplot(p0 / po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n\n\nCode from Pebesma and Bivand (2023)"
+    "text": "DE-9IM Strings\nEach cell here visualizes one component of the DE-9IM string 1020F1102, which describes the relationship between the following two geometries:\n\nBoxey McBoxface: POLYGON(0 0, 1 0, 1 1, 0 1, 0 0)\nLiney McLineface: LINESTRING(0.5 -0.5, 0.5 0.5)\n\n\n\nCode\nlibrary(sf)\npolygon &lt;- po &lt;- st_polygon(list(rbind(c(0,0), c(1,0), c(1,1), c(0,1), c(0,0))))\np0 &lt;- st_polygon(list(rbind(c(-1,-1), c(2,-1), c(2,2), c(-1,2), c(-1,-1))))\nline &lt;- li &lt;- st_linestring(rbind(c(.5, -.5), c(.5, 0.5)))\ns &lt;- st_sfc(po, li)\n\npar(mfrow = c(3,3))\npar(mar = c(1,1,1,1))\n\n# \"1020F1102\"\n# 1: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5,0), c(.5,.495)), col = 'red', lwd = 2)\npoints(0.5, 0.5, pch = 1)\n\n# 2: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"B(line) = 0\")))\npoints(0.5, 0.5, col = 'red', pch = 16)\n\n# 3: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"E(line) = 2\")))\nplot(po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n# 4: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"I(line) = 0\")))\npoints(.5, 0, col = 'red', pch = 16)\n\n# 5: F\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"B(line) = F\")))\n\n# 6: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"E(line) = 1\")))\nplot(po, border = 'red', col = NA, add = TRUE, lwd = 2)\n\n# 7: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5, -.5), c(.5, 0)), col = 'red', lwd = 2)\n\n# 8: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"B(line) = 0\")))\npoints(.5, -.5, col = 'red', pch = 16)\n\n# 9: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"E(line) = 2\")))\nplot(p0 / po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n\n\nCode from Pebesma and Bivand (2023)\nThe predicate equals corresponds to the DE-9IM string \"T*F**FFF*\". If any two geometries obey this relationship, they are (topologically) equal!"
   },
   {
     "objectID": "w04/slides.html#slowing-down-9im-no-de-yet",
@@ -1387,25 +1625,25 @@
     "text": "(If You Don’t Want to Scroll)\n\n\nCode\nus |&gt; filter(touch)\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_3166_2\nname\nde9im\ntouch\ngeometry\n\n\n\n\nUS-MD\nMaryland\nFF2F11212\nTRUE\nMULTIPOLYGON (((-75.64786 3…\n\n\nUS-VA\nVirginia\nFF2F11212\nTRUE\nMULTIPOLYGON (((-76.01325 3…"
   },
   {
-    "objectID": "w04/slides.html#from-last-week-almost-a-spatial-join",
-    "href": "w04/slides.html#from-last-week-almost-a-spatial-join",
+    "objectID": "w04/slides.html#almost-a-spatial-join",
+    "href": "w04/slides.html#almost-a-spatial-join",
     "title": "Week 4: Unary and Binary Operations",
-    "section": "From Last Week: Almost a Spatial Join",
-    "text": "From Last Week: Almost a Spatial Join\n\n\nCode\nlibrary(mapview)\nlibrary(leaflet.extras2)\nafrica_sf &lt;- ne_countries(continent = \"Africa\", scale = 50) |&gt; select(iso_a3, geounit)\nafrica_map &lt;- mapview(africa_sf, label=\"geounit\", legend=FALSE)\nN &lt;- 10\nafrica_union_sf &lt;- sf::st_union(africa_sf)\nsampled_points_sf &lt;- sf::st_sample(africa_union_sf, N) |&gt; sf::st_sf() |&gt; mutate(temp = runif(N, 0, 100))\nsampled_points_map &lt;- mapview(sampled_points_sf, label=\"Random Point\", col.regions=cbPalette[1], legend=FALSE)\ncountries_points_sf &lt;- africa_sf[sampled_points_sf,]\nfiltered_map &lt;- mapview(countries_points_sf, label=\"geounit\", legend=FALSE) + sampled_points_map\n(africa_map + sampled_points_map) | filtered_map"
+    "section": "Almost a Spatial Join",
+    "text": "Almost a Spatial Join\n\n\nCode\nlibrary(mapview)\nlibrary(leaflet.extras2)\nafrica_sf &lt;- ne_countries(continent = \"Africa\", scale = 50) |&gt; select(iso_a3, geounit)\nafrica_map &lt;- mapview(africa_sf, label=\"geounit\", legend=FALSE)\nN &lt;- 10\nafrica_union_sf &lt;- sf::st_union(africa_sf)\nsampled_points_sf &lt;- sf::st_sample(africa_union_sf, N) |&gt; sf::st_sf() |&gt; mutate(temp = runif(N, 0, 100))\nsampled_points_map &lt;- mapview(sampled_points_sf, label=\"Random Point\", col.regions=cbPalette[1], legend=FALSE)\ncountries_points_sf &lt;- africa_sf[sampled_points_sf,]\nfiltered_map &lt;- mapview(countries_points_sf, label=\"geounit\", legend=FALSE) + sampled_points_map\n(africa_map + sampled_points_map) | filtered_map"
   },
   {
     "objectID": "w04/slides.html#spatial-filter-neq-spatial-join",
     "href": "w04/slides.html#spatial-filter-neq-spatial-join",
     "title": "Week 4: Unary and Binary Operations",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (23.5386 22.01628)\n94.385575\n\n\nPOINT (14.64665 -13.35285)\n26.332960\n\n\nPOINT (32.29586 -27.78115)\n95.603092\n\n\nPOINT (16.11575 -9.174237)\n11.086251\n\n\nPOINT (14.39308 -1.016639)\n6.604077\n\n\nPOINT (47.91478 7.723278)\n40.497326\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n58\nSOM\nSomalia\nMULTIPOLYGON (((41.53271 -1…\n\n\n104\nMAR\nMorocco\nMULTIPOLYGON (((-2.219629 3…\n\n\n118\nMDG\nMadagascar\nMULTIPOLYGON (((49.53828 -1…"
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-5.135802 22.30373)\n99.14195\n\n\nPOINT (48.01641 10.55753)\n41.21422\n\n\nPOINT (47.30147 5.038318)\n95.30175\n\n\nPOINT (22.64591 7.799242)\n68.37119\n\n\nPOINT (7.739425 5.95728)\n56.40943\n\n\nPOINT (22.13408 20.87522)\n86.12631\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n58\nSOM\nSomalia\nMULTIPOLYGON (((41.53271 -1…\n\n\n59\n-99\nSomaliland\nMULTIPOLYGON (((48.93857 11…\n\n\n91\nNGA\nNigeria\nMULTIPOLYGON (((7.300781 4…."
   },
   {
     "objectID": "w04/slides.html#our-first-real-spatial-join-st_join",
     "href": "w04/slides.html#our-first-real-spatial-join-st_join",
     "title": "Week 4: Unary and Binary Operations",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n57\nZAF\nSouth Africa\n95.603092\nMULTIPOLYGON (((29.36484 -2…\n\n\n58\nSOM\nSomalia\n40.497326\nMULTIPOLYGON (((41.53271 -1…\n\n\n104\nMAR\nMorocco\n94.671352\nMULTIPOLYGON (((-2.219629 3…\n\n\n118\nMDG\nMadagascar\n1.921007\nMULTIPOLYGON (((49.53828 -1…\n\n\n123\nLBY\nLibya\n94.385575\nMULTIPOLYGON (((9.51875 30….\n\n\n160\nGAB\nGabon\n6.604077\nMULTIPOLYGON (((13.29355 2…."
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n2\nZMB\nZambia\n5.788125\nMULTIPOLYGON (((30.39609 -1…\n\n\n58\nSOM\nSomalia\n95.301751\nMULTIPOLYGON (((41.53271 -1…\n\n\n59\n-99\nSomaliland\n41.214222\nMULTIPOLYGON (((48.93857 11…\n\n\n91\nNGA\nNigeria\n56.409432\nMULTIPOLYGON (((7.300781 4….\n\n\n114\nMLI\nMali\n99.141948\nMULTIPOLYGON (((-11.3894 12…\n\n\n123\nLBY\nLibya\n86.126311\nMULTIPOLYGON (((9.51875 30…."
   },
   {
     "objectID": "w04/slides.html#but-we-were-still-in-easy-mode",
@@ -1440,7 +1678,7 @@
     "href": "w04/slides.html#references",
     "title": "Week 4: Unary and Binary Operations",
     "section": "References",
-    "text": "References\n\n\nCohn, P. M. 1965. Universal Algebra. Springer Science & Business Media.\n\n\nLovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2024. Geocomputation with R. CRC Press. https://r.geocompx.org/.\n\n\nPebesma, Edzer, and Roger Bivand. 2023. Spatial Data Science: With Applications in R. CRC Press. https://r-spatial.org/book/."
+    "text": "References\n\n\nCohn, P. M. 1965. Universal Algebra. Springer Science & Business Media.\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\nLovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2024. Geocomputation with R. CRC Press. https://r.geocompx.org/.\n\n\nMonmonier, Mark. 2018. How to Lie with Maps. University of Chicago Press. https://www.dropbox.com/scl/fi/7rsqbxgge6llggnaf5tit/How-to-Lie-with-Maps-Third-Edition.pdf?rlkey=6rqxta7cjyq3oqdnskj4dtwj8&dl=1.\n\n\nPebesma, Edzer, and Roger Bivand. 2023. Spatial Data Science: With Applications in R. CRC Press. https://r-spatial.org/book/."
   },
   {
     "objectID": "w04/index.html",
@@ -1453,11 +1691,241 @@
     ]
   },
   {
-    "objectID": "w04/index.html#st_buffer-an-unary-operation-i-forgot-to-introduce",
-    "href": "w04/index.html#st_buffer-an-unary-operation-i-forgot-to-introduce",
+    "objectID": "w04/index.html#latitude-and-longitude-are-angles",
+    "href": "w04/index.html#latitude-and-longitude-are-angles",
     "title": "Week 4: Unary and Binary Operations",
-    "section": "st_buffer(): An Unary Operation I Forgot to Introduce!",
-    "text": "st_buffer(): An Unary Operation I Forgot to Introduce!\n\nThink about how you might answer questions like:\n\n“How far is your house (POINT) from Manhattan (POLYGON)?”\n“Are there any chemical plants within a mile of this building (POLYGON) / stretch of road (LINESTRING)?”\n\nLazy mode (my favorite mode): Compute distances from the centroid\nGIS master mode: Construct the buffer!",
+    "section": "Latitude and Longitude are Angles!",
+    "text": "Latitude and Longitude are Angles!\n\n\n\nFrom Krygier and Wood (2016)",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#angular-distance-vs.-travel-distance",
+    "href": "w04/index.html#angular-distance-vs.-travel-distance",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Angular Distance vs. Travel Distance",
+    "text": "Angular Distance vs. Travel Distance\nThe Earth’s “width” is slightly greater than its “length” 😰\n\n\n\nFrom Wikimedia Commons",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#smooshing-3d-into-2d",
+    "href": "w04/index.html#smooshing-3d-into-2d",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Smooshing 3D into 2D",
+    "text": "Smooshing 3D into 2D\n\n\n\nFrom Monmonier (2018)",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#avoid-getting-lost-in-the-sauce",
+    "href": "w04/index.html#avoid-getting-lost-in-the-sauce",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Avoid Getting Lost in the Sauce",
+    "text": "Avoid Getting Lost in the Sauce",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#how-to-avoid-getting-lost-in-the-sauce",
+    "href": "w04/index.html#how-to-avoid-getting-lost-in-the-sauce",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "How To Avoid Getting Lost in the Sauce",
+    "text": "How To Avoid Getting Lost in the Sauce\n\n\n\n\n\nTissot Circles: Imagine infinitely small ellipses placed at regular intervals on the curved surface of the earth. Imagine these ellipses being projected along with the earth’s surface. When scaled up, changes in the ellipses show the location and quality of distortions on the projected map.",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#having-domain-knowledge-of-a-region",
+    "href": "w04/index.html#having-domain-knowledge-of-a-region",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Having Domain Knowledge of a Region",
+    "text": "Having Domain Knowledge of a Region\n\n\n\nFrom XKCD",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#crime-in-mongolia",
+    "href": "w04/index.html#crime-in-mongolia",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Crime in Mongolia",
+    "text": "Crime in Mongolia\n\n\n\nFrom Reddit",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#population-of-mongolia",
+    "href": "w04/index.html#population-of-mongolia",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Population of Mongolia",
+    "text": "Population of Mongolia\n\n\n\nFrom Wikimedia Commons",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#exhibit-a",
+    "href": "w04/index.html#exhibit-a",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Exhibit A",
+    "text": "Exhibit A\n\n\n\nFrom Monmonier (2018)",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#exhibit-b",
+    "href": "w04/index.html#exhibit-b",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Exhibit B",
+    "text": "Exhibit B\n\n\n\nFrom Monmonier (2018)",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#getting-the-geometries",
+    "href": "w04/index.html#getting-the-geometries",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Getting the Geometries",
+    "text": "Getting the Geometries\nUsing rnaturalearth with mapview\n\n\nCode\nset.seed(6805)\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ lubridate 1.9.4     ✔ tibble    3.3.0\n✔ purrr     1.0.4     ✔ tidyr     1.3.1\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\nlibrary(sf)\n\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(mapview)\nfrance_sf &lt;- ne_countries(country = \"France\", scale = 50)\n(france_map &lt;- mapview(france_sf, label = \"geounit\", legend = FALSE))",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#centroid-of-france",
+    "href": "w04/index.html#centroid-of-france",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Centroid of France",
+    "text": "Centroid of France\n\n\nCode\nfrance_cent_sf &lt;- sf::st_centroid(france_sf)\n\n\nWarning: st_centroid assumes attributes are constant over geometries\n\n\nCode\nfrance_map + mapview(france_cent_sf, label = \"Centroid\", legend = FALSE)",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#one-we-already-saw-union",
+    "href": "w04/index.html#one-we-already-saw-union",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "One We Already Saw: Union",
+    "text": "One We Already Saw: Union\nComputing the union of all geometries in the sf via sf::st_union()\n\n\nCode\nlibrary(leaflet.extras2)\n\n\nLoading required package: leaflet\n\n\nCode\nafrica_sf &lt;- ne_countries(continent = \"Africa\", scale = 50)\nafrica_union_sf &lt;- sf::st_union(africa_sf)\nafrica_map &lt;- mapview(africa_sf, label=\"geounit\", legend=FALSE)\nafrica_union_map &lt;- mapview(africa_union_sf, label=\"st_union(africa)\", legend=FALSE)\nafrica_map | africa_union_map",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#helpful-for-rasterizing-bbox",
+    "href": "w04/index.html#helpful-for-rasterizing-bbox",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Helpful for Rasterizing: BBox",
+    "text": "Helpful for Rasterizing: BBox\n\n\nCode\nafrica_bbox_sf &lt;- sf::st_bbox(africa_sf)\nafrica_bbox_map &lt;- mapview(africa_bbox_sf, label=\"st_bbox(africa)\", legend=FALSE)\nafrica_map | africa_bbox_map",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#convex-hulls-by-country",
+    "href": "w04/index.html#convex-hulls-by-country",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Convex Hulls by Country",
+    "text": "Convex Hulls by Country\n\n\nCode\nafrica_countries_cvx &lt;- sf::st_convex_hull(africa_sf)\nafrica_countries_cvx_map &lt;- mapview(africa_countries_cvx, label=\"geounit\", legend=FALSE)\nafrica_map | africa_countries_cvx_map",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#convex-hull-of-continent",
+    "href": "w04/index.html#convex-hull-of-continent",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Convex Hull of Continent",
+    "text": "Convex Hull of Continent\nUse st_union() first:\n\n\nCode\nafrica_cvx &lt;- africa_sf |&gt; st_union() |&gt; st_convex_hull()\nafrica_cvx_map &lt;- mapview(africa_cvx, label=\"geounit\", legend=FALSE)\nafrica_map | africa_cvx_map",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#one-we-already-saw-centroids",
+    "href": "w04/index.html#one-we-already-saw-centroids",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "One We Already Saw: Centroids",
+    "text": "One We Already Saw: Centroids\nComputing the centroid of all geometries in the sf via sf::st_centroid()\n\n\nCode\nafrica_cents_sf &lt;- sf::st_centroid(africa_sf)\n\n\nWarning: st_centroid assumes attributes are constant over geometries\n\n\nCode\nafrica_cents_map &lt;- mapview(africa_cents_sf, label=\"geounit\", legend=FALSE)\nafrica_map | africa_cents_map",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#spatial-joins",
+    "href": "w04/index.html#spatial-joins",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Spatial Joins",
+    "text": "Spatial Joins\n\n\nCode\nnc &lt;- system.file(\"shape/nc.shp\", package=\"sf\") |&gt;\n  read_sf() |&gt;\n  st_transform('EPSG:2264')\ngr &lt;- st_sf(\n         label = apply(expand.grid(1:10, LETTERS[10:1])[,2:1], 1, paste0, collapse = \"\"),\n         geom = st_make_grid(nc))\ngr$col &lt;- sf.colors(10, categorical = TRUE, alpha = .3)\n# cut, to verify that NA's work out:\ngr &lt;- gr[-(1:30),]\nsuppressWarnings(nc_j &lt;- st_join(nc, gr, largest = TRUE))\npar(mfrow = c(2,1), mar = rep(0,4))\nplot(st_geometry(nc_j), border = 'grey')\nplot(st_geometry(gr), add = TRUE, col = gr$col)\ntext(st_coordinates(st_centroid(st_geometry(gr))), labels = gr$label, cex = .85)\n# the joined dataset:\nplot(st_geometry(nc_j), border = 'grey', col = nc_j$col)\ntext(st_coordinates(st_centroid(st_geometry(nc_j))), labels = nc_j$label, cex = .7)\nplot(st_geometry(gr), border = '#88ff88aa', add = TRUE)",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#spatial-sampling",
+    "href": "w04/index.html#spatial-sampling",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Spatial Sampling",
+    "text": "Spatial Sampling\n\n\nCode\n# Sample random points\nafrica_points_list &lt;- sf::st_sample(africa_union_sf, 10)\nafrica_points_sf &lt;- sf::st_sf(africa_points_list)\nafrica_points_map &lt;- mapview(africa_points_sf, label=\"Random Point\", col.regions=cb_palette[1], legend=FALSE)\n\n\nWarning in cbind(`Feature ID` = fid, mat): number of rows of result is not a\nmultiple of vector length (arg 1)\n\n\nCode\nafrica_map + africa_points_map",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#the-default-predicate-st_intersects",
+    "href": "w04/index.html#the-default-predicate-st_intersects",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "The “Default” Predicate: st_intersects",
+    "text": "The “Default” Predicate: st_intersects\n\n\nCode\ncountries_w_points &lt;- africa_sf[africa_points_sf,]\nmapview(countries_w_points, label=\"geounit\", legend=FALSE) + africa_points_map",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#counting-with-lengths",
+    "href": "w04/index.html#counting-with-lengths",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Counting with lengths()",
+    "text": "Counting with lengths()\n\n\nCode\ncountry_inter &lt;- sf::st_intersects(africa_sf, africa_points_sf)\n# Computes point counts for each polygon\n(num_intersections &lt;- lengths(country_inter))\n\n\n [1] 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0 1 0 0 0\n[39] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 2\n\n\nCode\nafrica_sf &lt;- africa_sf |&gt; mutate(\n  num_points = num_intersections\n) |&gt; arrange(geounit)\nafrica_sf |&gt; select(geounit, num_points) |&gt; head()\n\n\n\n\n\n\ngeounit\nnum_points\ngeometry\n\n\n\n\nAlgeria\n2\nMULTIPOLYGON (((8.576563 36…\n\n\nAngola\n2\nMULTIPOLYGON (((13.07275 -4…\n\n\nBenin\n0\nMULTIPOLYGON (((1.622656 6….\n\n\nBotswana\n0\nMULTIPOLYGON (((25.25879 -1…\n\n\nBurkina Faso\n0\nMULTIPOLYGON (((0.9004883 1…\n\n\nBurundi\n0\nMULTIPOLYGON (((30.55361 -2…",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#plotting-with-mapview",
+    "href": "w04/index.html#plotting-with-mapview",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Plotting with mapview",
+    "text": "Plotting with mapview\n\n\nCode\nmapview(africa_sf, zcol=\"num_points\")",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#plotting-with-ggplot2",
+    "href": "w04/index.html#plotting-with-ggplot2",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Plotting with ggplot2",
+    "text": "Plotting with ggplot2\nSince we’re starting to get into data attributes rather than geometric features, switching to ggplot2 is recommended!\n\n\nCode\nafrica_sf |&gt; ggplot(aes(fill=num_points)) +\n  geom_sf() +\n  theme_classic()",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#one-more-unary-operation-st_buffer",
+    "href": "w04/index.html#one-more-unary-operation-st_buffer",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "One More Unary Operation: st_buffer()",
+    "text": "One More Unary Operation: st_buffer()\n\nThink about how you might answer questions like:\n\n“How far is your house (POINT) from Manhattan (POLYGON)?”\n“Are there any chemical plants within a mile of this building (POLYGON) / stretch of road (LINESTRING)?”\n\nLazy mode (my favorite mode): Compute distances from the centroid\nGIS master mode: Construct the buffer!",
     "crumbs": [
       "Week 4: Sep 17"
     ]
@@ -1527,7 +1995,7 @@
     "href": "w04/index.html#de-9im-strings",
     "title": "Week 4: Unary and Binary Operations",
     "section": "DE-9IM Strings",
-    "text": "DE-9IM Strings\nEach cell here visualizes one component of the DE-9IM string 1020F1102, which describes the relationship between the following two geometries:\n\nBoxey McBoxface: POLYGON(0 0, 1 0, 1 1, 0 1, 0 0)\nLiney McLineface: LINESTRING(0.5 -0.5, 0.5 0.5)\n\n\n\nCode\nlibrary(sf)\npolygon &lt;- po &lt;- st_polygon(list(rbind(c(0,0), c(1,0), c(1,1), c(0,1), c(0,0))))\np0 &lt;- st_polygon(list(rbind(c(-1,-1), c(2,-1), c(2,2), c(-1,2), c(-1,-1))))\nline &lt;- li &lt;- st_linestring(rbind(c(.5, -.5), c(.5, 0.5)))\ns &lt;- st_sfc(po, li)\n\npar(mfrow = c(3,3))\npar(mar = c(1,1,1,1))\n\n# \"1020F1102\"\n# 1: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5,0), c(.5,.495)), col = 'red', lwd = 2)\npoints(0.5, 0.5, pch = 1)\n\n# 2: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"B(line) = 0\")))\npoints(0.5, 0.5, col = 'red', pch = 16)\n\n# 3: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"E(line) = 2\")))\nplot(po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n# 4: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"I(line) = 0\")))\npoints(.5, 0, col = 'red', pch = 16)\n\n# 5: F\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"B(line) = F\")))\n\n# 6: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"E(line) = 1\")))\nplot(po, border = 'red', col = NA, add = TRUE, lwd = 2)\n\n# 7: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5, -.5), c(.5, 0)), col = 'red', lwd = 2)\n\n# 8: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"B(line) = 0\")))\npoints(.5, -.5, col = 'red', pch = 16)\n\n# 9: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"E(line) = 2\")))\nplot(p0 / po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n\n\n\n\nCode from Pebesma and Bivand (2023)",
+    "text": "DE-9IM Strings\nEach cell here visualizes one component of the DE-9IM string 1020F1102, which describes the relationship between the following two geometries:\n\nBoxey McBoxface: POLYGON(0 0, 1 0, 1 1, 0 1, 0 0)\nLiney McLineface: LINESTRING(0.5 -0.5, 0.5 0.5)\n\n\n\nCode\nlibrary(sf)\npolygon &lt;- po &lt;- st_polygon(list(rbind(c(0,0), c(1,0), c(1,1), c(0,1), c(0,0))))\np0 &lt;- st_polygon(list(rbind(c(-1,-1), c(2,-1), c(2,2), c(-1,2), c(-1,-1))))\nline &lt;- li &lt;- st_linestring(rbind(c(.5, -.5), c(.5, 0.5)))\ns &lt;- st_sfc(po, li)\n\npar(mfrow = c(3,3))\npar(mar = c(1,1,1,1))\n\n# \"1020F1102\"\n# 1: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5,0), c(.5,.495)), col = 'red', lwd = 2)\npoints(0.5, 0.5, pch = 1)\n\n# 2: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"B(line) = 0\")))\npoints(0.5, 0.5, col = 'red', pch = 16)\n\n# 3: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"I(pol)\",intersect(),\"E(line) = 2\")))\nplot(po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n# 4: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"I(line) = 0\")))\npoints(.5, 0, col = 'red', pch = 16)\n\n# 5: F\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"B(line) = F\")))\n\n# 6: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"B(pol)\",intersect(),\"E(line) = 1\")))\nplot(po, border = 'red', col = NA, add = TRUE, lwd = 2)\n\n# 7: 1\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"I(line) = 1\")))\nlines(rbind(c(.5, -.5), c(.5, 0)), col = 'red', lwd = 2)\n\n# 8: 0\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"B(line) = 0\")))\npoints(.5, -.5, col = 'red', pch = 16)\n\n# 9: 2\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste(\"E(pol)\",intersect(),\"E(line) = 2\")))\nplot(p0 / po, col = '#ff8888', add = TRUE)\nplot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)\n\n\n\n\n\nCode from Pebesma and Bivand (2023)\n\n\n\n\n\nThe predicate equals corresponds to the DE-9IM string \"T*F**FFF*\". If any two geometries obey this relationship, they are (topologically) equal!",
     "crumbs": [
       "Week 4: Sep 17"
     ]
@@ -1603,11 +2071,11 @@
     ]
   },
   {
-    "objectID": "w04/index.html#from-last-week-almost-a-spatial-join",
-    "href": "w04/index.html#from-last-week-almost-a-spatial-join",
+    "objectID": "w04/index.html#almost-a-spatial-join",
+    "href": "w04/index.html#almost-a-spatial-join",
     "title": "Week 4: Unary and Binary Operations",
-    "section": "From Last Week: Almost a Spatial Join",
-    "text": "From Last Week: Almost a Spatial Join\n\n\nCode\nlibrary(mapview)\nlibrary(leaflet.extras2)\nafrica_sf &lt;- ne_countries(continent = \"Africa\", scale = 50) |&gt; select(iso_a3, geounit)\nafrica_map &lt;- mapview(africa_sf, label=\"geounit\", legend=FALSE)\nN &lt;- 10\nafrica_union_sf &lt;- sf::st_union(africa_sf)\nsampled_points_sf &lt;- sf::st_sample(africa_union_sf, N) |&gt; sf::st_sf() |&gt; mutate(temp = runif(N, 0, 100))\nsampled_points_map &lt;- mapview(sampled_points_sf, label=\"Random Point\", col.regions=cbPalette[1], legend=FALSE)\ncountries_points_sf &lt;- africa_sf[sampled_points_sf,]\nfiltered_map &lt;- mapview(countries_points_sf, label=\"geounit\", legend=FALSE) + sampled_points_map\n(africa_map + sampled_points_map) | filtered_map",
+    "section": "Almost a Spatial Join",
+    "text": "Almost a Spatial Join\n\n\nCode\nlibrary(mapview)\nlibrary(leaflet.extras2)\nafrica_sf &lt;- ne_countries(continent = \"Africa\", scale = 50) |&gt; select(iso_a3, geounit)\nafrica_map &lt;- mapview(africa_sf, label=\"geounit\", legend=FALSE)\nN &lt;- 10\nafrica_union_sf &lt;- sf::st_union(africa_sf)\nsampled_points_sf &lt;- sf::st_sample(africa_union_sf, N) |&gt; sf::st_sf() |&gt; mutate(temp = runif(N, 0, 100))\nsampled_points_map &lt;- mapview(sampled_points_sf, label=\"Random Point\", col.regions=cbPalette[1], legend=FALSE)\ncountries_points_sf &lt;- africa_sf[sampled_points_sf,]\nfiltered_map &lt;- mapview(countries_points_sf, label=\"geounit\", legend=FALSE) + sampled_points_map\n(africa_map + sampled_points_map) | filtered_map",
     "crumbs": [
       "Week 4: Sep 17"
     ]
@@ -1617,7 +2085,7 @@
     "href": "w04/index.html#spatial-filter-neq-spatial-join",
     "title": "Week 4: Unary and Binary Operations",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (23.5386 22.01628)\n94.385575\n\n\nPOINT (14.64665 -13.35285)\n26.332960\n\n\nPOINT (32.29586 -27.78115)\n95.603092\n\n\nPOINT (16.11575 -9.174237)\n11.086251\n\n\nPOINT (14.39308 -1.016639)\n6.604077\n\n\nPOINT (47.91478 7.723278)\n40.497326\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n57\nZAF\nSouth Africa\nMULTIPOLYGON (((29.36484 -2…\n\n\n58\nSOM\nSomalia\nMULTIPOLYGON (((41.53271 -1…\n\n\n104\nMAR\nMorocco\nMULTIPOLYGON (((-2.219629 3…\n\n\n118\nMDG\nMadagascar\nMULTIPOLYGON (((49.53828 -1…",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-5.135802 22.30373)\n99.14195\n\n\nPOINT (48.01641 10.55753)\n41.21422\n\n\nPOINT (47.30147 5.038318)\n95.30175\n\n\nPOINT (22.64591 7.799242)\n68.37119\n\n\nPOINT (7.739425 5.95728)\n56.40943\n\n\nPOINT (22.13408 20.87522)\n86.12631\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n2\nZMB\nZambia\nMULTIPOLYGON (((30.39609 -1…\n\n\n58\nSOM\nSomalia\nMULTIPOLYGON (((41.53271 -1…\n\n\n59\n-99\nSomaliland\nMULTIPOLYGON (((48.93857 11…\n\n\n91\nNGA\nNigeria\nMULTIPOLYGON (((7.300781 4….",
     "crumbs": [
       "Week 4: Sep 17"
     ]
@@ -1627,7 +2095,7 @@
     "href": "w04/index.html#our-first-real-spatial-join-st_join",
     "title": "Week 4: Unary and Binary Operations",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n57\nZAF\nSouth Africa\n95.603092\nMULTIPOLYGON (((29.36484 -2…\n\n\n58\nSOM\nSomalia\n40.497326\nMULTIPOLYGON (((41.53271 -1…\n\n\n104\nMAR\nMorocco\n94.671352\nMULTIPOLYGON (((-2.219629 3…\n\n\n118\nMDG\nMadagascar\n1.921007\nMULTIPOLYGON (((49.53828 -1…\n\n\n123\nLBY\nLibya\n94.385575\nMULTIPOLYGON (((9.51875 30….\n\n\n160\nGAB\nGabon\n6.604077\nMULTIPOLYGON (((13.29355 2….",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n2\nZMB\nZambia\n5.788125\nMULTIPOLYGON (((30.39609 -1…\n\n\n58\nSOM\nSomalia\n95.301751\nMULTIPOLYGON (((41.53271 -1…\n\n\n59\n-99\nSomaliland\n41.214222\nMULTIPOLYGON (((48.93857 11…\n\n\n91\nNGA\nNigeria\n56.409432\nMULTIPOLYGON (((7.300781 4….\n\n\n114\nMLI\nMali\n99.141948\nMULTIPOLYGON (((-11.3894 12…\n\n\n123\nLBY\nLibya\n86.126311\nMULTIPOLYGON (((9.51875 30….",
     "crumbs": [
       "Week 4: Sep 17"
     ]
@@ -1677,7 +2145,7 @@
     "href": "w04/index.html#references",
     "title": "Week 4: Unary and Binary Operations",
     "section": "References",
-    "text": "References\n\n\nCohn, P. M. 1965. Universal Algebra. Springer Science & Business Media.\n\n\nLovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2024. Geocomputation with R. CRC Press. https://r.geocompx.org/.\n\n\nPebesma, Edzer, and Roger Bivand. 2023. Spatial Data Science: With Applications in R. CRC Press. https://r-spatial.org/book/.",
+    "text": "References\n\n\nCohn, P. M. 1965. Universal Algebra. Springer Science & Business Media.\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\nLovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2024. Geocomputation with R. CRC Press. https://r.geocompx.org/.\n\n\nMonmonier, Mark. 2018. How to Lie with Maps. University of Chicago Press. https://www.dropbox.com/scl/fi/7rsqbxgge6llggnaf5tit/How-to-Lie-with-Maps-Third-Edition.pdf?rlkey=6rqxta7cjyq3oqdnskj4dtwj8&dl=1.\n\n\nPebesma, Edzer, and Roger Bivand. 2023. Spatial Data Science: With Applications in R. CRC Press. https://r-spatial.org/book/.",
     "crumbs": [
       "Week 4: Sep 17"
     ]
@@ -2389,261 +2857,11 @@
     ]
   },
   {
-    "objectID": "w02/index.html#latitude-and-longitude-are-angles",
-    "href": "w02/index.html#latitude-and-longitude-are-angles",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Latitude and Longitude are Angles!",
-    "text": "Latitude and Longitude are Angles!\n\n\n\nFrom Krygier and Wood (2016)",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#angular-distance-vs.-travel-distance",
-    "href": "w02/index.html#angular-distance-vs.-travel-distance",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Angular Distance vs. Travel Distance",
-    "text": "Angular Distance vs. Travel Distance\nThe Earth’s “width” is slightly greater than its “length” 😰\n\n\n\nFrom Wikimedia Commons",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#smooshing-3d-into-2d",
-    "href": "w02/index.html#smooshing-3d-into-2d",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Smooshing 3D into 2D",
-    "text": "Smooshing 3D into 2D\n\n\n\nFrom Monmonier (2018)",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#avoid-getting-lost-in-the-sauce",
-    "href": "w02/index.html#avoid-getting-lost-in-the-sauce",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Avoid Getting Lost in the Sauce",
-    "text": "Avoid Getting Lost in the Sauce",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#how-to-avoid-getting-lost-in-the-sauce",
-    "href": "w02/index.html#how-to-avoid-getting-lost-in-the-sauce",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "How To Avoid Getting Lost in the Sauce",
-    "text": "How To Avoid Getting Lost in the Sauce\n\n\n\n\n\nTissot Circles: Imagine infinitely small ellipses placed at regular intervals on the curved surface of the earth. Imagine these ellipses being projected along with the earth’s surface. When scaled up, changes in the ellipses show the location and quality of distortions on the projected map.",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#scales-wrules-of-thumb",
-    "href": "w02/index.html#scales-wrules-of-thumb",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Scales (w/Rules of Thumb)",
-    "text": "Scales (w/Rules of Thumb)\n\n\n\nFrom Krygier and Wood (2016)",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#the-three-key-elements",
-    "href": "w02/index.html#the-three-key-elements",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "The Three Key Elements",
-    "text": "The Three Key Elements\n\n\n\nFrom Monmonier (2018)",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#what-can-happen-to-points",
-    "href": "w02/index.html#what-can-happen-to-points",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Can Happen to Points?",
-    "text": "What Can Happen to Points?\n\n\n\nFrom Monmonier (2018)",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#what-can-happen-to-lines",
-    "href": "w02/index.html#what-can-happen-to-lines",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Can Happen to Lines?",
-    "text": "What Can Happen to Lines?\n\n\n\nFrom Monmonier (2018)",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#what-can-happen-to-lines-1",
-    "href": "w02/index.html#what-can-happen-to-lines-1",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Can Happen to Lines?",
-    "text": "What Can Happen to Lines?\n\n\nSelection\n\n\n\nIn any map, most features from the human or natural environment are eliminated! (Krygier and Wood 2016)\n\n\n\nSimplification\n\n\n\nWithin the features that do remain, eliminate details that are unnecessary with respect to audience/context (Krygier and Wood 2016)",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#what-can-happen-to-areas",
-    "href": "w02/index.html#what-can-happen-to-areas",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Can Happen to Areas?",
-    "text": "What Can Happen to Areas?\n\n\n\nFrom Monmonier (2018)",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#areal-dimension-change",
-    "href": "w02/index.html#areal-dimension-change",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Areal Dimension Change",
-    "text": "Areal Dimension Change\n\n\n\nFrom Krygier and Wood (2016)",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#what-is-gained",
-    "href": "w02/index.html#what-is-gained",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Is Gained?",
-    "text": "What Is Gained?\n\n\n\nFrom Monmonier (2018)",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#what-is-lost",
-    "href": "w02/index.html#what-is-lost",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Is Lost?",
-    "text": "What Is Lost?\n\n\n\nFrom Monmonier (2018)",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#who-is-affected",
-    "href": "w02/index.html#who-is-affected",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Who Is Affected?",
-    "text": "Who Is Affected?\n\n\n\nFrom Monmonier (2018)",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#having-domain-knowledge-of-a-region",
-    "href": "w02/index.html#having-domain-knowledge-of-a-region",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Having Domain Knowledge of a Region",
-    "text": "Having Domain Knowledge of a Region\n\n\n\nFrom XKCD",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#crime-in-mongolia",
-    "href": "w02/index.html#crime-in-mongolia",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Crime in Mongolia",
-    "text": "Crime in Mongolia\n\n\n\nFrom Reddit",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#population-of-mongolia",
-    "href": "w02/index.html#population-of-mongolia",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Population of Mongolia",
-    "text": "Population of Mongolia\n\n\n\nFrom Wikimedia Commons",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#exhibit-a",
-    "href": "w02/index.html#exhibit-a",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Exhibit A",
-    "text": "Exhibit A\n\n\n\nFrom Monmonier (2018)",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#exhibit-b",
-    "href": "w02/index.html#exhibit-b",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Exhibit B",
-    "text": "Exhibit B\n\n\n\nFrom Monmonier (2018)",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#country-boundaries",
-    "href": "w02/index.html#country-boundaries",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Country Boundaries",
-    "text": "Country Boundaries\nKey package: rnaturalearth\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(sf)\nlibrary(ggplot2)\nlibrary(viridis)\n\n\nLoading required package: viridisLite\n\n\nCode\nlibrary(patchwork)\n\n\n\nAttaching package: 'patchwork'\n\n\nThe following object is masked from 'package:terra':\n\n    area\n\n\nCode\nmap1 &lt;- ne_countries(type = \"countries\", country = \"Germany\", scale = \"medium\", returnclass = \"sf\")\nmap2 &lt;- rnaturalearth::ne_states(\"Germany\", returnclass = \"sf\")\n(ggplot(map1) + geom_sf()) + (ggplot(map2) + geom_sf())",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#climate-data",
-    "href": "w02/index.html#climate-data",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Climate Data",
-    "text": "Climate Data\nKey package: geodata\n\n\nCode\nlibrary(geodata)\nd &lt;- worldclim_country(country = \"Jamaica\", var = \"tmin\",\n                       path = tempdir())\nterra::plot(mean(d), plg = list(title = \"Min. temperature (C)\"))",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#elevation",
-    "href": "w02/index.html#elevation",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Elevation",
-    "text": "Elevation\nKey packages: rnaturalearth + elevatr\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(elevatr)\n\n\nelevatr v0.99.0 NOTE: Version 0.99.0 of 'elevatr' uses 'sf' and 'terra'.  Use \nof the 'sp', 'raster', and underlying 'rgdal' packages by 'elevatr' is being \ndeprecated; however, get_elev_raster continues to return a RasterLayer.  This \nwill be dropped in future versions, so please plan accordingly.\n\n\nCode\nlibrary(terra)\nmap &lt;- ne_countries(type = \"countries\", country = \"Switzerland\",\n                    scale = \"medium\", returnclass = \"sf\")\nd &lt;- get_elev_raster(locations = map, z = 9, clip = \"locations\")\n\n\nMosaicing & Projecting\n\n\nClipping DEM to locations\n\n\nNote: Elevation units are in meters.\n\n\nCode\nterra::plot(rast(d), plg = list(title = \"Elevation (m)\"))",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#street-maps",
-    "href": "w02/index.html#street-maps",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Street Maps",
-    "text": "Street Maps\n\n\nCode\nlibrary(osmdata)\n\n\nData (c) OpenStreetMap contributors, ODbL 1.0. https://www.openstreetmap.org/copyright\n\n\nCode\nplacebb &lt;- getbb(\"Barcelona\")\nhospitals &lt;- placebb %&gt;% opq() %&gt;%\n  add_osm_feature(key = \"amenity\", value = \"hospital\") %&gt;%\n  osmdata_sf()\nmotorways &lt;- placebb %&gt;% opq() %&gt;%\n  add_osm_feature(key = \"highway\", value = \"motorway\") %&gt;%\n  osmdata_sf()\nlibrary(leaflet)\nleaflet() |&gt;  addTiles() |&gt;\n  addPolylines(data = motorways$osm_lines, color = \"black\") |&gt;\n  addPolygons(data = hospitals$osm_polygons,\n              label = hospitals$osm_polygons$name)",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
-    "objectID": "w02/index.html#world-bank-dataverse",
-    "href": "w02/index.html#world-bank-dataverse",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "World Bank Dataverse",
-    "text": "World Bank Dataverse\nKey package: wbstats\n\n\nCode\nlibrary(wbstats)\nd &lt;- wb_data(indicator = \"MO.INDEX.HDEV.XQ\",\n             start_date = 2011, end_date = 2011)\nlibrary(rnaturalearth)\nlibrary(mapview)\nmap &lt;- ne_countries(continent = \"Africa\", returnclass = \"sf\")\nmap &lt;- dplyr::left_join(map, d, by = c(\"iso_a3\" = \"iso3c\"))\nmapview(map, zcol = \"MO.INDEX.HDEV.XQ\")",
-    "crumbs": [
-      "Week 2: Sep 3"
-    ]
-  },
-  {
     "objectID": "w02/index.html#references",
     "href": "w02/index.html#references",
     "title": "Week 2: How Do Maps Work?",
     "section": "References",
-    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\nMonmonier, Mark. 2018. How to Lie with Maps. University of Chicago Press. https://www.dropbox.com/scl/fi/7rsqbxgge6llggnaf5tit/How-to-Lie-with-Maps-Third-Edition.pdf?rlkey=6rqxta7cjyq3oqdnskj4dtwj8&dl=1.\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.",
+    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.",
     "crumbs": [
       "Week 2: Sep 3"
     ]
@@ -2789,196 +3007,70 @@
     "text": "Raster Layer Values\n\n\nCode\nplot(gridtown)\ntext(gridtown, halo=TRUE, hc=\"black\", col=\"white\", hw=0.2)\n\n\n\n\nFigure 4: Gridtown Values"
   },
   {
-    "objectID": "w02/slides.html#latitude-and-longitude-are-angles",
-    "href": "w02/slides.html#latitude-and-longitude-are-angles",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Latitude and Longitude are Angles!",
-    "text": "Latitude and Longitude are Angles!\n\nFrom Krygier and Wood (2016)"
-  },
-  {
-    "objectID": "w02/slides.html#angular-distance-vs.-travel-distance",
-    "href": "w02/slides.html#angular-distance-vs.-travel-distance",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Angular Distance vs. Travel Distance",
-    "text": "Angular Distance vs. Travel Distance\nThe Earth’s “width” is slightly greater than its “length” 😰\n\nFrom Wikimedia Commons"
-  },
-  {
-    "objectID": "w02/slides.html#smooshing-3d-into-2d",
-    "href": "w02/slides.html#smooshing-3d-into-2d",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Smooshing 3D into 2D",
-    "text": "Smooshing 3D into 2D\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#avoid-getting-lost-in-the-sauce",
-    "href": "w02/slides.html#avoid-getting-lost-in-the-sauce",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Avoid Getting Lost in the Sauce",
-    "text": "Avoid Getting Lost in the Sauce"
-  },
-  {
-    "objectID": "w02/slides.html#how-to-avoid-getting-lost-in-the-sauce",
-    "href": "w02/slides.html#how-to-avoid-getting-lost-in-the-sauce",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "How To Avoid Getting Lost in the Sauce",
-    "text": "How To Avoid Getting Lost in the Sauce\n\n\n\n\n\nTissot Circles: Imagine infinitely small ellipses placed at regular intervals on the curved surface of the earth. Imagine these ellipses being projected along with the earth’s surface. When scaled up, changes in the ellipses show the location and quality of distortions on the projected map."
-  },
-  {
-    "objectID": "w02/slides.html#scales-wrules-of-thumb",
-    "href": "w02/slides.html#scales-wrules-of-thumb",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Scales (w/Rules of Thumb)",
-    "text": "Scales (w/Rules of Thumb)\n\nFrom Krygier and Wood (2016)"
-  },
-  {
-    "objectID": "w02/slides.html#the-three-key-elements",
-    "href": "w02/slides.html#the-three-key-elements",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "The Three Key Elements",
-    "text": "The Three Key Elements\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#what-can-happen-to-points",
-    "href": "w02/slides.html#what-can-happen-to-points",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Can Happen to Points?",
-    "text": "What Can Happen to Points?\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#what-can-happen-to-lines",
-    "href": "w02/slides.html#what-can-happen-to-lines",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Can Happen to Lines?",
-    "text": "What Can Happen to Lines?\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#what-can-happen-to-lines-1",
-    "href": "w02/slides.html#what-can-happen-to-lines-1",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Can Happen to Lines?",
-    "text": "What Can Happen to Lines?\n\n\nSelection\n\n\n\nIn any map, most features from the human or natural environment are eliminated! (Krygier and Wood 2016)\n\n\n\nSimplification\n\n\n\nWithin the features that do remain, eliminate details that are unnecessary with respect to audience/context (Krygier and Wood 2016)"
-  },
-  {
-    "objectID": "w02/slides.html#what-can-happen-to-areas",
-    "href": "w02/slides.html#what-can-happen-to-areas",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Can Happen to Areas?",
-    "text": "What Can Happen to Areas?\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#areal-dimension-change",
-    "href": "w02/slides.html#areal-dimension-change",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Areal Dimension Change",
-    "text": "Areal Dimension Change\n\nFrom Krygier and Wood (2016)"
-  },
-  {
-    "objectID": "w02/slides.html#what-is-gained",
-    "href": "w02/slides.html#what-is-gained",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Is Gained?",
-    "text": "What Is Gained?\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#what-is-lost",
-    "href": "w02/slides.html#what-is-lost",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "What Is Lost?",
-    "text": "What Is Lost?\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#who-is-affected",
-    "href": "w02/slides.html#who-is-affected",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Who Is Affected?",
-    "text": "Who Is Affected?\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#having-domain-knowledge-of-a-region",
-    "href": "w02/slides.html#having-domain-knowledge-of-a-region",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Having Domain Knowledge of a Region",
-    "text": "Having Domain Knowledge of a Region\n\nFrom XKCD"
-  },
-  {
-    "objectID": "w02/slides.html#crime-in-mongolia",
-    "href": "w02/slides.html#crime-in-mongolia",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Crime in Mongolia",
-    "text": "Crime in Mongolia\n\nFrom Reddit"
-  },
-  {
-    "objectID": "w02/slides.html#population-of-mongolia",
-    "href": "w02/slides.html#population-of-mongolia",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Population of Mongolia",
-    "text": "Population of Mongolia\n\nFrom Wikimedia Commons"
-  },
-  {
-    "objectID": "w02/slides.html#exhibit-a",
-    "href": "w02/slides.html#exhibit-a",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Exhibit A",
-    "text": "Exhibit A\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#exhibit-b",
-    "href": "w02/slides.html#exhibit-b",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Exhibit B",
-    "text": "Exhibit B\n\nFrom Monmonier (2018)"
-  },
-  {
-    "objectID": "w02/slides.html#country-boundaries",
-    "href": "w02/slides.html#country-boundaries",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Country Boundaries",
-    "text": "Country Boundaries\nKey package: rnaturalearth\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(sf)\nlibrary(ggplot2)\nlibrary(viridis)\nlibrary(patchwork)\nmap1 &lt;- ne_countries(type = \"countries\", country = \"Germany\", scale = \"medium\", returnclass = \"sf\")\nmap2 &lt;- rnaturalearth::ne_states(\"Germany\", returnclass = \"sf\")\n(ggplot(map1) + geom_sf()) + (ggplot(map2) + geom_sf())"
-  },
-  {
-    "objectID": "w02/slides.html#climate-data",
-    "href": "w02/slides.html#climate-data",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Climate Data",
-    "text": "Climate Data\nKey package: geodata\n\n\nCode\nlibrary(geodata)\nd &lt;- worldclim_country(country = \"Jamaica\", var = \"tmin\",\n                       path = tempdir())\nterra::plot(mean(d), plg = list(title = \"Min. temperature (C)\"))"
-  },
-  {
-    "objectID": "w02/slides.html#elevation",
-    "href": "w02/slides.html#elevation",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Elevation",
-    "text": "Elevation\nKey packages: rnaturalearth + elevatr\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(elevatr)\nlibrary(terra)\nmap &lt;- ne_countries(type = \"countries\", country = \"Switzerland\",\n                    scale = \"medium\", returnclass = \"sf\")\nd &lt;- get_elev_raster(locations = map, z = 9, clip = \"locations\")\nterra::plot(rast(d), plg = list(title = \"Elevation (m)\"))"
-  },
-  {
-    "objectID": "w02/slides.html#street-maps",
-    "href": "w02/slides.html#street-maps",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "Street Maps",
-    "text": "Street Maps\n\n\nCode\nlibrary(osmdata)\nplacebb &lt;- getbb(\"Barcelona\")\nhospitals &lt;- placebb %&gt;% opq() %&gt;%\n  add_osm_feature(key = \"amenity\", value = \"hospital\") %&gt;%\n  osmdata_sf()\nmotorways &lt;- placebb %&gt;% opq() %&gt;%\n  add_osm_feature(key = \"highway\", value = \"motorway\") %&gt;%\n  osmdata_sf()\nlibrary(leaflet)\nleaflet() |&gt;  addTiles() |&gt;\n  addPolylines(data = motorways$osm_lines, color = \"black\") |&gt;\n  addPolygons(data = hospitals$osm_polygons,\n              label = hospitals$osm_polygons$name)"
-  },
-  {
-    "objectID": "w02/slides.html#world-bank-dataverse",
-    "href": "w02/slides.html#world-bank-dataverse",
-    "title": "Week 2: How Do Maps Work?",
-    "section": "World Bank Dataverse",
-    "text": "World Bank Dataverse\nKey package: wbstats\n\n\nCode\nlibrary(wbstats)\nd &lt;- wb_data(indicator = \"MO.INDEX.HDEV.XQ\",\n             start_date = 2011, end_date = 2011)\nlibrary(rnaturalearth)\nlibrary(mapview)\nmap &lt;- ne_countries(continent = \"Africa\", returnclass = \"sf\")\nmap &lt;- dplyr::left_join(map, d, by = c(\"iso_a3\" = \"iso3c\"))\nmapview(map, zcol = \"MO.INDEX.HDEV.XQ\")"
-  },
-  {
     "objectID": "w02/slides.html#references",
     "href": "w02/slides.html#references",
     "title": "Week 2: How Do Maps Work?",
     "section": "References",
-    "text": "References\n\n\nKrygier, John, and Denis Wood. 2016. Making Maps, Third Edition: A Visual Guide to Map Design for GIS. Guilford Publications.\n\n\nMonmonier, Mark. 2018. How to Lie with Maps. University of Chicago Press. https://www.dropbox.com/scl/fi/7rsqbxgge6llggnaf5tit/How-to-Lie-with-Maps-Third-Edition.pdf?rlkey=6rqxta7cjyq3oqdnskj4dtwj8&dl=1.\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press."
+    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press."
   },
   {
     "objectID": "writeups/index.html",
     "href": "writeups/index.html",
     "title": "Extra Writeups",
     "section": "",
-    "text": "Order By\n      Default\n      \n        Last Updated - Oldest\n      \n      \n        Last Updated - Newest\n      \n      \n        Title\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\n\nLast Updated\n\n\n\nCategory\n\n\n\n\n\n\n\n\nConnecting to Positron and Accessing Assignments\n\n\nSep 7, 2025\n\n\nExtra Writeups\n\n\n\n\n\n\nNo matching items",
+    "text": "Order By\n      Default\n      \n        Last Updated - Oldest\n      \n      \n        Last Updated - Newest\n      \n      \n        Title\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\nTitle\n\n\n\nLast Updated\n\n\n\nCategory\n\n\n\n\n\n\n\n\nThings We Put On Maps\n\n\nSep 17, 2025\n\n\nExtra Writeups\n\n\n\n\n\n\nFinding GIS Data\n\n\nSep 17, 2025\n\n\nExtra Writeups\n\n\n\n\n\n\nConnecting to Positron and Accessing Assignments\n\n\nSep 7, 2025\n\n\nExtra Writeups\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Writeups"
     ]
+  },
+  {
+    "objectID": "writeups/data-sources/index.html",
+    "href": "writeups/data-sources/index.html",
+    "title": "Finding GIS Data",
+    "section": "",
+    "text": "This collection of “core” data sources draws heavily on Chapter 6: “R packages to download open spatial data”, in Moraga (2018), Spatial Statistics for Data Science: Theory and Practice with R"
+  },
+  {
+    "objectID": "writeups/data-sources/index.html#country-boundaries",
+    "href": "writeups/data-sources/index.html#country-boundaries",
+    "title": "Finding GIS Data",
+    "section": "Country Boundaries",
+    "text": "Country Boundaries\nKey package: rnaturalearth\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(sf) |&gt; suppressPackageStartupMessages()\nlibrary(ggplot2)\nlibrary(viridis) |&gt; suppressPackageStartupMessages()\nlibrary(patchwork)\nde_national_map &lt;- ne_countries(type = \"countries\", country = \"Germany\", scale = \"medium\", returnclass = \"sf\")\nde_states_map &lt;- rnaturalearth::ne_states(\"Germany\", returnclass = \"sf\")\n(ggplot(de_national_map) + geom_sf()) + (ggplot(de_states_map) + geom_sf())"
+  },
+  {
+    "objectID": "writeups/data-sources/index.html#climate-data",
+    "href": "writeups/data-sources/index.html#climate-data",
+    "title": "Finding GIS Data",
+    "section": "Climate Data",
+    "text": "Climate Data\nKey package: geodata\n\n\nCode\nlibrary(geodata)\n\n\nLoading required package: terra\n\n\nterra 1.8.60\n\n\n\nAttaching package: 'terra'\n\n\nThe following object is masked from 'package:patchwork':\n\n    area\n\n\nCode\njamaica_tmin &lt;- worldclim_country(\n  country = \"Jamaica\",\n  var = \"tmin\",\n  path = tempdir()\n)\nterra::plot(\n  mean(jamaica_tmin),\n  plg = list(title = \"Min. temperature (C)\")\n)"
+  },
+  {
+    "objectID": "writeups/data-sources/index.html#elevation",
+    "href": "writeups/data-sources/index.html#elevation",
+    "title": "Finding GIS Data",
+    "section": "Elevation",
+    "text": "Elevation\nKey packages: rnaturalearth + elevatr\n\n\nCode\nlibrary(rnaturalearth)\nlibrary(elevatr)\n\n\nelevatr v0.99.0 NOTE: Version 0.99.0 of 'elevatr' uses 'sf' and 'terra'.  Use \nof the 'sp', 'raster', and underlying 'rgdal' packages by 'elevatr' is being \ndeprecated; however, get_elev_raster continues to return a RasterLayer.  This \nwill be dropped in future versions, so please plan accordingly.\n\n\nCode\nlibrary(terra)\nswitz_sf &lt;- ne_countries(\n  type = \"countries\",\n  country = \"Switzerland\",\n  scale = \"medium\",\n  returnclass = \"sf\"\n)\n# Special weird case with Georgetown's SaxaNet wifi... This if statement just\n# tells the R library curl that SaxaNet is indeed a valid wifi connection\nif (!curl::has_internet()) {\n  assign(\"has_internet_via_proxy\", TRUE, environment(curl::has_internet))\n}\nswitz_raster &lt;- get_elev_raster(\n  locations = switz_sf, z = 9, clip = \"locations\"\n)\n\n\nMosaicing & Projecting\n\n\nClipping DEM to locations\n\n\nNote: Elevation units are in meters.\n\n\nCode\nterra::plot(\n  rast(switz_raster),\n  plg = list(title = \"Elevation (m)\")\n)"
+  },
+  {
+    "objectID": "writeups/data-sources/index.html#street-maps",
+    "href": "writeups/data-sources/index.html#street-maps",
+    "title": "Finding GIS Data",
+    "section": "Street Maps",
+    "text": "Street Maps\nKey package: osmdata\n\n\nCode\nlibrary(osmdata) |&gt; suppressPackageStartupMessages()\nlibrary(leaflet)\nplacebb &lt;- getbb(\"Barcelona\")\nhospitals &lt;- placebb |&gt;\n  opq() |&gt;\n  add_osm_feature(key = \"amenity\", value = \"hospital\") |&gt;\n  osmdata_sf()\nassign(\"has_internet_via_proxy\", TRUE, environment(curl::has_internet))\nmotorways &lt;- placebb |&gt;\n  opq() |&gt;\n  add_osm_feature(\n    key = \"highway\",\n    value = \"motorway\"\n  ) |&gt;\n  osmdata_sf()\nleaflet() |&gt;\n  addTiles() |&gt;\n  addPolylines(\n    data = motorways$osm_lines,\n    color = \"black\"\n  ) |&gt;\n  addPolygons(\n    data = hospitals$osm_polygons,\n    label = hospitals$osm_polygons$name\n  )"
+  },
+  {
+    "objectID": "writeups/data-sources/index.html#world-bank-dataverse",
+    "href": "writeups/data-sources/index.html#world-bank-dataverse",
+    "title": "Finding GIS Data",
+    "section": "World Bank Dataverse",
+    "text": "World Bank Dataverse\nKey package: wbstats\n\n\nCode\nlibrary(wbstats)\nd &lt;- wb_data(\n  indicator = \"MO.INDEX.HDEV.XQ\",\n  start_date = 2011, end_date = 2011\n)\nlibrary(rnaturalearth)\nlibrary(mapview)\nmap &lt;- ne_countries(\n  continent = \"Africa\", returnclass = \"sf\"\n)\nmap &lt;- dplyr::left_join(\n  map, d, by = c(\"iso_a3\" = \"iso3c\")\n)\nmapview(map, zcol = \"MO.INDEX.HDEV.XQ\")"
+  },
+  {
+    "objectID": "writeups/data-sources/index.html#additional-data-sources-raindrop.io-bookmarks",
+    "href": "writeups/data-sources/index.html#additional-data-sources-raindrop.io-bookmarks",
+    "title": "Finding GIS Data",
+    "section": "Additional Data Sources (Raindrop.io Bookmarks)",
+    "text": "Additional Data Sources (Raindrop.io Bookmarks)"
   },
   {
     "objectID": "w10/index.html",

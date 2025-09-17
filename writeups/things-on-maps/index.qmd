@@ -1,0 +1,88 @@
+---
+title: "Things We Put On Maps"
+author:
+  name: "Jeff Jacobs"
+  email: "jj1088@georgetown.edu"
+date: 2025-09-17
+sidebar: mainnav
+bibliography: "../../_PPOL6805.bib"
+csl: "../../chicago-17-no-url.csl"
+categories:
+  - Extra Writeups
+cache: true
+format:
+  html:
+    df-print: kable
+    fig-align: center
+    link-external-newwindow: true
+    link-external-icon: true
+    code-fold: show
+---
+
+# The Four Key Elements
+
+* Scales
+* Points
+* Lines
+* Areas
+
+## Scales (w/Rules of Thumb) {.smaller}
+
+![From @krygier_making_2016](images/scales.svg){fig-align="center"}
+
+This comes up immediately, since we'll be using [**Natural Earth**](https://www.naturalearthdata.com/downloads/) data more and more (via the [`rnaturalearth`](https://ropensci.github.io/rnaturalearth/) library) to obtain **country `POLYGON`s**
+
+## The Three Key Elements
+
+![From @monmonier_how_2018](images/chi-monmonier-fig02011.jpeg){fig-align="center"}
+
+# Thought Experiment: Zooming In and Out
+
+* What happens to points, lines, and areas?
+
+## What Can Happen to *Points*?
+
+![From @monmonier_how_2018](images/chi-monmonier-fig03002.jpeg){fig-align="center"}
+
+## What Can Happen to *Lines*?
+
+![From @monmonier_how_2018](images/chi-monmonier-fig03001.jpeg){fig-align="center"}
+
+## What Can Happen to *Lines*?
+
+::: {.columns}
+::: {.column width="50%"}
+
+**Selection**
+
+![In any map, **most** features from the human or natural environment are eliminated! [@krygier_making_2016]](images/selection.svg){fig-align="center" width="100%"}
+
+:::
+::: {.column width="50%"}
+
+**Simplification**
+
+![Within the features that *do* remain, eliminate **details** that are unnecessary with respect to audience/context [@krygier_making_2016]](images/simplification.svg){fig-align="center" width="100%"}
+
+:::
+:::
+
+## What Can Happen to *Areas*?
+
+![From @monmonier_how_2018](images/chi-monmonier-fig03003.jpeg){fig-align="center"}
+
+## Areal Dimension Change
+
+![From @krygier_making_2016](images/dimension_change.svg){fig-align="center" width="100%"}
+
+## What Is Gained?
+
+![From @monmonier_how_2018](images/chi-monmonier-fig03004.jpeg){fig-align="center"}
+
+## What Is Lost?
+
+![From @monmonier_how_2018](images/chi-monmonier-fig03005.jpeg){fig-align="center"}
+
+## Who Is Affected?
+
+![From @monmonier_how_2018](images/chi-monmonier-fig03007.jpeg){fig-align="center"}
