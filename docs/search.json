@@ -1173,14 +1173,14 @@
     "href": "w05/slides.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Joins",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (27.08501 8.151116)\n6.7348056\n\n\nPOINT (44.94241 10.18856)\n0.7728503\n\n\nPOINT (17.22098 -4.448239)\n59.0227748\n\n\nPOINT (18.72111 30.36353)\n18.1021065\n\n\nPOINT (-9.142789 16.71712)\n55.9965106\n\n\nPOINT (25.34225 21.54918)\n69.1987649\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n44\nTZA\nTanzania\nMULTIPOLYGON (((39.49648 -6…\n\n\n52\nSSD\nSouth Sudan\nMULTIPOLYGON (((33.97607 4….\n\n\n53\nSDN\nSudan\nMULTIPOLYGON (((34.07812 9….\n\n\n59\n-99\nSomaliland\nMULTIPOLYGON (((48.93857 11…"
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (-10.94879 27.0256)\n76.577081\n\n\nPOINT (28.47715 -5.93017)\n24.720896\n\n\nPOINT (14.1553 -6.052483)\n16.212632\n\n\nPOINT (15.70647 4.940905)\n71.606429\n\n\nPOINT (20.15372 -1.625124)\n9.365665\n\n\nPOINT (21.37302 16.22043)\n31.997951\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n44\nTZA\nTanzania\nMULTIPOLYGON (((39.49648 -6…\n\n\n91\nNGA\nNigeria\nMULTIPOLYGON (((7.300781 4….\n\n\n104\nMAR\nMorocco\nMULTIPOLYGON (((-2.219629 3…\n\n\n172\nETH\nEthiopia\nMULTIPOLYGON (((35.26836 5…."
   },
   {
     "objectID": "w05/slides.html#our-first-real-spatial-join-st_join",
     "href": "w05/slides.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Joins",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n44\nTZA\nTanzania\n63.7779831\nMULTIPOLYGON (((39.49648 -6…\n\n\n52\nSSD\nSouth Sudan\n6.7348056\nMULTIPOLYGON (((33.97607 4….\n\n\n53\nSDN\nSudan\n69.1987649\nMULTIPOLYGON (((34.07812 9….\n\n\n53.1\nSDN\nSudan\n62.4328422\nMULTIPOLYGON (((34.07812 9….\n\n\n59\n-99\nSomaliland\n0.7728503\nMULTIPOLYGON (((48.93857 11…\n\n\n112\nMRT\nMauritania\n55.9965106\nMULTIPOLYGON (((-16.37334 1…"
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n44\nTZA\nTanzania\n48.963178\nMULTIPOLYGON (((39.49648 -6…\n\n\n91\nNGA\nNigeria\n94.319304\nMULTIPOLYGON (((7.300781 4….\n\n\n104\nMAR\nMorocco\n76.577081\nMULTIPOLYGON (((-2.219629 3…\n\n\n172\nETH\nEthiopia\n66.932623\nMULTIPOLYGON (((35.26836 5….\n\n\n192\nCOD\nDemocratic Republic of the Congo\n24.720896\nMULTIPOLYGON (((30.75117 -8…\n\n\n192.1\nCOD\nDemocratic Republic of the Congo\n9.365665\nMULTIPOLYGON (((30.75117 -8…"
   },
   {
     "objectID": "w05/slides.html#but-we-were-still-in-easy-mode",
@@ -1263,7 +1263,7 @@
     "href": "w05/index.html#spatial-filter-neq-spatial-join",
     "title": "Week 5: Spatial Joins",
     "section": "Spatial Filter \\(\\neq\\) Spatial Join",
-    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (39.34379 2.926981)\n39.40338\n\n\nPOINT (18.62264 6.513931)\n35.18329\n\n\nPOINT (14.08976 -3.716445)\n22.12226\n\n\nPOINT (20.2687 -19.02181)\n84.48096\n\n\nPOINT (-13.04405 25.79444)\n99.64294\n\n\nPOINT (13.1074 14.69842)\n34.71885\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n1\nZWE\nZimbabwe\nMULTIPOLYGON (((31.28789 -2…\n\n\n52\nSSD\nSouth Sudan\nMULTIPOLYGON (((33.97607 4….\n\n\n92\nNER\nNiger\nMULTIPOLYGON (((13.60635 13…\n\n\n102\nNAM\nNamibia\nMULTIPOLYGON (((23.38066 -1…",
+    "text": "Spatial Filter \\(\\neq\\) Spatial Join\n\nThe issue: Data attributes of POINTs are not merged into data attributes of POLYGONs\n\n\n\n\nPOINT Attributes\n\n\n\nCode\nst_geometry(sampled_points_sf) &lt;- c(\"geom\")\nsampled_points_sf |&gt; head()\n\n\n\n\n\n\ngeom\ntemp\n\n\n\n\nPOINT (3.747748 29.42887)\n24.85954\n\n\nPOINT (31.22719 5.439444)\n91.22785\n\n\nPOINT (36.44592 0.2706998)\n99.52933\n\n\nPOINT (0.2069008 15.71347)\n36.36123\n\n\nPOINT (15.09193 -23.72652)\n62.01212\n\n\nPOINT (2.481116 10.3044)\n55.93019\n\n\n\n\n\n\n\n\nPOLYGON Attributes\n\n\n\nCode\ncountries_points_sf |&gt; head(4)\n\n\n\n\n\n\n\niso_a3\ngeounit\ngeometry\n\n\n\n\n52\nSSD\nSouth Sudan\nMULTIPOLYGON (((33.97607 4….\n\n\n102\nNAM\nNamibia\nMULTIPOLYGON (((23.38066 -1…\n\n\n114\nMLI\nMali\nMULTIPOLYGON (((-11.3894 12…\n\n\n133\nKEN\nKenya\nMULTIPOLYGON (((40.99443 -2…",
     "crumbs": [
       "Week 5: Sep 24"
     ]
@@ -1273,7 +1273,7 @@
     "href": "w05/index.html#our-first-real-spatial-join-st_join",
     "title": "Week 5: Spatial Joins",
     "section": "Our First Real Spatial Join: st_join()",
-    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n1\nZWE\nZimbabwe\n10.75655\nMULTIPOLYGON (((31.28789 -2…\n\n\n52\nSSD\nSouth Sudan\n50.89440\nMULTIPOLYGON (((33.97607 4….\n\n\n92\nNER\nNiger\n34.71885\nMULTIPOLYGON (((13.60635 13…\n\n\n102\nNAM\nNamibia\n84.48096\nMULTIPOLYGON (((23.38066 -1…\n\n\n104\nMAR\nMorocco\n99.64294\nMULTIPOLYGON (((-2.219629 3…\n\n\n133\nKEN\nKenya\n39.40338\nMULTIPOLYGON (((40.99443 -2…",
+    "text": "Our First Real Spatial Join: st_join()\n\n\nCode\njoined_sf &lt;- countries_points_sf |&gt; st_join(sampled_points_sf)\njoined_sf |&gt; head()\n\n\n\n\n\n\n\niso_a3\ngeounit\ntemp\ngeometry\n\n\n\n\n52\nSSD\nSouth Sudan\n91.22785\nMULTIPOLYGON (((33.97607 4….\n\n\n52.1\nSSD\nSouth Sudan\n78.34284\nMULTIPOLYGON (((33.97607 4….\n\n\n102\nNAM\nNamibia\n62.01212\nMULTIPOLYGON (((23.38066 -1…\n\n\n114\nMLI\nMali\n36.36123\nMULTIPOLYGON (((-11.3894 12…\n\n\n133\nKEN\nKenya\n99.52933\nMULTIPOLYGON (((40.99443 -2…\n\n\n172\nETH\nEthiopia\n20.27318\nMULTIPOLYGON (((35.26836 5….",
     "crumbs": [
       "Week 5: Sep 24"
     ]
@@ -1359,6 +1359,27 @@
     ]
   },
   {
+    "objectID": "w04/slides.html#hw1-question-1-generally",
+    "href": "w04/slides.html#hw1-question-1-generally",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "HW1 Question 1 Generally",
+    "text": "HW1 Question 1 Generally\n\n“Simplest” / Most Efficient Representation\n\n“Indicate which of the seven geometries above would provide the simplest representation of the entity”\n\nGEOMETRYCOLLECTION could represent any of the geographic entities in Q1, but would be overkill for representing e.g. a single point or line"
+  },
+  {
+    "objectID": "w04/slides.html#hw1-question-1.8-specifically",
+    "href": "w04/slides.html#hw1-question-1.8-specifically",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "HW1 Question 1.8 Specifically",
+    "text": "HW1 Question 1.8 Specifically\nFor the United Arab Emirates (UAE) data… we have what we call the Not-Paraguay-Problem: Most countries, including the UAE, have a bunch of lil “pieces”:\n\n\n\n\nCode\nru_national_map &lt;- ne_countries(type = \"countries\", country = \"Russia\", scale = \"medium\", returnclass = \"sf\")\nmapview(ru_national_map)\n\n\n\n\n\n\n\n\n\nCode\nuae_national_map &lt;- ne_countries(type = \"countries\", country = \"United Arab Emirates\", scale = \"large\", returnclass = \"sf\")\nmapview(uae_national_map)\n\n\n\n\n\n\n\nSo, for Q1.8: Assume we’re just trying to have the computer represent the “mainland” (the biggest contiguous landmass, with Dubai on it!)"
+  },
+  {
+    "objectID": "w04/slides.html#public-vs.-hidden-tests",
+    "href": "w04/slides.html#public-vs.-hidden-tests",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Public vs. Hidden Tests",
+    "text": "Public vs. Hidden Tests\n\nPublic Tests are basically “Quality Assurance Test”\nHidden Tests check for correctness"
+  },
+  {
     "objectID": "w04/slides.html#latitude-and-longitude-are-angles",
     "href": "w04/slides.html#latitude-and-longitude-are-angles",
     "title": "Week 4: Unary and Binary Operations",
@@ -1394,11 +1415,18 @@
     "text": "How To Avoid Getting Lost in the Sauce\n\n\n\n\n\nTissot Circles: Imagine infinitely small ellipses placed at regular intervals on the curved surface of the earth. Imagine these ellipses being projected along with the earth’s surface. When scaled up, changes in the ellipses show the location and quality of distortions on the projected map."
   },
   {
-    "objectID": "w04/slides.html#having-domain-knowledge-of-a-region",
-    "href": "w04/slides.html#having-domain-knowledge-of-a-region",
+    "objectID": "w04/slides.html#the-uss-ur-choropleth-1-population",
+    "href": "w04/slides.html#the-uss-ur-choropleth-1-population",
     "title": "Week 4: Unary and Binary Operations",
-    "section": "Having Domain Knowledge of a Region",
-    "text": "Having Domain Knowledge of a Region\n\nFrom XKCD"
+    "section": "The US’s Ur-Choropleth #1: Population",
+    "text": "The US’s Ur-Choropleth #1: Population\n\nKieran Healy, “America’s Ur-Choropleths”"
+  },
+  {
+    "objectID": "w04/slides.html#the-uss-ur-choropleth-2-race",
+    "href": "w04/slides.html#the-uss-ur-choropleth-2-race",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "The US’s Ur-Choropleth #2: Race",
+    "text": "The US’s Ur-Choropleth #2: Race\n\nKieran Healy, “America’s Ur-Choropleths”"
   },
   {
     "objectID": "w04/slides.html#crime-in-mongolia",
@@ -1427,6 +1455,48 @@
     "title": "Week 4: Unary and Binary Operations",
     "section": "Exhibit B",
     "text": "Exhibit B\n\nFrom Monmonier (2018)"
+  },
+  {
+    "objectID": "w04/slides.html#continuous-choropleth",
+    "href": "w04/slides.html#continuous-choropleth",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Continuous Choropleth",
+    "text": "Continuous Choropleth\nIs poverty a “significant issue” in the US?\n\nFrom Krygier and Wood (2016)"
+  },
+  {
+    "objectID": "w04/slides.html#quantile-colormap",
+    "href": "w04/slides.html#quantile-colormap",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Quantile Colormap",
+    "text": "Quantile Colormap\nIs poverty a “significant issue” in the US?\nAssigns the same number of observations to each color\n\nFrom Krygier and Wood (2016)"
+  },
+  {
+    "objectID": "w04/slides.html#equal-area-colormap",
+    "href": "w04/slides.html#equal-area-colormap",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Equal-Area Colormap",
+    "text": "Equal-Area Colormap\nIs poverty a “significant issue” in the US?\nBoundaries between colors come at regular (equal) intervals\n\nFrom Krygier and Wood (2016)"
+  },
+  {
+    "objectID": "w04/slides.html#natural-break-colormap",
+    "href": "w04/slides.html#natural-break-colormap",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Natural-Break Colormap",
+    "text": "Natural-Break Colormap\nIs poverty a “significant issue” in the US?\nClustering algorithm chooses classes to (a) minimize differences within classes, (b) maximize differences between classes\n\nFrom Krygier and Wood (2016)"
+  },
+  {
+    "objectID": "w04/slides.html#context-sensitive-colormap",
+    "href": "w04/slides.html#context-sensitive-colormap",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Context-Sensitive Colormap",
+    "text": "Context-Sensitive Colormap\nIs poverty a “significant issue” in the US?\nA government program offers special funding for counties with above 25% poverty\n\nFrom Krygier and Wood (2016)"
+  },
+  {
+    "objectID": "w04/slides.html#the-importance-of-history",
+    "href": "w04/slides.html#the-importance-of-history",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "The Importance of History",
+    "text": "The Importance of History\nIs poverty a “significant issue” in the US?\n\nFrom Krygier and Wood (2016)"
   },
   {
     "objectID": "w04/slides.html#getting-the-geometries",
@@ -1691,6 +1761,36 @@
     ]
   },
   {
+    "objectID": "w04/index.html#hw1-question-1-generally",
+    "href": "w04/index.html#hw1-question-1-generally",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "HW1 Question 1 Generally",
+    "text": "HW1 Question 1 Generally\n\n“Simplest” / Most Efficient Representation\n\n“Indicate which of the seven geometries above would provide the simplest representation of the entity”\n\nGEOMETRYCOLLECTION could represent any of the geographic entities in Q1, but would be overkill for representing e.g. a single point or line",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#hw1-question-1.8-specifically",
+    "href": "w04/index.html#hw1-question-1.8-specifically",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "HW1 Question 1.8 Specifically",
+    "text": "HW1 Question 1.8 Specifically\nFor the United Arab Emirates (UAE) data… we have what we call the Not-Paraguay-Problem: Most countries, including the UAE, have a bunch of lil “pieces”:\n\n\n\n\nCode\nru_national_map &lt;- ne_countries(type = \"countries\", country = \"Russia\", scale = \"medium\", returnclass = \"sf\")\nmapview(ru_national_map)\n\n\n\n\n\n\n\n\n\nCode\nuae_national_map &lt;- ne_countries(type = \"countries\", country = \"United Arab Emirates\", scale = \"large\", returnclass = \"sf\")\nmapview(uae_national_map)\n\n\n\n\n\n\n\n\nSo, for Q1.8: Assume we’re just trying to have the computer represent the “mainland” (the biggest contiguous landmass, with Dubai on it!)",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#public-vs.-hidden-tests",
+    "href": "w04/index.html#public-vs.-hidden-tests",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Public vs. Hidden Tests",
+    "text": "Public vs. Hidden Tests\n\nPublic Tests are basically “Quality Assurance Test”\nHidden Tests check for correctness",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
     "objectID": "w04/index.html#latitude-and-longitude-are-angles",
     "href": "w04/index.html#latitude-and-longitude-are-angles",
     "title": "Week 4: Unary and Binary Operations",
@@ -1741,11 +1841,21 @@
     ]
   },
   {
-    "objectID": "w04/index.html#having-domain-knowledge-of-a-region",
-    "href": "w04/index.html#having-domain-knowledge-of-a-region",
+    "objectID": "w04/index.html#the-uss-ur-choropleth-1-population",
+    "href": "w04/index.html#the-uss-ur-choropleth-1-population",
     "title": "Week 4: Unary and Binary Operations",
-    "section": "Having Domain Knowledge of a Region",
-    "text": "Having Domain Knowledge of a Region\n\n\n\nFrom XKCD",
+    "section": "The US’s Ur-Choropleth #1: Population",
+    "text": "The US’s Ur-Choropleth #1: Population\n\n\n\nKieran Healy, “America’s Ur-Choropleths”",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#the-uss-ur-choropleth-2-race",
+    "href": "w04/index.html#the-uss-ur-choropleth-2-race",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "The US’s Ur-Choropleth #2: Race",
+    "text": "The US’s Ur-Choropleth #2: Race\n\n\n\nKieran Healy, “America’s Ur-Choropleths”",
     "crumbs": [
       "Week 4: Sep 17"
     ]
@@ -1786,6 +1896,66 @@
     "title": "Week 4: Unary and Binary Operations",
     "section": "Exhibit B",
     "text": "Exhibit B\n\n\n\nFrom Monmonier (2018)",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#continuous-choropleth",
+    "href": "w04/index.html#continuous-choropleth",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Continuous Choropleth",
+    "text": "Continuous Choropleth\nIs poverty a “significant issue” in the US?\n\n\n\nFrom Krygier and Wood (2016)",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#quantile-colormap",
+    "href": "w04/index.html#quantile-colormap",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Quantile Colormap",
+    "text": "Quantile Colormap\nIs poverty a “significant issue” in the US?\nAssigns the same number of observations to each color\n\n\n\nFrom Krygier and Wood (2016)",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#equal-area-colormap",
+    "href": "w04/index.html#equal-area-colormap",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Equal-Area Colormap",
+    "text": "Equal-Area Colormap\nIs poverty a “significant issue” in the US?\nBoundaries between colors come at regular (equal) intervals\n\n\n\nFrom Krygier and Wood (2016)",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#natural-break-colormap",
+    "href": "w04/index.html#natural-break-colormap",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Natural-Break Colormap",
+    "text": "Natural-Break Colormap\nIs poverty a “significant issue” in the US?\nClustering algorithm chooses classes to (a) minimize differences within classes, (b) maximize differences between classes\n\n\n\nFrom Krygier and Wood (2016)",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#context-sensitive-colormap",
+    "href": "w04/index.html#context-sensitive-colormap",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "Context-Sensitive Colormap",
+    "text": "Context-Sensitive Colormap\nIs poverty a “significant issue” in the US?\nA government program offers special funding for counties with above 25% poverty\n\n\n\nFrom Krygier and Wood (2016)",
+    "crumbs": [
+      "Week 4: Sep 17"
+    ]
+  },
+  {
+    "objectID": "w04/index.html#the-importance-of-history",
+    "href": "w04/index.html#the-importance-of-history",
+    "title": "Week 4: Unary and Binary Operations",
+    "section": "The Importance of History",
+    "text": "The Importance of History\nIs poverty a “significant issue” in the US?\n\n\n\nFrom Krygier and Wood (2016)",
     "crumbs": [
       "Week 4: Sep 17"
     ]

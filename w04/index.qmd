@@ -49,16 +49,63 @@ format:
 
 :::
 
-# Coordinate Reference Systems {data-stack-name="CRS"}
+# Quick Logistical Things
+
+* HW1 Question 1 Clarifications
+* "Public Tests" vs. Hidden Tests
 
 ::: {.hidden}
 
 ```{r}
 #| label: r-source-globals
 source("../dsan-globals/_globals.r")
+library(rnaturalearth)
+library(mapview)
 ```
 
 :::
+
+## HW1 Question 1 Generally
+
+* "Simplest" / Most Efficient Representation
+
+  > *"Indicate which of the seven geometries above would provide the **simplest** representation of the entity"*
+
+* `GEOMETRYCOLLECTION` *could* represent any of the geographic entities in Q1, but would be overkill for representing e.g. a single point or line
+
+## HW1 Question 1.8 Specifically {.smaller .leaflet-300 .crunch-title}
+
+For the United Arab Emirates (UAE) data... we have what we call the **[Not-Paraguay-Problem]{style="font-variant: small-caps;"}**: Most countries, including the UAE, have a bunch of lil "pieces":
+
+:::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| label: russia-pieces
+ru_national_map <- ne_countries(type = "countries", country = "Russia", scale = "medium", returnclass = "sf")
+mapview(ru_national_map)
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: uae-pieces
+uae_national_map <- ne_countries(type = "countries", country = "United Arab Emirates", scale = "large", returnclass = "sf")
+mapview(uae_national_map)
+```
+
+:::
+::::
+
+So, for Q1.8: Assume we're just trying to have the computer represent the **"mainland"** (the biggest contiguous landmass, with Dubai on it!)
+
+## Public vs. Hidden Tests
+
+* Public Tests are basically **"Quality Assurance Test"**
+* Hidden Tests check for **correctness**
+
+# Coordinate Reference Systems {data-stack-name="CRS"}
 
 * First things first... what are **coordinates?**
 * We need a way to unambiguously specify **where** things are on the earth
@@ -106,9 +153,15 @@ The Earth's "width" is slightly greater than its "length" 😰
 
 # Choropleths for Good and Evil {data-stack-name="Choropleths"}
 
-## Having *Domain Knowledge* of a Region
+* Crucial crucial aspect of GIS: Having ***Domain Knowledge* of a Region**
 
-![From [XKCD](https://xkcd.com/1138/){target='_blank'}](images/xkcd_1138.png)
+## The US's Ur-Choropleth #1: Population {.smaller .title-12}
+
+![Kieran Healy, [*"America's Ur-Choropleths"*](https://kieranhealy.org/blog/archives/2015/06/12/americas-ur-choropleths/)](images/us-pop-density-2014.png){fig-align="center"}
+
+## The US's Ur-Choropleth #2: Race {.smaller .title-12}
+
+![Kieran Healy, [*"America's Ur-Choropleths"*](https://kieranhealy.org/blog/archives/2015/06/12/americas-ur-choropleths/)](images/us-pct-black-2013.png){fig-align="center"}
 
 ## Crime in Mongolia
 
@@ -126,9 +179,53 @@ The Earth's "width" is slightly greater than its "length" 😰
 
 ![From @monmonier_how_2018](images/chi-monmonier-fig03010.jpeg)
 
+## Continuous Choropleth {.smaller .crunch-title .crunch-p}
+
+*Is poverty a "significant issue" in the US?*
+
+![From @krygier_making_2016](images/choro1.svg){fig-align="center"}
+
+## Quantile Colormap {.smaller .crunch-title .crunch-p}
+
+*Is poverty a "significant issue" in the US?*
+
+Assigns the **same number of observations** to each color
+
+![From @krygier_making_2016](images/choro2.svg){fig-align="center"}
+
+## Equal-Area Colormap {.smaller .crunch-title .crunch-p}
+
+*Is poverty a "significant issue" in the US?*
+
+Boundaries between colors come at **regular (equal) intervals**
+
+![From @krygier_making_2016](images/choro_equal_area.svg){fig-align="center"}
+
+## Natural-Break Colormap {.smaller .crunch-title .crunch-p}
+
+*Is poverty a "significant issue" in the US?*
+
+**Clustering algorithm** chooses classes to (a) minimize differences within classes, (b) maximize differences between classes
+
+![From @krygier_making_2016](images/choro_natural_break.svg){fig-align="center"}
+
+## Context-Sensitive Colormap {.smaller .crunch-title .crunch-p}
+
+*Is poverty a "significant issue" in the US?*
+
+A government program offers special funding for **counties with above 25% poverty**
+
+![From @krygier_making_2016](images/choro_external.svg){fig-align="center"}
+
+## The Importance of *History* {.smaller .crunch-title .crunch-p}
+
+*Is poverty a "significant issue" in the US?*
+
+![From @krygier_making_2016](images/choro_think.svg){fig-align="center"}
+
 # Geospatial Operations 1: Unary Operations {data-stack-name="Unary Operations"}
 
-## Getting the Geometries {.smaller .crunch-title .fix-mapview}
+## Getting the Geometries {.smaller .crunch-title .leaflet-350}
 
 Using [`rnaturalearth`](http://ropensci.github.io/rnaturalearth/){target='_blank'} with [`mapview`](https://r-spatial.github.io/mapview/){target='_blank'}
 
@@ -165,7 +262,7 @@ africa_union_map <- mapview(africa_union_sf, label="st_union(africa)", legend=FA
 africa_map | africa_union_map
 ```
 
-## Helpful for Rasterizing: BBox
+## Helpful for Rasterizing: BBox {.small}
 
 ```{r}
 #| label: africa-bbox
@@ -174,7 +271,7 @@ africa_bbox_map <- mapview(africa_bbox_sf, label="st_bbox(africa)", legend=FALSE
 africa_map | africa_bbox_map
 ```
 
-## Convex Hulls by Country
+## Convex Hulls by Country {.smaller}
 
 ```{r}
 #| label: africa-countries-convex-hull
