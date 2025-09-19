@@ -1,0 +1,86 @@
+---
+title: "HW1 Hints"
+author:
+  name: "Jeff Jacobs"
+  email: "jj1088@georgetown.edu"
+date: 2025-09-19
+sidebar: mainnav
+categories:
+  - Assignment Hints
+cache: true
+format:
+  html:
+    df-print: kable
+    fig-align: center
+    link-external-newwindow: true
+    link-external-icon: true
+    code-fold: show
+---
+
+There are a few points in HW1 which may be tricky if you haven't used R before, so this guide is here to provide you with some sample code that you can hopefully adapt for use in Questions 2 and 3!
+
+## Question 2: Creating `sfg` (`sf` Geometry) Objects
+
+Here, the trickiest part is probably figuring out exactly what **format** the `sf` library wants you to use when creating these geometry objects: the `sf` representations of `POINT`, `LINESTRING`, and `POLYGON`.
+
+So, each subsection here will provide you with code explaining how to construct each of these three types of `sfg` objects out of three basic R data structures: **`vector`**, **`matrix`**, and **`list`**.
+
+### Creating `POINT` objects with `sf_point()`
+
+The syntax for creating `POINT` objects is the simplest of the three: since a `POINT` object in the [WKT schema](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) is literally just two numbers, we just need a way to "bundle together" two numbers and then provide this "bundle" to the `sf` library.
+
+So, as was discussed in class and in the Coding Workshop, we can use the `c()` function from Base R to bundle together any number of objects (as long as they're all of the same type) into a **vector**:
+
+```{r}
+#| label: vector-examples
+(my_numeric_vec <- c(1, 2, 3))
+(my_character_vec <- c("a", "b", "c"))
+(my_logical_vec <- c(TRUE, FALSE, TRUE))
+```
+
+With this knowledge, along with the fact that the `sf` library documentation says that the [`st_point()` function](https://r-spatial.github.io/sf/reference/st.html) takes in a **vector** as input, let's create a `POINT` object in R!
+
+Since we also linked the Wikipedia page on [WKT geometry representations](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) above, let's use the examples from that page. Their example for a `POINT` looks like:
+
+| | | |
+| - | - | - |
+| `POINT` | ![](images/SFA_Point.svg) | `POINT (30 10)` |
+
+And, the way we would create this `POINT` object in R (in a way that we could thus plot it or apply our unary/binary operations to it) looks as follows:
+
+```{r}
+#| label: wiki-point
+# Load the sf library functions into R's memory
+library(sf)
+# Create a numeric vector containing the two coordinates
+my_point_coords <- c(30, 10)
+# Print out the contents of this numeric vector
+print(my_point_coords)
+# Print out the *class* (the datatype) of this vector, how it is stored in R
+class(my_point_coords)
+# Use the numeric vector as the *argument* to st_point(), to tell sf we want a POINT with these coordinates
+my_point <- st_point(my_point_coords)
+# Print out the *class* of this object, to see how sf has created an sfg (sf geometry) object
+class(my_point)
+```
+
+We could also use `plot()` to plot an ultra-basic visual representation of this `POINT` we just created, `my_point`. It won't be very interesting, however, since the `plot()` function for `sfg` objects is meant to just quickly provide an as-simple-as-possible visual representation:
+
+```{r}
+#| label: plot-point
+plot(my_point)
+```
+
+If we want to visualize the point **in its context** (in this case, in the context of the "standard" Cartesian $xy$-plane), we can turn to `ggplot2`, the Tidyverse data-visualization library, which will allow us to show the point within the broader $xy$-plane:
+
+```{r}
+#| label: plot-point-ggplot
+library(tidyverse) |> suppressPackageStartupMessages()
+my_point |> ggplot() +
+  geom_sf() +
+  theme_classic()
+```
+
+Much better! We can now see, using the information along the $x$ and $y$ axes, that this `sfg` object `my_point` specifically represents a **`POINT` object with $x$ coordinate of 30 and a $y$ coordinate of 10!**
+
+Next up is `LINESTRING`, which `sf` allows us to create using the **constructor** function `st_linestring()`.

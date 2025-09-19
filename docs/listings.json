@@ -21,6 +21,7 @@
   {
     "listing": "/writeups/index.html",
     "items": [
+      "/writeups/hw1-guide/index.html",
       "/writeups/things-on-maps/index.html",
       "/writeups/data-sources/index.html",
       "/writeups/positron/index.html"
