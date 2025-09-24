@@ -513,7 +513,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-09-24, 03:03:22 PM</em></p>
+<p><em>Updated 2025-09-24, 06:07:29 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -526,7 +526,10 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#creating-point-objects-with-sf_point" id="toc-creating-point-objects-with-sf_point" class="nav-link" data-scroll-target="#creating-point-objects-with-sf_point">Creating <code>POINT</code> objects with <code>sf_point()</code></a></li>
   <li><a href="#creating-linestring-objects-with-st_linestring" id="toc-creating-linestring-objects-with-st_linestring" class="nav-link" data-scroll-target="#creating-linestring-objects-with-st_linestring">Creating <code>LINESTRING</code> Objects with <code>st_linestring()</code></a></li>
+  <li><a href="#creating-simple-polygon-objects-with-st_polygon" id="toc-creating-simple-polygon-objects-with-st_polygon" class="nav-link" data-scroll-target="#creating-simple-polygon-objects-with-st_polygon">Creating <em>Simple</em> <code>POLYGON</code> Objects with <code>st_polygon()</code></a></li>
+  <li><a href="#creating-complex-polygon-objects-polygons-with-holes-with-st_polygon" id="toc-creating-complex-polygon-objects-polygons-with-holes-with-st_polygon" class="nav-link" data-scroll-target="#creating-complex-polygon-objects-polygons-with-holes-with-st_polygon">Creating <em>Complex</em> <code>POLYGON</code> Objects (<code>POLYGON</code>s with Holes) with <code>st_polygon()</code></a></li>
   </ul></li>
+  <li><a href="#question-3-plotting-raster-data-with-tidyterra" id="toc-question-3-plotting-raster-data-with-tidyterra" class="nav-link" data-scroll-target="#question-3-plotting-raster-data-with-tidyterra">Question 3: Plotting Raster Data with <code>tidyterra</code></a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/writeups/hw1-guide/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -616,29 +619,35 @@ window.Quarto = {
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the sf library functions into R's memory</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a numeric vector containing the two coordinates</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>my_point_coords <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">10</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the contents of this numeric vector</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_point_coords)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a numeric vector containing the two coordinates</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>my_point_coords <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">10</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the contents of this numeric vector</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_point_coords)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 30 10</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the *class* (the datatype) of this vector, how it is stored in R</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(my_point_coords)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the *class* (the datatype) of this vector, how it is stored in R</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(my_point_coords)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "numeric"</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the numeric vector as the *argument* to st_point(), to tell sf we want a POINT with these coordinates</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>my_point <span class="ot">&lt;-</span> <span class="fu">st_point</span>(my_point_coords)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the *class* of this object, to see how sf has created an sfg (sf geometry) object</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(my_point)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the numeric vector as the *argument* to st_point(), to tell sf we want a POINT with these coordinates</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>my_point <span class="ot">&lt;-</span> <span class="fu">st_point</span>(my_point_coords)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the *class* of this object, to see how sf has created an sfg (sf geometry) object</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(my_point)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "XY"    "POINT" "sfg"  </code></pre>
@@ -648,7 +657,7 @@ window.Quarto = {
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_point)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_point)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -662,10 +671,10 @@ window.Quarto = {
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>my_point <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>my_point <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -675,7 +684,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Much better! We can now see, using the information along the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> axes, that this <code>sfg</code> object <code>my_point</code> specifically represents a <strong><code>POINT</code> object with <span class="math inline">\(x\)</span> coordinate of 30 and a <span class="math inline">\(y\)</span> coordinate of 10!</strong></p>
+<p>Much better! We can now see, using the information along the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> axes, that this <code>sfg</code> object <code>my_point</code> specifically represents a <strong><code>POINT</code> object with</strong> <span class="math inline">\(x\)</span> coordinate of 30 and a <span class="math inline">\(y\)</span> coordinate of 10!</p>
 </section>
 <section id="creating-linestring-objects-with-st_linestring" class="level3">
 <h3 class="anchored" data-anchor-id="creating-linestring-objects-with-st_linestring">Creating <code>LINESTRING</code> Objects with <code>st_linestring()</code></h3>
@@ -712,25 +721,25 @@ window.Quarto = {
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First we use c() to construct a *vector* containing all</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># elements of the matrix in a single row (a "flattened" representation)</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>flattened_matrix <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>flattened_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First we use c() to construct a *vector* containing all</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># elements of the matrix in a single row (a "flattened" representation)</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>flattened_matrix <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>flattened_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 2 3 4 5 6</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Then we provide this "flattened" vector to the matrix()</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># constructor function, along with instructions for R on how</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to split it into rows and columns</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>example_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  flattened_matrix,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">3</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>example_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Then we provide this "flattened" vector to the matrix()</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># constructor function, along with instructions for R on how</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to split it into rows and columns</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>example_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  flattened_matrix,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">3</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>example_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3]
@@ -743,13 +752,13 @@ window.Quarto = {
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>my_linestring_matrix_flat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">40</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>my_linestring_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  my_linestring_matrix_flat,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">2</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>my_linestring_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>my_linestring_matrix_flat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">40</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>my_linestring_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  my_linestring_matrix_flat,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">2</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>my_linestring_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2]
@@ -762,8 +771,8 @@ window.Quarto = {
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>my_linestring_sf <span class="ot">&lt;-</span> <span class="fu">st_linestring</span>(my_linestring_matrix)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>my_linestring_sf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>my_linestring_sf <span class="ot">&lt;-</span> <span class="fu">st_linestring</span>(my_linestring_matrix)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>my_linestring_sf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>LINESTRING (30 10, 10 30, 40 40)</code></pre>
@@ -773,7 +782,7 @@ window.Quarto = {
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_linestring_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_linestring_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -787,9 +796,9 @@ window.Quarto = {
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>my_linestring_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>my_linestring_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -799,9 +808,328 @@ window.Quarto = {
 </div>
 </div>
 </div>
-
-
 </section>
+<section id="creating-simple-polygon-objects-with-st_polygon" class="level3">
+<h3 class="anchored" data-anchor-id="creating-simple-polygon-objects-with-st_polygon">Creating <em>Simple</em> <code>POLYGON</code> Objects with <code>st_polygon()</code></h3>
+<p>This is the final boss! And, just as the increased complexity from <code>POINT</code> to <code>LINESTRING</code> required us to move from <strong>vectors</strong> to <strong>matrices</strong>, here the increased complexity from <code>LINESTRING</code> to <code>POLYGON</code> requires us to move from <strong>matrices</strong> to <strong>lists</strong>, as can be seen once again in the <a href="https://r-spatial.github.io/sf/reference/st.html"><code>sf</code> documentation</a>.</p>
+<p>Taking our example one final time from the <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Wikipedia article</a> on WKT, their first example <code>POLYGON</code> (the “simple” <code>POLYGON</code>, without any holes) looks as follows:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 37%">
+<col style="width: 25%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>POLYGON</code></td>
+<td style="text-align: center;"><img src="images/SFA_Polygon.svg" class="img-fluid"></td>
+<td style="text-align: left;"><code>POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))</code></td>
+</tr>
+</tbody>
+</table>
+<p>So, as discussed earlier in class, a <strong>simple</strong> <code>POLYGON</code> like this (without any holes) is actually quite similar to a <code>LINESTRING</code>: looking solely at the coordinates, we can see how a (simple) <code>POLYGON</code> is defined using just a series of connected points, as in a <code>LINESTRING</code>, with the additional constraint that <strong>the last point in the series is the same as the first point</strong>. So, we already know how to construct the data structure (a <code>matrix</code>) needed for defining a <code>LINESTRING</code>… let’s start with that here:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>my_polygon_flat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="dv">40</span>, <span class="dv">40</span>, <span class="dv">20</span>, <span class="dv">40</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">10</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>my_polygon_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  my_polygon_flat,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol=</span><span class="dv">2</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>my_polygon_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]   30   10
+[2,]   40   40
+[3,]   20   40
+[4,]   10   20
+[5,]   30   10</code></pre>
+</div>
+</div>
+<p>If we were just trying to create an <code>st_linestring</code> object, we could now complete the task by just plugging this matrix we created into the <code>st_linestring()</code> constructor function!</p>
+<p>But, from the documentation we see that the <code>st_polygon()</code> constructor function won’t accept a <code>matrix</code> – we need to provide a <code>list</code> instead (we’ll see why in a second!). So, in this case where we have a <strong>simple</strong> <code>POLYGON</code> without any holes, our <code>list</code> is going to feel silly: it will be a <code>list</code> with only one element, namely, the <code>matrix</code> we just created!</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>my_polygon_list <span class="ot">&lt;-</span> <span class="fu">list</span>(my_polygon_matrix)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>my_polygon_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+     [,1] [,2]
+[1,]   30   10
+[2,]   40   40
+[3,]   20   40
+[4,]   10   20
+[5,]   30   10</code></pre>
+</div>
+</div>
+<p>And, we complete our task by just plugging this <code>list</code> object into the <code>st_polygon()</code> constructor function:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>my_polygon_sf <span class="ot">&lt;-</span> <span class="fu">st_polygon</span>(my_polygon_list)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>my_polygon_sf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))</code></pre>
+</div>
+</div>
+<p>And plotting in two ways like before:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_polygon_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/plot-simple-polygon-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>my_polygon_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/plot-simple-polygon-ggplot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-complex-polygon-objects-polygons-with-holes-with-st_polygon" class="level3">
+<h3 class="anchored" data-anchor-id="creating-complex-polygon-objects-polygons-with-holes-with-st_polygon">Creating <em>Complex</em> <code>POLYGON</code> Objects (<code>POLYGON</code>s with Holes) with <code>st_polygon()</code></h3>
+<p>…So, why exactly does <code>st_polygon()</code> require a <strong><code>list</code></strong>, when all we did in the last section was to “wrap” our one <code>matrix</code> object into this <code>list</code>, as its only element? The answer comes from the fact that we need to represent <strong>complex</strong> <code>POLYGON</code>s as well: <code>POLYGON</code>s with <strong>holes in them!</strong> And, to achieve this, <code>st_polygon()</code> requires a <code>list</code> and then interprets <strong>all elements after the first element</strong> as describing the <strong>holes</strong> within the <code>POLYGON</code>!</p>
+<p>So, as our final hint for this question, let’s take the <strong>complex</strong> <code>POLYGON</code> example from the Wikipedia article:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 37%">
+<col style="width: 25%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>POLYGON</code></td>
+<td style="text-align: center;"><img src="images/SFA_Polygon_with_hole.svg" class="img-fluid"></td>
+<td style="text-align: left;"><code>POLYGON ((35 10, 45 45, 15 40, 10 20, 35 10),(20 30, 35 35, 30 20, 20 30))</code></td>
+</tr>
+</tbody>
+</table>
+<p>And let’s now set up our <code>list</code> so that its <strong>first</strong> element represents the coordinates of the <strong>outer boundary</strong> of this <code>POLYGON</code> (in counterclockwise order), while its <strong>second</strong> element represents the <strong>boundary of the hole</strong> (in reversed, clockwise order):</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>outer_flat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">35</span>,<span class="dv">10</span>,<span class="dv">45</span>,<span class="dv">45</span>,<span class="dv">15</span>,<span class="dv">40</span>,<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">35</span>,<span class="dv">10</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>outer_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  outer_flat,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol=</span><span class="dv">2</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>outer_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]   35   10
+[2,]   45   45
+[3,]   15   40
+[4,]   10   20
+[5,]   35   10</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>inner_flat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">35</span>,<span class="dv">35</span>,<span class="dv">30</span>,<span class="dv">20</span>,<span class="dv">20</span>,<span class="dv">30</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>inner_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  inner_flat,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">2</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>inner_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]   20   30
+[2,]   35   35
+[3,]   30   20
+[4,]   20   30</code></pre>
+</div>
+</div>
+<p>And now we can finally understand why the <code>st_polygon()</code> constructor function requires a <code>list</code> argument: it’s what now allows us to “encode” this <code>POLYGON</code>-with-hole within <code>sf</code>!</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>complex_poly_list <span class="ot">&lt;-</span> <span class="fu">list</span>(outer_matrix, inner_matrix)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>complex_poly_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+     [,1] [,2]
+[1,]   35   10
+[2,]   45   45
+[3,]   15   40
+[4,]   10   20
+[5,]   35   10
+
+[[2]]
+     [,1] [,2]
+[1,]   20   30
+[2,]   35   35
+[3,]   30   20
+[4,]   20   30</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>complex_poly_sf <span class="ot">&lt;-</span> <span class="fu">st_polygon</span>(complex_poly_list)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>complex_poly_sf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>POLYGON ((35 10, 45 45, 15 40, 10 20, 35 10), (20 30, 35 35, 30 20, 20 30))</code></pre>
+</div>
+</div>
+<p>And we can plot in two ways as usual:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(complex_poly_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/complex-poly-plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>complex_poly_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/complex-poly-plot-ggplot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="question-3-plotting-raster-data-with-tidyterra" class="level2">
+<h2 class="anchored" data-anchor-id="question-3-plotting-raster-data-with-tidyterra">Question 3: Plotting Raster Data with <code>tidyterra</code></h2>
+<p>This is even more important than the Question 2 help, only because, I failed to provide any examples using <code>tidyterra</code> in the slides this year 😨</p>
+<p>So, here is an example, showing especially how important it is to use the <code>interpolate=FALSE</code> option to prevent <code>tidyterra</code> from “smoothing” the individual pixels in your plot together into a hideous blob.</p>
+<p>First let’s use <code>terra</code> to construct a <span class="math inline">\(2 \times 3\)</span> raster grid (similar to Gridtopia, but, now as a rectangle rather than a square!)</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyterra) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>rectville <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrows =</span> <span class="dv">2</span>, <span class="at">ncols =</span> <span class="dv">3</span>,</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">2</span>, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> <span class="dv">1</span>,</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">vals =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rectville)</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>  rectville,</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">halo=</span><span class="cn">TRUE</span>, <span class="at">hc=</span><span class="st">"black"</span>, <span class="at">col=</span><span class="st">"white"</span>, <span class="at">hw=</span><span class="fl">0.2</span></span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/rectangle-raster-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And, like we’ve seen a few times now, we should try to use <code>ggplot2</code> rather than the <code>plot()</code> function from Base R since the <code>ggplot2</code> library provides a full-on <strong>Grammar of Graphics (GG)</strong> engine (<code>plot()</code> makes a lot of assumptions and guesses as to how we want things displayed, whereas <code>ggplot2</code> allows us to control each facet of the plot in a systematic way):</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>rectville <span class="sc">|&gt;</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatraster</span>(<span class="at">data=</span>rectville) <span class="sc">+</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/rectville-ggplot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice however that, in this case, since we only have <strong>one</strong> piece of information (one number) for each cell in the raster grid, <code>ggplot2</code> fills in the colors of the grid using the <strong>viridis</strong> color scale discussed in class.</p>
+<p>In GIS contexts, when we are working with and plotting <strong>raster</strong> data, we almost always have <strong>more than one</strong> piece of information for each cell. For example, if we’re working with <a href="https://en.wikipedia.org/wiki/Remote_sensing">remote sensing</a> data like <strong>photos taken from an airplane or satellite</strong>, we will in fact have <strong>three</strong> values for each pixel: the <strong>red intensity</strong>, the <strong>green intensity</strong>, and the <strong>blue intensity</strong>.</p>
+<p>Since this three-number RGB representation of pixels is so common (in general, since it’s how the pixels on our computer screens show color, but also in GIS specifically), <code>tidyterra</code> provides a special version of the <code>geom_spatraster()</code> function we used above solely for this case: <code>geom_spatraster_rgb()</code>.</p>
+<p>If we look at the <a href="https://dieghernan.github.io/tidyterra/reference/geom_spatraster_rgb.html">documentation</a> for this function, we can see that in fact the only <strong>required</strong> argument we need to provide is the <code>data</code> argument. Every other argument to this function (including <code>interpolate</code>, which we’ll see below) is <strong>optional</strong>, so that if we don’t provide a specific value when we call <code>geom_spatraster_rgb()</code>, the library will use the default values specified in the documentation.</p>
+<p>So, let’s now construct a new RGB-ified version of <code>rectville</code>, this time with <strong>three</strong> layers instead of just one, where the values in each layer will correspond to <strong>red</strong>, <strong>blue</strong>, and <strong>green intensity</strong> respectively:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>rgbville <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrows =</span> <span class="dv">2</span>, <span class="at">ncols =</span> <span class="dv">3</span>,</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">2</span>, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> <span class="dv">1</span>,</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vals =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">255</span>, <span class="dv">6</span>)</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lyr.2 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">255</span>, <span class="dv">6</span>),</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">lyr.3 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">255</span>, <span class="dv">6</span>)</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>rgbville <span class="sc">|&gt;</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatraster_rgb</span>(</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>rgbville</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/construct-rgbville-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What happened?!? If we squint when looking at this plot, we can see how it’s <strong>almost</strong> plotting the cells of <code>rgbville</code> as six discrete colors, but that at the <strong>edges</strong> the colors of the cells are <strong>blending into one another…</strong> This, it turns out, is the <strong>expected behavior</strong> of <code>geom_spatraster_rgb()</code> in this case!</p>
+<p>It has to do with the fact that <strong>the default value for the <code>interpolate</code> argument is <code>TRUE</code></strong>. Since this function is usually used to plot <strong>photos</strong> taken from airplanes or satellites, the individual pixels in the photo are usually treated as essentially “approximations” of the “true” even-higher-resolution thing that we’re taking a photo of (like, down to the atomic level eventually). And so, in this scenario, <em>smoothly</em> drawing each pixel so that their colors gradually transition into one another turns out to make a much <strong>smoother</strong> and more natural/realistic-looking overall picture, since the “borders” between one pixel and the next don’t actually exist in real life!</p>
+<p>With all that said, in this special case where we’ve <strong>constructed</strong> the raster grid from scratch, and we just want to see each color individually without this cross-grid “blending”, we should instead <strong>override</strong> the default <code>TRUE</code> value for the <code>interpolate</code> parameter:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>rgbville <span class="sc">|&gt;</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  tidyterra<span class="sc">::</span><span class="fu">geom_spatraster_rgb</span>(</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>rgbville,</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">interpolate=</span><span class="cn">FALSE</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/rgbville-no-interpolation-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And we’ve successfully plotted the six cells of our raster grid as intended! Note how now, when we use <code>geom_spatraster_rgb()</code> instead of <code>geom_spatraster()</code>, there is <strong>no legend</strong> in the generated image. This is again on purpose! Whereas with <code>geom_spatraster()</code> <code>ggplot2</code> needed to tell the viewer of the image how exactly it chose the different colors for the different cells, here we have <strong>manually specified</strong> each color as a triple of <span class="math inline">\((r, g, b)\)</span> values. This again makes sense if we think about the “standard” case of photos taken from an airplane or satellite: we don’t need a legend telling us the RGB values for each pixel, since, we can just look at the pixels with our eyes and put them together into a full-on picture of the landscape we’ve photographed!</p>
+
+
 </section>
 
 </main> <!-- /main -->

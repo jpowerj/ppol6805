@@ -1,0 +1,27 @@
+
+```{r}
+#| label: single-layer-gridtown
+#| warning: false
+set.seed(6805)
+library(tidyverse)
+library(terra)
+library(tidyterra)
+gridtown <- terra::rast(
+  nrows = 4, ncols = 4,
+  xmin = 0, xmax = 4, ymin = 0, ymax = 4,
+  vals = sample(1:16)
+)
+plot(gridtown)
+text(
+  gridtown,
+  halo=TRUE, hc="black", col="white", hw=0.2
+)
+```
+
+```{r}
+#| label: gridtown-with-ggplot
+gridtown |> ggplot() +
+  geom_spatraster(data=gridtown) +
+  scale_fill_viridis_c() +
+  theme_classic()
+```
