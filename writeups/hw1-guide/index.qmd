@@ -43,7 +43,7 @@ With this knowledge, along with the fact that the `sf` library documentation say
 Since we also linked the Wikipedia page on [WKT geometry representations](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) above, let's use the examples from that page. Their example for a `POINT` looks like:
 
 | | | |
-| - | - | - |
+|:-:|:-:|:-:|
 | `POINT` | ![](images/SFA_Point.svg) | `POINT (30 10)` |
 
 And, the way we would create this `POINT` object in R (in a way that we could thus plot it or apply our unary/binary operations to it) looks as follows:
@@ -82,5 +82,7 @@ my_point |> ggplot() +
 ```
 
 Much better! We can now see, using the information along the $x$ and $y$ axes, that this `sfg` object `my_point` specifically represents a **`POINT` object with $x$ coordinate of 30 and a $y$ coordinate of 10!**
+
+### Creating `LINESTRING` Objects with `st_linestring()`
 
 Next up is `LINESTRING`, which `sf` allows us to create using the **constructor** function `st_linestring()`.

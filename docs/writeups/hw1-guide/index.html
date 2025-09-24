@@ -513,7 +513,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-09-19, 06:17:17 PM</em></p>
+<p><em>Updated 2025-09-23, 10:09:27 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -525,6 +525,7 @@ window.Quarto = {
   <li><a href="#question-2-creating-sfg-sf-geometry-objects" id="toc-question-2-creating-sfg-sf-geometry-objects" class="nav-link active" data-scroll-target="#question-2-creating-sfg-sf-geometry-objects">Question 2: Creating <code>sfg</code> (<code>sf</code> Geometry) Objects</a>
   <ul class="collapse">
   <li><a href="#creating-point-objects-with-sf_point" id="toc-creating-point-objects-with-sf_point" class="nav-link" data-scroll-target="#creating-point-objects-with-sf_point">Creating <code>POINT</code> objects with <code>sf_point()</code></a></li>
+  <li><a href="#creating-linestring-objects-with-st_linestring" id="toc-creating-linestring-objects-with-st_linestring" class="nav-link" data-scroll-target="#creating-linestring-objects-with-st_linestring">Creating <code>LINESTRING</code> Objects with <code>st_linestring()</code></a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/writeups/hw1-guide/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -604,9 +605,9 @@ window.Quarto = {
 <table class="caption-top table">
 <tbody>
 <tr class="odd">
-<td><code>POINT</code></td>
-<td><img src="images/SFA_Point.svg" class="img-fluid"></td>
-<td><code>POINT (30 10)</code></td>
+<td style="text-align: center;"><code>POINT</code></td>
+<td style="text-align: center;"><img src="images/SFA_Point.svg" class="img-fluid"></td>
+<td style="text-align: center;"><code>POINT (30 10)</code></td>
 </tr>
 </tbody>
 </table>
@@ -675,6 +676,9 @@ window.Quarto = {
 </div>
 </div>
 <p>Much better! We can now see, using the information along the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> axes, that this <code>sfg</code> object <code>my_point</code> specifically represents a <strong><code>POINT</code> object with <span class="math inline">\(x\)</span> coordinate of 30 and a <span class="math inline">\(y\)</span> coordinate of 10!</strong></p>
+</section>
+<section id="creating-linestring-objects-with-st_linestring" class="level3">
+<h3 class="anchored" data-anchor-id="creating-linestring-objects-with-st_linestring">Creating <code>LINESTRING</code> Objects with <code>st_linestring()</code></h3>
 <p>Next up is <code>LINESTRING</code>, which <code>sf</code> allows us to create using the <strong>constructor</strong> function <code>st_linestring()</code>.</p>
 
 
