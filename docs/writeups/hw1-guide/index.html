@@ -513,7 +513,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-09-23, 10:09:27 PM</em></p>
+<p><em>Updated 2025-09-24, 03:03:22 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -607,7 +607,7 @@ window.Quarto = {
 <tr class="odd">
 <td style="text-align: center;"><code>POINT</code></td>
 <td style="text-align: center;"><img src="images/SFA_Point.svg" class="img-fluid"></td>
-<td style="text-align: center;"><code>POINT (30 10)</code></td>
+<td style="text-align: left;"><code>POINT (30 10)</code></td>
 </tr>
 </tbody>
 </table>
@@ -679,7 +679,126 @@ window.Quarto = {
 </section>
 <section id="creating-linestring-objects-with-st_linestring" class="level3">
 <h3 class="anchored" data-anchor-id="creating-linestring-objects-with-st_linestring">Creating <code>LINESTRING</code> Objects with <code>st_linestring()</code></h3>
-<p>Next up is <code>LINESTRING</code>, which <code>sf</code> allows us to create using the <strong>constructor</strong> function <code>st_linestring()</code>.</p>
+<p>Next up is <code>LINESTRING</code>, which <code>sf</code> allows us to create using the <strong>constructor</strong> function <code>st_linestring()</code>. The example in the <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Geometric_objects">Wikipedia article</a> in this case looks like:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 37%">
+<col style="width: 25%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>LINESTRING</code></td>
+<td style="text-align: center;"><img src="images/SFA_LineString.svg" class="img-fluid"></td>
+<td style="text-align: left;"><code>LINESTRING (30 10, 10 30, 40 40)</code></td>
+</tr>
+</tbody>
+</table>
+<p>And from the WKT string on the right side, we can see how representing this type of geometry is going to require a slightly more complex <strong>data structure</strong> than the more simple <strong>vector</strong> we used above to represent the two coordinates of a single <code>POINT</code>.</p>
+<p>In this case, looking at the <a href="https://r-spatial.github.io/sf/reference/st.html"><code>sf</code> documentation</a>, we can see that the <code>st_linestring()</code> constructor function requires a <strong><code>matrix</code></strong>, a datatype we haven’t seen yet but which actually builds straightforwardly on top of the <strong>vector</strong> type that we have seen!</p>
+<p>The <code>matrix</code> datatype in R is, I think, easiest to understand by looking at an example. Let’s say we want to represent the matrix</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 \\
+4 &amp; 5 &amp; 6
+\end{bmatrix}
+\]</span></p>
+<p>within R. Above we saw how, to represent a <strong>vector</strong> like <span class="math inline">\((1, 2)\)</span>, we used the <code>c()</code> function in R: <code>c(1, 2)</code>. To represent a <strong>matrix</strong>, it turns out that we will <strong>still use this <code>c()</code> function!</strong> The syntax of <code>matrix</code> <strong>takes a vector as input</strong>, then transforms it into matrix form as follows:</p>
+<ul>
+<li>First we use <code>c()</code> to write out <strong>all elements of the matrix, row by row, as a single “flat” vector</strong></li>
+<li>Then we <strong>tell R how it should “split” this flat vector into rows and columns</strong></li>
+</ul>
+<p>So, to represent the example matrix <span class="math inline">\(A\)</span> given above, in R, we implement these two steps as follows:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First we use c() to construct a *vector* containing all</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># elements of the matrix in a single row (a "flattened" representation)</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>flattened_matrix <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>flattened_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5 6</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Then we provide this "flattened" vector to the matrix()</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># constructor function, along with instructions for R on how</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to split it into rows and columns</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>example_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  flattened_matrix,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">3</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>example_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6</code></pre>
+</div>
+</div>
+<p>And there’s our example matrix from above, now encoded as an object of type <code>matrix</code> in R!</p>
+<p>So, returning to our example from the Wikipedia article, since this <code>LINESTRING</code> consists of <strong>3 coordinates</strong> connected by straight lines, we now need to construct a matrix with <strong>3 rows</strong>, where each row contains the <strong>coordinates of one point</strong> in the <code>LINESTRING</code>. We can do this as follows, using the same syntax as in the previous code cell:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>my_linestring_matrix_flat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">40</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>my_linestring_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  my_linestring_matrix_flat,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">2</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>my_linestring_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]   30   10
+[2,]   10   30
+[3,]   40   40</code></pre>
+</div>
+</div>
+<p>And now we have a <code>matrix</code> object in the form that <code>sf</code> requires for constructing an <code>st_linestring</code> object! All that’s left is to plug this <code>linestring_matrix</code> object into the <code>st_linestring()</code> constructor function, as follows:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>my_linestring_sf <span class="ot">&lt;-</span> <span class="fu">st_linestring</span>(my_linestring_matrix)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>my_linestring_sf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>LINESTRING (30 10, 10 30, 40 40)</code></pre>
+</div>
+</div>
+<p>And we’ve successfully encoded the Wikipedia example into the <code>sf</code> library’s <code>LINESTRING</code> representation! We can plot it quickly using <code>plot()</code> as we did earlier with the <code>st_point</code> object:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_linestring_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/plot-linestring-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And obtain a more interesting plot, showing our coordinate system, using <code>ggplot2</code>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>my_linestring_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/plot-linestring-ggplot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>

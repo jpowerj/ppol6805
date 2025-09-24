@@ -43,7 +43,7 @@ With this knowledge, along with the fact that the `sf` library documentation say
 Since we also linked the Wikipedia page on [WKT geometry representations](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) above, let's use the examples from that page. Their example for a `POINT` looks like:
 
 | | | |
-|:-:|:-:|:-:|
+|:-:|:-:|:-|
 | `POINT` | ![](images/SFA_Point.svg) | `POINT (30 10)` |
 
 And, the way we would create this `POINT` object in R (in a way that we could thus plot it or apply our unary/binary operations to it) looks as follows:
@@ -85,4 +85,84 @@ Much better! We can now see, using the information along the $x$ and $y$ axes, t
 
 ### Creating `LINESTRING` Objects with `st_linestring()`
 
-Next up is `LINESTRING`, which `sf` allows us to create using the **constructor** function `st_linestring()`.
+Next up is `LINESTRING`, which `sf` allows us to create using the **constructor** function `st_linestring()`. The example in the [Wikipedia article](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Geometric_objects) in this case looks like:
+
+| | | |
+|:-:|:-:|:-|
+| `LINESTRING` | ![](images/SFA_LineString.svg) | `LINESTRING (30 10, 10 30, 40 40)` |
+
+And from the WKT string on the right side, we can see how representing this type of geometry is going to require a slightly more complex **data structure** than the more simple **vector** we used above to represent the two coordinates of a single `POINT`.
+
+In this case, looking at the [`sf` documentation](https://r-spatial.github.io/sf/reference/st.html), we can see that the `st_linestring()` constructor function requires a **`matrix`**, a datatype we haven't seen yet but which actually builds straightforwardly on top of the **vector** type that we have seen!
+
+The `matrix` datatype in R is, I think, easiest to understand by looking at an example. Let's say we want to represent the matrix
+
+$$
+\begin{bmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6
+\end{bmatrix}
+$$
+
+within R. Above we saw how, to represent a **vector** like $(1, 2)$, we used the `c()` function in R: `c(1, 2)`. To represent a **matrix**, it turns out that we will **still use this `c()` function!** The syntax of `matrix` **takes a vector as input**, then transforms it into matrix form as follows:
+
+* First we use `c()` to write out **all elements of the matrix, row by row, as a single "flat" vector**
+* Then we **tell R how it should "split" this flat vector into rows and columns**
+
+So, to represent the example matrix $A$ given above, in R, we implement these two steps as follows:
+
+```{r}
+#| label: example-matrix
+# First we use c() to construct a *vector* containing all
+# elements of the matrix in a single row (a "flattened" representation)
+flattened_matrix <- c(1, 2, 3, 4, 5, 6)
+flattened_matrix
+# Then we provide this "flattened" vector to the matrix()
+# constructor function, along with instructions for R on how
+# to split it into rows and columns
+example_matrix <- matrix(
+  flattened_matrix,
+  byrow = TRUE,
+  nrow=2, ncol=3
+)
+example_matrix
+```
+
+And there's our example matrix from above, now encoded as an object of type `matrix` in R!
+
+So, returning to our example from the Wikipedia article, since this `LINESTRING` consists of **3 coordinates** connected by straight lines, we now need to construct a matrix with **3 rows**, where each row contains the **coordinates of one point** in the `LINESTRING`. We can do this as follows, using the same syntax as in the previous code cell:
+
+```{r}
+#| label: linestring-matrix
+my_linestring_matrix_flat <- c(30, 10, 10, 30, 40, 40)
+my_linestring_matrix <- matrix(
+  my_linestring_matrix_flat,
+  byrow = TRUE,
+  nrow=3, ncol=2
+)
+my_linestring_matrix
+```
+
+And now we have a `matrix` object in the form that `sf` requires for constructing an `st_linestring` object! All that's left is to plug this `linestring_matrix` object into the `st_linestring()` constructor function, as follows:
+
+```{r}
+#| label: construct-linestring
+my_linestring_sf <- st_linestring(my_linestring_matrix)
+my_linestring_sf
+```
+
+And we've successfully encoded the Wikipedia example into the `sf` library's `LINESTRING` representation! We can plot it quickly using `plot()` as we did earlier with the `st_point` object:
+
+```{r}
+#| label: plot-linestring
+plot(my_linestring_sf)
+```
+
+And obtain a more interesting plot, showing our coordinate system, using `ggplot2`:
+
+```{r}
+#| label: plot-linestring-ggplot
+my_linestring_sf |> ggplot() +
+  geom_sf() +
+  theme_classic()
+```

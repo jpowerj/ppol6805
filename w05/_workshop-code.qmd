@@ -1,0 +1,39 @@
+```{r}
+library(sf)
+library(tidyverse)
+library(rnaturalearth)
+library(mapview)
+```
+
+```{r}
+egy_sf <- ne_countries(country = 'Egypt', scale = 50)
+syr_sf <- ne_countries(country = 'Syria', scale = 50)
+```
+
+```{r}
+uar_sf <- st_union(egy_sf, syr_sf)
+```
+
+```{r}
+uar_sf |> st_convex_hull() |> mapview()
+```
+
+```{r}
+uar_cvx <- uar_sf |> st_convex_hull()
+```
+
+```{r}
+uar_bbox <- uar_sf |> st_bbox()
+```
+
+```{r}
+mapview(uar_bbox)
+```
+
+```{r}
+uar_bbox |> class()
+```
+
+```{r}
+uar_sf |> st_bbox() |> st_as_sfc() |> st_as_sf(crs = 4326) |> mapview()
+```
