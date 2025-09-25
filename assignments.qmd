@@ -57,5 +57,19 @@ gen_points_table(hw1_url)
 
 </div>
 
+## HW2
+
+<div style="height: 400px !important; max-height: 400px !important; overflow-y: scroll !important;">
+
+```{r}
+#| label: hw2-points-table
+#| warning: false
+#| echo: false
+hw1_url <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdmRJjK-1YCbLJsadNLO_uJ1UwWOnOvPqPHWtQxp1xLJFhJrELYVMRXoiT4W3img2H79fIop-_O9jp/pub?gid=1198705169&single=true&output=csv"
+gen_points_table(hw1_url)
+```
+
+</div>
+
 :::
 
