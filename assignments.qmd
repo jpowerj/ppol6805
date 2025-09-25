@@ -11,11 +11,11 @@ The following table provides a quick overview of the due dates for each homework
 
 | Assignment | Release Date | Due Date |
 | - |:-:|:-:|
-| HW1: {{< var hw.1.title >}} | {{< var hw.1.release-date-md >}} | {{< var hw.1.due-date-md >}} |
-| HW2: {{< var hw.2.title >}} | {{< var hw.2.release-date-md >}} | {{< var hw.2.due-date-md >}} |
-| HW3: {{< var hw.3.title >}} | {{< var hw.3.release-date-md >}} | {{< var hw.3.due-date-md >}} |
-| HW4: {{< var hw.4.title >}} | {{< var hw.4.release-date-md >}} | {{< var hw.4.due-date-md >}} |
-| HW5: {{< var hw.5.title >}} | {{< var hw.5.release-date-md >}} | {{< var hw.5.due-date-md >}} |
+| HW1: {{< var hw.1.title >}} | {{< var hw.1.release-date >}} | {{< var hw.1.due-date >}} |
+| HW2: {{< var hw.2.title >}} | {{< var hw.2.release-date >}} | {{< var hw.2.due-date >}} |
+| HW3: {{< var hw.3.title >}} | {{< var hw.3.release-date >}} | {{< var hw.3.due-date >}} |
+| HW4: {{< var hw.4.title >}} | {{< var hw.4.release-date >}} | {{< var hw.4.due-date >}} |
+| HW5: {{< var hw.5.title >}} | {{< var hw.5.release-date >}} | {{< var hw.5.due-date >}} |
 
 : {tbl-colwidths="[50, 25, 25]"}
 

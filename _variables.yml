@@ -73,27 +73,37 @@ hw:
     title: "GIS Concepts: Fun with Vectors and Rasters"
     pct: 9
     release-date-md: Sep 9
+    release-date: "Tuesday, September 9"
     due-date-md: Sep 24
+    due-date: "Wednesday, September 24"
   - hw-num: 2
     title: "Unary and Binary Operations, Spatial Joins"
     pct: 9
-    release-date-md: Sep 24
+    release-date-md: Sep 25
+    release-date: "Thursday, September 25"
     due-date-md: Oct 8
+    due-date: "Wednesday, October 8"
   - hw-num: 3
     title: "Autocorrelation and Clustering"
     pct: 9
     release-date-md: Oct 8
+    release-date: "Wednesday, October 8"
     due-date-md: Oct 22
+    due-date: "Wednesday, October 22"
   - hw-num: 4
     title: "Point Hypothesis Evaluation"
     pct: 9
     release-date-md: Nov 5
+    release-date: "Wednesday, November 5"
     due-date-md: Nov 19
+    due-date: "Wednesday, November 19"
   - hw-num: "5"
     title: "Spatial Regression"
     pct: 9
     release-date-md: Nov 19
+    release-date: "Wednesday, November 19"
     due-date-md: Dec 5
+    due-date: "Friday, December 5"
 midterm:
   date-md: Nov 5
   date-full: "Wednesday, November 5"
