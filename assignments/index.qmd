@@ -1,0 +1,87 @@
+---
+title: "Assignments: Due Dates and Point Distributions"
+subtitle: "PPOL 6805: GIS for Spatial Data Science"
+sidebar: mainnav
+listing:
+  contents: "**/*.qmd"
+format:
+  html:
+    df-print: kable
+---
+
+## Due Dates
+
+The following is a quick overview of the **due dates** for each homework assignment. Then, for each, you can use the **tabs below the table** to see exactly how many points are allocated for each question.
+
+| Assignment | Release Date | Due Date |
+| - |:-:|:-:|
+| HW1: {{< var hw.1.title >}} | {{< var hw.1.release-date >}} | {{< var hw.1.due-date >}} |
+| HW2: {{< var hw.2.title >}} | {{< var hw.2.release-date >}} | {{< var hw.2.due-date >}} |
+| HW3: {{< var hw.3.title >}} | {{< var hw.3.release-date >}} | {{< var hw.3.due-date >}} |
+| HW4: {{< var hw.4.title >}} | {{< var hw.4.release-date >}} | {{< var hw.4.due-date >}} |
+| HW5: {{< var hw.5.title >}} | {{< var hw.5.release-date >}} | {{< var hw.5.due-date >}} |
+
+: {tbl-colwidths="[40, 30, 30]"}
+
+## Points Per Question
+
+The following point distributions are imported from Google Sheets mainly for transparency: so that you can see exactly how totals are computed as a sum of the individual points allocated for each test!
+
+```{r}
+#| label: points-table-fn
+#| warning: false
+#| echo: false
+library(tidyverse)
+gen_points_table <- function(hw_url) {
+  hw_df <- read_csv(hw_url, col_types="ccdc")
+  # print(hw_df)
+  hw_df <- hw_df |> drop_na(points)
+  hw_df$points <- as.character(hw_df$points)
+  hw_df$section_total <- as.character(hw_df$section_total)
+  hw_df <- hw_df |> mutate(
+    question = replace_na(question, ""),
+    qid = replace_na(qid, ""),
+    section_total = replace_na(section_total, "")
+  )
+  return(hw_df)
+}
+```
+
+::: {.panel-tabset}
+
+## HW1
+
+<div style="height: 400px !important; max-height: 400px !important; overflow-y: scroll !important;">
+
+```{r}
+#| label: hw1-points-table
+#| warning: false
+#| echo: false
+hw1_url <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdmRJjK-1YCbLJsadNLO_uJ1UwWOnOvPqPHWtQxp1xLJFhJrELYVMRXoiT4W3img2H79fIop-_O9jp/pub?gid=0&single=true&output=csv"
+gen_points_table(hw1_url)
+```
+
+</div>
+
+## HW2
+
+<div style="height: 400px !important; max-height: 400px !important; overflow-y: scroll !important;">
+
+```{r}
+#| label: hw2-points-table
+#| warning: false
+#| echo: false
+hw1_url <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdmRJjK-1YCbLJsadNLO_uJ1UwWOnOvPqPHWtQxp1xLJFhJrELYVMRXoiT4W3img2H79fIop-_O9jp/pub?gid=1198705169&single=true&output=csv"
+gen_points_table(hw1_url)
+```
+
+</div>
+
+:::
+
+## Past Assignments Archive
+
+Long story short, since we sometimes get requests for copies of the assignments from students after they've completed the course, or just from interested people in general, the following listing contains **"frozen", archived versions** of assignments from previous years in the course.
+
+You can use these to get a preview for what a particular assignment might be about, but please keep in mind that **the "official", updated assignments for the current semester -- the assignments you'll be completing for a grade -- are hosted on Positron!** So, for example, you won't be able to download an older version of an assignment from here and submit it for a grade, since the contents change year-by-year.
+

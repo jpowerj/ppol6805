@@ -19,6 +19,12 @@
     ]
   },
   {
+    "listing": "/assignments/index.html",
+    "items": [
+      "/assignments/hw4/index.html"
+    ]
+  },
+  {
     "listing": "/writeups/index.html",
     "items": [
       "/writeups/hw1-guide/index.html",
