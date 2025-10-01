@@ -261,3 +261,4 @@ inter_sf <- inter_sf |> mutate(
 )
 mapview(inter_sf, zcol='interpolated_pop', label='krd_label')
 ```
+

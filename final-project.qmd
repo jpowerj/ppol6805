@@ -10,6 +10,16 @@ format:
     link-external-icon: true
 ---
 
+## Example Final Project Submission
+
+First things first, to jump right into an example of what the final project can end up looking like, click the following link to see an example final project in the required **Quarto Manuscript format**:
+
+<center>
+
+[**Example Project: "Coup-Proofing via Capital Relocation"**](https://jjacobs.me/gis-manuscript-template)
+
+</center>
+
 ## Project Overview
 
 Your job, for the final project, will be to
