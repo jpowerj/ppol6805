@@ -4,6 +4,7 @@ author: "Jeff Jacobs"
 date: 2025-10-01
 bibliography: "../../_PPOL6805.bib"
 csl: "../../chicago-17-no-url.csl"
+sidebar: mainnav
 categories:
   - Labs
 format:
