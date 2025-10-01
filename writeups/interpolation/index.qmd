@@ -12,6 +12,8 @@ format:
     df-print: kable
 ---
 
+# Part 1: Overview and Data Loading
+
 ## Historical Kurdistan Geoms from ESRI
 
 First, check out [this amazing ESRI StoryMap](https://storymaps.arcgis.com/stories/0e0151ceb16741d992ed18edfa5f7909), which we'll cite as @hanson_putting_2023. If you're interested, you can read a bunch more about the modern history of the Kurds in @mcdowall_modern_2021.
@@ -53,12 +55,12 @@ countries_sf <- rnaturalearth::ne_countries(
 )
 ```
 
-From among allll the variables in `countries_sf`, we're only going to need `geounit`!
+From among allll the variables in `countries_sf`, we're only going to need `geounit` and (later) `pop_est`!
 
 ```{r}
 #| label: simplify-countries-sf
 countries_sf <- countries_sf |>
-  select(geounit)
+  select(geounit, pop_est)
 ```
 
 ```{r}
@@ -74,6 +76,9 @@ And now the 1946 `.geojson` file, from the ESRI StoryMap, as discussed above!
 ```{r}
 #| label: add-krd
 print(getwd())
+if (endsWith(getwd(), "ppol6805")) {
+  setwd("./writeups/interpolation/")
+}
 krd_sf <- sf::st_read("data/krd_46.geojson") |>
   mutate(label="Kurdistan 1946")
 ```
@@ -88,6 +93,8 @@ krd_map
 #| label: display-map
 countries_map + krd_map
 ```
+
+# Part 2: Areal-Weighted Interpolation for "Division"
 
 ## First: Splitting KRD
 
@@ -262,3 +269,133 @@ inter_sf <- inter_sf |> mutate(
 mapview(inter_sf, zcol='interpolated_pop', label='krd_label')
 ```
 
+# Part 3: Areal-Weighted Interpolation as "Aggregation"
+
+## Part 3.1: Estimating *Kurdistan* Population from Country Populations
+
+Here, we pretend we don't know the population of Kurdistan, and try to **estimate it** from the four country populations, based on how much of each country `POLYGON`s **overlap** with the Kurdistan `POLYGON`:
+
+```{r}
+#| label: country-pops
+countries_sf
+```
+
+Visualized:
+
+```{r}
+#| label: country-pops-map
+countries_sf <- countries_sf |> mutate(
+  pop_str = fmt_pop(pop_est),
+  pop_label = paste0(geounit, ": ", pop_str)
+)
+mapview(countries_sf, zcol="pop_est", label="pop_label") + krd_map
+```
+
+```{r}
+#| label: interpolated-pop
+krd_pop_est_sf <- st_interpolate_aw(
+  countries_sf['pop_est'],
+  krd_sf,
+  extensive = TRUE
+)
+krd_sf <- krd_sf |> mutate(
+  pop_est = krd_pop_est_sf$pop_est,
+  pop_str = fmt_pop(pop_est),
+  geounit = "Kurdistan",
+  pop_label = paste0("Kurdistan Est: ", pop_str)
+)
+krd_sf
+```
+
+And, visualized!
+
+```{r}
+#| label: krd-est-pop-map
+mapview(countries_sf, zcol="pop_est", label="pop_label") + mapview(krd_sf, zcol="pop_est", label="pop_label")
+```
+
+We can also just combine our estimated Kurdistan data with the country data into one, big `sf` object with **5 rows**, where we just have to keep in mind that we've technically changed the unit of observation in each row from "UN-recognized country" to essentially "Geopolitical entity of some sort"
+
+```{r}
+krd_sub_sf <- krd_sf |> select(
+  geounit, pop_est, pop_str, pop_label
+)
+pol_ent_sf <- rbind(countries_sf, krd_sub_sf)
+pol_ent_sf
+```
+
+And now, with a single `mapview` call:
+
+```{r}
+#| label: visualize-combined
+mapview(pol_ent_sf, zcol='pop_est', label='pop_label')
+```
+
+# Part 4: Calibrating Two *Grids*
+
+There is a "Northern" Kurdish language, Kurmanji, as well as a "Central" Kurdish language called Sorani^[There is also a "Southern" Kurdish language called [Xwarin](https://en.wikipedia.org/wiki/Southern_Kurdish)] While it's a bit difficult (though, very possible!) to get **`POLYGON`s** for language groups, there are standardized datasets like [Glottolog](https://glottolog.org/resource/languoid/id/cent1972.bigmap.html#4/35.65/45.81) and [WALS](https://wals.info/languoid/lect/wals_code_kji) that we can use to get at least the **centroid** of where the language is spoken, as a `POINT`:
+
+```{r}
+#| label: lang-centroids
+kl_df <- tibble::tribble(
+  ~name, ~lat, ~lon,
+  # "Northern" Kurdish language: Kurmanji
+  "Kurmanji Centroid", 37.00, 43.00,
+  # "Central" Kurdish language: Sorani
+  "Sorani Centroid", 35.65, 45.81
+)
+# sf for language centroids
+kl_cent_sf <- st_as_sf(
+  kl_df,
+  coords=c('lon','lat'),
+  crs=4326
+)
+(cent_map <- mapview(kl_cent_sf))
+```
+
+So, let's use **Voronoi tessellation** to split Kurdistan into two sections, based on whether each point is closer to the **Kurmanji** or **Sorani** centroid!
+
+```{r}
+krd_voronoi <- st_voronoi(
+  st_union(kl_cent_sf),
+  envelope=st_as_sfc(st_bbox(krd_sf))
+)
+krd_extracted <- st_collection_extract(krd_voronoi, "POLYGON")
+#mapview(krd_extracted)
+
+krd_inter_sf <- st_sf(geometry = krd_extracted) |>
+  st_intersection(krd_sf)
+krd_inter_sf$label <- c("Kurmanji Speakers", "Sorani Speakers")
+mapview(krd_inter_sf, zcol='label') + cent_map
+
+#northern_sf <- krd_voronoi[1,]
+#southern_sf <- krd_voronoi[2,]
+# mapview(northern_sf) + mapview(southern_sf)
+#mapview(st_intersection(st_cast(krd_voronoi),krd_sf))
+```
+
+So now our job becomes: can we re-do the above estimate of Kurdistan's population, but this time derive **two separate estimates**, where the original estimate is "chopped" into two pieces on the basis of the distribution of area between Kurmanji and Sorani...
+
+The answer is: yes! That's also the job of `st_interpolate_aw()` 😎
+
+```{r}
+lang_pop_sf <- st_interpolate_aw(
+  countries_sf['pop_est'],
+  krd_inter_sf,
+  extensive=TRUE
+)
+mapview(lang_pop_sf)
+```
+
+And, adding back into our `krd_inter_sf` object so we have all the data "carried over":
+
+```{r}
+krd_inter_sf <- krd_inter_sf |> mutate(
+  pop_est = lang_pop_sf$pop_est,
+  pop_str = fmt_pop(pop_est),
+  pop_label = paste0(label, ": ", pop_str)
+)
+mapview(krd_inter_sf, zcol='pop_est', label='pop_label')
+```
+
+Wohoo!
