@@ -4,6 +4,7 @@ subtitle: "PPOL 6805: GIS for Spatial Data Science"
 sidebar: mainnav
 listing:
   contents: "**/*.qmd"
+  type: table
 format:
   html:
     df-print: kable

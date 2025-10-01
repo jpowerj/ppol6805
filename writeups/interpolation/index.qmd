@@ -1,0 +1,260 @@
+---
+title: "PPOL 6805 Week 6 Lab: Interpolating Kurdistan"
+author: "Jeff Jacobs"
+date: 2025-10-01
+bibliography: "../../_PPOL6805.bib"
+csl: "../../chicago-17-no-url.csl"
+format:
+  html:
+    df-print: kable
+---
+
+## Historical Kurdistan Geoms from ESRI
+
+First, check out [this amazing ESRI StoryMap](https://storymaps.arcgis.com/stories/0e0151ceb16741d992ed18edfa5f7909), which we'll cite as @hanson_putting_2023. If you're interested, you can read a bunch more about the modern history of the Kurds in @mcdowall_modern_2021.
+
+For the sake of this assignment, though, we'll focus in on the following 1946 map, which Jeff will give the fuller details of (condensing @mcdowall_modern_2021 into less than 5 minutes, hopefully!) in class:
+
+![](images/map_1946.jpeg){fig-align="center"}
+
+## From ESRI StoryMaps to `sf` Objects
+
+Digging into the code using Developer Tools reveals the magical **API endpoint**: [https://services.arcgis.com/3xOwF6p0r7IHIjfn/arcgis/rest/services/Kurdistan1947Boundaries](https://services.arcgis.com/3xOwF6p0r7IHIjfn/arcgis/rest/services/Kurdistan1947Boundaries)
+
+We could wrestle with ESRI's API, but, there's an even more fun way, which I learned about via [this blog post](https://jonathanchang.org/blog/downloading-esri-online-shapefiles/). Reading that will lead you on to the [`pyesridump` library](https://github.com/openaddresses/pyesridump), which I use within Python to download the layers of that StoryMap as `.geojson` files.
+
+The remainder of the lab uses these files, along with `rnaturalearth`!
+
+## Now Modern Border Geoms
+
+```{r}
+#| label: init
+library(tidyverse) |> suppressPackageStartupMessages()
+library(sf) |> suppressPackageStartupMessages()
+library(rnaturalearth) |> suppressPackageStartupMessages()
+library(mapview) |> suppressPackageStartupMessages()
+```
+
+```{r}
+#| label: krd-countries
+country_list <- c(
+  "Turkey",
+  "Iran",
+  "Iraq",
+  "Syria"
+)
+countries_sf <- rnaturalearth::ne_countries(
+  scale=50,
+  type="countries",
+  country=country_list
+)
+```
+
+From among allll the variables in `countries_sf`, we're only going to need `geounit`!
+
+```{r}
+#| label: simplify-countries-sf
+countries_sf <- countries_sf |>
+  select(geounit)
+```
+
+```{r}
+countries_map <- mapview(
+  countries_sf,
+  zcol='geounit'
+)
+countries_map
+```
+
+And now the 1946 `.geojson` file, from the ESRI StoryMap, as discussed above!
+
+```{r}
+#| label: add-krd
+print(getwd())
+krd_sf <- sf::st_read("data/krd_46.geojson") |>
+  mutate(label="Kurdistan 1946")
+```
+
+```{r}
+#| label: make-krd-map
+krd_map <- mapview(krd_sf, zcol='label')
+krd_map
+```
+
+```{r}
+#| label: display-map
+countries_map + krd_map
+```
+
+## First: Splitting KRD
+
+Intersects as the default predicate... not very helpful here!
+
+```{r}
+#| label: krd-regions
+default_sf <- countries_sf[krd_sf,]
+mapview(default_sf)
+```
+
+But, intersect**ion**, via `st_intersection()`, does give us what we want!
+
+```{r}
+#| label: krd-intersection
+inter_sf <- st_intersection(countries_sf, krd_sf)
+mapview(inter_sf)
+```
+
+## New Name Column
+
+```{r}
+inter_sf <- inter_sf |> mutate(
+  krd_name = paste0(geounit, " Kurdistan")
+)
+```
+
+Now let's view the four rows of the `sf` object individually:
+
+```{r}
+mapview(inter_sf[1,], zcol='krd_name')
+```
+
+```{r}
+mapview(inter_sf[2,], zcol='krd_name')
+```
+
+```{r}
+mapview(inter_sf[3,], zcol='krd_name')
+```
+
+```{r}
+mapview(inter_sf[4,], zcol='krd_name')
+```
+
+## ...And All at Once
+
+```{r}
+mapview(inter_sf, zcol='krd_name')
+```
+
+Very cool, but, we haven't taken **population** into account at all, which was the whole point of this exercise... spatial join / interpolation time!
+
+## Spatial Join / Interpolation
+
+Again drawing on @mcdowall_modern_2021 (this table is on page 4), we can estimate that the overall population across the four modern countries is approximately **32 million**:
+
+| Country | % of Country | Count |
+| - |-:|:- |
+| Turkey | 18 | 15 million |
+| Iran | 10 | 8 million |
+| Iraq | 18 | 7.2 million |
+| Syria | 9 | 1.8 million |
+| Diaspora and Caucasus | - | 2 million |
+| **Total** | - | 34 million |
+
+So, given this estimate, we can now "start over", this time with the goal of keeping track of the **population** as we do our operations:
+
+```{r}
+#| label: krd-with-pop
+fmt_pop <- function(x) formatC(x,big.mark=",",format='d')
+krd_sf <- krd_sf |> mutate(
+  pop = 32000000,
+  pop_str = fmt_pop(pop)
+)
+mapview(krd_sf, zcol='pop_str')
+```
+
+Now, if we just use `st_intersection()`... it doesn't know that it should pay attention to `pop` (even if it did know that, it wouldn't know exactly how you want to split it up... we'll get there)
+
+```{r}
+#| label: krd-naive-intersection
+pop_intersected_sf <- st_intersection(countries_sf, krd_sf) |>
+  mutate(
+    pop_str = fmt_pop(pop),
+    map_label = paste0(geounit, ' ', pop_str)
+  )
+mapview(pop_intersected_sf, zcol='pop', label='map_label')
+```
+
+So... what do we do? The binary operations we've learned so far won't cut it, sadly.
+
+So, we need to cap off the binary operations portion of the class with the fanciest operation we'll need: **spatial joins**, though more specifically we'll want an **interpolation**. The function in `sf` is called `st_interpolate_aw()`.
+
+Let's add that to our toolkit and get to **spatial statistics/data science!**
+
+```{r}
+#| label: interpolate-sf
+pop_interpolated_sf <- st_interpolate_aw(
+  krd_sf['pop'],
+  countries_sf,
+  extensive=TRUE
+)
+pop_interpolated_sf
+```
+
+And let's visualize it!
+
+```{r}
+#| label: interpolate-sf-mapview
+pop_interpolated_sf <- pop_interpolated_sf |> mutate(
+  pop_rounded = round(pop, 0),
+  pop_str = fmt_pop(pop_rounded)
+)
+mapview(pop_interpolated_sf, zcol='pop', label='pop_str')
+```
+
+Cool, this tells us, if we **didn't** create a Kurdistan, and just drew the borders of the four states (hypothetically.......), how many Kurds would be in each country (again, **assuming *uniform* distribution across 1947 Kurdistan!**)
+
+```{r}
+pop_interpolated_sf
+pop_interpolated_sf$pop |> sum() |> fmt_pop()
+```
+
+## Now Interpolating Over the *Intersection*
+
+I think of the above as kind of a... "partially-spatially-aware" interpolation. This isn't a great description, but, what I'm getting at is the fact that:
+
+* It *does* successfully compute how our population (of 1947 Kurdistan) proportionally distributes across the four national borders, but
+* It then *represents the output*, *geometrically* (as in, the `geometry` column), as just the original four countries, now with an additional **non-spatial** property: the Kurdish population in that country
+
+So, for what I'll call a "fully-spatially-aware" interpolation, we'll combine the two things we figured out above:
+
+* Spatial **intersection** between 1947 Kurdistan and the four countries (producing Turkish, Iranian, Syrian, and Iraqi Kurdistan), plus
+* The areal-weighted **interpolation** we just did above
+
+And it turns out, all that we really need to change is **which `sf` object** we're spatially interpolating across! Meaning, this is the above code, copied-and-pasted, with `countries_sf` now replaced by `inter_sf`:
+
+```{r}
+#| label: fully-spatially-aware
+fully_joined_sf <- st_interpolate_aw(
+  krd_sf['pop'],
+  inter_sf,
+  extensive=TRUE
+)
+mapview(fully_joined_sf)
+```
+
+Also take note of something here: how did `mapview` "know" to color the four regions by population (using the viridis scheme, the default in `mapview`!), when we didn't specify anything for the `zcol` argument?
+
+This happens because, `st_interpolate_aw()` is solely dedicated to computing a **single piece of information**: the population that results from distributing the first argument (numeric) across the second argument (an `sf`, with a `geometry` column)! It's technically not intended to carry out a full-on join.
+
+So, if you find yourself needing to keep **all the other information** along with the new areal-weighted population (which will usually be the case), just make sure you **add the new areal-weighted population column in `fully_joined_sf`** back into the `sf` object you passed as the second argument to `st_interpolate_aw()`, as a **new column**:
+
+```{r}
+#| label: interpolate-as-join
+inter_sf <- inter_sf |> mutate(
+  interpolated_pop = fully_joined_sf$pop
+)
+inter_sf
+```
+
+And now we can use all the other info, like the name, for the rest of our analysis! For example, when making an interactive map!
+
+```{r}
+#| label: interpolated-final
+inter_sf <- inter_sf |> mutate(
+  krd_name = paste0(geounit, ' Kurdistan'),
+  pop_str = fmt_pop(interpolated_pop),
+  krd_label = paste0(krd_name, ': ', pop_str)
+)
+mapview(inter_sf, zcol='interpolated_pop', label='krd_label')
+```
