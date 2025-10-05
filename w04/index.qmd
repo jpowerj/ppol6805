@@ -10,7 +10,7 @@ categories:
   - "Class Sessions"
 bibliography: "../_PPOL6805.bib"
 # Shared across formats:
-cache: false
+cache: true
 echo: true
 code-fold: show
 html-math-method: mathjax

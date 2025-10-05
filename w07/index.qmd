@@ -12,6 +12,7 @@ bibliography: "../_PPOL6805.bib"
 # Shared across formats:
 echo: true
 code-fold: show
+cache: false
 css: "../dsan-globals/jjstyles.css"
 html-math-method: mathjax
 # Format-specific settings:

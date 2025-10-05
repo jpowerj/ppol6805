@@ -502,7 +502,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-10-04, 09:17:53 PM</em></p>
+<p><em>Updated 2025-10-04, 09:30:13 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -636,7 +636,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="the-1984-2020-updated-crs" class="level2">
 <h2 class="anchored" data-anchor-id="the-1984-2020-updated-crs">The 1984 → 2020 Updated CRS</h2>
-<p>It turns out that, as was vaguely mentioned in class, there is <a href="https://epsg.io/3857">another CRS with <strong>code 3857</strong></a> which is slightly more amenable to GIS operations<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. While the 4326 CRS was created in the 1980s for early GPS systems, the 3857 CRS is regularly updated (most recently in 2020) for ease-of-use with web mapping systems like Google Maps. And, <code>sf</code> <strong>can</strong> indeed sample points along a <code>LINESTRING</code> if that <code>LINESTRING</code> is projected in CRS 3857.</p>
+<p>It turns out that, as was vaguely mentioned in class, there is <a href="https://epsg.io/3857">another CRS with <strong>code 3857</strong></a> which is slightly more amenable to GIS operations. While the 4326 CRS was created in the 1980s for early GPS systems, the 3857 CRS is regularly updated (most recently in 2020) for ease-of-use with web mapping systems like Google Maps. And, <code>sf</code> <strong>can</strong> indeed sample points along a <code>LINESTRING</code> if that <code>LINESTRING</code> is projected in CRS 3857.</p>
 <p>So, let’s <strong>re-project</strong> our <code>africa_longlines_sf</code> object into the 3857 CRS, and re-try! We’ll store the result of the <code>st_line_sample()</code> call into a variable named <code>africa_border_points</code>, then we’ll write the last line of our code cell as just <code>africa_border_points</code> so that R outputs the contents of this object as the result of running the cell:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>africa_longlines_sf <span class="ot">&lt;-</span> africa_longlines_sf <span class="sc">|&gt;</span></span>
@@ -668,7 +668,7 @@ First 5 geometries:</code></pre>
 <pre><code>MULTIPOINT ((-471616.7 1484662))</code></pre>
 </div>
 </div>
-<p>Bam. We can see that, for each of the 54 <code>LINESTRING</code> geometries in our <code>africa_longlines_sf</code> object, it has sampled a single point along this line<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>Bam. We can see that, for each of the 54 <code>LINESTRING</code> geometries in our <code>africa_longlines_sf</code> object, it has sampled a single point along this line<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>We can use <code>mapview()</code> here to generate a quick preview of where each sampled point falls relative to the map of Africa’s borders, to confirm that it has indeed only sampled points <strong>along</strong> these borders:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>africa_points_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(</span>
@@ -681,7 +681,7 @@ First 5 geometries:</code></pre>
 </div>
 </div>
 <p>Notice how, when you hover your mouse over the points, the popup tooltip just displays a number… that’s because <code>africa_border_points</code> is literally just a bunch of points, indexed by the order in which they were created: Point 1, Point 2, etc. As of now, <code>mapview</code> has no way of knowing that in fact each point is <strong>related to</strong> a country in <code>africa_longlines_sf</code>! As far as it’s concerned, it is just plotting two unrelated collections of geometries onto the base map of Africa.</p>
-<p>So, once you’ve completed Q1.1 through Q1.4, and once you’ve re-projected the <code>LINESTRING</code> geometries within <code>africa_longlines_sf</code> into the 3857 CRS, your remaining task in Q1.5 is to take this <code>africa_border_points</code> object – right now an <code>sfg</code> object<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> – and add it to <code>africa_longlines_sf</code> as a <strong>new column</strong> (rather than its own separate object).</p>
+<p>So, once you’ve completed Q1.1 through Q1.4, and once you’ve re-projected the <code>LINESTRING</code> geometries within <code>africa_longlines_sf</code> into the 3857 CRS, your remaining task in Q1.5 is to take this <code>africa_border_points</code> object – right now an <code>sfg</code> object<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> – and add it to <code>africa_longlines_sf</code> as a <strong>new column</strong> (rather than its own separate object).</p>
 
 
 </section>
@@ -690,9 +690,8 @@ First 5 geometries:</code></pre>
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>As indicated by its name “Pseudo-Mercator”, it is a slight modification of the Mercator projection that makes computation easier for e.g.&nbsp;Google Maps<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Note how it creates <code>MULTIPOINT</code> geometries rather than just <code>POINT</code> geometries – this is because <code>sf::st_line_sample()</code> is meant to support sampling <strong>any number of points</strong> from the line. Thus it always produces a <code>MULTIPOINT</code> geometry, where the number of points within that geometry will be exactly the <code>n</code> parameter we provide to the function. Since we provided <code>n=1</code>, however, the <code>MULTIPOINT</code> only contains a single point, and thus we could safely convert it from <code>MULTIPOINT</code> to <code>POINT</code> without any loss of information (which would also be more memory-efficient, since the <code>sf</code> object would now know that it only has to keep track of a single point for each row!)<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>As briefly mentioned in class, an <code>sfg</code> object is like <code>sf</code>’s version of a “geometric vector”: it is a column that <em>could</em> go into a <code>data.frame</code> or <code>tibble</code> for example, but it also has the special property that it contains <strong>WKT-encoded geometries</strong>, so that it could <em>also</em> go into an <code>sf</code> object and be used as that <code>sf</code> object’s special <code>geometry</code> column!<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Note how it creates <code>MULTIPOINT</code> geometries rather than just <code>POINT</code> geometries – this is because <code>sf::st_line_sample()</code> is meant to support sampling <strong>any number of points</strong> from the line. Thus it always produces a <code>MULTIPOINT</code> geometry, where the number of points within that geometry will be exactly the <code>n</code> parameter we provide to the function. Since we provided <code>n=1</code>, however, the <code>MULTIPOINT</code> only contains a single point, and thus we could safely convert it from <code>MULTIPOINT</code> to <code>POINT</code> without any loss of information (which would also be more memory-efficient, since the <code>sf</code> object would now know that it only has to keep track of a single point for each row!)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>As briefly mentioned in class, an <code>sfg</code> object is like <code>sf</code>’s version of a “geometric vector”: it is a column that <em>could</em> go into a <code>data.frame</code> or <code>tibble</code> for example, but it also has the special property that it contains <strong>WKT-encoded geometries</strong>, so that it could <em>also</em> go into an <code>sf</code> object and be used as that <code>sf</code> object’s special <code>geometry</code> column!<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

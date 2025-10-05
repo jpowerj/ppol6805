@@ -30,6 +30,10 @@ Digging into the code using Developer Tools reveals the magical **API endpoint**
 
 We could wrestle with ESRI's API, but, there's an even more fun way, which I learned about via [this blog post](https://jonathanchang.org/blog/downloading-esri-online-shapefiles/). Reading that will lead you on to the [`pyesridump` library](https://github.com/openaddresses/pyesridump), which I use within Python to download the layers of that StoryMap as `.geojson` files.
 
+The details of how `pyesridump` converts ESRI StoryMap **Features** into "standard" WKT **Geometries** can be fun to learn but are a bit outside of the scope of this writeup. But, from the following output you can see that ESRI **Features** can contain the WKT geometry types we've seen (like `POINT`, `LINESTRING`, or `POLYGON`), and in this case the feature we download does indeed correspond to a collection of `POLYGON`s (here we print just its first coordinate):
+
+{{< embed krd_layers.ipynb#scraped-esri-data >}}
+
 The remainder of the lab uses these files, along with `rnaturalearth`!
 
 ## Now Modern Border Geoms

@@ -14,7 +14,7 @@ echo: true
 code-fold: show
 css: "../dsan-globals/jjstyles.css"
 html-math-method: mathjax
-cache: false
+cache: true
 # Format-specific settings:
 format:
   revealjs:

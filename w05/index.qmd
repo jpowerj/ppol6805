@@ -13,6 +13,7 @@ bibliography: "../_PPOL6805.bib"
 echo: true
 code-fold: show
 html-math-method: mathjax
+cache: true
 # Format-specific settings:
 format:
   revealjs:
