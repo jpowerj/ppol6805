@@ -9,6 +9,8 @@ bibliography: "../../_PPOL6805.bib"
 csl: "../../chicago-17-no-url.csl"
 categories:
   - Extra Writeups
+assignments:
+  - All
 cache: true
 format:
   html:

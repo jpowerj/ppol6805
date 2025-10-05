@@ -7,6 +7,8 @@ csl: "../../chicago-17-no-url.csl"
 sidebar: mainnav
 categories:
   - Labs
+assignments:
+  - HW2
 format:
   html:
     df-print: kable
@@ -110,6 +112,7 @@ But, intersect**ion**, via `st_intersection()`, does give us what we want!
 
 ```{r}
 #| label: krd-intersection
+# inter_sf <- st_as_sf(st_union(st_intersection(countries_sf, krd_sf)))
 inter_sf <- st_intersection(countries_sf, krd_sf)
 mapview(inter_sf)
 ```

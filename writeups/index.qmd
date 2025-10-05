@@ -8,10 +8,11 @@ listing:
   categories: true
   include:
     categories: "{Labs,Extra Writeups,Clarifications,Assignment Hints}"
-  fields: [title,date,categories]
+  fields: [title,date,assignments,categories]
   field-display-names: 
     title: "Title"
     date: "Last Updated"
+    assignments: "Relevant Assignments"
     categories: "Category"
   sort: "date desc"
   table-hover: true
