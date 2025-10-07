@@ -25,24 +25,24 @@ weeks:
     footer: "PPOL 6805 Week 3: Unary Operations"
     date-md: "Sep 10"
   - weeknum: 4
-    title: "Unary and Binary Operations"
-    footer: "PPOL 6805 Week 4: Unary and Binary Operations"
+    title: "Unary Operations"
+    footer: "PPOL 6805 Week 4: Unary Operations"
     date-md: "Sep 17"
   - weeknum: 5
-    title: "Binary Operations and Spatial Joins"
-    footer: "PPOL 6805 Week 5: Binary Operations and Spatial Joins"
+    title: "Binary Operations and DE-9IM"
+    footer: "PPOL 6805 Week 5: Binary Operations and DE-9IM"
     date-md: "Sep 24"
   - weeknum: 6
-    title: "Spatial Data Science: Random Fields and Spatial Autocorrelation"
-    footer: "PPOL 6805 Week 6: Random Fields"
+    title: "Spatial Joins and Areal-Weighted Interpolation"
+    footer: "PPOL 6805 Week 7: Spatial Joins and Interpolation"
     date-md: "Oct 1"
   - weeknum: 7
-    title: "Point Processes, Clustering, and Regularity"
-    footer: "PPOL 6805 Week 7: Point Processes, Clustering, Regularity"
+    title: "Spatial Data Science: Three Forms of Spatial Autocorrelation"
+    footer: "PPOL 6805 Week 7: Spatial Data Science, Autocorrelation"
     date-md: "Oct 8"
   - weeknum: 8
-    title: "Null Models and Marked Point Processes"
-    footer: "PPOL 6805 Week 8: Spatial Prediction"
+    title: "Point Processes: Null Models, Clustering, and Regularity"
+    footer: "PPOL 6805 Week 7: Point Processes"
     date-md: "Oct 15"
   - weeknum: 9
     title: "Evaluating Spatial Hypotheses I: Point Data"

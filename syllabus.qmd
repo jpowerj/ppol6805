@@ -5,6 +5,8 @@ times: "Wednesdays 6:30-9pm, Healy 105"
 author: "Jeff Jacobs"
 email: "jj1088@georgetown.edu"
 term: "Fall 2025, Georgetown University"
+bibliography: "_PPOL6805.bib"
+csl: "chicago-17-no-url.csl"
 latex-auto-install: false
 editor:
   render-on-save: true
@@ -176,34 +178,43 @@ If you find any discrepancies between this schedule and Georgetown's [official c
         <span data-qmd="*[Deliverable] HW1 due 11:59pm EDT; HW2 Release*"></span>
     </td>
 </tr>
-<tr class='new-unit'>
-    <td><span data-qmd="**Unit 3:** Spatial Data Science I: Foundations"></span></td>
+<tr>
+    <td></td> 
     <td>6</td>
     <td><span data-qmd="{{< var weeks.6.date-md >}}"></span></td>
     <td>
         <span data-qmd="[{{<var weeks.6.title >}}](./w06/)"></span>
     </td>
 </tr>
-<tr>
-    <td></td>
-    <td>7</td>
-    <td><span data-qmd="{{< var weeks.7.date-md >}}"></span></td>
-    <td>
+<tr class='new-unit'>
+    <td style='border-bottom: 0px;'><span data-qmd="**Unit 3:** Spatial Data Science I: Foundations"></span></td>
+    <td style='border-bottom: 0px;'>7</td>
+    <td style='border-bottom: 0px;'><span data-qmd="{{< var weeks.7.date-md >}}"></span></td>
+    <td style='border-bottom: 0px;'>
         <span data-qmd="[{{< var weeks.7.title >}}](./w07/)"></span>
         <br>
-        <span data-qmd="*[Deliverable] HW2 due 11:59pm EDT; HW3 Release*"></span>
+        <span data-qmd="*[Deliverable] HW2, 11:59pm; HW3 Release*"></span>
     </td>
+</tr>
+<tr>
+    <td></td>
+    <td colspan="3" style="padding-top: 0px !important;"><div data-qmd="::: {.callout-tip title='Recommended Readings/Resources (In Order)' icon='false' style='margin: 0px !important;'}
+1. Amazing video introduction to analyzing spatial autocorrelation for *epidemiology* using R: @xie_analyzing_2022
+1. Three 'core' spatial-statistical datatypes: @schabenberger_statistical_2004, Section 1.2: *Types of Spatial Data* (pgs. 6-13)
+1. @baddeley_spatial_2015, Chapter 5: *Point Process Methods* (pgs. 127-154)
+:::
+"></span></td>
+</tr>
+<tr>
+    <td></td> 
+    <td>8</td>
+    <td><span data-qmd="{{< var weeks.8.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.8.title >}}](./w08/)"></span></td>
 </tr>
 <tr class='new-unit'>
     <td>
         <span data-qmd="**Unit 4:** Spatial Data Science II: Methods"></span>
     </td>
-    <td>8</td>
-    <td><span data-qmd="{{< var weeks.8.date-md >}}"></span></td>
-    <td><span data-qmd="[{{< var weeks.8.title >}}](./w08/)"></span></td>
-</tr>
-<tr>
-    <td></td>
     <td>9</td>
     <td><span data-qmd="{{< var weeks.9.date-md >}}"></span></td>
     <td>
