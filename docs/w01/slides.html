@@ -7,10 +7,10 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/quarto-contrib/videojs/video.min.js"></script>
 <link href="../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.33">
+  <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Jeff Jacobs">
   <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 1: Introduction to GIS</title>
@@ -118,7 +118,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-b98144a056446337e457f434ac15785f.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-68e77044b24223b3a9e15143e0f4fd07.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -456,7 +456,7 @@ Jeff Jacobs
 <li><strong>Libraries</strong> and <strong>tools</strong> we’ll use: <strong>specific</strong> systems/methods for geospatial analysis</li>
 <li><strong>GIS</strong> is an “umbrella term”, which just vaguely refers to this entire universe of libraries/tools/techniques/approaches</li>
 </ul>
-<table class="caption-top" data-quarto-postprocess="true">
+<table class="caption-top">
 <colgroup>
 <col style="width: 20%">
 <col style="width: 40%">
@@ -523,7 +523,7 @@ Jeff Jacobs
 }
 </style>
 
-<table class="caption-top" style="width:100%;" data-quarto-postprocess="true">
+<table class="caption-top" style="width:100%;">
 <colgroup>
 <col style="width: 24%">
 <col style="width: 1%">
@@ -559,7 +559,7 @@ Jeff Jacobs
 </div>
 <i class="bi bi-2-circle"></i> Realize there’s regularity/structure 🤔</td>
 <td colspan="2"><i class="bi bi-1-circle"></i> Start entering info in rows
-<table class="border-all caption-top" data-quarto-postprocess="true">
+<table class="border-all caption-top">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th">Fr</th>
@@ -585,7 +585,7 @@ Jeff Jacobs
 </table>
 <i class="bi bi-2-circle"></i> Realize you’re manually computing things that could be automated 🤔</td>
 <td colspan="2"><i class="bi bi-1-circle"></i> Start using equations
-<table class="border-all caption-top" data-quarto-postprocess="true">
+<table class="border-all caption-top">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th">Fr</th>
@@ -615,10 +615,10 @@ Jeff Jacobs
 <div class="code-with-filename-file">
 <pre><strong>plot_balance.py</strong></pre>
 </div>
-<div class="sourceCode" id="cb2" data-filename="plot_balance.py"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="plot_balance.py"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a></a>df <span class="op">=</span> pd.read_csv(...)</span>
 <span id="cb2-3"><a></a>calc_weekly_balance()</span>
-<span id="cb2-4"><a></a>df.plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a></a>df.plot()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <!-- <img src="balance.svg" style='display: block; margin-left: auto; margin-right: auto; width: 50%;'></img> --> <img data-src="balance.svg" style="width: 100%;">
 <p><i class="bi bi-2-circle"></i> Profit 💲💰🤑💰💲</p></td>
@@ -662,7 +662,7 @@ Jeff Jacobs
 <li>If you feel like ChatGPT will help you learn something in the course, then <strong>use it</strong>!</li>
 <li>If you feel like you’re using it as a “crutch”, try to hold yourself accountable for <strong>not</strong> using it!</li>
 </ul>
-<table class="caption-top" data-quarto-postprocess="true">
+<table class="caption-top">
 <colgroup>
 <col style="width: 50%">
 <col style="width: 50%">
@@ -771,10 +771,10 @@ Fig&nbsp;2: From <a href="https://en.wikipedia.org/wiki/The_Carter" target="_bla
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(sf)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(sf)</span>
 <span id="cb3-2"><a></a><span class="co"># Load DC tracts data</span></span>
 <span id="cb3-3"><a></a>dc_sf_fpath <span class="ot">&lt;-</span> <span class="st">"data/DC_Census_2020/Census_Tracts_in_2020.shp"</span></span>
-<span id="cb3-4"><a></a>dc_sf <span class="ot">&lt;-</span> <span class="fu">st_read</span>(dc_sf_fpath);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a></a>dc_sf <span class="ot">&lt;-</span> <span class="fu">st_read</span>(dc_sf_fpath);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `Census_Tracts_in_2020' from data source 
@@ -788,8 +788,8 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>cols_to_keep <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"OBJECTID"</span>, <span class="st">"TRACT"</span>, <span class="st">"GEOID"</span>, <span class="st">"ALAND"</span>, <span class="st">"AWATER"</span>, <span class="st">"STUSAB"</span>, <span class="st">"SUMLEV"</span>, <span class="st">"GEOCODE"</span>, <span class="st">"STATE"</span>, <span class="st">"NAME"</span>, <span class="st">"POP100"</span>, <span class="st">"HU100"</span>, <span class="st">"geometry"</span>)</span>
-<span id="cb5-2"><a></a>dc_sf <span class="ot">&lt;-</span> dc_sf <span class="sc">|&gt;</span> <span class="fu">select</span>(cols_to_keep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>cols_to_keep <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"OBJECTID"</span>, <span class="st">"TRACT"</span>, <span class="st">"GEOID"</span>, <span class="st">"ALAND"</span>, <span class="st">"AWATER"</span>, <span class="st">"STUSAB"</span>, <span class="st">"SUMLEV"</span>, <span class="st">"GEOCODE"</span>, <span class="st">"STATE"</span>, <span class="st">"NAME"</span>, <span class="st">"POP100"</span>, <span class="st">"HU100"</span>, <span class="st">"geometry"</span>)</span>
+<span id="cb5-2"><a></a>dc_sf <span class="ot">&lt;-</span> dc_sf <span class="sc">|&gt;</span> <span class="fu">select</span>(cols_to_keep)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -829,7 +829,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">str</span>(dc_sf)   <span class="co"># view structure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">str</span>(dc_sf)   <span class="co"># view structure</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Classes 'sf' and 'data.frame':  206 obs. of  13 variables:
@@ -859,7 +859,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">head</span>(dc_sf)  <span class="co"># view first several rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">head</span>(dc_sf)  <span class="co"># view first several rows</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 6 features and 12 fields
@@ -889,14 +889,14 @@ Projected CRS: WGS 84 / Pseudo-Mercator
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">dim</span>(dc_sf)   <span class="co"># view dimensions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">dim</span>(dc_sf)   <span class="co"># view dimensions</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 206  13</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>dc_sf[<span class="dv">1</span>,]    <span class="co"># select first row</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>dc_sf[<span class="dv">1</span>,]    <span class="co"># select first row</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 1 feature and 12 fields
@@ -916,7 +916,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">head</span>(dc_sf<span class="sc">$</span>NAME)  <span class="co"># select column by name  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">head</span>(dc_sf<span class="sc">$</span>NAME)  <span class="co"># select column by name  </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Census Tract 20.02" "Census Tract 21.01" "Census Tract 21.02"
@@ -924,7 +924,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">head</span>(dc_sf[,<span class="dv">4</span>])         <span class="co"># select column by number</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">head</span>(dc_sf[,<span class="dv">4</span>])         <span class="co"># select column by number</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 6 features and 1 field
@@ -947,12 +947,12 @@ Projected CRS: WGS 84 / Pseudo-Mercator
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># We can extract the geometry with the st_geometry function</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># We can extract the geometry with the st_geometry function</span></span>
 <span id="cb20-2"><a></a>dc_geo <span class="ot">&lt;-</span> <span class="fu">st_geometry</span>(dc_sf)</span>
 <span id="cb20-3"><a></a><span class="co">#pt_geo</span></span>
 <span id="cb20-4"><a></a></span>
 <span id="cb20-5"><a></a><span class="co"># Plot the geometry with base R's plot() function</span></span>
-<span id="cb20-6"><a></a><span class="fu">plot</span>(dc_geo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-6"><a></a><span class="fu">plot</span>(dc_geo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 
 </div>
@@ -975,7 +975,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator
 <li><span class="math inline">\(d &gt; 1\)</span>: Data forms a <strong>Random Field</strong> (this class: <span class="math inline">\(d = 2\)</span>!)</li>
 </ul>
 </div>
-<table class="caption-top" data-quarto-postprocess="true">
+<table class="caption-top">
 <colgroup>
 <col style="width: 9%">
 <col style="width: 30%">
@@ -1028,7 +1028,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator
 </section>
 <section id="spatial-randomness" class="slide level2 smaller smaller-table crunch-title crunch-img">
 <h2>Spatial Randomness</h2>
-<table class="caption-top" data-quarto-postprocess="true" style="width: 100%;">
+<table class="caption-top" style="width: 100%;">
 <colgroup>
 <col style="width: 20%">
 <col style="width: 25%">
@@ -1101,7 +1101,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator
 </section>
 <section id="complete-spatial-randomness-csr" class="slide level2 smaller smaller-table crunch-title crunch-img text-65">
 <h2><em>Complete</em> Spatial Randomness (CSR)</h2>
-<table class="caption-top" data-quarto-postprocess="true" style="width: 100%;">
+<table class="caption-top" style="width: 100%;">
 <colgroup>
 <col style="width: 20%">
 <col style="width: 25%">
@@ -1491,13 +1491,14 @@ Schabenberger, Oliver, and Carol A. Gotway. 2004. <em>Statistical <span>Methods<
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

@@ -11,3 +11,5 @@ lubridate
 sf
 terra
 latex2exp
+rnaturalearth
+mapview

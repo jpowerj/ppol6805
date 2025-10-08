@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -69,18 +69,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-a14e3238c51140e99ccc48519b6ed9ce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-ccd81253fefb92e9cd3f9eb5b5d87b54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-a14e3238c51140e99ccc48519b6ed9ce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-0d4a9d19931feb4fee1ddab4b2489000.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -124,7 +125,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -329,7 +330,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</a> 
         <div class="sidebar-tools-main">
@@ -512,7 +515,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-10-07, 02:57:42 AM</em></p>
+<p><em>Updated 2025-10-08, 12:52:51 AM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -612,18 +615,18 @@ Figure&nbsp;1
 </ul>
 <p>Also, importantly, it <strong>switches off</strong> <code>sf</code>’s <span class="math inline">\(S^2\)</span> (spherical geometry) mode, since the UN shapefiles here are incompatible with this mode (for reasons outlined <a href="https://github.com/r-spatial/sf/issues/1762">here</a>). Lastly, it defines a constant <code>raster_eps</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sf_use_s2</span>(<span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sf_use_s2</span>(<span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Spherical geometry (s2) switched off</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cb_palette <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>,<span class="st">"#0072B2"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#CC79A7"</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>raster_eps <span class="ot">&lt;-</span> <span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>raster_eps <span class="ot">&lt;-</span> <span class="dv">1000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="loading-and-preparing-the-data" class="level2">
@@ -631,19 +634,19 @@ Figure&nbsp;1
 <p>Here, to avoid the midterm situation where loading and cleaning took up nearly the whole time for most students (😭), we carry out the data loading and cleaning for you!</p>
 <p>First, we download, unzip, and load the shapefile for the <a href="https://en.wikipedia.org/wiki/Mandate_for_Palestine">British Mandate of Palestine</a>, as it was constituted in British colonial documents in 1948, on the eve of its (planned) transfer to UN jurisdiction. Since the shapefile corresponds to the Mandate’s <strong>border</strong> as it was defined earlier on by the League of Nations, we get a <code>LINESTRING</code>, which we convert to the <code>POLYGON</code> of the mandate using <code>st_cast()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>jpr_shapefile_url <span class="ot">&lt;-</span> <span class="st">"https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/jpr_data.zip"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>jpr_shapefile_url <span class="ot">&lt;-</span> <span class="st">"https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/jpr_data.zip"</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(jpr_shapefile_url, <span class="at">destfile =</span> <span class="st">"jpr_data.zip"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span>(<span class="st">"jpr_data.zip"</span>)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete the Mac OSX metadata</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">unlink</span>(<span class="st">"__MACOSX"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">unlink</span>(<span class="st">"__MACOSX"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mandate_border_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="st">"jpr_data/shapefiles/outside_border.shp"</span>, <span class="at">quiet=</span><span class="cn">TRUE</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mandate_border_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="st">"jpr_data/shapefiles/outside_border.shp"</span>, <span class="at">quiet=</span><span class="cn">TRUE</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mandate_sf <span class="ot">&lt;-</span> mandate_border_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_cast</span>(<span class="st">"POLYGON"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>mandate_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -654,7 +657,7 @@ Figure&nbsp;1
 </div>
 <p>Next, we load the dataset on villages in 1947 from <a href="https://journals.sagepub.com/doi/abs/10.1177/00223433221088324">McAlexander (2023)</a>, where the resulting plot indicates the villages cleansed in each of the two durations mentioned above:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>phases <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>phases <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Not Cleansed"</span>,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"29 Nov 1947 - 15 May 1948"</span>,</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"15 May 1948 - 3 Apr 1949"</span></span>
@@ -667,7 +670,7 @@ Figure&nbsp;1
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>vill_47_sf, <span class="fu">aes</span>(<span class="at">color=</span>cleansed_phase), <span class="at">size=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>, cb_palette[<span class="dv">2</span>], cb_palette[<span class="dv">1</span>])) <span class="sc">+</span></span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -679,10 +682,10 @@ Figure&nbsp;1
 <p>As you can see from this overlay, however, there are no recorded villages in the southern ~half of the Mandate territory. Condensing lots of details, this is not because there were no <em>people</em> in this portion, but because this southern portion was mainly populated by <a href="https://en.wikipedia.org/wiki/Negev_Bedouin">“Negev Bedouin”</a>, who typically practiced nomadic herding/agriculture rather than settling in one fixed location—which is why it’s important to keep in mind that the unit of analysis here is <strong>villages</strong>, not people!</p>
 <p>Given that the ethnic cleansing of the Bedouin from Mandate Palestine followed its own, somewhat <a href="https://www.un.org/unispal/document/auto-insert-195392/">separate trajectory</a>, we will focus in on the non-Bedouin Palestinian villages, and thus take our <strong>window of observation</strong> to be the northern portion of the Mandate, with the Palestinian village of <a href="https://en.wikipedia.org/wiki/Beersheba">Bir Seb’a (بئر السبع)</a> as the “cutoff” point, below which there are no recorded villages in the data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>vill_47_bbox <span class="ot">&lt;-</span> vill_47_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_bbox</span>()</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>vill_47_bbox <span class="ot">&lt;-</span> vill_47_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_bbox</span>()</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vill_47_bbox[[<span class="st">'xmin'</span>]] <span class="ot">&lt;-</span> <span class="fl">34.0</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>vill_47_bbox[[<span class="st">'ymin'</span>]] <span class="ot">&lt;-</span> <span class="fl">31.2</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>north_sf <span class="ot">&lt;-</span> mandate_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_crop</span>(vill_47_bbox)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>north_sf <span class="ot">&lt;-</span> mandate_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_crop</span>(vill_47_bbox)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>although coordinates are longitude/latitude, st_intersection assumes that they
 are planar</code></pre>
@@ -691,12 +694,12 @@ are planar</code></pre>
 <pre><code>Warning: attribute variables are assumed to be spatially constant throughout
 all geometries</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>north_sf) <span class="sc">+</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>vill_47_sf, <span class="fu">aes</span>(<span class="at">color=</span>cleansed_phase), <span class="at">size=</span><span class="fl">0.65</span>) <span class="sc">+</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>, cb_palette[<span class="dv">2</span>], cb_palette[<span class="dv">1</span>])) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -733,8 +736,8 @@ all geometries</code></pre>
 <p>i.e., that their probability of being chosen for cleansing was greater than their spatial density with respect to the distribution of villages across the Mandate.</p>
 <p>To test this hypothesis, we will need to load the shapefiles corresponding to the UN partition plan, which are again helpfully provided by McAlexander (2023), in the form of the shapefiles for the UN-allotted Palestinian region specifically (the Jewish region being everything in the Mandate besides this territory and besides Jerusalem, which was to be internationally administered by the UN, which we’ll see in Part 2 below). Then we plot the villages cleansed from 29 Nov 1947 to 15 May 1948, the points which we’ll test for disproportionate appearance in the UN-allotted Jewish region:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>un_pal_url <span class="ot">&lt;-</span> <span class="st">"https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/un_pal_crop.gpkg"</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>un_pal_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(un_pal_url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>un_pal_url <span class="ot">&lt;-</span> <span class="st">"https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/un_pal_crop.gpkg"</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>un_pal_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(un_pal_url)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `un_pal_crop' from data source 
   `https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/un_pal_crop.gpkg' 
@@ -745,13 +748,13 @@ Dimension:     XY
 Bounding box:  xmin: 3806734 ymin: 3658750 xmax: 3960787 ymax: 3908699
 Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>north_sf) <span class="sc">+</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>un_pal_sf, <span class="at">fill=</span>cb_palette[<span class="dv">3</span>], <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>vill_47_sf, <span class="fu">aes</span>(<span class="at">color=</span>cleansed_yish_4748), <span class="at">size=</span><span class="fl">0.65</span>) <span class="sc">+</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">'black'</span>, cb_palette[<span class="dv">2</span>], cb_palette[<span class="dv">1</span>])) <span class="sc">+</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -765,7 +768,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 <h3 class="anchored" data-anchor-id="question-1.1-observed-region-counts">Question 1.1: Observed Region Counts</h3>
 <p>We start by computing the <strong>observed</strong> spatial distribution of (phase-1) cleansed villages, in terms of how many such villages were located in the UN-allotted Jewish and Palestinian regions, respectively. The following plot, therefore, represents the point pattern we’re hoping to test, in terms of how likely it would be to occur under our null hypothesis:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>vill_c4748_sf <span class="ot">&lt;-</span> vill_47_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(cleansed_yish_4748)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>vill_c4748_sf <span class="ot">&lt;-</span> vill_47_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(cleansed_yish_4748)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>num_c4748 <span class="ot">&lt;-</span> <span class="fu">nrow</span>(vill_c4748_sf)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plot_title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Yishuv-Cleansed Villages (N = "</span>,num_c4748,<span class="st">")"</span>)</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>plot_subtitle <span class="ot">&lt;-</span> <span class="st">"15 May 1948 - 3 Apr 1949"</span></span>
@@ -779,7 +782,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>),</span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>)</span>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span>plot_title, <span class="at">subtitle=</span>plot_subtitle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span>plot_title, <span class="at">subtitle=</span>plot_subtitle)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -802,7 +805,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Implementing a Count Function
+<span class="screen-reader-only">Tip</span>Implementing a Count Function
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -811,7 +814,7 @@ Implementing a Count Function
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Recommended, not required: a function for computing this count</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>compute_sf_jewish_count <span class="ot">&lt;-</span> <span class="cf">function</span>(village_sf) {</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Your (optional) code here: compute the number of points in village_sf lying</span></span>
@@ -819,7 +822,7 @@ Implementing a Count Function
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace with count of cleansed villages in Jewish region</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>obs_num_jewish_region <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>obs_num_jewish_region <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>You should obtain the result that <strong>159 villages</strong>, out of the 190 total that were cleansed between 29 Nov 1947 and 15 May 1948, were located within the UN-allotted Jewish region. In the remaining questions, you will compare this count with counts obtained via simulation under the null hypothesis.</p>
 </section>
@@ -829,18 +832,18 @@ Implementing a Count Function
 <p>To this end, the first step is to estimate an <strong>intensity function</strong> of villages across the Mandate territory as they existed in 1947, which will then allow us to simulate the spatial distribution of villages under the null, i.e., simulate what a choice of villages <strong>not</strong> affected by the UN partition plan would look like. Estimate this intensity function using the <code>density()</code> function from <code>spatstat.random</code>, and store the estimated intensity function in a variable named <code>vill_47_int</code>.</p>
 <p>Remember to use the <code>raster_eps</code> global parameter defined at the top of the notebook for the <code>eps</code> parameter of <code>density()</code>! Otherwise the estimated intensity function might be too coarse (too pixelated) or, even worse, too fine-grained (which might lead to your RAM quickly filling up).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>vill_47_int <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with call to</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>vill_47_int <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with call to</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="question-1.3-simulated-region-counts" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.3-simulated-region-counts">Question 1.3: Simulated Region Counts</h3>
 <p>Now that you have an intensity function for villages throughout the north of the Mandate, you have what you need to use the <code>spatstat.random::rpoint()</code> function to simulate 190 points drawn from this intensity function! Do this in the following code cell, saving the resulting <code>ppp</code> object as <code>vill_c4748_sim_ppp</code> (with this name chosen since we’re simulating the locations of cleansed villages between 29 Nov 1947 and 15 May 1948 under the null hypothesis):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>vill_c4748_sim_ppp <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with rpoint() call</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>vill_c4748_sim_ppp <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with rpoint() call</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If your <code>ppp</code> object was created as intended, running the following code cell should produce a plot of these simulated villages overlaid on the 1947 village intensity function, which you can use as a “sanity check” (for example, if you observe a large number of villages in the blue low-intensity regions, something may be wrong with your call to <code>rpoint()</code>):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(vill_c4748_sim_ppp)) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(vill_c4748_sim_ppp)) {</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  vill_47_int_stars <span class="ot">&lt;-</span> stars<span class="sc">::</span><span class="fu">st_as_stars</span>(vill_47_int)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  vill_c4748_sim_points_sf <span class="ot">&lt;-</span> vill_c4748_sim_ppp <span class="sc">|&gt;</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
@@ -856,7 +859,7 @@ Implementing a Count Function
 <span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"190 Intensity-Sampled Villages"</span>)</span>
 <span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeLines</span>(<span class="st">"vill_c4748_sim_ppp object must be created first!"</span>)</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>vill_c4748_sim_ppp object must be created first!</code></pre>
 </div>
@@ -866,7 +869,7 @@ Implementing a Count Function
 <h3 class="anchored" data-anchor-id="question-1.4-computing-the-test-statistic">Question 1.4: Computing the Test Statistic</h3>
 <p>Given the resulting <code>ppp</code> object, you should be able to use code similar to the code you wrote in Question 1.1 to count the number of points in <code>vill_47_sim_ppp</code> that fall within the UN-allotted Jewish region of the Mandate. Store this value in a variable named <code>sim_c4748_points</code> and print its value at the end of your code cell.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>You should find that the number of simulated points falling within the UN-allotted Jewish region is lower than the observed number you computed at the end of Question 1.1.</p>
 <p>This gives us a… small hint that 159 might be a high number of villages, but we can’t evaluate the hypothesis on the basis of a single counterfactual simulation! The main point of this question, secretly, was to get you into the habit of writing code for a <strong>single</strong> simulation, and then plotting the results as a sanity-check that it works, <em>before</em> you think about running 999 of them.</p>
@@ -877,7 +880,7 @@ Implementing a Count Function
 <p>So, in the following code cell: compute these 999 simulations, derive the test statistic for each, and then use <code>ggplot2</code> to create a <strong>density plot</strong> (using <code>geom_density()</code>) of the 999 simulated test statistics, on top of which you should superimpose a <strong>dashed line</strong> (preferably with the color from the first element of <code>cb_palette</code>) representing the <strong>observed</strong> test statistic of 159, to see how likely or unlikely this value would be under the null hypothesis.</p>
 <p>As I’ve mentioned (ranted about) in class, you don’t need to compute a <span class="math inline">\(p\)</span>-value or confidence interval here. But, below the produced density plot, please provide a sentence or two describing your inference from the plot, in terms of the likelihood that the null hypothesis is true.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -894,11 +897,11 @@ Implementing a Count Function
 <p>Here we will focus on the war with <strong>Jordan</strong> in particular, for reasons that will become apparent once you visualize the spatial distribution of these phase-2 cleansed villages.</p>
 <p>After dropping the villages which had already been cleansed in the first phase (before 15 May 1948), a plot of those cleansed in this second phase immediately gives rise to a plausible hypothesis for their spatial distribution, revolving around the location of <strong>Jerusalem</strong> within the <strong>Jordanian-claimed portion</strong> of the UN-allotted Palestinian region.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop phase-1 cleansed villages</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop phase-1 cleansed villages</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>vill_48_sf <span class="ot">&lt;-</span> vill_47_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span>cleansed_yish_4748)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load POLYGON for Jordan-claimed portion</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>jord_url <span class="ot">&lt;-</span> <span class="st">"https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/un_jordan_claimed.gpkg"</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>jord_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(jord_url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>jord_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(jord_url)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `un_jordan_claimed' from data source 
   `https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/un_jordan_claimed.gpkg' 
@@ -909,9 +912,9 @@ Dimension:     XY
 Bounding box:  xmin: 34.68605 ymin: 31.22123 xmax: 35.58035 ymax: 32.63122
 Geodetic CRS:  WGS 84</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load POLYGON for 2024 West Bank</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load POLYGON for 2024 West Bank</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>wb_url <span class="ot">&lt;-</span> <span class="st">"https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/un_ocha_west_bank.gpkg"</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>wb_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(wb_url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>wb_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(wb_url)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `un_ocha_west_bank' from data source 
   `https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/un_ocha_west_bank.gpkg' 
@@ -922,7 +925,7 @@ Dimension:     XY
 Bounding box:  xmin: 34.88054 ymin: 31.34269 xmax: 35.57319 ymax: 32.55239
 Geodetic CRS:  WGS 84</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create sf containing a POINT corresponding to the centroid of the Old City</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create sf containing a POINT corresponding to the centroid of the Old City</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>jeru_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>lat, <span class="sc">~</span>lon,</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fl">31.777908401571544</span>, <span class="fl">35.23166035886802</span></span>
@@ -930,10 +933,10 @@ Geodetic CRS:  WGS 84</code></pre>
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>jeru_sf <span class="ot">&lt;-</span> jeru_df <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(</span>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">coords=</span><span class="fu">c</span>(<span class="st">"lon"</span>,<span class="st">"lat"</span>),</span>
 <span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">crs=</span><span class="dv">4326</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_transform</span>(<span class="dv">3857</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_transform</span>(<span class="dv">3857</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>gen_p2_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">include_wb=</span><span class="cn">FALSE</span>) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>gen_p2_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">include_wb=</span><span class="cn">FALSE</span>) {</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  p2_obj <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data=</span>north_sf, <span class="fu">aes</span>(<span class="at">fill=</span><span class="st">"Mandate (1917)"</span>), <span class="at">alpha=</span><span class="fl">0.0</span>) <span class="sc">+</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data=</span>jord_sf, <span class="fu">aes</span>(<span class="at">fill=</span><span class="st">"UN-Allocated (1947)"</span>), <span class="at">alpha=</span><span class="fl">0.3</span>, <span class="at">linewidth=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
@@ -953,7 +956,7 @@ Geodetic CRS:  WGS 84</code></pre>
 <span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Cleansed Villages, 1948-1949"</span>)</span>
 <span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p2_obj)</span>
 <span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a><span class="fu">gen_p2_plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a><span class="fu">gen_p2_plot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -964,7 +967,7 @@ Geodetic CRS:  WGS 84</code></pre>
 </div>
 <p>And, by overlaying the <code>POLYGON</code> for the modern (2024) West Bank, you can also see how these IDF cleansings essentially determined the final armistice line which divides Israel from the Occupied West Bank to this day:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gen_p2_plot</span>(<span class="at">include_wb=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gen_p2_plot</span>(<span class="at">include_wb=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -989,22 +992,22 @@ Geodetic CRS:  WGS 84</code></pre>
 <p>Notice that our <strong>observation window</strong> here is different from the previous part: wheres before we were considering the British Mandate territory as a whole, here we are “zooming in” on just the Jordanian-claimed portion of the UN-allotted Palestinian region. The following code cells set up the necessary <code>sf</code> objects that you’ll use for the remainder of the questions.</p>
 <p>First, the collection of <strong>all</strong> villages in the Jordanian-claimed region (the <strong>observation window</strong> for this question), which you’ll use to estimate a new “village intensity function” for this hypothesis:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># All remaining (non-previously-cleansed) villages in Jordanian-claimed region</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>vill_jord_sf <span class="ot">&lt;-</span> vill_48_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_filter</span>(jord_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># All remaining (non-previously-cleansed) villages in Jordanian-claimed region</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>vill_jord_sf <span class="ot">&lt;-</span> vill_48_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_filter</span>(jord_sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>although coordinates are longitude/latitude, st_intersects assumes that they
 are planar
 although coordinates are longitude/latitude, st_intersects assumes that they
 are planar</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>jord_sf) <span class="sc">+</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>vill_jord_sf, <span class="fu">aes</span>(<span class="at">color=</span>cleansed_idf_4849), <span class="at">size=</span><span class="fl">0.7</span>) <span class="sc">+</span></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>jeru_sf, <span class="fu">aes</span>(<span class="at">shape=</span><span class="st">"Jerusalem"</span>), <span class="at">fill=</span>cb_palette[<span class="dv">4</span>], <span class="at">size=</span><span class="dv">3</span>, <span class="at">stroke=</span><span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>,cb_palette[<span class="dv">1</span>])) <span class="sc">+</span></span>
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="fu">element_blank</span>(), <span class="at">values=</span><span class="dv">21</span>) <span class="sc">+</span></span>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1015,7 +1018,7 @@ are planar</code></pre>
 </div>
 <p>And now the subset of just the post-15 May 1848 <strong>cleansed</strong> villages, the <strong>observed</strong> point pattern that you will test on the basis of the village intensity function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Villages cleansed by IDF, post-15 May 1948</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Villages cleansed by IDF, post-15 May 1948</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>vill_c4849_sf <span class="ot">&lt;-</span> vill_jord_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(cleansed_idf_4849)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>num_c4849 <span class="ot">&lt;-</span> <span class="fu">nrow</span>(vill_c4849_sf)</span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>plot_title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"IDF-Cleansed Villages (N = "</span>,num_c4849,<span class="st">")"</span>)</span>
@@ -1031,7 +1034,7 @@ are planar</code></pre>
 <span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>),</span>
 <span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>)</span>
 <span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span>plot_title, <span class="at">subtitle=</span>plot_subtitle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span>plot_title, <span class="at">subtitle=</span>plot_subtitle)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1045,7 +1048,7 @@ are planar</code></pre>
 <h3 class="anchored" data-anchor-id="question-2.1-observed-distances">Question 2.1: Observed Distances</h3>
 <p>Your job in this question is to compute the <strong>observed</strong> test statistic: in this case, the mean distance between the cleansed villages and the centroid of the Old City of Jerusalem. You can call this <code>obs_mean_dist</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>obs_mean_dist <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with computation of observed mean distance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>obs_mean_dist <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with computation of observed mean distance</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>You should obtain a value of about 30843.81. Is this low or high? Let’s use point-process simulation to check!</p>
 </section>
@@ -1054,18 +1057,18 @@ are planar</code></pre>
 <p>Like in the Question 1.2, your job here is to use the collection of <strong>all</strong> remaining villages within the Jordanian-claimed region (the points stored in <code>vill_jord_sf</code> above) to estimate and plot an intensity function, which you should call <code>vill_jord_int</code>.</p>
 <p>And, as in Question 1.2 again, please make sure to use the <code>eps</code> parameter when you call <code>density()</code> to ensure a reasonable level of resolution for the (raster-data) intensity function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>vill_jord_int <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with density() call</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>vill_jord_int <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with density() call</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="question-2.3-simulated-points" class="level3">
 <h3 class="anchored" data-anchor-id="question-2.3-simulated-points">Question 2.3: Simulated Points</h3>
 <p>Here, as you did in Question 1.3, use the estimated intensity function <code>vill_jord_int</code> to simulate <code>num_c4849</code> points (<code>num_c4849</code> is defined above, in the code cell with label <code>q2-cleansed-villages</code>), and store the results of this simulation in a <code>ppp</code> object named <code>vill_c4849_sim_ppp</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>vill_c4849_sim_ppp <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with density() call</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>vill_c4849_sim_ppp <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with density() call</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Like in Question 1.3, if the intensity function was estimated correctly and the simulation ran as intended, the following code cell should plot the simulated points in <code>vill_c4849_sim_ppp</code> over top of the heatmap based on <code>vill_jord_int</code>, as a sanity check (you can run the <code>q2-3-response</code> code cell and then the following code multiple times, for example, to make sure that points tend to be generated in the regions with greater intensity!)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(vill_c4849_sim_ppp)) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(vill_c4849_sim_ppp)) {</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  vill_jord_int_stars <span class="ot">&lt;-</span> stars<span class="sc">::</span><span class="fu">st_as_stars</span>(vill_jord_int)</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  vill_c4849_sim_points_sf <span class="ot">&lt;-</span> vill_c4849_sim_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    sf<span class="sc">::</span><span class="fu">st_set_crs</span>(<span class="dv">3857</span>) <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"point"</span>)</span>
@@ -1078,7 +1081,7 @@ are planar</code></pre>
 <span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"100 Intensity-Sampled Villages"</span>)</span>
 <span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeLines</span>(<span class="st">"vill_c4849_sim_ppp object must be created first!"</span>)</span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>vill_c4849_sim_ppp object must be created first!</code></pre>
 </div>
@@ -1088,9 +1091,9 @@ are planar</code></pre>
 <h3 class="anchored" data-anchor-id="question-2.4-computing-the-test-statistic">Question 2.4: Computing the Test Statistic</h3>
 <p>This is where your code will start to differ from the code in Question 1. Here, your job is to compute the new <strong>distance-based test statistic</strong> in this part–the mean distance from the simulated villages to Jerusalem—for the simulated <code>ppp</code> object you just created. Store this value in a variable named <code>sim_c4849_mean</code> and print its value at the end of your code cell.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>sim_c4849_mean <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with calculated mean distance from Jerusalem</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sim_c4849_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sim_c4849_mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>NULL</code></pre>
 </div>
@@ -1104,7 +1107,7 @@ are planar</code></pre>
 <p>So, in the following code cell: compute these 999 simulations, derive the test statistic for each, and then use <code>ggplot2</code> to create a <strong>density plot</strong> (using <code>geom_density()</code>) of the 999 simulated test statistics, on top of which you should superimpose a <strong>dashed line</strong> (preferably with the color from the first element of <code>cb_palette</code>) representing the <strong>observed</strong> test statistic of 30843.81, to see how likely or unlikely this value would be under the null hypothesis.</p>
 <p>As before, you don’t need to compute an exact <span class="math inline">\(p\)</span>-value or confidence interval here. But, below the produced density plot, please provide a sentence or two describing your inference from the plot, in terms of the likelihood that the null hypothesis is true.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Thank you for your work! As with all of the other assignments, I hope they can be helpful as e.g.&nbsp;starter code for stuff you may find yourself working on in the future 🏃</p>
 
@@ -1177,13 +1180,14 @@ are planar</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

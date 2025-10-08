@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -70,18 +70,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-a14e3238c51140e99ccc48519b6ed9ce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-ccd81253fefb92e9cd3f9eb5b5d87b54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-a14e3238c51140e99ccc48519b6ed9ce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-0d4a9d19931feb4fee1ddab4b2489000.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/kbd/kbd.js"></script>
 <link href="../../site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -127,7 +128,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -332,7 +333,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</a> 
         <div class="sidebar-tools-main">
@@ -515,7 +518,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-10-07, 02:57:42 AM</em></p>
+<p><em>Updated 2025-10-08, 12:52:51 AM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -601,7 +604,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="step-3-open-positron">Step 3: Open Positron</h3>
 <p>Once the installation process completes, you should see Positron in wherever you access the Applications on your Mac. For example, here you can see it included at the bottom of the Launchpad interface:</p>
 <p><img src="images/positron_launchpad.jpeg" class="img-fluid"></p>
-<p>If you can’t find Launchpad, you can also activate MacOS’s <strong>Spotlight</strong> using the keyboard shortcut <kbd aria-hidden="true">Cmd-Space</kbd><span class="visually-hidden">Cmd-Space</span>, then start typing “Positron” until the “Positron – Open” option appears:</p>
+<p>If you can’t find Launchpad, you can also activate MacOS’s <strong>Spotlight</strong> using the keyboard shortcut <kbd title="Cmd-Space" aria-hidden="true">Cmd-Space</kbd><span class="visually-hidden">Cmd-Space</span>, then start typing “Positron” until the “Positron – Open” option appears:</p>
 <p><img src="images/positron_spotlight.jpeg" class="img-fluid"></p>
 <p>If you see the following popup message when you try launching Positron, you can continue by clicking “Open”</p>
 <p><img src="images/positron_confirm.jpeg" class="img-fluid"></p>
@@ -621,7 +624,7 @@ window.Quarto = {
 <li>The files shown in Positron will be files and folders residing on the <strong>GIS course server</strong>, and</li>
 <li>If you run Python or R commands, Positron will execute those on the <strong>GIS course server</strong>, which <strong>already has the necessary GIS libraries installed</strong>, and also has more computational resources (64 cores, 128 GB of RAM, and 1.5TB of hard drive space) than your local laptop!</li>
 </ul>
-<p>When in doubt, one quick way you can tell which “mode” Positron is in (local vs.&nbsp;remote) is to <strong>open a new Terminal</strong>: In the menubar at the top of Positron, you can click **“Terminal” -&gt; “New Terminal”, or you can use the keyboard shortcut <kbd aria-hidden="true">Ctrl-Shift-`</kbd><span class="visually-hidden">Ctrl-Shift-`</span>.</p>
+<p>When in doubt, one quick way you can tell which “mode” Positron is in (local vs.&nbsp;remote) is to <strong>open a new Terminal</strong>: In the menubar at the top of Positron, you can click **“Terminal” -&gt; “New Terminal”, or you can use the keyboard shortcut <kbd title="Ctrl-Shift-`" aria-hidden="true">Ctrl-Shift-`</kbd><span class="visually-hidden">Ctrl-Shift-`</span>.</p>
 <p>If the terminal (which should open in the bottom-left panel of Positron) looks as follows, with a <strong>percent sign <code>%</code> right before the portion where you’re able to start typing</strong>, you are likely <strong>running locally</strong>, since MacOS’s default Terminal uses this percent sign character <code>%</code> to indicate the start of the command prompt.</p>
 <p><img src="images/terminal_local.jpeg" class="img-fluid"></p>
 <p>If instead the terminal you see looks as follows, with a <strong>dollar sign <code>$</code> right before the portion where you’re able to start typing</strong>, you are likely <strong>running remotely</strong>, since the Ubuntu operating system installed on the course’s server uses this dollar sign character <code>$</code> to indicate the start of the command prompt.</p>
@@ -636,9 +639,9 @@ window.Quarto = {
 <p><img src="images/command_palette.jpeg" class="img-fluid"></p>
 <p>Now, from among the three options shown, please select the <strong>Connect Current Window to Host…</strong> option<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>The interface will then prompt you with the text <code>"Enter [user@]hostname[:port]"</code>, with a blank text box underneath this prompt. Please enter the following address, where you should replace the <code>YOUR_NETID</code> portion with your actual Georgetown-assigned <strong>NetID</strong>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-YOUR_NETID@guhub.io</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-YOUR_NETID@guhub.io</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>So, for example, since my NetID is <code>jj1088</code>, I would enter</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-jj1088@guhub.io</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-jj1088@guhub.io</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Then press Enter. If the address was entered correctly, you may see the interface look like it’s “refreshing”, but then you should be prompted to enter a <strong>password</strong>:</p>
 <p><img src="images/password.jpeg" class="img-fluid"></p>
 <p>This is where you should <strong>enter the JupyterHub password that was emailed to you</strong> near the beginning of the semester. For easy searching in your email client, it was an email with the subject <strong>“Your PPOL 6805 / DSAN 6750 JupyterHub Login”</strong>.</p>
@@ -678,7 +681,7 @@ window.Quarto = {
 <p><img src="images/hw0.jpeg" class="img-fluid"></p>
 <p>Once it is open, all you need to do is answer the single question (which asks, what is <span class="math inline">\(1 + 1\)</span>?), storing the numeric result in a variable named <code>q1_solution</code>. This should only require one line of code, which you should write in the code cell which has <code># label: q1-response</code> at the top – i.e., you should write this line of code immediately after this <code># label: q1-response</code> line:</p>
 <p><img src="images/hw0_q1.jpeg" class="img-fluid"></p>
-<p>You can then use the keyboard shortcut <kbd aria-hidden="true">Cmd-S</kbd><span class="visually-hidden">Cmd-S</span> to save your changes, and you’re done!</p>
+<p>You can then use the keyboard shortcut <kbd title="Cmd-S" aria-hidden="true">Cmd-S</kbd><span class="visually-hidden">Cmd-S</span> to save your changes, and you’re done!</p>
 <p>We will just check whether or not you’ve added this new line of code to the <code>ppol6805_hw0.qmd</code> file, as our way of checking who has successfully been able to connect to the course server using Positron.</p>
 </section>
 <section id="step-8-disconnecting-from-the-server" class="level3">
@@ -764,13 +767,14 @@ window.Quarto = {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

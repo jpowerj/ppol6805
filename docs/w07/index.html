@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -89,18 +89,19 @@ div.csl-indent {
 <link href="../favicon.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-a14e3238c51140e99ccc48519b6ed9ce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-ccd81253fefb92e9cd3f9eb5b5d87b54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-a14e3238c51140e99ccc48519b6ed9ce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-0d4a9d19931feb4fee1ddab4b2489000.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -144,7 +145,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -160,7 +161,6 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../dsan-globals/jjstyles.css">
 <link rel="stylesheet" href="../dsan-globals/jjstyles.css">
 </head>
 
@@ -348,7 +348,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</a> 
         <div class="sidebar-tools-main">
@@ -531,7 +533,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-10-07, 02:57:42 AM</em></p>
+<p><em>Updated 2025-10-08, 12:52:51 AM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -540,7 +542,29 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#naïve-clustering" id="toc-naïve-clustering" class="nav-link active" data-scroll-target="#naïve-clustering">Naïve Clustering</a>
+  <li><a href="#random-fields" id="toc-random-fields" class="nav-link active" data-scroll-target="#random-fields">Random Fields</a>
+  <ul class="collapse">
+  <li><a href="#key-notation-definition" id="toc-key-notation-definition" class="nav-link" data-scroll-target="#key-notation-definition">Key Notation / Definition</a></li>
+  <li><a href="#geostatistical-data-dumping-sand-onto-a-table" id="toc-geostatistical-data-dumping-sand-onto-a-table" class="nav-link" data-scroll-target="#geostatistical-data-dumping-sand-onto-a-table">Geostatistical Data: Dumping Sand onto a Table!</a></li>
+  <li><a href="#example-water-coverage-in-bhola-bangladesh" id="toc-example-water-coverage-in-bhola-bangladesh" class="nav-link" data-scroll-target="#example-water-coverage-in-bhola-bangladesh">Example: Water Coverage in Bhola, Bangladesh</a></li>
+  <li><a href="#geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes" id="toc-geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes" class="nav-link" data-scroll-target="#geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes">Geostatistical <em>Modeling</em>: Terrains Are <em>Not</em> Spiky Chaotic Landscapes!</a></li>
+  <li><a href="#geostatistical-data-rightarrow-point-pattern" id="toc-geostatistical-data-rightarrow-point-pattern" class="nav-link" data-scroll-target="#geostatistical-data-rightarrow-point-pattern">Geostatistical Data <span class="math inline">\(\rightarrow\)</span> Point Pattern</a></li>
+  <li><a href="#geospatial-data-rightarrow-latticeregion-data" id="toc-geospatial-data-rightarrow-latticeregion-data" class="nav-link" data-scroll-target="#geospatial-data-rightarrow-latticeregion-data">Geospatial Data <span class="math inline">\(\rightarrow\)</span> Lattice/Region Data</a></li>
+  </ul></li>
+  <li><a href="#doing-things-with-nbdep" id="toc-doing-things-with-nbdep" class="nav-link" data-scroll-target="#doing-things-with-nbdep">Doing Things with <code>nbdep</code></a>
+  <ul class="collapse">
+  <li><a href="#who-are-my-neighbors" id="toc-who-are-my-neighbors" class="nav-link" data-scroll-target="#who-are-my-neighbors">Who Are My Neighbors?</a></li>
+  <li><a href="#distance-based-neighbors" id="toc-distance-based-neighbors" class="nav-link" data-scroll-target="#distance-based-neighbors">Distance-Based Neighbors</a></li>
+  <li><a href="#spatial-autocorrelation" id="toc-spatial-autocorrelation" class="nav-link" data-scroll-target="#spatial-autocorrelation">Spatial Autocorrelation</a></li>
+  <li><a href="#morans-i" id="toc-morans-i" class="nav-link" data-scroll-target="#morans-i">Moran’s <span class="math inline">\(I\)</span></a></li>
+  <li><a href="#local-indicators-of-spatial-autocorrelation-lisa" id="toc-local-indicators-of-spatial-autocorrelation-lisa" class="nav-link" data-scroll-target="#local-indicators-of-spatial-autocorrelation-lisa">Local Indicators of Spatial Autocorrelation (LISA)</a></li>
+  </ul></li>
+  <li><a href="#our-null-hypothesis-complete-spatial-randomness-csr" id="toc-our-null-hypothesis-complete-spatial-randomness-csr" class="nav-link" data-scroll-target="#our-null-hypothesis-complete-spatial-randomness-csr">Our Null Hypothesis: Complete Spatial Randomness (CSR)</a>
+  <ul class="collapse">
+  <li><a href="#leaving-you-with-a-challenge" id="toc-leaving-you-with-a-challenge" class="nav-link" data-scroll-target="#leaving-you-with-a-challenge">Leaving You With a Challenge</a></li>
+  <li><a href="#a-challenge" id="toc-a-challenge" class="nav-link" data-scroll-target="#a-challenge">A Challenge…</a></li>
+  </ul></li>
+  <li><a href="#naïve-clustering" id="toc-naïve-clustering" class="nav-link" data-scroll-target="#naïve-clustering">Naïve Clustering</a>
   <ul class="collapse">
   <li><a href="#why-naïve" id="toc-why-naïve" class="nav-link" data-scroll-target="#why-naïve">Why “Naïve”?</a></li>
   <li><a href="#spatial-randomness" id="toc-spatial-randomness" class="nav-link" data-scroll-target="#spatial-randomness">Spatial Randomness</a></li>
@@ -605,9 +629,489 @@ window.Quarto = {
 <center class="mb-3">
 <a class="h2" href="./slides.html" target="_blank">Open slides in new tab →</a>
 </center>
+<section id="random-fields" class="level1 crunch-title crunch-ul title-13 crunch-math not-title-slide smaller" data-stack-name="Random Fields">
+<h1 class="crunch-title crunch-ul title-13 crunch-math not-title-slide smaller" data-stack-name="Random Fields">Random Fields</h1>
+<p><span class="math display">\[
+\text{Data} = \left\{Z(\mathbf{s}) \mid \mathbf{s} \in D \subset \mathbb{R}^2\right\}
+\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/w3.jpg" class="img-fluid figure-img"></p>
+<figcaption><span class="math inline">\(D\)</span> = Rectangle; <span class="math inline">\(Z(\mathbf{s})\)</span> here: <strong>height</strong> at coordinate <span class="math inline">\(\mathbf{s} \in D\)</span></figcaption>
+</figure>
+</div>
+<section id="key-notation-definition" class="level2 smaller smaller-table crunch-title crunch-ul crunch-li-5 crunch-math shift-ul inline-90 math-90 title-12">
+<h2 class="smaller smaller-table crunch-title crunch-ul crunch-li-5 crunch-math shift-ul inline-90 math-90 title-12 anchored" data-anchor-id="key-notation-definition">Key Notation / Definition</h2>
+<div id="full-defn" style="width: 100% !important">
+<p>2-Dimensional <strong>Spatial Process</strong> <span class="citation" data-cites="schabenberger_statistical_2004">(<a href="#ref-schabenberger_statistical_2004" role="doc-biblioref">Schabenberger and Gotway 2004, 6</a>)</span></p>
+<p><span class="math display">\[
+\text{Data} = \left\{Z(\mathbf{s}) \mid \mathbf{s} \in D \subset \mathbb{R}^d\right\}
+\]</span></p>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 30%">
+<col style="width: 31%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Geostatistical Data</th>
+<th data-quarto-table-cell-role="th">Lattice/Region Data</th>
+<th data-quarto-table-cell-role="th">Point Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Criteria</strong></td>
+<td>Fixed <span class="math inline">\(D\)</span>, Continuous</td>
+<td>Fixed <span class="math inline">\(D\)</span>, Discrete</td>
+<td>Random subset <span class="math inline">\(D^* \subseteq D\)</span></td>
+</tr>
+<tr class="even">
+<td><b>
+What's Random?</b></td>
+<td>Value of <span class="math inline">\(Z\)</span> at <strong><code>POINT</code></strong> <span class="math inline">\(\mathbf{s}_i \in D\)</span></td>
+<td>Value of <span class="math inline">\(Z\)</span> across <strong><code>POLYGON</code></strong> <span class="math inline">\(\mathbf{r}_i \subseteq D\)</span></td>
+<td>Subset <span class="math inline">\(D^*\)</span> formed by <strong>events</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Interest</strong></td>
+<td>Infer <strong>non-observed</strong> parts of <span class="math inline">\(D\)</span></td>
+<td><strong>Autocorrelation</strong>, clustering</td>
+<td>Point-generating <strong>process</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Example</strong></td>
+<td class="tdvt"><ul>
+<li>Dumping sand on a table <span class="math inline">\(D = \{(x,y) \mid x \in [0,2], y \in [0,1]\}\)</span></li>
+<li><span class="math inline">\(Z(\mathbf{s}_i)\)</span>: Attribute(s) at site <span class="math inline">\(\mathbf{s}_i\)</span> (at coordinate <span class="math inline">\(\mathbf{s}_i = (x_i,y_i)\)</span>)</li>
+<li>Example: <strong>Height</strong> of sand. <span class="math inline">\(Z(\mathbf{s}_1) = 500\text{m}\)</span>, <span class="math inline">\(Z(\mathbf{s}_2) = 850\text{m}\)</span>, <span class="math inline">\(\ldots\)</span></li>
+</ul></td>
+<td class="tdvt"><ul>
+<li><p><span class="math inline">\(Z(\mathbf{s})\)</span> observed over <span class="math inline">\(N \times N\)</span> grid of <strong>plots</strong></p></li>
+<li><p>Well-defined ‘Neighbors’ (next section!)</p></li>
+<li><p>Autocorrelation: Are points <strong>around</strong> <span class="math inline">\(\mathbf{s}_i\)</span> likely to have values similar to <span class="math inline">\(Z(\mathbf{s}_i)\)</span>?</p></li>
+</ul></td>
+<td class="tdvt"><ul>
+<li>Unknown number of lightning strikes <span class="math inline">\(\mathbf{s}_1, \mathbf{s}_2, \ldots\)</span></li>
+<li>All of <span class="math inline">\(D\)</span> is observed, but what determines subset <span class="math inline">\(D^*\)</span> where <strong>events</strong> occur?</li>
+<li><em>Unmarked</em>: Locations only</li>
+<li><em>Marked</em>: Locations+info (e.g., intensity of strike)</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<!-- * Note the **lack of subscript** on $Z$! Important, not a typo! -->
+</section>
+<section id="geostatistical-data-dumping-sand-onto-a-table" class="level2 smaller crunch-title crunch-ul crunch-quarto-figure crunch-img crunch-figcaption crunch-quarto-layout-cell crunch-quarto-layout-panel title-10">
+<h2 class="smaller crunch-title crunch-ul crunch-quarto-figure crunch-img crunch-figcaption crunch-quarto-layout-cell crunch-quarto-layout-panel title-10 anchored" data-anchor-id="geostatistical-data-dumping-sand-onto-a-table">Geostatistical Data: Dumping Sand onto a Table!</h2>
+<ul>
+<li>Domain <span class="math inline">\(D\)</span>: <strong>tabletop</strong>; Random process: <strong>dumping sand</strong> onto the tabletop</li>
+<li><span class="math inline">\(\Omega\)</span>: All possible realizations of process. <span class="math inline">\(\omega_i \in \Omega\)</span> Particular realization</li>
+</ul>
+<div class="quarto-layout-panel" data-layout="[[1,1],[1,1]]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-w1" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap-location="top">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-w1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: <span class="math inline">\(\omega_1 \in \Omega\)</span>
+</figcaption>
+<div aria-describedby="fig-w1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/w1.jpg" class="img-fluid figure-img" style="width:82.0%" data-fig-cap-location="top">
+</div>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-w2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap-location="top">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-w2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: <span class="math inline">\(\omega_2 \in \Omega\)</span>
+</figcaption>
+<div aria-describedby="fig-w2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/w2.jpg" class="img-fluid figure-img" style="width:82.0%" data-fig-cap-location="top">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-w3" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap-location="top">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-w3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: <span class="math inline">\(\omega_3 \in \Omega\)</span>
+</figcaption>
+<div aria-describedby="fig-w3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/w3.jpg" class="img-fluid figure-img" style="width:82.0%" data-fig-cap-location="top">
+</div>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-w4" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap-location="top">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-w4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: <span class="math inline">\(\omega_4 \in \Omega\)</span>
+</figcaption>
+<div aria-describedby="fig-w4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/w4.jpg" class="img-fluid figure-img" style="width:82.0%" data-fig-cap-location="top">
+</div>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-water-coverage-in-bhola-bangladesh" class="level2 smaller crunch-img title-10 crunch-quarto-layout-panel crunch-p">
+<h2 class="smaller crunch-img title-10 crunch-quarto-layout-panel crunch-p anchored" data-anchor-id="example-water-coverage-in-bhola-bangladesh">Example: Water Coverage in Bhola, Bangladesh</h2>
+<div class="quarto-layout-panel" data-layout="[75,25]">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div id="sea-level-rise" class="quarto-layout-cell" style="flex-basis: 75.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/bhola.jpg" class="img-fluid figure-img"></p>
+<figcaption>ArcGIS: <a href="https://www.arcgis.com/apps/mapviewer/index.html?webmap=b82e4d7b92084b63a30b3a3bbed09ec5&amp;utm_source=chatgpt.com">Sea Level Rise in Bangladesh</a></figcaption>
+</figure>
+</div>
+</div>
+<div id="tropic-of-chaos" class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tropic_of_chaos.jpg" class="img-fluid figure-img"></p>
+<figcaption><span class="citation" data-cites="parenti_tropic_2011">Parenti (<a href="#ref-parenti_tropic_2011" role="doc-biblioref">2011</a>)</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes" class="level2 smaller crunch-title title-12">
+<h2 class="smaller crunch-title title-12 anchored" data-anchor-id="geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes">Geostatistical <em>Modeling</em>: Terrains Are <em>Not</em> Spiky Chaotic Landscapes!</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/w2_missing.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="geostatistical-data-rightarrow-point-pattern" class="level2 crunch-title crunch-ul smaller crunch-quarto-layout-panel crunch-img crunch-quarto-figure title-12 text-65">
+<h2 class="crunch-title crunch-ul smaller crunch-quarto-layout-panel crunch-img crunch-quarto-figure title-12 text-65 anchored" data-anchor-id="geostatistical-data-rightarrow-point-pattern">Geostatistical Data <span class="math inline">\(\rightarrow\)</span> Point Pattern</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>Indicator function</strong>: <span class="math inline">\(\mathbb{1}\left[Z(\mathbf{s}) &gt; 860\text{m}\right]\)</span></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>terra 1.8.60
+
+Attaching package: 'terra'
+
+The following object is masked from 'package:tidyr':
+
+    extract</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(latex2exp)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">#### Define area</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>lat_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">5.0</span>, <span class="sc">-</span><span class="fl">6.0</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>lon_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#lon_center &lt;- -5.4</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#lat_center &lt;- 36.75</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># And the window around this centroid</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>lat_radius <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>lon_radius <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>gen_random_table <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">world_num=</span><span class="dv">1</span>, <span class="at">return_data=</span><span class="cn">FALSE</span>, <span class="at">rand_seed=</span><span class="cn">NULL</span>) {</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(rand_seed)) {</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(rand_seed)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    rand_seed <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9999</span>, <span class="at">size=</span><span class="dv">1</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(rand_seed)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  lat_center <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="fu">min</span>(lat_range), <span class="at">max=</span><span class="fu">max</span>(lat_range))</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  lon_center <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="fu">min</span>(lon_range), <span class="at">max=</span><span class="fu">max</span>(lon_range))</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  lon_lower <span class="ot">&lt;-</span> lon_center <span class="sc">-</span> lon_radius</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  lon_upper <span class="ot">&lt;-</span> lon_center <span class="sc">+</span> lon_radius</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  lat_lower <span class="ot">&lt;-</span> lat_center <span class="sc">-</span> lat_radius</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  lat_upper <span class="ot">&lt;-</span> lat_center <span class="sc">+</span> lat_radius</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  coords <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(lon_lower, lon_lower, lon_upper, lon_upper),</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> <span class="fu">c</span>(lat_lower, lat_upper, lat_lower, lat_upper))</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  coords_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(coords, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Using geodata</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  elev <span class="ot">&lt;-</span> geodata<span class="sc">::</span><span class="fu">elevation_3s</span>(<span class="at">lon =</span> lon_center, <span class="at">lat =</span> lat_center, <span class="at">res=</span><span class="fl">2.5</span>, <span class="at">path =</span> <span class="fu">getwd</span>())</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  elev <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(elev, coords_sf)</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(elev)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>compute_hillshade <span class="ot">&lt;-</span> <span class="cf">function</span>(elev) {</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate hillshade</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  slopes <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">terrain</span>(elev, <span class="st">"slope"</span>, <span class="at">unit =</span> <span class="st">"radians"</span>)</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  aspect <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">terrain</span>(elev, <span class="st">"aspect"</span>, <span class="at">unit =</span> <span class="st">"radians"</span>)</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>  hs <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">shade</span>(slopes, aspect)</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(hs)</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>plot_hillshade <span class="ot">&lt;-</span> <span class="cf">function</span>(elev, hs, <span class="at">title=</span><span class="cn">NULL</span>) {</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Plot hillshading as basemap</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (here using terra::plot, but could use tmap)</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># lat_upper_trimmed &lt;- lat_upper - 0.001*lat_upper</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># lat_lower_trimmed &lt;- lat_lower - 0.001*lat_lower</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>  base_plot <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">plot</span>(</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    hs, <span class="at">col =</span> <span class="fu">gray</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span> <span class="sc">/</span> <span class="dv">100</span>), <span class="at">legend =</span> <span class="cn">FALSE</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">grid=</span><span class="cn">TRUE</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>  <span class="co">#    xlim = c(elev_xmin, elev_xmax), ylim = c(elev_ymin, elev_ymax))</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># overlay with elevation</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>  color_vec <span class="ot">&lt;-</span> <span class="fu">terrain.colors</span>(<span class="dv">25</span>)</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(elev, <span class="at">col =</span> color_vec, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add contour lines</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>  terra<span class="sc">::</span><span class="fu">contour</span>(elev, <span class="at">col =</span> <span class="st">"grey30"</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(title)) {</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>    world_name <span class="ot">&lt;-</span> <span class="fu">TeX</span>(<span class="fu">sprintf</span>(r<span class="st">"(World $\omega_{%d} \in \Omega$)"</span>, world_num))</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">title</span>(world_name)</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>elev_r1 <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6810</span>)</span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>hs_r1 <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(elev_r1)</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_hillshade</span>(elev_r1, hs_r1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/geostat-to-point-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">ifel</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  elev_r1 <span class="sc">&gt;</span> <span class="dv">860</span>, elev_r1, <span class="cn">NA</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> <span class="fu">plot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/after-indicator-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>elev_r2 <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6815</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>hs_r2 <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(elev_r2)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_hillshade</span>(elev_r2, hs_r2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/before-indicator-r2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>my_quant <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">quantile</span>(x, <span class="fl">0.99</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>elev_99 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">global</span>(elev_r2, my_quant)[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>elev_indic_r2 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">ifel</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  elev_r2 <span class="sc">&gt;</span> elev_99, elev_r2, <span class="cn">NA</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elev_indic_r2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/after-indicator-r2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="geospatial-data-rightarrow-latticeregion-data" class="level2 crunch-title crunch-quarto-layout-cell title-08">
+<h2 class="crunch-title crunch-quarto-layout-cell title-08 anchored" data-anchor-id="geospatial-data-rightarrow-latticeregion-data">Geospatial Data <span class="math inline">\(\rightarrow\)</span> Lattice/Region Data</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>table_elev <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6805</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>table_hs <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(table_elev)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#plot_hillshade(table_elev, table_hs)</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#par(mfrow=c(1,2), mar=c(0,0,1,1))</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(table_elev)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/table-to-lattice-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>(Pretend this is infinite-resolution) Infinite number of neighbors around each point!</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>elev_coarse <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">aggregate</span>(table_elev, <span class="dv">12</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(elev_coarse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/coarsened-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Finite number of neighbors around each observation <span class="math inline">\(\implies\)</span> Can study correlations between <em>neighboring</em> cells!</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="doing-things-with-nbdep" class="level1" data-stack-name="Autocorrelation">
+<h1 data-stack-name="Autocorrelation">Doing Things with <code>nbdep</code></h1>
+<ul>
+<li>“Neighbor” Definitions</li>
+<li>Testing Hypotheses About Neighborhoods!</li>
+</ul>
+<section id="who-are-my-neighbors" class="level2">
+<h2 class="anchored" data-anchor-id="who-are-my-neighbors">Who Are My Neighbors?</h2>
+<ul>
+<li><p>Contiguity-Based:</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><img src="images/queen.png" class="img-fluid"></td>
+<td><img src="images/rook.png" class="img-fluid"></td>
+</tr>
+</tbody>
+</table></li>
+<li><p>Distance-Based</p></li>
+<li><p><span class="math inline">\(K\)</span>-Nearest Neighbors</p></li>
+</ul>
+</section>
+<section id="distance-based-neighbors" class="level2">
+<h2 class="anchored" data-anchor-id="distance-based-neighbors">Distance-Based Neighbors</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/dist-based.jpeg" class="img-fluid figure-img"></p>
+<figcaption>From <span class="citation" data-cites="xie_analyzing_2022">Xie (<a href="#ref-xie_analyzing_2022" role="doc-biblioref">2022</a>)</span></figcaption>
+</figure>
+</div>
+</section>
+<section id="spatial-autocorrelation" class="level2">
+<h2 class="anchored" data-anchor-id="spatial-autocorrelation">Spatial Autocorrelation</h2>
+<ul>
+<li>Location <span class="math inline">\(i\)</span> has high value <span class="math inline">\(\implies\)</span> locations <strong>near</strong> <span class="math inline">\(i\)</span> more likely to have high values</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/autocorr.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="morans-i" class="level2">
+<h2 class="anchored" data-anchor-id="morans-i">Moran’s <span class="math inline">\(I\)</span></h2>
+<p><span class="math display">\[
+I =
+\underset{\text{Inverse of Variance}}{\boxed{\frac{n}{\sum_{i=1}^{n}(y_i - \overline{y})^2}}}
+\frac
+  {\overbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(y_i - \overline{y})(y_j - \overline{y})}^{\text{Weighted Covariance}}}
+  {\underbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}_{\text{Normalize Weights}}}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(I\)</span> is <strong>Large</strong> when:
+<ul>
+<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> are <strong>neighbors</strong>: <span class="math inline">\(w_{ij}\)</span>, and</li>
+<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> <strong>large at the same time</strong>: <span class="math inline">\((y_i - \overline{y})(y_j - \overline{y})\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="local-indicators-of-spatial-autocorrelation-lisa" class="level2">
+<h2 class="anchored" data-anchor-id="local-indicators-of-spatial-autocorrelation-lisa">Local Indicators of Spatial Autocorrelation (LISA)</h2>
+<ul>
+<li>tldr: See how much a given location <span class="math inline">\(\mathbf{s}\)</span> <strong>contributes to</strong> overall Moran’s <span class="math inline">\(I\)</span></li>
+<li>Local Moran’s <span class="math inline">\(I\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+I_i = \frac{y_i - \overline{y}}{S_i^2}\sum_{j=1}^{n}w_{ij}(y_j - \overline{y})
+\]</span></p>
+</section>
+</section>
+<section id="our-null-hypothesis-complete-spatial-randomness-csr" class="level1" data-stack-name="Spatial Randomness">
+<h1 data-stack-name="Spatial Randomness">Our Null Hypothesis: Complete Spatial Randomness (CSR)</h1>
+<section id="leaving-you-with-a-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="leaving-you-with-a-challenge">Leaving You With a Challenge</h2>
+<ul>
+<li>These point patterns can be <strong>classified</strong> as clustered or regular:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/simple_clust.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="transform: rotate(90deg);"></p>
+</figure>
+</div>
+</section>
+<section id="a-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="a-challenge">A Challenge…</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clusters.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+</section>
 <section id="naïve-clustering" class="level1 smaller smaller-table" data-stack-name="Naïve Clustering">
 <h1 class="smaller smaller-table" data-stack-name="Naïve Clustering">Naïve Clustering</h1>
-<table class="caption-top table" data-quarto-postprocess="true">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 15%">
 <col style="width: 15%">
@@ -651,12 +1155,9 @@ window.Quarto = {
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
-</div>
 </div>
 </div>
 <section id="why-naïve" class="level2">
@@ -673,50 +1174,50 @@ window.Quarto = {
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">60</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>r_core <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Regularity via Inhibition</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>cond_reg_sims <span class="ot">&lt;-</span> <span class="fu">rSSI</span>(<span class="at">r=</span>r_core, N)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># CSR data</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#csr_sims &lt;- rpoispp(N, win=obs_window)</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>cond_sr_sims <span class="ot">&lt;-</span> <span class="fu">rpoint</span>(N, <span class="at">win=</span>obs_window)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">### Clustered data</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">#clust_sims &lt;- rclusterBKBC(clusters="MatClust", kappa=10, mu=10, scale=0.05, verbose=FALSE)</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Each cluster consist of 10 points in a disc of radius 0.2</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>nclust <span class="ot">&lt;-</span> <span class="cf">function</span>(x0, y0, radius, n) {</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print(n)</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">runifdisc</span>(<span class="dv">10</span>, radius, <span class="at">centre=</span><span class="fu">c</span>(x0, y0)))</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>cond_clust_sims <span class="ot">&lt;-</span> <span class="fu">rNeymanScott</span>(<span class="at">kappa=</span><span class="dv">5</span>, <span class="at">expand=</span><span class="fl">0.0</span>, <span class="at">rclust=</span>nclust, <span class="at">radius=</span><span class="dv">2</span><span class="sc">*</span>r_core, <span class="at">n=</span><span class="dv">10</span>)</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># And PLOT</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>plot_w <span class="ot">&lt;-</span> <span class="dv">400</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>plot_h <span class="ot">&lt;-</span> <span class="dv">400</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>plot_scale <span class="ot">&lt;-</span> <span class="fl">2.25</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>cond_reg_plot <span class="ot">&lt;-</span> cond_reg_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>()</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/cond_reg.png"</span>, cond_reg_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>cond_sr_plot <span class="ot">&lt;-</span> cond_sr_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>()</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/cond_sr.png"</span>, cond_sr_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>cond_clust_plot <span class="ot">&lt;-</span> cond_clust_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>()</span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/cond_clust.png"</span>, cond_clust_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>r_core <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Regularity via Inhibition</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>cond_reg_sims <span class="ot">&lt;-</span> <span class="fu">rSSI</span>(<span class="at">r=</span>r_core, N)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># CSR data</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#csr_sims &lt;- rpoispp(N, win=obs_window)</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>cond_sr_sims <span class="ot">&lt;-</span> <span class="fu">rpoint</span>(N, <span class="at">win=</span>obs_window)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="do">### Clustered data</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#clust_sims &lt;- rclusterBKBC(clusters="MatClust", kappa=10, mu=10, scale=0.05, verbose=FALSE)</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Each cluster consist of 10 points in a disc of radius 0.2</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>nclust <span class="ot">&lt;-</span> <span class="cf">function</span>(x0, y0, radius, n) {</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print(n)</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">runifdisc</span>(<span class="dv">10</span>, radius, <span class="at">centre=</span><span class="fu">c</span>(x0, y0)))</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>cond_clust_sims <span class="ot">&lt;-</span> <span class="fu">rNeymanScott</span>(<span class="at">kappa=</span><span class="dv">5</span>, <span class="at">expand=</span><span class="fl">0.0</span>, <span class="at">rclust=</span>nclust, <span class="at">radius=</span><span class="dv">2</span><span class="sc">*</span>r_core, <span class="at">n=</span><span class="dv">10</span>)</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co"># And PLOT</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>plot_w <span class="ot">&lt;-</span> <span class="dv">400</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>plot_h <span class="ot">&lt;-</span> <span class="dv">400</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>plot_scale <span class="ot">&lt;-</span> <span class="fl">2.25</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>cond_reg_plot <span class="ot">&lt;-</span> cond_reg_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>()</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/cond_reg.png"</span>, cond_reg_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>cond_sr_plot <span class="ot">&lt;-</span> cond_sr_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>()</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/cond_sr.png"</span>, cond_sr_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>cond_clust_plot <span class="ot">&lt;-</span> cond_clust_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>()</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/cond_clust.png"</span>, cond_clust_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<table class="caption-top table" data-quarto-postprocess="true">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 20%">
 <col style="width: 25%">
@@ -792,45 +1293,45 @@ window.Quarto = {
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6807</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">60</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>r_core <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Regularity via Inhibition</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Regularity via Inhibition</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>reg_sims <span class="ot">&lt;-</span> <span class="fu">rMaternI</span>(lambda, <span class="at">r=</span>r_core, <span class="at">win=</span>obs_window)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># CSR data</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>csr_sims <span class="ot">&lt;-</span> <span class="fu">rpoispp</span>(N, <span class="at">win=</span>obs_window)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="do">### Clustered data</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>clust_mu <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>clust_sims <span class="ot">&lt;-</span> <span class="fu">rMatClust</span>(<span class="at">kappa=</span>lambda <span class="sc">/</span> clust_mu, <span class="at">scale=</span><span class="dv">2</span><span class="sc">*</span>r_core, <span class="at">mu=</span><span class="dv">10</span>, <span class="at">win=</span>obs_window)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># And PLOT</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>plot_w <span class="ot">&lt;-</span> <span class="dv">400</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>plot_h <span class="ot">&lt;-</span> <span class="dv">400</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>plot_scale <span class="ot">&lt;-</span> <span class="fl">2.25</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>reg_plot <span class="ot">&lt;-</span> reg_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="fu">paste0</span>(<span class="st">"N = "</span>,reg_sims<span class="sc">$</span>n)) <span class="sc">+</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>()</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/reg.png"</span>, reg_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>csr_plot <span class="ot">&lt;-</span> csr_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="fu">paste0</span>(<span class="st">"N = "</span>,csr_sims<span class="sc">$</span>n)) <span class="sc">+</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>()</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/csr.png"</span>, csr_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>clust_plot <span class="ot">&lt;-</span> clust_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="fu">paste0</span>(<span class="st">"N = "</span>,clust_sims<span class="sc">$</span>n)) <span class="sc">+</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>()</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/clust.png"</span>, clust_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6807</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>r_core <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Regularity via Inhibition</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Regularity via Inhibition</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>reg_sims <span class="ot">&lt;-</span> <span class="fu">rMaternI</span>(lambda, <span class="at">r=</span>r_core, <span class="at">win=</span>obs_window)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># CSR data</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>csr_sims <span class="ot">&lt;-</span> <span class="fu">rpoispp</span>(N, <span class="at">win=</span>obs_window)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">### Clustered data</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>clust_mu <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>clust_sims <span class="ot">&lt;-</span> <span class="fu">rMatClust</span>(<span class="at">kappa=</span>lambda <span class="sc">/</span> clust_mu, <span class="at">scale=</span><span class="dv">2</span><span class="sc">*</span>r_core, <span class="at">mu=</span><span class="dv">10</span>, <span class="at">win=</span>obs_window)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># And PLOT</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>plot_w <span class="ot">&lt;-</span> <span class="dv">400</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>plot_h <span class="ot">&lt;-</span> <span class="dv">400</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>plot_scale <span class="ot">&lt;-</span> <span class="fl">2.25</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>reg_plot <span class="ot">&lt;-</span> reg_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="fu">paste0</span>(<span class="st">"N = "</span>,reg_sims<span class="sc">$</span>n)) <span class="sc">+</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>()</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/reg.png"</span>, reg_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>csr_plot <span class="ot">&lt;-</span> csr_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="fu">paste0</span>(<span class="st">"N = "</span>,csr_sims<span class="sc">$</span>n)) <span class="sc">+</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>()</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/csr.png"</span>, csr_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>clust_plot <span class="ot">&lt;-</span> clust_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="fu">paste0</span>(<span class="st">"N = "</span>,clust_sims<span class="sc">$</span>n)) <span class="sc">+</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>()</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/clust.png"</span>, clust_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<table class="caption-top table" data-quarto-postprocess="true">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 20%">
 <col style="width: 25%">
@@ -909,39 +1410,39 @@ window.Quarto = {
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">60</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>window_scale <span class="ot">&lt;-</span> <span class="fl">3.5</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>csr_sims_square <span class="ot">&lt;-</span> <span class="fu">rpoispp</span>(N, <span class="at">win=</span>obs_window)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Triangular window</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>obs_window_tri <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(<span class="fu">st_polygon</span>(<span class="fu">list</span>(</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.3</span>,<span class="fl">0.1</span>,<span class="fl">0.7</span>,<span class="fl">0.1</span>,<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.1</span>), <span class="at">byrow=</span><span class="cn">TRUE</span>, <span class="at">nrow=</span><span class="dv">4</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)))</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>obs_window_geom <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(<span class="fu">st_linestring</span>(</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">byrow=</span><span class="cn">TRUE</span>, <span class="at">nrow=</span><span class="dv">5</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>csr_sims_tri <span class="ot">&lt;-</span> <span class="fu">ppp</span>(csr_sims_square<span class="sc">$</span>x, csr_sims_square<span class="sc">$</span>y, <span class="at">window=</span><span class="fu">as.owin</span>(obs_window_tri))</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>tri_plot <span class="ot">&lt;-</span> csr_sims_tri <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>);</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/window_tri.png"</span>, tri_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>window_scale)</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Square window</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>square_plot <span class="ot">&lt;-</span> csr_sims_square <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>obs_window_tri <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_boundary</span>()) <span class="sc">+</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/window_square.png"</span>, square_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>window_scale)</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Circular window</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>obs_window_disc <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(<span class="fu">st_point</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))) <span class="sc">|&gt;</span> <span class="fu">st_buffer</span>(<span class="fl">1.2</span>)</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>csr_sims_circ <span class="ot">&lt;-</span> <span class="fu">ppp</span>(csr_sims_square<span class="sc">$</span>x, csr_sims_square<span class="sc">$</span>y, <span class="at">window=</span><span class="fu">as.owin</span>(obs_window_disc))</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>circ_plot <span class="ot">&lt;-</span> csr_sims_circ <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>obs_window_geom) <span class="sc">+</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>)</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/window_circ.png"</span>, circ_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>window_scale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>window_scale <span class="ot">&lt;-</span> <span class="fl">3.5</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>csr_sims_square <span class="ot">&lt;-</span> <span class="fu">rpoispp</span>(N, <span class="at">win=</span>obs_window)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Triangular window</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>obs_window_tri <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(<span class="fu">st_polygon</span>(<span class="fu">list</span>(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.3</span>,<span class="fl">0.1</span>,<span class="fl">0.7</span>,<span class="fl">0.1</span>,<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.1</span>), <span class="at">byrow=</span><span class="cn">TRUE</span>, <span class="at">nrow=</span><span class="dv">4</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>)))</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>obs_window_geom <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(<span class="fu">st_linestring</span>(</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">byrow=</span><span class="cn">TRUE</span>, <span class="at">nrow=</span><span class="dv">5</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>csr_sims_tri <span class="ot">&lt;-</span> <span class="fu">ppp</span>(csr_sims_square<span class="sc">$</span>x, csr_sims_square<span class="sc">$</span>y, <span class="at">window=</span><span class="fu">as.owin</span>(obs_window_tri))</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>tri_plot <span class="ot">&lt;-</span> csr_sims_tri <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>);</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/window_tri.png"</span>, tri_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>window_scale)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Square window</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>square_plot <span class="ot">&lt;-</span> csr_sims_square <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>obs_window_tri <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_boundary</span>()) <span class="sc">+</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/window_square.png"</span>, square_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>window_scale)</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Circular window</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>obs_window_disc <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(<span class="fu">st_point</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))) <span class="sc">|&gt;</span> <span class="fu">st_buffer</span>(<span class="fl">1.2</span>)</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>csr_sims_circ <span class="ot">&lt;-</span> <span class="fu">ppp</span>(csr_sims_square<span class="sc">$</span>x, csr_sims_square<span class="sc">$</span>y, <span class="at">window=</span><span class="fu">as.owin</span>(obs_window_disc))</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>circ_plot <span class="ot">&lt;-</span> csr_sims_circ <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>obs_window_geom) <span class="sc">+</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>)</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/window_circ.png"</span>, circ_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>window_scale)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <table class="caption-top table">
@@ -993,41 +1494,41 @@ window.Quarto = {
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>center_l_function <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span>spatstat.geom<span class="sc">::</span><span class="fu">is.ppp</span>(x) <span class="sc">&amp;&amp;</span> <span class="sc">!</span>spatstat.geom<span class="sc">::</span><span class="fu">is.fv</span>(x)) {</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"Please provide either ppp or fv object."</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (spatstat.geom<span class="sc">::</span><span class="fu">is.ppp</span>(x)) {</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">Lest</span>(x, ...)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  r <span class="ot">&lt;-</span> x<span class="sc">$</span>r</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  l_centered <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">eval.fv</span>(x <span class="sc">-</span> r)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(l_centered)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>cond_clust_sf <span class="ot">&lt;-</span> cond_clust_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>pines_plot <span class="ot">&lt;-</span> cond_clust_sf <span class="sc">|&gt;</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"full"</span>)</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/pines.png"</span>, pines_plot)</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># density() calls density.ppp() if the argument is a ppp object</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>den <span class="ot">&lt;-</span> <span class="fu">density</span>(cond_clust_sims, <span class="at">sigma =</span> <span class="fl">0.1</span>)</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(den)</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"images/intensity_plot.png"</span>)</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(den, <span class="at">main =</span> <span class="st">"Intensity λ(s)"</span>)</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(den, <span class="at">add =</span> <span class="cn">TRUE</span>) <span class="co"># contour plot</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co"># And Kest / Lest</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>kest_result <span class="ot">&lt;-</span> <span class="fu">Kest</span>(cond_clust_sims, <span class="at">rmax=</span><span class="fl">0.5</span>, <span class="at">correction=</span><span class="st">"best"</span>)</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>lest_result <span class="ot">&lt;-</span> <span class="fu">center_l_function</span>(cond_clust_sims, <span class="at">rmax=</span><span class="fl">0.5</span>)</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"images/lest.png"</span>)</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lest_result, <span class="at">main=</span><span class="st">"K(h)"</span>)</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>center_l_function <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span>spatstat.geom<span class="sc">::</span><span class="fu">is.ppp</span>(x) <span class="sc">&amp;&amp;</span> <span class="sc">!</span>spatstat.geom<span class="sc">::</span><span class="fu">is.fv</span>(x)) {</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"Please provide either ppp or fv object."</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (spatstat.geom<span class="sc">::</span><span class="fu">is.ppp</span>(x)) {</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">Lest</span>(x, ...)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  r <span class="ot">&lt;-</span> x<span class="sc">$</span>r</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  l_centered <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">eval.fv</span>(x <span class="sc">-</span> r)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(l_centered)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>cond_clust_sf <span class="ot">&lt;-</span> cond_clust_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>pines_plot <span class="ot">&lt;-</span> cond_clust_sf <span class="sc">|&gt;</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"full"</span>)</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/pines.png"</span>, pines_plot)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="co"># density() calls density.ppp() if the argument is a ppp object</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>den <span class="ot">&lt;-</span> <span class="fu">density</span>(cond_clust_sims, <span class="at">sigma =</span> <span class="fl">0.1</span>)</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(den)</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"images/intensity_plot.png"</span>)</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(den, <span class="at">main =</span> <span class="st">"Intensity λ(s)"</span>)</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(den, <span class="at">add =</span> <span class="cn">TRUE</span>) <span class="co"># contour plot</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="co"># And Kest / Lest</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>kest_result <span class="ot">&lt;-</span> <span class="fu">Kest</span>(cond_clust_sims, <span class="at">rmax=</span><span class="fl">0.5</span>, <span class="at">correction=</span><span class="st">"best"</span>)</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>lest_result <span class="ot">&lt;-</span> <span class="fu">center_l_function</span>(cond_clust_sims, <span class="at">rmax=</span><span class="fl">0.5</span>)</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"images/lest.png"</span>)</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lest_result, <span class="at">main=</span><span class="st">"K(h)"</span>)</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <table class="caption-top table">
@@ -1057,17 +1558,23 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
+<section id="references" class="level2 crunch-title smaller">
+<h2 class="crunch-title smaller anchored" data-anchor-id="references">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-baddeley_spatial_2015" class="csl-entry" role="listitem">
-Baddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. <em>Spatial <span>Point Patterns</span>: <span>Methodology</span> and <span>Applications</span> with <span>R</span></em>. CRC Press. <a href="https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&amp;dl=1">https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&amp;dl=1</a>.
+Baddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. <em><a href="https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&amp;dl=1">Spatial <span>Point Patterns</span>: <span>Methodology</span> and <span>Applications</span> with <span>R</span></a></em>. CRC Press.
+</div>
+<div id="ref-parenti_tropic_2011" class="csl-entry" role="listitem">
+Parenti, Christian. 2011. <em>Tropic of <span>Chaos</span>: <span>Climate Change</span> and the <span>New Geography</span> of <span>Violence</span></em>. PublicAffairs.
 </div>
 <div id="ref-schabenberger_statistical_2004" class="csl-entry" role="listitem">
-Schabenberger, Oliver, and Carol A. Gotway. 2004. <em>Statistical <span>Methods</span> for <span>Spatial Data Analysis</span></em>. CRC Press. <a href="https://www.dropbox.com/scl/fi/25gj53qitsdzw9kvcvfjf/Oliver-Schabenberger-Carol-A.-Gotway-Statistical-methods-for-spatial-data-analysis.pdf?rlkey=p5ih232gmxzm3zstvszux2big&amp;dl=1">https://www.dropbox.com/scl/fi/25gj53qitsdzw9kvcvfjf/Oliver-Schabenberger-Carol-A.-Gotway-Statistical-methods-for-spatial-data-analysis.pdf?rlkey=p5ih232gmxzm3zstvszux2big&amp;dl=1</a>.
+Schabenberger, Oliver, and Carol A. Gotway. 2004. <em><a href="https://www.dropbox.com/scl/fi/25gj53qitsdzw9kvcvfjf/Oliver-Schabenberger-Carol-A.-Gotway-Statistical-methods-for-spatial-data-analysis.pdf?rlkey=p5ih232gmxzm3zstvszux2big&amp;dl=1">Statistical <span>Methods</span> for <span>Spatial Data Analysis</span></a></em>. CRC Press.
 </div>
 <div id="ref-waller_applied_2004" class="csl-entry" role="listitem">
-Waller, Lance A., and Carol A. Gotway. 2004. <em>Applied <span>Spatial Statistics</span> for <span>Public Health Data</span></em>. John Wiley &amp; Sons. <a href="https://www.dropbox.com/scl/fi/kyq9h64e3x2zcd5qezaeh/Lance-A.-Waller-Carol-A.-Gotway-Applied-Spatial-Analysis-of-Public-Health-Data.pdf?rlkey=ajc3pfm3j01htkflidgd6jx28&amp;dl=1">https://www.dropbox.com/scl/fi/kyq9h64e3x2zcd5qezaeh/Lance-A.-Waller-Carol-A.-Gotway-Applied-Spatial-Analysis-of-Public-Health-Data.pdf?rlkey=ajc3pfm3j01htkflidgd6jx28&amp;dl=1</a>.
+Waller, Lance A., and Carol A. Gotway. 2004. <em><a href="https://www.dropbox.com/scl/fi/kyq9h64e3x2zcd5qezaeh/Lance-A.-Waller-Carol-A.-Gotway-Applied-Spatial-Analysis-of-Public-Health-Data.pdf?rlkey=ajc3pfm3j01htkflidgd6jx28&amp;dl=1">Applied <span>Spatial Statistics</span> for <span>Public Health Data</span></a></em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-xie_analyzing_2022" class="csl-entry" role="listitem">
+Xie, Sherrie. 2022. <span>“<a href="https://www.youtube.com/watch?v=DD7bXonh-_E">Analyzing <span>Geospatial Data</span> in <span>R</span></a>.”</span> R/Medicine Virtual Conference: YouTube.
 </div>
 </div>
 
@@ -1140,13 +1647,14 @@ Waller, Lance A., and Carol A. Gotway. 2004. <em>Applied <span>Spatial Statistic
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

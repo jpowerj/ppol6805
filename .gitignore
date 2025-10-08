@@ -3,3 +3,5 @@
 *.tif
 *.hdr
 *.tfw
+
+**/*.quarto_ipynb

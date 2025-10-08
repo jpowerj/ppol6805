@@ -126,3 +126,6 @@ plot(reg_sims, main=paste0("Spatial Regularity: N = ",reg_sims$n))
 plot(csr_sims, main=paste0("Complete Spatial Randomness: N = ",csr_sims$n))
 plot(clust_sims, main=paste0("Spatial Clustering: N = ",clust_sims$n))
 ```
+
+
+

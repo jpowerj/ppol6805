@@ -7,8 +7,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.33">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Jeff Jacobs">
   <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 8: Point Processes: Null Models, Clustering, and Regularity</title>
@@ -116,7 +116,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-b92f69f301b2c1bb785b64f55f1b1447.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ca0b782abe05404a642e04cd0acde7cc.css">
   <link rel="stylesheet" href="../dsan-globals/jjstyles.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -264,14 +264,14 @@ Jeff Jacobs
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
 <span id="cb1-2"><a></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
 <span id="cb1-3"><a></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
 <span id="cb1-4"><a></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
 <span id="cb1-5"><a></a><span class="fu">library</span>(spatstat) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
 <span id="cb1-6"><a></a><span class="fu">library</span>(mdthemes) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
 <span id="cb1-7"><a></a><span class="fu">library</span>(mapview) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb1-8"><a></a><span class="fu">library</span>(leaflet) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a></a><span class="fu">library</span>(leaflet) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </div>
@@ -306,12 +306,12 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>tree_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">lon=</span><span class="fu">runif</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">lat=</span><span class="fu">runif</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">age=</span><span class="fu">runif</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>tree_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">lon=</span><span class="fu">runif</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">lat=</span><span class="fu">runif</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">age=</span><span class="fu">runif</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
 <span id="cb2-2"><a></a>tree_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(</span>
 <span id="cb2-3"><a></a>  tree_df,</span>
 <span id="cb2-4"><a></a>  <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">'lon'</span>, <span class="st">'lat'</span>)</span>
 <span id="cb2-5"><a></a>)</span>
-<span id="cb2-6"><a></a>tree_sf <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-6"><a></a>tree_sf <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -349,10 +349,10 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>pois_ppp <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>pois_ppp <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
 <span id="cb3-2"><a></a>  <span class="at">lambda=</span><span class="dv">100</span>, <span class="at">win=</span>spatstat.geom<span class="sc">::</span><span class="fu">square</span>(<span class="dv">1</span>)</span>
 <span id="cb3-3"><a></a>)</span>
-<span id="cb3-4"><a></a>pois_ppp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a></a>pois_ppp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Planar point pattern: 91 points
@@ -360,14 +360,14 @@ window: rectangle = [0, 1] x [0, 1] units</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">attributes</span>(pois_ppp)<span class="sc">$</span>names</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">attributes</span>(pois_ppp)<span class="sc">$</span>names</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "window"     "n"          "x"          "y"          "markformat"</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>pois_ppp<span class="sc">$</span>x <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>pois_ppp<span class="sc">$</span>x <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5735346 0.7526621 0.8129999 0.7419696</code></pre>
@@ -383,8 +383,8 @@ window: rectangle = [0, 1] x [0, 1] units</code></pre>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>pois_sf <span class="ot">&lt;-</span> pois_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
-<span id="cb9-2"><a></a>pois_sf <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>pois_sf <span class="ot">&lt;-</span> pois_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb9-2"><a></a>pois_sf <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -420,13 +420,13 @@ window: rectangle = [0, 1] x [0, 1] units</code></pre>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>pois_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>pois_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb10-2"><a></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>pois_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label<span class="sc">==</span><span class="st">"window"</span>), <span class="fu">aes</span>(<span class="at">fill=</span><span class="st">'grey'</span>)) <span class="sc">+</span></span>
 <span id="cb10-3"><a></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>pois_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">!=</span> <span class="st">"window"</span>), <span class="fu">aes</span>(<span class="at">color=</span><span class="st">'black'</span>)) <span class="sc">+</span></span>
 <span id="cb10-4"><a></a>  <span class="fu">md_theme_classic</span>(<span class="at">base_size=</span><span class="dv">26</span>) <span class="sc">+</span></span>
 <span id="cb10-5"><a></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"gray90"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"&lt;span style='font-family: mono'&gt;label == 'window'&lt;/span&gt;"</span>)) <span class="sc">+</span></span>
 <span id="cb10-6"><a></a>  <span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"&lt;span style='font-family: mono'&gt;label == 'point'&lt;/span&gt;"</span>)) <span class="sc">+</span></span>
-<span id="cb10-7"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"&lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; &amp;rarr; &lt;span style='font-family: mono'&gt;sf&lt;/span&gt; Result"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-7"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"&lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; &amp;rarr; &lt;span style='font-family: mono'&gt;sf&lt;/span&gt; Result"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -441,14 +441,14 @@ window: rectangle = [0, 1] x [0, 1] units</code></pre>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>square_sfc <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_polygon</span>(<span class="fu">list</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>square_sfc <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_polygon</span>(<span class="fu">list</span>(</span>
 <span id="cb11-2"><a></a>  <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">nrow=</span><span class="dv">5</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
 <span id="cb11-3"><a></a>)) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_sfc</span>()</span>
 <span id="cb11-4"><a></a>tree_ppp <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(</span>
 <span id="cb11-5"><a></a>  sf<span class="sc">::</span><span class="fu">st_as_sfc</span>(tree_sf),</span>
 <span id="cb11-6"><a></a>  <span class="at">W=</span><span class="fu">as.owin</span>(square_sfc)</span>
 <span id="cb11-7"><a></a>)</span>
-<span id="cb11-8"><a></a>tree_ppp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-8"><a></a>tree_ppp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Planar point pattern: 100 points
@@ -459,7 +459,7 @@ enclosing rectangle: [0, 1] x [0, 1] units</code></pre>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>tree_ppp_sf <span class="ot">&lt;-</span> tree_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>tree_ppp_sf <span class="ot">&lt;-</span> tree_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
 <span id="cb13-2"><a></a>tree_ppp_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb13-3"><a></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill=</span><span class="st">'gray90'</span>)) <span class="sc">+</span></span>
 <span id="cb13-4"><a></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>tree_ppp_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">!=</span> <span class="st">"window"</span>), <span class="fu">aes</span>(<span class="at">color=</span><span class="st">'black'</span>)) <span class="sc">+</span></span>
@@ -472,7 +472,7 @@ enclosing rectangle: [0, 1] x [0, 1] units</code></pre>
 <span id="cb13-11"><a></a>    <span class="at">y=</span><span class="st">"&lt;span style='font-family: mono'&gt;tree_ppp$y&lt;/span&gt;"</span></span>
 <span id="cb13-12"><a></a>  ) <span class="sc">+</span> </span>
 <span id="cb13-13"><a></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">order =</span> <span class="dv">1</span>), </span>
-<span id="cb13-14"><a></a>              <span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">order =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-14"><a></a>              <span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">order =</span> <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -513,13 +513,13 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Art}}\)</span>: Arti
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code (Step 1: Grid Creation)</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>ha_base <span class="ot">&lt;-</span> <span class="dv">28</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>ha_base <span class="ot">&lt;-</span> <span class="dv">28</span></span>
 <span id="cb14-2"><a></a>square_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(spatstat.geom<span class="sc">::</span><span class="fu">square</span>(<span class="dv">1</span>))</span>
 <span id="cb14-3"><a></a>grid_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(sf<span class="sc">::</span><span class="fu">st_make_grid</span>(square_sf))</span>
 <span id="cb14-4"><a></a>grid_buffer_sf <span class="ot">&lt;-</span> grid_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_buffer</span>(<span class="at">dist=</span><span class="sc">-</span><span class="fl">0.01</span>, <span class="at">singleSide =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb14-5"><a></a>grid_buffer_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb14-6"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb14-7"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>ha_base)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-7"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>ha_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -533,11 +533,11 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Art}}\)</span>: Arti
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code (Step 2: Point Generation)</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>grid_points <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(grid_buffer_sf, <span class="at">size=</span><span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">100</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>grid_points <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(grid_buffer_sf, <span class="at">size=</span><span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">100</span>))</span>
 <span id="cb15-2"><a></a>grid_buffer_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb15-3"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
 <span id="cb15-4"><a></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>grid_points) <span class="sc">+</span></span>
-<span id="cb15-5"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>ha_base)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-5"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>ha_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -551,10 +551,10 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Art}}\)</span>: Arti
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code (Step 3: Observed Result)</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>grid_ppp <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(grid_points, <span class="at">W=</span>spatstat.geom<span class="sc">::</span><span class="fu">square</span>(<span class="dv">1</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>grid_ppp <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(grid_points, <span class="at">W=</span>spatstat.geom<span class="sc">::</span><span class="fu">square</span>(<span class="dv">1</span>))</span>
 <span id="cb16-2"><a></a>grid_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb16-3"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb16-4"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>ha_base)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-4"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>ha_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -573,13 +573,13 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code (Step 1: Tree Generation)</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>hn_base <span class="ot">&lt;-</span> <span class="dv">28</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>hn_base <span class="ot">&lt;-</span> <span class="dv">28</span></span>
 <span id="cb17-2"><a></a>r <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
 <span id="cb17-3"><a></a>pois_ppp <span class="ot">&lt;-</span> <span class="fu">rpoispp</span>(<span class="dv">150</span>)</span>
 <span id="cb17-4"><a></a>pois_sf <span class="ot">&lt;-</span> pois_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
 <span id="cb17-5"><a></a>pois_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb17-6"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb17-7"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>hn_base)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-7"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>hn_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -593,7 +593,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code (Step 2: Competition)</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>age <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fu">npoints</span>(pois_ppp))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>age <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fu">npoints</span>(pois_ppp))</span>
 <span id="cb18-2"><a></a>pair_dists <span class="ot">&lt;-</span> <span class="fu">pairdist</span>(pois_ppp)</span>
 <span id="cb18-3"><a></a>close <span class="ot">&lt;-</span> (pair_dists <span class="sc">&lt;</span> r)</span>
 <span id="cb18-4"><a></a>later <span class="ot">&lt;-</span> <span class="fu">outer</span>(age, age, <span class="st">"&gt;"</span>)</span>
@@ -613,7 +613,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb18-18"><a></a>  <span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"Alive"</span><span class="ot">=</span><span class="st">"black"</span>, <span class="st">"Dead"</span><span class="ot">=</span>cb_palette[<span class="dv">1</span>], <span class="st">"Inhibition"</span><span class="ot">=</span><span class="st">"black"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Alive"</span>, <span class="st">"Dead"</span>, <span class="st">"Inhibition"</span>)) <span class="sc">+</span></span>
 <span id="cb18-19"><a></a>  <span class="fu">guides</span>(<span class="at">shape=</span><span class="fu">guide_legend</span>(<span class="at">override.aes=</span><span class="fu">list</span>(<span class="at">fill =</span> <span class="st">"white"</span>))) <span class="sc">+</span></span>
 <span id="cb18-20"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> hn_base) <span class="sc">+</span></span>
-<span id="cb18-21"><a></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="st">"cm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-21"><a></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="st">"cm"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -627,9 +627,9 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code (Step 3: Observed Result)</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>alive_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>alive_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb19-2"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb19-3"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>hn_base)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-3"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>hn_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -651,7 +651,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb20-2"><a></a><span class="fu">library</span>(spatstat)</span>
 <span id="cb20-3"><a></a><span class="fu">set.seed</span>(<span class="dv">6809</span>)</span>
 <span id="cb20-4"><a></a>N <span class="ot">&lt;-</span> <span class="dv">60</span></span>
@@ -687,10 +687,10 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb20-34"><a></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.0</span>, <span class="at">to=</span><span class="fl">1.0</span>, <span class="at">by=</span><span class="fl">0.1</span>)) <span class="sc">+</span></span>
 <span id="cb20-35"><a></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Distance"</span>, <span class="at">y=</span><span class="st">"Density"</span>) <span class="sc">+</span></span>
 <span id="cb20-36"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">14</span>)</span>
-<span id="cb20-37"><a></a><span class="fu">ggsave</span>(<span class="st">"images/clust_pcf.png"</span>, clust_pcf_plot, <span class="at">width=</span><span class="dv">3</span>, <span class="at">height=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-37"><a></a><span class="fu">ggsave</span>(<span class="st">"images/clust_pcf.png"</span>, clust_pcf_plot, <span class="at">width=</span><span class="dv">3</span>, <span class="at">height=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<table data-quarto-postprocess="true" style="width: 100%; table-layout: fixed;">
+<table style="width: 100%; table-layout: fixed;">
 <colgroup>
 <col style="width: 32%">
 <col style="width: 34%">
@@ -724,7 +724,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>sq_base <span class="ot">&lt;-</span> <span class="dv">16</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>sq_base <span class="ot">&lt;-</span> <span class="dv">16</span></span>
 <span id="cb21-2"><a></a>sq_psize <span class="ot">&lt;-</span> <span class="fl">2.5</span></span>
 <span id="cb21-3"><a></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
 <span id="cb21-4"><a></a>r0 <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
@@ -742,7 +742,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb21-16"><a></a>sq_ppp <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(sq_sf, <span class="at">W=</span>obs_window)</span>
 <span id="cb21-17"><a></a>sq_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb21-18"><a></a>  <span class="fu">geom_sf</span>(<span class="at">size=</span>sq_psize) <span class="sc">+</span></span>
-<span id="cb21-19"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-19"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -756,10 +756,10 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">las=</span><span class="dv">2</span>, <span class="at">oma=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">las=</span><span class="dv">2</span>, <span class="at">oma=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
 <span id="cb22-2"><a></a>sq_density <span class="ot">&lt;-</span> <span class="fu">density</span>(sq_ppp)</span>
 <span id="cb22-3"><a></a><span class="fu">plot</span>(sq_density, <span class="at">main=</span><span class="cn">NULL</span>, <span class="at">xaxs=</span><span class="st">'i'</span>, <span class="at">yaxs=</span><span class="st">'i'</span>)</span>
-<span id="cb22-4"><a></a><span class="fu">contour</span>(sq_density, <span class="at">xaxs=</span><span class="st">'i'</span>, <span class="at">yaxs=</span><span class="st">'i'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-4"><a></a><span class="fu">contour</span>(sq_density, <span class="at">xaxs=</span><span class="st">'i'</span>, <span class="at">yaxs=</span><span class="st">'i'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -773,7 +773,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="do">### PCF</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="do">### PCF</span></span>
 <span id="cb23-2"><a></a>pcf_result <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">pcf</span>(</span>
 <span id="cb23-3"><a></a>  sq_ppp,</span>
 <span id="cb23-4"><a></a>  <span class="at">divisor=</span><span class="st">"d"</span>,</span>
@@ -783,7 +783,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb23-8"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">1</span>, <span class="at">linetype=</span><span class="st">'dashed'</span>, <span class="at">linewidth=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
 <span id="cb23-9"><a></a>  <span class="fu">geom_area</span>(<span class="at">color=</span><span class="st">'black'</span>, <span class="at">fill=</span>cb_palette[<span class="dv">1</span>], <span class="at">alpha=</span><span class="fl">0.75</span>) <span class="sc">+</span></span>
 <span id="cb23-10"><a></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.0</span>, <span class="at">to=</span><span class="fl">1.0</span>, <span class="at">by=</span><span class="fl">0.1</span>)) <span class="sc">+</span></span>
-<span id="cb23-11"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-11"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -800,13 +800,13 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>csr_ppp <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>csr_ppp <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
 <span id="cb24-2"><a></a>  <span class="at">lambda =</span> <span class="dv">60</span>,</span>
 <span id="cb24-3"><a></a>  <span class="at">win=</span>obs_window</span>
 <span id="cb24-4"><a></a>)</span>
 <span id="cb24-5"><a></a>csr_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb24-6"><a></a>  <span class="fu">geom_sf</span>(<span class="at">size=</span>sq_psize) <span class="sc">+</span></span>
-<span id="cb24-7"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-7"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -820,14 +820,14 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">par</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">par</span>(</span>
 <span id="cb25-2"><a></a>  <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>),</span>
 <span id="cb25-3"><a></a>  <span class="at">las=</span><span class="dv">2</span>,</span>
 <span id="cb25-4"><a></a>  <span class="at">oma=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
 <span id="cb25-5"><a></a>)</span>
 <span id="cb25-6"><a></a>csr_density <span class="ot">&lt;-</span> <span class="fu">density</span>(csr_ppp)</span>
 <span id="cb25-7"><a></a><span class="fu">plot</span>(csr_density, <span class="at">main=</span><span class="cn">NULL</span>, <span class="at">xaxs=</span><span class="st">"i"</span>, <span class="at">yaxs=</span><span class="st">"i"</span>)</span>
-<span id="cb25-8"><a></a><span class="fu">contour</span>(csr_density, <span class="at">xaxs=</span><span class="st">"i"</span>, <span class="at">yaxs=</span><span class="st">"i"</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd=</span><span class="fl">1.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-8"><a></a><span class="fu">contour</span>(csr_density, <span class="at">xaxs=</span><span class="st">"i"</span>, <span class="at">yaxs=</span><span class="st">"i"</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd=</span><span class="fl">1.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -841,7 +841,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>csr_pcf_result <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">pcf</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>csr_pcf_result <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">pcf</span>(</span>
 <span id="cb26-2"><a></a>  csr_ppp,</span>
 <span id="cb26-3"><a></a>  <span class="at">divisor=</span><span class="st">"d"</span>,</span>
 <span id="cb26-4"><a></a>  <span class="at">r=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.00</span>, <span class="at">to=</span><span class="fl">0.8</span>, <span class="at">by=</span><span class="fl">0.01</span>)</span>
@@ -850,7 +850,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb26-7"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">1</span>, <span class="at">linetype=</span><span class="st">'dashed'</span>, <span class="at">linewidth=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
 <span id="cb26-8"><a></a>  <span class="fu">geom_area</span>(<span class="at">color=</span><span class="st">'black'</span>, <span class="at">fill=</span>cb_palette[<span class="dv">1</span>], <span class="at">alpha=</span><span class="fl">0.75</span>) <span class="sc">+</span></span>
 <span id="cb26-9"><a></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.0</span>, <span class="at">to=</span><span class="fl">1.0</span>, <span class="at">by=</span><span class="fl">0.1</span>)) <span class="sc">+</span></span>
-<span id="cb26-10"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-10"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -869,7 +869,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 </section>
 <section id="poisson-point-processes-csr" class="slide level2 crunch-title crunch-img crunch-ul inline-90">
 <h2>Poisson Point Processes (CSR)</h2>
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(lambda, win)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(lambda, win)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><i class="bi bi-1-circle"></i> <span class="math inline">\(N \sim \text{Pois}(\lambda)\)</span></li>
 <li><i class="bi bi-2-circle"></i> For <span class="math inline">\(i \in \{1, \ldots, N\}\)</span>:
@@ -880,7 +880,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>sim_base <span class="ot">&lt;-</span> <span class="dv">22</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>sim_base <span class="ot">&lt;-</span> <span class="dv">22</span></span>
 <span id="cb28-2"><a></a>sim_psize <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb28-3"><a></a>sim_xticks <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.0</span>, <span class="at">to=</span><span class="fl">1.0</span>, <span class="at">by=</span><span class="fl">0.2</span>)</span>
 <span id="cb28-4"><a></a>sim_yticks <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.0</span>, <span class="at">to=</span><span class="fl">1.0</span>, <span class="at">by=</span><span class="fl">0.2</span>)</span>
@@ -907,14 +907,14 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb28-25"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sim_base) <span class="sc">+</span></span>
 <span id="cb28-26"><a></a>  <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">"lines"</span>)) <span class="sc">+</span></span>
 <span id="cb28-27"><a></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span>sim_xticks) <span class="sc">+</span></span>
-<span id="cb28-28"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span>sim_yticks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-28"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span>sim_yticks)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 
 </div>
 <img data-src="index_files/figure-revealjs/pois-ppp-sims-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="simple-sequential-inhibition-ssi" class="slide level2 smaller crunch-title title-11 inline-90 code-90 crunch-img crunch-quarto-figure crunch-ul">
 <h2>Simple Sequential Inhibition (SSI)</h2>
-<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>spatstat.random<span class="sc">::</span><span class="fu">rSSI</span>(r, <span class="at">n=</span><span class="cn">Inf</span>, <span class="at">giveup=</span><span class="dv">1000</span>, win)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>spatstat.random<span class="sc">::</span><span class="fu">rSSI</span>(r, <span class="at">n=</span><span class="cn">Inf</span>, <span class="at">giveup=</span><span class="dv">1000</span>, win)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><span class="math inline">\(\mathbf{S} = \varnothing\)</span></li>
 <li>While not <code>done</code>:
@@ -930,7 +930,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">capture.output</span>(ssi_sims <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rSSI</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">capture.output</span>(ssi_sims <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rSSI</span>(</span>
 <span id="cb30-2"><a></a>  <span class="at">r =</span> <span class="fl">0.05</span>, <span class="at">n=</span><span class="dv">60</span>, <span class="at">nsim=</span><span class="dv">3</span></span>
 <span id="cb30-3"><a></a>), <span class="at">file=</span><span class="fu">nullfile</span>())</span>
 <span id="cb30-4"><a></a>combined_df <span class="ot">&lt;-</span> <span class="fu">imap</span>(<span class="at">.x=</span>ssi_sims, <span class="at">.f=</span>to_sim_df) <span class="sc">|&gt;</span> <span class="fu">bind_rows</span>()</span>
@@ -941,7 +941,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb30-9"><a></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">24</span>) <span class="sc">+</span></span>
 <span id="cb30-10"><a></a>  <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"lines"</span>)) <span class="sc">+</span></span>
 <span id="cb30-11"><a></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span>sim_xticks) <span class="sc">+</span></span>
-<span id="cb30-12"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span>sim_yticks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-12"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span>sim_yticks)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 
 </div>
@@ -950,7 +950,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <h2>Matérn Cluster Process</h2>
 <div class="columns">
 <div class="column" style="width:75%;">
-<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>spatstat.random<span class="sc">::</span><span class="fu">rMatClust</span>(kappa, scale, mu, win)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>spatstat.random<span class="sc">::</span><span class="fu">rMatClust</span>(kappa, scale, mu, win)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:25%;">
 <p><a href="https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMatClust.html" target="_blank">Docs</a></p>
 </div></div>
@@ -965,7 +965,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>matclust_sims <span class="ot">&lt;-</span> <span class="fu">rMatClust</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>matclust_sims <span class="ot">&lt;-</span> <span class="fu">rMatClust</span>(</span>
 <span id="cb32-2"><a></a>  <span class="at">kappa =</span> <span class="dv">6</span>,</span>
 <span id="cb32-3"><a></a>  <span class="at">scale =</span> <span class="fl">0.075</span>,</span>
 <span id="cb32-4"><a></a>  <span class="at">mu =</span> <span class="dv">10</span>,</span>
@@ -980,16 +980,16 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb32-13"><a></a>  <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">"lines"</span>)) <span class="sc">+</span></span>
 <span id="cb32-14"><a></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span>sim_xticks) <span class="sc">+</span></span>
 <span id="cb32-15"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span>sim_yticks)</span>
-<span id="cb32-16"><a></a>matclust_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-16"><a></a>matclust_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 
 </div>
 <img data-src="index_files/figure-revealjs/matclust-plot-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="matérn-inhibition-process-i-and-ii" class="slide level2 smaller crunch-title inline-90 crunch-ul">
 <h2>Matérn Inhibition Process (I and II)</h2>
-<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>spatstat.random<span class="sc">::</span><span class="fu">rMaternI</span>(kappa, r, win)</span>
-<span id="cb33-2"><a></a>spatstat.random<span class="sc">::</span><span class="fu">rMaternII</span>(kappa, r, win)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<table data-quarto-postprocess="true">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>spatstat.random<span class="sc">::</span><span class="fu">rMaternI</span>(kappa, r, win)</span>
+<span id="cb33-2"><a></a>spatstat.random<span class="sc">::</span><span class="fu">rMaternII</span>(kappa, r, win)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table>
 <colgroup>
 <col style="width: 50%">
 <col style="width: 50%">
@@ -1023,7 +1023,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>mI_sims <span class="ot">&lt;-</span> <span class="fu">rMaternI</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>mI_sims <span class="ot">&lt;-</span> <span class="fu">rMaternI</span>(</span>
 <span id="cb34-2"><a></a>  <span class="at">kappa =</span> <span class="dv">60</span>, <span class="at">r =</span> <span class="fl">0.075</span>, <span class="at">nsim=</span><span class="dv">2</span></span>
 <span id="cb34-3"><a></a>)</span>
 <span id="cb34-4"><a></a>mII_sims <span class="ot">&lt;-</span> <span class="fu">rMaternII</span>(</span>
@@ -1040,7 +1040,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb34-15"><a></a>  <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">"lines"</span>)) <span class="sc">+</span></span>
 <span id="cb34-16"><a></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span>sim_xticks) <span class="sc">+</span></span>
 <span id="cb34-17"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span>sim_yticks)</span>
-<span id="cb34-18"><a></a>m_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-18"><a></a>m_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 
 </div>
@@ -1049,15 +1049,15 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <h2>Cox Processes: Random Intensity → Random Events</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a>spatstat.random<span class="sc">::</span><span class="fu">rLGCP</span>(model, mu, param, win)</span>
-<span id="cb35-2"><a></a>models<span class="ot">=</span><span class="fu">c</span>(<span class="st">"exponential"</span>, <span class="st">"gauss"</span>, <span class="st">"stable"</span>, <span class="st">"gencauchy"</span>, <span class="st">"matern"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a>spatstat.random<span class="sc">::</span><span class="fu">rLGCP</span>(model, mu, param, win)</span>
+<span id="cb35-2"><a></a>models<span class="ot">=</span><span class="fu">c</span>(<span class="st">"exponential"</span>, <span class="st">"gauss"</span>, <span class="st">"stable"</span>, <span class="st">"gencauchy"</span>, <span class="st">"matern"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:40%;">
 <p><a href="https://search.r-project.org/CRAN/refmans/spatstat.random/html/rLGCP.html" target="_blank">Docs</a></p>
 </div></div>
 <div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>cox_pcol <span class="ot">&lt;-</span> <span class="st">"black"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>cox_pcol <span class="ot">&lt;-</span> <span class="st">"black"</span></span>
 <span id="cb36-2"><a></a>cox_bg <span class="ot">&lt;-</span> <span class="st">"grey90"</span></span>
 <span id="cb36-3"><a></a>cox_pch <span class="ot">&lt;-</span> <span class="dv">21</span></span>
 <span id="cb36-4"><a></a><span class="co"># inhomogeneous LGCP with Gaussian covariance function</span></span>
@@ -1071,7 +1071,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb36-12"><a></a>  <span class="fu">points</span>(lgcp_sim, <span class="at">col=</span>cox_pcol, <span class="at">bg=</span>cox_bg, <span class="at">pch=</span>cox_pch)</span>
 <span id="cb36-13"><a></a>}</span>
 <span id="cb36-14"><a></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">oma=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">las=</span><span class="dv">2</span>)</span>
-<span id="cb36-15"><a></a>nulls <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X=</span>lgcp_sims, <span class="at">FUN=</span>plot_lgcp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-15"><a></a>nulls <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X=</span>lgcp_sims, <span class="at">FUN=</span>plot_lgcp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 
 </div>
@@ -1093,7 +1093,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>city_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>city_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
 <span id="cb37-2"><a></a>  <span class="sc">~</span>city, <span class="sc">~</span>lon, <span class="sc">~</span>lat, <span class="sc">~</span>pop,</span>
 <span id="cb37-3"><a></a>  <span class="st">"Chicago"</span>, <span class="fl">41.950567516553896</span>, <span class="sc">-</span><span class="fl">87.93011127491978</span>, <span class="dv">2746388</span>,</span>
 <span id="cb37-4"><a></a>  <span class="st">"Detroit"</span>, <span class="fl">42.45123004999075</span>, <span class="sc">-</span><span class="fl">83.18402319217698</span>, <span class="dv">631524</span></span>
@@ -1108,7 +1108,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb37-13"><a></a>city_cases_sf<span class="sc">$</span>city <span class="ot">&lt;-</span> <span class="st">"Detroit (10 Cases)"</span></span>
 <span id="cb37-14"><a></a>city_cases_sf[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="st">'city'</span>] <span class="ot">&lt;-</span> <span class="st">"Chicago (10 Cases)"</span></span>
 <span id="cb37-15"><a></a>city_cases_sf<span class="sc">$</span>sample <span class="ot">&lt;-</span> <span class="st">"Flu"</span></span>
-<span id="cb37-16"><a></a><span class="fu">mapview</span>(city_cases_sf, <span class="at">zcol=</span><span class="st">"city"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-16"><a></a><span class="fu">mapview</span>(city_cases_sf, <span class="at">zcol=</span><span class="st">"city"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-d45df5adcc02bd179ec9" style="width:960px;height:480px;"></div>
@@ -1137,7 +1137,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>city_pop_sf <span class="ot">&lt;-</span> city_buf_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(<span class="at">size=</span><span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">4</span>)) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>city_pop_sf <span class="ot">&lt;-</span> city_buf_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(<span class="at">size=</span><span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">4</span>)) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
 <span id="cb38-2"><a></a>city_pop_sf<span class="sc">$</span>city <span class="ot">&lt;-</span> <span class="st">"Detroit"</span></span>
 <span id="cb38-3"><a></a>city_pop_sf[<span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>, <span class="st">'city'</span>] <span class="ot">&lt;-</span> <span class="st">"Chicago"</span></span>
 <span id="cb38-4"><a></a>city_pop_sf<span class="sc">$</span>sample <span class="ot">&lt;-</span> <span class="st">"People"</span></span>
@@ -1162,7 +1162,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb38-23"><a></a><span class="fu">leaflet</span>(city_flu_sf) <span class="sc">|&gt;</span></span>
 <span id="cb38-24"><a></a>  <span class="fu">addProviderTiles</span>(<span class="st">"CartoDB.Positron"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb38-25"><a></a>  <span class="fu">addMarkers</span>(<span class="at">data=</span>city_flu_sf, <span class="at">icon =</span> Flu) <span class="sc">|&gt;</span></span>
-<span id="cb38-26"><a></a>  <span class="fu">addMarkers</span>(<span class="at">data=</span>city_ppl_sf, <span class="at">icon =</span> People)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb38-26"><a></a>  <span class="fu">addMarkers</span>(<span class="at">data=</span>city_ppl_sf, <span class="at">icon =</span> People)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-e54b1b6927d23f747982" style="width:960px;height:480px;"></div>
@@ -1483,13 +1483,14 @@ Baddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. <em>Spatial <span>Point Patt
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

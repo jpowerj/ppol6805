@@ -13,7 +13,6 @@ bibliography: "../_PPOL6805.bib"
 echo: true
 code-fold: show
 cache: true
-css: "../dsan-globals/jjstyles.css"
 html-math-method: mathjax
 # Format-specific settings:
 format:
@@ -27,8 +26,8 @@ format:
     link-external-newwindow: true
     footer: "{{< var weeks.6.footer >}}"
     include-in-header:
-      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>"
-    theme: [default]
+      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'><link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css'><link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous'><script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous'></script>"
+    theme: [default, "../dsan-globals/jjquarto.scss"]
     revealjs-plugins:
       - simplemenu
     simplemenu:
@@ -50,316 +49,132 @@ format:
 
 :::
 
-# Random Fields {.crunch-title .crunch-ul data-stack-name="Random Fields"}
+# Doing Things with DE-9IM (Back to Binary Operations)
 
-* (Now on slides rather than scribbled on the whiteboard!)
-
-![$D$ = Rectangle; $Z(\mathbf{s})$ here: **height** at coordinate $\mathbf{s} \in D$](images/w3.jpg){fig-align="center"}
-
-## Key Notation / Definition {.smaller .smaller-table .crunch-title .crunch-ul .crunch-math}
-
-::: {#full-defn style="width: 100% !important"}
-
-* $d$-Dimensional "Spatial Process" [@schabenberger_statistical_2004, 6]
-
-$$
-\text{Data} = \left\{Z(\mathbf{s}) \mid \mathbf{s} \in D \subset \mathbb{R}^d\right\}
-$$
-
-* $d > 1$: Data forms a **Random Field** (this class: $d = 2$!)
-
-:::
-
-```{=html}
-<table>
-<colgroup>
-  <col style="width: 9%;">
-  <col style="width: 30%;">
-  <col style="width: 31%;">
-  <col style="width: 30%;">
-</colgroup>
-<thead>
-<tr>
-    <th></th>
-    <th>Geostatistical Data</th>
-    <th>Lattice/Region Data</th>
-    <th>Point Pattern</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-    <td><b>Criteria</b></td>
-    <td><span data-qmd="Fixed $D$, Continuous"></span></td>
-    <td><span data-qmd="Fixed $D$, Discrete"></span></td>
-    <td><span data-qmd="Random subset $D^* \subseteq D$"></span></td>
-    <td></td>
-</tr>
-<tr>
-    <td><b>Interest</b></td>
-    <td><span data-qmd="Infer **non-observed** parts of $D$"></span></td>
-    <td><span data-qmd="Autocorrelation, clustering"></span></td>
-    <td><span data-qmd="Point-generating process"></span></td>
-    <td></td>
-</tr>
-<tr>
-    <td><b>Example</b></td>
-    <td class='tdvt'><div data-qmd="* $N$ **trees** $\mathbf{s}_1, \mathbf{s}_2, \ldots, \mathbf{s}_N$, observed within a **sample window** $D \subset \mathbb{R}^2$, ($D$ some finite plot of land)
-* $Z(\mathbf{s}_i)$: Attribute(s) at site $\mathbf{s}_i$
-* Example: **Height**. $Z(\mathbf{s}_1) = 500\text{m}$, $Z(\mathbf{s}_2) = 850\text{m}$, $\ldots$"></div></td>
-    <td class='tdvt'><div data-qmd="* $Z(\mathbf{s})$ observed over $N \times N$ grid of **plots**
-    
-* $\Rightarrow$ Contiguity, Neighbors (next section of slides!)
-* $\Rightarrow$ Autocorrelation: Are points **around** $\mathbf{s}_i$ likely to have values similar to $Z(\mathbf{s}_i)$?"></div></td>
-    <td class='tdvt'><div data-qmd='* Unknown number of lightning strikes $\mathbf{s}_1, \mathbf{s}_2, \ldots$
-* Contrast with geostatistical: all of $D$ is observed, but what determines the subset $D^*$ where **events** occur?
-* "Unmarked": Just locations
-* "Marked": Locations+info (e.g., intensity of strike)'></div></td>
-</tr>
-</tbody>
-</table>
-```
-
-<!-- * Note the **lack of subscript** on $Z$! Important, not a typo! -->
-
-## Geostatistical Data: Dumping Sand onto a Table {.smaller .crunch-title .crunch-ul .crunch-quarto-figure .crunch-img .crunch-figcaption .crunch-quarto-layout-cell .crunch-quarto-layout-panel .title-11}
-
-* Domain $D$: **tabletop**; Random process: **dumping sand** onto the tabletop
-* $\Omega$: All possible realizations of process. $\omega_i \in \Omega$ Particular realization
-
-::: {layout="[[1,1],[1,1]]"}
-
-![$\omega_1 \in \Omega$](images/w1.jpg){#fig-w1 width="82%" fig-cap-location="top"}
-
-![$\omega_2 \in \Omega$](images/w2.jpg){#fig-w2 width="82%" fig-cap-location="top"}
-
-![$\omega_3 \in \Omega$](images/w3.jpg){#fig-w3 width="82%" fig-cap-location="top"}
-
-![$\omega_4 \in \Omega$](images/w4.jpg){#fig-w4 width="82%" fig-cap-location="top"}
-
-:::
-
-## Geostatistical *Modeling*: Terrains Are *Not* Spiky Chaotic Landscapes! {.smaller .crunch-title .title-12}
-
-![](images/w2_missing.jpeg){fig-align="center"}
-
-## Geostatistical Data $\rightarrow$ Point Pattern {.crunch-title .crunch-ul .smaller .crunch-quarto-layout-panel .crunch-img .crunch-quarto-figure}
-
-:::: {.columns}
-::: {.column width="50%"}
-
-* **Indicator function**: $\mathbb{1}\left[Z(\mathbf{s}) > 860\text{m}\right]$
+## *Almost* a Spatial Join {.smaller .crunch-title .leaflet-350}
 
 ```{r}
-#| label: geostat-to-point
+#| label: almost-spatial-join
+source("../dsan-globals/_globals.r")
+library(tidyverse) |> suppressPackageStartupMessages()
+library(sf) |> suppressPackageStartupMessages()
+library(rnaturalearth) |> suppressPackageStartupMessages()
+library(mapview) |> suppressPackageStartupMessages()
+africa_sf <- ne_countries(continent = "Africa", scale = 50)
+africa_union_sf <- sf::st_union(africa_sf)
+africa_map <- mapview(africa_sf, label="geounit", legend=FALSE)
+N <- 10
+sampled_points_sf <- sf::st_sample(africa_union_sf, N) |> sf::st_sf() |> mutate(temp = runif(N, 0, 100))
+sampled_points_map <- mapview(sampled_points_sf, label="Random Point", col.regions=cbPalette[1], legend=FALSE)
+countries_points_sf <- africa_sf[sampled_points_sf,]
+filtered_map <- mapview(countries_points_sf, label="geounit", legend=FALSE) + sampled_points_map
+(africa_map + sampled_points_map) | filtered_map
+```
+
+## Spatial Filter $\neq$ Spatial Join {.smaller .smaller-table}
+
+-   The issue: **Data attributes of `POINT`s are not merged into data attributes of `POLYGON`s**
+
+::::: columns
+::: {.column width="50%"}
+<center>**`POINT` Attributes**</center>
+
+```{r}
+#| label: point-attributes-filter
+st_geometry(sampled_points_sf) <- c("geom")
+sampled_points_sf |> head()
+```
+:::
+
+::: {.column width="50%"}
+<center>**`POLYGON` Attributes**</center>
+
+```{r}
+#| label: poly-attributes-filter
+countries_points_sf |> head(4)
+```
+:::
+:::::
+
+## Our First Real Spatial Join: `st_join()` {.smaller .crunch-title .title-12}
+
+```{r}
+#| label: st-join-first
+joined_sf <- countries_points_sf |> st_join(sampled_points_sf)
+joined_sf |> head()
+```
+
+![](images/dance_with_doge.gif){fig-align="center"}
+
+## But... We Were Still in Easy Mode {.crunch-title}
+
+-   Every point could be matched **one-to-one** with a country. But what if... 😱
+
+```{r}
+#| label: area-weighted-interpolation-first
 #| code-fold: true
-#| fig-align: center
-set.seed(6805)
-library(tidyverse)
-library(sf)
-library(terra)
-library(latex2exp)
-#### Define area
-lat_range <- c(-5.0, -6.0)
-lon_range <- c(15, 20)
-#lon_center <- -5.4
-#lat_center <- 36.75
-# And the window around this centroid
-lat_radius <- 0.05
-lon_radius <- 0.1
-
-gen_random_table <- function(world_num=1, return_data=FALSE, rand_seed=NULL) {
-  if (!is.null(rand_seed)) {
-    set.seed(rand_seed)
-  } else {
-    rand_seed <- sample(1:9999, size=1)
-    set.seed(rand_seed)
-  }
-  lat_center <- runif(1, min=min(lat_range), max=max(lat_range))
-  lon_center <- runif(1, min=min(lon_range), max=max(lon_range))
-  lon_lower <- lon_center - lon_radius
-  lon_upper <- lon_center + lon_radius
-  lat_lower <- lat_center - lat_radius
-  lat_upper <- lat_center + lat_radius
-  coords <- data.frame(x = c(lon_lower, lon_lower, lon_upper, lon_upper),
-                       y = c(lat_lower, lat_upper, lat_lower, lat_upper))
-  coords_sf <- st_as_sf(coords, coords = c("x", "y"), crs = 4326)
-  # Using geodata
-  elev <- geodata::elevation_3s(lon = lon_center, lat = lat_center, res=2.5, path = getwd())
-  elev <- terra::crop(elev, coords_sf)
-  return(elev)
-}
-
-compute_hillshade <- function(elev) {
-  # Calculate hillshade
-  slopes <- terra::terrain(elev, "slope", unit = "radians")
-  aspect <- terra::terrain(elev, "aspect", unit = "radians")
-  hs <- terra::shade(slopes, aspect)
-  return(hs)
-}
-
-plot_hillshade <- function(elev, hs, title=NULL) {
-  ## Plot hillshading as basemap
-  # (here using terra::plot, but could use tmap)
-  # lat_upper_trimmed <- lat_upper - 0.001*lat_upper
-  # lat_lower_trimmed <- lat_lower - 0.001*lat_lower
-  base_plot <- terra::plot(
-    hs, col = gray(0:100 / 100), legend = FALSE, axes = FALSE, mar=c(0,0,1,0), grid=TRUE
-  )
-  #    xlim = c(elev_xmin, elev_xmax), ylim = c(elev_ymin, elev_ymax))
-  # overlay with elevation
-  
-  color_vec <- terrain.colors(25)
-  plot(elev, col = color_vec, alpha = 0.5, legend = FALSE, axes = FALSE, add = TRUE)
-  
-  # add contour lines
-  terra::contour(elev, col = "grey30", add = TRUE)
-  if (!is.null(title)) {
-    world_name <- TeX(sprintf(r"(World $\omega_{%d} \in \Omega$)", world_num))
-    title(world_name)
-  }
-}
-elev_r1 <- gen_random_table(rand_seed=6810)
-hs_r1 <- compute_hillshade(elev_r1)
-plot_hillshade(elev_r1, hs_r1)
+g <- st_make_grid(st_bbox(st_as_sfc("LINESTRING(0 0,1 1)")), n = c(2,2))
+par(mar = rep(0,4))
+plot(g)
+plot(g[1] * diag(c(3/4, 1)) + c(0.25, 0.125), add = TRUE, lty = 2)
+text(c(.2, .8, .2, .8), c(.2, .2, .8, .8), c(1,2,4,8), col = 'red')
 ```
 
-:::
-::: {.column width="50%"}
+## Spatially *Intensive* vs. Spatially *Extensive* {.smaller .crunch-title .title-12}
 
-```{r}
-#| label: after-indicator
-elev_indic_r1 <- terra::ifel(
-  elev_r1 > 860, elev_r1, NA
-)
-plot(elev_indic_r1)
-```
+-   **Extensive** attributes: associated with a physical size (length, area, volume, counts of items). Ex: **population count**.
+    -   Associated with an area $\implies$ if that area is cut into smaller areas, the population count needs to be split too
+    -   (At minimum, the **sum** of the population counts for the smaller areas needs to equal the total for the larger area)
+-   **Intensive** attributes: **Not** proportional to support: if the area is split, values may vary but on average remain the same. Ex: **population density**
+    -   If an area is split into smaller areas, population density is not split similarly!
+    -   The **sum** of population densities for the smaller areas is a meaningless measure
+    -   Instead, the **mean** will be more useful as \~similar to the density of the total
 
-:::
-::::
+## Handling the Extensive Case {.smaller .crunch-title}
 
-:::: {.columns}
-::: {.column width="50%"}
+-   Assume the **extensive** attribute $Y$ is **uniformly distributed** over a space $S_i$ (e.g., for **population counts** we assume everyone is evenly-spaced across the region)
 
-```{r}
-#| label: before-indicator-r2
-#| fig-align: center
-#| code-fold: true
-elev_r2 <- gen_random_table(rand_seed=6815)
-hs_r2 <- compute_hillshade(elev_r2)
-plot_hillshade(elev_r2, hs_r2)
-```
+-   We first compute $Y_{ij}$, derived from $Y_i$ for a sub-area of $S_i$, $A_{ij} = S_i \cap T_j$:
 
-:::
-::: {.column width="50%"}
+    $$
+    \hat{Y}_{ij}(A_{ij}) = \frac{|A_{ij}|}{|S_i|}Y_i(S_i)
+    $$
 
-```{r}
-#| label: after-indicator-r2
-#| code-fold: true
-my_quant <- function(x) quantile(x, 0.99)
-elev_99 <- terra::global(elev_r2, my_quant)[1,1]
-elev_indic_r2 <- terra::ifel(
-  elev_r2 > elev_99, elev_r2, NA
-)
-plot(elev_indic_r2)
-```
+    where $|\cdot|$ denotes area.
 
-:::
-::::
-
-## Geospatial Data $\rightarrow$ Lattice/Region Data {.crunch-title .crunch-quarto-layout-cell}
-
-:::: {.columns}
-::: {.column width="50%"}
-
-```{r}
-#| label: table-to-lattice
-#| code-fold: true
-#| fig-align: center
-#| fig-cap: "(Pretend this is infinite-resolution) Infinite number of neighbors around each point!"
-table_elev <- gen_random_table(rand_seed=6805)
-table_hs <- compute_hillshade(table_elev)
-#plot_hillshade(table_elev, table_hs)
-#par(mfrow=c(1,2), mar=c(0,0,1,1))
-plot(table_elev)
-```
-
-:::
-::: {.column width="50%"}
-
-```{r}
-#| label: coarsened
-#| fig-align: center
-#| code-fold: true
-#| fig-cap: "Finite number of neighbors around each observation $\\implies$ Can study correlations between *neighboring* cells!"
-elev_coarse <- terra::aggregate(table_elev, 12)
-plot(elev_coarse)
-```
-
-:::
-::::
-
-# Doing Things with `nbdep` {data-stack-name="Autocorrelation"}
-
-* "Neighbor" Definitions
-* Testing Hypotheses About Neighborhoods!
-
-## Who Are My Neighbors?
-
-* Contiguity-Based:
-
-  | | |
-  |-|-|
-  | ![](images/queen.png) | ![](images/rook.png) |
-
-* Distance-Based
-* $K$-Nearest Neighbors
-
-## Distance-Based Neighbors
-
-![From @xie_analyzing_2023](images/dist-based.jpeg){fig-align="center"}
-
-## Spatial Autocorrelation
-
-* Location $i$ has high value $\implies$ locations **near** $i$ more likely to have high values
-
-![](images/autocorr.jpeg){fig-align="center"}
-
-## Moran's $I$
+-   Then we can compute $Y_j(T_j)$ by summing all the elements over area $T_j$:
 
 $$
-I =
-\underset{\text{Inverse of Variance}}{\boxed{\frac{n}{\sum_{i=1}^{n}(y_i - \overline{y})^2}}}
-\frac
-  {\overbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(y_i - \overline{y})(y_j - \overline{y})}^{\text{Weighted Covariance}}}
-  {\underbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}_{\text{Normalize Weights}}}
+\hat{Y}_j(T_j) = \sum_{i=1}^{p}\frac{|A_{ij}|}{|S_i|}Y_i(S_i)
 $$
 
-* $I$ is **Large** when:
-    * $y_i$ and $y_j$ are **neighbors**: $w_{ij}$, and
-    * $y_i$ and $y_j$ **large at the same time**: $(y_i - \overline{y})(y_j - \overline{y})$
+## Handling the *Intensive* Case {.smaller .crunch-title}
 
-## Local Indicators of Spatial Autocorrelation (LISA)
-
-* tldr: See how much a given location $\mathbf{s}$ **contributes to** overall Moran's $I$
-* Local Moran's $I$:
+-   Assume the variable $Y$ has **constant value** over a space $S_i$ (e.g., **population density** in assumed to be the same across all sub-areas)
+-   Then the estimate for a sub-area is the **same** as the estimate for the total area:
 
 $$
-I_i = \frac{y_i - \overline{y}}{S_i^2}\sum_{j=1}^{n}w_{ij}(y_j - \overline{y})
+\hat{Y}_{ij} = Y_i(S_i)
 $$
 
-# Our Null Hypothesis: Complete Spatial Randomness (CSR) {data-stack-name="Spatial Randomness"}
+-   So that we can obtain estimates of $Y$ for new spatial units $T_j$ via **area-weighted average** of the source values:
 
-## Leaving You With a Challenge
+$$
+\hat{Y}_j(T_j) = \sum_{i=1}^{p}\frac{|A_{ij}|}{|T_j|}Y_j(S_i)
+$$
 
-* These point patterns can be **classified** as clustered or regular:
+## Let's Go See It In Action!
 
-![](images/simple_clust.svg){fig-align="center" style="transform: rotate(90deg);"}
+&nbsp;
 
-## Leaving You With a Challenge
+<center>
 
-![](images/clusters.svg){fig-align="center"}
+[**Week 6 Lab: Interpolating Kurdistan**](../writeups/interpolation/index.qmd)
+
+</center>
 
 ## References
 
 ::: {#refs}
 :::
+

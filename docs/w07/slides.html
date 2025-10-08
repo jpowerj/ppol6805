@@ -7,8 +7,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.33">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Jeff Jacobs">
   <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation</title>
@@ -116,8 +116,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-b92f69f301b2c1bb785b64f55f1b1447.css">
-  <link rel="stylesheet" href="../dsan-globals/jjstyles.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-68e77044b24223b3a9e15143e0f4fd07.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -211,7 +210,7 @@
       margin-right: 0; 
     }
   </style>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -235,9 +234,431 @@ Jeff Jacobs
   <p class="date">Wednesday, October 9, 2024</p>
 </section>
 <section>
+<section id="random-fields" class="title-slide slide level1 crunch-title crunch-ul title-13 crunch-math not-title-slide smaller center" data-stack-name="Random Fields">
+<h1>Random Fields</h1>
+<p><span class="math display">\[
+\text{Data} = \left\{Z(\mathbf{s}) \mid \mathbf{s} \in D \subset \mathbb{R}^2\right\}
+\]</span></p>
+
+<img data-src="images/w3.jpg" class="r-stretch quarto-figure-center"><p class="caption"><span class="math inline">\(D\)</span> = Rectangle; <span class="math inline">\(Z(\mathbf{s})\)</span> here: <strong>height</strong> at coordinate <span class="math inline">\(\mathbf{s} \in D\)</span></p></section>
+<section id="key-notation-definition" class="slide level2 smaller smaller-table crunch-title crunch-ul crunch-li-5 crunch-math shift-ul inline-90 math-90 title-12">
+<h2>Key Notation / Definition</h2>
+<div id="full-defn" style="width: 100% !important">
+<p>2-Dimensional <strong>Spatial Process</strong> <span class="citation" data-cites="schabenberger_statistical_2004">(<a href="#/references" role="doc-biblioref" onclick="">Schabenberger and Gotway 2004, 6</a>)</span></p>
+<p><span class="math display">\[
+\text{Data} = \left\{Z(\mathbf{s}) \mid \mathbf{s} \in D \subset \mathbb{R}^d\right\}
+\]</span></p>
+</div>
+<table>
+<colgroup>
+<col style="width: 7%">
+<col style="width: 30%">
+<col style="width: 31%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Geostatistical Data</th>
+<th data-quarto-table-cell-role="th">Lattice/Region Data</th>
+<th data-quarto-table-cell-role="th">Point Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Criteria</strong></td>
+<td>Fixed <span class="math inline">\(D\)</span>, Continuous</td>
+<td>Fixed <span class="math inline">\(D\)</span>, Discrete</td>
+<td>Random subset <span class="math inline">\(D^* \subseteq D\)</span></td>
+</tr>
+<tr class="even">
+<td><b>
+What's Random?</b></td>
+<td>Value of <span class="math inline">\(Z\)</span> at <strong><code>POINT</code></strong> <span class="math inline">\(\mathbf{s}_i \in D\)</span></td>
+<td>Value of <span class="math inline">\(Z\)</span> across <strong><code>POLYGON</code></strong> <span class="math inline">\(\mathbf{r}_i \subseteq D\)</span></td>
+<td>Subset <span class="math inline">\(D^*\)</span> formed by <strong>events</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Interest</strong></td>
+<td>Infer <strong>non-observed</strong> parts of <span class="math inline">\(D\)</span></td>
+<td><strong>Autocorrelation</strong>, clustering</td>
+<td>Point-generating <strong>process</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Example</strong></td>
+<td class="tdvt"><ul>
+<li>Dumping sand on a table <span class="math inline">\(D = \{(x,y) \mid x \in [0,2], y \in [0,1]\}\)</span></li>
+<li><span class="math inline">\(Z(\mathbf{s}_i)\)</span>: Attribute(s) at site <span class="math inline">\(\mathbf{s}_i\)</span> (at coordinate <span class="math inline">\(\mathbf{s}_i = (x_i,y_i)\)</span>)</li>
+<li>Example: <strong>Height</strong> of sand. <span class="math inline">\(Z(\mathbf{s}_1) = 500\text{m}\)</span>, <span class="math inline">\(Z(\mathbf{s}_2) = 850\text{m}\)</span>, <span class="math inline">\(\ldots\)</span></li>
+</ul></td>
+<td class="tdvt"><ul>
+<li><p><span class="math inline">\(Z(\mathbf{s})\)</span> observed over <span class="math inline">\(N \times N\)</span> grid of <strong>plots</strong></p></li>
+<li><p>Well-defined ‘Neighbors’ (next section!)</p></li>
+<li><p>Autocorrelation: Are points <strong>around</strong> <span class="math inline">\(\mathbf{s}_i\)</span> likely to have values similar to <span class="math inline">\(Z(\mathbf{s}_i)\)</span>?</p></li>
+</ul></td>
+<td class="tdvt"><ul>
+<li>Unknown number of lightning strikes <span class="math inline">\(\mathbf{s}_1, \mathbf{s}_2, \ldots\)</span></li>
+<li>All of <span class="math inline">\(D\)</span> is observed, but what determines subset <span class="math inline">\(D^*\)</span> where <strong>events</strong> occur?</li>
+<li><em>Unmarked</em>: Locations only</li>
+<li><em>Marked</em>: Locations+info (e.g., intensity of strike)</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<!-- * Note the **lack of subscript** on $Z$! Important, not a typo! -->
+</section>
+<section id="geostatistical-data-dumping-sand-onto-a-table" class="slide level2 smaller crunch-title crunch-ul crunch-quarto-figure crunch-img crunch-figcaption crunch-quarto-layout-cell crunch-quarto-layout-panel title-10">
+<h2>Geostatistical Data: Dumping Sand onto a Table!</h2>
+<ul>
+<li>Domain <span class="math inline">\(D\)</span>: <strong>tabletop</strong>; Random process: <strong>dumping sand</strong> onto the tabletop</li>
+<li><span class="math inline">\(\Omega\)</span>: All possible realizations of process. <span class="math inline">\(\omega_i \in \Omega\)</span> Particular realization</li>
+</ul>
+<div class="quarto-layout-panel" data-layout="[[1,1],[1,1]]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-w1" class="quarto-float quarto-figure quarto-figure-center" data-fig-cap-location="top">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-w1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: <span class="math inline">\(\omega_1 \in \Omega\)</span>
+</figcaption>
+<div aria-describedby="fig-w1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="images/w1.jpg" style="width:82.0%" data-fig-cap-location="top">
+</div>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-w2" class="quarto-float quarto-figure quarto-figure-center" data-fig-cap-location="top">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-w2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: <span class="math inline">\(\omega_2 \in \Omega\)</span>
+</figcaption>
+<div aria-describedby="fig-w2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="images/w2.jpg" style="width:82.0%" data-fig-cap-location="top">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-w3" class="quarto-float quarto-figure quarto-figure-center" data-fig-cap-location="top">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-w3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: <span class="math inline">\(\omega_3 \in \Omega\)</span>
+</figcaption>
+<div aria-describedby="fig-w3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="images/w3.jpg" style="width:82.0%" data-fig-cap-location="top">
+</div>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-w4" class="quarto-float quarto-figure quarto-figure-center" data-fig-cap-location="top">
+<figure class="quarto-float quarto-float-fig">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-w4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: <span class="math inline">\(\omega_4 \in \Omega\)</span>
+</figcaption>
+<div aria-describedby="fig-w4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="images/w4.jpg" style="width:82.0%" data-fig-cap-location="top">
+</div>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-water-coverage-in-bhola-bangladesh" class="slide level2 smaller crunch-img title-10 crunch-quarto-layout-panel crunch-p">
+<h2>Example: Water Coverage in Bhola, Bangladesh</h2>
+<div class="quarto-layout-panel" data-layout="[75,25]">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div id="sea-level-rise" class="quarto-layout-cell" style="flex-basis: 75.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/bhola.jpg"></p>
+<figcaption>ArcGIS: <a href="https://www.arcgis.com/apps/mapviewer/index.html?webmap=b82e4d7b92084b63a30b3a3bbed09ec5&amp;utm_source=chatgpt.com">Sea Level Rise in Bangladesh</a></figcaption>
+</figure>
+</div>
+</div>
+<div id="tropic-of-chaos" class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/tropic_of_chaos.jpg"></p>
+<figcaption><span class="citation" data-cites="parenti_tropic_2011">Parenti (<a href="#/references" role="doc-biblioref" onclick="">2011</a>)</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes" class="slide level2 smaller crunch-title title-12">
+<h2>Geostatistical <em>Modeling</em>: Terrains Are <em>Not</em> Spiky Chaotic Landscapes!</h2>
+
+<img data-src="images/w2_missing.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="geostatistical-data-rightarrow-point-pattern" class="slide level2 crunch-title crunch-ul smaller crunch-quarto-layout-panel crunch-img crunch-quarto-figure title-12 text-65">
+<h2>Geostatistical Data <span class="math inline">\(\rightarrow\)</span> Point Pattern</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>Indicator function</strong>: <span class="math inline">\(\mathbb{1}\left[Z(\mathbf{s}) &gt; 860\text{m}\right]\)</span></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-4"><a></a><span class="fu">library</span>(terra)</span>
+<span id="cb1-5"><a></a><span class="fu">library</span>(latex2exp)</span>
+<span id="cb1-6"><a></a><span class="do">#### Define area</span></span>
+<span id="cb1-7"><a></a>lat_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">5.0</span>, <span class="sc">-</span><span class="fl">6.0</span>)</span>
+<span id="cb1-8"><a></a>lon_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>)</span>
+<span id="cb1-9"><a></a><span class="co">#lon_center &lt;- -5.4</span></span>
+<span id="cb1-10"><a></a><span class="co">#lat_center &lt;- 36.75</span></span>
+<span id="cb1-11"><a></a><span class="co"># And the window around this centroid</span></span>
+<span id="cb1-12"><a></a>lat_radius <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb1-13"><a></a>lon_radius <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb1-14"><a></a></span>
+<span id="cb1-15"><a></a>gen_random_table <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">world_num=</span><span class="dv">1</span>, <span class="at">return_data=</span><span class="cn">FALSE</span>, <span class="at">rand_seed=</span><span class="cn">NULL</span>) {</span>
+<span id="cb1-16"><a></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(rand_seed)) {</span>
+<span id="cb1-17"><a></a>    <span class="fu">set.seed</span>(rand_seed)</span>
+<span id="cb1-18"><a></a>  } <span class="cf">else</span> {</span>
+<span id="cb1-19"><a></a>    rand_seed <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9999</span>, <span class="at">size=</span><span class="dv">1</span>)</span>
+<span id="cb1-20"><a></a>    <span class="fu">set.seed</span>(rand_seed)</span>
+<span id="cb1-21"><a></a>  }</span>
+<span id="cb1-22"><a></a>  lat_center <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="fu">min</span>(lat_range), <span class="at">max=</span><span class="fu">max</span>(lat_range))</span>
+<span id="cb1-23"><a></a>  lon_center <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="fu">min</span>(lon_range), <span class="at">max=</span><span class="fu">max</span>(lon_range))</span>
+<span id="cb1-24"><a></a>  lon_lower <span class="ot">&lt;-</span> lon_center <span class="sc">-</span> lon_radius</span>
+<span id="cb1-25"><a></a>  lon_upper <span class="ot">&lt;-</span> lon_center <span class="sc">+</span> lon_radius</span>
+<span id="cb1-26"><a></a>  lat_lower <span class="ot">&lt;-</span> lat_center <span class="sc">-</span> lat_radius</span>
+<span id="cb1-27"><a></a>  lat_upper <span class="ot">&lt;-</span> lat_center <span class="sc">+</span> lat_radius</span>
+<span id="cb1-28"><a></a>  coords <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(lon_lower, lon_lower, lon_upper, lon_upper),</span>
+<span id="cb1-29"><a></a>                       <span class="at">y =</span> <span class="fu">c</span>(lat_lower, lat_upper, lat_lower, lat_upper))</span>
+<span id="cb1-30"><a></a>  coords_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(coords, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb1-31"><a></a>  <span class="co"># Using geodata</span></span>
+<span id="cb1-32"><a></a>  elev <span class="ot">&lt;-</span> geodata<span class="sc">::</span><span class="fu">elevation_3s</span>(<span class="at">lon =</span> lon_center, <span class="at">lat =</span> lat_center, <span class="at">res=</span><span class="fl">2.5</span>, <span class="at">path =</span> <span class="fu">getwd</span>())</span>
+<span id="cb1-33"><a></a>  elev <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(elev, coords_sf)</span>
+<span id="cb1-34"><a></a>  <span class="fu">return</span>(elev)</span>
+<span id="cb1-35"><a></a>}</span>
+<span id="cb1-36"><a></a></span>
+<span id="cb1-37"><a></a>compute_hillshade <span class="ot">&lt;-</span> <span class="cf">function</span>(elev) {</span>
+<span id="cb1-38"><a></a>  <span class="co"># Calculate hillshade</span></span>
+<span id="cb1-39"><a></a>  slopes <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">terrain</span>(elev, <span class="st">"slope"</span>, <span class="at">unit =</span> <span class="st">"radians"</span>)</span>
+<span id="cb1-40"><a></a>  aspect <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">terrain</span>(elev, <span class="st">"aspect"</span>, <span class="at">unit =</span> <span class="st">"radians"</span>)</span>
+<span id="cb1-41"><a></a>  hs <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">shade</span>(slopes, aspect)</span>
+<span id="cb1-42"><a></a>  <span class="fu">return</span>(hs)</span>
+<span id="cb1-43"><a></a>}</span>
+<span id="cb1-44"><a></a></span>
+<span id="cb1-45"><a></a>plot_hillshade <span class="ot">&lt;-</span> <span class="cf">function</span>(elev, hs, <span class="at">title=</span><span class="cn">NULL</span>) {</span>
+<span id="cb1-46"><a></a>  <span class="do">## Plot hillshading as basemap</span></span>
+<span id="cb1-47"><a></a>  <span class="co"># (here using terra::plot, but could use tmap)</span></span>
+<span id="cb1-48"><a></a>  <span class="co"># lat_upper_trimmed &lt;- lat_upper - 0.001*lat_upper</span></span>
+<span id="cb1-49"><a></a>  <span class="co"># lat_lower_trimmed &lt;- lat_lower - 0.001*lat_lower</span></span>
+<span id="cb1-50"><a></a>  base_plot <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">plot</span>(</span>
+<span id="cb1-51"><a></a>    hs, <span class="at">col =</span> <span class="fu">gray</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span> <span class="sc">/</span> <span class="dv">100</span>), <span class="at">legend =</span> <span class="cn">FALSE</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">grid=</span><span class="cn">TRUE</span></span>
+<span id="cb1-52"><a></a>  )</span>
+<span id="cb1-53"><a></a>  <span class="co">#    xlim = c(elev_xmin, elev_xmax), ylim = c(elev_ymin, elev_ymax))</span></span>
+<span id="cb1-54"><a></a>  <span class="co"># overlay with elevation</span></span>
+<span id="cb1-55"><a></a>  </span>
+<span id="cb1-56"><a></a>  color_vec <span class="ot">&lt;-</span> <span class="fu">terrain.colors</span>(<span class="dv">25</span>)</span>
+<span id="cb1-57"><a></a>  <span class="fu">plot</span>(elev, <span class="at">col =</span> color_vec, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-58"><a></a>  </span>
+<span id="cb1-59"><a></a>  <span class="co"># add contour lines</span></span>
+<span id="cb1-60"><a></a>  terra<span class="sc">::</span><span class="fu">contour</span>(elev, <span class="at">col =</span> <span class="st">"grey30"</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-61"><a></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(title)) {</span>
+<span id="cb1-62"><a></a>    world_name <span class="ot">&lt;-</span> <span class="fu">TeX</span>(<span class="fu">sprintf</span>(r<span class="st">"(World $\omega_{%d} \in \Omega$)"</span>, world_num))</span>
+<span id="cb1-63"><a></a>    <span class="fu">title</span>(world_name)</span>
+<span id="cb1-64"><a></a>  }</span>
+<span id="cb1-65"><a></a>}</span>
+<span id="cb1-66"><a></a>elev_r1 <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6810</span>)</span>
+<span id="cb1-67"><a></a>hs_r1 <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(elev_r1)</span>
+<span id="cb1-68"><a></a><span class="fu">plot_hillshade</span>(elev_r1, hs_r1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/geostat-to-point-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>terra<span class="sc">::</span><span class="fu">ifel</span>(</span>
+<span id="cb2-2"><a></a>  elev_r1 <span class="sc">&gt;</span> <span class="dv">860</span>, elev_r1, <span class="cn">NA</span></span>
+<span id="cb2-3"><a></a>) <span class="sc">|&gt;</span> <span class="fu">plot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/after-indicator-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>elev_r2 <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6815</span>)</span>
+<span id="cb3-2"><a></a>hs_r2 <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(elev_r2)</span>
+<span id="cb3-3"><a></a><span class="fu">plot_hillshade</span>(elev_r2, hs_r2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/before-indicator-r2-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>my_quant <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">quantile</span>(x, <span class="fl">0.99</span>)</span>
+<span id="cb4-2"><a></a>elev_99 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">global</span>(elev_r2, my_quant)[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb4-3"><a></a>elev_indic_r2 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">ifel</span>(</span>
+<span id="cb4-4"><a></a>  elev_r2 <span class="sc">&gt;</span> elev_99, elev_r2, <span class="cn">NA</span></span>
+<span id="cb4-5"><a></a>)</span>
+<span id="cb4-6"><a></a><span class="fu">plot</span>(elev_indic_r2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/after-indicator-r2-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="geospatial-data-rightarrow-latticeregion-data" class="slide level2 crunch-title crunch-quarto-layout-cell title-08">
+<h2>Geospatial Data <span class="math inline">\(\rightarrow\)</span> Lattice/Region Data</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>table_elev <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6805</span>)</span>
+<span id="cb5-2"><a></a>table_hs <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(table_elev)</span>
+<span id="cb5-3"><a></a><span class="co">#plot_hillshade(table_elev, table_hs)</span></span>
+<span id="cb5-4"><a></a><span class="co">#par(mfrow=c(1,2), mar=c(0,0,1,1))</span></span>
+<span id="cb5-5"><a></a><span class="fu">plot</span>(table_elev)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/table-to-lattice-1.png" width="960"></p>
+<figcaption>(Pretend this is infinite-resolution) Infinite number of neighbors around each point!</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>elev_coarse <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">aggregate</span>(table_elev, <span class="dv">12</span>)</span>
+<span id="cb6-2"><a></a><span class="fu">plot</span>(elev_coarse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/coarsened-1.png" width="960"></p>
+<figcaption>Finite number of neighbors around each observation <span class="math inline">\(\implies\)</span> Can study correlations between <em>neighboring</em> cells!</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="doing-things-with-nbdep" class="title-slide slide level1 center" data-stack-name="Autocorrelation">
+<h1>Doing Things with <code>nbdep</code></h1>
+<ul>
+<li>“Neighbor” Definitions</li>
+<li>Testing Hypotheses About Neighborhoods!</li>
+</ul>
+</section>
+<section id="who-are-my-neighbors" class="slide level2">
+<h2>Who Are My Neighbors?</h2>
+<ul>
+<li><p>Contiguity-Based:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><img data-src="images/queen.png"></td>
+<td><img data-src="images/rook.png"></td>
+</tr>
+</tbody>
+</table></li>
+<li><p>Distance-Based</p></li>
+<li><p><span class="math inline">\(K\)</span>-Nearest Neighbors</p></li>
+</ul>
+</section>
+<section id="distance-based-neighbors" class="slide level2">
+<h2>Distance-Based Neighbors</h2>
+
+<img data-src="images/dist-based.jpeg" class="r-stretch quarto-figure-center"><p class="caption">From <span class="citation" data-cites="xie_analyzing_2022">Xie (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></section>
+<section id="spatial-autocorrelation" class="slide level2">
+<h2>Spatial Autocorrelation</h2>
+<ul>
+<li>Location <span class="math inline">\(i\)</span> has high value <span class="math inline">\(\implies\)</span> locations <strong>near</strong> <span class="math inline">\(i\)</span> more likely to have high values</li>
+</ul>
+
+<img data-src="images/autocorr.jpg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="morans-i" class="slide level2">
+<h2>Moran’s <span class="math inline">\(I\)</span></h2>
+<p><span class="math display">\[
+I =
+\underset{\text{Inverse of Variance}}{\boxed{\frac{n}{\sum_{i=1}^{n}(y_i - \overline{y})^2}}}
+\frac
+  {\overbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(y_i - \overline{y})(y_j - \overline{y})}^{\text{Weighted Covariance}}}
+  {\underbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}_{\text{Normalize Weights}}}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(I\)</span> is <strong>Large</strong> when:
+<ul>
+<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> are <strong>neighbors</strong>: <span class="math inline">\(w_{ij}\)</span>, and</li>
+<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> <strong>large at the same time</strong>: <span class="math inline">\((y_i - \overline{y})(y_j - \overline{y})\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="local-indicators-of-spatial-autocorrelation-lisa" class="slide level2">
+<h2>Local Indicators of Spatial Autocorrelation (LISA)</h2>
+<ul>
+<li>tldr: See how much a given location <span class="math inline">\(\mathbf{s}\)</span> <strong>contributes to</strong> overall Moran’s <span class="math inline">\(I\)</span></li>
+<li>Local Moran’s <span class="math inline">\(I\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+I_i = \frac{y_i - \overline{y}}{S_i^2}\sum_{j=1}^{n}w_{ij}(y_j - \overline{y})
+\]</span></p>
+</section></section>
+<section>
+<section id="our-null-hypothesis-complete-spatial-randomness-csr" class="title-slide slide level1 center" data-stack-name="Spatial Randomness">
+<h1>Our Null Hypothesis: Complete Spatial Randomness (CSR)</h1>
+
+</section>
+<section id="leaving-you-with-a-challenge" class="slide level2">
+<h2>Leaving You With a Challenge</h2>
+<ul>
+<li>These point patterns can be <strong>classified</strong> as clustered or regular:</li>
+</ul>
+
+<img data-src="images/simple_clust.svg" class="quarto-figure quarto-figure-center r-stretch" style="transform: rotate(90deg);"></section>
+<section id="a-challenge" class="slide level2">
+<h2>A Challenge…</h2>
+
+<img data-src="images/clusters.svg" class="quarto-figure quarto-figure-center r-stretch"></section></section>
+<section>
 <section id="naïve-clustering" class="title-slide slide level1 smaller smaller-table center" data-stack-name="Naïve Clustering">
 <h1>Naïve Clustering</h1>
-<table data-quarto-postprocess="true" style="width: 100%;">
+<table style="width: 100%;">
 <colgroup>
 <col style="width: 15%">
 <col style="width: 15%">
@@ -281,8 +702,8 @@ Jeff Jacobs
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
-<span id="cb1-2"><a></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
+<span id="cb7-2"><a></a><span class="fu">library</span>(sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </div>
@@ -301,50 +722,50 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-2"><a></a><span class="fu">library</span>(spatstat)</span>
-<span id="cb2-3"><a></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
-<span id="cb2-4"><a></a>N <span class="ot">&lt;-</span> <span class="dv">60</span></span>
-<span id="cb2-5"><a></a>r_core <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb2-6"><a></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
-<span id="cb2-7"><a></a><span class="co"># Regularity via Inhibition</span></span>
-<span id="cb2-8"><a></a><span class="co">#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)</span></span>
-<span id="cb2-9"><a></a>cond_reg_sims <span class="ot">&lt;-</span> <span class="fu">rSSI</span>(<span class="at">r=</span>r_core, N)</span>
-<span id="cb2-10"><a></a><span class="co"># CSR data</span></span>
-<span id="cb2-11"><a></a><span class="co">#csr_sims &lt;- rpoispp(N, win=obs_window)</span></span>
-<span id="cb2-12"><a></a>cond_sr_sims <span class="ot">&lt;-</span> <span class="fu">rpoint</span>(N, <span class="at">win=</span>obs_window)</span>
-<span id="cb2-13"><a></a><span class="do">### Clustered data</span></span>
-<span id="cb2-14"><a></a><span class="co">#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)</span></span>
-<span id="cb2-15"><a></a><span class="co">#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)</span></span>
-<span id="cb2-16"><a></a><span class="co">#clust_sims &lt;- rclusterBKBC(clusters="MatClust", kappa=10, mu=10, scale=0.05, verbose=FALSE)</span></span>
-<span id="cb2-17"><a></a><span class="co"># Each cluster consist of 10 points in a disc of radius 0.2</span></span>
-<span id="cb2-18"><a></a>nclust <span class="ot">&lt;-</span> <span class="cf">function</span>(x0, y0, radius, n) {</span>
-<span id="cb2-19"><a></a>    <span class="co">#print(n)</span></span>
-<span id="cb2-20"><a></a>    <span class="fu">return</span>(<span class="fu">runifdisc</span>(<span class="dv">10</span>, radius, <span class="at">centre=</span><span class="fu">c</span>(x0, y0)))</span>
-<span id="cb2-21"><a></a>}</span>
-<span id="cb2-22"><a></a>cond_clust_sims <span class="ot">&lt;-</span> <span class="fu">rNeymanScott</span>(<span class="at">kappa=</span><span class="dv">5</span>, <span class="at">expand=</span><span class="fl">0.0</span>, <span class="at">rclust=</span>nclust, <span class="at">radius=</span><span class="dv">2</span><span class="sc">*</span>r_core, <span class="at">n=</span><span class="dv">10</span>)</span>
-<span id="cb2-23"><a></a><span class="co"># And PLOT</span></span>
-<span id="cb2-24"><a></a>plot_w <span class="ot">&lt;-</span> <span class="dv">400</span></span>
-<span id="cb2-25"><a></a>plot_h <span class="ot">&lt;-</span> <span class="dv">400</span></span>
-<span id="cb2-26"><a></a>plot_scale <span class="ot">&lt;-</span> <span class="fl">2.25</span></span>
-<span id="cb2-27"><a></a>cond_reg_plot <span class="ot">&lt;-</span> cond_reg_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb2-28"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb2-29"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb2-30"><a></a>  <span class="fu">dsan_theme</span>()</span>
-<span id="cb2-31"><a></a><span class="fu">ggsave</span>(<span class="st">"images/cond_reg.png"</span>, cond_reg_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
-<span id="cb2-32"><a></a>cond_sr_plot <span class="ot">&lt;-</span> cond_sr_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb2-33"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb2-34"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb2-35"><a></a>  <span class="fu">dsan_theme</span>()</span>
-<span id="cb2-36"><a></a><span class="fu">ggsave</span>(<span class="st">"images/cond_sr.png"</span>, cond_sr_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
-<span id="cb2-37"><a></a>cond_clust_plot <span class="ot">&lt;-</span> cond_clust_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb2-38"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb2-39"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb2-40"><a></a>  <span class="fu">dsan_theme</span>()</span>
-<span id="cb2-41"><a></a><span class="fu">ggsave</span>(<span class="st">"images/cond_clust.png"</span>, cond_clust_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb8-2"><a></a><span class="fu">library</span>(spatstat)</span>
+<span id="cb8-3"><a></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb8-4"><a></a>N <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb8-5"><a></a>r_core <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb8-6"><a></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
+<span id="cb8-7"><a></a><span class="co"># Regularity via Inhibition</span></span>
+<span id="cb8-8"><a></a><span class="co">#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)</span></span>
+<span id="cb8-9"><a></a>cond_reg_sims <span class="ot">&lt;-</span> <span class="fu">rSSI</span>(<span class="at">r=</span>r_core, N)</span>
+<span id="cb8-10"><a></a><span class="co"># CSR data</span></span>
+<span id="cb8-11"><a></a><span class="co">#csr_sims &lt;- rpoispp(N, win=obs_window)</span></span>
+<span id="cb8-12"><a></a>cond_sr_sims <span class="ot">&lt;-</span> <span class="fu">rpoint</span>(N, <span class="at">win=</span>obs_window)</span>
+<span id="cb8-13"><a></a><span class="do">### Clustered data</span></span>
+<span id="cb8-14"><a></a><span class="co">#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)</span></span>
+<span id="cb8-15"><a></a><span class="co">#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)</span></span>
+<span id="cb8-16"><a></a><span class="co">#clust_sims &lt;- rclusterBKBC(clusters="MatClust", kappa=10, mu=10, scale=0.05, verbose=FALSE)</span></span>
+<span id="cb8-17"><a></a><span class="co"># Each cluster consist of 10 points in a disc of radius 0.2</span></span>
+<span id="cb8-18"><a></a>nclust <span class="ot">&lt;-</span> <span class="cf">function</span>(x0, y0, radius, n) {</span>
+<span id="cb8-19"><a></a>    <span class="co">#print(n)</span></span>
+<span id="cb8-20"><a></a>    <span class="fu">return</span>(<span class="fu">runifdisc</span>(<span class="dv">10</span>, radius, <span class="at">centre=</span><span class="fu">c</span>(x0, y0)))</span>
+<span id="cb8-21"><a></a>}</span>
+<span id="cb8-22"><a></a>cond_clust_sims <span class="ot">&lt;-</span> <span class="fu">rNeymanScott</span>(<span class="at">kappa=</span><span class="dv">5</span>, <span class="at">expand=</span><span class="fl">0.0</span>, <span class="at">rclust=</span>nclust, <span class="at">radius=</span><span class="dv">2</span><span class="sc">*</span>r_core, <span class="at">n=</span><span class="dv">10</span>)</span>
+<span id="cb8-23"><a></a><span class="co"># And PLOT</span></span>
+<span id="cb8-24"><a></a>plot_w <span class="ot">&lt;-</span> <span class="dv">400</span></span>
+<span id="cb8-25"><a></a>plot_h <span class="ot">&lt;-</span> <span class="dv">400</span></span>
+<span id="cb8-26"><a></a>plot_scale <span class="ot">&lt;-</span> <span class="fl">2.25</span></span>
+<span id="cb8-27"><a></a>cond_reg_plot <span class="ot">&lt;-</span> cond_reg_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb8-28"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb8-29"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb8-30"><a></a>  <span class="fu">dsan_theme</span>()</span>
+<span id="cb8-31"><a></a><span class="fu">ggsave</span>(<span class="st">"images/cond_reg.png"</span>, cond_reg_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
+<span id="cb8-32"><a></a>cond_sr_plot <span class="ot">&lt;-</span> cond_sr_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb8-33"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb8-34"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb8-35"><a></a>  <span class="fu">dsan_theme</span>()</span>
+<span id="cb8-36"><a></a><span class="fu">ggsave</span>(<span class="st">"images/cond_sr.png"</span>, cond_sr_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
+<span id="cb8-37"><a></a>cond_clust_plot <span class="ot">&lt;-</span> cond_clust_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb8-38"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb8-39"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb8-40"><a></a>  <span class="fu">dsan_theme</span>()</span>
+<span id="cb8-41"><a></a><span class="fu">ggsave</span>(<span class="st">"images/cond_clust.png"</span>, cond_clust_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<table data-quarto-postprocess="true" style="width: 100%;">
+<table style="width: 100%;">
 <colgroup>
 <col style="width: 20%">
 <col style="width: 25%">
@@ -420,45 +841,45 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb3-2"><a></a><span class="fu">library</span>(spatstat)</span>
-<span id="cb3-3"><a></a><span class="fu">set.seed</span>(<span class="dv">6807</span>)</span>
-<span id="cb3-4"><a></a>lambda <span class="ot">&lt;-</span> <span class="dv">60</span></span>
-<span id="cb3-5"><a></a>r_core <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb3-6"><a></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
-<span id="cb3-7"><a></a><span class="co"># Regularity via Inhibition</span></span>
-<span id="cb3-8"><a></a><span class="co"># Regularity via Inhibition</span></span>
-<span id="cb3-9"><a></a>reg_sims <span class="ot">&lt;-</span> <span class="fu">rMaternI</span>(lambda, <span class="at">r=</span>r_core, <span class="at">win=</span>obs_window)</span>
-<span id="cb3-10"><a></a><span class="co"># CSR data</span></span>
-<span id="cb3-11"><a></a>csr_sims <span class="ot">&lt;-</span> <span class="fu">rpoispp</span>(N, <span class="at">win=</span>obs_window)</span>
-<span id="cb3-12"><a></a><span class="do">### Clustered data</span></span>
-<span id="cb3-13"><a></a>clust_mu <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb3-14"><a></a>clust_sims <span class="ot">&lt;-</span> <span class="fu">rMatClust</span>(<span class="at">kappa=</span>lambda <span class="sc">/</span> clust_mu, <span class="at">scale=</span><span class="dv">2</span><span class="sc">*</span>r_core, <span class="at">mu=</span><span class="dv">10</span>, <span class="at">win=</span>obs_window)</span>
-<span id="cb3-15"><a></a><span class="co"># And PLOT</span></span>
-<span id="cb3-16"><a></a>plot_w <span class="ot">&lt;-</span> <span class="dv">400</span></span>
-<span id="cb3-17"><a></a>plot_h <span class="ot">&lt;-</span> <span class="dv">400</span></span>
-<span id="cb3-18"><a></a>plot_scale <span class="ot">&lt;-</span> <span class="fl">2.25</span></span>
-<span id="cb3-19"><a></a>reg_plot <span class="ot">&lt;-</span> reg_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-20"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb3-21"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb3-22"><a></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="fu">paste0</span>(<span class="st">"N = "</span>,reg_sims<span class="sc">$</span>n)) <span class="sc">+</span></span>
-<span id="cb3-23"><a></a>  <span class="fu">dsan_theme</span>()</span>
-<span id="cb3-24"><a></a><span class="fu">ggsave</span>(<span class="st">"images/reg.png"</span>, reg_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
-<span id="cb3-25"><a></a>csr_plot <span class="ot">&lt;-</span> csr_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-26"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb3-27"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb3-28"><a></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="fu">paste0</span>(<span class="st">"N = "</span>,csr_sims<span class="sc">$</span>n)) <span class="sc">+</span></span>
-<span id="cb3-29"><a></a>  <span class="fu">dsan_theme</span>()</span>
-<span id="cb3-30"><a></a><span class="fu">ggsave</span>(<span class="st">"images/csr.png"</span>, csr_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
-<span id="cb3-31"><a></a>clust_plot <span class="ot">&lt;-</span> clust_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-32"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb3-33"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb3-34"><a></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="fu">paste0</span>(<span class="st">"N = "</span>,clust_sims<span class="sc">$</span>n)) <span class="sc">+</span></span>
-<span id="cb3-35"><a></a>  <span class="fu">dsan_theme</span>()</span>
-<span id="cb3-36"><a></a><span class="fu">ggsave</span>(<span class="st">"images/clust.png"</span>, clust_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-2"><a></a><span class="fu">library</span>(spatstat)</span>
+<span id="cb9-3"><a></a><span class="fu">set.seed</span>(<span class="dv">6807</span>)</span>
+<span id="cb9-4"><a></a>lambda <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb9-5"><a></a>r_core <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb9-6"><a></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
+<span id="cb9-7"><a></a><span class="co"># Regularity via Inhibition</span></span>
+<span id="cb9-8"><a></a><span class="co"># Regularity via Inhibition</span></span>
+<span id="cb9-9"><a></a>reg_sims <span class="ot">&lt;-</span> <span class="fu">rMaternI</span>(lambda, <span class="at">r=</span>r_core, <span class="at">win=</span>obs_window)</span>
+<span id="cb9-10"><a></a><span class="co"># CSR data</span></span>
+<span id="cb9-11"><a></a>csr_sims <span class="ot">&lt;-</span> <span class="fu">rpoispp</span>(N, <span class="at">win=</span>obs_window)</span>
+<span id="cb9-12"><a></a><span class="do">### Clustered data</span></span>
+<span id="cb9-13"><a></a>clust_mu <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb9-14"><a></a>clust_sims <span class="ot">&lt;-</span> <span class="fu">rMatClust</span>(<span class="at">kappa=</span>lambda <span class="sc">/</span> clust_mu, <span class="at">scale=</span><span class="dv">2</span><span class="sc">*</span>r_core, <span class="at">mu=</span><span class="dv">10</span>, <span class="at">win=</span>obs_window)</span>
+<span id="cb9-15"><a></a><span class="co"># And PLOT</span></span>
+<span id="cb9-16"><a></a>plot_w <span class="ot">&lt;-</span> <span class="dv">400</span></span>
+<span id="cb9-17"><a></a>plot_h <span class="ot">&lt;-</span> <span class="dv">400</span></span>
+<span id="cb9-18"><a></a>plot_scale <span class="ot">&lt;-</span> <span class="fl">2.25</span></span>
+<span id="cb9-19"><a></a>reg_plot <span class="ot">&lt;-</span> reg_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb9-20"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb9-21"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb9-22"><a></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="fu">paste0</span>(<span class="st">"N = "</span>,reg_sims<span class="sc">$</span>n)) <span class="sc">+</span></span>
+<span id="cb9-23"><a></a>  <span class="fu">dsan_theme</span>()</span>
+<span id="cb9-24"><a></a><span class="fu">ggsave</span>(<span class="st">"images/reg.png"</span>, reg_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
+<span id="cb9-25"><a></a>csr_plot <span class="ot">&lt;-</span> csr_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb9-26"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb9-27"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb9-28"><a></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="fu">paste0</span>(<span class="st">"N = "</span>,csr_sims<span class="sc">$</span>n)) <span class="sc">+</span></span>
+<span id="cb9-29"><a></a>  <span class="fu">dsan_theme</span>()</span>
+<span id="cb9-30"><a></a><span class="fu">ggsave</span>(<span class="st">"images/csr.png"</span>, csr_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span>
+<span id="cb9-31"><a></a>clust_plot <span class="ot">&lt;-</span> clust_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb9-32"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb9-33"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb9-34"><a></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="fu">paste0</span>(<span class="st">"N = "</span>,clust_sims<span class="sc">$</span>n)) <span class="sc">+</span></span>
+<span id="cb9-35"><a></a>  <span class="fu">dsan_theme</span>()</span>
+<span id="cb9-36"><a></a><span class="fu">ggsave</span>(<span class="st">"images/clust.png"</span>, clust_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>plot_scale)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<table data-quarto-postprocess="true" style="width: 100%;">
+<table style="width: 100%;">
 <colgroup>
 <col style="width: 20%">
 <col style="width: 25%">
@@ -537,39 +958,39 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>N <span class="ot">&lt;-</span> <span class="dv">60</span></span>
-<span id="cb4-2"><a></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
-<span id="cb4-3"><a></a>window_scale <span class="ot">&lt;-</span> <span class="fl">3.5</span></span>
-<span id="cb4-4"><a></a>csr_sims_square <span class="ot">&lt;-</span> <span class="fu">rpoispp</span>(N, <span class="at">win=</span>obs_window)</span>
-<span id="cb4-5"><a></a><span class="co"># Triangular window</span></span>
-<span id="cb4-6"><a></a>obs_window_tri <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(<span class="fu">st_polygon</span>(<span class="fu">list</span>(</span>
-<span id="cb4-7"><a></a>    <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.3</span>,<span class="fl">0.1</span>,<span class="fl">0.7</span>,<span class="fl">0.1</span>,<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.1</span>), <span class="at">byrow=</span><span class="cn">TRUE</span>, <span class="at">nrow=</span><span class="dv">4</span>)</span>
-<span id="cb4-8"><a></a>)))</span>
-<span id="cb4-9"><a></a>obs_window_geom <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(<span class="fu">st_linestring</span>(</span>
-<span id="cb4-10"><a></a>    <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">byrow=</span><span class="cn">TRUE</span>, <span class="at">nrow=</span><span class="dv">5</span>)</span>
-<span id="cb4-11"><a></a>))</span>
-<span id="cb4-12"><a></a>csr_sims_tri <span class="ot">&lt;-</span> <span class="fu">ppp</span>(csr_sims_square<span class="sc">$</span>x, csr_sims_square<span class="sc">$</span>y, <span class="at">window=</span><span class="fu">as.owin</span>(obs_window_tri))</span>
-<span id="cb4-13"><a></a>tri_plot <span class="ot">&lt;-</span> csr_sims_tri <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb4-14"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb4-15"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb4-16"><a></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>);</span>
-<span id="cb4-17"><a></a><span class="fu">ggsave</span>(<span class="st">"images/window_tri.png"</span>, tri_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>window_scale)</span>
-<span id="cb4-18"><a></a><span class="co"># Square window</span></span>
-<span id="cb4-19"><a></a>square_plot <span class="ot">&lt;-</span> csr_sims_square <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb4-20"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb4-21"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb4-22"><a></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>obs_window_tri <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_boundary</span>()) <span class="sc">+</span></span>
-<span id="cb4-23"><a></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>)</span>
-<span id="cb4-24"><a></a><span class="fu">ggsave</span>(<span class="st">"images/window_square.png"</span>, square_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>window_scale)</span>
-<span id="cb4-25"><a></a><span class="co"># Circular window</span></span>
-<span id="cb4-26"><a></a>obs_window_disc <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(<span class="fu">st_point</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))) <span class="sc">|&gt;</span> <span class="fu">st_buffer</span>(<span class="fl">1.2</span>)</span>
-<span id="cb4-27"><a></a>csr_sims_circ <span class="ot">&lt;-</span> <span class="fu">ppp</span>(csr_sims_square<span class="sc">$</span>x, csr_sims_square<span class="sc">$</span>y, <span class="at">window=</span><span class="fu">as.owin</span>(obs_window_disc))</span>
-<span id="cb4-28"><a></a>circ_plot <span class="ot">&lt;-</span> csr_sims_circ <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb4-29"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb4-30"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb4-31"><a></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>obs_window_geom) <span class="sc">+</span></span>
-<span id="cb4-32"><a></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>)</span>
-<span id="cb4-33"><a></a><span class="fu">ggsave</span>(<span class="st">"images/window_circ.png"</span>, circ_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>window_scale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>N <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb10-2"><a></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
+<span id="cb10-3"><a></a>window_scale <span class="ot">&lt;-</span> <span class="fl">3.5</span></span>
+<span id="cb10-4"><a></a>csr_sims_square <span class="ot">&lt;-</span> <span class="fu">rpoispp</span>(N, <span class="at">win=</span>obs_window)</span>
+<span id="cb10-5"><a></a><span class="co"># Triangular window</span></span>
+<span id="cb10-6"><a></a>obs_window_tri <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(<span class="fu">st_polygon</span>(<span class="fu">list</span>(</span>
+<span id="cb10-7"><a></a>    <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.3</span>,<span class="fl">0.1</span>,<span class="fl">0.7</span>,<span class="fl">0.1</span>,<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="fl">0.3</span>,<span class="fl">0.1</span>), <span class="at">byrow=</span><span class="cn">TRUE</span>, <span class="at">nrow=</span><span class="dv">4</span>)</span>
+<span id="cb10-8"><a></a>)))</span>
+<span id="cb10-9"><a></a>obs_window_geom <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(<span class="fu">st_linestring</span>(</span>
+<span id="cb10-10"><a></a>    <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">byrow=</span><span class="cn">TRUE</span>, <span class="at">nrow=</span><span class="dv">5</span>)</span>
+<span id="cb10-11"><a></a>))</span>
+<span id="cb10-12"><a></a>csr_sims_tri <span class="ot">&lt;-</span> <span class="fu">ppp</span>(csr_sims_square<span class="sc">$</span>x, csr_sims_square<span class="sc">$</span>y, <span class="at">window=</span><span class="fu">as.owin</span>(obs_window_tri))</span>
+<span id="cb10-13"><a></a>tri_plot <span class="ot">&lt;-</span> csr_sims_tri <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb10-14"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-15"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb10-16"><a></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>);</span>
+<span id="cb10-17"><a></a><span class="fu">ggsave</span>(<span class="st">"images/window_tri.png"</span>, tri_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>window_scale)</span>
+<span id="cb10-18"><a></a><span class="co"># Square window</span></span>
+<span id="cb10-19"><a></a>square_plot <span class="ot">&lt;-</span> csr_sims_square <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb10-20"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-21"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb10-22"><a></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>obs_window_tri <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_boundary</span>()) <span class="sc">+</span></span>
+<span id="cb10-23"><a></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>)</span>
+<span id="cb10-24"><a></a><span class="fu">ggsave</span>(<span class="st">"images/window_square.png"</span>, square_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>window_scale)</span>
+<span id="cb10-25"><a></a><span class="co"># Circular window</span></span>
+<span id="cb10-26"><a></a>obs_window_disc <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(<span class="fu">st_point</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))) <span class="sc">|&gt;</span> <span class="fu">st_buffer</span>(<span class="fl">1.2</span>)</span>
+<span id="cb10-27"><a></a>csr_sims_circ <span class="ot">&lt;-</span> <span class="fu">ppp</span>(csr_sims_square<span class="sc">$</span>x, csr_sims_square<span class="sc">$</span>y, <span class="at">window=</span><span class="fu">as.owin</span>(obs_window_disc))</span>
+<span id="cb10-28"><a></a>circ_plot <span class="ot">&lt;-</span> csr_sims_circ <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb10-29"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-30"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb10-31"><a></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>obs_window_geom) <span class="sc">+</span></span>
+<span id="cb10-32"><a></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>)</span>
+<span id="cb10-33"><a></a><span class="fu">ggsave</span>(<span class="st">"images/window_circ.png"</span>, circ_plot, <span class="at">width=</span>plot_w, <span class="at">height=</span>plot_h, <span class="at">units=</span><span class="st">"px"</span>, <span class="at">scale=</span>window_scale)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <table>
@@ -622,41 +1043,41 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>center_l_function <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
-<span id="cb5-2"><a></a></span>
-<span id="cb5-3"><a></a>  <span class="cf">if</span> (<span class="sc">!</span>spatstat.geom<span class="sc">::</span><span class="fu">is.ppp</span>(x) <span class="sc">&amp;&amp;</span> <span class="sc">!</span>spatstat.geom<span class="sc">::</span><span class="fu">is.fv</span>(x)) {</span>
-<span id="cb5-4"><a></a>    <span class="fu">stop</span>(<span class="st">"Please provide either ppp or fv object."</span>)</span>
-<span id="cb5-5"><a></a>  }</span>
-<span id="cb5-6"><a></a></span>
-<span id="cb5-7"><a></a>  <span class="cf">if</span> (spatstat.geom<span class="sc">::</span><span class="fu">is.ppp</span>(x)) {</span>
-<span id="cb5-8"><a></a>    x <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">Lest</span>(x, ...)</span>
-<span id="cb5-9"><a></a>  }</span>
-<span id="cb5-10"><a></a></span>
-<span id="cb5-11"><a></a>  r <span class="ot">&lt;-</span> x<span class="sc">$</span>r</span>
-<span id="cb5-12"><a></a></span>
-<span id="cb5-13"><a></a>  l_centered <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">eval.fv</span>(x <span class="sc">-</span> r)</span>
-<span id="cb5-14"><a></a></span>
-<span id="cb5-15"><a></a>  <span class="fu">return</span>(l_centered)</span>
-<span id="cb5-16"><a></a>}</span>
-<span id="cb5-17"><a></a>cond_clust_sf <span class="ot">&lt;-</span> cond_clust_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
-<span id="cb5-18"><a></a>pines_plot <span class="ot">&lt;-</span> cond_clust_sf <span class="sc">|&gt;</span></span>
-<span id="cb5-19"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb5-20"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb5-21"><a></a>  <span class="fu">dsan_theme</span>(<span class="st">"full"</span>)</span>
-<span id="cb5-22"><a></a><span class="fu">ggsave</span>(<span class="st">"images/pines.png"</span>, pines_plot)</span>
-<span id="cb5-23"><a></a><span class="co"># density() calls density.ppp() if the argument is a ppp object</span></span>
-<span id="cb5-24"><a></a>den <span class="ot">&lt;-</span> <span class="fu">density</span>(cond_clust_sims, <span class="at">sigma =</span> <span class="fl">0.1</span>)</span>
-<span id="cb5-25"><a></a><span class="co">#summary(den)</span></span>
-<span id="cb5-26"><a></a><span class="fu">png</span>(<span class="st">"images/intensity_plot.png"</span>)</span>
-<span id="cb5-27"><a></a><span class="fu">plot</span>(den, <span class="at">main =</span> <span class="st">"Intensity λ(s)"</span>)</span>
-<span id="cb5-28"><a></a><span class="fu">contour</span>(den, <span class="at">add =</span> <span class="cn">TRUE</span>) <span class="co"># contour plot</span></span>
-<span id="cb5-29"><a></a><span class="fu">dev.off</span>()</span>
-<span id="cb5-30"><a></a><span class="co"># And Kest / Lest</span></span>
-<span id="cb5-31"><a></a>kest_result <span class="ot">&lt;-</span> <span class="fu">Kest</span>(cond_clust_sims, <span class="at">rmax=</span><span class="fl">0.5</span>, <span class="at">correction=</span><span class="st">"best"</span>)</span>
-<span id="cb5-32"><a></a>lest_result <span class="ot">&lt;-</span> <span class="fu">center_l_function</span>(cond_clust_sims, <span class="at">rmax=</span><span class="fl">0.5</span>)</span>
-<span id="cb5-33"><a></a><span class="fu">png</span>(<span class="st">"images/lest.png"</span>)</span>
-<span id="cb5-34"><a></a><span class="fu">plot</span>(lest_result, <span class="at">main=</span><span class="st">"K(h)"</span>)</span>
-<span id="cb5-35"><a></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>center_l_function <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
+<span id="cb11-2"><a></a></span>
+<span id="cb11-3"><a></a>  <span class="cf">if</span> (<span class="sc">!</span>spatstat.geom<span class="sc">::</span><span class="fu">is.ppp</span>(x) <span class="sc">&amp;&amp;</span> <span class="sc">!</span>spatstat.geom<span class="sc">::</span><span class="fu">is.fv</span>(x)) {</span>
+<span id="cb11-4"><a></a>    <span class="fu">stop</span>(<span class="st">"Please provide either ppp or fv object."</span>)</span>
+<span id="cb11-5"><a></a>  }</span>
+<span id="cb11-6"><a></a></span>
+<span id="cb11-7"><a></a>  <span class="cf">if</span> (spatstat.geom<span class="sc">::</span><span class="fu">is.ppp</span>(x)) {</span>
+<span id="cb11-8"><a></a>    x <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">Lest</span>(x, ...)</span>
+<span id="cb11-9"><a></a>  }</span>
+<span id="cb11-10"><a></a></span>
+<span id="cb11-11"><a></a>  r <span class="ot">&lt;-</span> x<span class="sc">$</span>r</span>
+<span id="cb11-12"><a></a></span>
+<span id="cb11-13"><a></a>  l_centered <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">eval.fv</span>(x <span class="sc">-</span> r)</span>
+<span id="cb11-14"><a></a></span>
+<span id="cb11-15"><a></a>  <span class="fu">return</span>(l_centered)</span>
+<span id="cb11-16"><a></a>}</span>
+<span id="cb11-17"><a></a>cond_clust_sf <span class="ot">&lt;-</span> cond_clust_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb11-18"><a></a>pines_plot <span class="ot">&lt;-</span> cond_clust_sf <span class="sc">|&gt;</span></span>
+<span id="cb11-19"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb11-20"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb11-21"><a></a>  <span class="fu">dsan_theme</span>(<span class="st">"full"</span>)</span>
+<span id="cb11-22"><a></a><span class="fu">ggsave</span>(<span class="st">"images/pines.png"</span>, pines_plot)</span>
+<span id="cb11-23"><a></a><span class="co"># density() calls density.ppp() if the argument is a ppp object</span></span>
+<span id="cb11-24"><a></a>den <span class="ot">&lt;-</span> <span class="fu">density</span>(cond_clust_sims, <span class="at">sigma =</span> <span class="fl">0.1</span>)</span>
+<span id="cb11-25"><a></a><span class="co">#summary(den)</span></span>
+<span id="cb11-26"><a></a><span class="fu">png</span>(<span class="st">"images/intensity_plot.png"</span>)</span>
+<span id="cb11-27"><a></a><span class="fu">plot</span>(den, <span class="at">main =</span> <span class="st">"Intensity λ(s)"</span>)</span>
+<span id="cb11-28"><a></a><span class="fu">contour</span>(den, <span class="at">add =</span> <span class="cn">TRUE</span>) <span class="co"># contour plot</span></span>
+<span id="cb11-29"><a></a><span class="fu">dev.off</span>()</span>
+<span id="cb11-30"><a></a><span class="co"># And Kest / Lest</span></span>
+<span id="cb11-31"><a></a>kest_result <span class="ot">&lt;-</span> <span class="fu">Kest</span>(cond_clust_sims, <span class="at">rmax=</span><span class="fl">0.5</span>, <span class="at">correction=</span><span class="st">"best"</span>)</span>
+<span id="cb11-32"><a></a>lest_result <span class="ot">&lt;-</span> <span class="fu">center_l_function</span>(cond_clust_sims, <span class="at">rmax=</span><span class="fl">0.5</span>)</span>
+<span id="cb11-33"><a></a><span class="fu">png</span>(<span class="st">"images/lest.png"</span>)</span>
+<span id="cb11-34"><a></a><span class="fu">plot</span>(lest_result, <span class="at">main=</span><span class="st">"K(h)"</span>)</span>
+<span id="cb11-35"><a></a><span class="fu">dev.off</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <table>
@@ -686,17 +1107,23 @@ Jeff Jacobs
 </tbody>
 </table>
 </section>
-<section id="references" class="slide level2 smaller scrollable">
+<section id="references" class="slide level2 crunch-title smaller scrollable">
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-baddeley_spatial_2015" class="csl-entry" role="listitem">
-Baddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. <em>Spatial <span>Point Patterns</span>: <span>Methodology</span> and <span>Applications</span> with <span>R</span></em>. CRC Press. <a href="https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&amp;dl=1">https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&amp;dl=1</a>.
+Baddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. <em><a href="https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&amp;dl=1">Spatial <span>Point Patterns</span>: <span>Methodology</span> and <span>Applications</span> with <span>R</span></a></em>. CRC Press.
+</div>
+<div id="ref-parenti_tropic_2011" class="csl-entry" role="listitem">
+Parenti, Christian. 2011. <em>Tropic of <span>Chaos</span>: <span>Climate Change</span> and the <span>New Geography</span> of <span>Violence</span></em>. PublicAffairs.
 </div>
 <div id="ref-schabenberger_statistical_2004" class="csl-entry" role="listitem">
-Schabenberger, Oliver, and Carol A. Gotway. 2004. <em>Statistical <span>Methods</span> for <span>Spatial Data Analysis</span></em>. CRC Press. <a href="https://www.dropbox.com/scl/fi/25gj53qitsdzw9kvcvfjf/Oliver-Schabenberger-Carol-A.-Gotway-Statistical-methods-for-spatial-data-analysis.pdf?rlkey=p5ih232gmxzm3zstvszux2big&amp;dl=1">https://www.dropbox.com/scl/fi/25gj53qitsdzw9kvcvfjf/Oliver-Schabenberger-Carol-A.-Gotway-Statistical-methods-for-spatial-data-analysis.pdf?rlkey=p5ih232gmxzm3zstvszux2big&amp;dl=1</a>.
+Schabenberger, Oliver, and Carol A. Gotway. 2004. <em><a href="https://www.dropbox.com/scl/fi/25gj53qitsdzw9kvcvfjf/Oliver-Schabenberger-Carol-A.-Gotway-Statistical-methods-for-spatial-data-analysis.pdf?rlkey=p5ih232gmxzm3zstvszux2big&amp;dl=1">Statistical <span>Methods</span> for <span>Spatial Data Analysis</span></a></em>. CRC Press.
 </div>
 <div id="ref-waller_applied_2004" class="csl-entry" role="listitem">
-Waller, Lance A., and Carol A. Gotway. 2004. <em>Applied <span>Spatial Statistics</span> for <span>Public Health Data</span></em>. John Wiley &amp; Sons. <a href="https://www.dropbox.com/scl/fi/kyq9h64e3x2zcd5qezaeh/Lance-A.-Waller-Carol-A.-Gotway-Applied-Spatial-Analysis-of-Public-Health-Data.pdf?rlkey=ajc3pfm3j01htkflidgd6jx28&amp;dl=1">https://www.dropbox.com/scl/fi/kyq9h64e3x2zcd5qezaeh/Lance-A.-Waller-Carol-A.-Gotway-Applied-Spatial-Analysis-of-Public-Health-Data.pdf?rlkey=ajc3pfm3j01htkflidgd6jx28&amp;dl=1</a>.
+Waller, Lance A., and Carol A. Gotway. 2004. <em><a href="https://www.dropbox.com/scl/fi/kyq9h64e3x2zcd5qezaeh/Lance-A.-Waller-Carol-A.-Gotway-Applied-Spatial-Analysis-of-Public-Health-Data.pdf?rlkey=ajc3pfm3j01htkflidgd6jx28&amp;dl=1">Applied <span>Spatial Statistics</span> for <span>Public Health Data</span></a></em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-xie_analyzing_2022" class="csl-entry" role="listitem">
+Xie, Sherrie. 2022. <span>“<a href="https://www.youtube.com/watch?v=DD7bXonh-_E">Analyzing <span>Geospatial Data</span> in <span>R</span></a>.”</span> R/Medicine Virtual Conference: YouTube.
 </div>
 </div>
 
@@ -1005,13 +1432,14 @@ Waller, Lance A., and Carol A. Gotway. 2004. <em>Applied <span>Spatial Statistic
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

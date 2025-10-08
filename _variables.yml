@@ -34,7 +34,7 @@ weeks:
     date-md: "Sep 24"
   - weeknum: 6
     title: "Spatial Joins and Areal-Weighted Interpolation"
-    footer: "PPOL 6805 Week 7: Spatial Joins and Interpolation"
+    footer: "PPOL 6805 Week 6: Spatial Joins and Interpolation"
     date-md: "Oct 1"
   - weeknum: 7
     title: "Spatial Data Science: Three Forms of Spatial Autocorrelation"
