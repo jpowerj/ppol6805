@@ -3,5 +3,6 @@
 *.tif
 *.hdr
 *.tfw
+*.zip
 
 **/*.quarto_ipynb

@@ -148,7 +148,7 @@ $$
 :::: {layout="[75,25]" layout-valign="center"}
 ::: {#sea-level-rise}
 
-![ArcGIS: [Sea Level Rise in Bangladesh](https://www.arcgis.com/apps/mapviewer/index.html?webmap=b82e4d7b92084b63a30b3a3bbed09ec5&utm_source=chatgpt.com)](images/bhola.jpg){fig-align="center"}
+![ArcGIS: [Sea Level Rise in Bangladesh](https://www.arcgis.com/apps/mapviewer/index.html?webmap=b82e4d7b92084b63a30b3a3bbed09ec5) ([See also](https://www.pbs.org/newshour/show/as-rising-sea-levels-swallow-bangladeshs-land-its-climate-refugees-are-forced-to-adapt))](images/bhola.jpg){fig-align="center"}
 
 :::
 ::: {#tropic-of-chaos}

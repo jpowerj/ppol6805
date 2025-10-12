@@ -589,7 +589,7 @@
     "href": "w08/slides.html#references",
     "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
     "section": "References",
-    "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press. https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&dl=1."
+    "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press."
   },
   {
     "objectID": "w08/index.html",
@@ -746,7 +746,7 @@
     "href": "w08/index.html#references",
     "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
     "section": "References",
-    "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press. https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&dl=1.",
+    "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press.",
     "crumbs": [
       "Week 8: Oct 15"
     ]
@@ -987,7 +987,7 @@
     "href": "index.html",
     "title": "PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science",
     "section": "",
-    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2025, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Healy 105. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\n\nDate\n\n\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 27\n\n\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 3\n\n\n\n\n\n\nWeek 3: Vector and Raster Representations\n\n\nSep 11\n\n\n\n\n\n\nWeek 4: Unary Operations\n\n\nSep 17\n\n\n\n\n\n\nWeek 5: Binary Operations and DE-9IM\n\n\nSep 25\n\n\n\n\n\n\nWeek 6: Spatial Joins and Areal-Weighted Interpolation\n\n\nOct 2\n\n\n\n\n\n\nWeek 7: Spatial Data Science: Three Forms of Spatial Autocorrelation\n\n\nOct 9\n\n\n\n\n\n\nWeek 8: Point Processes: Null Models, Clustering, and Regularity\n\n\nOct 16\n\n\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Point Data\n\n\nOct 23\n\n\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Areal Data\n\n\nOct 30\n\n\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 6\n\n\n\n\n\n\nWeek 12: Tools for Final Projects\n\n\nNov 13\n\n\n\n\n\n\nWeek 13: In-Class Office Hours\n\n\nNov 20\n\n\n\n\n\n\nWeek 14: Final Project Poster Session\n\n\nDec 4\n\n\n\n\n\n\nNo matching items",
+    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2025, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Healy 105. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\n\nDate\n\n\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 27\n\n\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 3\n\n\n\n\n\n\nWeek 3: Vector and Raster Representations\n\n\nSep 11\n\n\n\n\n\n\nWeek 4: Unary Operations\n\n\nSep 17\n\n\n\n\n\n\nWeek 5: Binary Operations and DE-9IM\n\n\nSep 25\n\n\n\n\n\n\nWeek 6: Spatial Joins and Areal-Weighted Interpolation\n\n\nOct 2\n\n\n\n\n\n\nWeek 7: Spatial Data Science: Three Forms of Spatial Autocorrelation\n\n\nOct 9\n\n\n\n\n\n\nWeek 8: Point Processes: Null Models, Clustering, and Regularity\n\n\nOct 15\n\n\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Point Data\n\n\nOct 23\n\n\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Areal Data\n\n\nOct 30\n\n\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 6\n\n\n\n\n\n\nWeek 12: Tools for Final Projects\n\n\nNov 13\n\n\n\n\n\n\nWeek 13: In-Class Office Hours\n\n\nNov 20\n\n\n\n\n\n\nWeek 14: Final Project Poster Session\n\n\nDec 4\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "<i class='bi bi-house pe-1'></i> Home"
     ]
@@ -3414,7 +3414,7 @@
     "href": "w07/index.html#example-water-coverage-in-bhola-bangladesh",
     "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
     "section": "Example: Water Coverage in Bhola, Bangladesh",
-    "text": "Example: Water Coverage in Bhola, Bangladesh\n\n\n\n\n\n\nArcGIS: Sea Level Rise in Bangladesh\n\n\n\n\n\n\n\nParenti (2011)",
+    "text": "Example: Water Coverage in Bhola, Bangladesh\n\n\n\n\n\n\nArcGIS: Sea Level Rise in Bangladesh (See also)\n\n\n\n\n\n\n\nParenti (2011)",
     "crumbs": [
       "Week 7: Oct 8"
     ]
@@ -3608,7 +3608,7 @@
     "href": "w07/slides.html#example-water-coverage-in-bhola-bangladesh",
     "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
     "section": "Example: Water Coverage in Bhola, Bangladesh",
-    "text": "Example: Water Coverage in Bhola, Bangladesh\n\n\n\n\n\n\nArcGIS: Sea Level Rise in Bangladesh\n\n\n\n\n\n\n\nParenti (2011)"
+    "text": "Example: Water Coverage in Bhola, Bangladesh\n\n\n\n\n\n\nArcGIS: Sea Level Rise in Bangladesh (See also)\n\n\n\n\n\n\n\nParenti (2011)"
   },
   {
     "objectID": "w07/slides.html#geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes",

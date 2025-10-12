@@ -552,7 +552,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-10-08, 12:52:51 AM</em></p>
+<p><em>Updated 2025-10-11, 10:38:28 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -666,7 +666,7 @@ window.Quarto = {
 <center>
 <strong><code>POINT</code> Attributes</strong>
 </center>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(sampled_points_sf) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"geom"</span>)</span>
@@ -715,7 +715,7 @@ window.Quarto = {
 <center>
 <strong><code>POLYGON</code> Attributes</strong>
 </center>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>countries_points_sf <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1768,7 +1768,7 @@ window.Quarto = {
 </section>
 <section id="our-first-real-spatial-join-st_join" class="level2 smaller crunch-title title-12">
 <h2 class="smaller crunch-title title-12 anchored" data-anchor-id="our-first-real-spatial-join-st_join">Our First Real Spatial Join: <code>st_join()</code></h2>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>joined_sf <span class="ot">&lt;-</span> countries_points_sf <span class="sc">|&gt;</span> <span class="fu">st_join</span>(sampled_points_sf)</span>
@@ -3180,7 +3180,7 @@ window.Quarto = {
 <ul>
 <li>Every point could be matched <strong>one-to-one</strong> with a country. But what if… 😱</li>
 </ul>
-<div class="cell" data-layout-align="center">
+<div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">st_make_grid</span>(<span class="fu">st_bbox</span>(<span class="fu">st_as_sfc</span>(<span class="st">"LINESTRING(0 0,1 1)"</span>)), <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
@@ -3190,9 +3190,9 @@ window.Quarto = {
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fu">c</span>(.<span class="dv">2</span>, .<span class="dv">8</span>, .<span class="dv">2</span>, .<span class="dv">8</span>), <span class="fu">c</span>(.<span class="dv">2</span>, .<span class="dv">2</span>, .<span class="dv">8</span>, .<span class="dv">8</span>), <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>), <span class="at">col =</span> <span class="st">'red'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div>
 <figure class="figure">
-<p><img src="index_files/figure-html/area-weighted-interpolation-first-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="index_files/figure-html/area-weighted-interpolation-first-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
