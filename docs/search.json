@@ -487,25 +487,81 @@
     ]
   },
   {
-    "objectID": "w08/slides.html#from-last-week-our-new-library-spatstat",
-    "href": "w08/slides.html#from-last-week-our-new-library-spatstat",
+    "objectID": "w08/slides.html#where-we-left-off",
+    "href": "w08/slides.html#where-we-left-off",
     "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
-    "section": "[From Last Week] Our New Library: spatstat!",
-    "text": "[From Last Week] Our New Library: spatstat!\n\n\n\nHomepage: spatstat.org\nGitHub: github.com/spatstat\nBook: Baddeley, Rubak, and Turner (2015) [Companion website]\nPDF: here"
+    "section": "Where We Left Off",
+    "text": "Where We Left Off\n\nLocation \\(i\\) has high value \\(\\implies\\) locations near \\(i\\) more likely to have high values"
   },
   {
-    "objectID": "w08/slides.html#ppp-objects",
-    "href": "w08/slides.html#ppp-objects",
+    "objectID": "w08/slides.html#morans-i",
+    "href": "w08/slides.html#morans-i",
     "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
-    "section": "ppp Objects",
-    "text": "ppp Objects\n\nThe main datatype used to represent Planar Point Patterns [spatstat book p. 41]\nUnlike sf objects, which contain data+geometries for any desired collection of \\(N\\) entities, ppp objects are required to have at least an observation window!\n\n\n\nsf Creation:\n\n\nCode\ntree_df &lt;- tibble::tibble(lon=runif(100,0,1), lat=runif(100,0,1), age=runif(100,0,1))\ntree_sf &lt;- sf::st_as_sf(\n  tree_df,\n  coords = c('lon', 'lat')\n)\ntree_sf |&gt; head(4)\n\n\n\n\n\n\nage\ngeometry\n\n\n\n\n0.0233144\nPOINT (0.1487039 0.5640943)\n\n\n0.6882371\nPOINT (0.1248064 0.8612631)\n\n\n0.3889197\nPOINT (0.6370261 0.5268693)\n\n\n0.6638135\nPOINT (0.5211425 0.4551448)\n\n\n\n\n\n\n\nppp Creation:\n\n\nCode\npois_ppp &lt;- spatstat.random::rpoispp(\n  lambda=100, win=spatstat.geom::square(1)\n)\npois_ppp\n\n\nPlanar point pattern: 91 points\nwindow: rectangle = [0, 1] x [0, 1] units\n\n\nCode\nattributes(pois_ppp)$names\n\n\n[1] \"window\"     \"n\"          \"x\"          \"y\"          \"markformat\"\n\n\nCode\npois_ppp$x |&gt; head(4)\n\n\n[1] 0.5735346 0.7526621 0.8129999 0.7419696"
+    "section": "Moran’s \\(I\\)",
+    "text": "Moran’s \\(I\\)\n\\[\nI =\n\\underset{\\text{Inverse of Variance}}{\\boxed{\\frac{n}{\\sum_{i=1}^{n}(y_i - \\overline{y})^2}}}\n\\frac\n  {\\overbrace{\\sum_{i=1}^{n}\\sum_{j=1}^{n}w_{ij}(y_i - \\overline{y})(y_j - \\overline{y})}^{\\text{Weighted Covariance}}}\n  {\\underbrace{\\sum_{i=1}^{n}\\sum_{j=1}^{n}w_{ij}}_{\\text{Normalize Weights}}}\n\\]\n\n\\(I\\) is Large when:\n\n\\(y_i\\) and \\(y_j\\) are neighbors: \\(w_{ij}\\), and\n\\(y_i\\) and \\(y_j\\) large at the same time: \\((y_i - \\overline{y})(y_j - \\overline{y})\\)"
   },
   {
-    "objectID": "w08/slides.html#ppp-leftrightarrow-sf-conversion",
-    "href": "w08/slides.html#ppp-leftrightarrow-sf-conversion",
+    "objectID": "w08/slides.html#local-indicators-of-spatial-autocorrelation-lisa",
+    "href": "w08/slides.html#local-indicators-of-spatial-autocorrelation-lisa",
     "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
-    "section": "ppp \\(\\leftrightarrow\\) sf Conversion",
-    "text": "ppp \\(\\leftrightarrow\\) sf Conversion\n\n\nppp to sf Conversion:\n\n\nCode\npois_sf &lt;- pois_ppp |&gt; sf::st_as_sf()\npois_sf |&gt; head(4)\n\n\n\n\n\n\nlabel\ngeom\n\n\n\n\nwindow\nPOLYGON ((0 0, 1 0, 1 1, 0 …\n\n\npoint\nPOINT (0.5735346 0.6204983)\n\n\npoint\nPOINT (0.7526621 0.4205887)\n\n\npoint\nPOINT (0.8129999 0.6844816)\n\n\n\n\n\n\n\n\nCode\npois_sf |&gt; ggplot() +\n  geom_sf(data=pois_sf |&gt; filter(label==\"window\"), aes(fill='grey')) +\n  geom_sf(data=pois_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'window'&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'point'&lt;/span&gt;\")) +\n  labs(title = \"&lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;sf&lt;/span&gt; Result\")\n\n\n\n\n\n\n\n\n\n\nsf to ppp Conversion:\n\n\nCode\nsquare_sfc &lt;- sf::st_polygon(list(\n  matrix(c(0,0,1,0,1,1,0,1,0,0), nrow=5, byrow=TRUE)\n)) |&gt; sf::st_sfc()\ntree_ppp &lt;- as.ppp(\n  sf::st_as_sfc(tree_sf),\n  W=as.owin(square_sfc)\n)\ntree_ppp\n\n\nPlanar point pattern: 100 points\nwindow: polygonal boundary\nenclosing rectangle: [0, 1] x [0, 1] units\n\n\n\n\nCode\ntree_ppp_sf &lt;- tree_ppp |&gt; sf::st_as_sf()\ntree_ppp_sf |&gt; ggplot() +\n  geom_sf(aes(fill='gray90')) +\n  geom_sf(data=tree_ppp_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp$window&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp${x,y}&lt;/span&gt;\")) +\n  labs(\n    title = \"&lt;span style='font-family: mono'&gt;sf&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; Result\",\n    x=\"&lt;span style='font-family: mono'&gt;tree_ppp$x&lt;/span&gt;\",\n    y=\"&lt;span style='font-family: mono'&gt;tree_ppp$y&lt;/span&gt;\"\n  ) + \n  guides(fill = guide_legend(order = 1), \n              color = guide_legend(order = 2))"
+    "section": "Local Indicators of Spatial Autocorrelation (LISA)",
+    "text": "Local Indicators of Spatial Autocorrelation (LISA)\n\ntldr: See how much a given location \\(\\mathbf{s}\\) contributes to overall Moran’s \\(I\\)\nLocal Moran’s \\(I\\):\n\n\\[\nI_i = \\frac{y_i - \\overline{y}}{S_i^2}\\sum_{j=1}^{n}w_{ij}(y_j - \\overline{y})\n\\]"
+  },
+  {
+    "objectID": "w08/slides.html#our-null-hypothesis-complete-spatial-randomness-csr",
+    "href": "w08/slides.html#our-null-hypothesis-complete-spatial-randomness-csr",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Our Null Hypothesis: Complete Spatial Randomness (CSR)",
+    "text": "Our Null Hypothesis: Complete Spatial Randomness (CSR)\nBut, a challenge…"
+  },
+  {
+    "objectID": "w08/slides.html#why-naïve",
+    "href": "w08/slides.html#why-naïve",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Why “Naïve”?",
+    "text": "Why “Naïve”?\n\nRegional data: easiest way to visualize / operationalize simple measures of clustering via spatial autocorrelation\nSo, we develop intuitions for measures like Moran’s \\(I\\) by looking at lattice data, but…\nNaïve because we’re not modeling the lattice regions (cells) themselves!\nNon-naïve clustering: Knowing the clusters but also what process led to their formation!"
+  },
+  {
+    "objectID": "w08/slides.html#spatial-randomness",
+    "href": "w08/slides.html#spatial-randomness",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Spatial Randomness",
+    "text": "Spatial Randomness\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6805)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)\ncond_reg_sims &lt;- rSSI(r=r_core, N)\n# CSR data\n#csr_sims &lt;- rpoispp(N, win=obs_window)\ncond_sr_sims &lt;- rpoint(N, win=obs_window)\n### Clustered data\n#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)\n#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)\n#clust_sims &lt;- rclusterBKBC(clusters=\"MatClust\", kappa=10, mu=10, scale=0.05, verbose=FALSE)\n# Each cluster consist of 10 points in a disc of radius 0.2\nnclust &lt;- function(x0, y0, radius, n) {\n    #print(n)\n    return(runifdisc(10, radius, centre=c(x0, y0)))\n}\ncond_clust_sims &lt;- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\ncond_reg_plot &lt;- cond_reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_reg.png\", cond_reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_sr_plot &lt;- cond_sr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_sr.png\", cond_sr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_clust_plot &lt;- cond_clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_clust.png\", cond_clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed \\(N\\)\n60\n\n60\n\n60"
+  },
+  {
+    "objectID": "w08/slides.html#complete-spatial-randomness-csr",
+    "href": "w08/slides.html#complete-spatial-randomness-csr",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Complete Spatial Randomness (CSR)",
+    "text": "Complete Spatial Randomness (CSR)\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6807)\nlambda &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n# Regularity via Inhibition\nreg_sims &lt;- rMaternI(lambda, r=r_core, win=obs_window)\n# CSR data\ncsr_sims &lt;- rpoispp(N, win=obs_window)\n### Clustered data\nclust_mu &lt;- 10\nclust_sims &lt;- rMatClust(kappa=lambda / clust_mu, scale=2*r_core, mu=10, win=obs_window)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\nreg_plot &lt;- reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",reg_sims$n)) +\n  dsan_theme()\nggsave(\"images/reg.png\", reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncsr_plot &lt;- csr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",csr_sims$n)) +\n  dsan_theme()\nggsave(\"images/csr.png\", csr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\nclust_plot &lt;- clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",clust_sims$n)) +\n  dsan_theme()\nggsave(\"images/clust.png\", clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed Intensity \\(\\lambda\\)\n60\n\n60\n\n60\n\n\nRandom \\(N\\)"
+  },
+  {
+    "objectID": "w08/slides.html#measures-are-relative-to-window-of-observation",
+    "href": "w08/slides.html#measures-are-relative-to-window-of-observation",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Measures are Relative to Window of Observation",
+    "text": "Measures are Relative to Window of Observation\n\nSame data can be spatially random within one window, clustered or regular in others!\n\n\n\nCode\nN &lt;- 60\nobs_window &lt;- square(1)\nwindow_scale &lt;- 3.5\ncsr_sims_square &lt;- rpoispp(N, win=obs_window)\n# Triangular window\nobs_window_tri &lt;- st_sfc(st_polygon(list(\n    matrix(c(0.3,0.1,0.7,0.1,0.5,0.5,0.3,0.1), byrow=TRUE, nrow=4)\n)))\nobs_window_geom &lt;- st_sfc(st_linestring(\n    matrix(c(0,0,1,0,1,1,0,1,0,0), byrow=TRUE, nrow=5)\n))\ncsr_sims_tri &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_tri))\ntri_plot &lt;- csr_sims_tri |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"quarter\");\nggsave(\"images/window_tri.png\", tri_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Square window\nsquare_plot &lt;- csr_sims_square |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_tri |&gt; sf::st_boundary()) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_square.png\", square_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Circular window\nobs_window_disc &lt;- st_sfc(st_point(c(1, 0.5))) |&gt; st_buffer(1.2)\ncsr_sims_circ &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_disc))\ncirc_plot &lt;- csr_sims_circ |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_geom) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_circ.png\", circ_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n\n\n\n\n\n\n\n\n\n\nRegular\nCSR\nClustered"
+  },
+  {
+    "objectID": "w08/slides.html#our-new-library-spatstat",
+    "href": "w08/slides.html#our-new-library-spatstat",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Our New Library: spatstat!",
+    "text": "Our New Library: spatstat!\n\n\n\nHomepage: spatstat.org\nGitHub: github.com/spatstat\nBook: Baddeley, Rubak, and Turner (2015) [Companion website]\nPDF: here"
+  },
+  {
+    "objectID": "w08/slides.html#why-do-events-appear-where-they-do",
+    "href": "w08/slides.html#why-do-events-appear-where-they-do",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Why Do Events Appear Where They Do?",
+    "text": "Why Do Events Appear Where They Do?\n\n\nCode\ncenter_l_function &lt;- function(x, ...) {\n\n  if (!spatstat.geom::is.ppp(x) && !spatstat.geom::is.fv(x)) {\n    stop(\"Please provide either ppp or fv object.\")\n  }\n\n  if (spatstat.geom::is.ppp(x)) {\n    x &lt;- spatstat.explore::Lest(x, ...)\n  }\n\n  r &lt;- x$r\n\n  l_centered &lt;- spatstat.explore::eval.fv(x - r)\n\n  return(l_centered)\n}\ncond_clust_sf &lt;- cond_clust_sims |&gt; sf::st_as_sf()\npines_plot &lt;- cond_clust_sf |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"full\")\nggsave(\"images/pines.png\", pines_plot)\n# density() calls density.ppp() if the argument is a ppp object\nden &lt;- density(cond_clust_sims, sigma = 0.1)\n#summary(den)\npng(\"images/intensity_plot.png\")\nplot(den, main = \"Intensity λ(s)\")\ncontour(den, add = TRUE) # contour plot\ndev.off()\n# And Kest / Lest\nkest_result &lt;- Kest(cond_clust_sims, rmax=0.5, correction=\"best\")\nlest_result &lt;- center_l_function(cond_clust_sims, rmax=0.5)\npng(\"images/lest.png\")\nplot(lest_result, main=\"K(h)\")\ndev.off()\n\n\n\n\n\n\n\n\n\n\n\nFirst-Order\nSecond-Order\n\n\n\n\n\nEvents considered individually \\(\\implies\\) Intensity function \\(\\lambda(\\mathbf{s})\\)\nSecond-Order: Events considered pairwise \\(\\implies\\) \\(K\\)-function \\(K(\\vec{h})\\)"
+  },
+  {
+    "objectID": "w08/slides.html#summary-statistics-vs.-models",
+    "href": "w08/slides.html#summary-statistics-vs.-models",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Summary Statistics vs. Models",
+    "text": "Summary Statistics vs. Models\n\nMoran’s \\(I\\) is to GISers what a thermometer is to doctors\nMeasures symptoms; many possible underlying causes!"
   },
   {
     "objectID": "w08/slides.html#the-tree-grid-mystery",
@@ -522,8 +578,8 @@
     "text": "Two Possible Histories…\n\nHypothesis \\(\\mathcal{H}_{\\textsf{Art}}\\): Artificial Formation\n\n\n\n\n\nCode (Step 1: Grid Creation)\nha_base &lt;- 28\nsquare_sf &lt;- sf::st_as_sf(spatstat.geom::square(1))\ngrid_sf &lt;- sf::st_as_sf(sf::st_make_grid(square_sf))\ngrid_buffer_sf &lt;- grid_sf |&gt; sf::st_buffer(dist=-0.01, singleSide = TRUE)\ngrid_buffer_sf |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=ha_base)\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 2: Point Generation)\ngrid_points &lt;- sf::st_sample(grid_buffer_sf, size=rep(1,100))\ngrid_buffer_sf |&gt; ggplot() +\n  geom_sf() +\n  geom_sf(data=grid_points) +\n  theme_classic(base_size=ha_base)\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 3: Observed Result)\ngrid_ppp &lt;- as.ppp(grid_points, W=spatstat.geom::square(1))\ngrid_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=ha_base)\n\n\n\n\n\n\n\n\n\n\n\nHypothesis \\(\\mathcal{H}_{\\textsf{Nat}}\\): Natural Formation\n\n\n\n\n\nCode (Step 1: Tree Generation)\nhn_base &lt;- 28\nr &lt;- 0.05\npois_ppp &lt;- rpoispp(150)\npois_sf &lt;- pois_ppp |&gt; sf::st_as_sf()\npois_sf |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=hn_base)\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 2: Competition)\nage &lt;- runif(npoints(pois_ppp))\npair_dists &lt;- pairdist(pois_ppp)\nclose &lt;- (pair_dists &lt; r)\nlater &lt;- outer(age, age, \"&gt;\")\nkilled &lt;- apply(close & later, 1, any)\nkilled_ppp &lt;- pois_ppp[killed]\nalive_ppp &lt;- pois_ppp[!killed]\npois_window_sf &lt;- pois_ppp |&gt; sf::st_as_sf() |&gt; filter(label==\"window\")\npois_killed_sf &lt;- killed_ppp |&gt; sf::st_as_sf() |&gt; filter(label==\"point\")\npois_alive_sf &lt;- alive_ppp |&gt; sf::st_as_sf() |&gt; filter(label==\"point\")\nalive_buff_sf &lt;- pois_alive_sf |&gt; sf::st_buffer(r) |&gt; sf::st_union() |&gt; sf::st_intersection(pois_window_sf)\nggplot() +\n  geom_sf(data=pois_window_sf) +\n  geom_sf(data=alive_buff_sf, aes(color='Inhibition', shape='Inhibition'), linetype='dashed') +\n  geom_sf(data=pois_killed_sf, aes(color='Dead', shape='Dead'), size=2, stroke=2) +\n  geom_sf(data=pois_alive_sf, aes(color='Alive', shape='Alive'), size=1, stroke=1) +\n  scale_shape_manual(name=NULL, values=c(\"Alive\"=19, \"Dead\"=4, 'Inhibition'=21), labels=c(\"Alive\", \"Dead\", \"Inhibition\")) +\n  scale_color_manual(name=NULL, values=c(\"Alive\"=\"black\", \"Dead\"=cb_palette[1], \"Inhibition\"=\"black\"), labels=c(\"Alive\", \"Dead\", \"Inhibition\")) +\n  guides(shape=guide_legend(override.aes=list(fill = \"white\"))) +\n  theme_classic(base_size = hn_base) +\n  theme(plot.margin = unit(c(0,0,0,0), \"cm\"))\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 3: Observed Result)\nalive_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=hn_base)"
   },
   {
-    "objectID": "w08/slides.html#why-do-events-appear-where-they-do",
-    "href": "w08/slides.html#why-do-events-appear-where-they-do",
+    "objectID": "w08/slides.html#why-do-events-appear-where-they-do-1",
+    "href": "w08/slides.html#why-do-events-appear-where-they-do-1",
     "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
     "section": "Why Do Events Appear Where They Do?",
     "text": "Why Do Events Appear Where They Do?\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6809)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n### Clustered data\nclust_ppp &lt;- rMatClust(\n  kappa=6,\n  scale=r_core,\n  mu=10\n)\nclust_sf &lt;- clust_ppp |&gt; sf::st_as_sf()\nclust_plot &lt;- clust_sf |&gt;\n  ggplot() +\n  geom_sf(size=2) +\n  theme_classic(base_size=18)\nggsave(\"images/clust_ppp.png\", clust_plot, width=3, height=3)\n# Intensity fn\nclust_intensity &lt;- density(clust_ppp, sigma = 0.1)\npng(\"images/clust_intensity.png\")\npar(mar=c(0,0,0,2), las=2, oma=c(0,0,0,0), cex=2)\nplot(clust_intensity, main=NULL)\ncontour(clust_intensity, add = TRUE)\ndev.off()\n### PCF\nclust_pcf &lt;- spatstat.explore::pcf(\n  clust_ppp, divisor=\"d\",\n  r=seq(from=0.00, to=0.50, by=0.01)\n)\nclust_pcf_plot &lt;- clust_pcf |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  labs(x=\"Distance\", y=\"Density\") +\n  theme_classic(base_size=14)\nggsave(\"images/clust_pcf.png\", clust_pcf_plot, width=3, height=3)\n\n\n\n\n\n\n\n\n\n\nOriginal Data\nFirst-Order\nSecond-Order\n\n\n\n\n\\(N = 60\\) Events\nEvents modeled individually\\(\\implies\\) Intensity function \\(\\lambda(\\mathbf{s})\\)\nEvents modeled pairwise \\(\\implies\\) \\(K\\)-function \\(K(\\vec{h})\\)"
@@ -571,6 +627,27 @@
     "text": "Cox Processes: Random Intensity → Random Events\n\n\nspatstat.random::rLGCP(model, mu, param, win)\nmodels=c(\"exponential\", \"gauss\", \"stable\", \"gencauchy\", \"matern\")\n\nDocs\n\n\n\nCode\ncox_pcol &lt;- \"black\"\ncox_bg &lt;- \"grey90\"\ncox_pch &lt;- 21\n# inhomogeneous LGCP with Gaussian covariance function\nm &lt;- as.im(function(x, y){\n  5 - 1.5 * (x - 0.5)^2 + 2 * (y - 0.5)^2\n}, W=owin())\nlgcp_sims &lt;- rLGCP(\"gauss\", m, var=0.15, scale =0.5, nsim=3)\n# lgcp_combined_df &lt;- imap(.x=ssi_sims, .f=to_sim_df) |&gt; bind_rows()\nplot_lgcp &lt;- function(lgcp_sim) {\n  plot(attr(lgcp_sim, \"Lambda\"), main=NULL)\n  points(lgcp_sim, col=cox_pcol, bg=cox_bg, pch=cox_pch)\n}\npar(mfrow=c(1,3), mar=c(0,0,0,2), oma=c(0,0,0,0), las=2)\nnulls &lt;- lapply(X=lgcp_sims, FUN=plot_lgcp)"
   },
   {
+    "objectID": "w08/slides.html#from-last-week-our-new-library-spatstat",
+    "href": "w08/slides.html#from-last-week-our-new-library-spatstat",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "[From Last Week] Our New Library: spatstat!",
+    "text": "[From Last Week] Our New Library: spatstat!\n\n\n\nHomepage: spatstat.org\nGitHub: github.com/spatstat\nBook: Baddeley, Rubak, and Turner (2015) [Companion website]\nPDF: here"
+  },
+  {
+    "objectID": "w08/slides.html#ppp-objects",
+    "href": "w08/slides.html#ppp-objects",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "ppp Objects",
+    "text": "ppp Objects\n\nThe main datatype used to represent Planar Point Patterns [spatstat book p. 41]\nUnlike sf objects, which contain data+geometries for any desired collection of \\(N\\) entities, ppp objects are required to have at least an observation window!\n\n\n\nsf Creation:\n\n\nCode\ntree_df &lt;- tibble::tibble(lon=runif(100,0,1), lat=runif(100,0,1), age=runif(100,0,1))\ntree_sf &lt;- sf::st_as_sf(\n  tree_df,\n  coords = c('lon', 'lat')\n)\ntree_sf |&gt; head(4)\n\n\n\n\n\n\nage\ngeometry\n\n\n\n\n0.8593935\nPOINT (0.5035446 0.05519595)\n\n\n0.9770798\nPOINT (0.2606818 0.3874983)\n\n\n0.9517643\nPOINT (0.5464588 0.8271631)\n\n\n0.0592741\nPOINT (0.7999682 0.5852131)\n\n\n\n\n\n\n\nppp Creation:\n\n\nCode\npois_ppp &lt;- spatstat.random::rpoispp(\n  lambda=100, win=spatstat.geom::square(1)\n)\npois_ppp\n\n\nPlanar point pattern: 93 points\nwindow: rectangle = [0, 1] x [0, 1] units\n\n\nCode\nattributes(pois_ppp)$names\n\n\n[1] \"window\"     \"n\"          \"x\"          \"y\"          \"markformat\"\n\n\nCode\npois_ppp$x |&gt; head(4)\n\n\n[1] 0.51779807 0.62213583 0.84467836 0.05354204"
+  },
+  {
+    "objectID": "w08/slides.html#ppp-leftrightarrow-sf-conversion",
+    "href": "w08/slides.html#ppp-leftrightarrow-sf-conversion",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "ppp \\(\\leftrightarrow\\) sf Conversion",
+    "text": "ppp \\(\\leftrightarrow\\) sf Conversion\n\n\nppp to sf Conversion:\n\n\nCode\npois_sf &lt;- pois_ppp |&gt; sf::st_as_sf()\npois_sf |&gt; head(4)\n\n\n\n\n\n\nlabel\ngeom\n\n\n\n\nwindow\nPOLYGON ((0 0, 1 0, 1 1, 0 …\n\n\npoint\nPOINT (0.5177981 0.553718)\n\n\npoint\nPOINT (0.6221358 0.3933781)\n\n\npoint\nPOINT (0.8446784 0.8187611)\n\n\n\n\n\n\n\n\nCode\npois_sf |&gt; ggplot() +\n  geom_sf(data=pois_sf |&gt; filter(label==\"window\"), aes(fill='grey')) +\n  geom_sf(data=pois_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'window'&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'point'&lt;/span&gt;\")) +\n  labs(title = \"&lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;sf&lt;/span&gt; Result\")\n\n\n\n\n\n\n\n\n\n\nsf to ppp Conversion:\n\n\nCode\nsquare_sfc &lt;- sf::st_polygon(list(\n  matrix(c(0,0,1,0,1,1,0,1,0,0), nrow=5, byrow=TRUE)\n)) |&gt; sf::st_sfc()\ntree_ppp &lt;- as.ppp(\n  sf::st_as_sfc(tree_sf),\n  W=as.owin(square_sfc)\n)\ntree_ppp\n\n\nPlanar point pattern: 100 points\nwindow: polygonal boundary\nenclosing rectangle: [0, 1] x [0, 1] units\n\n\n\n\nCode\ntree_ppp_sf &lt;- tree_ppp |&gt; sf::st_as_sf()\ntree_ppp_sf |&gt; ggplot() +\n  geom_sf(aes(fill='gray90')) +\n  geom_sf(data=tree_ppp_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp$window&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp${x,y}&lt;/span&gt;\")) +\n  labs(\n    title = \"&lt;span style='font-family: mono'&gt;sf&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; Result\",\n    x=\"&lt;span style='font-family: mono'&gt;tree_ppp$x&lt;/span&gt;\",\n    y=\"&lt;span style='font-family: mono'&gt;tree_ppp$y&lt;/span&gt;\"\n  ) + \n  guides(fill = guide_legend(order = 1), \n              color = guide_legend(order = 2))"
+  },
+  {
     "objectID": "w08/slides.html#constant-risk-hypothesis-motivation",
     "href": "w08/slides.html#constant-risk-hypothesis-motivation",
     "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
@@ -589,7 +666,7 @@
     "href": "w08/slides.html#references",
     "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
     "section": "References",
-    "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press."
+    "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.\n\n\nWaller, Lance A., and Carol A. Gotway. 2004. Applied Spatial Statistics for Public Health Data. John Wiley & Sons."
   },
   {
     "objectID": "w08/index.html",
@@ -602,31 +679,111 @@
     ]
   },
   {
-    "objectID": "w08/index.html#from-last-week-our-new-library-spatstat",
-    "href": "w08/index.html#from-last-week-our-new-library-spatstat",
+    "objectID": "w08/index.html#where-we-left-off",
+    "href": "w08/index.html#where-we-left-off",
     "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
-    "section": "[From Last Week] Our New Library: spatstat!",
-    "text": "[From Last Week] Our New Library: spatstat!\n\n\n\nHomepage: spatstat.org\nGitHub: github.com/spatstat\nBook: Baddeley, Rubak, and Turner (2015) [Companion website]\nPDF: here",
+    "section": "Where We Left Off",
+    "text": "Where We Left Off\n\nLocation \\(i\\) has high value \\(\\implies\\) locations near \\(i\\) more likely to have high values",
     "crumbs": [
       "Week 8: Oct 15"
     ]
   },
   {
-    "objectID": "w08/index.html#ppp-objects",
-    "href": "w08/index.html#ppp-objects",
+    "objectID": "w08/index.html#morans-i",
+    "href": "w08/index.html#morans-i",
     "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
-    "section": "ppp Objects",
-    "text": "ppp Objects\n\nThe main datatype used to represent Planar Point Patterns [spatstat book p. 41]\nUnlike sf objects, which contain data+geometries for any desired collection of \\(N\\) entities, ppp objects are required to have at least an observation window!\n\n\n\nsf Creation:\n\n\nCode\ntree_df &lt;- tibble::tibble(lon=runif(100,0,1), lat=runif(100,0,1), age=runif(100,0,1))\ntree_sf &lt;- sf::st_as_sf(\n  tree_df,\n  coords = c('lon', 'lat')\n)\ntree_sf |&gt; head(4)\n\n\n\n\n\n\nage\ngeometry\n\n\n\n\n0.0233144\nPOINT (0.1487039 0.5640943)\n\n\n0.6882371\nPOINT (0.1248064 0.8612631)\n\n\n0.3889197\nPOINT (0.6370261 0.5268693)\n\n\n0.6638135\nPOINT (0.5211425 0.4551448)\n\n\n\n\n\n\n\nppp Creation:\n\n\nCode\npois_ppp &lt;- spatstat.random::rpoispp(\n  lambda=100, win=spatstat.geom::square(1)\n)\npois_ppp\n\n\nPlanar point pattern: 91 points\nwindow: rectangle = [0, 1] x [0, 1] units\n\n\nCode\nattributes(pois_ppp)$names\n\n\n[1] \"window\"     \"n\"          \"x\"          \"y\"          \"markformat\"\n\n\nCode\npois_ppp$x |&gt; head(4)\n\n\n[1] 0.5735346 0.7526621 0.8129999 0.7419696",
+    "section": "Moran’s \\(I\\)",
+    "text": "Moran’s \\(I\\)\n\\[\nI =\n\\underset{\\text{Inverse of Variance}}{\\boxed{\\frac{n}{\\sum_{i=1}^{n}(y_i - \\overline{y})^2}}}\n\\frac\n  {\\overbrace{\\sum_{i=1}^{n}\\sum_{j=1}^{n}w_{ij}(y_i - \\overline{y})(y_j - \\overline{y})}^{\\text{Weighted Covariance}}}\n  {\\underbrace{\\sum_{i=1}^{n}\\sum_{j=1}^{n}w_{ij}}_{\\text{Normalize Weights}}}\n\\]\n\n\\(I\\) is Large when:\n\n\\(y_i\\) and \\(y_j\\) are neighbors: \\(w_{ij}\\), and\n\\(y_i\\) and \\(y_j\\) large at the same time: \\((y_i - \\overline{y})(y_j - \\overline{y})\\)",
     "crumbs": [
       "Week 8: Oct 15"
     ]
   },
   {
-    "objectID": "w08/index.html#ppp-leftrightarrow-sf-conversion",
-    "href": "w08/index.html#ppp-leftrightarrow-sf-conversion",
+    "objectID": "w08/index.html#local-indicators-of-spatial-autocorrelation-lisa",
+    "href": "w08/index.html#local-indicators-of-spatial-autocorrelation-lisa",
     "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
-    "section": "ppp \\(\\leftrightarrow\\) sf Conversion",
-    "text": "ppp \\(\\leftrightarrow\\) sf Conversion\n\n\nppp to sf Conversion:\n\n\nCode\npois_sf &lt;- pois_ppp |&gt; sf::st_as_sf()\npois_sf |&gt; head(4)\n\n\n\n\n\n\nlabel\ngeom\n\n\n\n\nwindow\nPOLYGON ((0 0, 1 0, 1 1, 0 …\n\n\npoint\nPOINT (0.5735346 0.6204983)\n\n\npoint\nPOINT (0.7526621 0.4205887)\n\n\npoint\nPOINT (0.8129999 0.6844816)\n\n\n\n\n\n\n\n\nCode\npois_sf |&gt; ggplot() +\n  geom_sf(data=pois_sf |&gt; filter(label==\"window\"), aes(fill='grey')) +\n  geom_sf(data=pois_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'window'&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'point'&lt;/span&gt;\")) +\n  labs(title = \"&lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;sf&lt;/span&gt; Result\")\n\n\n\n\n\n\n\n\n\n\nsf to ppp Conversion:\n\n\nCode\nsquare_sfc &lt;- sf::st_polygon(list(\n  matrix(c(0,0,1,0,1,1,0,1,0,0), nrow=5, byrow=TRUE)\n)) |&gt; sf::st_sfc()\ntree_ppp &lt;- as.ppp(\n  sf::st_as_sfc(tree_sf),\n  W=as.owin(square_sfc)\n)\ntree_ppp\n\n\nPlanar point pattern: 100 points\nwindow: polygonal boundary\nenclosing rectangle: [0, 1] x [0, 1] units\n\n\n\n\nCode\ntree_ppp_sf &lt;- tree_ppp |&gt; sf::st_as_sf()\ntree_ppp_sf |&gt; ggplot() +\n  geom_sf(aes(fill='gray90')) +\n  geom_sf(data=tree_ppp_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp$window&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp${x,y}&lt;/span&gt;\")) +\n  labs(\n    title = \"&lt;span style='font-family: mono'&gt;sf&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; Result\",\n    x=\"&lt;span style='font-family: mono'&gt;tree_ppp$x&lt;/span&gt;\",\n    y=\"&lt;span style='font-family: mono'&gt;tree_ppp$y&lt;/span&gt;\"\n  ) + \n  guides(fill = guide_legend(order = 1), \n              color = guide_legend(order = 2))",
+    "section": "Local Indicators of Spatial Autocorrelation (LISA)",
+    "text": "Local Indicators of Spatial Autocorrelation (LISA)\n\ntldr: See how much a given location \\(\\mathbf{s}\\) contributes to overall Moran’s \\(I\\)\nLocal Moran’s \\(I\\):\n\n\\[\nI_i = \\frac{y_i - \\overline{y}}{S_i^2}\\sum_{j=1}^{n}w_{ij}(y_j - \\overline{y})\n\\]",
+    "crumbs": [
+      "Week 8: Oct 15"
+    ]
+  },
+  {
+    "objectID": "w08/index.html#our-null-hypothesis-complete-spatial-randomness-csr",
+    "href": "w08/index.html#our-null-hypothesis-complete-spatial-randomness-csr",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Our Null Hypothesis: Complete Spatial Randomness (CSR)",
+    "text": "Our Null Hypothesis: Complete Spatial Randomness (CSR)\nBut, a challenge…",
+    "crumbs": [
+      "Week 8: Oct 15"
+    ]
+  },
+  {
+    "objectID": "w08/index.html#why-naïve",
+    "href": "w08/index.html#why-naïve",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Why “Naïve”?",
+    "text": "Why “Naïve”?\n\nRegional data: easiest way to visualize / operationalize simple measures of clustering via spatial autocorrelation\nSo, we develop intuitions for measures like Moran’s \\(I\\) by looking at lattice data, but…\nNaïve because we’re not modeling the lattice regions (cells) themselves!\nNon-naïve clustering: Knowing the clusters but also what process led to their formation!",
+    "crumbs": [
+      "Week 8: Oct 15"
+    ]
+  },
+  {
+    "objectID": "w08/index.html#spatial-randomness",
+    "href": "w08/index.html#spatial-randomness",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Spatial Randomness",
+    "text": "Spatial Randomness\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6805)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)\ncond_reg_sims &lt;- rSSI(r=r_core, N)\n# CSR data\n#csr_sims &lt;- rpoispp(N, win=obs_window)\ncond_sr_sims &lt;- rpoint(N, win=obs_window)\n### Clustered data\n#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)\n#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)\n#clust_sims &lt;- rclusterBKBC(clusters=\"MatClust\", kappa=10, mu=10, scale=0.05, verbose=FALSE)\n# Each cluster consist of 10 points in a disc of radius 0.2\nnclust &lt;- function(x0, y0, radius, n) {\n    #print(n)\n    return(runifdisc(10, radius, centre=c(x0, y0)))\n}\ncond_clust_sims &lt;- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\ncond_reg_plot &lt;- cond_reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_reg.png\", cond_reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_sr_plot &lt;- cond_sr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_sr.png\", cond_sr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_clust_plot &lt;- cond_clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_clust.png\", cond_clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed \\(N\\)\n60\n\n60\n\n60",
+    "crumbs": [
+      "Week 8: Oct 15"
+    ]
+  },
+  {
+    "objectID": "w08/index.html#complete-spatial-randomness-csr",
+    "href": "w08/index.html#complete-spatial-randomness-csr",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Complete Spatial Randomness (CSR)",
+    "text": "Complete Spatial Randomness (CSR)\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6807)\nlambda &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n# Regularity via Inhibition\nreg_sims &lt;- rMaternI(lambda, r=r_core, win=obs_window)\n# CSR data\ncsr_sims &lt;- rpoispp(N, win=obs_window)\n### Clustered data\nclust_mu &lt;- 10\nclust_sims &lt;- rMatClust(kappa=lambda / clust_mu, scale=2*r_core, mu=10, win=obs_window)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\nreg_plot &lt;- reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",reg_sims$n)) +\n  dsan_theme()\nggsave(\"images/reg.png\", reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncsr_plot &lt;- csr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",csr_sims$n)) +\n  dsan_theme()\nggsave(\"images/csr.png\", csr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\nclust_plot &lt;- clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",clust_sims$n)) +\n  dsan_theme()\nggsave(\"images/clust.png\", clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed Intensity \\(\\lambda\\)\n60\n\n60\n\n60\n\n\nRandom \\(N\\)",
+    "crumbs": [
+      "Week 8: Oct 15"
+    ]
+  },
+  {
+    "objectID": "w08/index.html#measures-are-relative-to-window-of-observation",
+    "href": "w08/index.html#measures-are-relative-to-window-of-observation",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Measures are Relative to Window of Observation",
+    "text": "Measures are Relative to Window of Observation\n\nSame data can be spatially random within one window, clustered or regular in others!\n\n\n\nCode\nN &lt;- 60\nobs_window &lt;- square(1)\nwindow_scale &lt;- 3.5\ncsr_sims_square &lt;- rpoispp(N, win=obs_window)\n# Triangular window\nobs_window_tri &lt;- st_sfc(st_polygon(list(\n    matrix(c(0.3,0.1,0.7,0.1,0.5,0.5,0.3,0.1), byrow=TRUE, nrow=4)\n)))\nobs_window_geom &lt;- st_sfc(st_linestring(\n    matrix(c(0,0,1,0,1,1,0,1,0,0), byrow=TRUE, nrow=5)\n))\ncsr_sims_tri &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_tri))\ntri_plot &lt;- csr_sims_tri |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"quarter\");\nggsave(\"images/window_tri.png\", tri_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Square window\nsquare_plot &lt;- csr_sims_square |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_tri |&gt; sf::st_boundary()) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_square.png\", square_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Circular window\nobs_window_disc &lt;- st_sfc(st_point(c(1, 0.5))) |&gt; st_buffer(1.2)\ncsr_sims_circ &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_disc))\ncirc_plot &lt;- csr_sims_circ |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_geom) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_circ.png\", circ_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n\n\n\n\n\n\n\n\n\n\nRegular\nCSR\nClustered",
+    "crumbs": [
+      "Week 8: Oct 15"
+    ]
+  },
+  {
+    "objectID": "w08/index.html#our-new-library-spatstat",
+    "href": "w08/index.html#our-new-library-spatstat",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Our New Library: spatstat!",
+    "text": "Our New Library: spatstat!\n\n\n\nHomepage: spatstat.org\nGitHub: github.com/spatstat\nBook: Baddeley, Rubak, and Turner (2015) [Companion website]\nPDF: here",
+    "crumbs": [
+      "Week 8: Oct 15"
+    ]
+  },
+  {
+    "objectID": "w08/index.html#why-do-events-appear-where-they-do",
+    "href": "w08/index.html#why-do-events-appear-where-they-do",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Why Do Events Appear Where They Do?",
+    "text": "Why Do Events Appear Where They Do?\n\n\nCode\ncenter_l_function &lt;- function(x, ...) {\n\n  if (!spatstat.geom::is.ppp(x) && !spatstat.geom::is.fv(x)) {\n    stop(\"Please provide either ppp or fv object.\")\n  }\n\n  if (spatstat.geom::is.ppp(x)) {\n    x &lt;- spatstat.explore::Lest(x, ...)\n  }\n\n  r &lt;- x$r\n\n  l_centered &lt;- spatstat.explore::eval.fv(x - r)\n\n  return(l_centered)\n}\ncond_clust_sf &lt;- cond_clust_sims |&gt; sf::st_as_sf()\npines_plot &lt;- cond_clust_sf |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"full\")\nggsave(\"images/pines.png\", pines_plot)\n# density() calls density.ppp() if the argument is a ppp object\nden &lt;- density(cond_clust_sims, sigma = 0.1)\n#summary(den)\npng(\"images/intensity_plot.png\")\nplot(den, main = \"Intensity λ(s)\")\ncontour(den, add = TRUE) # contour plot\ndev.off()\n# And Kest / Lest\nkest_result &lt;- Kest(cond_clust_sims, rmax=0.5, correction=\"best\")\nlest_result &lt;- center_l_function(cond_clust_sims, rmax=0.5)\npng(\"images/lest.png\")\nplot(lest_result, main=\"K(h)\")\ndev.off()\n\n\n\n\n\n\n\n\n\n\n\nFirst-Order\nSecond-Order\n\n\n\n\n\nEvents considered individually \\(\\implies\\) Intensity function \\(\\lambda(\\mathbf{s})\\)\nSecond-Order: Events considered pairwise \\(\\implies\\) \\(K\\)-function \\(K(\\vec{h})\\)",
+    "crumbs": [
+      "Week 8: Oct 15"
+    ]
+  },
+  {
+    "objectID": "w08/index.html#summary-statistics-vs.-models",
+    "href": "w08/index.html#summary-statistics-vs.-models",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "Summary Statistics vs. Models",
+    "text": "Summary Statistics vs. Models\n\nMoran’s \\(I\\) is to GISers what a thermometer is to doctors\nMeasures symptoms; many possible underlying causes!",
     "crumbs": [
       "Week 8: Oct 15"
     ]
@@ -652,8 +809,8 @@
     ]
   },
   {
-    "objectID": "w08/index.html#why-do-events-appear-where-they-do",
-    "href": "w08/index.html#why-do-events-appear-where-they-do",
+    "objectID": "w08/index.html#why-do-events-appear-where-they-do-1",
+    "href": "w08/index.html#why-do-events-appear-where-they-do-1",
     "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
     "section": "Why Do Events Appear Where They Do?",
     "text": "Why Do Events Appear Where They Do?\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6809)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n### Clustered data\nclust_ppp &lt;- rMatClust(\n  kappa=6,\n  scale=r_core,\n  mu=10\n)\nclust_sf &lt;- clust_ppp |&gt; sf::st_as_sf()\nclust_plot &lt;- clust_sf |&gt;\n  ggplot() +\n  geom_sf(size=2) +\n  theme_classic(base_size=18)\nggsave(\"images/clust_ppp.png\", clust_plot, width=3, height=3)\n# Intensity fn\nclust_intensity &lt;- density(clust_ppp, sigma = 0.1)\npng(\"images/clust_intensity.png\")\npar(mar=c(0,0,0,2), las=2, oma=c(0,0,0,0), cex=2)\nplot(clust_intensity, main=NULL)\ncontour(clust_intensity, add = TRUE)\ndev.off()\n### PCF\nclust_pcf &lt;- spatstat.explore::pcf(\n  clust_ppp, divisor=\"d\",\n  r=seq(from=0.00, to=0.50, by=0.01)\n)\nclust_pcf_plot &lt;- clust_pcf |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  labs(x=\"Distance\", y=\"Density\") +\n  theme_classic(base_size=14)\nggsave(\"images/clust_pcf.png\", clust_pcf_plot, width=3, height=3)\n\n\n\n\n\n\n\n\n\n\nOriginal Data\nFirst-Order\nSecond-Order\n\n\n\n\n\\(N = 60\\) Events\nEvents modeled individually\\(\\implies\\) Intensity function \\(\\lambda(\\mathbf{s})\\)\nEvents modeled pairwise \\(\\implies\\) \\(K\\)-function \\(K(\\vec{h})\\)",
@@ -722,6 +879,36 @@
     ]
   },
   {
+    "objectID": "w08/index.html#from-last-week-our-new-library-spatstat",
+    "href": "w08/index.html#from-last-week-our-new-library-spatstat",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "[From Last Week] Our New Library: spatstat!",
+    "text": "[From Last Week] Our New Library: spatstat!\n\n\n\nHomepage: spatstat.org\nGitHub: github.com/spatstat\nBook: Baddeley, Rubak, and Turner (2015) [Companion website]\nPDF: here",
+    "crumbs": [
+      "Week 8: Oct 15"
+    ]
+  },
+  {
+    "objectID": "w08/index.html#ppp-objects",
+    "href": "w08/index.html#ppp-objects",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "ppp Objects",
+    "text": "ppp Objects\n\nThe main datatype used to represent Planar Point Patterns [spatstat book p. 41]\nUnlike sf objects, which contain data+geometries for any desired collection of \\(N\\) entities, ppp objects are required to have at least an observation window!\n\n\n\nsf Creation:\n\n\nCode\ntree_df &lt;- tibble::tibble(lon=runif(100,0,1), lat=runif(100,0,1), age=runif(100,0,1))\ntree_sf &lt;- sf::st_as_sf(\n  tree_df,\n  coords = c('lon', 'lat')\n)\ntree_sf |&gt; head(4)\n\n\n\n\n\n\nage\ngeometry\n\n\n\n\n0.8593935\nPOINT (0.5035446 0.05519595)\n\n\n0.9770798\nPOINT (0.2606818 0.3874983)\n\n\n0.9517643\nPOINT (0.5464588 0.8271631)\n\n\n0.0592741\nPOINT (0.7999682 0.5852131)\n\n\n\n\n\n\n\nppp Creation:\n\n\nCode\npois_ppp &lt;- spatstat.random::rpoispp(\n  lambda=100, win=spatstat.geom::square(1)\n)\npois_ppp\n\n\nPlanar point pattern: 93 points\nwindow: rectangle = [0, 1] x [0, 1] units\n\n\nCode\nattributes(pois_ppp)$names\n\n\n[1] \"window\"     \"n\"          \"x\"          \"y\"          \"markformat\"\n\n\nCode\npois_ppp$x |&gt; head(4)\n\n\n[1] 0.51779807 0.62213583 0.84467836 0.05354204",
+    "crumbs": [
+      "Week 8: Oct 15"
+    ]
+  },
+  {
+    "objectID": "w08/index.html#ppp-leftrightarrow-sf-conversion",
+    "href": "w08/index.html#ppp-leftrightarrow-sf-conversion",
+    "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
+    "section": "ppp \\(\\leftrightarrow\\) sf Conversion",
+    "text": "ppp \\(\\leftrightarrow\\) sf Conversion\n\n\nppp to sf Conversion:\n\n\nCode\npois_sf &lt;- pois_ppp |&gt; sf::st_as_sf()\npois_sf |&gt; head(4)\n\n\n\n\n\n\nlabel\ngeom\n\n\n\n\nwindow\nPOLYGON ((0 0, 1 0, 1 1, 0 …\n\n\npoint\nPOINT (0.5177981 0.553718)\n\n\npoint\nPOINT (0.6221358 0.3933781)\n\n\npoint\nPOINT (0.8446784 0.8187611)\n\n\n\n\n\n\n\n\nCode\npois_sf |&gt; ggplot() +\n  geom_sf(data=pois_sf |&gt; filter(label==\"window\"), aes(fill='grey')) +\n  geom_sf(data=pois_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'window'&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'point'&lt;/span&gt;\")) +\n  labs(title = \"&lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;sf&lt;/span&gt; Result\")\n\n\n\n\n\n\n\n\n\n\nsf to ppp Conversion:\n\n\nCode\nsquare_sfc &lt;- sf::st_polygon(list(\n  matrix(c(0,0,1,0,1,1,0,1,0,0), nrow=5, byrow=TRUE)\n)) |&gt; sf::st_sfc()\ntree_ppp &lt;- as.ppp(\n  sf::st_as_sfc(tree_sf),\n  W=as.owin(square_sfc)\n)\ntree_ppp\n\n\nPlanar point pattern: 100 points\nwindow: polygonal boundary\nenclosing rectangle: [0, 1] x [0, 1] units\n\n\n\n\nCode\ntree_ppp_sf &lt;- tree_ppp |&gt; sf::st_as_sf()\ntree_ppp_sf |&gt; ggplot() +\n  geom_sf(aes(fill='gray90')) +\n  geom_sf(data=tree_ppp_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp$window&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp${x,y}&lt;/span&gt;\")) +\n  labs(\n    title = \"&lt;span style='font-family: mono'&gt;sf&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; Result\",\n    x=\"&lt;span style='font-family: mono'&gt;tree_ppp$x&lt;/span&gt;\",\n    y=\"&lt;span style='font-family: mono'&gt;tree_ppp$y&lt;/span&gt;\"\n  ) + \n  guides(fill = guide_legend(order = 1), \n              color = guide_legend(order = 2))",
+    "crumbs": [
+      "Week 8: Oct 15"
+    ]
+  },
+  {
     "objectID": "w08/index.html#constant-risk-hypothesis-motivation",
     "href": "w08/index.html#constant-risk-hypothesis-motivation",
     "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
@@ -746,7 +933,7 @@
     "href": "w08/index.html#references",
     "title": "Week 8: Point Processes: Null Models, Clustering, and Regularity",
     "section": "References",
-    "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press.",
+    "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.\n\n\nWaller, Lance A., and Carol A. Gotway. 2004. Applied Spatial Statistics for Public Health Data. John Wiley & Sons.",
     "crumbs": [
       "Week 8: Oct 15"
     ]
@@ -3500,91 +3687,11 @@
     ]
   },
   {
-    "objectID": "w07/index.html#leaving-you-with-a-challenge",
-    "href": "w07/index.html#leaving-you-with-a-challenge",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "Leaving You With a Challenge",
-    "text": "Leaving You With a Challenge\n\nThese point patterns can be classified as clustered or regular:",
-    "crumbs": [
-      "Week 7: Oct 8"
-    ]
-  },
-  {
-    "objectID": "w07/index.html#a-challenge",
-    "href": "w07/index.html#a-challenge",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "A Challenge…",
-    "text": "A Challenge…",
-    "crumbs": [
-      "Week 7: Oct 8"
-    ]
-  },
-  {
-    "objectID": "w07/index.html#why-naïve",
-    "href": "w07/index.html#why-naïve",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "Why “Naïve”?",
-    "text": "Why “Naïve”?\n\n[Continuing from last week] Lattice data: easiest way to visualize / operationalize simple measures of clustering via spatial autocorrelation\nSo, we develop intuitions for measures like Moran’s \\(I\\) by looking at lattice data, but…\nNaïve because we’re not modeling the lattice regions (cells) themselves!\nNon-naïve clustering: Knowing the clusters but also what process led to their formation!",
-    "crumbs": [
-      "Week 7: Oct 8"
-    ]
-  },
-  {
-    "objectID": "w07/index.html#spatial-randomness",
-    "href": "w07/index.html#spatial-randomness",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "Spatial Randomness",
-    "text": "Spatial Randomness\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6805)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)\ncond_reg_sims &lt;- rSSI(r=r_core, N)\n# CSR data\n#csr_sims &lt;- rpoispp(N, win=obs_window)\ncond_sr_sims &lt;- rpoint(N, win=obs_window)\n### Clustered data\n#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)\n#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)\n#clust_sims &lt;- rclusterBKBC(clusters=\"MatClust\", kappa=10, mu=10, scale=0.05, verbose=FALSE)\n# Each cluster consist of 10 points in a disc of radius 0.2\nnclust &lt;- function(x0, y0, radius, n) {\n    #print(n)\n    return(runifdisc(10, radius, centre=c(x0, y0)))\n}\ncond_clust_sims &lt;- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\ncond_reg_plot &lt;- cond_reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_reg.png\", cond_reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_sr_plot &lt;- cond_sr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_sr.png\", cond_sr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_clust_plot &lt;- cond_clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_clust.png\", cond_clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed \\(N\\)\n60\n\n60\n\n60",
-    "crumbs": [
-      "Week 7: Oct 8"
-    ]
-  },
-  {
-    "objectID": "w07/index.html#complete-spatial-randomness-csr",
-    "href": "w07/index.html#complete-spatial-randomness-csr",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "Complete Spatial Randomness (CSR)",
-    "text": "Complete Spatial Randomness (CSR)\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6807)\nlambda &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n# Regularity via Inhibition\nreg_sims &lt;- rMaternI(lambda, r=r_core, win=obs_window)\n# CSR data\ncsr_sims &lt;- rpoispp(N, win=obs_window)\n### Clustered data\nclust_mu &lt;- 10\nclust_sims &lt;- rMatClust(kappa=lambda / clust_mu, scale=2*r_core, mu=10, win=obs_window)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\nreg_plot &lt;- reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",reg_sims$n)) +\n  dsan_theme()\nggsave(\"images/reg.png\", reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncsr_plot &lt;- csr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",csr_sims$n)) +\n  dsan_theme()\nggsave(\"images/csr.png\", csr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\nclust_plot &lt;- clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",clust_sims$n)) +\n  dsan_theme()\nggsave(\"images/clust.png\", clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed Intensity \\(\\lambda\\)\n60\n\n60\n\n60\n\n\nRandom \\(N\\)",
-    "crumbs": [
-      "Week 7: Oct 8"
-    ]
-  },
-  {
-    "objectID": "w07/index.html#measures-are-relative-to-window-of-observation",
-    "href": "w07/index.html#measures-are-relative-to-window-of-observation",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "Measures are Relative to Window of Observation",
-    "text": "Measures are Relative to Window of Observation\n\nSame data can be spatially random within one window, clustered or regular in others!\n\n\n\nCode\nN &lt;- 60\nobs_window &lt;- square(1)\nwindow_scale &lt;- 3.5\ncsr_sims_square &lt;- rpoispp(N, win=obs_window)\n# Triangular window\nobs_window_tri &lt;- st_sfc(st_polygon(list(\n    matrix(c(0.3,0.1,0.7,0.1,0.5,0.5,0.3,0.1), byrow=TRUE, nrow=4)\n)))\nobs_window_geom &lt;- st_sfc(st_linestring(\n    matrix(c(0,0,1,0,1,1,0,1,0,0), byrow=TRUE, nrow=5)\n))\ncsr_sims_tri &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_tri))\ntri_plot &lt;- csr_sims_tri |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"quarter\");\nggsave(\"images/window_tri.png\", tri_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Square window\nsquare_plot &lt;- csr_sims_square |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_tri |&gt; sf::st_boundary()) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_square.png\", square_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Circular window\nobs_window_disc &lt;- st_sfc(st_point(c(1, 0.5))) |&gt; st_buffer(1.2)\ncsr_sims_circ &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_disc))\ncirc_plot &lt;- csr_sims_circ |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_geom) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_circ.png\", circ_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n\n\n\n\n\n\n\n\n\n\nRegular\nCSR\nClustered",
-    "crumbs": [
-      "Week 7: Oct 8"
-    ]
-  },
-  {
-    "objectID": "w07/index.html#our-new-library-spatstat",
-    "href": "w07/index.html#our-new-library-spatstat",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "Our New Library: spatstat!",
-    "text": "Our New Library: spatstat!\n\n\n\nHomepage: spatstat.org\nGitHub: github.com/spatstat\nBook: Baddeley, Rubak, and Turner (2015) [Companion website]\nPDF: here",
-    "crumbs": [
-      "Week 7: Oct 8"
-    ]
-  },
-  {
-    "objectID": "w07/index.html#why-do-events-appear-where-they-do",
-    "href": "w07/index.html#why-do-events-appear-where-they-do",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "Why Do Events Appear Where They Do?",
-    "text": "Why Do Events Appear Where They Do?\n\n\nCode\ncenter_l_function &lt;- function(x, ...) {\n\n  if (!spatstat.geom::is.ppp(x) && !spatstat.geom::is.fv(x)) {\n    stop(\"Please provide either ppp or fv object.\")\n  }\n\n  if (spatstat.geom::is.ppp(x)) {\n    x &lt;- spatstat.explore::Lest(x, ...)\n  }\n\n  r &lt;- x$r\n\n  l_centered &lt;- spatstat.explore::eval.fv(x - r)\n\n  return(l_centered)\n}\ncond_clust_sf &lt;- cond_clust_sims |&gt; sf::st_as_sf()\npines_plot &lt;- cond_clust_sf |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"full\")\nggsave(\"images/pines.png\", pines_plot)\n# density() calls density.ppp() if the argument is a ppp object\nden &lt;- density(cond_clust_sims, sigma = 0.1)\n#summary(den)\npng(\"images/intensity_plot.png\")\nplot(den, main = \"Intensity λ(s)\")\ncontour(den, add = TRUE) # contour plot\ndev.off()\n# And Kest / Lest\nkest_result &lt;- Kest(cond_clust_sims, rmax=0.5, correction=\"best\")\nlest_result &lt;- center_l_function(cond_clust_sims, rmax=0.5)\npng(\"images/lest.png\")\nplot(lest_result, main=\"K(h)\")\ndev.off()\n\n\n\n\n\n\n\n\n\n\n\nFirst-Order\nSecond-Order\n\n\n\n\n\nEvents considered individually \\(\\implies\\) Intensity function \\(\\lambda(\\mathbf{s})\\)\nSecond-Order: Events considered pairwise \\(\\implies\\) \\(K\\)-function \\(K(\\vec{h})\\)",
-    "crumbs": [
-      "Week 7: Oct 8"
-    ]
-  },
-  {
     "objectID": "w07/index.html#references",
     "href": "w07/index.html#references",
     "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
     "section": "References",
-    "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press.\n\n\nParenti, Christian. 2011. Tropic of Chaos: Climate Change and the New Geography of Violence. PublicAffairs.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.\n\n\nWaller, Lance A., and Carol A. Gotway. 2004. Applied Spatial Statistics for Public Health Data. John Wiley & Sons.\n\n\nXie, Sherrie. 2022. “Analyzing Geospatial Data in R.” R/Medicine Virtual Conference: YouTube.",
+    "text": "References\n\n\nParenti, Christian. 2011. Tropic of Chaos: Climate Change and the New Geography of Violence. PublicAffairs.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.\n\n\nXie, Sherrie. 2022. “Analyzing Geospatial Data in R.” R/Medicine Virtual Conference: YouTube.",
     "crumbs": [
       "Week 7: Oct 8"
     ]
@@ -3667,67 +3774,11 @@
     "text": "Local Indicators of Spatial Autocorrelation (LISA)\n\ntldr: See how much a given location \\(\\mathbf{s}\\) contributes to overall Moran’s \\(I\\)\nLocal Moran’s \\(I\\):\n\n\\[\nI_i = \\frac{y_i - \\overline{y}}{S_i^2}\\sum_{j=1}^{n}w_{ij}(y_j - \\overline{y})\n\\]"
   },
   {
-    "objectID": "w07/slides.html#leaving-you-with-a-challenge",
-    "href": "w07/slides.html#leaving-you-with-a-challenge",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "Leaving You With a Challenge",
-    "text": "Leaving You With a Challenge\n\nThese point patterns can be classified as clustered or regular:"
-  },
-  {
-    "objectID": "w07/slides.html#a-challenge",
-    "href": "w07/slides.html#a-challenge",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "A Challenge…",
-    "text": "A Challenge…"
-  },
-  {
-    "objectID": "w07/slides.html#why-naïve",
-    "href": "w07/slides.html#why-naïve",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "Why “Naïve”?",
-    "text": "Why “Naïve”?\n\n[Continuing from last week] Lattice data: easiest way to visualize / operationalize simple measures of clustering via spatial autocorrelation\nSo, we develop intuitions for measures like Moran’s \\(I\\) by looking at lattice data, but…\nNaïve because we’re not modeling the lattice regions (cells) themselves!\nNon-naïve clustering: Knowing the clusters but also what process led to their formation!"
-  },
-  {
-    "objectID": "w07/slides.html#spatial-randomness",
-    "href": "w07/slides.html#spatial-randomness",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "Spatial Randomness",
-    "text": "Spatial Randomness\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6805)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)\ncond_reg_sims &lt;- rSSI(r=r_core, N)\n# CSR data\n#csr_sims &lt;- rpoispp(N, win=obs_window)\ncond_sr_sims &lt;- rpoint(N, win=obs_window)\n### Clustered data\n#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)\n#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)\n#clust_sims &lt;- rclusterBKBC(clusters=\"MatClust\", kappa=10, mu=10, scale=0.05, verbose=FALSE)\n# Each cluster consist of 10 points in a disc of radius 0.2\nnclust &lt;- function(x0, y0, radius, n) {\n    #print(n)\n    return(runifdisc(10, radius, centre=c(x0, y0)))\n}\ncond_clust_sims &lt;- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\ncond_reg_plot &lt;- cond_reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_reg.png\", cond_reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_sr_plot &lt;- cond_sr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_sr.png\", cond_sr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_clust_plot &lt;- cond_clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme()\nggsave(\"images/cond_clust.png\", cond_clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed \\(N\\)\n60\n\n60\n\n60"
-  },
-  {
-    "objectID": "w07/slides.html#complete-spatial-randomness-csr",
-    "href": "w07/slides.html#complete-spatial-randomness-csr",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "Complete Spatial Randomness (CSR)",
-    "text": "Complete Spatial Randomness (CSR)\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6807)\nlambda &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n# Regularity via Inhibition\nreg_sims &lt;- rMaternI(lambda, r=r_core, win=obs_window)\n# CSR data\ncsr_sims &lt;- rpoispp(N, win=obs_window)\n### Clustered data\nclust_mu &lt;- 10\nclust_sims &lt;- rMatClust(kappa=lambda / clust_mu, scale=2*r_core, mu=10, win=obs_window)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\nreg_plot &lt;- reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",reg_sims$n)) +\n  dsan_theme()\nggsave(\"images/reg.png\", reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncsr_plot &lt;- csr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",csr_sims$n)) +\n  dsan_theme()\nggsave(\"images/csr.png\", csr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\nclust_plot &lt;- clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",clust_sims$n)) +\n  dsan_theme()\nggsave(\"images/clust.png\", clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\n\\(I = -1\\)\n←\n\\(I = 0\\)\n→\n\\(I = 1\\)\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\(\\mathbf{s} = (x,y)\\) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed Intensity \\(\\lambda\\)\n60\n\n60\n\n60\n\n\nRandom \\(N\\)"
-  },
-  {
-    "objectID": "w07/slides.html#measures-are-relative-to-window-of-observation",
-    "href": "w07/slides.html#measures-are-relative-to-window-of-observation",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "Measures are Relative to Window of Observation",
-    "text": "Measures are Relative to Window of Observation\n\nSame data can be spatially random within one window, clustered or regular in others!\n\n\n\nCode\nN &lt;- 60\nobs_window &lt;- square(1)\nwindow_scale &lt;- 3.5\ncsr_sims_square &lt;- rpoispp(N, win=obs_window)\n# Triangular window\nobs_window_tri &lt;- st_sfc(st_polygon(list(\n    matrix(c(0.3,0.1,0.7,0.1,0.5,0.5,0.3,0.1), byrow=TRUE, nrow=4)\n)))\nobs_window_geom &lt;- st_sfc(st_linestring(\n    matrix(c(0,0,1,0,1,1,0,1,0,0), byrow=TRUE, nrow=5)\n))\ncsr_sims_tri &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_tri))\ntri_plot &lt;- csr_sims_tri |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"quarter\");\nggsave(\"images/window_tri.png\", tri_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Square window\nsquare_plot &lt;- csr_sims_square |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_tri |&gt; sf::st_boundary()) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_square.png\", square_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Circular window\nobs_window_disc &lt;- st_sfc(st_point(c(1, 0.5))) |&gt; st_buffer(1.2)\ncsr_sims_circ &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_disc))\ncirc_plot &lt;- csr_sims_circ |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_geom) +\n  dsan_theme(\"quarter\")\nggsave(\"images/window_circ.png\", circ_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n\n\n\n\n\n\n\n\n\n\nRegular\nCSR\nClustered"
-  },
-  {
-    "objectID": "w07/slides.html#our-new-library-spatstat",
-    "href": "w07/slides.html#our-new-library-spatstat",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "Our New Library: spatstat!",
-    "text": "Our New Library: spatstat!\n\n\n\nHomepage: spatstat.org\nGitHub: github.com/spatstat\nBook: Baddeley, Rubak, and Turner (2015) [Companion website]\nPDF: here"
-  },
-  {
-    "objectID": "w07/slides.html#why-do-events-appear-where-they-do",
-    "href": "w07/slides.html#why-do-events-appear-where-they-do",
-    "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
-    "section": "Why Do Events Appear Where They Do?",
-    "text": "Why Do Events Appear Where They Do?\n\n\nCode\ncenter_l_function &lt;- function(x, ...) {\n\n  if (!spatstat.geom::is.ppp(x) && !spatstat.geom::is.fv(x)) {\n    stop(\"Please provide either ppp or fv object.\")\n  }\n\n  if (spatstat.geom::is.ppp(x)) {\n    x &lt;- spatstat.explore::Lest(x, ...)\n  }\n\n  r &lt;- x$r\n\n  l_centered &lt;- spatstat.explore::eval.fv(x - r)\n\n  return(l_centered)\n}\ncond_clust_sf &lt;- cond_clust_sims |&gt; sf::st_as_sf()\npines_plot &lt;- cond_clust_sf |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"full\")\nggsave(\"images/pines.png\", pines_plot)\n# density() calls density.ppp() if the argument is a ppp object\nden &lt;- density(cond_clust_sims, sigma = 0.1)\n#summary(den)\npng(\"images/intensity_plot.png\")\nplot(den, main = \"Intensity λ(s)\")\ncontour(den, add = TRUE) # contour plot\ndev.off()\n# And Kest / Lest\nkest_result &lt;- Kest(cond_clust_sims, rmax=0.5, correction=\"best\")\nlest_result &lt;- center_l_function(cond_clust_sims, rmax=0.5)\npng(\"images/lest.png\")\nplot(lest_result, main=\"K(h)\")\ndev.off()\n\n\n\n\n\n\n\n\n\n\n\nFirst-Order\nSecond-Order\n\n\n\n\n\nEvents considered individually \\(\\implies\\) Intensity function \\(\\lambda(\\mathbf{s})\\)\nSecond-Order: Events considered pairwise \\(\\implies\\) \\(K\\)-function \\(K(\\vec{h})\\)"
-  },
-  {
     "objectID": "w07/slides.html#references",
     "href": "w07/slides.html#references",
     "title": "Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation",
     "section": "References",
-    "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press.\n\n\nParenti, Christian. 2011. Tropic of Chaos: Climate Change and the New Geography of Violence. PublicAffairs.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.\n\n\nWaller, Lance A., and Carol A. Gotway. 2004. Applied Spatial Statistics for Public Health Data. John Wiley & Sons.\n\n\nXie, Sherrie. 2022. “Analyzing Geospatial Data in R.” R/Medicine Virtual Conference: YouTube."
+    "text": "References\n\n\nParenti, Christian. 2011. Tropic of Chaos: Climate Change and the New Geography of Violence. PublicAffairs.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.\n\n\nXie, Sherrie. 2022. “Analyzing Geospatial Data in R.” R/Medicine Virtual Conference: YouTube."
   },
   {
     "objectID": "final-project.html",
