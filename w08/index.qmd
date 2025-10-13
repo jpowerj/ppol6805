@@ -49,7 +49,7 @@ format:
 
 :::
 
-# HW4 Tips!
+# HW3 Tips!
 
 * `ppp` Objects
 * Converting between `ppp` and `sf`

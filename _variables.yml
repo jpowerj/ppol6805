@@ -86,10 +86,10 @@ hw:
   - hw-num: 3
     title: "Autocorrelation and Clustering"
     pct: 9
-    release-date-md: Oct 8
-    release-date: "Wednesday, October 8"
-    due-date-md: Oct 22
-    due-date: "Wednesday, October 22"
+    release-date-md: Oct 12
+    release-date: "Sunday, October 12"
+    due-date-md: Oct 29
+    due-date: "Wednesday, October 29"
   - hw-num: 4
     title: "Point Hypothesis Evaluation"
     pct: 9
