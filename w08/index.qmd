@@ -14,6 +14,7 @@ csl: "../chicago-17-no-url.csl"
 echo: true
 code-fold: show
 html-math-method: mathjax
+cache: true
 # Format-specific settings:
 format:
   revealjs:
@@ -49,7 +50,11 @@ format:
 
 :::
 
-# Spatial Autocorrelation {data-stack-name="Autocorrelation"}
+# [Naïve] Spatial Autocorrelation {.title-11 .not-title-slide data-stack-name="Beyond Naïve Clustering"}
+
+* Where we left off: Location $i$ has high value $\implies$ locations **near** $i$ more likely to have high values
+
+![](images/autocorr.jpg){fig-align="center"}
 
 ::: {.hidden}
 
@@ -66,12 +71,6 @@ library(leaflet) |> suppressPackageStartupMessages()
 ```
 
 :::
-
-## Where We Left Off
-
-* Location $i$ has high value $\implies$ locations **near** $i$ more likely to have high values
-
-![](images/autocorr.jpg){fig-align="center"}
 
 ## Moran's $I$
 
@@ -96,20 +95,92 @@ $$
 I_i = \frac{y_i - \overline{y}}{S_i^2}\sum_{j=1}^{n}w_{ij}(y_j - \overline{y})
 $$
 
-## Our Null Hypothesis: Complete Spatial Randomness (CSR)
+# Agenda for Point Patterns: Something "Noteworthy" is Happening if Pattern Unlikely to Arise ~~Randomly~~ Under CSR! {.smaller .title-08 .crunch-title .crunch-p .not-title-slide .crunch-quarto-layout-panel}
 
-*But, a challenge...*
+:::: {layout="[1,1,1]" layout-valign="bottom"}
+::: {#less-clustering}
 
-![](images/clusters.svg){fig-align="center"}
+<center>
 
-# Naïve Clustering {.smaller .smaller-table data-stack-name="Naïve Clustering"}
+**Less** clustering than expected
+
+</center>
+
+:::
+::: {#csr-clustering}
+
+<center>
+
+Roughly **expected** amount of clustering under CSR
+
+</center>
+
+:::
+::: {#more-clustering}
+
+<center>
+
+**More** clustering than expected
+
+</center>
+
+:::
+::::
+
+:::: {.columns}
+::: {.column width="34%"}
+
+![*Is this likely to arise under CSR?*<br>*But is it because of repulsion?*<br>[BBC, Aug 10 2025](https://www.bbc.com/news/articles/cj4wwxz12jko)](images/new-settlements.webp){fig-align="center" width="60%"}
+
+:::
+::: {.column width="33%"}
+
+
+
+:::
+::: {.column width="33%"}
+
+![*Is this likely to arise under CSR?<br>*Is it because of homophily?*<br>(Realization $\omega_1$ in red, $\omega_2$ in blue)*](images/dc_racial_dot_map.png){fig-align="center"}
+
+:::
+::::
+
+## ...Or, [Non-Human] Nature Examples {.title-11 .crunch-title .smaller .crunch-p}
+
+:::: {.columns}
+::: {.column width="33%"}
+
+!["Fairy circles" in Namibia [Smithsonian Magazine: *Namibia's mysterious fairy circles might actually be caused by competition 👀 between grasses*](https://www.smithsonianmag.com/smart-news/what-causes-namibias-fairy-circles-probably-not-termites-180951534/)](images/fairy_circles.webp){fig-align="center"}
+
+![[Termite mounds](https://www.biointeractive.org/classroom-resources/mozambique-mounds-0) in Mozambique](images/termite_mounds.jpg){fig-align="center"}
+
+:::
+::: {.column width="33%"}
+
+![Free stock photo by [`@natalinadmay`](https://www.pexels.com/@natalinadmay/)](images/leaves.jpg){fig-align="center"}
+
+:::
+::: {.column width="33%"}
+
+![Three kestral (bird) colonies form a triangle straddling the Basilicata and Apulia [regions](https://en.wikipedia.org/wiki/Regions_of_Italy) of Italy; from @morinay_withincolony_2023](images/kestrals.jpg){fig-align="center"}
+
+:::
+::::
+
+## But, a Challenge...
+
+Typically depends on *context* and/or *level of resolution* and/or *level of analysis*
+
+![From @waller_applied_2004](images/clusters.svg){fig-align="center"}
+
+# Naïve Clustering {.smaller .smaller-table}
 
 ```{=html}
 <table style="width: 100%;">
 <colgroup>
   <col style="width: 15%;">
-  <col style="width: 15%;">
-  <col style="width: 5%;">
+  <col style="width: 16%;">
+  <col style="width: 4%;">
   <col style="width: 20%;">
   <col style="width: 5%;">
   <col style="width: 15%;">
@@ -120,7 +191,7 @@ $$
 </thead>
 <tbody>
 <tr>
-    <td class='tdvc'><span data-qmd="**Weeks 6-8**<br>(My labels)"></span></td>
+    <td class='tdvc'><span data-qmd="**Weeks 8-9**<br>(My labels)"></span></td>
     <td class='tdvc'>Naïve Clustering</td>
     <td class='tdvc'>&rarr;</td>
     <td class='tdvc'><span data-qmd="Point Process **Models**"></span></td>
@@ -137,26 +208,45 @@ $$
     <td class='tdvc'>&rarr;</td>
     <td class='tdvc' style='border: 3px solid black;'>Ch 6: Point Data (Cases and Controls)</td>
     <td class='tdvc'>&rarr;</td>
-    <td class='tdvc' style='border: 3px solid black;'><span data-qmd="Ch 7: Regional Count Data<br>*(First mention of autocorrelation on page 227)*"></span></td>
+    <td class='tdvc' style='border: 3px solid black;'><span data-qmd="Ch 7: Regional Count Data<br>*(First mention of autocorrelation on pg. 227)*"></span></td>
 </tr>
 <tr>
     <td class='tdvc'><span data-qmd="**@schabenberger_statistical_2004**"></span></td>
-    <td class='tdvc' style='border: 3px solid black;'>Ch 1 (Page 14): Autocorrelation</td>
+    <td class='tdvc' style='border: 3px solid black;'>Ch 1 (pg. 14): Autocorrelation</td>
     <td class='tdvc'>&rarr;</td>
-    <td class='tdvc' align='center' colspan="5"><span data-qmd="*(A bunch of more complicated stuff we'll learn later)*"></span></td>
+    <td class='tdvc' align='center' colspan="5"><span data-qmd="*(A bunch of more complicated stuff we'll learn at the end)*"></span></td>
 </tr>
 </tbody>
 </table>
 ```
 
-## Why "Naïve"?
+## Why "Naïve"? {.crunch-title .title-11 .crunch-ul}
 
 * **Regional data**: easiest way to visualize / operationalize simple measures of **clustering** via **spatial autocorrelation**
 * So, we develop **intuitions** for measures like Moran's $I$ by looking at **lattice** data, but...
 * Naïve because **we're not modeling the lattice regions (cells) themselves!**
-* Non-naïve clustering: Knowing the **clusters** but also **what process led to their formation**!
+* Non-naïve clustering: Knowing the **clusters** but also **what process led to their formation**! Which brings us to...
 
-## Spatial Randomness {.smaller .smaller-table .crunch-title .crunch-img}
+# ...Point Process Models! {.crunch-title .title-09 .not-title-slide data-stack-name="Point Process Models"}
+
+:::: {.columns}
+::: {.column width="55%"}
+
+* Our New Library: `spatstat`!
+* Homepage: [spatstat.org](https://spatstat.org/){target='_blank'}
+* GitHub: [github.com/spatstat](https://github.com/spatstat){target='_blank'}
+* Book: @baddeley_spatial_2015 \[[Companion website](http://book.spatstat.org/){target='_blank'}\]
+* PDF: [here](https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&dl=1)
+
+:::
+::: {.column width="45%"}
+
+![](images/spatstat_book.jpg){fig-align="center" width="75%"}
+
+:::
+::::
+
+## Spatial Randomness {.smaller .smaller-table .crunch-title .crunch-img .text-65}
 
 ```{r}
 #| label: sr-plot
@@ -260,7 +350,7 @@ ggsave("images/cond_clust.png", cond_clust_plot, width=plot_w, height=plot_h, un
     <td align="center"><span data-qmd="**1st Order**: Tasty food at clust centers<br>**2nd Order**: Cooperation"></span></td>
 </tr>
 <tr>
-    <td><span data-qmd="**Fixed $N$**"></span></td>
+    <td><span style="border: 2px solid red; padding-left: 3px !important; padding-right: 3px !important;"><span data-qmd="**Fixed $N$**"></span></span></td>
     <td align="center">60</td>
     <td></td>
     <td align="center">60</td>
@@ -268,7 +358,7 @@ ggsave("images/cond_clust.png", cond_clust_plot, width=plot_w, height=plot_h, un
     <td align="center">60</td>
 </tr>
 <tr>
-    <td></td>
+    <td style="vertical-align: top; padding-top: 8px;"><span data-qmd="*Problem with fixed $N$: Learning there are $n_1$ points in region $R_1$ $\Rightarrow$ there are $N - n_1$ points outside $R_1$*"></span></td>
     <td align="center"><img src="images/cond_reg.png" width="400px"></img></td>
     <td></td>
     <td align="center"><img src="images/cond_sr.png" width="400px"></img></td>
@@ -279,7 +369,7 @@ ggsave("images/cond_clust.png", cond_clust_plot, width=plot_w, height=plot_h, un
 </table>
 ```
 
-## *Complete* Spatial Randomness (CSR) {.smaller .smaller-table .crunch-title .crunch-img}
+## *Complete* Spatial Randomness (CSR) {.smaller .smaller-table .crunch-title .title-12 .crunch-img}
 
 ```{r}
 #| label: csr-plot
@@ -397,10 +487,9 @@ ggsave("images/clust.png", clust_plot, width=plot_w, height=plot_h, units="px", 
 </table>
 ```
 
-## Measures are *Relative* to Window of Observation {.smaller .title-11}
+## Caveat 1: Measures are *Relative* to Window of Observation {.smaller .title-12}
 
-* Same data can be **spatially random** within one window, **clustered** or **regular** in others!
-
+Same data can be **spatially random** within one window, **clustered** or **regular** in others!
 
 ```{r}
 #| label: obs-windows
@@ -445,28 +534,13 @@ ggsave("images/window_circ.png", circ_plot, width=plot_w, height=plot_h, units="
 |:-:|:-:|:-:|
 | ![](images/window_tri.png){fig-align="center"} | ![](images/window_square.png){fig-align="center"} | ![](images/window_circ.png){fig-align="center"} |
 
+## Caveat 2: Summary Statistics Like $I$ are Not *Models*! {.title-10}
 
-# Point Process Models {data-stack-name="Point Process Models"}
+* Moran's $I$ is to **GISers** what a thermometer is to **doctors**
+* Measures **symptoms**; many possible underlying **causes!**
+* Need to ask *why* autocorrelation seems to be present!
 
-## Our New Library: `spatstat`! {.crunch-title}
-
-:::: {.columns}
-::: {.column width="50%"}
-
-* Homepage: [spatstat.org](https://spatstat.org/){target='_blank'}
-* GitHub: [github.com/spatstat](https://github.com/spatstat){target='_blank'}
-* Book: @baddeley_spatial_2015 \[[Companion website](http://book.spatstat.org/){target='_blank'}\]
-* PDF: [here](https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&dl=1)
-
-:::
-::: {.column width="50%"}
-
-![](images/spatstat_book.jpg){fig-align="center" width="75%"}
-
-:::
-::::
-
-## *Why* Do Events Appear Where They Do? {.smaller .title-12 .inline-90}
+## [<i class='bi bi-tree-fill'></i>] *Why* Do Events Appear Where They Do? {.smaller .title-10 .inline-90}
 
 ```{r}
 #| label: intensity-est
@@ -475,26 +549,21 @@ ggsave("images/window_circ.png", circ_plot, width=plot_w, height=plot_h, units="
 #| fig-height: 2
 #| output: false
 center_l_function <- function(x, ...) {
-
   if (!spatstat.geom::is.ppp(x) && !spatstat.geom::is.fv(x)) {
     stop("Please provide either ppp or fv object.")
   }
-
   if (spatstat.geom::is.ppp(x)) {
     x <- spatstat.explore::Lest(x, ...)
   }
-
   r <- x$r
-
   l_centered <- spatstat.explore::eval.fv(x - r)
-
   return(l_centered)
 }
 cond_clust_sf <- cond_clust_sims |> sf::st_as_sf()
 pines_plot <- cond_clust_sf |>
   ggplot() +
   geom_sf() +
-  dsan_theme("full")
+  theme_classic(base_size=12)
 ggsave("images/pines.png", pines_plot)
 # density() calls density.ppp() if the argument is a ppp object
 den <- density(cond_clust_sims, sigma = 0.1)
@@ -503,35 +572,44 @@ png("images/intensity_plot.png")
 plot(den, main = "Intensity λ(s)")
 contour(den, add = TRUE) # contour plot
 dev.off()
-# And Kest / Lest
-kest_result <- Kest(cond_clust_sims, rmax=0.5, correction="best")
-lest_result <- center_l_function(cond_clust_sims, rmax=0.5)
-png("images/lest.png")
-plot(lest_result, main="K(h)")
+# And Gest / Kest / Lest
+# saveRDS(cond_clust_sims, "cond_clust_sims.rds")
+pcf_result <- spatstat.explore::pcf.ppp(
+  cond_clust_sims,
+  divisor="d",
+  stoyan=0.25,
+  bw=0.05,
+  r=seq(from=0.0, to=1.0, by=0.001)
+)
+png("images/spatstat_pcf.png")
+plot(pcf_result, xlim=c(0, 1), main="pcf")
 dev.off()
+# kest_result <- Kest(cond_clust_sims, rmax=0.5, correction="best")
+# lest_result <- center_l_function(cond_clust_sims, rmax=0.5)
+# png("images/lest.png")
+# plot(lest_result, main="K(h)")
+# dev.off()
 ```
 
 | | First-Order | Second-Order |
 |-|-|-|
-| | Events considered **individually** $\implies$ **Intensity function $\lambda(\mathbf{s})$** | **Second-Order**: Events considered **pairwise** $\implies$ **$K$-function $K(\vec{h})$** |
-| ![](images/pines.png) | ![](images/intensity_plot.png) | ![](images/lest.png) |
+| | Events considered **individually** $\Rightarrow$ **Intensity function $\lambda(\mathbf{s})$** | Events considered **pairwise** $\Rightarrow$ **Pairwise Correlation Function $\textrm{pcf}(\vec{h})$** |
+| ![](images/pines.png) | ![](images/intensity_plot.png) | ![](images/spatstat_pcf.png) |
 
-## Summary Statistics vs. Models
+: {tbl-colwidths="[30,36,34]"}
 
-* Moran's $I$ is to **GISers** what a thermometer is to **doctors**
-* Measures **symptoms**; many possible underlying **causes!**
+## The Tree-Grid Mystery {.crunch-title .text-90 .crunch-ul .crunch-p}
 
-## The Tree-Grid Mystery
+You've been hired as an archaeologist -- congratulations! Your job: determine whether arrangement of **trees** formed:
 
-* You've been hired as an archaeologist---congratulations! Your job: determine whether arrangement of **trees** formed:
-  * **Naturally**, via a process of **resource competition**, or
-  * **Artificially**, via an ancient civilization planting in a **grid**...
+* **Naturally**, via a process of **resource competition**, or
+* **Artificially**, via an ancient civilization planting in a **grid**...
 
 ```{r}
 #| label: tree-mystery
 #| echo: false
 #| code-fold: true
-#| crop: true
+#| fig-align: center
 square_sf <- sf::st_as_sf(spatstat.geom::square(1))
 grid_sf <- sf::st_as_sf(sf::st_make_grid(square_sf))
 grid_buffer_sf <- grid_sf |> sf::st_buffer(dist=-0.01, singleSide = TRUE)
@@ -574,10 +652,15 @@ grid_buffer_sf |> ggplot() +
 #| code-summary: "Code (Step 2: Point Generation)"
 #| fig-width: 7
 grid_points <- sf::st_sample(grid_buffer_sf, size=rep(1,100))
-grid_buffer_sf |> ggplot() +
+grid_buffer_sf |> ggplot(aes(shape='Cell')) +
   geom_sf() +
   geom_sf(data=grid_points) +
-  theme_classic(base_size=ha_base)
+  scale_shape_manual("Shape", values=c('Cell'=19)) +
+  theme_classic(base_size=ha_base) +
+  theme(
+    legend.title = element_blank(),
+    # legend.text = element_text(size=18)
+  )
 ```
 
 :::
@@ -666,9 +749,11 @@ alive_ppp |> sf::st_as_sf() |> ggplot() +
 :::
 ::::
 
-# What Tools Do We Have for Distinguishing Between These Cases? {data-stack-name="First and Second Moments"}
+# What Tools Do We Have for Distinguishing Between These Cases? {data-stack-name="First/Second Moments"}
 
-## *Why* Do Events Appear Where They Do? {.smaller .title-12 .inline-90 .nostretch}
+* **"First-Order"** measures vs. **"Second-Order"** measures
+
+## *Why* Do Events Appear Where They Do? {.smaller .title-12 .inline-95 .nostretch .text-65}
 
 ```{r}
 #| label: sr-plot2
@@ -720,22 +805,22 @@ ggsave("images/clust_pcf.png", clust_pcf_plot, width=3, height=3)
 ```{=html}
 <table style='width: 100%; table-layout: fixed;'>
 <colgroup>
-  <col style='width: 32%;' />
-  <col style='width: 34%;' />
-  <col style='width: 32%;' />
+  <col style='width: 31%;' />
+  <col style='width: 33%;' />
+  <col style='width: 36%;' />
 </colgroup>
 <thead>
 <tr>
-  <th>Original Data</th>
+  <th align="center">Original Data</th>
   <th>First-Order</th>
   <th>Second-Order</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-  <td class='tdvc'><span data-qmd="$N = 60$ Events"></span></td>
-  <td><span data-qmd="Events modeled **individually**<br>$\implies$ **Intensity function $\lambda(\mathbf{s})$**"></span></td>
-  <td><span data-qmd="Events modeled **pairwise** $\implies$ **$K$-function $K(\vec{h})$**"></span></td>
+  <td class='tdvc' align="center"><span data-qmd="$N = 60$ Events"></span></td>
+  <td class='tdvc'><span data-qmd="Events modeled **individually**<br>$\Rightarrow$ **Intensity Function $\lambda(\mathbf{s})$**"></span></td>
+  <td><span data-qmd="Events modeled **pairwise** $\Rightarrow$ **Pairwise-Corr Function** $\textrm{pcf}(\vec{h})$"></span></td>
 </tr>
 <tr>
   <td><img src='images/clust_ppp.png' width="450px" /></td>
@@ -746,7 +831,7 @@ ggsave("images/clust_pcf.png", clust_pcf_plot, width=3, height=3)
 </table>
 ```
 
-## What Do These Functions "Detect"? {.crunch-title .smaller .crunch-img .crunch-quarto-figure .crunch-columns}
+## What Do These Functions "Detect"? {.crunch-title .smaller .crunch-img .crunch-quarto-figure .crunch-columns .title-12}
 
 :::: {.columns}
 ::: {.column width="33%"}
@@ -754,8 +839,9 @@ ggsave("images/clust_pcf.png", clust_pcf_plot, width=3, height=3)
 ```{r}
 #| label: sq-point-plot
 #| code-fold: true
-#| fig-width: 2.5
-#| fig-height: 2.5
+#| fig-width: 2.75
+#| fig-height: 2.75
+#| code-summary: "Code (Fixed Points)"
 sq_base <- 16
 sq_psize <- 2.5
 obs_window <- square(1)
@@ -784,7 +870,7 @@ sq_ppp |> sf::st_as_sf() |> ggplot() +
 #| label: sq-intensity-plot
 #| code-fold: true
 #| fig-width: 3
-#| fig-height: 3
+#| fig-height: 2.5
 #| crop: true
 par(mar=c(0,0,0,2), las=2, oma=c(0,0,1,0))
 sq_density <- density(sq_ppp)
@@ -824,8 +910,9 @@ pcf_result |> ggplot(aes(x=r, y=iso)) +
 ```{r}
 #| label: csr-properties-plot
 #| code-fold: true
-#| fig-height: 2.5
-#| fig-width: 2.5
+#| fig-height: 2.75
+#| fig-width: 2.75
+#| code-summary: "Code (CSR Points)"
 csr_ppp <- spatstat.random::rpoispp(
   lambda = 60,
   win=obs_window
@@ -842,7 +929,7 @@ csr_ppp |> sf::st_as_sf() |> ggplot() +
 #| label: csr-intensity-plot
 #| code-fold: true
 #| fig-width: 3
-#| fig-height: 3
+#| fig-height: 2.5
 #| crop: true
 par(
   mar=c(0,0,0,2),
@@ -877,7 +964,7 @@ csr_pcf_result |> ggplot(aes(x=r, y=iso)) +
 :::
 ::::
 
-# A Menagerie of Models {data-stack-name="Visualizing Models"}
+# A Menagerie of Models {.title-12 data-stack-name="Visualizing Models"}
 
 <center>
 
@@ -1224,74 +1311,6 @@ tree_ppp_sf |> ggplot() +
 
 :::
 ::::
-
-# The Point of All This: Null Models via Base Rates! {data-stack-name="Null Models"}
-
-* Given an **intensity function**, we can compute a bunch of simulated **point patterns** (**in**homogeneous Poisson Point Process)...
-* How does an **observed** point pattern **differ** from the simulated point patterns?
-
-## Constant Risk Hypothesis: Motivation {.smaller .crunch-title}
-
-* Here is a (fictional) map of flu cases in the US "Midwest"
-* Are people in Chicago and Detroit equally "at risk"?
-
-```{r}
-#| label: midwest-cases-plot
-#| code-fold: true
-city_df <- tibble::tribble(
-  ~city, ~lon, ~lat, ~pop,
-  "Chicago", 41.950567516553896, -87.93011127491978, 2746388,
-  "Detroit", 42.45123004999075, -83.18402319217698, 631524
-)
-city_sf <- sf::st_as_sf(
-  city_df,
-  coords = c("lat", "lon"),
-  crs=4326
-)
-city_buf_sf <- city_sf |> sf::st_buffer(20000)
-city_cases_sf <- city_buf_sf |> sf::st_sample(size=rep(10,2)) |> sf::st_as_sf()
-city_cases_sf$city <- "Detroit (10 Cases)"
-city_cases_sf[1:10, 'city'] <- "Chicago (10 Cases)"
-city_cases_sf$sample <- "Flu"
-mapview(city_cases_sf, zcol="city")
-```
-
-## Constant Risk Hypothesis: Base Rates {.smaller .crunch-title}
-
-| | Chicago | Detroit |
-|-|-|-|
-| **Population** | 2,746,388 | 631,524 |
-
-```{r}
-#| label: midwest-pop-plot
-#| code-fold: true
-city_pop_sf <- city_buf_sf |> sf::st_sample(size=c(16, 4)) |> sf::st_as_sf()
-city_pop_sf$city <- "Detroit"
-city_pop_sf[1:16, 'city'] <- "Chicago"
-city_pop_sf$sample <- "People"
-city_combined_sf <- bind_rows(city_cases_sf, city_pop_sf)
-# mapview(city_combined_sf, zcol="city", marker="sample")
-Flu = makeIcon(
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png",
-    20,
-    20
-)
-People = makeIcon(
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png",
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png",
-  20,
-  20
-)
-
-city_combined_sf$r <- ifelse(city_combined_sf$sample == "Flu", 0, 4)
-city_flu_sf <- city_combined_sf |> filter(sample == "Flu")
-city_ppl_sf <- city_combined_sf |> filter(sample == "People")
-leaflet(city_flu_sf) |>
-  addProviderTiles("CartoDB.Positron") |>
-  addMarkers(data=city_flu_sf, icon = Flu) |>
-  addMarkers(data=city_ppl_sf, icon = People)
-```
 
 ## References
 
