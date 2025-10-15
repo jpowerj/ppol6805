@@ -95,9 +95,9 @@ $$
 I_i = \frac{y_i - \overline{y}}{S_i^2}\sum_{j=1}^{n}w_{ij}(y_j - \overline{y})
 $$
 
-# Agenda for Point Patterns: Something "Noteworthy" is Happening if Pattern Unlikely to Arise ~~Randomly~~ Under CSR! {.smaller .title-08 .crunch-title .crunch-p .not-title-slide .crunch-quarto-layout-panel}
+# Agenda for Point Patterns: Something "Noteworthy" is Happening if Pattern Unlikely to Arise ~~Randomly~~ Under CSR! {.smaller .title-08 .crunch-title .crunch-p .not-title-slide .crunch-quarto-layout-panel .text-65}
 
-:::: {layout="[1,1,1]" layout-valign="bottom"}
+:::: {layout="[1,1,1]" layout-valign="center"}
 ::: {#less-clustering}
 
 <center>
@@ -127,7 +127,7 @@ Roughly **expected** amount of clustering under CSR
 :::
 ::::
 
-:::: {.columns}
+:::: {layout="[1,1,1]" layout-valign="center"}
 ::: {.column width="34%"}
 
 ![*Is this likely to arise under CSR?*<br>*But is it because of repulsion?*<br>[BBC, Aug 10 2025](https://www.bbc.com/news/articles/cj4wwxz12jko)](images/new-settlements.webp){fig-align="center" width="60%"}
@@ -135,7 +135,7 @@ Roughly **expected** amount of clustering under CSR
 :::
 ::: {.column width="33%"}
 
-
+![*A pattern arising from CSR!*<br>(Realizations $\omega_\triangle$ and $\omega_\square$ from same $D$)<br>*From [Parable of the Polygons](https://ncase.me/polygons/)*](images/polygons.png){fig-align="center"}
 
 :::
 ::: {.column width="33%"}
@@ -145,24 +145,26 @@ Roughly **expected** amount of clustering under CSR
 :::
 ::::
 
-## ...Or, [Non-Human] Nature Examples {.title-11 .crunch-title .smaller .crunch-p}
+## ...Or, [Non-Human] Nature Examples {.title-11 .crunch-title .smaller .crunch-p .crunch-quarto-figure .text-60}
 
-:::: {.columns}
+:::: {layout="[1,1,1]" layout-valign="center"}
 ::: {.column width="33%"}
 
-!["Fairy circles" in Namibia [Smithsonian Magazine: *Namibia's mysterious fairy circles might actually be caused by competition 👀 between grasses*](https://www.smithsonianmag.com/smart-news/what-causes-namibias-fairy-circles-probably-not-termites-180951534/)](images/fairy_circles.webp){fig-align="center"}
+![Namibian "Fairy Circles"; [Smithsonian Magazine: *Namibia's mysterious fairy circles may be competition 👀 between plants*](https://www.smithsonianmag.com/smart-news/what-causes-namibias-fairy-circles-probably-not-termites-180951534/)](images/fairy_circles.webp){fig-align="center"}
 
 ![[Termite mounds](https://www.biointeractive.org/classroom-resources/mozambique-mounds-0) in Mozambique](images/termite_mounds.jpg){fig-align="center"}
 
 :::
-::: {.column width="33%"}
+::: {.column width="30%"}
 
 ![Free stock photo by [`@natalinadmay`](https://www.pexels.com/@natalinadmay/)](images/leaves.jpg){fig-align="center"}
 
 :::
-::: {.column width="33%"}
+::: {.column width="36%"}
 
-![Three kestral (bird) colonies form a triangle straddling the Basilicata and Apulia [regions](https://en.wikipedia.org/wiki/Regions_of_Italy) of Italy; from @morinay_withincolony_2023](images/kestrals.jpg){fig-align="center"}
+![Three kestral (bird) colonies form a triangle straddling the Basilicata and Apulia [regions](https://en.wikipedia.org/wiki/Regions_of_Italy) of Italy; from @morinay_withincolony_2023](images/kestrals.jpg){fig-align="center" width="90%"}
+
+![Spatial clustering of birdsongs; from @crates_loss_2021](images/birdsongs.png){fig-align="center" width="200"}
 
 :::
 ::::
@@ -964,7 +966,7 @@ csr_pcf_result |> ggplot(aes(x=r, y=iso)) +
 :::
 ::::
 
-# A Menagerie of Models {.title-12 data-stack-name="Visualizing Models"}
+# A Menagerie of Models {.title-12 .not-title-slide data-stack-name="Visualizing Models"}
 
 <center>
 
@@ -985,6 +987,7 @@ spatstat.random::rpoispp(lambda, win)
 ```{r}
 #| label: pois-ppp-sims
 #| code-fold: true
+#| fig-align: center
 #| crop: true
 sim_base <- 22
 sim_psize <- 2
@@ -1032,6 +1035,7 @@ spatstat.random::rSSI(r, n=Inf, giveup=1000, win)
 ```{r}
 #| label: ssi-sims
 #| code-fold: true
+#| fig-align: center
 #| warning: false
 #| crop: true
 capture.output(ssi_sims <- spatstat.random::rSSI(
@@ -1073,6 +1077,7 @@ spatstat.random::rMatClust(kappa, scale, mu, win)
 ```{r}
 #| label: matclust-plot
 #| code-fold: true
+#| fig-align: center
 #| crop: true
 matclust_sims <- rMatClust(
   kappa = 6,
@@ -1124,6 +1129,7 @@ spatstat.random::rMaternII(kappa, r, win)
 ```{r}
 #| label: matern-inhib-plots
 #| code-fold: true
+#| fig-align: center
 #| crop: true
 mI_sims <- rMaternI(
   kappa = 60, r = 0.075, nsim=2
@@ -1166,6 +1172,7 @@ models=c("exponential", "gauss", "stable", "gencauchy", "matern")
 ```{r}
 #| label: lgcp-sim
 #| code-fold: true
+#| fig-align: center
 #| crop: true
 cox_pcol <- "black"
 cox_bg <- "grey90"
@@ -1190,25 +1197,6 @@ nulls <- lapply(X=lgcp_sims, FUN=plot_lgcp)
 * `ppp` Objects
 * Converting between `ppp` and `sf`
 * Plotting
-
-
-## [From Last Week] Our New Library: `spatstat`! {.crunch-title}
-
-:::: {.columns}
-::: {.column width="50%"}
-
-* Homepage: [spatstat.org](https://spatstat.org/){target='_blank'}
-* GitHub: [github.com/spatstat](https://github.com/spatstat){target='_blank'}
-* Book: @baddeley_spatial_2015 \[[Companion website](http://book.spatstat.org/){target='_blank'}\]
-* PDF: [here](https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&dl=1)
-
-:::
-::: {.column width="50%"}
-
-![](images/spatstat_book.jpg){fig-align="center" width="75%"}
-
-:::
-::::
 
 ## `ppp` Objects {.smaller .crunch-title .crunch-ul .smaller-table}
 

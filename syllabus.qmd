@@ -211,6 +211,15 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="{{< var weeks.8.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var weeks.8.title >}}](./w08/)"></span></td>
 </tr>
+<tr>
+    <td></td>
+    <td colspan="3" style="padding-top: 0px !important;"><div data-qmd="::: {.callout-tip title='Recommended Readings/Resources (In Order)' icon='false' style='margin: 0px !important;'}
+1. Intensity Functions (First-order properties of point processes): @baddeley_spatial_2015, Chapter 6: *Intensity* (pgs. 157-198)
+1. Pair Correlation Functions (Second-order properties of point processes): @baddeley_spatial_2015, Chapter 7: *Correlation* (pgs. 199-254)
+1. Monte Carlo Simulation: @waller_applied_2004, Section 5.2.3: *Hypothesis Tests of CSR via Monte Carlo Methods* (pgs. 125-126*ff*)
+:::
+"></span></td>
+</tr>
 <tr class='new-unit'>
     <td>
         <span data-qmd="**Unit 4:** Spatial Data Science II: Methods"></span>
