@@ -1,0 +1,118 @@
+---
+title: "Unambiguous Neighborhoods with `sfdep`"
+author: "Jeff Jacobs"
+date: 2025-10-14
+sidebar: mainnav
+categories:
+  - Extra Writeups
+assignments:
+  - HW3
+format:
+  html:
+    df-print: kable
+    link-external-icon: true
+    link-external-newwindow: true
+---
+
+## Initialization Code
+
+```{r}
+#| label: init-sfdep
+library(tidyverse) |> suppressPackageStartupMessages()
+library(mapview) |> suppressPackageStartupMessages()
+library(rnaturalearth) |> suppressPackageStartupMessages()
+library(spdep) |> suppressPackageStartupMessages()
+```
+
+* [Relevant Moraga](https://www.paulamoraga.com/book-spatial/spatial-neighborhood-matrices.html)
+* [Relevant Pebesma](https://r-spatial.org/book/14-Areal.html#contiguous-neighbours)
+
+## Finding Neighbors in Asia
+
+```{r}
+#| label: get-asia-data
+asia_countries_sf <- ne_countries(continent = "Asia", scale=50)
+mapview(asia_countries_sf, label="geounit")
+```
+
+```{r}
+#| label: compute-neighbors
+library(spdep)
+asia_countries_nb <- asia_countries_sf |>
+  spdep::poly2nb(
+    queen = TRUE,
+    row.names=asia_countries_sf$geounit
+  )
+asia_countries_nb
+```
+
+```{r}
+#| label: plot-neighbors
+nb_cents <- sf::st_point_on_surface(asia_countries_sf) |>
+  sf::st_as_sf()
+nb_lines <- spdep::nb2lines(
+  asia_countries_nb,
+  coords=st_coordinates(nb_cents),
+  as_sf=TRUE
+)
+nb_lines$edgelabel <- paste0(nb_lines$i_ID, "-", nb_lines$j_ID)
+mapview(nb_cents, label="geounit") + mapview(nb_lines, label="edgelabel")
+```
+
+```{r}
+#| label: print-nb-object
+print(asia_countries_nb)
+```
+
+```{r}
+#| label: ggplot-afg-neighbors
+asia_nb_names <- attributes(asia_countries_nb)$region.id
+afg_index <- which(asia_nb_names == "Afghanistan")
+asia_countries_sf$neighbors <- "other"
+asia_countries_sf$neighbors[afg_index] <- "area"
+asia_countries_sf$neighbors[asia_countries_nb[[afg_index]]] <- "neighbors"
+afg_sf <- asia_countries_sf |> filter(neighbors != "other")
+ggplot(afg_sf) +
+  geom_sf(aes(fill = neighbors)) +
+  theme_bw() +
+  scale_fill_manual(
+    values = c("gray30", "gray", "white")
+  )
+```
+
+```{r}
+#| label: mapview-afg-neighbors
+mapview(afg_sf, zcol="neighbors", label="geounit")
+```
+
+```{r}
+#| label: nb-weights
+nb_weights <- asia_countries_nb |>
+  spdep::nb2listw(zero.policy=TRUE)
+```
+
+```{r}
+#| label: afg-tibble
+afg_df <- tibble(
+  nb_name=asia_countries_sf$geounit[nb_weights$neighbours[[afg_index]]],
+  nb_index=nb_weights$neighbours[[afg_index]],
+  nb_weight=nb_weights$weights[[afg_index]]
+)
+afg_df
+```
+
+```{r}
+#| label: distance-weights
+nb_dist_weights <- asia_countries_nb |>
+  spdep::nb2listwdist(nb_cents, zero.policy=TRUE)
+```
+
+```{r}
+#| label: afg-distance-weights
+afg_dist_df <- tibble(
+  nb_name=asia_countries_sf$geounit[nb_dist_weights$neighbours[[afg_index]]],
+  nb_index=nb_dist_weights$neighbours[[afg_index]],
+  nb_weight=nb_dist_weights$weights[[afg_index]]
+)
+afg_dist_df
+```

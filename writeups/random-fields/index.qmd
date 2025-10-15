@@ -4,6 +4,7 @@ subtitle: "PPOL 6805: GIS for Spatial Data Science"
 author: "Jeff Jacobs"
 date: 2025-10-12
 sidebar: mainnav
+cache: true
 categories:
   - Extra Writeups
 assignments:
@@ -11,6 +12,13 @@ assignments:
 format:
   live-html:
     render-df: kable
+    theme: [default, "../../dsan-globals/jjquarto.scss"]
+    css: "/dsan-globals/jjstyles.css"
+    toc: true
+    link-external-newwindow: true
+    link-external-icon: true
+    include-in-header:
+      text: "<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js' integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='' crossorigin='anonymous' referrerpolicy='no-referrer'></script><link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css'><script src='/sidebar.js'></script>"
     resources:
       - elevation
 ---
@@ -27,7 +35,6 @@ The following initialization code is actually doing A LOT under the hood. On top
 #| autorun: true
 set.seed(6805)
 library(ggplot2) |> suppressPackageStartupMessages()
-library(geodata) |> suppressPackageStartupMessages()
 library(scales) |> suppressPackageStartupMessages()
 library(terra) |> suppressPackageStartupMessages()
 library(tidyterra) |> suppressPackageStartupMessages()
@@ -42,7 +49,7 @@ Feel free to modify the code however you'd like, then click the "Run Code" butto
 #| label: gen-geospatial
 #| fig-align: center
 #| autorun: true
-
+#| max-lines: 16
 # Define region
 lat_range <- c(-5.0, -6.0)
 lon_range <- c(15, 20)
@@ -54,10 +61,8 @@ get_elevation_data <- function(
   lon_center, lat_center, coord_bounds,
   resolution=10
 ) {
-  elev_full <- geodata::elevation_3s(
-    lon = lon_center, lat = lat_center,
-    path = getwd()
-  )
+  elev_full <- terra::rast("elevation/srtm_40_14.tif")
+	crs(elev_full) <- "+proj=longlat +datum=WGS84"
   elev_crop <- terra::crop(elev_full, coord_bounds)
   return(elev_crop)
 }

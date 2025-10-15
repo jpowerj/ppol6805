@@ -1,12 +1,12 @@
 ---
-title: "HW5A: International Borders and the Ethnic Cleansing of Palestine"
+title: "HW4: International Borders and the Ethnic Cleansing of Palestine"
 subtitle: "PPOL 6805 / DSAN 6750: GIS for Spatial Data Science"
 author: "Your Name Here"
 affiliation: "Georgetown University"
 sidebar: mainnav
+cache: true
 format:
   html:
-    # embed-resources: true
     df-print: kable
     toc: true
     link-external-newwindow: true
@@ -15,7 +15,7 @@ format:
 
 ## Overview
 
-You may have noticed, in the news, the "sudden" "eruption" of violence between the Israeli Defense Forces (IDF) and the al-Qassam Brigades (the armed wing of Hamas, the democratically-elected government of the Occupied Palestinian Territories).
+You may have noticed, in the news, the "sudden" eruption of violence between the Israeli Defense Forces (IDF) and the al-Qassam Brigades (the armed wing of Hamas, the democratically-elected government of the Occupied Palestinian Territories).
 
 In this bonus homework you will use spatial point pattern analysis to understand a key piece of historical context which lies at the root of the present-day conflict, namely, the [ethnic cleansing](https://jjacobs.me/ethnic-cleansing-of-palestine/) of Palestinian-populated villages in 1948, and Israel's subsequent refusal to allow refugees from these villages to return to their homes, in violation of [Article 49](https://ihl-databases.icrc.org/en/ihl-treaties/gciv-1949/article-49) of the Fourth Geneva Convention, the document which forms the basis for much of modern international law (see, e.g. the 1998 [Rome Statute](https://www.icc-cpi.int/sites/default/files/2024-05/Rome-Statute-eng.pdf) of the International Criminal Court).
 
