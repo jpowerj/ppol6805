@@ -27,6 +27,7 @@
   {
     "listing": "/writeups/index.html",
     "items": [
+      "/writeups/random-fields/index.html",
       "/writeups/working-with-crs/index.html",
       "/writeups/interpolation/index.html",
       "/writeups/hw1-guide/index.html",

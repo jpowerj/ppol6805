@@ -1,0 +1,159 @@
+---
+title: "Visualizing Random Fields"
+subtitle: "PPOL 6805: GIS for Spatial Data Science"
+author: "Jeff Jacobs"
+date: 2025-10-12
+sidebar: mainnav
+categories:
+  - Extra Writeups
+assignments:
+  - All
+format:
+  live-html:
+    render-df: kable
+    resources:
+      - elevation
+---
+
+## Initialization Code
+
+The following initialization code is actually doing A LOT under the hood. On top of starting R within your browser and importing the libraries specified in the code block, it also loads the elevation data for all of Tanzania, so that it can re-generate as many geospatial data **realizations** as you'd like (Click the "Run Code" button in the non-initialization cell below, to generate new realizations!)
+
+{{< include ../../_extensions/r-wasm/live/_knitr.qmd >}}
+
+```{webr}
+#| label: topo-init
+#| warning: false
+#| autorun: true
+set.seed(6805)
+library(ggplot2) |> suppressPackageStartupMessages()
+library(geodata) |> suppressPackageStartupMessages()
+library(scales) |> suppressPackageStartupMessages()
+library(terra) |> suppressPackageStartupMessages()
+library(tidyterra) |> suppressPackageStartupMessages()
+writeLines("Library and data loading complete! Scroll down for Base R and ggplot visualizations")
+```
+
+## Base R and `ggplot2` Visualizations
+
+Feel free to modify the code however you'd like, then click the "Run Code" button to generate and visualize new realizations of the geospatial process! (You can click "Start Over" to reset the code to its original state)
+
+```{webr}
+#| label: gen-geospatial
+#| fig-align: center
+#| autorun: true
+
+# Define region
+lat_range <- c(-5.0, -6.0)
+lon_range <- c(15, 20)
+# And the window around this centroid
+lat_radius <- 0.05
+lon_radius <- 0.1
+
+get_elevation_data <- function(
+  lon_center, lat_center, coord_bounds,
+  resolution=10
+) {
+  elev_full <- geodata::elevation_3s(
+    lon = lon_center, lat = lat_center,
+    path = getwd()
+  )
+  elev_crop <- terra::crop(elev_full, coord_bounds)
+  return(elev_crop)
+}
+
+gen_random_table <- function(rand_seed=NULL) {
+  rand_seed <- ifelse(
+    is.null(rand_seed),
+    sample(1:9999, size=1),
+    rand_seed
+  )
+  set.seed(rand_seed)
+  writeLines(paste0("RNG seed: ",rand_seed))
+  lat_center <- runif(n=1, min=min(lat_range), max=max(lat_range))
+  lon_center <- runif(n=1, min=min(lon_range), max=max(lon_range))
+  lon_lower <- lon_center - lon_radius
+  lon_upper <- lon_center + lon_radius
+  lat_lower <- lat_center - lat_radius
+  lat_upper <- lat_center + lat_radius
+  coord_bounds <- terra::ext(
+    lon_lower, lon_upper, lat_lower, lat_upper
+  )
+  # Using geodata
+  elev <- get_elevation_data(
+    lon_center, lat_center, coord_bounds
+  )
+  return(elev)
+}
+
+compute_hillshade <- function(terrain_elev) {
+  # Calculate hillshade
+  slopes <- terra::terrain(terrain_elev, "slope", unit = "radians")
+  aspect <- terra::terrain(terrain_elev, "aspect", unit = "radians")
+  hillshade <- terra::shade(slopes, aspect)
+  names(hillshade) <- "shades"
+  return(hillshade)
+}
+
+plot_hillshade <- function(terrain_raster, hillshade) {
+  ## Plot hillshading as basemap
+  base_plot <- terra::plot(
+    hillshade, col = gray(0:100 / 100),
+    legend = FALSE, axes = FALSE,
+    mar=c(0,0,1,0),
+    grid=FALSE,
+    main="Visualization with Base R"
+  )
+  # overlay with elevation
+  color_vec <- terrain.colors(25)
+  plot(
+    terrain_raster, col = color_vec, alpha = 0.5,
+    legend = FALSE, axes = FALSE, add = TRUE
+  )
+  # add contour lines
+  terra::contour(
+    terrain_raster, col = "grey30", add = TRUE
+  )
+}
+# Uncomment and change the rand_seed argument for
+# deterministic generation
+# terrain_raster <- gen_random_table(rand_seed=6807)
+terrain_raster <- gen_random_table()
+terrain_hillshade <- compute_hillshade(terrain_raster)
+plot_hillshade(terrain_raster, terrain_hillshade)
+pal_greys <- hcl.colors(100, "Grays")
+index <- terrain_hillshade |>
+  mutate(
+    index_col = round(
+      scales::rescale(
+        shades,
+        to = c(1, length(pal_greys))
+      )
+    )
+  ) |> pull(index_col)
+# Get cols
+vector_cols <- pal_greys[index]
+ggplot() +
+  tidyterra::geom_spatraster(
+    data=terrain_hillshade,
+    fill=vector_cols,
+    # maxcell=Inf,
+  ) +
+  scale_fill_terrain_c(
+    "Elevation",
+    direction=-1,
+    # n.breaks=25
+  ) +
+  tidyterra::geom_spatraster(
+    data=terrain_raster,
+    alpha=0.55
+  ) +
+  tidyterra::geom_spatraster_contour(
+    data=terrain_raster,
+    color='grey30',
+    linewidth=0.275
+  ) +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(title="Visualization with ggplot2")
+```
