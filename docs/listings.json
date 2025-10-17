@@ -28,6 +28,7 @@
   {
     "listing": "/writeups/index.html",
     "items": [
+      "/writeups/why-poisson/index.html",
       "/writeups/sfdep/index.html",
       "/writeups/random-fields/index.html",
       "/writeups/working-with-crs/index.html",
