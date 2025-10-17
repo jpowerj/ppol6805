@@ -9,7 +9,7 @@
 <meta name="author" content="Jeff Jacobs">
 <meta name="dcterms.date" content="2025-10-16">
 
-<title>Why Poisson Processes are ‘The’ Core Model for Spatial Randomness – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
+<title>Why Poisson Processes are ‘The’ Core Model for Testing Spatial Hypotheses – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,7 +57,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -516,7 +536,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-10-16, 10:34:46 PM</em></p>
+<p><em>Updated 2025-10-17, 06:36:22 AM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -529,6 +549,7 @@ window.Quarto = {
   <li><a href="#part-1-the-null-model-from-introductory-statistics" id="toc-part-1-the-null-model-from-introductory-statistics" class="nav-link" data-scroll-target="#part-1-the-null-model-from-introductory-statistics">Part 1: The Null Model from Introductory Statistics</a></li>
   <li><a href="#part-2-naïvely-generalizing-to-the-spatial-statistical-setting" id="toc-part-2-naïvely-generalizing-to-the-spatial-statistical-setting" class="nav-link" data-scroll-target="#part-2-naïvely-generalizing-to-the-spatial-statistical-setting">Part 2: “Naïvely” Generalizing to the Spatial-Statistical Setting</a></li>
   <li><a href="#part-3-saved-by-the-poisson-distribution" id="toc-part-3-saved-by-the-poisson-distribution" class="nav-link" data-scroll-target="#part-3-saved-by-the-poisson-distribution">Part 3: Saved by the Poisson Distribution!</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/writeups/why-poisson/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -538,7 +559,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Why Poisson Processes are ‘The’ Core Model for Spatial Randomness</h1>
+<h1 class="title">Why Poisson Processes are ‘The’ Core Model for Testing Spatial Hypotheses</h1>
   <div class="quarto-categories">
     <div class="quarto-category">Extra Writeups</div>
   </div>
@@ -599,7 +620,7 @@ window.Quarto = {
 <p>The second assumption (that <span class="math inline">\(\{X_1, X_2, \ldots, X_n\}\)</span> are <strong>identically distributed</strong>) is super important for the wording of the LLN and CLT. To see exactly why these theorems are useful, we’ll add one more piece of information to this assumption, namely, that the underlying population distribution we’ve assumed has some well-defined <strong>mean</strong> <span class="math inline">\(\mu\)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. We actually don’t need to assume anything more than this, but for the sake of making a picture let’s also assume a well-defined standard deviation <span class="math inline">\(\sigma\)</span>.</p>
 <p>These assumptions now allow us to visualize the <strong>population distribution</strong> of height, the distribution of the heights of all possible Georgetown students in the past, present, and future:</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(latex2exp) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
@@ -643,7 +664,7 @@ window.Quarto = {
 </div>
 <p>We won’t have any way of knowing the actual <strong>values</strong> <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> in practice (if we did, we wouldn’t need to use this whoe sampling thing in the first place), but to make our visualization a little more concrete, let’s assume that this abstract population mean height is <span class="math inline">\(\mu = 170\text{cm}\)</span> and population mean SD is <span class="math inline">\(\sigma = 10\text{cm}\)</span>. Then the above visualization becomes:</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>(pop_plot <span class="ot">&lt;-</span> base_pop_plot <span class="sc">+</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
@@ -686,11 +707,11 @@ Sample #3: 159.99, 164.23, 159.36, 163.04, 167.38
 Mean = 162.8</code></pre>
 </div>
 </div>
-<p>And if we repeat this 1000 times, we’ll get 1000 different sample means: that is, 1000 different <strong>realized values</strong> of <span class="math inline">\(\overline{X}_N\)</span> (here we display only the first 1000 of these realized values, for brevity):</p>
+<p>And if we repeat this 999 times, we’ll get 999 different sample means: that is, 999 different <strong>realized values</strong> of <span class="math inline">\(\overline{X}_N\)</span> (here we display only the first 100 of these realized values, for brevity):</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">mean</span>(<span class="fu">sample_from_pop</span>()))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">999</span>, <span class="fu">mean</span>(<span class="fu">sample_from_pop</span>()))</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sample_means[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -711,7 +732,7 @@ Mean = 162.8</code></pre>
 </div>
 <p>If we plot the distribution of <strong>these</strong> values, we get a different distribution from the above. This time, it’s a <strong>sampling</strong> distribution! It’s a distribution of the <strong>averages</strong> we get when we <strong>sample</strong> from the population distribution:</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sample_mean_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span>sample_means)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sample_plot <span class="ot">&lt;-</span> sample_mean_df <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x)) <span class="sc">+</span></span>
@@ -721,7 +742,7 @@ Mean = 162.8</code></pre>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span><span class="fl">0.75</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Distribution of 1000 Means from Samples of Size N = 5"</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Distribution of 999 Means from Samples of Size N = 5"</span>) <span class="sc">+</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>sample_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -735,7 +756,7 @@ Mean = 162.8</code></pre>
 </div>
 <p>By overlaying this <strong>sampling</strong> distribution on top of the <strong>population</strong> distribution (though remember, again, that in the real world we’re never going to be able to discover this “true” population distribution), we can start to see what’s going on:</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
@@ -768,7 +789,7 @@ Mean = 162.8</code></pre>
 </div>
 <p>The values we’re getting for the <strong>sample mean</strong>, in blue here, <strong>vary</strong> around the <strong>true mean</strong> that we’re trying to estimate. And, intuitively, if we have the resources to take <strong>bigger</strong> samples (e.g., more time to ask more than <span class="math inline">\(N = 5\)</span> people), this should give us even <strong>more accurate</strong> estimates of the population mean, which is what we indeed find in our simulation:</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sample_sizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">100</span>, <span class="dv">500</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sample_means_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">N =</span> <span class="fu">numeric</span>(), <span class="at">xbar=</span><span class="fu">numeric</span>())</span>
@@ -797,33 +818,33 @@ Mean = 162.8</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">169.3783</td>
+<td style="text-align: right;">179.5180</td>
 </tr>
 <tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">169.3783</td>
+</tr>
+<tr class="odd">
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">177.2945</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">179.8101</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">167.2210</td>
 </tr>
-<tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">167.8652</td>
-</tr>
 <tr class="even">
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">166.3705</td>
+<td style="text-align: right;">167.8652</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sample_means_df <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
@@ -875,7 +896,7 @@ Mean = 162.8</code></pre>
 <p>Continuing our above example, if we think that the “true” mean height of Georgetown students is <span class="math inline">\(\mu = 170\text{cm}\)</span>, we can take a sample of <span class="math inline">\(N\)</span> Georgetown students and compare the <strong>mean height value</strong> of <strong>this particular sample</strong> with the <strong>distribution of mean height values</strong> that a <strong>population distribution with <span class="math inline">\(\mu = 170\text{cm}\)</span> would generate</strong>.</p>
 <p>For example, if we take a sample of <span class="math inline">\(N = 30\)</span> Georgetown students, and find that the mean height of these 30 students is <strong>160cm</strong>, we can “test” how likely it is that this particular mean height value would arise relative to our <strong>working hypothesis</strong> that the “true” population mean is <span class="math inline">\(\mu = 170\text{cm}\)</span>… just take the blue distribution from the <span class="math inline">\(N = 30\)</span> plot above, and check <strong>where 160cm falls</strong> relative to this distribution! Here’s what this looks like:</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>n30_df <span class="ot">&lt;-</span> sample_means_df <span class="sc">|&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(N <span class="sc">==</span> <span class="dv">30</span>)</span>
@@ -892,7 +913,7 @@ Mean = 162.8</code></pre>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> cb_palette[<span class="dv">3</span>]</span>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Observed Mean (155cm) vs. 1000 Simulated Means"</span>) <span class="sc">+</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Observed Mean (160cm) vs. 1000 Simulated Means"</span>) <span class="sc">+</span></span>
 <span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
@@ -907,11 +928,28 @@ Mean = 162.8</code></pre>
 </section>
 <section id="part-2-naïvely-generalizing-to-the-spatial-statistical-setting" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-naïvely-generalizing-to-the-spatial-statistical-setting">Part 2: “Naïvely” Generalizing to the Spatial-Statistical Setting</h2>
-<p>The idea is that, if we want to statistically test hypotheses about observed <strong>spatial</strong> distributions, we’d like an <strong>equivalent to the above normal distribution</strong> for the <strong>two-dimensional spatial settings</strong> (Random Fields) we analyze in this course!</p>
-<p>In the same way that we just tested our <strong>observed mean</strong> of <span class="math inline">\(155\text{cm}\)</span> against the range of means we would <strong>expect</strong> to see under some hypothesis, we’d like to test <strong>observed point patterns</strong> against some range of <strong>expected point patterns</strong> under some hypothesis – in this case, rather than a hypothesis about the <strong>mean</strong> <span class="math inline">\(\mu\)</span>, we could have a hypothesis about the <strong>degree of autocorrelation</strong>, Moran’s <span class="math inline">\(I\)</span>, or the <strong>intensity</strong> <span class="math inline">\(\lambda\)</span> of point in a given region of a country.</p>
+<p>The next idea is that, if we want to statistically test hypotheses about observed <strong>spatial</strong> distributions, we’d like an <strong>equivalent to the above normal distribution</strong> for the <strong>two-dimensional spatial settings</strong> (Random Fields) we analyze in this course!</p>
+<p>In the same way that we just tested our <strong>observed mean</strong> of <span class="math inline">\(160\text{cm}\)</span> against the range of means we would <strong>expect</strong> to see under some hypothesis, we’d like to test <strong>observed point patterns</strong> against some range of <strong>expected point patterns</strong> under some hypothesis. In this case, rather than a hypothesis about the <strong>mean</strong> <span class="math inline">\(\mu\)</span>, let’s start with a hypothesis about the first <strong>spatial statistic</strong> we learned in Week 7, namely, Moran’s <span class="math inline">\(I\)</span>! Let’s say we think there is a propensity for points to cluster together very tightly, so that although the specific cluster patterns may vary slightly from year to year, we think that the underlying <strong>population</strong> autocorrelation <span class="math inline">\(I\)</span> is close to <span class="math inline">\(1.0\)</span>.</p>
+<p>The reason for “overthinking” the Poisson process at this point is, we’re going to need to think about how we might <strong>falsify</strong> this hypothesis<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>Like we did above for the simpler “one-dimensional” hypothesis about the population mean height, we’ll subject our hypothesis <span class="math inline">\(\mathcal{H} = [I \approx 1]\)</span> to <strong>falsification testing</strong> by developing a “null model”: a model of what a world where our hypothesis is <strong>wrong</strong> would look like.</p>
+<p>With this “null model” in hand, we can then simulate what <strong>not-high</strong> spatial autocorrelation would look like within the same spatial domain. In fact, since the null model is a <strong>generative</strong> model, we can use it to generate as many worlds-where-my-hypothesis-is-false as we’d like! Above we arbitrarily chose to stop after we had generated 999 such worlds, and we’ll do the same for most examples in this course.</p>
+<p>Once we have these 999 simulated null-world patterns, we can compute a Moran’s <span class="math inline">\(I\)</span> value for each, producing <span class="math inline">\(\{I_1, I_2, \ldots, I_{999}\}\)</span>, which we call the “null distribution” of our “test statistic” <span class="math inline">\(I\)</span>. We then <strong>compare</strong> <span class="math inline">\(I_{\text{obs}}\)</span> with these 999 simulated <span class="math inline">\(I\)</span> values:</p>
+<ul>
+<li>If we find that the observed autocorrelation value <span class="math inline">\(I_{\text{obs}}\)</span>, calculated with respect to the point pattern we <strong>actually saw</strong>, is sufficiently <strong>different</strong> from the range of <span class="math inline">\(I\)</span> values <span class="math inline">\(\{I_1, I_2, \ldots, I_{999}\)</span>} that we calculated from the <strong>simulated</strong> patterns, we should<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <strong>increase our confidence</strong> in the idea that the <strong>underlying</strong> spatial pattern is indeed one with high autocorrelation (relative to our confidence before carrying out this test)</li>
+<li>If we find that the observed autocorrelation value <span class="math inline">\(I_{\text{obs}}\)</span>, calculated with respect to the point pattern we <strong>actually saw</strong>, is <strong>not</strong> very different from the range of <span class="math inline">\(I\)</span> values <span class="math inline">\(\{I_1, I_2, \ldots, I_{999}\)</span>} that we calculated from the <strong>simulated</strong> patterns, we should <strong>decrease our confidence</strong> in the idea that the <strong>underlying</strong> spatial pattern is indeed one with high autocorrelation (relative to our confidence before carrying out this test)</li>
+</ul>
+<p>So, if we observed (say) <span class="math inline">\(N_{\text{obs}} = 60\)</span> points in some region, and we’re hypothesizing that the <strong>underlying</strong> micro-level process generating these points is one with the property of <strong>high autocorrelation</strong>… our instinct may very reasonably be: Cool! Let’s go generate 999 point patterns, each with <span class="math inline">\(N = 60\)</span> points, but where the points are spread randomly across the same region!</p>
 </section>
 <section id="part-3-saved-by-the-poisson-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-saved-by-the-poisson-distribution">Part 3: Saved by the Poisson Distribution!</h2>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-jaynes_probability_2002" class="csl-entry" role="listitem">
+Jaynes, Edwin T. 2002. <em><a href="https://www.dropbox.com/scl/fi/duzv66baqi9y7pc37py7m/Probability-Theory-The-Logic-of-Science-E.T.-Jaynes-G.-Larry-Bretthorst-Editor.pdf?rlkey=spqf81ekio420awmsxpl9fvqh&amp;dl=1">Probability <span>Theory</span>: <span>The Logic</span> of <span>Science</span></a></em>. Cambridge University Press.
+</div>
+</div>
 
 
 </section>
@@ -921,6 +959,8 @@ Mean = 162.8</code></pre>
 
 <ol>
 <li id="fn1"><p>In slightly more detail, in the context we’ve set up, this assumption of a “well-defined” mean <span class="math inline">\(\mu\)</span> is saying that <span class="math inline">\(\mathbb{E}[X_i] = \mu\)</span>, i.e., that the most likely value, the specific numeric value we most “expect” to see when <span class="math inline">\(X_i\)</span> is realized, is the value <span class="math inline">\(\mu\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This is not specific to spatial statistics, or even statistics in general – it’s the foundation of the so-called “Popperian” scientific method, which Jeff needs to not rant about here 😜<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The word “should” might feel weird here, as a normative/prescriptive term suddenly appearing in the middle of a descriptive statistical procedure – in Bayesian statistics, though, we actually have a good reason for using “should”: any other rule we might use for evaluating hypotheses is provably “sub-optimal”, at least in the narrow sense that we’ll make worse predictions in the future. This is true, sadly, even for the “standard” hypothesis test setup you may have learned, where you “reject” or “fail to reject” the null hypothesis: we can do better in terms of future predictions by converting “reject” into “decrease my belief by an amount determined by Bayes’ Rule” and “fail to reject” into “increase my belief by an amount determined by Bayes’ Rule”! You can find proofs and applications and etc. in <span class="citation" data-cites="jaynes_probability_2002">Jaynes (<a href="#ref-jaynes_probability_2002" role="doc-biblioref">2002</a>)</span><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

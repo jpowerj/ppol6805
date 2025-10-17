@@ -4,6 +4,8 @@ author: "Jeff Jacobs"
 institute: "`jj1088@georgetown.edu`"
 date: 2025-10-16
 sidebar: mainnav
+bibliography: "../../_PPOL6805.bib"
+csl: "../../chicago-17-no-url.csl"
 code-fold: show
 categories:
   - Extra Writeups
@@ -43,6 +45,7 @@ These assumptions now allow us to visualize the **population distribution** of h
 
 ```{r}
 #| label: pop-dist
+#| code-fold: true
 library(tidyverse) |> suppressPackageStartupMessages()
 library(latex2exp) |> suppressPackageStartupMessages()
 set.seed(6807)
@@ -80,6 +83,7 @@ We won't have any way of knowing the actual **values** $\mu$ and $\sigma$ in pra
 
 ```{r}
 #| label: pop-dist-values
+#| code-fold: true
 (pop_plot <- base_pop_plot +
   labs(
     title="Hypothesized Population Distribution: N(170, 10)"
@@ -108,11 +112,11 @@ for (i in 1:3) {
 }
 ```
 
-And if we repeat this 1000 times, we'll get 1000 different sample means: that is, 1000 different **realized values** of $\overline{X}_N$ (here we display only the first 1000 of these realized values, for brevity):
+And if we repeat this 999 times, we'll get 999 different sample means: that is, 999 different **realized values** of $\overline{X}_N$ (here we display only the first 100 of these realized values, for brevity):
 
 ```{r}
 #| label: many-sample-means
-sample_means <- replicate(1000, mean(sample_from_pop()))
+sample_means <- replicate(999, mean(sample_from_pop()))
 sample_means[1:100]
 ```
 
@@ -120,6 +124,7 @@ If we plot the distribution of **these** values, we get a different distribution
 
 ```{r}
 #| label: sampling-dist-histogram
+#| code-fold: true
 sample_mean_df <- tibble(x=sample_means)
 sample_plot <- sample_mean_df |> ggplot(aes(x=x)) +
   geom_histogram(
@@ -128,7 +133,7 @@ sample_plot <- sample_mean_df |> ggplot(aes(x=x)) +
     alpha=0.75
   ) +
   theme_classic(base_size=15) +
-  labs(title="Distribution of 1000 Means from Samples of Size N = 5") +
+  labs(title="Distribution of 999 Means from Samples of Size N = 5") +
   theme(plot.title = element_text(hjust=0.5))
 sample_plot
 ```
@@ -138,6 +143,7 @@ By overlaying this **sampling** distribution on top of the **population** distri
 ```{r}
 #| label: pop-and-sampling-dist
 #| warning: false
+#| code-fold: true
 ggplot() +
   geom_area(
     data = xlim_df,
@@ -165,6 +171,7 @@ The values we're getting for the **sample mean**, in blue here, **vary** around 
 ```{r}
 #| label: increasing-n
 #| warning: false
+#| code-fold: true
 sample_sizes <- c(5, 30, 100, 500)
 sample_means_df <- tibble(N = numeric(), xbar=numeric())
 for (cur_sample_size in sample_sizes) {
@@ -222,6 +229,7 @@ For example, if we take a sample of $N = 30$ Georgetown students, and find that 
 ```{r}
 #| label: hypothesis-test
 #| warning: false
+#| code-fold: true
 n30_df <- sample_means_df |>
   filter(N == 30)
 n30_df |> ggplot() +
@@ -237,7 +245,7 @@ n30_df |> ggplot() +
     color = cb_palette[3]
   ) +
   theme_classic(base_size = 15) +
-  labs(title="Observed Mean (155cm) vs. 1000 Simulated Means") +
+  labs(title="Observed Mean (160cm) vs. 1000 Simulated Means") +
   theme(plot.title = element_text(hjust=0.5))
 ```
 
@@ -245,8 +253,26 @@ The vertical (dashed) green line in this plot is the **mean we actually obtained
 
 ## Part 2: "Naïvely" Generalizing to the Spatial-Statistical Setting
 
-The idea is that, if we want to statistically test hypotheses about observed **spatial** distributions, we'd like an **equivalent to the above normal distribution** for the **two-dimensional spatial settings** (Random Fields) we analyze in this course!
+The next idea is that, if we want to statistically test hypotheses about observed **spatial** distributions, we'd like an **equivalent to the above normal distribution** for the **two-dimensional spatial settings** (Random Fields) we analyze in this course!
 
-In the same way that we just tested our **observed mean** of $155\text{cm}$ against the range of means we would **expect** to see under some hypothesis, we'd like to test **observed point patterns** against some range of **expected point patterns** under some hypothesis -- in this case, rather than a hypothesis about the **mean** $\mu$, we could have a hypothesis about the **degree of autocorrelation**, Moran's $I$, or the **intensity** $\lambda$ of point in a given region of a country.
+In the same way that we just tested our **observed mean** of $160\text{cm}$ against the range of means we would **expect** to see under some hypothesis, we'd like to test **observed point patterns** against some range of **expected point patterns** under some hypothesis. In this case, rather than a hypothesis about the **mean** $\mu$, let's start with a hypothesis about the first **spatial statistic** we learned in Week 7, namely, Moran's $I$! Let's say we think there is a propensity for points to cluster together very tightly, so that although the specific cluster patterns may vary slightly from year to year, we think that the underlying **population** autocorrelation $I$ is close to $1.0$.
+
+The reason for "overthinking" the Poisson process at this point is, we're going to need to think about how we might **falsify** this hypothesis^[This is not specific to spatial statistics, or even statistics in general -- it's the foundation of the so-called "Popperian" scientific method, which Jeff needs to not rant about here 😜].
+
+Like we did above for the simpler "one-dimensional" hypothesis about the population mean height, we'll subject our hypothesis $\mathcal{H} = [I \approx 1]$ to **falsification testing** by developing a "null model": a model of what a world where our hypothesis is **wrong** would look like.
+
+With this "null model" in hand, we can then simulate what **not-high** spatial autocorrelation would look like within the same spatial domain. In fact, since the null model is a **generative** model, we can use it to generate as many worlds-where-my-hypothesis-is-false as we'd like! Above we arbitrarily chose to stop after we had generated 999 such worlds, and we'll do the same for most examples in this course.
+
+Once we have these 999 simulated null-world patterns, we can compute a Moran's $I$ value for each, producing $\{I_1, I_2, \ldots, I_{999}\}$, which we call the "null distribution" of our "test statistic" $I$. We then **compare** $I_{\text{obs}}$ with these 999 simulated $I$ values:
+
+* If we find that the observed autocorrelation value $I_{\text{obs}}$, calculated with respect to the point pattern we **actually saw**, is sufficiently **different** from the range of $I$ values $\{I_1, I_2, \ldots, I_{999}$} that we calculated from the **simulated** patterns, we should^[The word "should" might feel weird here, as a normative/prescriptive term suddenly appearing in the middle of a descriptive statistical procedure -- in Bayesian statistics, though, we actually have a good reason for using "should": any other rule we might use for evaluating hypotheses is provably "sub-optimal", at least in the narrow sense that we'll make worse predictions in the future. This is true, sadly, even for the "standard" hypothesis test setup you may have learned, where you "reject" or "fail to reject" the null hypothesis: we can do better in terms of future predictions by converting "reject" into "decrease my belief by an amount determined by Bayes' Rule" and "fail to reject" into "increase my belief by an amount determined by Bayes' Rule"! You can find proofs and applications and etc. in @jaynes_probability_2002] **increase our confidence** in the idea that the **underlying** spatial pattern is indeed one with high autocorrelation (relative to our confidence before carrying out this test)
+* If we find that the observed autocorrelation value $I_{\text{obs}}$, calculated with respect to the point pattern we **actually saw**, is **not** very different from the range of $I$ values $\{I_1, I_2, \ldots, I_{999}$} that we calculated from the **simulated** patterns, we should **decrease our confidence** in the idea that the **underlying** spatial pattern is indeed one with high autocorrelation (relative to our confidence before carrying out this test)
+
+So, if we observed (say) $N_{\text{obs}} = 60$ points in some region, and we're hypothesizing that the **underlying** micro-level process generating these points is one with the property of **high autocorrelation**... our instinct may very reasonably be: Cool! Let's go generate 999 point patterns, each with $N = 60$ points, but where the points are spread randomly across the same region!
 
 ## Part 3: Saved by the Poisson Distribution!
+
+## References
+
+::: {#refs}
+:::
