@@ -282,10 +282,10 @@ To move from the above intuitive-but-deficient approach to the notion of **Compl
 To start, consider the simplest possible point process we can imagine: just taking some 2D shape like a (unit) square and placing a single point randomly within it. If we place our unit square in the first quadrant of the Cartesian plane, then to generate a random point $\mathbf{s}_0$ within this square we literally just need to generate a random $x$ coordinate $X \sim \mathcal{U}[0,1]$ and a random $y$ coordinate $Y \sim \mathcal{U}[0,1]$, as in the following plot:
 
 ```{r}
-#| label: random-point
+#| label: random-point-table
 #| code-fold: true
 library(latex2exp)
-set.seed(6808)
+set.seed(6862)
 x_coords <- runif(n = 4, min = 0, max = 1) |>
   round(2)
 y_coords <- runif(n = 4, min = 0, max = 1) |>
@@ -296,25 +296,41 @@ rand_point_df <- tibble::tibble(
   y=y_coords
 )
 rand_point_df <- rand_point_df |> mutate(
-  label_tex = paste0(
+  point_tex_str = paste0(
     '$s_',
     index,
-    '$ = (',
+    '$'
+  ),
+  point_prob_tex_str = paste0(
+    '$\\Pr(s=s_',
+    index,
+    ') = 0$'
+  ),
+  label_tex_str = paste0(
+    point_tex_str,
+    ' = (',
     x,
     ", ",
     y,
     ")"
   )
 )
+rand_point_df$point_tex <- as.list(TeX(rand_point_df$point_tex_str))
+rand_point_df$point_prob_tex <- as.list(TeX(rand_point_df$point_prob_tex_str))
 rand_point_df
+```
+
+```{r}
+#| label: random-point-plot
+#| code-fold: true
+#| fig-cap: Test
 appender <- function(s) {
   return(TeX(s))
 }
 tex_labeller = as_labeller(
   appender,
   default = label_parsed
-) 
-
+)
 base_point_plot <- rand_point_df |>
   ggplot(aes(x=x, y=y)) +
   # xlim(0, 1) + ylim(0, 1) +
@@ -334,27 +350,27 @@ base_point_plot <- rand_point_df |>
   coord_equal() +
   theme(plot.title=element_text(hjust=0.5))
 base_point_plot +
-  geom_point(size=3) +
+  geom_point(size=2.5) +
   geom_segment(
     mapping = aes(
       yend=-Inf
     ),
-    linewidth=0.75,
+    linewidth=0.5,
     linetype='dashed'
   ) +
   geom_segment(
     mapping = aes(
       xend=-Inf
     ),
-    linewidth=0.75,
+    linewidth=0.5,
     linetype='dashed'
   ) +
   facet_wrap(
-    vars(label_tex), nrow=2, ncol=2,
+    vars(label_tex_str), nrow=2, ncol=2,
     labeller=tex_labeller,
     # scales='free_x'
-  )
-
+  ) +
+  labs(title="Four Realizations of the Uniform Point Process")
 ```
 
 Now, if we take this and try to generalize it into a probabilistic model, we should at minimum be able to ask a question like, what's the probability of getting **this** particular point (or any other point in the unit square, but, we have a specific example above we can work with for concreteness). From [previous probability and statistics courses](https://jjacobs.me/dsan5100/w04/slides.html#/discrete-vs.-continuous) you might know that the answer is... zero! When working in **continuous spaces** like the unit square, we actually **can't compute probabilities for individual, infinitesimally-small points**.
@@ -379,64 +395,79 @@ to obtain the answer $\frac{1}{2}$, as the **proportion** of the area covered by
 #| label: area-probabilities
 #| code-fold: true
 #| warning: false
-
-
-# library(latex2exp)
-# area_label <- TeX('$A \\subseteq D$')
-# area_prob_label <- TeX('$\\Pr(s \\in A) = \\frac{1}{2}$')
-# point_label <- TeX('$s_0$')
-# point_prob_label <- TeX('$\\Pr(s = s_0) = 0$')
-# base_point_plot +
-#   geom_rect(
-#     xmin=0.5, xmax=1.0,
-#     ymin=0.0, ymax=1.0,
-#     fill=cb_palette[1],
-#     alpha=0.5
-#   ) +
-#   geom_point(size=3) +
-#   geom_segment(
-#     mapping = aes(
-#       yend=-Inf
-#     ),
-#     linewidth=0.75,
-#     linetype='dashed'
-#   ) +
-#   geom_segment(
-#     mapping = aes(
-#       xend=-Inf
-#     ),
-#     linewidth=0.75,
-#     linetype='dashed'
-#   ) +
-#   geom_text(
-#     x=0.75, y=0.9,
-#     label=area_label,
-#     size=8
-#   ) +
-#   geom_text(
-#     x=0.75, y=0.7,
-#     label=area_prob_label,
-#     size=6
-#   ) +
-#   geom_text(
-#     x = 0.75, y=0.3,
-#     label=point_prob_label,
-#     size=6,
-#   ) +
-#   geom_text(
-#     label=point_label,
-#     size=6,
-#     nudge_y = 0.05
-#   )
+library(latex2exp)
+area_label <- TeX('$A \\subseteq D$')
+area_prob_label <- TeX('$\\Pr(s \\in A) = \\frac{1}{2}$')
+base_point_plot +
+  geom_rect(
+    xmin=0.5, xmax=1.0,
+    ymin=0.0, ymax=1.0,
+    fill=cb_palette[1],
+    alpha=0.5
+  ) +
+  geom_point(size=2) +
+  geom_segment(
+    x=0.5,
+    y=-Inf,
+    yend=Inf,
+    linetype="dashed"
+  ) +
+  facet_wrap(
+    vars(label_tex_str), nrow=2, ncol=2,
+    labeller=tex_labeller,
+    # scales='free_x'
+  ) +
+  geom_text(
+    x=0.75, y=0.9,
+    label=area_label,
+    size=4
+  ) +
+  geom_text(
+    x=0.75, y=0.7,
+    label=area_prob_label,
+    size=2.5
+  ) +
+  geom_text(
+    # x = 0.75, y=0.3,
+    mapping = aes(label=point_prob_tex),
+    # label=point_prob_label,
+    size=3,
+    nudge_y = -0.1,
+    nudge_x = -0.1,
+    parse = TRUE
+  ) +
+  geom_text(
+    mapping = aes(label=point_tex),
+    size=4,
+    nudge_x = -0.09,
+    nudge_y = 0.06,
+    parse = TRUE
+  ) +
+  labs(title="Point vs. Area Probabilities")
 ```
 
 This notion, that we can only meaningfully ask about the probability of a point **falling within some area**, is key to why the next model (which is in fact the "intuitive" model from earlier) fails as a workable null model for spatial data science.
 
 ### Model 2: Binomial Point Process
 
-Now, if we wanted to generate **more than one** point, our next guess might be to start by **choosing a number of points $N$**, and then **generating coordinates for each of the $N$ points uniformly** within $D$... Does that sound familiar? That is exactly the "intuitive" null model we came up with above, as a way of testing the "randomness" (as opposed to "clustered-ness" or "regular-ness") of some observed collection of points!
+Now, if we want to develop a process which can generate **more than one** point, a natural approach might be to just run the above process $N$ times. That is, we might **fix a number of points $N$** in advance, and then **generate coordinates for each of the $N$ points uniformly** within $D$... Does that sound familiar? That is exactly the "intuitive" null model we came up with above, as a way of testing the "randomness" (as opposed to "clustered-ness" or "regular-ness") of some observed collection of points!
 
-A collection of points generated with this method looks as follows
+The following figure generates four point patterns using this process, with $N$ set to be $60$:
+
+```{r}
+#| label: fig-binom
+#| code-fold: show
+#| fig-cap: Four individual **realizations** of the **Binomial Point Process** described in this section
+library(spatstat) |> suppressPackageStartupMessages()
+binom_ppp <- spatstat.random::rpoint(60)
+plot(binom_ppp)
+```
+
+Why is it called the **Binomial** Point Process? Recall our above intuition, that we can **only obtain meaningful probabilities** if we ask about the likelihood of **points falling within areas**. This means that any probabilistic point model where points are generated within a continuous space $D$ must provide answers to the question "Given some area $A \subseteq D$, What is the probability that a point appears in $A$?" So, if we ask this question after running our **Uniform Point Process** from earlier a bunch of times (producing point patterns like those plotted in @fig-binom) fixing some region $A$, we end up with the **Binomial PDF**:
+
+$$
+\Pr(\mathbf{s} \in A) = \binom{N}{k}p^{k}(1-p)^{N-k}
+$$
 
 ## Part 4: Saved by the Poisson Distribution!
 

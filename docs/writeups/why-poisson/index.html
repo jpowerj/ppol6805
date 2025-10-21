@@ -536,7 +536,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-10-17, 06:36:22 AM</em></p>
+<p><em>Updated 2025-10-21, 07:30:00 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -960,7 +960,7 @@ Mean = 162.8</code></pre>
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(latex2exp)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6808</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6862</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>x_coords <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">4</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>y_coords <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">4</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
@@ -971,58 +971,101 @@ Mean = 162.8</code></pre>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">y=</span>y_coords</span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>rand_point_df <span class="ot">&lt;-</span> rand_point_df <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">label_tex =</span> <span class="fu">paste0</span>(</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">point_tex_str =</span> <span class="fu">paste0</span>(</span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'$s_'</span>,</span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    index,</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'$ = ('</span>,</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    x,</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">", "</span>,</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    y,</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">")"</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>rand_point_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'$'</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">point_prob_tex_str =</span> <span class="fu">paste0</span>(</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'$</span><span class="sc">\\</span><span class="st">Pr(s=s_'</span>,</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    index,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">') = 0$'</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">label_tex_str =</span> <span class="fu">paste0</span>(</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    point_tex_str,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">' = ('</span>,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    x,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">", "</span>,</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">")"</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>rand_point_df<span class="sc">$</span>point_tex <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="fu">TeX</span>(rand_point_df<span class="sc">$</span>point_tex_str))</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>rand_point_df<span class="sc">$</span>point_prob_tex <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="fu">TeX</span>(rand_point_df<span class="sc">$</span>point_prob_tex_str))</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>rand_point_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 5%">
+<col style="width: 52%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: right;">index</th>
 <th style="text-align: right;">x</th>
 <th style="text-align: right;">y</th>
-<th style="text-align: left;">label_tex</th>
+<th style="text-align: left;">point_tex_str</th>
+<th style="text-align: left;">point_prob_tex_str</th>
+<th style="text-align: left;">label_tex_str</th>
+<th style="text-align: left;">point_tex</th>
+<th style="text-align: left;">point_prob_tex</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.72</td>
-<td style="text-align: right;">0.10</td>
-<td style="text-align: left;"><span class="math inline">\(s_1\)</span> = (0.72, 0.1)</td>
+<td style="text-align: right;">0.54</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: left;"><span class="math inline">\(s_1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\Pr(s=s_1) = 0\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(s_1\)</span> = (0.54, 0.45)</td>
+<td style="text-align: left;">s[1]</td>
+<td style="text-align: left;">Pr(s * {, phantom() == phantom(), } * s[1]) * {, phantom() == phantom(), } * 0</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">0.14</td>
-<td style="text-align: right;">0.71</td>
-<td style="text-align: left;"><span class="math inline">\(s_2\)</span> = (0.14, 0.71)</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">0.26</td>
+<td style="text-align: left;"><span class="math inline">\(s_2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\Pr(s=s_2) = 0\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(s_2\)</span> = (0.27, 0.26)</td>
+<td style="text-align: left;">s[2]</td>
+<td style="text-align: left;">Pr(s * {, phantom() == phantom(), } * s[2]) * {, phantom() == phantom(), } * 0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">0.79</td>
-<td style="text-align: right;">0.49</td>
-<td style="text-align: left;"><span class="math inline">\(s_3\)</span> = (0.79, 0.49)</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: left;"><span class="math inline">\(s_3\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\Pr(s=s_3) = 0\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(s_3\)</span> = (0.28, 0.85)</td>
+<td style="text-align: left;">s[3]</td>
+<td style="text-align: left;">Pr(s * {, phantom() == phantom(), } * s[3]) * {, phantom() == phantom(), } * 0</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">0.92</td>
-<td style="text-align: right;">0.30</td>
-<td style="text-align: left;"><span class="math inline">\(s_4\)</span> = (0.92, 0.3)</td>
+<td style="text-align: right;">0.75</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: left;"><span class="math inline">\(s_4\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\Pr(s=s_4) = 0\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(s_4\)</span> = (0.75, 0.19)</td>
+<td style="text-align: left;">s[4]</td>
+<td style="text-align: left;">Pr(s * {, phantom() == phantom(), } * s[4]) * {, phantom() == phantom(), } * 0</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
+</div>
+<div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>appender <span class="ot">&lt;-</span> <span class="cf">function</span>(s) {</span>
@@ -1031,52 +1074,53 @@ Mean = 162.8</code></pre>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>tex_labeller <span class="ot">=</span> <span class="fu">as_labeller</span>(</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  appender,</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">default =</span> label_parsed</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>) </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>base_point_plot <span class="ot">&lt;-</span> rand_point_df <span class="sc">|&gt;</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)) <span class="sc">+</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># xlim(0, 1) + ylim(0, 1) +</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.05</span>, <span class="fl">1.05</span>),</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.05</span>, <span class="fl">1.05</span>)</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>),</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>)</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>),</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>)</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))</span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>base_point_plot <span class="sc">+</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">yend=</span><span class="sc">-</span><span class="cn">Inf</span></span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth=</span><span class="fl">0.75</span>,</span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype=</span><span class="st">'dashed'</span></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>      <span class="at">xend=</span><span class="sc">-</span><span class="cn">Inf</span></span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth=</span><span class="fl">0.75</span>,</span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype=</span><span class="st">'dashed'</span></span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
-<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vars</span>(label_tex), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>,</span>
-<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">labeller=</span>tex_labeller,</span>
-<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># scales='free_x'</span></span>
-<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>base_point_plot <span class="ot">&lt;-</span> rand_point_df <span class="sc">|&gt;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># xlim(0, 1) + ylim(0, 1) +</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.05</span>, <span class="fl">1.05</span>),</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.05</span>, <span class="fl">1.05</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>),</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>),</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>)</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>base_point_plot <span class="sc">+</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">yend=</span><span class="sc">-</span><span class="cn">Inf</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth=</span><span class="fl">0.5</span>,</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype=</span><span class="st">'dashed'</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">xend=</span><span class="sc">-</span><span class="cn">Inf</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth=</span><span class="fl">0.5</span>,</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype=</span><span class="st">'dashed'</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vars</span>(label_tex_str), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>,</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">labeller=</span>tex_labeller,</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># scales='free_x'</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Four Realizations of the Uniform Point Process"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/random-point-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/random-point-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Test</figcaption>
 </figure>
 </div>
 </div>
@@ -1099,61 +1143,94 @@ Mean = 162.8</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(latex2exp)</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># area_label &lt;- TeX('$A \\subseteq D$')</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># area_prob_label &lt;- TeX('$\\Pr(s \\in A) = \\frac{1}{2}$')</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># point_label &lt;- TeX('$s_0$')</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># point_prob_label &lt;- TeX('$\\Pr(s = s_0) = 0$')</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># base_point_plot +</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_rect(</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     xmin=0.5, xmax=1.0,</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     ymin=0.0, ymax=1.0,</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     fill=cb_palette[1],</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     alpha=0.5</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_point(size=3) +</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_segment(</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     mapping = aes(</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#       yend=-Inf</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">#     ),</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co">#     linewidth=0.75,</span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">#     linetype='dashed'</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_segment(</span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">#     mapping = aes(</span></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co">#       xend=-Inf</span></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="co">#     ),</span></span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="co">#     linewidth=0.75,</span></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co">#     linetype='dashed'</span></span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_text(</span></span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="co">#     x=0.75, y=0.9,</span></span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="co">#     label=area_label,</span></span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="co">#     size=8</span></span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_text(</span></span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="co">#     x=0.75, y=0.7,</span></span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="co">#     label=area_prob_label,</span></span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="co">#     size=6</span></span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_text(</span></span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="co">#     x = 0.75, y=0.3,</span></span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="co">#     label=point_prob_label,</span></span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="co">#     size=6,</span></span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_text(</span></span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="co">#     label=point_label,</span></span>
-<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="co">#     size=6,</span></span>
-<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="co">#     nudge_y = 0.05</span></span>
-<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(latex2exp)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>area_label <span class="ot">&lt;-</span> <span class="fu">TeX</span>(<span class="st">'$A </span><span class="sc">\\</span><span class="st">subseteq D$'</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>area_prob_label <span class="ot">&lt;-</span> <span class="fu">TeX</span>(<span class="st">'$</span><span class="sc">\\</span><span class="st">Pr(s </span><span class="sc">\\</span><span class="st">in A) = </span><span class="sc">\\</span><span class="st">frac{1}{2}$'</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>base_point_plot <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">xmin=</span><span class="fl">0.5</span>, <span class="at">xmax=</span><span class="fl">1.0</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin=</span><span class="fl">0.0</span>, <span class="at">ymax=</span><span class="fl">1.0</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span>cb_palette[<span class="dv">1</span>],</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span><span class="fl">0.5</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="fl">0.5</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="sc">-</span><span class="cn">Inf</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">yend=</span><span class="cn">Inf</span>,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype=</span><span class="st">"dashed"</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vars</span>(label_tex_str), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>,</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">labeller=</span>tex_labeller,</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># scales='free_x'</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="fl">0.75</span>, <span class="at">y=</span><span class="fl">0.9</span>,</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">label=</span>area_label,</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="dv">4</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="fl">0.75</span>, <span class="at">y=</span><span class="fl">0.7</span>,</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">label=</span>area_prob_label,</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">2.5</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># x = 0.75, y=0.3,</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label=</span>point_prob_tex),</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># label=point_prob_label,</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="dv">3</span>,</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_y =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_x =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">parse =</span> <span class="cn">TRUE</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label=</span>point_tex),</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="dv">4</span>,</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_x =</span> <span class="sc">-</span><span class="fl">0.09</span>,</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_y =</span> <span class="fl">0.06</span>,</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">parse =</span> <span class="cn">TRUE</span></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Point vs. Area Probabilities"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/area-probabilities-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>This notion, that we can only meaningfully ask about the probability of a point <strong>falling within some area</strong>, is key to why the next model (which is in fact the “intuitive” model from earlier) fails as a workable null model for spatial data science.</p>
 </section>
 <section id="model-2-binomial-point-process" class="level3">
 <h3 class="anchored" data-anchor-id="model-2-binomial-point-process">Model 2: Binomial Point Process</h3>
-<p>Now, if we wanted to generate <strong>more than one</strong> point, our next guess might be to start by <strong>choosing a number of points <span class="math inline">\(N\)</span></strong>, and then <strong>generating coordinates for each of the <span class="math inline">\(N\)</span> points uniformly</strong> within <span class="math inline">\(D\)</span>… Does that sound familiar? That is exactly the “intuitive” null model we came up with above, as a way of testing the “randomness” (as opposed to “clustered-ness” or “regular-ness”) of some observed collection of points!</p>
-<p>A collection of points generated with this method looks as follows</p>
+<p>Now, if we want to develop a process which can generate <strong>more than one</strong> point, a natural approach might be to just run the above process <span class="math inline">\(N\)</span> times. That is, we might <strong>fix a number of points <span class="math inline">\(N\)</span></strong> in advance, and then <strong>generate coordinates for each of the <span class="math inline">\(N\)</span> points uniformly</strong> within <span class="math inline">\(D\)</span>… Does that sound familiar? That is exactly the “intuitive” null model we came up with above, as a way of testing the “randomness” (as opposed to “clustered-ness” or “regular-ness”) of some observed collection of points!</p>
+<p>The following figure generates four point patterns using this process, with <span class="math inline">\(N\)</span> set to be <span class="math inline">\(60\)</span>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>binom_ppp <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoint</span>(<span class="dv">60</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(binom_ppp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-binom" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-binom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-binom-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-binom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Four individual <strong>realizations</strong> of the <strong>Binomial Point Process</strong> described in this section
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Why is it called the <strong>Binomial</strong> Point Process? Recall our above intuition, that we can <strong>only obtain meaningful probabilities</strong> if we ask about the likelihood of <strong>points falling within areas</strong>. This means that any probabilistic point model where points are generated within a continuous space <span class="math inline">\(D\)</span> must provide answers to the question “Given some area <span class="math inline">\(A \subseteq D\)</span>, What is the probability that a point appears in <span class="math inline">\(A\)</span>?” So, if we ask this question after running our <strong>Uniform Point Process</strong> from earlier a bunch of times (producing point patterns like those plotted in <a href="#fig-binom" class="quarto-xref">Figure&nbsp;1</a>) fixing some region <span class="math inline">\(A\)</span>, we end up with the <strong>Binomial PDF</strong>:</p>
+<p><span class="math display">\[
+\Pr(\mathbf{s} \in A) = \binom{N}{k}p^{k}(1-p)^{N-k}
+\]</span></p>
 </section>
 </section>
 <section id="part-4-saved-by-the-poisson-distribution" class="level2">
