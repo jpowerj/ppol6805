@@ -548,7 +548,15 @@ window.Quarto = {
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#part-1-the-null-model-from-introductory-statistics" id="toc-part-1-the-null-model-from-introductory-statistics" class="nav-link" data-scroll-target="#part-1-the-null-model-from-introductory-statistics">Part 1: The Null Model from Introductory Statistics</a></li>
   <li><a href="#part-2-naïvely-generalizing-to-the-spatial-statistical-setting" id="toc-part-2-naïvely-generalizing-to-the-spatial-statistical-setting" class="nav-link" data-scroll-target="#part-2-naïvely-generalizing-to-the-spatial-statistical-setting">Part 2: “Naïvely” Generalizing to the Spatial-Statistical Setting</a></li>
-  <li><a href="#part-3-saved-by-the-poisson-distribution" id="toc-part-3-saved-by-the-poisson-distribution" class="nav-link" data-scroll-target="#part-3-saved-by-the-poisson-distribution">Part 3: Saved by the Poisson Distribution!</a></li>
+  <li><a href="#part-3-what-kinds-of-spatial-randomness-do-we-want-to-model" id="toc-part-3-what-kinds-of-spatial-randomness-do-we-want-to-model" class="nav-link" data-scroll-target="#part-3-what-kinds-of-spatial-randomness-do-we-want-to-model">Part 3: What Kind(s) of Spatial Randomness Do We Want to Model?</a>
+  <ul class="collapse">
+  <li><a href="#model-1-uniform-point-process" id="toc-model-1-uniform-point-process" class="nav-link" data-scroll-target="#model-1-uniform-point-process">Model 1: Uniform Point Process</a></li>
+  <li><a href="#model-2-binomial-point-process" id="toc-model-2-binomial-point-process" class="nav-link" data-scroll-target="#model-2-binomial-point-process">Model 2: Binomial Point Process</a></li>
+  </ul></li>
+  <li><a href="#part-4-saved-by-the-poisson-distribution" id="toc-part-4-saved-by-the-poisson-distribution" class="nav-link" data-scroll-target="#part-4-saved-by-the-poisson-distribution">Part 4: Saved by the Poisson Distribution!</a>
+  <ul class="collapse">
+  <li><a href="#model-3-poisson-point-process" id="toc-model-3-poisson-point-process" class="nav-link" data-scroll-target="#model-3-poisson-point-process">Model 3: Poisson Point Process</a></li>
+  </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/writeups/why-poisson/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -604,8 +612,9 @@ window.Quarto = {
 <p>The reason we worry so much about the “proper” null model to use when we want to test <strong>spatial</strong> hypotheses (and the reason for creating a full-on Writeup about it), is that certain intuitions we may have developed in our standard (non-spatial) statistics courses fail to <strong>generalize</strong> easily to our current two-dimensional <strong>spatial</strong> setting! So, let’s:</p>
 <ol type="1">
 <li>Start by looking at what may be in our heads from these earlier classes when we hear the term “null model” (<a href="#part-1-the-null-model-from-introductory-statistics">Part 1</a>), then</li>
-<li>Describe the trouble we run into if we try to haphazardly take the one-dimensional statistical notion of <strong>independent and identically distributed (i.i.d.) random variables</strong> and just “lift” it into two dimensions (<a href="#part-2-naïvely-generalizing-to-the-spatial-statistical-setting">Part 2</a>), and finally</li>
-<li>Conclude with the less-rushed version of what I said in class: that the <strong>Poisson Point Process</strong> model “saves us” by avoiding these troubles (<a href="#part-3-saved-by-the-poisson-distribution">Part 3</a>)</li>
+<li>Describe the trouble we run into if we try to haphazardly take the one-dimensional statistical notion of <strong>independent and identically distributed (i.i.d.) random variables</strong> and just “lift” it into two dimensions (<a href="#part-2-naïvely-generalizing-to-the-spatial-statistical-setting">Part 2</a>),</li>
+<li>Start more slowly, building up from the simplest possible point process to see where exactly this naïve approach goes wrong (<a href="#part-3-what-kind(s-of-spatial-randomness-do-we-want-to-model)">Part 3</a>, and finally</li>
+<li>Conclude with the less-rushed version of what I said in class: that the <strong>Poisson Point Process</strong> model “saves us” by avoiding these troubles (<a href="#part-4-saved-by-the-poisson-distribution">Part 4</a>)</li>
 </ol>
 </section>
 <section id="part-1-the-null-model-from-introductory-statistics" class="level2">
@@ -938,14 +947,227 @@ Mean = 162.8</code></pre>
 <li>If we find that the observed autocorrelation value <span class="math inline">\(I_{\text{obs}}\)</span>, calculated with respect to the point pattern we <strong>actually saw</strong>, is sufficiently <strong>different</strong> from the range of <span class="math inline">\(I\)</span> values <span class="math inline">\(\{I_1, I_2, \ldots, I_{999}\)</span>} that we calculated from the <strong>simulated</strong> patterns, we should<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <strong>increase our confidence</strong> in the idea that the <strong>underlying</strong> spatial pattern is indeed one with high autocorrelation (relative to our confidence before carrying out this test)</li>
 <li>If we find that the observed autocorrelation value <span class="math inline">\(I_{\text{obs}}\)</span>, calculated with respect to the point pattern we <strong>actually saw</strong>, is <strong>not</strong> very different from the range of <span class="math inline">\(I\)</span> values <span class="math inline">\(\{I_1, I_2, \ldots, I_{999}\)</span>} that we calculated from the <strong>simulated</strong> patterns, we should <strong>decrease our confidence</strong> in the idea that the <strong>underlying</strong> spatial pattern is indeed one with high autocorrelation (relative to our confidence before carrying out this test)</li>
 </ul>
-<p>So, if we observed (say) <span class="math inline">\(N_{\text{obs}} = 60\)</span> points in some region, and we’re hypothesizing that the <strong>underlying</strong> micro-level process generating these points is one with the property of <strong>high autocorrelation</strong>… our instinct may very reasonably be: Cool! Let’s go generate 999 point patterns, each with <span class="math inline">\(N = 60\)</span> points, but where the points are spread randomly across the same region!</p>
+<p>So, if we observed (say) <span class="math inline">\(N_{\text{obs}} = 60\)</span> points in some region, and we’re hypothesizing that the <strong>underlying</strong> micro-level process generating these points is one with the property of <strong>high autocorrelation</strong>… our instinct may very reasonably be: “Cool! Let’s go generate 999 point patterns, each with <span class="math inline">\(N = 60\)</span> points spread randomly across the same region!”</p>
+<p>There is, unfortunately, a big <strong>red flag</strong> inherent in this approach that we need to train our brains to notice. The issue with this approach, that makes it <strong>inappropriate</strong> as a null model for most spatial data analyses, is <strong>extremely subtle</strong> but <strong>extremely important</strong> as we move forward with our spatial data analysis unit! It boils down to <strong>where exactly we think the “randomness” is happening in the “random spatial process”</strong>.</p>
+<p>To move from the above intuitive-but-deficient approach to the notion of <strong>Complete Spatial Randomness (CSR)</strong> that is the “standard” null model for spatial data, let’s follow Sections 5.2 and 5.3 (pages 128 to 137) of <span class="citation" data-cites="baddeley_spatial_2015">Baddeley, Rubak, and Turner (<a href="#ref-baddeley_spatial_2015" role="doc-biblioref">2015</a>)</span> by moving slowly, starting from the simplest possible point process.</p>
 </section>
-<section id="part-3-saved-by-the-poisson-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-saved-by-the-poisson-distribution">Part 3: Saved by the Poisson Distribution!</h2>
+<section id="part-3-what-kinds-of-spatial-randomness-do-we-want-to-model" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-what-kinds-of-spatial-randomness-do-we-want-to-model">Part 3: What Kind(s) of Spatial Randomness Do We Want to Model?</h2>
+<section id="model-1-uniform-point-process" class="level3">
+<h3 class="anchored" data-anchor-id="model-1-uniform-point-process">Model 1: Uniform Point Process</h3>
+<p>To start, consider the simplest possible point process we can imagine: just taking some 2D shape like a (unit) square and placing a single point randomly within it. If we place our unit square in the first quadrant of the Cartesian plane, then to generate a random point <span class="math inline">\(\mathbf{s}_0\)</span> within this square we literally just need to generate a random <span class="math inline">\(x\)</span> coordinate <span class="math inline">\(X \sim \mathcal{U}[0,1]\)</span> and a random <span class="math inline">\(y\)</span> coordinate <span class="math inline">\(Y \sim \mathcal{U}[0,1]\)</span>, as in the following plot:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(latex2exp)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6808</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>x_coords <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">4</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>y_coords <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">4</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>rand_point_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">index=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x=</span>x_coords,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">y=</span>y_coords</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>rand_point_df <span class="ot">&lt;-</span> rand_point_df <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">label_tex =</span> <span class="fu">paste0</span>(</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'$s_'</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    index,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'$ = ('</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    x,</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">", "</span>,</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">")"</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>rand_point_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">index</th>
+<th style="text-align: right;">x</th>
+<th style="text-align: right;">y</th>
+<th style="text-align: left;">label_tex</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.72</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: left;"><span class="math inline">\(s_1\)</span> = (0.72, 0.1)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.14</td>
+<td style="text-align: right;">0.71</td>
+<td style="text-align: left;"><span class="math inline">\(s_2\)</span> = (0.14, 0.71)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.79</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: left;"><span class="math inline">\(s_3\)</span> = (0.79, 0.49)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.92</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: left;"><span class="math inline">\(s_4\)</span> = (0.92, 0.3)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>appender <span class="ot">&lt;-</span> <span class="cf">function</span>(s) {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">TeX</span>(s))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>tex_labeller <span class="ot">=</span> <span class="fu">as_labeller</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  appender,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">default =</span> label_parsed</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>base_point_plot <span class="ot">&lt;-</span> rand_point_df <span class="sc">|&gt;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># xlim(0, 1) + ylim(0, 1) +</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.05</span>, <span class="fl">1.05</span>),</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.05</span>, <span class="fl">1.05</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>),</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>),</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>)</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>base_point_plot <span class="sc">+</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">yend=</span><span class="sc">-</span><span class="cn">Inf</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth=</span><span class="fl">0.75</span>,</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype=</span><span class="st">'dashed'</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>      <span class="at">xend=</span><span class="sc">-</span><span class="cn">Inf</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth=</span><span class="fl">0.75</span>,</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype=</span><span class="st">'dashed'</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vars</span>(label_tex), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>,</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">labeller=</span>tex_labeller,</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># scales='free_x'</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/random-point-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, if we take this and try to generalize it into a probabilistic model, we should at minimum be able to ask a question like, what’s the probability of getting <strong>this</strong> particular point (or any other point in the unit square, but, we have a specific example above we can work with for concreteness). From <a href="https://jjacobs.me/dsan5100/w04/slides.html#/discrete-vs.-continuous">previous probability and statistics courses</a> you might know that the answer is… zero! When working in <strong>continuous spaces</strong> like the unit square, we actually <strong>can’t compute probabilities for individual, infinitesimally-small points</strong>.</p>
+<p>So, given this limitation, when we are working with probabilities in continuous spaces we employ a simple but powerful “trick” that ends up unlocking the whole world of <strong>continuous probability distributions</strong>: we shift away from thinking about probabilities of <strong>points</strong> and instead think about probabilities of <strong>areas</strong>: unlike the question</p>
+<blockquote class="blockquote">
+<p>“What is the probability that a randomly-generated point <span class="math inline">\(\mathbf{s}\)</span> in <span class="math inline">\(D\)</span> appears at the <strong>exact coordinates</strong> <span class="math inline">\((x,y) \in D\)</span>?”,</p>
+</blockquote>
+<p>which always has the answer 0, we instead ask</p>
+<blockquote class="blockquote">
+<p>“What is the probability that a randomly-generated point <span class="math inline">\(\mathbf{s}\)</span> in <span class="math inline">\(D\)</span> appears within some <strong>area</strong> <span class="math inline">\(A \subseteq D\)</span>?”,</p>
+</blockquote>
+<p>which has a well-formed, meaningful answer! An answer that we can therefore use, for example, to identify <strong>subregions</strong> of <span class="math inline">\(D\)</span> with higher and lower <strong>densities</strong> of points (the thing we’ve been hoping to do all along, since these subregions represent areas with <strong>clusters</strong> of points!)</p>
+<p>For example, the following plot illustrates how we can meaningfully ask the question</p>
+<blockquote class="blockquote">
+<p>“What is the probability that a randomly-generated point in <span class="math inline">\(D\)</span> appears in the <em>right half</em> of <span class="math inline">\(D\)</span>?”,</p>
+</blockquote>
+<p>to obtain the answer <span class="math inline">\(\frac{1}{2}\)</span>, as the <strong>proportion</strong> of the area covered by <span class="math inline">\(A\)</span> to the <strong>total area</strong> of our working domain <span class="math inline">\(D\)</span> (in this case, the total area of the unit square, which is 1).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(latex2exp)</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># area_label &lt;- TeX('$A \\subseteq D$')</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># area_prob_label &lt;- TeX('$\\Pr(s \\in A) = \\frac{1}{2}$')</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># point_label &lt;- TeX('$s_0$')</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># point_prob_label &lt;- TeX('$\\Pr(s = s_0) = 0$')</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># base_point_plot +</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_rect(</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     xmin=0.5, xmax=1.0,</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     ymin=0.0, ymax=1.0,</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     fill=cb_palette[1],</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     alpha=0.5</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_point(size=3) +</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_segment(</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     mapping = aes(</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#       yend=-Inf</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">#     ),</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co">#     linewidth=0.75,</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">#     linetype='dashed'</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_segment(</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">#     mapping = aes(</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co">#       xend=-Inf</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="co">#     ),</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="co">#     linewidth=0.75,</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co">#     linetype='dashed'</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_text(</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="co">#     x=0.75, y=0.9,</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="co">#     label=area_label,</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="co">#     size=8</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_text(</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="co">#     x=0.75, y=0.7,</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="co">#     label=area_prob_label,</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="co">#     size=6</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_text(</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="co">#     x = 0.75, y=0.3,</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="co">#     label=point_prob_label,</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="co">#     size=6,</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_text(</span></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="co">#     label=point_label,</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="co">#     size=6,</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="co">#     nudge_y = 0.05</span></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>This notion, that we can only meaningfully ask about the probability of a point <strong>falling within some area</strong>, is key to why the next model (which is in fact the “intuitive” model from earlier) fails as a workable null model for spatial data science.</p>
+</section>
+<section id="model-2-binomial-point-process" class="level3">
+<h3 class="anchored" data-anchor-id="model-2-binomial-point-process">Model 2: Binomial Point Process</h3>
+<p>Now, if we wanted to generate <strong>more than one</strong> point, our next guess might be to start by <strong>choosing a number of points <span class="math inline">\(N\)</span></strong>, and then <strong>generating coordinates for each of the <span class="math inline">\(N\)</span> points uniformly</strong> within <span class="math inline">\(D\)</span>… Does that sound familiar? That is exactly the “intuitive” null model we came up with above, as a way of testing the “randomness” (as opposed to “clustered-ness” or “regular-ness”) of some observed collection of points!</p>
+<p>A collection of points generated with this method looks as follows</p>
+</section>
+</section>
+<section id="part-4-saved-by-the-poisson-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-saved-by-the-poisson-distribution">Part 4: Saved by the Poisson Distribution!</h2>
+<section id="model-3-poisson-point-process" class="level3">
+<h3 class="anchored" data-anchor-id="model-3-poisson-point-process">Model 3: Poisson Point Process</h3>
+</section>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-baddeley_spatial_2015" class="csl-entry" role="listitem">
+Baddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. <em><a href="https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&amp;dl=1">Spatial <span>Point Patterns</span>: <span>Methodology</span> and <span>Applications</span> with <span>R</span></a></em>. CRC Press.
+</div>
 <div id="ref-jaynes_probability_2002" class="csl-entry" role="listitem">
 Jaynes, Edwin T. 2002. <em><a href="https://www.dropbox.com/scl/fi/duzv66baqi9y7pc37py7m/Probability-Theory-The-Logic-of-Science-E.T.-Jaynes-G.-Larry-Bretthorst-Editor.pdf?rlkey=spqf81ekio420awmsxpl9fvqh&amp;dl=1">Probability <span>Theory</span>: <span>The Logic</span> of <span>Science</span></a></em>. Cambridge University Press.
 </div>

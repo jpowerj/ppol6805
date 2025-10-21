@@ -25,8 +25,9 @@ I fumbled this concept towards the end of the Week 8 lecture, since I was rushin
 The reason we worry so much about the "proper" null model to use when we want to test **spatial** hypotheses (and the reason for creating a full-on Writeup about it), is that certain intuitions we may have developed in our standard (non-spatial) statistics courses fail to **generalize** easily to our current two-dimensional **spatial** setting! So, let's:
 
 1. Start by looking at what may be in our heads from these earlier classes when we hear the term "null model" ([Part 1](#part-1-the-null-model-from-introductory-statistics)), then
-2. Describe the trouble we run into if we try to haphazardly take the one-dimensional statistical notion of **independent and identically distributed (i.i.d.) random variables** and just "lift" it into two dimensions ([Part 2](#part-2-naïvely-generalizing-to-the-spatial-statistical-setting)), and finally
-3. Conclude with the less-rushed version of what I said in class: that the **Poisson Point Process** model "saves us" by avoiding these troubles ([Part 3](#part-3-saved-by-the-poisson-distribution))
+2. Describe the trouble we run into if we try to haphazardly take the one-dimensional statistical notion of **independent and identically distributed (i.i.d.) random variables** and just "lift" it into two dimensions ([Part 2](#part-2-naïvely-generalizing-to-the-spatial-statistical-setting)),
+3. Start more slowly, building up from the simplest possible point process to see where exactly this naïve approach goes wrong ([Part 3](#part-3-what-kind(s-of-spatial-randomness-do-we-want-to-model)), and finally
+4. Conclude with the less-rushed version of what I said in class: that the **Poisson Point Process** model "saves us" by avoiding these troubles ([Part 4](#part-4-saved-by-the-poisson-distribution))
 
 ## Part 1: The Null Model from Introductory Statistics
 
@@ -268,9 +269,178 @@ Once we have these 999 simulated null-world patterns, we can compute a Moran's $
 * If we find that the observed autocorrelation value $I_{\text{obs}}$, calculated with respect to the point pattern we **actually saw**, is sufficiently **different** from the range of $I$ values $\{I_1, I_2, \ldots, I_{999}$} that we calculated from the **simulated** patterns, we should^[The word "should" might feel weird here, as a normative/prescriptive term suddenly appearing in the middle of a descriptive statistical procedure -- in Bayesian statistics, though, we actually have a good reason for using "should": any other rule we might use for evaluating hypotheses is provably "sub-optimal", at least in the narrow sense that we'll make worse predictions in the future. This is true, sadly, even for the "standard" hypothesis test setup you may have learned, where you "reject" or "fail to reject" the null hypothesis: we can do better in terms of future predictions by converting "reject" into "decrease my belief by an amount determined by Bayes' Rule" and "fail to reject" into "increase my belief by an amount determined by Bayes' Rule"! You can find proofs and applications and etc. in @jaynes_probability_2002] **increase our confidence** in the idea that the **underlying** spatial pattern is indeed one with high autocorrelation (relative to our confidence before carrying out this test)
 * If we find that the observed autocorrelation value $I_{\text{obs}}$, calculated with respect to the point pattern we **actually saw**, is **not** very different from the range of $I$ values $\{I_1, I_2, \ldots, I_{999}$} that we calculated from the **simulated** patterns, we should **decrease our confidence** in the idea that the **underlying** spatial pattern is indeed one with high autocorrelation (relative to our confidence before carrying out this test)
 
-So, if we observed (say) $N_{\text{obs}} = 60$ points in some region, and we're hypothesizing that the **underlying** micro-level process generating these points is one with the property of **high autocorrelation**... our instinct may very reasonably be: Cool! Let's go generate 999 point patterns, each with $N = 60$ points, but where the points are spread randomly across the same region!
+So, if we observed (say) $N_{\text{obs}} = 60$ points in some region, and we're hypothesizing that the **underlying** micro-level process generating these points is one with the property of **high autocorrelation**... our instinct may very reasonably be: "Cool! Let's go generate 999 point patterns, each with $N = 60$ points spread randomly across the same region!"
 
-## Part 3: Saved by the Poisson Distribution!
+There is, unfortunately, a big **red flag** inherent in this approach that we need to train our brains to notice. The issue with this approach, that makes it **inappropriate** as a null model for most spatial data analyses, is **extremely subtle** but **extremely important** as we move forward with our spatial data analysis unit! It boils down to **where exactly we think the "randomness" is happening in the "random spatial process"**.
+
+To move from the above intuitive-but-deficient approach to the notion of **Complete Spatial Randomness (CSR)** that is the "standard" null model for spatial data, let's follow Sections 5.2 and 5.3 (pages 128 to 137) of @baddeley_spatial_2015 by moving slowly, starting from the simplest possible point process.
+
+## Part 3: What Kind(s) of Spatial Randomness Do We Want to Model?
+
+### Model 1: Uniform Point Process
+
+To start, consider the simplest possible point process we can imagine: just taking some 2D shape like a (unit) square and placing a single point randomly within it. If we place our unit square in the first quadrant of the Cartesian plane, then to generate a random point $\mathbf{s}_0$ within this square we literally just need to generate a random $x$ coordinate $X \sim \mathcal{U}[0,1]$ and a random $y$ coordinate $Y \sim \mathcal{U}[0,1]$, as in the following plot:
+
+```{r}
+#| label: random-point
+#| code-fold: true
+library(latex2exp)
+set.seed(6808)
+x_coords <- runif(n = 4, min = 0, max = 1) |>
+  round(2)
+y_coords <- runif(n = 4, min = 0, max = 1) |>
+  round(2)
+rand_point_df <- tibble::tibble(
+  index=1:4,
+  x=x_coords,
+  y=y_coords
+)
+rand_point_df <- rand_point_df |> mutate(
+  label_tex = paste0(
+    '$s_',
+    index,
+    '$ = (',
+    x,
+    ", ",
+    y,
+    ")"
+  )
+)
+rand_point_df
+appender <- function(s) {
+  return(TeX(s))
+}
+tex_labeller = as_labeller(
+  appender,
+  default = label_parsed
+) 
+
+base_point_plot <- rand_point_df |>
+  ggplot(aes(x=x, y=y)) +
+  # xlim(0, 1) + ylim(0, 1) +
+  expand_limits(
+    x=c(-0.05, 1.05),
+    y=c(-0.05, 1.05)
+  ) +
+  scale_x_continuous(
+    breaks=c(0, 0.5, 1.0),
+    labels=c(0, 0.5, 1.0)
+  ) +
+  scale_y_continuous(
+    breaks=c(0, 0.5, 1.0),
+    labels=c(0, 0.5, 1.0)
+  ) +
+  theme_classic(base_size=15) +
+  coord_equal() +
+  theme(plot.title=element_text(hjust=0.5))
+base_point_plot +
+  geom_point(size=3) +
+  geom_segment(
+    mapping = aes(
+      yend=-Inf
+    ),
+    linewidth=0.75,
+    linetype='dashed'
+  ) +
+  geom_segment(
+    mapping = aes(
+      xend=-Inf
+    ),
+    linewidth=0.75,
+    linetype='dashed'
+  ) +
+  facet_wrap(
+    vars(label_tex), nrow=2, ncol=2,
+    labeller=tex_labeller,
+    # scales='free_x'
+  )
+
+```
+
+Now, if we take this and try to generalize it into a probabilistic model, we should at minimum be able to ask a question like, what's the probability of getting **this** particular point (or any other point in the unit square, but, we have a specific example above we can work with for concreteness). From [previous probability and statistics courses](https://jjacobs.me/dsan5100/w04/slides.html#/discrete-vs.-continuous) you might know that the answer is... zero! When working in **continuous spaces** like the unit square, we actually **can't compute probabilities for individual, infinitesimally-small points**.
+
+So, given this limitation, when we are working with probabilities in continuous spaces we employ a simple but powerful "trick" that ends up unlocking the whole world of **continuous probability distributions**: we shift away from thinking about probabilities of **points** and instead think about probabilities of **areas**: unlike the question
+
+> "What is the probability that a randomly-generated point $\mathbf{s}$ in $D$ appears at the **exact coordinates** $(x,y) \in D$?",
+
+which always has the answer 0, we instead ask
+
+> "What is the probability that a randomly-generated point $\mathbf{s}$ in $D$ appears within some **area** $A \subseteq D$?",
+
+which has a well-formed, meaningful answer! An answer that we can therefore use, for example, to identify **subregions** of $D$ with higher and lower **densities** of points (the thing we've been hoping to do all along, since these subregions represent areas with **clusters** of points!)
+
+For example, the following plot illustrates how we can meaningfully ask the question
+
+> "What is the probability that a randomly-generated point in $D$ appears in the *right half* of $D$?",
+
+to obtain the answer $\frac{1}{2}$, as the **proportion** of the area covered by $A$ to the **total area** of our working domain $D$ (in this case, the total area of the unit square, which is 1).
+
+```{r}
+#| label: area-probabilities
+#| code-fold: true
+#| warning: false
+
+
+# library(latex2exp)
+# area_label <- TeX('$A \\subseteq D$')
+# area_prob_label <- TeX('$\\Pr(s \\in A) = \\frac{1}{2}$')
+# point_label <- TeX('$s_0$')
+# point_prob_label <- TeX('$\\Pr(s = s_0) = 0$')
+# base_point_plot +
+#   geom_rect(
+#     xmin=0.5, xmax=1.0,
+#     ymin=0.0, ymax=1.0,
+#     fill=cb_palette[1],
+#     alpha=0.5
+#   ) +
+#   geom_point(size=3) +
+#   geom_segment(
+#     mapping = aes(
+#       yend=-Inf
+#     ),
+#     linewidth=0.75,
+#     linetype='dashed'
+#   ) +
+#   geom_segment(
+#     mapping = aes(
+#       xend=-Inf
+#     ),
+#     linewidth=0.75,
+#     linetype='dashed'
+#   ) +
+#   geom_text(
+#     x=0.75, y=0.9,
+#     label=area_label,
+#     size=8
+#   ) +
+#   geom_text(
+#     x=0.75, y=0.7,
+#     label=area_prob_label,
+#     size=6
+#   ) +
+#   geom_text(
+#     x = 0.75, y=0.3,
+#     label=point_prob_label,
+#     size=6,
+#   ) +
+#   geom_text(
+#     label=point_label,
+#     size=6,
+#     nudge_y = 0.05
+#   )
+```
+
+This notion, that we can only meaningfully ask about the probability of a point **falling within some area**, is key to why the next model (which is in fact the "intuitive" model from earlier) fails as a workable null model for spatial data science.
+
+### Model 2: Binomial Point Process
+
+Now, if we wanted to generate **more than one** point, our next guess might be to start by **choosing a number of points $N$**, and then **generating coordinates for each of the $N$ points uniformly** within $D$... Does that sound familiar? That is exactly the "intuitive" null model we came up with above, as a way of testing the "randomness" (as opposed to "clustered-ness" or "regular-ness") of some observed collection of points!
+
+A collection of points generated with this method looks as follows
+
+## Part 4: Saved by the Poisson Distribution!
+
+### Model 3: Poisson Point Process
 
 ## References
 
