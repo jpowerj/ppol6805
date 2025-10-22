@@ -317,7 +317,7 @@ rand_point_df <- rand_point_df |> mutate(
 )
 rand_point_df$point_tex <- as.list(TeX(rand_point_df$point_tex_str))
 rand_point_df$point_prob_tex <- as.list(TeX(rand_point_df$point_prob_tex_str))
-rand_point_df
+rand_point_df |> select(index, x, y, point_tex_str)
 ```
 
 ```{r}
@@ -456,11 +456,44 @@ The following figure generates four point patterns using this process, with $N$ 
 
 ```{r}
 #| label: fig-binom
-#| code-fold: show
+#| code-fold: true
 #| fig-cap: Four individual **realizations** of the **Binomial Point Process** described in this section
+library(tidyverse) |> suppressPackageStartupMessages()
+library(sf) |> suppressPackageStartupMessages()
 library(spatstat) |> suppressPackageStartupMessages()
-binom_ppp <- spatstat.random::rpoint(60)
-plot(binom_ppp)
+window_as_sf <- function(ppp_obj) {
+  window_sf <- sf::st_as_sf(ppp_obj) |>
+    filter(label == "window")
+  return(window_sf)
+}
+points_to_sf <- function(ppp_obj, ppp_index) {
+  points_sf <- sf::st_as_sf(ppp_obj) |>
+    filter(label == "point") |>
+    mutate(sim=ppp_index)
+  return(points_sf)
+}
+set.seed(6805)
+binom_ppp <- spatstat.random::rpoint(60, nsim=4)
+win_sf <- window_as_sf(binom_ppp[[1]])
+# points_sf_list <- lapply(binom_ppp, points_to_sf)
+points_sf_list <- imap(
+  binom_ppp,
+  \(x, idx) points_to_sf(x, idx)
+)
+points_sf <- bind_rows(points_sf_list)
+ggplot() +
+  geom_sf(
+    data=win_sf
+  ) +
+  geom_sf(
+    data=points_sf,
+    size=1.5
+  ) +
+  theme_classic() +
+  facet_wrap(
+    vars(sim),
+    nrow=2, ncol=2
+  )
 ```
 
 Why is it called the **Binomial** Point Process? Recall our above intuition, that we can **only obtain meaningful probabilities** if we ask about the likelihood of **points falling within areas**. This means that any probabilistic point model where points are generated within a continuous space $D$ must provide answers to the question "Given some area $A \subseteq D$, What is the probability that a point appears in $A$?" So, if we ask this question after running our **Uniform Point Process** from earlier a bunch of times (producing point patterns like those plotted in @fig-binom) fixing some region $A$, we end up with the **Binomial PDF**:
@@ -469,9 +502,124 @@ $$
 \Pr(\mathbf{s} \in A) = \binom{N}{k}p^{k}(1-p)^{N-k}
 $$
 
+For visual intuition of why we arrive at this formula, we can re-run the process four times as we did above, but this time consider asking the question of **how many points** we expect to see within the **shaded (orange) region** $A$:
+
+```{r}
+library(sf) |> suppressPackageStartupMessages()
+cent_df <- tibble::tribble(
+  ~x, ~y, ~r,
+  0.5, 0.7, 0.225,
+  0.25, 0.5, 0.15,
+)
+cent_sf <- sf::st_as_sf(
+  cent_df,
+  coords=c('x','y')
+)
+buf_sf <- sf::st_buffer(cent_sf, dist=cent_sf$r)
+union_sf <- sf::st_union(buf_sf)
+hull_sf <- sf::st_convex_hull(union_sf)
+print(sf::st_area(hull_sf))
+ggplot() +
+  geom_sf(data=hull_sf) +
+  xlim(0, 1) + ylim(0, 1) +
+  theme_classic()
+```
+
+```{r}
+#| label: fig-binom-region
+#| code-fold: true
+#| fig-cap: The same four realizations of the Binary Point Process in @fig-binom, but where the goal is now to model the probability (for each $k$ between 0 and 60) that exactly $k$ out of the $N$ generated points lie within the shaded subregion $A$. The mathematical formula for this probability turns out to be precisely the **probability mass function** (pmf) of the **Binomial distribution**, $\Pr(K = k) = \binom{N}{k}p^k(1-p)^{N-k}$.<br><br>Intuitively, since the area of $A$ is about $0.238$, while the area of $D$ is $1$, the probability that a randomly (uniformly) generated point within $D$ will fall within $A$ is $p = \frac{|A|}{|D|} = \frac{0.238}{1} = 0.238$, which thus serves as our value for $p$ in this binomial pmf. This linkage with the Binomial distribution also means that we expect $\mathbb{E}[K] = Np = N \cdot \frac{|A|}{|D|}$ points to lie within $A$. Since $N = 60$ here, we expect $60 \cdot \frac{0.238}{1} \approx 14.28$ points within this particular shaded region.
+library(tidyverse) |> suppressPackageStartupMessages()
+# For drawing circles
+library(ggforce) |> suppressPackageStartupMessages()
+library(sf) |> suppressPackageStartupMessages()
+library(spatstat) |> suppressPackageStartupMessages()
+window_as_sf <- function(ppp_obj) {
+  window_sf <- sf::st_as_sf(ppp_obj) |>
+    filter(label == "window")
+  return(window_sf)
+}
+points_to_sf <- function(ppp_obj, ppp_index) {
+  points_sf <- sf::st_as_sf(ppp_obj) |>
+    filter(label == "point") |>
+    mutate(sim=ppp_index)
+  return(points_sf)
+}
+set.seed(6805)
+binom_ppp <- spatstat.random::rpoint(60, nsim=4)
+win_sf <- window_as_sf(binom_ppp[[1]])
+# points_sf_list <- lapply(binom_ppp, points_to_sf)
+points_sf_list <- imap(
+  binom_ppp,
+  \(x, idx) points_to_sf(x, idx)
+)
+points_sf <- bind_rows(points_sf_list)
+ggplot() +
+  # Window
+  geom_sf(
+    data=win_sf
+  ) +
+  # Shaded region
+  geom_sf(
+    data=hull_sf,
+    fill=cb_palette[1],
+    alpha=0.5,
+    linewidth=1
+  ) +
+  geom_sf(
+    data=points_sf,
+    size=1.5
+  ) +
+  theme_classic() +
+  facet_wrap(
+    vars(sim),
+    nrow=2, ncol=2
+  )
+```
+
+This is **almost** what we want, in order to have a null model for 2D **spatial** data that mirrors the null model for "1D" data we saw above in [Part 1](#part-1-the-null-model-from-introductory-statistics).
+
+However, there is one thing wrong with this Binomial Point Process model, which we didn't encounter with the Normal distribution above: namely, that for the points-appearing-in-areas-probabilities to be **completely random**, we need the property that
+
+> For any two disjoint regions $R_1 \subseteq D$ and $R_2 \subseteq D$, the probability $\Pr(K_R = k)$ that we're aiming to model -- in words, the probability that $k$ points appear in region $R$ -- should be **independent!**
+
+If we rephrase this to focus on what "independence" means for Random Variables: learning that there are $k_1$ points in a region $R_1$ (that is, learning that the random variable $K_1$ has been realized as the integer $k_1$) should **not give us any information** about how many points are in $R_2$.
+
+But, unfortunately for us, we only need to pick one subregion $R$ of $D$ to immediately see why the Binomial Point Process **violates** this independence property:
+
+> If we learn that there are $k_1$ points in a subregion $R_1$, we actually immediately learn something about another subregion: $D \setminus R_1$, the remaining portion of $D$ that is **not** within $R_1$!
+
+Using our grey square $D$ and orange blob region $A$ from above, for example, if we learn (for a given realization) that **50 of the 60 total points** are contained within the orange-shaded region, then we've actually immediately learned with certainty that there are **exactly 10 points** in the region **outside of** $A$!
+
+What we'd really like, for a model of **random** and **independent** appearances of events (as spatial points within a larger domain $D$), is a model with the property that learning the number of points in one portion of the domain does **not** provide any information about the number of points in other portions. Is this even possible? Are we perhaps doomed by some fact of geometry, so that any point process we can think of will have this dependence property? The answer, thankfully, is **no!** We **can** come up with a point process which, though it *looks* similar to the Binomial Point Process at first glance, in fact **does** satisfy the independence property we are looking for. And that magical point process is the **Poisson Point Process** 🥳
+
+::: {.callout-warning title="Quick But Important Disclaimer: The 'Right' Null Model for *What*?"}
+
+Here, now that we see the main issue with the **Binomial** Point Process, and before we move on to its resolution via the Poisson distribution, it's important to note one "corner case":
+
+If the phenomenon you're trying to model **actually does involve exactly $N$ points moving around in an enclosed space** -- meaning, you have a case where no matter how many time the process is run, you always end up with $N$ points (e.g., a 1-meter-by-1-meter box where rats are trapped and each realization is a measurement of the rats' positions after $t$ seconds) -- then the Binomial Point Process **is** the proper null model!
+
+However, excepting this very specific case, the **Poisson** Point Process is almost always the null model you want to use, for reasons described in the next section! (e.g., if the 1-by-1 rat-box example is modified so that rats can **leave** or **enter** the box between one realization and the next, then you're back to a case where the PPP is likely the null model you want to use)
+
+:::
+
 ## Part 4: Saved by the Poisson Distribution!
 
+The gist, the core property that illustrates why the Poisson Point Process magically "fixes" the issues with the Binomial Point Process mentioned above, is simply the following:
+
+> The probability of finding $k$ points within a chosen region $R$ will now be modeled as a random process that **depends only on the area of $R$ relative to the larger domain $D$**.
+
+This approach, at first, probably sounds horrifically complex -- at a high level it feels like we'd have to figure out some fancy fractal-based way to "scale" the Binomial distribution probabilities for randomly-chosen regions $R$ up and down based on the ratio of $|R|$ to $|D|$.
+
+In fact, however, this [French guy](https://en.wikipedia.org/wiki/Sim%C3%A9on_Denis_Poisson) already wrestled with precisely this issue in the early 1800s, and worked out the scary math "under the hood" so that today we get to just use the resulting distribution that's named after him, the **Poisson Distribution!**
+
 ### Model 3: Poisson Point Process
+
+The intuition for the Poisson **distribution** (before we apply it to come up with a point process) is just that, as you may have learned in an earlier stats class, it is a probabilistic model of the **number of "successes" in an extremely large number of independent trials, each of which has an extremely low success probability**.
+
+In other words (as you may have learned in a slightly-more-intense statistics class), the Poisson distribution can be thought of as the **limiting distribution** that you get if you start with the **Binomial** distribution but take the limit as the **number of trials** $N \rightarrow \infty$ while simultaneously the **probability of success** $p \rightarrow 0$. Why does this help us model subregions of $D$ independently from one another? The following diagram, from page 134 of @baddeley_spatial_2015, visualizes how an "independent set of trials with rare success probability" might appear in a spatial setting: if we treat each **infinitesimally-small grid cell** here as a "trial", with a $1$ in the grid cell in the very rare case that an event occurs within that cell, and a $0$ otherwise, the Poisson distribution then "emerges" as **the** probabilistic model of the **number of points $k$ appearing in $R$** if we know that **events happen in $R$ at some rate $\lambda$**. In particular, since we're modeling the **random appearance** of points in a region $R$ as being **proportional to the area of $R$**, we arrive at the **Poisson Point Process** by setting the rate $\lambda$ to be the proportion of $D$ occupied by $R$: $\lambda = \frac{|R|}{|D|}$!
+
+![](images/poisson_caption.svg){fig-align="center"}
 
 ## References
 
