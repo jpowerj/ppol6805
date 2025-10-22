@@ -617,9 +617,21 @@ In fact, however, this [French guy](https://en.wikipedia.org/wiki/Sim%C3%A9on_De
 
 The intuition for the Poisson **distribution** (before we apply it to come up with a point process) is just that, as you may have learned in an earlier stats class, it is a probabilistic model of the **number of "successes" in an extremely large number of independent trials, each of which has an extremely low success probability**.
 
-In other words (as you may have learned in a slightly-more-intense statistics class), the Poisson distribution can be thought of as the **limiting distribution** that you get if you start with the **Binomial** distribution but take the limit as the **number of trials** $N \rightarrow \infty$ while simultaneously the **probability of success** $p \rightarrow 0$. Why does this help us model subregions of $D$ independently from one another? The following diagram, from page 134 of @baddeley_spatial_2015, visualizes how an "independent set of trials with rare success probability" might appear in a spatial setting: if we treat each **infinitesimally-small grid cell** here as a "trial", with a $1$ in the grid cell in the very rare case that an event occurs within that cell, and a $0$ otherwise, the Poisson distribution then "emerges" as **the** probabilistic model of the **number of points $k$ appearing in $R$** if we know that **events happen in $R$ at some rate $\lambda$**. In particular, since we're modeling the **random appearance** of points in a region $R$ as being **proportional to the area of $R$**, we arrive at the **Poisson Point Process** by setting the rate $\lambda$ to be the proportion of $D$ occupied by $R$: $\lambda = \frac{|R|}{|D|}$!
+In other words (as you may have learned in a slightly-more-intense statistics class), the Poisson distribution can be thought of as the **limiting distribution** that you get if you start with the **Binomial** distribution but take the limit as the **number of trials** $N \rightarrow \infty$ while simultaneously the **probability of success** $p \rightarrow 0$.
+
+Why does this help us model subregions of $D$ independently from one another? The following diagram, from page 134 of @baddeley_spatial_2015, visualizes how an "independent set of trials with rare success probability" might appear in a spatial setting: if we treat each **infinitesimally-small grid cell** here as a "trial", with a $1$ in the grid cell in the very rare case that an event occurs within that cell, and a $0$ otherwise, the Poisson distribution then "emerges" as **the** probabilistic model of the **number of points $k$ appearing in $R$** if we know that **events happen in $R$ at some rate $\lambda$**. In particular, since we're modeling the **random appearance** of points in a region $R$ as being **proportional to the area of $R$**, we arrive at the **Poisson Point Process** by setting the rate $\lambda$ to be the portion of $D$'s total area that is taken up by $R$: $\lambda = \frac{|R|}{|D|}$!
 
 ![](images/poisson_caption.svg){fig-align="center"}
+
+So, equipped with this new ability that the Poisson distribution gives us -- the ability to model **the rate of event occurrence within a region $R$** as being **proportional to the area of $R$** -- we can now use the `rpoispp()` function from `spatstat` to implement the (in most cases) "appropriate" null model for a spatial process, wherein events (points) occur in a given area in a manner that is independent of the occurrence of events in other areas!
+
+```{r}
+#| label: poisson-realizations
+# library(spatstat) |> suppressPackageStartupMessages()
+# pois_ppp <- spatstat.random::rpoispp(60)
+# pois_win_sf <- window_as_sf(pois_ppp)
+# pois_points_sf <- points_as_sf()
+```
 
 ## References
 

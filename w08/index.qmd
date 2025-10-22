@@ -1252,6 +1252,7 @@ pois_sf |> head(4)
 ```{r}
 #| label: converted-sf-plot
 #| code-fold: true
+library(mdthemes) |> suppressPackageStartupMessages()
 pois_sf |> ggplot() +
   geom_sf(data=pois_sf |> filter(label=="window"), aes(fill='grey')) +
   geom_sf(data=pois_sf |> filter(label != "window"), aes(color='black')) +

@@ -46,11 +46,11 @@ weeks:
     date-md: "Oct 15"
   - weeknum: 9
     title: "Evaluating Spatial Hypotheses I: Point Data"
-    footer: "PPOL 6805 Week 9: Evaluating Point Data Hypotheses"
+    footer: "PPOL 6805 Week 9: Evaluating Point Hypotheses"
     date-md: "Oct 22"
   - weeknum: 10
     title: "Evaluating Spatial Hypotheses II: Areal Data"
-    footer: "PPOL 6805 Week 10: Areal Data Hypotheses"
+    footer: "PPOL 6805 Week 10: Evaluating Areal Hypotheses"
     date-md: "Oct 29"
   - weeknum: 11
     title: "In-Class Midterm"
@@ -84,7 +84,7 @@ hw:
     due-date-md: Oct 8
     due-date: "Wednesday, October 8"
   - hw-num: 3
-    title: "Autocorrelation and Clustering"
+    title: "Autocorrelation, Clustering, and Point Processes"
     pct: 9
     release-date-md: Oct 12
     release-date: "Sunday, October 12"

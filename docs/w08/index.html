@@ -533,7 +533,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-10-21, 10:36:28 PM</em></p>
+<p><em>Updated 2025-10-22, 06:26:51 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -2018,13 +2018,14 @@ window: rectangle = [0, 1] x [0, 1] units</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>pois_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>pois_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label<span class="sc">==</span><span class="st">"window"</span>), <span class="fu">aes</span>(<span class="at">fill=</span><span class="st">'grey'</span>)) <span class="sc">+</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>pois_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">!=</span> <span class="st">"window"</span>), <span class="fu">aes</span>(<span class="at">color=</span><span class="st">'black'</span>)) <span class="sc">+</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">md_theme_classic</span>(<span class="at">base_size=</span><span class="dv">26</span>) <span class="sc">+</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"gray90"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"&lt;span style='font-family: mono'&gt;label == 'window'&lt;/span&gt;"</span>)) <span class="sc">+</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"&lt;span style='font-family: mono'&gt;label == 'point'&lt;/span&gt;"</span>)) <span class="sc">+</span></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"&lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; &amp;rarr; &lt;span style='font-family: mono'&gt;sf&lt;/span&gt; Result"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mdthemes) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>pois_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>pois_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label<span class="sc">==</span><span class="st">"window"</span>), <span class="fu">aes</span>(<span class="at">fill=</span><span class="st">'grey'</span>)) <span class="sc">+</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>pois_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">!=</span> <span class="st">"window"</span>), <span class="fu">aes</span>(<span class="at">color=</span><span class="st">'black'</span>)) <span class="sc">+</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">md_theme_classic</span>(<span class="at">base_size=</span><span class="dv">26</span>) <span class="sc">+</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"gray90"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"&lt;span style='font-family: mono'&gt;label == 'window'&lt;/span&gt;"</span>)) <span class="sc">+</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"&lt;span style='font-family: mono'&gt;label == 'point'&lt;/span&gt;"</span>)) <span class="sc">+</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"&lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; &amp;rarr; &lt;span style='font-family: mono'&gt;sf&lt;/span&gt; Result"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
