@@ -3,17 +3,18 @@ title: "Week 10: {{< var weeks.10.title >}}"
 subtitle: "{{< var course.slides-subtitle >}}"
 author: "{{< var course.author >}}"
 institute: "{{< var course.institute >}}"
-date: "October 30, 2024"
+date: 2025-10-29
 date-format: full
 lecnum: 10
 categories:
   - "Class Sessions"
 bibliography: "../_PPOL6805.bib"
+csl: "../chicago-17-no-url.csl"
 # Shared across formats:
 echo: true
 code-fold: show
-css: "../dsan-globals/jjstyles.css"
 html-math-method: mathjax
+cache: true
 # Format-specific settings:
 format:
   revealjs:
@@ -26,8 +27,8 @@ format:
     link-external-newwindow: true
     footer: "{{< var weeks.10.footer >}}"
     include-in-header:
-      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>"
-    theme: [default]
+      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'><link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css'><link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous'><script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous'></script>"
+    theme: [default, "../dsan-globals/jjquarto.scss"]
     revealjs-plugins:
       - simplemenu
     simplemenu:
@@ -49,13 +50,11 @@ format:
 
 :::
 
-# Roadmap to the Midterm!
+# Roadmap to the Midterm! {.text-80}
 
-* Last Week (**Oct 23**): Evaluating Hypotheses for **Point Data**
-* Today (**Oct 30**): Evaluating Hypotheses for **Areal Data**
-* In-Class Midterm (**Nov 6**): Basically a "mini-homework" on Spatial Data Science unit (topics from HW4 onwards)!
-
-# Point Processes $\rightarrow$ Areal Processes
+* Last Week (**Oct 22**): Evaluating Hypotheses for **Point Data**
+* Today (**Oct 29**): Evaluating Hypotheses for **Areal Data**
+* In-Class Midterm (**Nov 5**): Basically a "mini-homework" on Spatial Data Science unit (same topics as on HW3)!
 
 ::: {.hidden}
 
@@ -73,6 +72,370 @@ library(leaflet) |> suppressPackageStartupMessages()
 
 :::
 
+
+# The Point of All This: Null Models via Base Rates! {data-stack-name="Base Rates"}
+
+## Null Models
+
+* Given an **intensity function**, we can compute a bunch of simulated **point patterns** (**in**homogeneous Poisson Point Process)...
+* How does an **observed** point pattern **differ** from the simulated point patterns?
+
+## Constant Risk Hypothesis: Motivation {.smaller .crunch-title}
+
+* Here is a (fictional) map of flu cases in the US "Midwest"
+* Are people in Chicago and Detroit equally "at risk"?
+
+```{r}
+#| label: midwest-cases-plot
+#| code-fold: true
+library(mapview) |> suppressPackageStartupMessages()
+city_df <- tibble::tribble(
+  ~city, ~lon, ~lat, ~pop,
+  "Chicago", 41.950567516553896, -87.93011127491978, 2746388,
+  "Detroit", 42.45123004999075, -83.18402319217698, 631524
+)
+city_sf <- sf::st_as_sf(
+  city_df,
+  coords = c("lat", "lon"),
+  crs=4326
+)
+city_buf_sf <- city_sf |> sf::st_buffer(20000)
+city_cases_sf <- city_buf_sf |> sf::st_sample(size=rep(10,2)) |> sf::st_as_sf()
+city_cases_sf$city <- "Detroit (10 Cases)"
+city_cases_sf[1:10, 'city'] <- "Chicago (10 Cases)"
+city_cases_sf$sample <- "Flu"
+mapview(city_cases_sf, zcol="city")
+```
+
+## Constant Risk Hypothesis: Base Rates {.smaller .crunch-title}
+
+| | Chicago | Detroit |
+|-|-|-|
+| **Population** | 2,746,388 | 631,524 |
+
+```{r}
+#| label: midwest-pop-plot
+#| code-fold: true
+library(leaflet) |> suppressPackageStartupMessages()
+library(leaflet.extras2) |> suppressPackageStartupMessages()
+city_pop_sf <- city_buf_sf |> sf::st_sample(size=c(16, 4)) |> sf::st_as_sf()
+city_pop_sf$city <- "Detroit"
+city_pop_sf[1:16, 'city'] <- "Chicago"
+city_pop_sf$sample <- "People"
+city_combined_sf <- bind_rows(city_cases_sf, city_pop_sf)
+# mapview(city_combined_sf, zcol="city", marker="sample")
+Flu = makeIcon(
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png",
+    20,
+    20
+)
+People = makeIcon(
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png",
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png",
+  20,
+  20
+)
+
+city_combined_sf$r <- ifelse(city_combined_sf$sample == "Flu", 0, 4)
+city_flu_sf <- city_combined_sf |> filter(sample == "Flu")
+city_ppl_sf <- city_combined_sf |> filter(sample == "People")
+leaflet(city_flu_sf) |>
+  addProviderTiles("CartoDB.Positron") |>
+  addMarkers(data=city_flu_sf, icon = Flu) |>
+  addMarkers(data=city_ppl_sf, icon = People)
+```
+
+## Meaningful Results $\leftrightarrow$ *Comparisons* with Null Model(s) {.crunch-title .title-10 .smaller}
+
+* **Cases** of disease form an intensity function $\lambda(\mathbf{s})$
+* **Controls** form an "ambient" intensity function $\lambda_0(\mathbf{s})$
+* $\implies$ The following model allows us to separate the quantities we **really** care about from the **base rate** information:
+
+    $$
+    \lambda(\mathbf{s}) = \alpha \overbrace{\lambda_0(\mathbf{s})}^{\mathclap{\text{Base Rate}}} \underbrace{\rho(\mathbf{s})}_{\mathclap{\text{Relative Risk}}},
+    $$
+
+    where
+
+    $$
+    \alpha = \frac{\# \text{Cases}}{\# \text{Controls}}
+    $$
+
+* (Remember: **unit** of $\lambda(\mathbf{s})$ is **number of cases**; **not** a probability density!)
+
+## Example from Moraga (2024) {.smaller .crunch-title .crunch-ul .crunch-quarto-figure .text-65}
+
+* [Data](https://tilmandavies.github.io/sparr/reference/pbc.html){target='_blank'}: 761 [primary biliary cirrhosis (PBC) cases](https://pubmed.ncbi.nlm.nih.gov/11731995/){target='_blank'}, 3020 controls, England 1987-94
+
+:::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| label: plot-raw-controls
+#| code-fold: true
+#| crop: true
+#| fig-width: 3
+#| fig-align: center
+library(sparr) |> suppressPackageStartupMessages()
+data(pbc)
+controls <- unmark(pbc[which(pbc$marks == "control"), ])
+controls |> sf::st_as_sf() |> ggplot() +
+  geom_sf() +
+  theme_classic() +
+  labs(title="Controls (Population Sample)")
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: plot-raw-cases
+#| code-fold: true
+#| crop: true
+#| fig-width: 3
+#| fig-align: center
+cases <- unmark(pbc[which(pbc$marks == "case"), ])
+cases |> sf::st_as_sf() |> ggplot() +
+  geom_sf() +
+  theme_classic() +
+  labs(title="PBC Cases")
+```
+
+:::
+::::
+
+## Estimating Comparable Intensity Surfaces {.title-11 .crunch-title .smaller .crunch-details .crunch-p .crunch-ul .crunch-img}
+
+* To ensure comparable **intensity functions**, need a common **bandwidth** value
+* `density()` from `spatstat` makes "smart" choices for this bandwidth, so for now we just **average** the bandwidths estimated for cases and controls:
+
+```{r}
+#| label: mean-density
+#| code-fold: true
+library(sparr)
+data(pbc)
+cases <- unmark(pbc[which(pbc$marks == "case"), ])
+controls <- unmark(pbc[which(pbc$marks == "control"), ])
+bwcases <- attr(density(cases), "sigma")
+bwcontr <- attr(density(controls), "sigma")
+(bw <- (bwcases + bwcontr)/2)
+```
+
+:::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| label: plot-controls-density
+#| fig-width: 3
+#| fig-height: 4
+#| fig-align: center
+int_controls <- density(controls, sigma = bw, eps=0.25)
+plot(int_controls, main = "Control Intensity")
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: plot-cases-density
+#| crop: true
+#| fig-width: 3
+#| fig-height: 4
+#| fig-align: center
+int_cases <- density(cases, sigma = bw, eps=0.25)
+plot(int_cases, main = "Case Intensity")
+```
+
+:::
+::::
+
+## Visualizing Relative Risk Surface {.smaller .crunch-title .crunch-ul}
+
+* All that's left is $\alpha = \# \text{Controls} / \# \text{Cases}$!
+
+```{r}
+#| label: cases-controls-plot
+#| code-fold: true
+#| crop: true
+library(fields)
+(alpha_hat <- cases$n/controls$n)
+x <- int_cases$xcol
+y <- int_cases$yrow
+rr <- t(int_cases$v)/t(alpha_hat * int_controls$v)
+image.plot(x, y, rr, asp = 1)
+title(xlab = "Easting", ylab = "Northing")
+```
+
+# From Exploratory to Confirmatory Data Analysis {data-stack-name="Evaluation" .smaller .title-10 .not-title-slide .crunch-title}
+
+* How do we know whether &uarr; risk around **North Newcastle** due to "chance"? Maybe relative risk is actually constant, and people in Newcastle are just **unlucky**...
+* Thought experiment: Bro hands you a coin. You flip **10 times**. `HHHHHTHHHH`...
+* Coin **may** be biased-towards-`H`, **or** could be **fair** (lots of heads **by chance!**)
+* **Stats**: Compare with **null model!** For fair coin, how **likely** is [9 Heads / 10 Flips]?
+
+:::: {.columns}
+::: {.column width="50%"}
+
+![**Exploratory** Data Analysis: Collecting **evidence**](images/tukey.jpg){fig-align="center" width="80%"}
+
+:::
+::: {.column width="50%"}
+
+![**Confirmatory** Data Analysis: Making **judgements**](images/judgement.jpg){fig-align="center" width="90%"}
+
+:::
+::::
+
+## Null Model: CSR
+
+![Figure from @gimond_introduction_2024](images/IRP_CSR.png){fig-align="center"}
+
+## The *Random Labeling Hypothesis* {.smaller}
+
+<div style="width: 100%;">
+
+* Randomly apply 761 "sick" labels to the 3781 points!
+
+</div>
+
+:::: {.columns}
+::: {.column width="33%"}
+
+```{r}
+#| label: random-labeling
+#| code-fold: true
+#| crop: true
+#| fig-width: 4.8
+#| fig-height: 6
+plot_rlabel <- function(rl_ppp) {
+  rl_win_sf <- window_to_sf(rl_ppp)
+  rl_points_sf <- points_to_sf(rl_ppp) |>
+    rename(
+      type = spatstat.geom..marks.x.
+    )
+  rl_plot <- ggplot() +
+    geom_sf(
+      data=rl_win_sf,
+      alpha=0.3
+    ) +
+    geom_sf(
+      mapping=aes(fill=type, alpha=type),
+      data=rl_points_sf,
+      size=2,
+      # alpha=0.75,
+      shape=21,
+      stroke=0.1,
+      # color='white',
+    ) +
+    # scale_color_manual(
+    #   "Point Type",
+    #   values=c("control"="gray","case"=cb_palette[1])
+    # ) +
+    scale_fill_manual(
+      "Type",
+      values=c("control"="gray","case"=cb_palette[1])
+    ) +
+    scale_alpha_manual(
+      "Type",
+      values=c("control"=0.5, "case"=1.0)
+    ) +
+    theme_classic(base_size=16) +
+    labs(
+      title="NE Britain Disease Cases"
+    )
+  return(rl_plot)
+}
+set.seed(6810)
+rl1_ppp <- rlabel(pbc)
+plot_rlabel(rl1_ppp)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: random-labeling-2
+#| code-fold: true
+#| fig-width: 4.8
+#| fig-height: 6
+set.seed(6811)
+pbc_2 <- rlabel(pbc)
+plot_rlabel(pbc_2)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: random-labeling-3
+#| code-fold: true
+#| fig-width: 4.8
+#| fig-height: 6
+set.seed(6812)
+pbc_3 <- rlabel(pbc)
+plot_rlabel(pbc_3)
+```
+
+:::
+::::
+
+## The *Constant Risk Hypothesis* {.smaller}
+
+* Everyone **equally at risk** of contracting disease, **regardless** of location: $\rho(\mathbf{s}) = 1$
+* In this case: $\lambda_{CR}(\mathbf{s}) = \alpha \lambda_0(\mathbf{s})$
+
+:::: {.columns}
+::: {.column width="33%"}
+
+```{r}
+#| label: monte-carlo-sim
+#| code-fold: true
+#| fig-width: 2.5
+#| crop: true
+pbc_win_sf <- pbc |> sf::st_as_sf() |> filter(label == "window")
+plot_pbc_sim <- function() {
+    pbc_sim <- spatstat.random::rpoispp(
+        lambda = alpha_hat * int_controls
+    )
+    # Separate window and points
+    pbc_sf <- pbc_sim |> sf::st_as_sf()
+    pbc_point_sf <- pbc_sf |> filter(label == "point")
+    pbc_win_sf <- pbc_sf |> filter(label == "window")
+    pbc_plot <- ggplot() +
+      geom_sf(data=pbc_win_sf) +
+      geom_sf(data=pbc_point_sf, size=0.5, alpha=0.5) +
+      theme_classic()
+    return(pbc_plot)
+}
+plot_pbc_sim()
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| code-fold: true
+#| fig-width: 2.5
+#| crop: true
+plot_pbc_sim()
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| code-fold: true
+#| fig-width: 2.5
+#| crop: true
+plot_pbc_sim()
+```
+
+:::
+::::
+
+# Point Processes $\rightarrow$ Areal Processes
+
 * The "Complete" Part of Complete Spatial Randomness (CSR)
 * Bringing **Neighbors** Back In
 * Spatial Regression
@@ -87,12 +450,12 @@ library(leaflet) |> suppressPackageStartupMessages()
 * One way to see **areal** data modeling: we *keep* the Poisson part, but we **no longer observe** the coordinates for the points!
 * So... why is it still helpful for you to have sat through those lectures on Point Processes? Two reasons...
 
-## (1) Areal Patterns = Aggregated Point Patterns {.title-09}
+## (1) Areal Patterns = Aggregated Point Patterns {.title-09 .crunch-title .text-90}
 
 * One application, mentioned last week: **areal-weighted interpolation** using actual **models** of how the points are distributed within the area!
-  * Regularly-spaced points is rarely a good "default" model!
-  * Humans, for example, rarely live at perfect evenly-spaced intervals... they form **households**, **villages**, **cities**
-  * Regularly-spaced points (we now know) $\implies$ **negative autocorrelation** $\implies$ typically due to **inhibition process** (competition)
+* Regularly-spaced points is rarely a good "default" model!
+* Humans, for example, rarely live at perfect evenly-spaced intervals... they form **households**, **villages**, **cities**
+* Regularly-spaced points (we now know) $\implies$ **negative autocorrelation** $\implies$ typically due to **inhibition process** (competition)
 
 ## (2) Spatial Scan Statistics {.smaller}
 
@@ -102,24 +465,23 @@ library(leaflet) |> suppressPackageStartupMessages()
 
 ![](images/scan_stat.jpg){fig-align="center"}
 
-## (3) Hierarchical Bayesian Smoothing
+## (3) Hierarchical Bayesian Smoothing {.title-08 .crunch-title .crunch-ul}
 
 * The issue might just be **not enough data** for some areas, while we have an **abundance** of data in nearby areas...
 
 ![From Kramer (2023), [*Spatial Epidemiology*](https://mkram01.github.io/EPI563-SpatialEPI/disease-mapping-iii-introduction-to-fully-bayesian-mapping.html){target='_blank'}](images/bayes_smoothing.png){fig-align="center"}
 
-# Autocorrelation on Networks {data-stack-name="Areal Autocorrelation"}
-
-## Reminder: Weight Matrix Defines "Neighbors"
+## Autocorrelation Reminder: Weight Matrix Defines "Neighbors" {.smaller .crunch-title .title-10}
 
 ![From [Canadian Rockies Exploration Guide](http://www.canadianrockies.net/maps/){target='_blank'}](images/canada_dist.gif){fig-align="center"}
 
-## Choices Available in `spdep`
+## Choices Available in `spdep` {.crunch-title .text-90 .inline-90}
 
-* $w_{ij} = 1$ if $i$ and $j$ "overlap"
+* $w_{ij} = 1$ if $i$ and $j$ "touch"
   * Rook: Overlap is 1 or 2-dimensional
   * Queen: Overlap is 0, 1, or 2-dimensional
 * $w_{ij} = \frac{1}{\text{dist}(i, j)}$
+  * $w(\textsf{Seoul}, \textsf{Incheon})$ > $w(\textsf{Seoul}, \textsf{Busan})$ > $w(\textsf{Seoul}, \textsf{Jeju})$
 * $w_{ij} = 1$ if $dist(i, j) < \overline{D}$
 * $w_{ij} = 1$ for $K$ nearest neighbors
 

@@ -9,7 +9,7 @@
 <meta name="author" content="Jeff Jacobs">
 <meta name="dcterms.date" content="2025-10-16">
 
-<title>Why Poisson Processes are ‘The’ Core Model for Testing Spatial Hypotheses – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
+<title>Why Poisson Processes are ‘The’ Null Model for Testing Spatial Hypotheses – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -536,7 +536,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-10-22, 06:26:51 PM</em></p>
+<p><em>Updated 2025-10-29, 06:27:24 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -550,12 +550,12 @@ window.Quarto = {
   <li><a href="#part-2-naïvely-generalizing-to-the-spatial-statistical-setting" id="toc-part-2-naïvely-generalizing-to-the-spatial-statistical-setting" class="nav-link" data-scroll-target="#part-2-naïvely-generalizing-to-the-spatial-statistical-setting">Part 2: “Naïvely” Generalizing to the Spatial-Statistical Setting</a></li>
   <li><a href="#part-3-what-kinds-of-spatial-randomness-do-we-want-to-model" id="toc-part-3-what-kinds-of-spatial-randomness-do-we-want-to-model" class="nav-link" data-scroll-target="#part-3-what-kinds-of-spatial-randomness-do-we-want-to-model">Part 3: What Kind(s) of Spatial Randomness Do We Want to Model?</a>
   <ul class="collapse">
-  <li><a href="#model-1-uniform-point-process" id="toc-model-1-uniform-point-process" class="nav-link" data-scroll-target="#model-1-uniform-point-process">Model 1: Uniform Point Process</a></li>
-  <li><a href="#model-2-binomial-point-process" id="toc-model-2-binomial-point-process" class="nav-link" data-scroll-target="#model-2-binomial-point-process">Model 2: Binomial Point Process</a></li>
+  <li><a href="#model-uniform-point-process" id="toc-model-uniform-point-process" class="nav-link" data-scroll-target="#model-uniform-point-process">Model 😐: Uniform Point Process</a></li>
+  <li><a href="#model-binomial-point-process" id="toc-model-binomial-point-process" class="nav-link" data-scroll-target="#model-binomial-point-process">Model 🤔: Binomial Point Process</a></li>
   </ul></li>
   <li><a href="#part-4-saved-by-the-poisson-distribution" id="toc-part-4-saved-by-the-poisson-distribution" class="nav-link" data-scroll-target="#part-4-saved-by-the-poisson-distribution">Part 4: Saved by the Poisson Distribution!</a>
   <ul class="collapse">
-  <li><a href="#model-3-poisson-point-process" id="toc-model-3-poisson-point-process" class="nav-link" data-scroll-target="#model-3-poisson-point-process">Model 3: Poisson Point Process</a></li>
+  <li><a href="#model-poisson-point-process" id="toc-model-poisson-point-process" class="nav-link" data-scroll-target="#model-poisson-point-process">Model 🤩: Poisson Point Process</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -567,7 +567,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Why Poisson Processes are ‘The’ Core Model for Testing Spatial Hypotheses</h1>
+<h1 class="title">Why Poisson Processes are ‘The’ Null Model for Testing Spatial Hypotheses</h1>
   <div class="quarto-categories">
     <div class="quarto-category">Extra Writeups</div>
   </div>
@@ -953,8 +953,8 @@ Mean = 162.8</code></pre>
 </section>
 <section id="part-3-what-kinds-of-spatial-randomness-do-we-want-to-model" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-what-kinds-of-spatial-randomness-do-we-want-to-model">Part 3: What Kind(s) of Spatial Randomness Do We Want to Model?</h2>
-<section id="model-1-uniform-point-process" class="level3">
-<h3 class="anchored" data-anchor-id="model-1-uniform-point-process">Model 1: Uniform Point Process</h3>
+<section id="model-uniform-point-process" class="level3">
+<h3 class="anchored" data-anchor-id="model-uniform-point-process">Model 😐: Uniform Point Process</h3>
 <p>To start, consider the simplest possible point process we can imagine: just taking some 2D shape like a (unit) square and placing a single point randomly within it. If we place our unit square in the first quadrant of the Cartesian plane, then to generate a random point <span class="math inline">\(\mathbf{s}_0\)</span> within this square we literally just need to generate a random <span class="math inline">\(x\)</span> coordinate <span class="math inline">\(X \sim \mathcal{U}[0,1]\)</span> and a random <span class="math inline">\(y\)</span> coordinate <span class="math inline">\(Y \sim \mathcal{U}[0,1]\)</span>, as in the following plot:</p>
 <div class="cell">
 <details class="code-fold">
@@ -1173,8 +1173,8 @@ Mean = 162.8</code></pre>
 </div>
 <p>This notion, that we can only meaningfully ask about the probability of a point <strong>falling within some area</strong>, is key to why the next model (which is in fact the “intuitive” model from earlier) fails as a workable null model for spatial data science.</p>
 </section>
-<section id="model-2-binomial-point-process" class="level3">
-<h3 class="anchored" data-anchor-id="model-2-binomial-point-process">Model 2: Binomial Point Process</h3>
+<section id="model-binomial-point-process" class="level3">
+<h3 class="anchored" data-anchor-id="model-binomial-point-process">Model 🤔: Binomial Point Process</h3>
 <p>Now, if we want to develop a process which can generate <strong>more than one</strong> point, a natural approach might be to just run the above process <span class="math inline">\(N\)</span> times. That is, we might <strong>fix a number of points <span class="math inline">\(N\)</span></strong> in advance, and then <strong>generate coordinates for each of the <span class="math inline">\(N\)</span> points uniformly</strong> within <span class="math inline">\(D\)</span>… Does that sound familiar? That is exactly the “intuitive” null model we came up with above, as a way of testing the “randomness” (as opposed to “clustered-ness” or “regular-ness”) of some observed collection of points!</p>
 <p>The following figure generates four point patterns using this process, with <span class="math inline">\(N\)</span> set to be <span class="math inline">\(60\)</span>:</p>
 <div class="cell">
@@ -1183,39 +1183,62 @@ Mean = 162.8</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>window_as_sf <span class="ot">&lt;-</span> <span class="cf">function</span>(ppp_obj) {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>window_to_sf <span class="ot">&lt;-</span> <span class="cf">function</span>(ppp_obj) {</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  window_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(ppp_obj) <span class="sc">|&gt;</span></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"window"</span>)</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(window_sf)</span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>points_to_sf <span class="ot">&lt;-</span> <span class="cf">function</span>(ppp_obj, ppp_index) {</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>points_to_sf <span class="ot">&lt;-</span> <span class="cf">function</span>(ppp_obj) {</span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  points_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(ppp_obj) <span class="sc">|&gt;</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"point"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">sim=</span>ppp_index)</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(points_sf)</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>binom_ppp <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoint</span>(<span class="dv">60</span>, <span class="at">nsim=</span><span class="dv">4</span>)</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>win_sf <span class="ot">&lt;-</span> <span class="fu">window_as_sf</span>(binom_ppp[[<span class="dv">1</span>]])</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co"># points_sf_list &lt;- lapply(binom_ppp, points_to_sf)</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>points_sf_list <span class="ot">&lt;-</span> <span class="fu">imap</span>(</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  binom_ppp,</span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  \(x, idx) <span class="fu">points_to_sf</span>(x, idx)</span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>points_sf <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(points_sf_list)</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>win_sf</span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>points_sf,</span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">1.5</span></span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vars</span>(sim),</span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span></span>
-<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"point"</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(points_sf)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>sim_points_to_sf <span class="ot">&lt;-</span> <span class="cf">function</span>(ppp_obj, sim_index, <span class="at">label_num_points=</span><span class="cn">FALSE</span>) {</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract points from ppp object</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  points_sim_sf <span class="ot">&lt;-</span> <span class="fu">points_to_sf</span>(ppp_obj)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add *sim_index* as an additional column. If</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># label_num_points is TRUE, also add the number</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># of generated points to the sim column labels</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  sim_label <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    label_num_points,</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(sim_index, <span class="st">": N = "</span>, <span class="fu">nrow</span>(points_sim_sf)),</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    sim_index</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  points_sim_sf <span class="ot">&lt;-</span> points_sim_sf <span class="sc">|&gt;</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">sim_label =</span> sim_label,</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">sim_N =</span> <span class="fu">nrow</span>(points_sim_sf)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(points_sim_sf)</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>sim_list_points_to_sf <span class="ot">&lt;-</span> <span class="cf">function</span>(ppp_list_obj, <span class="at">label_num_points=</span><span class="cn">FALSE</span>) {</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># This produces a *list* of sf objects</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>  points_sf_list <span class="ot">&lt;-</span> <span class="fu">imap</span>(</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    ppp_list_obj,</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    \(x, idx) <span class="fu">sim_points_to_sf</span>(x, idx, label_num_points)</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># And this concatenates the list elements (by row)</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># together to produce a single combined sf object</span></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>  all_points_sf <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(points_sf_list)</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(all_points_sf)</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>binom_ppp_sims <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoint</span>(<span class="dv">60</span>, <span class="at">nsim=</span><span class="dv">4</span>)</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>win_sf <span class="ot">&lt;-</span> <span class="fu">window_to_sf</span>(binom_ppp_sims[[<span class="dv">1</span>]])</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>points_sf <span class="ot">&lt;-</span> <span class="fu">sim_list_points_to_sf</span>(binom_ppp_sims)</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>win_sf</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>points_sf,</span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">1.5</span></span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vars</span>(sim_label),</span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span></span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-binom" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1234,92 +1257,88 @@ Figure&nbsp;1: Four individual <strong>realizations</strong> of the <strong>Bino
 <p><span class="math display">\[
 \Pr(\mathbf{s} \in A) = \binom{N}{k}p^{k}(1-p)^{N-k}
 \]</span></p>
-<p>For visual intuition of why we arrive at this formula, we can re-run the process four times as we did above, but this time consider asking the question of <strong>how many points</strong> we expect to see within the <strong>shaded (orange) region</strong> <span class="math inline">\(A\)</span>:</p>
+<p>For visual intuition of why we arrive at this formula, we can re-run the process four times as we did above, but this time consider asking the question of <strong>how many points</strong> we expect to see within a specific <strong>shaded (orange) region</strong> <span class="math inline">\(A\)</span>, constructed and visualized on its own in the following figure:</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>cent_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>x, <span class="sc">~</span>y, <span class="sc">~</span>r,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="fl">0.225</span>,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.15</span>,</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>cent_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  cent_df,</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">coords=</span><span class="fu">c</span>(<span class="st">'x'</span>,<span class="st">'y'</span>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>buf_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_buffer</span>(cent_sf, <span class="at">dist=</span>cent_sf<span class="sc">$</span>r)</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>union_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_union</span>(buf_sf)</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>hull_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_convex_hull</span>(union_sf)</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sf<span class="sc">::</span><span class="fu">st_area</span>(hull_sf))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># One circle with large radius at (0.5, 0.7), plus</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># a circle with smaller radius at (0.25, 0.5)</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>cent_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>x, <span class="sc">~</span>y, <span class="sc">~</span>r,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="fl">0.225</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.15</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert from df to sf</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>cent_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  cent_df,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">coords=</span><span class="fu">c</span>(<span class="st">'x'</span>,<span class="st">'y'</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Use st_buffer to "transform" from points to circles</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># with desired radii</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>buf_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_buffer</span>(</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  cent_sf,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist=</span>cent_sf<span class="sc">$</span>r</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the *union* of the two circles</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>union_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_union</span>(buf_sf)</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform into a single combined shape via st_convex_hull</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>hull_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_convex_hull</span>(union_sf)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the area of this final shape</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sf<span class="sc">::</span><span class="fu">st_area</span>(hull_sf))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2381532</code></pre>
 </div>
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>hull_sf) <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># And plot it in the Cartesian plane</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>hull_sf,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span>cb_palette[<span class="dv">1</span>],</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth=</span><span class="dv">1</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span><span class="fl">0.5</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/subregion-area-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>And then overlaid with the points from our Binomial patterns generated earlier:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># For drawing circles</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggforce) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>window_as_sf <span class="ot">&lt;-</span> <span class="cf">function</span>(ppp_obj) {</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  window_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(ppp_obj) <span class="sc">|&gt;</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"window"</span>)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(window_sf)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>points_to_sf <span class="ot">&lt;-</span> <span class="cf">function</span>(ppp_obj, ppp_index) {</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  points_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(ppp_obj) <span class="sc">|&gt;</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"point"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">sim=</span>ppp_index)</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(points_sf)</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>binom_ppp <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoint</span>(<span class="dv">60</span>, <span class="at">nsim=</span><span class="dv">4</span>)</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>win_sf <span class="ot">&lt;-</span> <span class="fu">window_as_sf</span>(binom_ppp[[<span class="dv">1</span>]])</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co"># points_sf_list &lt;- lapply(binom_ppp, points_to_sf)</span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>points_sf_list <span class="ot">&lt;-</span> <span class="fu">imap</span>(</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  binom_ppp,</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  \(x, idx) <span class="fu">points_to_sf</span>(x, idx)</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>points_sf <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(points_sf_list)</span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Window</span></span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>win_sf</span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Shaded region</span></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>hull_sf,</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span>cb_palette[<span class="dv">1</span>],</span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span><span class="fl">0.5</span>,</span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth=</span><span class="dv">1</span></span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>points_sf,</span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">1.5</span></span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vars</span>(sim),</span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span></span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Window</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>win_sf</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Shaded region</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>hull_sf,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span>cb_palette[<span class="dv">1</span>],</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span><span class="fl">0.5</span>,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth=</span><span class="dv">1</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>points_sf,</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">1.5</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vars</span>(sim_label),</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-binom-region" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1371,25 +1390,65 @@ Figure&nbsp;2: The same four realizations of the Binary Point Process in <a href
 </blockquote>
 <p>This approach, at first, probably sounds horrifically complex – at a high level it feels like we’d have to figure out some fancy fractal-based way to “scale” the Binomial distribution probabilities for randomly-chosen regions <span class="math inline">\(R\)</span> up and down based on the ratio of <span class="math inline">\(|R|\)</span> to <span class="math inline">\(|D|\)</span>.</p>
 <p>In fact, however, this <a href="https://en.wikipedia.org/wiki/Sim%C3%A9on_Denis_Poisson">French guy</a> already wrestled with precisely this issue in the early 1800s, and worked out the scary math “under the hood” so that today we get to just use the resulting distribution that’s named after him, the <strong>Poisson Distribution!</strong></p>
-<section id="model-3-poisson-point-process" class="level3">
-<h3 class="anchored" data-anchor-id="model-3-poisson-point-process">Model 3: Poisson Point Process</h3>
+<section id="model-poisson-point-process" class="level3">
+<h3 class="anchored" data-anchor-id="model-poisson-point-process">Model 🤩: Poisson Point Process</h3>
 <p>The intuition for the Poisson <strong>distribution</strong> (before we apply it to come up with a point process) is just that, as you may have learned in an earlier stats class, it is a probabilistic model of the <strong>number of “successes” in an extremely large number of independent trials, each of which has an extremely low success probability</strong>.</p>
 <p>In other words (as you may have learned in a slightly-more-intense statistics class), the Poisson distribution can be thought of as the <strong>limiting distribution</strong> that you get if you start with the <strong>Binomial</strong> distribution but take the limit as the <strong>number of trials</strong> <span class="math inline">\(N \rightarrow \infty\)</span> while simultaneously the <strong>probability of success</strong> <span class="math inline">\(p \rightarrow 0\)</span>.</p>
-<p>Why does this help us model subregions of <span class="math inline">\(D\)</span> independently from one another? The following diagram, from page 134 of <span class="citation" data-cites="baddeley_spatial_2015">Baddeley, Rubak, and Turner (<a href="#ref-baddeley_spatial_2015" role="doc-biblioref">2015</a>)</span>, visualizes how an “independent set of trials with rare success probability” might appear in a spatial setting: if we treat each <strong>infinitesimally-small grid cell</strong> here as a “trial”, with a <span class="math inline">\(1\)</span> in the grid cell in the very rare case that an event occurs within that cell, and a <span class="math inline">\(0\)</span> otherwise, the Poisson distribution then “emerges” as <strong>the</strong> probabilistic model of the <strong>number of points <span class="math inline">\(k\)</span> appearing in <span class="math inline">\(R\)</span></strong> if we know that <strong>events happen in <span class="math inline">\(R\)</span> at some rate <span class="math inline">\(\lambda\)</span></strong>. In particular, since we’re modeling the <strong>random appearance</strong> of points in a region <span class="math inline">\(R\)</span> as being <strong>proportional to the area of <span class="math inline">\(R\)</span></strong>, we arrive at the <strong>Poisson Point Process</strong> by setting the rate <span class="math inline">\(\lambda\)</span> to be the portion of <span class="math inline">\(D\)</span>’s total area that is taken up by <span class="math inline">\(R\)</span>: <span class="math inline">\(\lambda = \frac{|R|}{|D|}\)</span>!</p>
+<p>Why does this help us model subregions of <span class="math inline">\(D\)</span> independently from one another? The following diagram, from page 134 of <span class="citation" data-cites="baddeley_spatial_2015">Baddeley, Rubak, and Turner (<a href="#ref-baddeley_spatial_2015" role="doc-biblioref">2015</a>)</span>, visualizes how an “independent set of trials with rare success probability” might appear in a spatial setting: if we treat each <strong>infinitesimally-small grid cell</strong> here as a “trial”, with a <span class="math inline">\(1\)</span> in the grid cell in the very rare case that an event occurs within that cell, and a <span class="math inline">\(0\)</span> otherwise, the Poisson distribution then “emerges” as <strong>the</strong> probabilistic model of the <strong>number of points <span class="math inline">\(k\)</span> appearing in <span class="math inline">\(R\)</span></strong> if we know that <strong>events happen across the domain <span class="math inline">\(D\)</span> at a rate of <span class="math inline">\(\lambda\)</span> points per unit area</strong>. In particular, since we’re modeling the <strong>random appearance</strong> of points in a subregion <span class="math inline">\(R \subseteq D\)</span> as being <strong>proportional to the area of <span class="math inline">\(R\)</span></strong>, we’ve arrived at the <strong>Poisson Point Process</strong> with the rate parameter <span class="math inline">\(\lambda\)</span> set to be the portion of <span class="math inline">\(D\)</span>’s total area that is taken up by <span class="math inline">\(R\)</span>: <span class="math inline">\(\lambda = \frac{|R|}{|D|}\)</span>!</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/poisson_caption.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
-<p>So, equipped with this new ability that the Poisson distribution gives us – the ability to model <strong>the rate of event occurrence within a region <span class="math inline">\(R\)</span></strong> as being <strong>proportional to the area of <span class="math inline">\(R\)</span></strong> – we can now use the <code>rpoispp()</code> function from <code>spatstat</code> to implement the (in most cases) “appropriate” null model for a spatial process, wherein events (points) occur in a given area in a manner that is independent of the occurrence of events in other areas!</p>
+<p>So, equipped with this new ability that the Poisson distribution gives us – the ability to model <strong>the rate of event occurrence within a region <span class="math inline">\(R\)</span></strong> as being <strong>proportional to the area of <span class="math inline">\(R\)</span></strong> – we can now use the <code>rpoispp()</code> function from <code>spatstat</code> to implement the (in most cases) “appropriate” null model for a spatial process, wherein events (points) occur in a given area in a manner that is independent of the occurrence of events in other areas. Four realizations of this final Poisson Point Process model are given below, though you will generate many more throughout your adventures in spatial hypothesis testing!</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(spatstat) |&gt; suppressPackageStartupMessages()</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pois_ppp &lt;- spatstat.random::rpoispp(60)</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># pois_win_sf &lt;- window_as_sf(pois_ppp)</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># pois_points_sf &lt;- points_as_sf()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(spatstat) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb20-3"><a href="#cb20-3"></a>pois_ppp_list <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="at">lambda=</span><span class="dv">60</span>, <span class="at">nsim=</span><span class="dv">4</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>)</span>
+<span id="cb20-6"><a href="#cb20-6"></a>pois_win_sf <span class="ot">&lt;-</span> <span class="fu">window_to_sf</span>(pois_ppp_list[[<span class="dv">1</span>]])</span>
+<span id="cb20-7"><a href="#cb20-7"></a>pois_points_sf <span class="ot">&lt;-</span> <span class="fu">sim_list_points_to_sf</span>(</span>
+<span id="cb20-8"><a href="#cb20-8"></a>  pois_ppp_list,</span>
+<span id="cb20-9"><a href="#cb20-9"></a>  <span class="at">label_num_points=</span><span class="cn">TRUE</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a>)</span>
+<span id="cb20-11"><a href="#cb20-11"></a><span class="co"># Compute the mean number of points across the four</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a><span class="co"># realizations</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a>mean_N <span class="ot">&lt;-</span> pois_points_sf <span class="sc">|&gt;</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a>  sf<span class="sc">::</span><span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-15"><a href="#cb20-15"></a>  <span class="fu">group_by</span>(sim_label) <span class="sc">|&gt;</span></span>
+<span id="cb20-16"><a href="#cb20-16"></a>  <span class="fu">summarize</span>(<span class="at">first_N =</span> <span class="fu">first</span>(sim_N)) <span class="sc">|&gt;</span></span>
+<span id="cb20-17"><a href="#cb20-17"></a>  <span class="fu">summarize</span>(<span class="at">mean_N =</span> <span class="fu">mean</span>(first_N))</span>
+<span id="cb20-18"><a href="#cb20-18"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb20-19"><a href="#cb20-19"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb20-20"><a href="#cb20-20"></a>    <span class="at">data=</span>pois_win_sf</span>
+<span id="cb20-21"><a href="#cb20-21"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-22"><a href="#cb20-22"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb20-23"><a href="#cb20-23"></a>    <span class="at">data=</span>pois_points_sf</span>
+<span id="cb20-24"><a href="#cb20-24"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-25"><a href="#cb20-25"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb20-26"><a href="#cb20-26"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb20-27"><a href="#cb20-27"></a>    <span class="fu">vars</span>(sim_label),</span>
+<span id="cb20-28"><a href="#cb20-28"></a>    <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span></span>
+<span id="cb20-29"><a href="#cb20-29"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-30"><a href="#cb20-30"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-31"><a href="#cb20-31"></a>    <span class="at">title=</span><span class="fu">paste0</span>(</span>
+<span id="cb20-32"><a href="#cb20-32"></a>      <span class="st">"Poisson Realizations (Mean N = "</span>,</span>
+<span id="cb20-33"><a href="#cb20-33"></a>      mean_N,</span>
+<span id="cb20-34"><a href="#cb20-34"></a>      <span class="st">")"</span></span>
+<span id="cb20-35"><a href="#cb20-35"></a>    )</span>
+<span id="cb20-36"><a href="#cb20-36"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-37"><a href="#cb20-37"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/poisson-realizations-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 </section>
