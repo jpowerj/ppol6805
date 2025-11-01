@@ -288,7 +288,7 @@
     "href": "syllabus.html#late-policy",
     "title": "PPOL 6805 / DSAN 6750",
     "section": "Late Policy",
-    "text": "Late Policy\nAfter the due date, for each homework assignment, you will have a grace period of 24 hours to submit the assignment without a lateness penalty. After this 24 hour grace period, late penalties will be applied up until 66 hours after the due date. Specifically, late penalties will be applied based on the following scale (unless you obtain an excused lateness from one of the instructional staff!):\n\n0 to 24 hours after due date: no penalty\n24 to 30 hours after due date: 2.5% penalty\n30 to 42 hours after due date: 5% penalty\n42 to 54 hours after due date: 10% penalty\n54 to 66 hours after due date: 20% penalty\nMore than 66 hours after due date: Assignment submissions no longer accepted (without instructor approval)",
+    "text": "Late Policy\nAfter the due date, for each homework assignment, you will have a grace period of 24 hours to submit the assignment without a lateness penalty. After this 24 hour grace period, late penalties will be applied up until 66 hours after the due date. Specifically, late penalties will be applied based on the following scale (unless you obtain an excused lateness from one of the instructional staff!1):\n\n0 to 24 hours after due date: no penalty\n24 to 30 hours after due date: 2.5% penalty\n30 to 42 hours after due date: 5% penalty\n42 to 54 hours after due date: 10% penalty\n54 to 66 hours after due date: 20% penalty\nMore than 66 hours after due date: Assignment submissions no longer accepted (without instructor approval)",
     "crumbs": [
       "Syllabus"
     ]
@@ -3486,7 +3486,7 @@
     "href": "w10/index.html#visualizing-relative-risk-surface",
     "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
     "section": "Visualizing Relative Risk Surface",
-    "text": "Visualizing Relative Risk Surface\n\nAll that’s left is \\(\\alpha = \\# \\text{Controls} / \\# \\text{Cases}\\)!\n\n\n\nCode\nlibrary(fields)\n\n\nLoading required package: spam\n\n\nSpam version 2.10-0 (2023-10-23) is loaded.\nType 'help( Spam)' or 'demo( spam)' for a short introduction \nand overview of this package.\nHelp for individual functions is also obtained by adding the\nsuffix '.spam' to the function name, e.g. 'help( chol.spam)'.\n\n\n\nAttaching package: 'spam'\n\n\nThe following objects are masked from 'package:base':\n\n    backsolve, forwardsolve\n\n\nLoading required package: viridisLite\n\n\n\nTry help(fields) to get started.\n\n\n\nAttaching package: 'fields'\n\n\nThe following object is masked from 'package:leaflet':\n\n    addLegend\n\n\nCode\n(alpha_hat &lt;- cases$n/controls$n)\n\n\n[1] 0.2519868\n\n\nCode\nx &lt;- int_cases$xcol\ny &lt;- int_cases$yrow\nrr &lt;- t(int_cases$v)/t(alpha_hat * int_controls$v)\nimage.plot(x, y, rr, asp = 1)\ntitle(xlab = \"Easting\", ylab = \"Northing\")",
+    "text": "Visualizing Relative Risk Surface\n\nAll that’s left is \\(\\alpha = \\# \\text{Controls} / \\# \\text{Cases}\\)!\n\n\n\nCode\nlibrary(fields)\n(alpha_hat &lt;- cases$n/controls$n)\n\n\n[1] 0.2519868\n\n\nCode\nx &lt;- int_cases$xcol\ny &lt;- int_cases$yrow\nrr &lt;- t(int_cases$v)/t(alpha_hat * int_controls$v)\nimage.plot(x, y, rr, asp = 1)\ntitle(xlab = \"Easting\", ylab = \"Northing\")",
     "crumbs": [
       "Week 10: Oct 29"
     ]
@@ -4821,7 +4821,7 @@
     "href": "resources.html#other-courses",
     "title": "Additional Resources",
     "section": "Other Courses",
-    "text": "Other Courses\n\nIf you’re looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out Data Over Space and Time, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.",
+    "text": "Other Courses\n\nIf you’re looking to dive headfirst into more intensive statistical modeling of geospatial (and spatiotemporal) data, definitely check out Data Over Space and Time, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.",
     "crumbs": [
       "Resources"
     ]
@@ -4920,5 +4920,15 @@
     "title": "Week 13: In-Class Office Hours",
     "section": "References",
     "text": "References"
+  },
+  {
+    "objectID": "syllabus.html#footnotes",
+    "href": "syllabus.html#footnotes",
+    "title": "PPOL 6805 / DSAN 6750",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nExcused lateness exceptions, in turn, will be grounded in a policy where you can “pause” the class (due date-wise, but also just, expectation-of-progress-wise more generally) to take the time you need to handle things happening in your life. Then, you can “resume” work once you feel more centered/once you find yourself back on stable ground. If you’re familiar with “Maslow’s hierarchy”, that’s an even easier way to think about it:Learning GIS is way up there in the blue triangle, so, it’s important that you feel like the first four levels are solidified before you turn your focus back to classwork. And, it’s a win-win, because it means that once you’re back in action you can be more engaged and receptive to new topics, rather than being forced to “simulate” being in the blue triangle while in reality struggling in other spots!↩︎",
+    "crumbs": [
+      "Syllabus"
+    ]
   }
 ]

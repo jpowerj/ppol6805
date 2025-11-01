@@ -33,7 +33,7 @@ This is the perfect book for anyone worried about the... **maps**-specific part 
 
 ::::: {.callout-tip title="<i class='bi bi-2-circle'></i> The *Point Patterns* Book: @baddeley_spatial_2015" icon="false" appearance="default"}
 
-**Baddeley, Rubak, and Turner, *Spatial Point Patterns: Methodology and Applications with R*** \[[`pdf`](https://www.dropbox.com/scl/fi/3xa9tfswmv1w8ez54prtk/Joshua-D.-Angrist-J-rn-Steffen-Pischke-Mastering-Metrics.pdf?rlkey=2w0ipphrgxrejd7ddkv1wd635&dl=1)\]
+**Baddeley, Rubak, and Turner, *Spatial Point Patterns: Methodology and Applications with R*** \[[`pdf`](https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&dl=1)\]
 
 :::: {layout="[30,70]" layout-valign="center"}
 ::: {#baddeley-cover style="margin-right: 8px;"}
@@ -119,4 +119,4 @@ Whereas the [GIS with Python and R](#gis-with-python-and-r) resources above are 
 
 ## Other Courses
 
-* If you're looking to dive headfirst into more intensive statistical modeling of geospatial data, definitely check out [Data Over Space and Time](https://www.stat.cmu.edu/~cshalizi/dst/20/){target='_blank'}, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.
+* If you're looking to dive headfirst into more intensive statistical modeling of geospatial (and spatio**temporal**) data, definitely check out [Data Over Space and Time](https://www.stat.cmu.edu/~cshalizi/dst/20/){target='_blank'}, a course taught by Cosma Shalizi, a very cool professor of Statistics at Carnegie Mellon University.
