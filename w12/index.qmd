@@ -3,7 +3,7 @@ title: "Week 12: {{< var weeks.12.title >}}"
 subtitle: "{{< var course.slides-subtitle >}}"
 author: "{{< var course.author >}}"
 institute: "{{< var course.institute >}}"
-date: "November 12, 2025"
+date: 2025-11-12
 date-format: full
 lecnum: 12
 categories:
