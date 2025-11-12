@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Your Name Here">
+
+<title>HW4: International Borders and the Ethnic Cleansing of Palestine – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-0d4a9d19931feb4fee1ddab4b2489000.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" '="" crossorigin="anonymous" referrerpolicy="no-referrer"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"><script src="../../sidebar.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../dsan-globals/jjstyles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      PPOL 6805 / DSAN 6750: GIS for Spatial Data Science
+      </li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><i class="bi bi-house pe-1"></i> Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../writeups/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writeups</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../final-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final Project</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../assignments/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://hchristy.georgetown.domains/_site" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Coding Workshop <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w01/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1: Aug 27</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w02/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2: Sep 3</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w03/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3: Sep 10</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w04/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4: Sep 17</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w05/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5: Sep 24</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w06/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6: Oct 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w07/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7: Oct 8</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w08/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8: Oct 15</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w09/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9: Oct 22</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w10/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10: Oct 29</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w11/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11: Nov 5</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w12/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12: Nov 12</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w13/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 13: Nov 19</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w14/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 14: Dec 3</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://georgetown.zoom.us/j/92295251878?pwd=K8nOs3w9uRlj3mfn63bh0yazBpBbsC.1" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Zoom Link <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://georgetown.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=20a30444-5d14-4a4e-9994-b34400dc520d" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Recordings <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://guhub.io" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">JupyterHub <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://jjacobs.me/meet" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Book Office Hour <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://chat.google.com/room/AAQAqBiPrZk?cls=7" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Google Space <i class="bi bi-box-arrow-up-right ps-1 align-self-center justify-self-center" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://forms.gle/1qmHmeXo94BaoN7d8" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Feedback <i class="bi bi-box-arrow-up-right ps-1 align-self-center justify-self-center" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p><em>Updated 2025-11-12, 06:42:36 PM</em></p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#loading-and-preparing-the-data" id="toc-loading-and-preparing-the-data" class="nav-link" data-scroll-target="#loading-and-preparing-the-data">Loading and Preparing the Data</a></li>
+  <li><a href="#part-1-cleansing-by-the-yishuv-29-nov-1947-to-15-may-1948" id="toc-part-1-cleansing-by-the-yishuv-29-nov-1947-to-15-may-1948" class="nav-link" data-scroll-target="#part-1-cleansing-by-the-yishuv-29-nov-1947-to-15-may-1948">Part 1: Cleansing by the Yishuv, 29 Nov 1947 to 15 May 1948</a>
+  <ul class="collapse">
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#the-hypothesis" id="toc-the-hypothesis" class="nav-link" data-scroll-target="#the-hypothesis">The Hypothesis</a></li>
+  <li><a href="#question-1.1-observed-region-counts" id="toc-question-1.1-observed-region-counts" class="nav-link" data-scroll-target="#question-1.1-observed-region-counts">Question 1.1: Observed Region Counts</a></li>
+  <li><a href="#question-1.2-village-intensity-function" id="toc-question-1.2-village-intensity-function" class="nav-link" data-scroll-target="#question-1.2-village-intensity-function">Question 1.2: Village Intensity Function</a></li>
+  <li><a href="#question-1.3-simulated-region-counts" id="toc-question-1.3-simulated-region-counts" class="nav-link" data-scroll-target="#question-1.3-simulated-region-counts">Question 1.3: Simulated Region Counts</a></li>
+  <li><a href="#question-1.4-computing-the-test-statistic" id="toc-question-1.4-computing-the-test-statistic" class="nav-link" data-scroll-target="#question-1.4-computing-the-test-statistic">Question 1.4: Computing the Test Statistic</a></li>
+  <li><a href="#question-1.5-monte-carlo-hypothesis-testing" id="toc-question-1.5-monte-carlo-hypothesis-testing" class="nav-link" data-scroll-target="#question-1.5-monte-carlo-hypothesis-testing">Question 1.5: Monte Carlo Hypothesis Testing</a></li>
+  </ul></li>
+  <li><a href="#part-2-cleansing-by-the-idf-15-may-1948-to-3-apr-1949" id="toc-part-2-cleansing-by-the-idf-15-may-1948-to-3-apr-1949" class="nav-link" data-scroll-target="#part-2-cleansing-by-the-idf-15-may-1948-to-3-apr-1949">Part 2: Cleansing by the IDF, 15 May 1948 to 3 Apr 1949</a>
+  <ul class="collapse">
+  <li><a href="#background-1" id="toc-background-1" class="nav-link" data-scroll-target="#background-1">Background</a></li>
+  <li><a href="#the-hypothesis-1" id="toc-the-hypothesis-1" class="nav-link" data-scroll-target="#the-hypothesis-1">The Hypothesis</a></li>
+  <li><a href="#question-2.1-observed-distances" id="toc-question-2.1-observed-distances" class="nav-link" data-scroll-target="#question-2.1-observed-distances">Question 2.1: Observed Distances</a></li>
+  <li><a href="#question-2.2-village-intensity-function" id="toc-question-2.2-village-intensity-function" class="nav-link" data-scroll-target="#question-2.2-village-intensity-function">Question 2.2: Village Intensity Function</a></li>
+  <li><a href="#question-2.3-simulated-points" id="toc-question-2.3-simulated-points" class="nav-link" data-scroll-target="#question-2.3-simulated-points">Question 2.3: Simulated Points</a></li>
+  <li><a href="#question-2.4-computing-the-test-statistic" id="toc-question-2.4-computing-the-test-statistic" class="nav-link" data-scroll-target="#question-2.4-computing-the-test-statistic">Question 2.4: Computing the Test Statistic</a></li>
+  <li><a href="#question-2.5-monte-carlo-hypothesis-testing" id="toc-question-2.5-monte-carlo-hypothesis-testing" class="nav-link" data-scroll-target="#question-2.5-monte-carlo-hypothesis-testing">Question 2.5: Monte Carlo Hypothesis Testing</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/assignments/hw4/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">HW4: International Borders and the Ethnic Cleansing of Palestine</h1>
+<p class="subtitle lead">PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Your Name Here </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>You may have noticed, in the news, the “sudden” eruption of violence between the Israeli Defense Forces (IDF) and the al-Qassam Brigades (the armed wing of Hamas, the democratically-elected government of the Occupied Palestinian Territories).</p>
+<p>In this bonus homework you will use spatial point pattern analysis to understand a key piece of historical context which lies at the root of the present-day conflict, namely, the <a href="https://jjacobs.me/ethnic-cleansing-of-palestine/">ethnic cleansing</a> of Palestinian-populated villages in 1948, and Israel’s subsequent refusal to allow refugees from these villages to return to their homes, in violation of <a href="https://ihl-databases.icrc.org/en/ihl-treaties/gciv-1949/article-49">Article 49</a> of the Fourth Geneva Convention, the document which forms the basis for much of modern international law (see, e.g.&nbsp;the 1998 <a href="https://www.icc-cpi.int/sites/default/files/2024-05/Rome-Statute-eng.pdf">Rome Statute</a> of the International Criminal Court).</p>
+<p>The centrality of this event for Palestinian refugees (who call it <em>al-Nakba</em>, or “The Catastrophe”), and the importance of the Right to Return to their everyday lives, becomes immediately viscerally clear as you approach the UN-administered <a href="https://en.wikipedia.org/wiki/Aida_Camp">Aida camp</a> in Beit Lahm, for example (the first refugee camp I ever worked in), and walk underneath the large <a href="https://en.wikipedia.org/wiki/Palestinian_key">key of return</a> erected above its entrance <a href="#fig-aida" class="quarto-xref">Figure&nbsp;1</a>.</p>
+<div id="fig-aida" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-aida-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Aida_Camp_entrance.jpeg" id="fig-aida" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-aida-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+<p>Given that participants in armed attacks against Israeli occupying forces are disproportionately <a href="https://apnews.com/article/israel-palestinians-west-bank-raid-militants-7b96eaa77fd237d78b323329f04b6317">recruited</a> from these very camps, understanding this linkage between <em>al-Nakba</em> and the present is crucial for understanding the conflict.</p>
+<p>The data we’ll be using can be understood through three key dates in this era of the conflict:</p>
+<ul>
+<li><strong>29 November 1947</strong>: The UN announces its <strong>partition plan</strong> for the former British Mandate of Palestine</li>
+<li><strong>15 May 1948</strong>: The armed Jewish groups throughout the former mandate <strong>declare independence</strong> for the State of Israel</li>
+<li><strong>3 April 1949</strong>: Israel signs an <strong>armistice agreement</strong> with the Hashemite Kingdom of Jordan, leaving much of the present-day West Bank under Jordanian sovereignty (until its invasion and occupation by the IDF in 1967, which lasts to the present day)</li>
+</ul>
+<p>These three dates will “bookend” our hypotheses here, since the historiography of <em>al-Nakba</em> often involves debate around the following basic chronology:</p>
+<ul>
+<li>From <strong>29 November 1947</strong> until <strong>15 May 1948</strong>, the Haganah (see below) conducted a campaign of terror and ethnic cleansing against Palestinian-populated villages, mainly targeting those located within the Jewish areas of the UN Partition Plan</li>
+<li>From <strong>15 May 1948</strong> until <strong>3 April 1949</strong>, the IDF (see below again) conducted another campaign of terror and ethnic cleansing against Palestinian-populated villages, this time targeting those <strong>between</strong> the borders at the time of the declaration of independence and Jerusalem, the envisioned capital of <em>Eretz Israel</em> (“Greater Israel”) in the eyes of the Zionist movement.</li>
+</ul>
+<p>Before you begin, make sure to run the following code cell, which:</p>
+<ul>
+<li>Sets R’s random seed,</li>
+<li>Loads the libraries we’ll use,</li>
+<li>Defines a colorblind-friendly palette, and</li>
+<li>Defines a constant <code>raster_eps</code> which we’ll use to determine the resolution of our intensity function estimates</li>
+</ul>
+<p>Also, importantly, it <strong>switches off</strong> <code>sf</code>’s <span class="math inline">\(S^2\)</span> (spherical geometry) mode, since the UN shapefiles here are incompatible with this mode (for reasons outlined <a href="https://github.com/r-spatial/sf/issues/1762">here</a>). Lastly, it defines a constant <code>raster_eps</code></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sf_use_s2</span>(<span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Spherical geometry (s2) switched off</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cb_palette <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>,<span class="st">"#0072B2"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#CC79A7"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>raster_eps <span class="ot">&lt;-</span> <span class="dv">1000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="loading-and-preparing-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="loading-and-preparing-the-data">Loading and Preparing the Data</h2>
+<p>Here, to avoid the midterm situation where loading and cleaning took up nearly the whole time for most students (😭), we carry out the data loading and cleaning for you!</p>
+<p>First, we download, unzip, and load the shapefile for the <a href="https://en.wikipedia.org/wiki/Mandate_for_Palestine">British Mandate of Palestine</a>, as it was constituted in British colonial documents in 1948, on the eve of its (planned) transfer to UN jurisdiction. Since the shapefile corresponds to the Mandate’s <strong>border</strong> as it was defined earlier on by the League of Nations, we get a <code>LINESTRING</code>, which we convert to the <code>POLYGON</code> of the mandate using <code>st_cast()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>jpr_shapefile_url <span class="ot">&lt;-</span> <span class="st">"https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/jpr_data.zip"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(jpr_shapefile_url, <span class="at">destfile =</span> <span class="st">"jpr_data.zip"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span>(<span class="st">"jpr_data.zip"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete the Mac OSX metadata</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">unlink</span>(<span class="st">"__MACOSX"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mandate_border_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="st">"jpr_data/shapefiles/outside_border.shp"</span>, <span class="at">quiet=</span><span class="cn">TRUE</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mandate_sf <span class="ot">&lt;-</span> mandate_border_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_cast</span>(<span class="st">"POLYGON"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>mandate_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/load-mandate-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Next, we load the dataset on villages in 1947 from <a href="https://journals.sagepub.com/doi/abs/10.1177/00223433221088324">McAlexander (2023)</a>, where the resulting plot indicates the villages cleansed in each of the two durations mentioned above:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>phases <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Not Cleansed"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"29 Nov 1947 - 15 May 1948"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"15 May 1948 - 3 Apr 1949"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>vill_url <span class="ot">&lt;-</span> <span class="st">"https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/villages_1947.gpkg"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>vill_47_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(vill_url, <span class="at">quiet=</span><span class="cn">TRUE</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>vill_47_sf <span class="ot">&lt;-</span> vill_47_sf <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">cleansed_phase =</span> <span class="fu">factor</span>(cleansed_phase, <span class="at">levels=</span>phases))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>mandate_sf) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>vill_47_sf, <span class="fu">aes</span>(<span class="at">color=</span>cleansed_phase), <span class="at">size=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>, cb_palette[<span class="dv">2</span>], cb_palette[<span class="dv">1</span>])) <span class="sc">+</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/load-villages-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As you can see from this overlay, however, there are no recorded villages in the southern ~half of the Mandate territory. Condensing lots of details, this is not because there were no <em>people</em> in this portion, but because this southern portion was mainly populated by <a href="https://en.wikipedia.org/wiki/Negev_Bedouin">“Negev Bedouin”</a>, who typically practiced nomadic herding/agriculture rather than settling in one fixed location—which is why it’s important to keep in mind that the unit of analysis here is <strong>villages</strong>, not people!</p>
+<p>Given that the ethnic cleansing of the Bedouin from Mandate Palestine followed its own, somewhat <a href="https://www.un.org/unispal/document/auto-insert-195392/">separate trajectory</a>, we will focus in on the non-Bedouin Palestinian villages, and thus take our <strong>window of observation</strong> to be the northern portion of the Mandate, with the Palestinian village of <a href="https://en.wikipedia.org/wiki/Beersheba">Bir Seb’a (بئر السبع)</a> as the “cutoff” point, below which there are no recorded villages in the data:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>vill_47_bbox <span class="ot">&lt;-</span> vill_47_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_bbox</span>()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vill_47_bbox[[<span class="st">'xmin'</span>]] <span class="ot">&lt;-</span> <span class="fl">34.0</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>vill_47_bbox[[<span class="st">'ymin'</span>]] <span class="ot">&lt;-</span> <span class="fl">31.2</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>north_sf <span class="ot">&lt;-</span> mandate_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_crop</span>(vill_47_bbox)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>although coordinates are longitude/latitude, st_intersection assumes that they
+are planar</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: attribute variables are assumed to be spatially constant throughout
+all geometries</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>north_sf) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>vill_47_sf, <span class="fu">aes</span>(<span class="at">color=</span>cleansed_phase), <span class="at">size=</span><span class="fl">0.65</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>, cb_palette[<span class="dv">2</span>], cb_palette[<span class="dv">1</span>])) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/crop-mandate-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="part-1-cleansing-by-the-yishuv-29-nov-1947-to-15-may-1948" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-cleansing-by-the-yishuv-29-nov-1947-to-15-may-1948">Part 1: Cleansing by the Yishuv, 29 Nov 1947 to 15 May 1948</h2>
+<section id="background" class="level3">
+<h3 class="anchored" data-anchor-id="background">Background</h3>
+<p>The “Yishuv” (ישוב), Hebrew for “Settlement”, is a general term used to refer to the Jewish population of Ottoman (1881-1917) and British (1917-1948) Palestine, which increased dramatically between the <a href="https://en.wikipedia.org/wiki/First_Aliyah">First Aliyah</a> (i.e., the first wave of European Jewish settlement in Palestine) onwards and the establishment of Israel on 15 May 1948, at which point various armed paramilitary groups of the Yishuv were unified to form the Israeli Defense Forces (IDF), the national army of the newly-formed State of Israel.</p>
+<p>The reason we distinguish between the Yishuv groups and the IDF is precisely because of the tenets of international law (as described by the Fourth Geneva Convention) mentioned above: <strong>before</strong> 15 May 1948, these groups operated as non-state paramilitary forces within territory under British sovereignty, and therefore had a different legal status from the <strong>post</strong>-May 15th IDF, which obtained the legal status of “official” state military (once Israel signed the Geneva Conventions and had its military and borders subsequently recognized by, e.g., the US, UK, USSR, and so on, leading to their accession to the United Nations less than a year later, on 11 May 1949).</p>
+<p>As mentioned above, 29 Nov 1947 is our first key date, since it is the day that the <a href="https://en.wikipedia.org/wiki/United_Nations_Partition_Plan_for_Palestine"><strong>UN Partition Plan</strong></a> for Palestine was announced. Skipping lots of details (as in pretty much every part of this assignment, so I’ll stop providing this disclaimer from now on!): although the surrounding Arab nations rejected the UN plan, the Yishuv accepted it and recognized it as a crucial opportunity to gain international legitimacy as a soon-to-be nation-state.</p>
+<p>However, in the eyes of Yishuv leaders like David Ben-Gurion (who would become Israel’s first Prime Minister), this presented a dilemma:</p>
+<ul>
+<li>A key precondition of this international legitimacy would be to establish Israel as a “democratic” state (and thus qualify for the post-WWII reconstruction efforts being granted to the “free world” by the United States, <em>a la</em> the Marshall Plan), but…</li>
+<li>The goal of Zionism, since its inception, had been an ethnostate in Palestine: i.e., a state wherein the Jewish population held uncontested control over all political, economic, and military decisions.</li>
+</ul>
+<p>The second point is perhaps best summarized by Ben-Gurion himself:</p>
+<blockquote class="blockquote">
+<p>In the area allocated to the Jewish State [in the UN plan mentioned above] there are not more than 520,000 Jews and about 350,000 non-Jews, mostly Arabs. Such a population composition does not provide a stable basis for a Jewish State. With such a composition, there cannot even be absolute certainty that control will remain in the hands of the Jewish majority […] There can be no stable and strong Jewish state so long as it has a Jewish majority of only 60%. (Source: <a href="https://www.google.com/books/edition/Targeting_Civilians_in_War/xiAp2dy_WX4C?hl=en&amp;gbpv=1&amp;pg=PA190&amp;printsec=frontcover">Downes (2004), <em>Targeting Civilians in War</em></a>)</p>
+</blockquote>
+</section>
+<section id="the-hypothesis" class="level3">
+<h3 class="anchored" data-anchor-id="the-hypothesis">The Hypothesis</h3>
+<p>Given this dilemma, a natural hypothesis would be that the announcement of the UN plan would spark a campaign of intensified ethnic cleansing by the armed groups of the Yishuv, aiming to drive Palestinians out of villages <em>within</em> the UN-allotted Jewish region until a “safe” Jewish majority (well above the “only 60%” mentioned in the above quote) could be secured, at which point independence could be declared for a democratic State of Israel. And indeed, Ben-Gurion would refer to this goal somewhat indirectly as the “transfer process”, a process which was codified in <a href="https://en.wikipedia.org/wiki/Plan_Dalet">Plan Dalet</a> and explored in McAlexander (2023), the article from which our dataset is drawn.</p>
+<p>The operationalization of this hypothesis in terms of the data we have, therefore, would involve the null hypothesis that</p>
+<p><strong>Villages were cleansed in proportion to their density across the Mandate, regardless of their position within or outside of the UN-allotted Jewish region</strong></p>
+<p>which we compare with the alternative hypothesis that</p>
+<p><strong>Villages within the UN-allotted Jewish region were disproportionately likely to be chosen for cleansing</strong>,</p>
+<p>i.e., that their probability of being chosen for cleansing was greater than their spatial density with respect to the distribution of villages across the Mandate.</p>
+<p>To test this hypothesis, we will need to load the shapefiles corresponding to the UN partition plan, which are again helpfully provided by McAlexander (2023), in the form of the shapefiles for the UN-allotted Palestinian region specifically (the Jewish region being everything in the Mandate besides this territory and besides Jerusalem, which was to be internationally administered by the UN, which we’ll see in Part 2 below). Then we plot the villages cleansed from 29 Nov 1947 to 15 May 1948, the points which we’ll test for disproportionate appearance in the UN-allotted Jewish region:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>un_pal_url <span class="ot">&lt;-</span> <span class="st">"https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/un_pal_crop.gpkg"</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>un_pal_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(un_pal_url)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `un_pal_crop' from data source 
+  `https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/un_pal_crop.gpkg' 
+  using driver `GPKG'
+Simple feature collection with 1 feature and 0 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 3806734 ymin: 3658750 xmax: 3960787 ymax: 3908699
+Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>north_sf) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>un_pal_sf, <span class="at">fill=</span>cb_palette[<span class="dv">3</span>], <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>vill_47_sf, <span class="fu">aes</span>(<span class="at">color=</span>cleansed_yish_4748), <span class="at">size=</span><span class="fl">0.65</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">'black'</span>, cb_palette[<span class="dv">2</span>], cb_palette[<span class="dv">1</span>])) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/load-un-partition-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-1.1-observed-region-counts" class="level3">
+<h3 class="anchored" data-anchor-id="question-1.1-observed-region-counts">Question 1.1: Observed Region Counts</h3>
+<p>We start by computing the <strong>observed</strong> spatial distribution of (phase-1) cleansed villages, in terms of how many such villages were located in the UN-allotted Jewish and Palestinian regions, respectively. The following plot, therefore, represents the point pattern we’re hoping to test, in terms of how likely it would be to occur under our null hypothesis:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>vill_c4748_sf <span class="ot">&lt;-</span> vill_47_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(cleansed_yish_4748)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>num_c4748 <span class="ot">&lt;-</span> <span class="fu">nrow</span>(vill_c4748_sf)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plot_title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Yishuv-Cleansed Villages (N = "</span>,num_c4748,<span class="st">")"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>plot_subtitle <span class="ot">&lt;-</span> <span class="st">"15 May 1948 - 3 Apr 1949"</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>north_sf) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>un_pal_sf, <span class="at">fill=</span>cb_palette[<span class="dv">3</span>], <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>vill_c4748_sf, <span class="at">size=</span><span class="fl">0.65</span>) <span class="sc">+</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">'black'</span>, cb_palette[<span class="dv">2</span>], cb_palette[<span class="dv">1</span>])) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>),</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span>plot_title, <span class="at">subtitle=</span>plot_subtitle)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/plot-observed-c4748-villages-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Using the above-created <code>sf</code> objects:</p>
+<ul>
+<li><code>north_sf</code>, containing a <code>POLYGON</code> representing the northern ~half of the British Mandate of Palestine,</li>
+<li><code>un_pal_north_sf</code>, containing <code>MULTIPOLYGON</code> representing the UN-allotted Palestinian regions, and</li>
+<li><code>vill_c4748_sf</code>, containing <code>POINT</code>s representing the villages cleansed by the Yishuv from 29 Nov 1947 to 15 May 1948,</li>
+</ul>
+<p>Your goal is to compute the counts of how many villages in <code>vill_c4748_sf</code> fall within the UN-allotted Palestinian region and how many do not fall within this region.</p>
+<p>Since we are interested in the hypothesis that the number of cleansed villages in the UN-allotted <em>Jewish</em> region is disproportionate, we will use this number specifically as our <strong>test statistic</strong>: store this value in a variable named <code>obs_nc4748_in_jewish</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Implementing a Count Function">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Implementing a Count Function
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Though it’s not required, it will save you time later on if you implement this by creating a <strong>function</strong> named <code>compute_sf_jewish_count()</code>, which takes in an <code>sf</code> object containing <code>POINT</code>s and returns the number of these points that fall outside of <code>un_pal_north_sf</code>.</p>
+<p>Though it requires more thought up-front, it will pay off when you construct the large number of Monte Carlo simulations in Questions 1.3 and 1.4, since you can convert these simulated <code>ppp</code> objects into <code>sf</code> objects (making sure to filter out the <strong>window</strong> and keep only the simulated <strong><code>POINT</code></strong> observations!), then use this function to compute counts for each simulation.</p>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Recommended, not required: a function for computing this count</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>compute_sf_jewish_count <span class="ot">&lt;-</span> <span class="cf">function</span>(village_sf) {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Your (optional) code here: compute the number of points in village_sf lying</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># outside of un_pal_north_sf.</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace with count of cleansed villages in Jewish region</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>obs_num_jewish_region <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You should obtain the result that <strong>159 villages</strong>, out of the 190 total that were cleansed between 29 Nov 1947 and 15 May 1948, were located within the UN-allotted Jewish region. In the remaining questions, you will compare this count with counts obtained via simulation under the null hypothesis.</p>
+</section>
+<section id="question-1.2-village-intensity-function" class="level3">
+<h3 class="anchored" data-anchor-id="question-1.2-village-intensity-function">Question 1.2: Village Intensity Function</h3>
+<p>Now that you have the observed count of how many of the 190 villages chosen for cleansing fell within the UN-allotted Jewish region, we need to evaluate whether this is higher or lower than the count we would <strong>expect</strong> to see under our null hypothesis!</p>
+<p>To this end, the first step is to estimate an <strong>intensity function</strong> of villages across the Mandate territory as they existed in 1947, which will then allow us to simulate the spatial distribution of villages under the null, i.e., simulate what a choice of villages <strong>not</strong> affected by the UN partition plan would look like. Estimate this intensity function using the <code>density()</code> function from <code>spatstat.random</code>, and store the estimated intensity function in a variable named <code>vill_47_int</code>.</p>
+<p>Remember to use the <code>raster_eps</code> global parameter defined at the top of the notebook for the <code>eps</code> parameter of <code>density()</code>! Otherwise the estimated intensity function might be too coarse (too pixelated) or, even worse, too fine-grained (which might lead to your RAM quickly filling up).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>vill_47_int <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with call to</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="question-1.3-simulated-region-counts" class="level3">
+<h3 class="anchored" data-anchor-id="question-1.3-simulated-region-counts">Question 1.3: Simulated Region Counts</h3>
+<p>Now that you have an intensity function for villages throughout the north of the Mandate, you have what you need to use the <code>spatstat.random::rpoint()</code> function to simulate 190 points drawn from this intensity function! Do this in the following code cell, saving the resulting <code>ppp</code> object as <code>vill_c4748_sim_ppp</code> (with this name chosen since we’re simulating the locations of cleansed villages between 29 Nov 1947 and 15 May 1948 under the null hypothesis):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>vill_c4748_sim_ppp <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with rpoint() call</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If your <code>ppp</code> object was created as intended, running the following code cell should produce a plot of these simulated villages overlaid on the 1947 village intensity function, which you can use as a “sanity check” (for example, if you observe a large number of villages in the blue low-intensity regions, something may be wrong with your call to <code>rpoint()</code>):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(vill_c4748_sim_ppp)) {</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  vill_47_int_stars <span class="ot">&lt;-</span> stars<span class="sc">::</span><span class="fu">st_as_stars</span>(vill_47_int)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  vill_c4748_sim_points_sf <span class="ot">&lt;-</span> vill_c4748_sim_ppp <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    sf<span class="sc">::</span><span class="fu">st_set_crs</span>(<span class="dv">3857</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"point"</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_stars</span>(<span class="at">data=</span>vill_47_int_stars) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data=</span>vill_c4748_sim_points_sf, <span class="at">size=</span><span class="fl">0.65</span>) <span class="sc">+</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data=</span>un_pal_north_sf, <span class="at">alpha=</span><span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_viridis_c</span>(<span class="at">option=</span><span class="st">"C"</span>, <span class="at">na.value=</span><span class="st">"transparent"</span>) <span class="sc">+</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"190 Intensity-Sampled Villages"</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeLines</span>(<span class="st">"vill_c4748_sim_ppp object must be created first!"</span>)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>vill_c4748_sim_ppp object must be created first!</code></pre>
+</div>
+</div>
+</section>
+<section id="question-1.4-computing-the-test-statistic" class="level3">
+<h3 class="anchored" data-anchor-id="question-1.4-computing-the-test-statistic">Question 1.4: Computing the Test Statistic</h3>
+<p>Given the resulting <code>ppp</code> object, you should be able to use code similar to the code you wrote in Question 1.1 to count the number of points in <code>vill_47_sim_ppp</code> that fall within the UN-allotted Jewish region of the Mandate. Store this value in a variable named <code>sim_c4748_points</code> and print its value at the end of your code cell.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You should find that the number of simulated points falling within the UN-allotted Jewish region is lower than the observed number you computed at the end of Question 1.1.</p>
+<p>This gives us a… small hint that 159 might be a high number of villages, but we can’t evaluate the hypothesis on the basis of a single counterfactual simulation! The main point of this question, secretly, was to get you into the habit of writing code for a <strong>single</strong> simulation, and then plotting the results as a sanity-check that it works, <em>before</em> you think about running 999 of them.</p>
+</section>
+<section id="question-1.5-monte-carlo-hypothesis-testing" class="level3">
+<h3 class="anchored" data-anchor-id="question-1.5-monte-carlo-hypothesis-testing">Question 1.5: Monte Carlo Hypothesis Testing</h3>
+<p>Here, your job is to just take the simulation code that you’ve now used to generate one simulation and run it 999 times, to generate 999 <code>ppp</code> objects and then extract the count of the number of cleansed villages in the UN-allotted Jewish area from each. Like in the midterm, this will give you a <strong>distribution</strong> of test statistics that you can use to judge <strong>how unlikely</strong> it would be to observe 159 cleansed villages within the UN-allotted Jewish region under the null hypothesis.</p>
+<p>So, in the following code cell: compute these 999 simulations, derive the test statistic for each, and then use <code>ggplot2</code> to create a <strong>density plot</strong> (using <code>geom_density()</code>) of the 999 simulated test statistics, on top of which you should superimpose a <strong>dashed line</strong> (preferably with the color from the first element of <code>cb_palette</code>) representing the <strong>observed</strong> test statistic of 159, to see how likely or unlikely this value would be under the null hypothesis.</p>
+<p>As I’ve mentioned (ranted about) in class, you don’t need to compute a <span class="math inline">\(p\)</span>-value or confidence interval here. But, below the produced density plot, please provide a sentence or two describing your inference from the plot, in terms of the likelihood that the null hypothesis is true.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="part-2-cleansing-by-the-idf-15-may-1948-to-3-apr-1949" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-cleansing-by-the-idf-15-may-1948-to-3-apr-1949">Part 2: Cleansing by the IDF, 15 May 1948 to 3 Apr 1949</h2>
+<section id="background-1" class="level3">
+<h3 class="anchored" data-anchor-id="background-1">Background</h3>
+<p>Once Israel had established itself as a democracy and signed onto the <a href="https://en.wikipedia.org/wiki/Fourth_Geneva_Convention">Fourth Geneva Convention</a>, as mentioned above, the borders of the UN-allotted Jewish territory were accepted as the borders of the State of Israel by great powers like the US, UK, and USSR. However, the rejection of the plan by the surrounding Arab nations provided the newly-formed state with a <em>fait accompli</em> to conduct a second phase of the ethnic cleansing campaign, which could now be justified as essentially a “side effect” of the <strong>inter-state</strong> wars between Israel and, for example:</p>
+<ul>
+<li><strong>Lebanon</strong> to the north,</li>
+<li><strong>Egypt</strong> to the southwest (resulting in Egyptian sovereignty over the Gaza Strip), and</li>
+<li><strong>Jordan</strong> to the east (resulting in Jordanian sovereignty over the West Bank).</li>
+</ul>
+<p>Here we will focus on the war with <strong>Jordan</strong> in particular, for reasons that will become apparent once you visualize the spatial distribution of these phase-2 cleansed villages.</p>
+<p>After dropping the villages which had already been cleansed in the first phase (before 15 May 1948), a plot of those cleansed in this second phase immediately gives rise to a plausible hypothesis for their spatial distribution, revolving around the location of <strong>Jerusalem</strong> within the <strong>Jordanian-claimed portion</strong> of the UN-allotted Palestinian region.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop phase-1 cleansed villages</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>vill_48_sf <span class="ot">&lt;-</span> vill_47_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span>cleansed_yish_4748)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load POLYGON for Jordan-claimed portion</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>jord_url <span class="ot">&lt;-</span> <span class="st">"https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/un_jordan_claimed.gpkg"</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>jord_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(jord_url)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `un_jordan_claimed' from data source 
+  `https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/un_jordan_claimed.gpkg' 
+  using driver `GPKG'
+Simple feature collection with 1 feature and 1 field
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 34.68605 ymin: 31.22123 xmax: 35.58035 ymax: 32.63122
+Geodetic CRS:  WGS 84</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load POLYGON for 2024 West Bank</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>wb_url <span class="ot">&lt;-</span> <span class="st">"https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/un_ocha_west_bank.gpkg"</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>wb_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(wb_url)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `un_ocha_west_bank' from data source 
+  `https://github.com/jpowerj/dsan-content/raw/refs/heads/main/2024-fall-ppol6805/hw5a/un_ocha_west_bank.gpkg' 
+  using driver `GPKG'
+Simple feature collection with 1 feature and 10 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 34.88054 ymin: 31.34269 xmax: 35.57319 ymax: 32.55239
+Geodetic CRS:  WGS 84</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create sf containing a POINT corresponding to the centroid of the Old City</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>jeru_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>lat, <span class="sc">~</span>lon,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fl">31.777908401571544</span>, <span class="fl">35.23166035886802</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>jeru_sf <span class="ot">&lt;-</span> jeru_df <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">coords=</span><span class="fu">c</span>(<span class="st">"lon"</span>,<span class="st">"lat"</span>),</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">crs=</span><span class="dv">4326</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_transform</span>(<span class="dv">3857</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>gen_p2_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">include_wb=</span><span class="cn">FALSE</span>) {</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  p2_obj <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data=</span>north_sf, <span class="fu">aes</span>(<span class="at">fill=</span><span class="st">"Mandate (1917)"</span>), <span class="at">alpha=</span><span class="fl">0.0</span>) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data=</span>jord_sf, <span class="fu">aes</span>(<span class="at">fill=</span><span class="st">"UN-Allocated (1947)"</span>), <span class="at">alpha=</span><span class="fl">0.3</span>, <span class="at">linewidth=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ifelse</span>(</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>      include_wb,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_sf</span>(<span class="at">data=</span>wb_sf, <span class="fu">aes</span>(<span class="at">fill=</span><span class="st">"West Bank (2024)"</span>), <span class="at">alpha=</span><span class="fl">0.6</span>, <span class="at">linewidth=</span><span class="fl">0.5</span>),</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">element_blank</span>()</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data=</span>vill_48_sf, <span class="fu">aes</span>(<span class="at">color=</span>cleansed_idf_4849), <span class="at">size=</span><span class="fl">0.65</span>) <span class="sc">+</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data=</span>jeru_sf, <span class="fu">aes</span>(<span class="at">shape=</span><span class="st">"Jerusalem"</span>), <span class="at">fill=</span>cb_palette[<span class="dv">4</span>], <span class="at">size=</span><span class="dv">3</span>, <span class="at">stroke=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data=</span>sf<span class="sc">::</span><span class="fu">st_boundary</span>(north_sf), <span class="at">linewidth=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="st">"Cleansed"</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>,cb_palette[<span class="dv">1</span>])) <span class="sc">+</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="fu">element_blank</span>(), <span class="at">values=</span><span class="fu">c</span>(<span class="st">"white"</span>,cb_palette[<span class="dv">3</span>],cb_palette[<span class="dv">3</span>])) <span class="sc">+</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_shape_manual</span>(<span class="fu">element_blank</span>(), <span class="at">values=</span><span class="dv">21</span>) <span class="sc">+</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Cleansed Villages, 1948-1949"</span>)</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p2_obj)</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a><span class="fu">gen_p2_plot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/plot-jerusalem-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And, by overlaying the <code>POLYGON</code> for the modern (2024) West Bank, you can also see how these IDF cleansings essentially determined the final armistice line which divides Israel from the Occupied West Bank to this day:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gen_p2_plot</span>(<span class="at">include_wb=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/plot-jerusalem-wb2024-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-hypothesis-1" class="level3">
+<h3 class="anchored" data-anchor-id="the-hypothesis-1">The Hypothesis</h3>
+<p>Though the UN Partition Plan designated Jerusalem as an <a href="https://en.wikipedia.org/wiki/Corpus_separatum_(Jerusalem)">internationally-administered territory</a> (rather than placing it within the Jewish or Palestinian “sides”), our hypothesis for the second phase is that the IDF wanted to clear a “road to Jerusalem” from the newly-formed State of Israel, as proposed by (newly-elected Prime Minister) David Ben-Gurion:</p>
+<blockquote class="blockquote">
+<p>If we defeat them and capture western Galilee or territory on both sides of the road to Jerusalem, these areas will become part of the state. Why should we obligate ourselves to accept boundaries that in any case the Arabs don’t accept?”</p>
+</blockquote>
+<p>Cleansing the villages which had the misfortune of existing on this “road to Jerusalem” would, ostensibly, make it easier to wrest Jerusalem from international or Jordanian control via military conquest, which was indeed <a href="https://en.wikipedia.org/wiki/Six-Day_War">achieved 19 years later</a>.</p>
+<p>Thus our <strong>null hypothesis</strong> in this part is that:</p>
+<p><strong>Villages were cleansed in proportion to their density within the Jordanian-claimed portion of the UN-allotted Palestinian region, regardless of their distance to Jerusalem</strong></p>
+<p>which we compare with the alternative hypothesis that</p>
+<p><strong>Villages closer to Jerusalem were disproportionately likely to be chosen for cleansing</strong>.</p>
+<p>To test this hypothesis, like on the midterm and the previous problem, your job is to conduct 999 Monte Carlo simulations of the null hypothesis, and see how different the <strong>observed</strong> average distance from Jerusalem is from the 999 <strong>simulated</strong> average distances.</p>
+<p>Notice that our <strong>observation window</strong> here is different from the previous part: wheres before we were considering the British Mandate territory as a whole, here we are “zooming in” on just the Jordanian-claimed portion of the UN-allotted Palestinian region. The following code cells set up the necessary <code>sf</code> objects that you’ll use for the remainder of the questions.</p>
+<p>First, the collection of <strong>all</strong> villages in the Jordanian-claimed region (the <strong>observation window</strong> for this question), which you’ll use to estimate a new “village intensity function” for this hypothesis:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># All remaining (non-previously-cleansed) villages in Jordanian-claimed region</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>vill_jord_sf <span class="ot">&lt;-</span> vill_48_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_filter</span>(jord_sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>although coordinates are longitude/latitude, st_intersects assumes that they
+are planar
+although coordinates are longitude/latitude, st_intersects assumes that they
+are planar</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>jord_sf) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>vill_jord_sf, <span class="fu">aes</span>(<span class="at">color=</span>cleansed_idf_4849), <span class="at">size=</span><span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>jeru_sf, <span class="fu">aes</span>(<span class="at">shape=</span><span class="st">"Jerusalem"</span>), <span class="at">fill=</span>cb_palette[<span class="dv">4</span>], <span class="at">size=</span><span class="dv">3</span>, <span class="at">stroke=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>,cb_palette[<span class="dv">1</span>])) <span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="fu">element_blank</span>(), <span class="at">values=</span><span class="dv">21</span>) <span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/q2-plot-jordan-villages-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And now the subset of just the post-15 May 1848 <strong>cleansed</strong> villages, the <strong>observed</strong> point pattern that you will test on the basis of the village intensity function:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Villages cleansed by IDF, post-15 May 1948</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>vill_c4849_sf <span class="ot">&lt;-</span> vill_jord_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(cleansed_idf_4849)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>num_c4849 <span class="ot">&lt;-</span> <span class="fu">nrow</span>(vill_c4849_sf)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>plot_title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"IDF-Cleansed Villages (N = "</span>,num_c4849,<span class="st">")"</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>plot_subtitle <span class="ot">&lt;-</span> <span class="st">"15 May 1948 - 3 Apr 1949"</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>jord_sf) <span class="sc">+</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>vill_c4849_sf, <span class="at">size=</span><span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>jeru_sf, <span class="fu">aes</span>(<span class="at">shape=</span><span class="st">"Jerusalem"</span>), <span class="at">fill=</span>cb_palette[<span class="dv">4</span>], <span class="at">size=</span><span class="dv">3</span>, <span class="at">stroke=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="fu">element_blank</span>(), <span class="at">values=</span><span class="dv">21</span>) <span class="sc">+</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>),</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>),</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>)</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span>plot_title, <span class="at">subtitle=</span>plot_subtitle)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/q2-plot-cleansed-villages-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-2.1-observed-distances" class="level3">
+<h3 class="anchored" data-anchor-id="question-2.1-observed-distances">Question 2.1: Observed Distances</h3>
+<p>Your job in this question is to compute the <strong>observed</strong> test statistic: in this case, the mean distance between the cleansed villages and the centroid of the Old City of Jerusalem. You can call this <code>obs_mean_dist</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>obs_mean_dist <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with computation of observed mean distance</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You should obtain a value of about 30843.81. Is this low or high? Let’s use point-process simulation to check!</p>
+</section>
+<section id="question-2.2-village-intensity-function" class="level3">
+<h3 class="anchored" data-anchor-id="question-2.2-village-intensity-function">Question 2.2: Village Intensity Function</h3>
+<p>Like in the Question 1.2, your job here is to use the collection of <strong>all</strong> remaining villages within the Jordanian-claimed region (the points stored in <code>vill_jord_sf</code> above) to estimate and plot an intensity function, which you should call <code>vill_jord_int</code>.</p>
+<p>And, as in Question 1.2 again, please make sure to use the <code>eps</code> parameter when you call <code>density()</code> to ensure a reasonable level of resolution for the (raster-data) intensity function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>vill_jord_int <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with density() call</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="question-2.3-simulated-points" class="level3">
+<h3 class="anchored" data-anchor-id="question-2.3-simulated-points">Question 2.3: Simulated Points</h3>
+<p>Here, as you did in Question 1.3, use the estimated intensity function <code>vill_jord_int</code> to simulate <code>num_c4849</code> points (<code>num_c4849</code> is defined above, in the code cell with label <code>q2-cleansed-villages</code>), and store the results of this simulation in a <code>ppp</code> object named <code>vill_c4849_sim_ppp</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>vill_c4849_sim_ppp <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with density() call</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Like in Question 1.3, if the intensity function was estimated correctly and the simulation ran as intended, the following code cell should plot the simulated points in <code>vill_c4849_sim_ppp</code> over top of the heatmap based on <code>vill_jord_int</code>, as a sanity check (you can run the <code>q2-3-response</code> code cell and then the following code multiple times, for example, to make sure that points tend to be generated in the regions with greater intensity!)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(vill_c4849_sim_ppp)) {</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  vill_jord_int_stars <span class="ot">&lt;-</span> stars<span class="sc">::</span><span class="fu">st_as_stars</span>(vill_jord_int)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  vill_c4849_sim_points_sf <span class="ot">&lt;-</span> vill_c4849_sim_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    sf<span class="sc">::</span><span class="fu">st_set_crs</span>(<span class="dv">3857</span>) <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"point"</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_stars</span>(<span class="at">data=</span>vill_jord_int_stars) <span class="sc">+</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data=</span>vill_c4849_sim_points_sf, <span class="at">size=</span><span class="fl">0.65</span>) <span class="sc">+</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_viridis_c</span>(<span class="at">option=</span><span class="st">"C"</span>, <span class="at">na.value=</span><span class="st">"transparent"</span>) <span class="sc">+</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"100 Intensity-Sampled Villages"</span>)</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeLines</span>(<span class="st">"vill_c4849_sim_ppp object must be created first!"</span>)</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>vill_c4849_sim_ppp object must be created first!</code></pre>
+</div>
+</div>
+</section>
+<section id="question-2.4-computing-the-test-statistic" class="level3">
+<h3 class="anchored" data-anchor-id="question-2.4-computing-the-test-statistic">Question 2.4: Computing the Test Statistic</h3>
+<p>This is where your code will start to differ from the code in Question 1. Here, your job is to compute the new <strong>distance-based test statistic</strong> in this part–the mean distance from the simulated villages to Jerusalem—for the simulated <code>ppp</code> object you just created. Store this value in a variable named <code>sim_c4849_mean</code> and print its value at the end of your code cell.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>sim_c4849_mean <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Replace with calculated mean distance from Jerusalem</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sim_c4849_mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
+<p>Once again, you should get a mean distance here that is <em>lower</em> than the observed mean distance, but (as before) we can’t evaluate the hypothesis on the basis of a single counterfactual simulation! So, in the next question, you will re-run this simulation, 999 times, and then create a density plot to see how likely or unlikely our observed value of 30843.81 is relative to the mean distances resulting from these 999 simulations.</p>
+</section>
+<section id="question-2.5-monte-carlo-hypothesis-testing" class="level3">
+<h3 class="anchored" data-anchor-id="question-2.5-monte-carlo-hypothesis-testing">Question 2.5: Monte Carlo Hypothesis Testing</h3>
+<p>Here, like in Question 1.5, your job is to just take the simulation code that you’ve now used to generate one simulation and run it 999 times, computing the <strong>mean distance from Jerusalem</strong> for each (on the basis of the centroid in <code>jeru_sf</code>).</p>
+<p>Like in Question 1.5, this will give you a <strong>distribution</strong> of test statistics that you can use to judge <strong>how unlikely</strong> it would be to observe a mean distance of 30843.81 under the null hypothesis.</p>
+<p>So, in the following code cell: compute these 999 simulations, derive the test statistic for each, and then use <code>ggplot2</code> to create a <strong>density plot</strong> (using <code>geom_density()</code>) of the 999 simulated test statistics, on top of which you should superimpose a <strong>dashed line</strong> (preferably with the color from the first element of <code>cb_palette</code>) representing the <strong>observed</strong> test statistic of 30843.81, to see how likely or unlikely this value would be under the null hypothesis.</p>
+<p>As before, you don’t need to compute an exact <span class="math inline">\(p\)</span>-value or confidence interval here. But, below the produced density plot, please provide a sentence or two describing your inference from the plot, in terms of the likelihood that the null hypothesis is true.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Thank you for your work! As with all of the other assignments, I hope they can be helpful as e.g.&nbsp;starter code for stuff you may find yourself working on in the future 🏃</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/assignments/hw4/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>

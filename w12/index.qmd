@@ -248,31 +248,31 @@ $$
 ```{r}
 #| label: barcelona-leaflet
 #| output-location: column
-library(osmdata) |> suppressPackageStartupMessages()
-library(leaflet)
-assign("has_internet_via_proxy", TRUE, environment(curl::has_internet))
-placebb <- osmdata::getbb("Barcelona")
-hospitals <- placebb |>
-  opq() |>
-  add_osm_feature(key = "amenity", value = "hospital") |>
-  osmdata_sf()
-motorways <- placebb |>
-  opq() |>
-  add_osm_feature(
-    key = "highway",
-    value = "motorway"
-  ) |>
-  osmdata_sf()
-leaflet() |>
-  addTiles() |>
-  addPolylines(
-    data = motorways$osm_lines,
-    color = "black"
-  ) |>
-  addPolygons(
-    data = hospitals$osm_polygons,
-    label = hospitals$osm_polygons$name
-  )
+# library(osmdata) |> suppressPackageStartupMessages()
+# library(leaflet)
+# assign("has_internet_via_proxy", TRUE, environment(curl::has_internet))
+# placebb <- osmdata::getbb("Barcelona")
+# hospitals <- placebb |>
+#   opq() |>
+#   add_osm_feature(key = "amenity", value = "hospital") |>
+#   osmdata_sf()
+# motorways <- placebb |>
+#   opq() |>
+#   add_osm_feature(
+#     key = "highway",
+#     value = "motorway"
+#   ) |>
+#   osmdata_sf()
+# leaflet() |>
+#   addTiles() |>
+#   addPolylines(
+#     data = motorways$osm_lines,
+#     color = "black"
+#   ) |>
+#   addPolygons(
+#     data = hospitals$osm_polygons,
+#     label = hospitals$osm_polygons$name
+#   )
 ```
 
 

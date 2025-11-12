@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jeff Jacobs">
+
+<title>Week 9: Evaluating Spatial Hypotheses I: Point Data – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-0d4a9d19931feb4fee1ddab4b2489000.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" '="" crossorigin="anonymous" referrerpolicy="no-referrer"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"><script src="../sidebar.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../dsan-globals/jjstyles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w09/index.html">Week 9: Oct 22</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><i class="bi bi-house pe-1"></i> Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../writeups/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writeups</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../final-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final Project</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://hchristy.georgetown.domains/_site" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Coding Workshop <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w01/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1: Aug 27</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w02/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2: Sep 3</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w03/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3: Sep 10</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w04/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4: Sep 17</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w05/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5: Sep 24</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w06/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6: Oct 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w07/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7: Oct 8</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w08/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8: Oct 15</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w09/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Week 9: Oct 22</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w10/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10: Oct 29</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w11/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11: Nov 5</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w12/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12: Nov 12</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w13/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 13: Nov 19</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../w14/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 14: Dec 3</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://georgetown.zoom.us/j/92295251878?pwd=K8nOs3w9uRlj3mfn63bh0yazBpBbsC.1" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Zoom Link <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://georgetown.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=20a30444-5d14-4a4e-9994-b34400dc520d" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Recordings <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://guhub.io" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">JupyterHub <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://jjacobs.me/meet" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Book Office Hour <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://chat.google.com/room/AAQAqBiPrZk?cls=7" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Google Space <i class="bi bi-box-arrow-up-right ps-1 align-self-center justify-self-center" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://forms.gle/1qmHmeXo94BaoN7d8" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Feedback <i class="bi bi-box-arrow-up-right ps-1 align-self-center justify-self-center" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p><em>Updated 2025-11-12, 06:42:36 PM</em></p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#roadmap-to-the-midterm" id="toc-roadmap-to-the-midterm" class="nav-link active" data-scroll-target="#roadmap-to-the-midterm">Roadmap to the Midterm!</a></li>
+  <li><a href="#so-what-do-we-do-with-morans-i" id="toc-so-what-do-we-do-with-morans-i" class="nav-link" data-scroll-target="#so-what-do-we-do-with-morans-i">So… What Do We <em>Do</em> With Moran’s <span class="math inline">\(I\)</span>?</a>
+  <ul class="collapse">
+  <li><a href="#caveat-2-summary-statistics-like-i-are-not-models" id="toc-caveat-2-summary-statistics-like-i-are-not-models" class="nav-link" data-scroll-target="#caveat-2-summary-statistics-like-i-are-not-models">Caveat 2: Summary Statistics Like <span class="math inline">\(I\)</span> are Not <em>Models</em>!</a></li>
+  <li><a href="#why-do-events-appear-where-they-do" id="toc-why-do-events-appear-where-they-do" class="nav-link" data-scroll-target="#why-do-events-appear-where-they-do">[<i class="bi bi-tree-fill"></i>] <em>Why</em> Do Events Appear Where They Do?</a></li>
+  <li><a href="#the-tree-grid-mystery" id="toc-the-tree-grid-mystery" class="nav-link" data-scroll-target="#the-tree-grid-mystery">The Tree-Grid Mystery</a></li>
+  <li><a href="#two-possible-histories" id="toc-two-possible-histories" class="nav-link" data-scroll-target="#two-possible-histories">Two Possible Histories…</a></li>
+  </ul></li>
+  <li><a href="#what-tools-do-we-have-for-distinguishing-between-these-cases" id="toc-what-tools-do-we-have-for-distinguishing-between-these-cases" class="nav-link" data-scroll-target="#what-tools-do-we-have-for-distinguishing-between-these-cases">What Tools Do We Have for Distinguishing Between These Cases?</a>
+  <ul class="collapse">
+  <li><a href="#why-do-events-appear-where-they-do-1" id="toc-why-do-events-appear-where-they-do-1" class="nav-link" data-scroll-target="#why-do-events-appear-where-they-do-1"><em>Why</em> Do Events Appear Where They Do?</a></li>
+  <li><a href="#what-do-these-functions-detect" id="toc-what-do-these-functions-detect" class="nav-link" data-scroll-target="#what-do-these-functions-detect">What Do These Functions “Detect”?</a></li>
+  </ul></li>
+  <li><a href="#a-menagerie-of-models" id="toc-a-menagerie-of-models" class="nav-link" data-scroll-target="#a-menagerie-of-models">A Menagerie of Models</a>
+  <ul class="collapse">
+  <li><a href="#poisson-point-processes-csr" id="toc-poisson-point-processes-csr" class="nav-link" data-scroll-target="#poisson-point-processes-csr">Poisson Point Processes (CSR)</a></li>
+  <li><a href="#simple-sequential-inhibition-ssi" id="toc-simple-sequential-inhibition-ssi" class="nav-link" data-scroll-target="#simple-sequential-inhibition-ssi">Simple Sequential Inhibition (SSI)</a></li>
+  <li><a href="#matérn-cluster-process" id="toc-matérn-cluster-process" class="nav-link" data-scroll-target="#matérn-cluster-process">Matérn Cluster Process</a></li>
+  <li><a href="#matérn-inhibition-process-i-and-ii" id="toc-matérn-inhibition-process-i-and-ii" class="nav-link" data-scroll-target="#matérn-inhibition-process-i-and-ii">Matérn Inhibition Process (I and II)</a></li>
+  <li><a href="#cox-processes-random-intensity-random-events" id="toc-cox-processes-random-intensity-random-events" class="nav-link" data-scroll-target="#cox-processes-random-intensity-random-events">Cox Processes: Random Intensity → Random Events</a></li>
+  </ul></li>
+  <li><a href="#hw3-tips" id="toc-hw3-tips" class="nav-link" data-scroll-target="#hw3-tips">HW3 Tips!</a>
+  <ul class="collapse">
+  <li><a href="#ppp-objects" id="toc-ppp-objects" class="nav-link" data-scroll-target="#ppp-objects"><code>ppp</code> Objects</a></li>
+  <li><a href="#ppp-leftrightarrow-sf-conversion" id="toc-ppp-leftrightarrow-sf-conversion" class="nav-link" data-scroll-target="#ppp-leftrightarrow-sf-conversion"><code>ppp</code> <span class="math inline">\(\leftrightarrow\)</span> <code>sf</code> Conversion</a></li>
+  <li><a href="#why-do-events-appear-where-they-do-2" id="toc-why-do-events-appear-where-they-do-2" class="nav-link" data-scroll-target="#why-do-events-appear-where-they-do-2"><em>Why</em> Do Events Appear Where They Do?</a></li>
+  <li><a href="#what-do-these-functions-detect-1" id="toc-what-do-these-functions-detect-1" class="nav-link" data-scroll-target="#what-do-these-functions-detect-1">What Do These Functions “Detect”?</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/w09/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 9: Evaluating Spatial Hypotheses I: Point Data</h1>
+<p class="subtitle lead"><em>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</em><br>Fall 2025</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Class Sessions</div>
+  </div>
+  </div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Jeff Jacobs </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="mailto:jj1088@georgetown.edu" target="_blank"><code>jj1088@georgetown.edu</code></a>
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Wednesday, October 22, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<center class="mb-3">
+<a class="h2" href="./slides.html" target="_blank">Open slides in new tab →</a>
+</center>
+<section id="roadmap-to-the-midterm" class="level1">
+<h1>Roadmap to the Midterm!</h1>
+<ul>
+<li>This Week (<strong>Oct 22</strong>): Evaluating Hypotheses for <strong>Point Data</strong></li>
+<li>Next Week (<strong>Oct 29</strong>): Evaluating Hypotheses for <strong>Areal Data</strong></li>
+<li>In-Class Midterm (<strong>Nov 5</strong>): Basically a “mini-homework” on <code>sf</code> → <code>ppp</code> → spatial hypothesis testing!</li>
+</ul>
+<div class="hidden">
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</section>
+<section id="so-what-do-we-do-with-morans-i" class="level1 smaller crunch-title not-title-slide title-11 text-60" data-stack-name="Solving Mysteries">
+<h1 class="smaller crunch-title not-title-slide title-11 text-60" data-stack-name="Solving Mysteries">So… What Do We <em>Do</em> With Moran’s <span class="math inline">\(I\)</span>?</h1>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<td></td>
+<td style="text-align: center;">Doctor</td>
+<td style="text-align: center;">Midterm Practice</td>
+<td style="text-align: center;">Midterm</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="tdvc" width="19%"><img src="images/mcmahon1.jpg" class="img-fluid"></td>
+<td class="tdvc" width="25%">Your temperature is 40° C</td>
+<td class="tdvc" width="30%">Moran’s <span class="math inline">\(I\)</span> of Protestant Churches is 0.58</td>
+<td class="tdvc">Moran’s <span class="math inline">\(I\)</span> of toxic waste dump sites is 0.67</td>
+</tr>
+<tr class="even">
+<td class="tdvc"><img src="images/mcmahon2.jpg" class="img-fluid"></td>
+<td class="tdvc">One cause could be malaria, 40% likelihood</td>
+<td class="tdvc">One cause could be urbanization, 40% likelihood</td>
+<td class="tdvc">One cause could be population density of stigmatized ethnic group, 60% likelihood</td>
+</tr>
+<tr class="odd">
+<td class="tdvc"><img src="images/mcmahon3.jpg" class="img-fluid"></td>
+<td class="tdvc">One cause could be lupus, 75% likelihood</td>
+<td class="tdvc">One cause could be distance from Luther, 75% likelihood</td>
+<td class="tdvc">One cause could be distance from <a href="https://en.wikipedia.org/wiki/United_Nations_Operation_in_C%C3%B4te_d%27Ivoire">UNOCI HQ</a>, 75% likelihood</td>
+</tr>
+<tr class="even">
+<td class="tdvc"><img src="images/mcmahon4.jpg" class="img-fluid"></td>
+<td class="tdvc">I judge lupus is the more likely cause, we should do <a href="https://www.mayoclinic.org/diseases-conditions/lupus/diagnosis-treatment/drc-20365790#treatment">lupus treatments</a></td>
+<td class="tdvc">I judge distance from Luther as more likely, we should study Luther more</td>
+<td class="tdvc">I judge distance from UNOCI is the most likely cause; handle in UN rather than ICC</td>
+</tr>
+</tbody>
+</table>
+<section id="caveat-2-summary-statistics-like-i-are-not-models" class="level2 title-10">
+<h2 class="title-10 anchored" data-anchor-id="caveat-2-summary-statistics-like-i-are-not-models">Caveat 2: Summary Statistics Like <span class="math inline">\(I\)</span> are Not <em>Models</em>!</h2>
+<ul>
+<li>Moran’s <span class="math inline">\(I\)</span> is to <strong>GISers</strong> what a thermometer is to <strong>doctors</strong></li>
+<li>Measures <strong>symptoms</strong>; many possible underlying <strong>causes!</strong></li>
+<li>Need to ask <em>why</em> autocorrelation seems to be present!</li>
+</ul>
+</section>
+<section id="why-do-events-appear-where-they-do" class="level2 smaller title-10 inline-90">
+<h2 class="smaller title-10 inline-90 anchored" data-anchor-id="why-do-events-appear-where-they-do">[<i class="bi bi-tree-fill"></i>] <em>Why</em> Do Events Appear Where They Do?</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6806</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>r_core <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Regularity via Inhibition</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Regularity via Inhibition</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>reg_sims <span class="ot">&lt;-</span> <span class="fu">rMaternI</span>(lambda, <span class="at">r=</span>r_core, <span class="at">win=</span>obs_window)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># CSR data</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>csr_sims <span class="ot">&lt;-</span> <span class="fu">rpoispp</span>(N, <span class="at">win=</span>obs_window)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">### Clustered data</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>clust_mu <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>clust_sims <span class="ot">&lt;-</span> <span class="fu">rMatClust</span>(<span class="at">kappa=</span>lambda <span class="sc">/</span> clust_mu, <span class="at">scale=</span><span class="dv">2</span><span class="sc">*</span>r_core, <span class="at">mu=</span><span class="dv">10</span>, <span class="at">win=</span>obs_window)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Each cluster consist of 10 points in a disc of radius 0.2</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>nclust <span class="ot">&lt;-</span> <span class="cf">function</span>(x0, y0, radius, n) {</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print(n)</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">runifdisc</span>(<span class="dv">10</span>, radius, <span class="at">centre=</span><span class="fu">c</span>(x0, y0)))</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>cond_clust_sims <span class="ot">&lt;-</span> <span class="fu">rNeymanScott</span>(<span class="at">kappa=</span><span class="dv">5</span>, <span class="at">expand=</span><span class="fl">0.0</span>, <span class="at">rclust=</span>nclust, <span class="at">radius=</span><span class="dv">2</span><span class="sc">*</span>r_core, <span class="at">n=</span><span class="dv">10</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>cond_clust_sf <span class="ot">&lt;-</span> cond_clust_sims <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>pines_plot <span class="ot">&lt;-</span> cond_clust_sf <span class="sc">|&gt;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">12</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/pines.png"</span>, pines_plot)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># density() calls density.ppp() if the argument is a ppp object</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>den <span class="ot">&lt;-</span> <span class="fu">density</span>(cond_clust_sims, <span class="at">sigma =</span> <span class="fl">0.1</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(den)</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"images/intensity_plot.png"</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(den, <span class="at">main =</span> <span class="st">"Intensity λ(s)"</span>)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(den, <span class="at">add =</span> <span class="cn">TRUE</span>) <span class="co"># contour plot</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co"># And Gest / Kest / Lest</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># saveRDS(cond_clust_sims, "cond_clust_sims.rds")</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>pcf_result <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">pcf.ppp</span>(</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  cond_clust_sims,</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">divisor=</span><span class="st">"d"</span>,</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">stoyan=</span><span class="fl">0.25</span>,</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">bw=</span><span class="fl">0.05</span>,</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">r=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.0</span>, <span class="at">to=</span><span class="fl">1.0</span>, <span class="at">by=</span><span class="fl">0.001</span>)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"images/spatstat_pcf.png"</span>)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcf_result, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">main=</span><span class="st">"pcf"</span>)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="co"># kest_result &lt;- Kest(cond_clust_sims, rmax=0.5, correction="best")</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="co"># lest_result &lt;- center_l_function(cond_clust_sims, rmax=0.5)</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="co"># png("images/lest.png")</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(lest_result, main="K(h)")</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="co"># dev.off()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 36%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>First-Order</th>
+<th>Second-Order</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>Events considered <strong>individually</strong> <span class="math inline">\(\Rightarrow\)</span> <strong>Intensity function <span class="math inline">\(\lambda(\mathbf{s})\)</span></strong></td>
+<td>Events considered <strong>pairwise</strong> <span class="math inline">\(\Rightarrow\)</span> <strong>Pairwise Correlation Function <span class="math inline">\(\textrm{pcf}(\vec{h})\)</span></strong></td>
+</tr>
+<tr class="even">
+<td><img src="images/pines.png" class="img-fluid"></td>
+<td><img src="images/intensity_plot.png" class="img-fluid"></td>
+<td><img src="images/spatstat_pcf.png" class="img-fluid"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-tree-grid-mystery" class="level2 crunch-title text-90 crunch-ul crunch-p">
+<h2 class="crunch-title text-90 crunch-ul crunch-p anchored" data-anchor-id="the-tree-grid-mystery">The Tree-Grid Mystery</h2>
+<p>You’ve been hired as an archaeologist – congratulations! Your job: determine whether arrangement of <strong>trees</strong> formed:</p>
+<ul>
+<li><strong>Naturally</strong>, via a process of <strong>resource competition</strong>, or</li>
+<li><strong>Artificially</strong>, via an ancient civilization planting in a <strong>grid</strong>…</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/tree-mystery-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="two-possible-histories" class="level2 crunch-title inline-90 smaller crunch-img crunch-quarto-figure">
+<h2 class="crunch-title inline-90 smaller crunch-img crunch-quarto-figure anchored" data-anchor-id="two-possible-histories">Two Possible Histories…</h2>
+<center>
+Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Art}}\)</span>: Artificial Formation
+</center>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code (Step 1: Grid Creation)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ha_base <span class="ot">&lt;-</span> <span class="dv">28</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>square_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(spatstat.geom<span class="sc">::</span><span class="fu">square</span>(<span class="dv">1</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>grid_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(sf<span class="sc">::</span><span class="fu">st_make_grid</span>(square_sf))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>grid_buffer_sf <span class="ot">&lt;-</span> grid_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_buffer</span>(<span class="at">dist=</span><span class="sc">-</span><span class="fl">0.01</span>, <span class="at">singleSide =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>grid_buffer_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>ha_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/artificial-grid-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code (Step 2: Point Generation)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>grid_points <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(grid_buffer_sf, <span class="at">size=</span><span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">100</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>grid_buffer_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">shape=</span><span class="st">'Cell'</span>)) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>grid_points) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="st">"Shape"</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">'Cell'</span><span class="ot">=</span><span class="dv">19</span>)) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>ha_base) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># legend.text = element_text(size=18)</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/artificial-grid-points-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code (Step 3: Observed Result)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>grid_ppp <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(grid_points, <span class="at">W=</span>spatstat.geom<span class="sc">::</span><span class="fu">square</span>(<span class="dv">1</span>))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>grid_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>ha_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/artificial-grid-result-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<center>
+Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natural Formation
+</center>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code (Step 1: Tree Generation)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hn_base <span class="ot">&lt;-</span> <span class="dv">28</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>pois_ppp <span class="ot">&lt;-</span> <span class="fu">rpoispp</span>(<span class="dv">150</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>pois_sf <span class="ot">&lt;-</span> pois_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>pois_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>hn_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/gen-trees-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:34%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code (Step 2: Competition)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fu">npoints</span>(pois_ppp))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>pair_dists <span class="ot">&lt;-</span> <span class="fu">pairdist</span>(pois_ppp)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>close <span class="ot">&lt;-</span> (pair_dists <span class="sc">&lt;</span> r)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>later <span class="ot">&lt;-</span> <span class="fu">outer</span>(age, age, <span class="st">"&gt;"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>killed <span class="ot">&lt;-</span> <span class="fu">apply</span>(close <span class="sc">&amp;</span> later, <span class="dv">1</span>, any)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>killed_ppp <span class="ot">&lt;-</span> pois_ppp[killed]</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>alive_ppp <span class="ot">&lt;-</span> pois_ppp[<span class="sc">!</span>killed]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>pois_window_sf <span class="ot">&lt;-</span> pois_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">filter</span>(label<span class="sc">==</span><span class="st">"window"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>pois_killed_sf <span class="ot">&lt;-</span> killed_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">filter</span>(label<span class="sc">==</span><span class="st">"point"</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>pois_alive_sf <span class="ot">&lt;-</span> alive_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">filter</span>(label<span class="sc">==</span><span class="st">"point"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>alive_buff_sf <span class="ot">&lt;-</span> pois_alive_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_buffer</span>(r) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_union</span>() <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_intersection</span>(pois_window_sf)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>pois_window_sf) <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>alive_buff_sf, <span class="fu">aes</span>(<span class="at">color=</span><span class="st">'Inhibition'</span>, <span class="at">shape=</span><span class="st">'Inhibition'</span>), <span class="at">linetype=</span><span class="st">'dashed'</span>) <span class="sc">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>pois_killed_sf, <span class="fu">aes</span>(<span class="at">color=</span><span class="st">'Dead'</span>, <span class="at">shape=</span><span class="st">'Dead'</span>), <span class="at">size=</span><span class="dv">2</span>, <span class="at">stroke=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>pois_alive_sf, <span class="fu">aes</span>(<span class="at">color=</span><span class="st">'Alive'</span>, <span class="at">shape=</span><span class="st">'Alive'</span>), <span class="at">size=</span><span class="dv">1</span>, <span class="at">stroke=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"Alive"</span><span class="ot">=</span><span class="dv">19</span>, <span class="st">"Dead"</span><span class="ot">=</span><span class="dv">4</span>, <span class="st">'Inhibition'</span><span class="ot">=</span><span class="dv">21</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Alive"</span>, <span class="st">"Dead"</span>, <span class="st">"Inhibition"</span>)) <span class="sc">+</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"Alive"</span><span class="ot">=</span><span class="st">"black"</span>, <span class="st">"Dead"</span><span class="ot">=</span>cb_palette[<span class="dv">1</span>], <span class="st">"Inhibition"</span><span class="ot">=</span><span class="st">"black"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Alive"</span>, <span class="st">"Dead"</span>, <span class="st">"Inhibition"</span>)) <span class="sc">+</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">shape=</span><span class="fu">guide_legend</span>(<span class="at">override.aes=</span><span class="fu">list</span>(<span class="at">fill =</span> <span class="st">"white"</span>))) <span class="sc">+</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> hn_base) <span class="sc">+</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="st">"cm"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/kill-trees-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:32%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code (Step 3: Observed Result)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>alive_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>hn_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/post-tree-killing-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="what-tools-do-we-have-for-distinguishing-between-these-cases" class="level1" data-stack-name="First/Second Moments">
+<h1 data-stack-name="First/Second Moments">What Tools Do We Have for Distinguishing Between These Cases?</h1>
+<ul>
+<li><strong>“First-Order”</strong> measures vs.&nbsp;<strong>“Second-Order”</strong> measures</li>
+</ul>
+<section id="why-do-events-appear-where-they-do-1" class="level2 smaller title-12 inline-95 nostretch text-65">
+<h2 class="smaller title-12 inline-95 nostretch text-65 anchored" data-anchor-id="why-do-events-appear-where-they-do-1"><em>Why</em> Do Events Appear Where They Do?</h2>
+<div class="cell" data-layout-align="center" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6809</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>r_core <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="do">### Clustered data</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>clust_ppp <span class="ot">&lt;-</span> <span class="fu">rMatClust</span>(</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">kappa=</span><span class="dv">6</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale=</span>r_core,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu=</span><span class="dv">10</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>clust_sf <span class="ot">&lt;-</span> clust_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>clust_plot <span class="ot">&lt;-</span> clust_sf <span class="sc">|&gt;</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">18</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/clust_ppp.png"</span>, clust_plot, <span class="at">width=</span><span class="dv">3</span>, <span class="at">height=</span><span class="dv">3</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Intensity fn</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>clust_intensity <span class="ot">&lt;-</span> <span class="fu">density</span>(clust_ppp, <span class="at">sigma =</span> <span class="fl">0.1</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"images/clust_intensity.png"</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">las=</span><span class="dv">2</span>, <span class="at">oma=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(clust_intensity, <span class="at">main=</span><span class="cn">NULL</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(clust_intensity, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="do">### PCF</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>clust_pcf <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">pcf</span>(</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  clust_ppp, <span class="at">divisor=</span><span class="st">"d"</span>,</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">r=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.00</span>, <span class="at">to=</span><span class="fl">0.50</span>, <span class="at">by=</span><span class="fl">0.01</span>)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>clust_pcf_plot <span class="ot">&lt;-</span> clust_pcf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>r, <span class="at">y=</span>iso)) <span class="sc">+</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">1</span>, <span class="at">linetype=</span><span class="st">'dashed'</span>, <span class="at">linewidth=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">color=</span><span class="st">'black'</span>, <span class="at">fill=</span>cb_palette[<span class="dv">1</span>], <span class="at">alpha=</span><span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.0</span>, <span class="at">to=</span><span class="fl">1.0</span>, <span class="at">by=</span><span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Distance"</span>, <span class="at">y=</span><span class="st">"Density"</span>) <span class="sc">+</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">14</span>)</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/clust_pcf.png"</span>, clust_pcf_plot, <span class="at">width=</span><span class="dv">3</span>, <span class="at">height=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 33%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Original Data</th>
+<th data-quarto-table-cell-role="th">First-Order</th>
+<th data-quarto-table-cell-role="th">Second-Order</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="tdvc" style="text-align: center;"><span class="math inline">\(N = 60\)</span> Events</td>
+<td class="tdvc">Events modeled <strong>individually</strong><br><span class="math inline">\(\Rightarrow\)</span> <strong>Intensity Function <span class="math inline">\(\lambda(\mathbf{s})\)</span></strong></td>
+<td>Events modeled <strong>pairwise</strong> <span class="math inline">\(\Rightarrow\)</span> <strong>Pairwise-Corr Function</strong> <span class="math inline">\(\textrm{pcf}(\vec{h})\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><img src="images/clust_ppp.png" class="img-fluid" width="450"></td>
+<td class="tdvc"><img src="images/clust_intensity.png" class="img-fluid" style="width:100.0%"></td>
+<td class="tdvc"><img src="images/clust_pcf.png" class="img-fluid" style="width:80.0%"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="what-do-these-functions-detect" class="level2 crunch-title smaller crunch-img crunch-quarto-figure crunch-columns title-12">
+<h2 class="crunch-title smaller crunch-img crunch-quarto-figure crunch-columns title-12 anchored" data-anchor-id="what-do-these-functions-detect">What Do These Functions “Detect”?</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code (Fixed Points)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sq_base <span class="ot">&lt;-</span> <span class="dv">16</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sq_psize <span class="ot">&lt;-</span> <span class="fl">2.5</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>r0 <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>sq_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>x, <span class="sc">~</span>y,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.5</span><span class="sc">-</span>r0,<span class="fl">0.5</span><span class="sc">-</span>r0,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.5</span><span class="sc">+</span>r0,<span class="fl">0.5</span><span class="sc">+</span>r0,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.5</span><span class="sc">-</span>r0,<span class="fl">0.5</span><span class="sc">+</span>r0,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.5</span><span class="sc">+</span>r0,<span class="fl">0.5</span><span class="sc">-</span>r0</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>sq_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  sq_df,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"x"</span>,<span class="st">"y"</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>sq_ppp <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(sq_sf, <span class="at">W=</span>obs_window)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>sq_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">size=</span>sq_psize) <span class="sc">+</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/sq-point-plot-1.png" class="img-fluid figure-img" width="264"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">las=</span><span class="dv">2</span>, <span class="at">oma=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sq_density <span class="ot">&lt;-</span> <span class="fu">density</span>(sq_ppp)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sq_density, <span class="at">main=</span><span class="cn">NULL</span>, <span class="at">xaxs=</span><span class="st">'i'</span>, <span class="at">yaxs=</span><span class="st">'i'</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(sq_density, <span class="at">xaxs=</span><span class="st">'i'</span>, <span class="at">yaxs=</span><span class="st">'i'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/sq-intensity-plot-1.png" class="img-fluid figure-img" width="288"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">### PCF</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>pcf_result <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">pcf</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  sq_ppp,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">divisor=</span><span class="st">"d"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">r=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.00</span>, <span class="at">to=</span><span class="fl">0.8</span>, <span class="at">by=</span><span class="fl">0.01</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>pcf_result <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>r, <span class="at">y=</span>iso)) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">1</span>, <span class="at">linetype=</span><span class="st">'dashed'</span>, <span class="at">linewidth=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">color=</span><span class="st">'black'</span>, <span class="at">fill=</span>cb_palette[<span class="dv">1</span>], <span class="at">alpha=</span><span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.0</span>, <span class="at">to=</span><span class="fl">1.0</span>, <span class="at">by=</span><span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/sq-pcf-plot-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- CSR pattern -->
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code (CSR Points)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>csr_ppp <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda =</span> <span class="dv">60</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">win=</span>obs_window</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>csr_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">size=</span>sq_psize) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/csr-properties-plot-1.png" class="img-fluid figure-img" width="264"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">las=</span><span class="dv">2</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">oma=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>csr_density <span class="ot">&lt;-</span> <span class="fu">density</span>(csr_ppp)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(csr_density, <span class="at">main=</span><span class="cn">NULL</span>, <span class="at">xaxs=</span><span class="st">"i"</span>, <span class="at">yaxs=</span><span class="st">"i"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(csr_density, <span class="at">xaxs=</span><span class="st">"i"</span>, <span class="at">yaxs=</span><span class="st">"i"</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd=</span><span class="fl">1.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/csr-intensity-plot-1.png" class="img-fluid figure-img" width="288"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>csr_pcf_result <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">pcf</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  csr_ppp,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">divisor=</span><span class="st">"d"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">r=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.00</span>, <span class="at">to=</span><span class="fl">0.8</span>, <span class="at">by=</span><span class="fl">0.01</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>csr_pcf_result <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>r, <span class="at">y=</span>iso)) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">1</span>, <span class="at">linetype=</span><span class="st">'dashed'</span>, <span class="at">linewidth=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">color=</span><span class="st">'black'</span>, <span class="at">fill=</span>cb_palette[<span class="dv">1</span>], <span class="at">alpha=</span><span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.0</span>, <span class="at">to=</span><span class="fl">1.0</span>, <span class="at">by=</span><span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/csr-pcf-plot-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="a-menagerie-of-models" class="level1 title-12 not-title-slide" data-stack-name="Visualizing Models">
+<h1 class="title-12 not-title-slide" data-stack-name="Visualizing Models">A Menagerie of Models</h1>
+<center>
+<p><a href="https://jjacobs.me/gis-webr">Open Interactive (WebR) Version</a></p>
+</center>
+<section id="poisson-point-processes-csr" class="level2 crunch-title crunch-img crunch-ul inline-90">
+<h2 class="crunch-title crunch-img crunch-ul inline-90 anchored" data-anchor-id="poisson-point-processes-csr">Poisson Point Processes (CSR)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(lambda, win)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><i class="bi bi-1-circle"></i> <span class="math inline">\(N \sim \text{Pois}(\lambda)\)</span></li>
+<li><i class="bi bi-2-circle"></i> For <span class="math inline">\(i \in \{1, \ldots, N\}\)</span>:
+<ul>
+<li>Generate <span class="math inline">\(X_i, Y_i \sim \mathcal{U}(\texttt{win})\)</span></li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sim_base <span class="ot">&lt;-</span> <span class="dv">22</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>sim_psize <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>sim_xticks <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.0</span>, <span class="at">to=</span><span class="fl">1.0</span>, <span class="at">by=</span><span class="fl">0.2</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>sim_yticks <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.0</span>, <span class="at">to=</span><span class="fl">1.0</span>, <span class="at">by=</span><span class="fl">0.2</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>gen_pois_df <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">num_sims=</span><span class="dv">1</span>) {</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  pois_sims <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">lambda =</span> <span class="dv">60</span>, <span class="at">nsim=</span>num_sims</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(tibble<span class="sc">::</span><span class="fu">as_tibble</span>(pois_sims))</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#pois_dfs &lt;- gen_pois_df()</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#pois_dfs |&gt; head()</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>pois_sims <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda =</span> <span class="dv">60</span>, <span class="at">nsim=</span><span class="dv">3</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>to_sim_df <span class="ot">&lt;-</span> <span class="cf">function</span>(cur_sim, sim_name) {</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  cur_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">as_tibble</span>(cur_sim) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">sim=</span>sim_name)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(cur_df)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>combined_df <span class="ot">&lt;-</span> <span class="fu">imap</span>(<span class="at">.x=</span>pois_sims, <span class="at">.f=</span>to_sim_df) <span class="sc">|&gt;</span> <span class="fu">bind_rows</span>()</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>combined_df <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span>sim_psize) <span class="sc">+</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sim)) <span class="sc">+</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sim_base) <span class="sc">+</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">"lines"</span>)) <span class="sc">+</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span>sim_xticks) <span class="sc">+</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span>sim_yticks)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/pois-ppp-sims-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="simple-sequential-inhibition-ssi" class="level2 smaller crunch-title title-11 inline-90 code-90 crunch-img crunch-quarto-figure crunch-ul">
+<h2 class="smaller crunch-title title-11 inline-90 code-90 crunch-img crunch-quarto-figure crunch-ul anchored" data-anchor-id="simple-sequential-inhibition-ssi">Simple Sequential Inhibition (SSI)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>spatstat.random<span class="sc">::</span><span class="fu">rSSI</span>(r, <span class="at">n=</span><span class="cn">Inf</span>, <span class="at">giveup=</span><span class="dv">1000</span>, win)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><span class="math inline">\(\mathbf{S} = \varnothing\)</span></li>
+<li>While not <code>done</code>:
+<ul>
+<li><i class="bi bi-1-circle"></i> Generate <span class="math inline">\(\mathbf{E} = (X, Y) \sim \mathcal{U}(\texttt{win})\)</span></li>
+<li><i class="bi bi-2-circle"></i> Check if <span class="math inline">\(\mathbf{E}\)</span> within <code>r</code> units of any existing point in <span class="math inline">\(\mathbf{S}\)</span>
+<ul>
+<li>If it is, <strong>throw <span class="math inline">\(\mathbf{E}\)</span> away</strong>. Otherwise, <strong>add <span class="math inline">\(\mathbf{E}\)</span> to <span class="math inline">\(\mathbf{S}\)</span></strong></li>
+</ul></li>
+<li><i class="bi bi-3-circle"></i> <code>done=TRUE</code> if <span class="math inline">\(\mathbf{S}\)</span> has <code>n</code> points OR has been the same for <code>giveup</code> steps</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">capture.output</span>(ssi_sims <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rSSI</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="fl">0.05</span>, <span class="at">n=</span><span class="dv">60</span>, <span class="at">nsim=</span><span class="dv">3</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>), <span class="at">file=</span><span class="fu">nullfile</span>())</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>combined_df <span class="ot">&lt;-</span> <span class="fu">imap</span>(<span class="at">.x=</span>ssi_sims, <span class="at">.f=</span>to_sim_df) <span class="sc">|&gt;</span> <span class="fu">bind_rows</span>()</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>combined_df <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span>sim_psize) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sim)) <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">24</span>) <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"lines"</span>)) <span class="sc">+</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span>sim_xticks) <span class="sc">+</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span>sim_yticks)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/ssi-sims-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="matérn-cluster-process" class="level2 crunch-title smaller code-90">
+<h2 class="crunch-title smaller code-90 anchored" data-anchor-id="matérn-cluster-process">Matérn Cluster Process</h2>
+<div class="columns">
+<div class="column" style="width:75%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>spatstat.random<span class="sc">::</span><span class="fu">rMatClust</span>(kappa, scale, mu, win)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:25%;">
+<p><a href="https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMatClust.html" target="_blank">Docs</a></p>
+</div>
+</div>
+<ul>
+<li><i class="bi bi-1-circle"></i> Generate <span class="math inline">\(K(\kappa)\)</span> <strong>parent points</strong> via Poisson Point Process with intensity <span class="math inline">\(\lambda = \kappa\)</span></li>
+<li><i class="bi bi-2-circle"></i> For each parent point <span class="math inline">\(\mathbf{s}_i \in \left\{\mathbf{s}_1, \ldots, \mathbf{s}_{K(\kappa)}\right\}\)</span>:
+<ul>
+<li>Generate <span class="math inline">\(N(\mu)\)</span> <strong>offspring points</strong> via Poisson Point Process with intensity <span class="math inline">\(\lambda = \mu\)</span>, distributed uniformly within a <strong>circle of radius <code>scale</code></strong> centered at <span class="math inline">\(\mathbf{s}_i\)</span></li>
+</ul></li>
+<li><i class="bi bi-3-circle"></i> <strong>Offspring points</strong> form the outcome (parent points are thrown away)</li>
+</ul>
+<div class="cell" data-layout-align="center" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>matclust_sims <span class="ot">&lt;-</span> <span class="fu">rMatClust</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">kappa =</span> <span class="dv">6</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="fl">0.075</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="dv">10</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nsim =</span> <span class="dv">3</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>matclust_df <span class="ot">&lt;-</span> <span class="fu">imap</span>(<span class="at">.x=</span>matclust_sims, <span class="at">.f=</span>to_sim_df) <span class="sc">|&gt;</span> <span class="fu">bind_rows</span>()</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>matclust_plot <span class="ot">&lt;-</span> matclust_df <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span>sim_psize) <span class="sc">+</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sim), <span class="at">nrow=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sim_base) <span class="sc">+</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">"lines"</span>)) <span class="sc">+</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span>sim_xticks) <span class="sc">+</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span>sim_yticks)</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>matclust_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/matclust-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="matérn-inhibition-process-i-and-ii" class="level2 smaller crunch-title inline-85 crunch-ul title-12 text-65">
+<h2 class="smaller crunch-title inline-85 crunch-ul title-12 text-65 anchored" data-anchor-id="matérn-inhibition-process-i-and-ii">Matérn Inhibition Process (I and II)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>spatstat.random<span class="sc">::</span><span class="fu">rMaternI</span>(kappa, r, win)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>spatstat.random<span class="sc">::</span><span class="fu">rMaternII</span>(kappa, r, win)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th"><strong><code>rMaternI()</code></strong> [<a href="https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMaternI.html" target="_blank">Docs</a>]</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th"><strong><code>rMaternII()</code></strong> [<a href="https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMaternII.html" target="_blank">Docs</a>]<br>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="tdvt"><ul>
+<li><i class="bi bi-1-circle"></i> Generate events <span class="math inline">\(\mathbf{S} = \{\mathbf{s}_1, \ldots, \mathbf{s}_{N(\lambda)}\}\)</span> via Poisson point process with <span class="math inline">\(\lambda = \kappa\)</span></li>
+</ul></td>
+<td class="tdvt"><ul>
+<li><i class="bi bi-1-circle"></i> Generate events <span class="math inline">\(\mathbf{S} = \{\mathbf{s}_1, \ldots, \mathbf{s}_{N(\lambda)}\}\)</span> via Poisson point process with <span class="math inline">\(\lambda = \kappa\)</span>, plus <strong>timestamp</strong> <span class="math inline">\(t_i \sim \mathcal{U}(0,1)\)</span> for each <span class="math inline">\(\mathbf{s}_i\)</span></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td class="tdvt"><ul>
+<li><i class="bi bi-2-circle"></i> Delete all <strong>pairs</strong> of points <span class="math inline">\(\mathbf{s}_i\)</span>, <span class="math inline">\(\mathbf{s}_j\)</span> for which <span class="math inline">\(\textsf{dist}(\mathbf{s}_i, \mathbf{s}_j) &lt; \texttt{r}\)</span></li>
+</ul></td>
+<td><ul>
+<li><i class="bi bi-2-circle"></i> For each pair of points <span class="math inline">\(\mathbf{s}_i\)</span>, <span class="math inline">\(\mathbf{s}_j\)</span>: if <span class="math inline">\(\textsf{dist}(\mathbf{s}_i, \mathbf{s}_j) &lt; \texttt{r}\)</span>, delete the <strong>later</strong> point</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<div class="cell" data-layout-align="center" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mI_sims <span class="ot">&lt;-</span> <span class="fu">rMaternI</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">kappa =</span> <span class="dv">60</span>, <span class="at">r =</span> <span class="fl">0.075</span>, <span class="at">nsim=</span><span class="dv">2</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>mII_sims <span class="ot">&lt;-</span> <span class="fu">rMaternII</span>(</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">kappa =</span> <span class="dv">60</span>, <span class="at">r =</span> <span class="fl">0.075</span>, <span class="at">nsim=</span><span class="dv">2</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>mI_combined_df <span class="ot">&lt;-</span> <span class="fu">imap</span>(<span class="at">.x=</span>mI_sims, <span class="at">.f=</span>to_sim_df) <span class="sc">|&gt;</span> <span class="fu">bind_rows</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">sim=</span><span class="fu">paste0</span>(<span class="st">"MI "</span>,sim))</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>mII_combined_df <span class="ot">&lt;-</span> <span class="fu">imap</span>(<span class="at">.x=</span>mII_sims, <span class="at">.f=</span>to_sim_df) <span class="sc">|&gt;</span> <span class="fu">bind_rows</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">sim=</span><span class="fu">paste0</span>(<span class="st">"MII "</span>,sim))</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>m_combined_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(mI_combined_df, mII_combined_df)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>m_plot <span class="ot">&lt;-</span> m_combined_df <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span>sim_psize) <span class="sc">+</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sim), <span class="at">nrow=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sim_base) <span class="sc">+</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">"lines"</span>)) <span class="sc">+</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span>sim_xticks) <span class="sc">+</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span>sim_yticks)</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>m_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/matern-inhib-plots-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="cox-processes-random-intensity-random-events" class="level2 smaller crunch-title title-10 code-90">
+<h2 class="smaller crunch-title title-10 code-90 anchored" data-anchor-id="cox-processes-random-intensity-random-events">Cox Processes: Random Intensity → Random Events</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>spatstat.random<span class="sc">::</span><span class="fu">rLGCP</span>(model, mu, param, win)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>models<span class="ot">=</span><span class="fu">c</span>(<span class="st">"exponential"</span>, <span class="st">"gauss"</span>, <span class="st">"stable"</span>, <span class="st">"gencauchy"</span>, <span class="st">"matern"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:40%;">
+<p><a href="https://search.r-project.org/CRAN/refmans/spatstat.random/html/rLGCP.html" target="_blank">Docs</a></p>
+</div>
+</div>
+<div class="cell" data-layout-align="center" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>cox_pcol <span class="ot">&lt;-</span> <span class="st">"black"</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>cox_bg <span class="ot">&lt;-</span> <span class="st">"grey90"</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>cox_pch <span class="ot">&lt;-</span> <span class="dv">21</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># inhomogeneous LGCP with Gaussian covariance function</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">as.im</span>(<span class="cf">function</span>(x, y){</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">5</span> <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> (x <span class="sc">-</span> <span class="fl">0.5</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> (y <span class="sc">-</span> <span class="fl">0.5</span>)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>}, <span class="at">W=</span><span class="fu">owin</span>())</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>lgcp_sims <span class="ot">&lt;-</span> <span class="fu">rLGCP</span>(<span class="st">"gauss"</span>, m, <span class="at">var=</span><span class="fl">0.15</span>, <span class="at">scale =</span><span class="fl">0.5</span>, <span class="at">nsim=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: 32750 out of 65536 terms (50%) in FFT calculation of matrix square
+root were negative, and were set to zero. Range: [-2.96, 1910]</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lgcp_combined_df &lt;- imap(.x=ssi_sims, .f=to_sim_df) |&gt; bind_rows()</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>plot_lgcp <span class="ot">&lt;-</span> <span class="cf">function</span>(lgcp_sim) {</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">attr</span>(lgcp_sim, <span class="st">"Lambda"</span>), <span class="at">main=</span><span class="cn">NULL</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">points</span>(lgcp_sim, <span class="at">col=</span>cox_pcol, <span class="at">bg=</span>cox_bg, <span class="at">pch=</span>cox_pch)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">oma=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">las=</span><span class="dv">2</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>nulls <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X=</span>lgcp_sims, <span class="at">FUN=</span>plot_lgcp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/lgcp-sim-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="hw3-tips" class="level1" data-stack-name="HW3">
+<h1 data-stack-name="HW3">HW3 Tips!</h1>
+<ul>
+<li><code>ppp</code> Objects</li>
+<li>Converting between <code>ppp</code> and <code>sf</code></li>
+<li>Plotting</li>
+</ul>
+<section id="ppp-objects" class="level2 smaller crunch-title crunch-ul smaller-table">
+<h2 class="smaller crunch-title crunch-ul smaller-table anchored" data-anchor-id="ppp-objects"><code>ppp</code> Objects</h2>
+<ul>
+<li>The <strong>main</strong> datatype used to represent <strong>P</strong>lanar <strong>P</strong>oint <strong>P</strong>atterns [<code>spatstat</code> book p.&nbsp;41]</li>
+<li>Unlike <code>sf</code> objects, which contain data+geometries for any desired collection of <span class="math inline">\(N\)</span> entities, <code>ppp</code> objects are <strong>required</strong> to have at least an <strong>observation window</strong>!</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><code>sf</code> Creation:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>tree_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">lon=</span><span class="fu">runif</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">lat=</span><span class="fu">runif</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">age=</span><span class="fu">runif</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>tree_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  tree_df,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">'lon'</span>, <span class="st">'lat'</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>tree_sf <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">age</th>
+<th style="text-align: left;">geometry</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.8593935</td>
+<td style="text-align: left;">POINT (0.5035446 0.05519595)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.9770798</td>
+<td style="text-align: left;">POINT (0.2606818 0.3874983)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.9517643</td>
+<td style="text-align: left;">POINT (0.5464588 0.8271631)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.0592741</td>
+<td style="text-align: left;">POINT (0.7999682 0.5852131)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><code>ppp</code> Creation:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pois_ppp <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda=</span><span class="dv">100</span>, <span class="at">win=</span>spatstat.geom<span class="sc">::</span><span class="fu">square</span>(<span class="dv">1</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>pois_ppp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Planar point pattern: 93 points
+window: rectangle = [0, 1] x [0, 1] units</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(pois_ppp)<span class="sc">$</span>names</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "window"     "n"          "x"          "y"          "markformat"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pois_ppp<span class="sc">$</span>x <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.51779807 0.62213583 0.84467836 0.05354204</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ppp-leftrightarrow-sf-conversion" class="level2 smaller smaller-table crunch-title crunch-details crunch-img crunch-quarto-figure">
+<h2 class="smaller smaller-table crunch-title crunch-details crunch-img crunch-quarto-figure anchored" data-anchor-id="ppp-leftrightarrow-sf-conversion"><code>ppp</code> <span class="math inline">\(\leftrightarrow\)</span> <code>sf</code> Conversion</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><code>ppp</code> to <code>sf</code> Conversion:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>pois_sf <span class="ot">&lt;-</span> pois_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>pois_sf <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">label</th>
+<th style="text-align: left;">geom</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">window</td>
+<td style="text-align: left;">POLYGON ((0 0, 1 0, 1 1, 0 …</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.5177981 0.553718)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.6221358 0.3933781)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">POINT (0.8446784 0.8187611)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mdthemes) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>pois_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>pois_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label<span class="sc">==</span><span class="st">"window"</span>), <span class="fu">aes</span>(<span class="at">fill=</span><span class="st">'grey'</span>)) <span class="sc">+</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>pois_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">!=</span> <span class="st">"window"</span>), <span class="fu">aes</span>(<span class="at">color=</span><span class="st">'black'</span>)) <span class="sc">+</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">md_theme_classic</span>(<span class="at">base_size=</span><span class="dv">26</span>) <span class="sc">+</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"gray90"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"&lt;span style='font-family: mono'&gt;label == 'window'&lt;/span&gt;"</span>)) <span class="sc">+</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"&lt;span style='font-family: mono'&gt;label == 'point'&lt;/span&gt;"</span>)) <span class="sc">+</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"&lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; &amp;rarr; &lt;span style='font-family: mono'&gt;sf&lt;/span&gt; Result"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/converted-sf-plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><code>sf</code> to <code>ppp</code> Conversion:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>square_sfc <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_polygon</span>(<span class="fu">list</span>(</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">nrow=</span><span class="dv">5</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>)) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_sfc</span>()</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>tree_ppp <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  sf<span class="sc">::</span><span class="fu">st_as_sfc</span>(tree_sf),</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">W=</span><span class="fu">as.owin</span>(square_sfc)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>tree_ppp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Planar point pattern: 100 points
+window: polygonal boundary
+enclosing rectangle: [0, 1] x [0, 1] units</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>tree_ppp_sf <span class="ot">&lt;-</span> tree_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>tree_ppp_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill=</span><span class="st">'gray90'</span>)) <span class="sc">+</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>tree_ppp_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">!=</span> <span class="st">"window"</span>), <span class="fu">aes</span>(<span class="at">color=</span><span class="st">'black'</span>)) <span class="sc">+</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">md_theme_classic</span>(<span class="at">base_size=</span><span class="dv">26</span>) <span class="sc">+</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"gray90"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"&lt;span style='font-family: mono'&gt;tree_ppp$window&lt;/span&gt;"</span>)) <span class="sc">+</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name=</span><span class="cn">NULL</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"black"</span>), <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"&lt;span style='font-family: mono'&gt;tree_ppp${x,y}&lt;/span&gt;"</span>)) <span class="sc">+</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"&lt;span style='font-family: mono'&gt;sf&lt;/span&gt; &amp;rarr; &lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; Result"</span>,</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="st">"&lt;span style='font-family: mono'&gt;tree_ppp$x&lt;/span&gt;"</span>,</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="st">"&lt;span style='font-family: mono'&gt;tree_ppp$y&lt;/span&gt;"</span></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">order =</span> <span class="dv">1</span>), </span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">order =</span> <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/converted-ppp-plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="why-do-events-appear-where-they-do-2" class="level2 smaller title-12 inline-90 nostretch">
+<h2 class="smaller title-12 inline-90 nostretch anchored" data-anchor-id="why-do-events-appear-where-they-do-2"><em>Why</em> Do Events Appear Where They Do?</h2>
+<div class="cell" data-layout-align="center" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6809</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>r_core <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="do">### Clustered data</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>clust_ppp <span class="ot">&lt;-</span> <span class="fu">rMatClust</span>(</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">kappa=</span><span class="dv">6</span>,</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale=</span>r_core,</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu=</span><span class="dv">10</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>clust_sf <span class="ot">&lt;-</span> clust_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>clust_plot <span class="ot">&lt;-</span> clust_sf <span class="sc">|&gt;</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">18</span>)</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/clust_ppp.png"</span>, clust_plot, <span class="at">width=</span><span class="dv">3</span>, <span class="at">height=</span><span class="dv">3</span>)</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Intensity fn</span></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>clust_intensity <span class="ot">&lt;-</span> <span class="fu">density</span>(clust_ppp, <span class="at">sigma =</span> <span class="fl">0.1</span>)</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"images/clust_intensity.png"</span>)</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">las=</span><span class="dv">2</span>, <span class="at">oma=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(clust_intensity, <span class="at">main=</span><span class="cn">NULL</span>)</span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(clust_intensity, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a><span class="do">### PCF</span></span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>clust_pcf <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">pcf</span>(</span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>  clust_ppp, <span class="at">divisor=</span><span class="st">"d"</span>,</span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">r=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.00</span>, <span class="at">to=</span><span class="fl">0.50</span>, <span class="at">by=</span><span class="fl">0.01</span>)</span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a>clust_pcf_plot <span class="ot">&lt;-</span> clust_pcf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>r, <span class="at">y=</span>iso)) <span class="sc">+</span></span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">1</span>, <span class="at">linetype=</span><span class="st">'dashed'</span>, <span class="at">linewidth=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">color=</span><span class="st">'black'</span>, <span class="at">fill=</span>cb_palette[<span class="dv">1</span>], <span class="at">alpha=</span><span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.0</span>, <span class="at">to=</span><span class="fl">1.0</span>, <span class="at">by=</span><span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Distance"</span>, <span class="at">y=</span><span class="st">"Density"</span>) <span class="sc">+</span></span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">14</span>)</span>
+<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"images/clust_pcf.png"</span>, clust_pcf_plot, <span class="at">width=</span><span class="dv">3</span>, <span class="at">height=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 34%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Original Data</th>
+<th data-quarto-table-cell-role="th">First-Order</th>
+<th data-quarto-table-cell-role="th">Second-Order</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="tdvc"><span class="math inline">\(N = 60\)</span> Events</td>
+<td>Events modeled <strong>individually</strong><br><span class="math inline">\(\implies\)</span> <strong>Intensity function <span class="math inline">\(\lambda(\mathbf{s})\)</span></strong></td>
+<td>Events modeled <strong>pairwise</strong> <span class="math inline">\(\implies\)</span> <strong><span class="math inline">\(K\)</span>-function <span class="math inline">\(K(\vec{h})\)</span></strong></td>
+</tr>
+<tr class="even">
+<td><img src="images/clust_ppp.png" class="img-fluid" width="450"></td>
+<td class="tdvc"><img src="images/clust_intensity.png" class="img-fluid" style="width:100.0%"></td>
+<td class="tdvc"><img src="images/clust_pcf.png" class="img-fluid" style="width:80.0%"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="what-do-these-functions-detect-1" class="level2 crunch-title smaller crunch-img crunch-quarto-figure crunch-columns">
+<h2 class="crunch-title smaller crunch-img crunch-quarto-figure crunch-columns anchored" data-anchor-id="what-do-these-functions-detect-1">What Do These Functions “Detect”?</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>sq_base <span class="ot">&lt;-</span> <span class="dv">16</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>sq_psize <span class="ot">&lt;-</span> <span class="fl">2.5</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>obs_window <span class="ot">&lt;-</span> <span class="fu">square</span>(<span class="dv">1</span>)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>r0 <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>sq_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>x, <span class="sc">~</span>y,</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.5</span><span class="sc">-</span>r0,<span class="fl">0.5</span><span class="sc">-</span>r0,</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.5</span><span class="sc">+</span>r0,<span class="fl">0.5</span><span class="sc">+</span>r0,</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.5</span><span class="sc">-</span>r0,<span class="fl">0.5</span><span class="sc">+</span>r0,</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.5</span><span class="sc">+</span>r0,<span class="fl">0.5</span><span class="sc">-</span>r0</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>sq_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>  sq_df,</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"x"</span>,<span class="st">"y"</span>)</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>sq_ppp <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(sq_sf, <span class="at">W=</span>obs_window)</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>sq_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">size=</span>sq_psize) <span class="sc">+</span></span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/sq-point-plot2-1.png" class="img-fluid figure-img" width="240"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">las=</span><span class="dv">2</span>, <span class="at">oma=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>sq_density <span class="ot">&lt;-</span> <span class="fu">density</span>(sq_ppp)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sq_density, <span class="at">main=</span><span class="cn">NULL</span>, <span class="at">xaxs=</span><span class="st">'i'</span>, <span class="at">yaxs=</span><span class="st">'i'</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(sq_density, <span class="at">xaxs=</span><span class="st">'i'</span>, <span class="at">yaxs=</span><span class="st">'i'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/sq-intensity-plot2-1.png" class="img-fluid figure-img" width="288"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="do">### PCF</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>pcf_result <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">pcf</span>(</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  sq_ppp,</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">divisor=</span><span class="st">"d"</span>,</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">r=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.00</span>, <span class="at">to=</span><span class="fl">0.8</span>, <span class="at">by=</span><span class="fl">0.01</span>)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>pcf_result <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>r, <span class="at">y=</span>iso)) <span class="sc">+</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">1</span>, <span class="at">linetype=</span><span class="st">'dashed'</span>, <span class="at">linewidth=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">color=</span><span class="st">'black'</span>, <span class="at">fill=</span>cb_palette[<span class="dv">1</span>], <span class="at">alpha=</span><span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.0</span>, <span class="at">to=</span><span class="fl">1.0</span>, <span class="at">by=</span><span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/sq-pcf-plot2-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- CSR pattern -->
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>csr_ppp <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda =</span> <span class="dv">60</span>,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">win=</span>obs_window</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>csr_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">size=</span>sq_psize) <span class="sc">+</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/csr-properties-plot2-1.png" class="img-fluid figure-img" width="240"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-crop="true">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>),</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">las=</span><span class="dv">2</span>,</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">oma=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>csr_density <span class="ot">&lt;-</span> <span class="fu">density</span>(csr_ppp)</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(csr_density, <span class="at">main=</span><span class="cn">NULL</span>, <span class="at">xaxs=</span><span class="st">"i"</span>, <span class="at">yaxs=</span><span class="st">"i"</span>)</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(csr_density, <span class="at">xaxs=</span><span class="st">"i"</span>, <span class="at">yaxs=</span><span class="st">"i"</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd=</span><span class="fl">1.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/csr-intensity-plot2-1.png" class="img-fluid figure-img" width="288"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>csr_pcf_result <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">pcf</span>(</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  csr_ppp,</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">divisor=</span><span class="st">"d"</span>,</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">r=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.00</span>, <span class="at">to=</span><span class="fl">0.8</span>, <span class="at">by=</span><span class="fl">0.01</span>)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>csr_pcf_result <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>r, <span class="at">y=</span>iso)) <span class="sc">+</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">1</span>, <span class="at">linetype=</span><span class="st">'dashed'</span>, <span class="at">linewidth=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">color=</span><span class="st">'black'</span>, <span class="at">fill=</span>cb_palette[<span class="dv">1</span>], <span class="at">alpha=</span><span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fl">0.0</span>, <span class="at">to=</span><span class="fl">1.0</span>, <span class="at">by=</span><span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/csr-pcf-plot2-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" role="list">
+
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/w09/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>
