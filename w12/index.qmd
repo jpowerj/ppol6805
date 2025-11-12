@@ -14,6 +14,7 @@ csl: "../chicago-17-no-url.csl"
 echo: true
 code-fold: show
 html-math-method: mathjax
+cache: false
 # Format-specific settings:
 format:
   revealjs:
@@ -64,227 +65,19 @@ format:
 
 ## Due Date Details {.smaller .crunch-title .title-12}
 
-<style>
-.reveal a {
-  font-weight: unset !important;
-  background-color: unset !important;
-  text-decoration: unset !important;
-  color: black !important;
-}
-.reveal table {
-  margin: 0px !important;
-  padding: 0px !important;
-  table-layout: fixed !important;
-}
-.reveal table th, .reveal table td {
-  text-align: unset !important;
-  padding: unset !important;
-}
-.fc-scrollgrid-sync-inner {
-  text-align: center;
-}
-.fc-daygrid-day-frame {
-  /* border: 0.5px solid #f1f1f1 !important; */
-  border-right: 1px solid #f1f1f1 !important;
-}
-.fc-col-header-cell {
-  /* border: 0.5px solid #f1f1f1 !important; */
-  border-right: 1px solid #f1f1f1 !important;
-}
-th .fc-day-sun {
-  border-right: 2px solid #f1f1f1 !important;
-}
-.fc-event:first {
-  margin-top: -5px !important;
-}
-.fc-event-title-container {
-  line-height: 1.1 !important;
-  margin-top: 0px !important;
-  margin-bottom: -5px !important;
-}
-/* .fc-daygrid-block-event {
-  margin-right: -20px !important;
-} */
-.grade-projects {
-  margin-right: -16px !important;
-  /* color: green !important; */
-}
-tr:nth-of-type(3) td:nth-of-type(1) a:not(.movie-monday-3) > .fc-event-main {
-  background-color: #e69f00 !important;
-}
-.movie-monday-3 {
-  margin-top: 3px !important;
-}
-.reveal table tbody tr th, .reveal table tbody tr td {
-  /* border-bottom: 0px solid white !important; */
-  border-right: 0px solid white;
-  border-top: 0px solid white;
-  /* border-left: 0px solid white !important; */
-}
-/* .reveal table tbody tr th, .reveal table tbody tr td {
-  border-bottom: 0px solid white !important;
-  border-right: 0px solid black !important;
-  border-top: 0px solid white !important;
-} */
-.fc-toolbar {
-  font-size: 1rem !important;
-}
-.fc-header-toolbar {
-  margin-bottom: 5px !important;
-}
-.fc-scroller-harness {
-  border: 0px solid white !important;
-}
-.fc-scrollgrid {
-  border-top: 0px solid white !important;
-}
-/* .fc-scrollgrid-section td {
-  border: 0px solid white !important;
-} */
-/* .fc-h-event {
-  border: 0px solid white !important;
-} */
-.fc-toolbar-title {
-  font-size: 1.6rem !important;
-}
-.fc-event-title {
-  font-size: 0.9rem !important;
-}
-.fc-daygrid-day-number {
-  font-size: 0.9rem !important;
-}
-.fc-daygrid-day {
-  border-top: 1px solid #f1f1f1 !important;
-  border-right: 1px solid #f1f1f1 !important;
-  border-bottom: 1px solid #f1f1f1 !important;
-}
-.fc-col-header-cell {
-  font-size: 1rem !important;
-  font-weight: bold !important;
-}
-.fc-h-event .fc-event-main {
-  background-color: #3788d8f0 !important;
-}
-tr:nth-of-type(1) td:nth-of-type(3) .fc-event-main > * {
-  background-color: #e69f00 !important;
-}
-tr:nth-of-type(2) td:nth-of-type(3) .fc-event-main:nth-of-type(1) {
-  background-color: #3788d8f0 !important;
-}
-tr:nth-of-type(2) td:nth-of-type(5) .fc-event-main {
-  background-color: #e69f00 !important;
-}
-</style>
-
 <center>
 
-::: {html-table-processing="none"}
-
-```{=html}
-<div id='calendar'></div>
-```
-
-:::
+<iframe src="https://calendar.google.com/calendar/embed?height=550&wkst=1&ctz=America%2FNew_York&showPrint=0&src=Y19iMmNhM2I5NTM5MWY1OTk2Zjc0Y2FjMDQ5ZGE1MjZhZDY0YWIwOThmOTc3ZjIwZjQ1YTBiYTVjN2IwMmMxZWIyQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&color=%239e69af" style="border:solid 1px #777" width="900" height="550" frameborder="0" scrolling="no"></iframe>
 
 </center>
-
-<script>
-document.addEventListener(
-  'DOMContentLoaded',
-  function() {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(
-      calendarEl, {
-        initialView: 'dayGridMonth',
-        // initialView: 'multiMonthYear',
-        multiMonthMaxColumns: 1,
-        initialDate: '2025-12-01',
-        fixedWeekCount: false,
-        showNonCurrentDates: false,
-        firstDay: 1,
-        height: 530,
-        contentHeight: 530,
-        eventColor: '#3788d8',
-        eventBackgroundColor: '#3788d8',
-        aspectRatio: 1.2,
-        headerToolbar: {
-          // left: 'prev,next today',
-          left: '',
-          center: 'title',
-          right: '',
-        },
-        // eventDidMount: function(info) {
-        //   var tooltip = new bootstrap.Tooltip(info.el, {
-        //     // title: info.event.extendedProps.title,
-        //     title: 'testing',
-        //     placement: 'top',
-        //     trigger: 'hover',
-        //     container: 'body'
-        //   });
-        // },
-        events: [
-          {
-            title: 'Movie Monday',
-            start: '2025-12-01',
-          },
-          {
-            title: 'Project Showcase',
-            start: '2025-12-03',
-          },
-          {
-            title: 'Movie Monday',
-            start: '2025-12-08'
-          },
-          {
-            title: 'Present Big Data (J)',
-            start: '2025-12-08'
-          },
-          {
-            title: 'Present Big Data (A)',
-            start: '2025-12-10'
-          },
-          {
-            title: 'Project Due',
-            start: '2025-12-12'
-          },
-          {
-            title: 'Movie Monday',
-            start: '2025-12-15',
-            className: 'movie-monday-3'
-          },
-          {
-            title: 'Jeff Grades Projects',
-            start: '2025-12-15',
-            end: '2025-12-20',
-            className: 'grade-projects'
-          },
-          {
-            title: 'Movie Monday',
-            start: '2025-12-22',
-          },
-          {
-            title: 'Movie Monday',
-            start: '2025-12-29',
-          }
-        ]
-      }
-    );
-    calendar.render();
-    calendar.updateSize();
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
-  }
-);
-</script>
 
 ## Presentation Setup
 
 * Each of your desks becomes a **"table"** at a GIS conference!
-* Everyone can go around and ask others about their projects 😻
-* Once I have grilled you on yours (~2-5mins), you are free to leave
+* Everyone can go around and ask others about projects 😻
 * But, **FOOD** $\implies$ you can also stay!
 
-## Report Setup
+## Report Setup {.crunch-title}
 
 * [**GitHub repository**](https://github.com/) (for your portfolio!)
   * GH Pages site: `your_username.github.io/gis_project`
@@ -292,9 +85,111 @@ document.addEventListener(
 * [**Quarto Manuscript**](https://quarto.org/docs/manuscripts/)
 * What do you put in the Quarto manuscript?
 * **Writeup** + **Visualizations** + **Code**, interspersed!
-  * "Literate Programming" $\implies$ **Reproducible Results!**
+  * "Literate Programming" $\Rightarrow$ **Reproducible Results!**
 
-# Immediately-Relevant Tools for Final Projects! {data-stack-name="Tools"}
+# Spatial Regression {data-stack-name="Spatial Regression"}
+
+* (We made it! This is the last Spatial Data Science topic!)
+* (Nearly all extremely-fancy applied GIS models can be implemented via Spatial Regression!)
+
+## Motivation: When Does Non-Spatial Regression "Work"?
+
+$$
+Y_i = \beta_0 + \beta_1X_{i,1} + \beta_2X_{i,2} + \cdots + \beta_MX_{i,M} + \varepsilon_i
+$$
+
+* Importance of OLS regression: can give us the **Best Linear Unbiased Estimator (BLUE)**
+* This is only true **if** the Gauss-Markov assumptions hold---one of these is that the error terms are **uncorrelated**:
+
+  $$
+  \text{Cov}[\varepsilon_i, \varepsilon_j] = 0 \; \forall i \neq j
+  $$
+
+## Spatial Autocorrelation in Residuals
+
+* We have now seen several models / datasets where effect of some variable $X$ (say, population) on another variable $Y$ (say, disease count) is **spatial**! (Kind of the whole point of the class 😜)
+* So, to see when OLS will "work", vs. when you need to incorporate GIS, key step is **plotting the spatial distribution of regression residuals!**
+
+## Example: Italian Elections
+
+:::: {.columns}
+::: {.column width="50%"}
+
+![@ward_spatial_2018, Figure 2.3](images/italy_gdp.svg){fig-align="center" width="100%"}
+
+:::
+::: {.column width="50%"}
+
+![@ward_spatial_2018, Figure 2.4](images/italy_turnout.svg){fig-align="center" width="100%"}
+
+:::
+::::
+
+## Will OLS "Work" Here? {.smaller}
+
+* Can we use OLS to derive the BLUE of the effect of GDP on voting?
+
+:::: {.columns}
+::: {.column width="48%"}
+
+<center>
+Plain OLS
+</center>
+
+| $N = 477$ | $\widehat{\beta}$ | SE | $t$ |
+| - | - | - | - |
+| Intercept | 35.30 | 2.21 | 15.96 |
+| Log GDP per cap | 13.46 | 0.65 | 20.84 |
+
+Moran's $I$ for residuals = **0.47**(!)
+
+:::
+::: {.column width="4%"}
+
+&nbsp;
+
+:::
+::: {.column width="48%"}
+
+<center>
+Spatial Regression
+</center>
+
+| $N = 477$ | $\widehat{\beta}$ | SE | $t$ |
+| - | - | - | - |
+| Intercept | 4.70 | 1.66 | 2.80 |
+| Log GDP per cap | 1.77 | 0.48 | 3.66 |
+| $\rho$ | 0.87 | 0.02 | 36.7 |
+
+:::
+::::
+
+## What Does it Mean that "Spatial Effect" is Significant? {.smaller}
+
+![*(From the future... your HW4!)*](images/spatial-reg-italy.png){fig-align="center" width="100%"}
+
+## Case 1: No Residual Spatial Autocorrelation
+
+* Example: Residuals have Moran's $I$ near 0...
+* ...Don't need GIS at all!
+
+## Case 2: Conditional Autoregressive Model (CAR)
+
+* GIS, but... only for "fixing" your regression
+
+$$
+Y_i = \underbrace{\mu_i}_{\text{Non-spatial model}} + \underbrace{\frac{1}{w_{i,\cdot}}\sum_{j \neq i}(Y_j - \mu_j)}_{\text{Spatial Autocorrelation}} + \varepsilon_i
+$$
+
+## Case 3: Simultaneous Autoregressive Model (SAR)
+
+* The main event! Here we are **explicitly** modeling "spatially lagged" versions of our dependent variable $Y$!
+
+$$
+Y = \mathbf{X}\beta + \rho \underbrace{\mathbf{W}Y}_{\mathclap{\text{Spatially-lagged }Y}} + \boldsymbol\varepsilon
+$$
+
+# Immediately-Relevant Tools for Final Projects! (The Coming Weeks) {.title-09 data-stack-name="Tools Preview"}
 
 * Research Methodology (**Hypotheses**)
 * Visualizing Spatial Data
@@ -302,7 +197,7 @@ document.addEventListener(
 * Remote-Sensed / Raster Data
 * Data Anonymization / Synthetic Datasets
 
-## Research Methodology: Hypotheses
+## Research Methodology: Hypotheses {.crunch-title .crunch-img}
 
 <center>
 **Social Science (McCourt):**
@@ -316,7 +211,7 @@ document.addEventListener(
 ![](images/predictive.svg){width="40%"}
 </center>
 
-## (Secretly My Opportunity to do More Spatial Regression!)
+## (Secretly My Opportunity to do More Spatial Regression!) {.crunch-title}
 
 * What **explains** previously-observed instances of **separatist insurgencies**?
 * Can we **predict** separatist insurgencies?
@@ -346,9 +241,98 @@ $$
 * Neighbors if **Capitals** are close
 * 🤔
 
-## Visualizing Spatial Data
+## Visualizing Spatial Data {.smaller .crunch-title .crunch-ul}
 
-* My recommendation for final presentations: **Leaflet**
+* My recommendation for final presentations: Tiptoe from **`mapview`** $\leadsto$ **Leaflet!**
+
+```{r}
+#| label: barcelona-leaflet
+#| output-location: column
+library(osmdata) |> suppressPackageStartupMessages()
+library(leaflet)
+assign("has_internet_via_proxy", TRUE, environment(curl::has_internet))
+placebb <- osmdata::getbb("Barcelona")
+hospitals <- placebb |>
+  opq() |>
+  add_osm_feature(key = "amenity", value = "hospital") |>
+  osmdata_sf()
+motorways <- placebb |>
+  opq() |>
+  add_osm_feature(
+    key = "highway",
+    value = "motorway"
+  ) |>
+  osmdata_sf()
+leaflet() |>
+  addTiles() |>
+  addPolylines(
+    data = motorways$osm_lines,
+    color = "black"
+  ) |>
+  addPolygons(
+    data = hospitals$osm_polygons,
+    label = hospitals$osm_polygons$name
+  )
+```
+
+
+## Custom Icons! {.smaller .crunch-title}
+
+| | Chicago | Detroit |
+|-|-|-|
+| **Population** | 2,746,388 | 631,524 |
+
+```{r}
+#| label: midwest-pop-plot
+#| output-location: column
+library(tidyverse) |> suppressPackageStartupMessages()
+library(sf) |> suppressPackageStartupMessages()
+library(leaflet) |> suppressPackageStartupMessages()
+library(leaflet.extras2) |> suppressPackageStartupMessages()
+library(mapview) |> suppressPackageStartupMessages()
+city_df <- tibble::tribble(
+  ~city, ~lon, ~lat, ~pop,
+  "Chicago", 41.950567516553896, -87.93011127491978, 2746388,
+  "Detroit", 42.45123004999075, -83.18402319217698, 631524
+)
+city_sf <- sf::st_as_sf(
+  city_df,
+  coords = c("lat", "lon"),
+  crs=4326
+)
+city_buf_sf <- city_sf |> sf::st_buffer(20000)
+city_cases_sf <- city_buf_sf |> sf::st_sample(size=rep(10,2)) |> sf::st_as_sf()
+city_cases_sf$city <- "Detroit (10 Cases)"
+city_cases_sf[1:10, 'city'] <- "Chicago (10 Cases)"
+city_cases_sf$sample <- "Flu"
+city_pop_sf <- city_buf_sf |>
+  sf::st_sample(size=c(16, 4)) |> sf::st_as_sf()
+city_pop_sf$city <- "Detroit"
+city_pop_sf[1:16, 'city'] <- "Chicago"
+city_pop_sf$sample <- "People"
+city_combined_sf <- bind_rows(city_cases_sf, city_pop_sf)
+# mapview(city_combined_sf, zcol="city", marker="sample")
+Flu = makeIcon(
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png",
+    20,
+    20
+)
+People = makeIcon(
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png",
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png",
+  20,
+  20
+)
+
+city_combined_sf$r <- ifelse(city_combined_sf$sample == "Flu", 0, 4)
+city_flu_sf <- city_combined_sf |> filter(sample == "Flu")
+city_ppl_sf <- city_combined_sf |> filter(sample == "People")
+leaflet(city_flu_sf) |>
+  addProviderTiles("CartoDB.Positron") |>
+  addMarkers(data=city_flu_sf, icon = Flu) |>
+  addMarkers(data=city_ppl_sf, icon = People)
+```
 
 ## Remote-Sensed / Raster Data
 
@@ -361,6 +345,14 @@ $$
 
 * Differential privacy
 * Used by the US Census(!) Since 2020
+
+
+## Example: Bolshevik Revolution $\rightarrow$ "Bipolar" World
+
+![](images/democracy.jpg){fig-align="center"}
+
+* Null hypothesis: no spatial effect of democratization/de-democratization on neighboring countries
+* If null hypothesis is true, and countries democratize/de-democratize independently... could this pattern still arise?
 
 ## References
 

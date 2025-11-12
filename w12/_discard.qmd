@@ -1,0 +1,214 @@
+
+
+<style>
+.reveal a {
+  font-weight: unset !important;
+  background-color: unset !important;
+  text-decoration: unset !important;
+  color: black !important;
+}
+.reveal table {
+  margin: 0px !important;
+  padding: 0px !important;
+  table-layout: fixed !important;
+}
+.reveal table th, .reveal table td {
+  text-align: unset !important;
+  padding: unset !important;
+}
+.fc-scrollgrid-sync-inner {
+  text-align: center;
+}
+.fc-daygrid-day-frame {
+  /* border: 0.5px solid #f1f1f1 !important; */
+  border-right: 1px solid #f1f1f1 !important;
+}
+.fc-col-header-cell {
+  /* border: 0.5px solid #f1f1f1 !important; */
+  border-right: 1px solid #f1f1f1 !important;
+}
+th .fc-day-sun {
+  border-right: 2px solid #f1f1f1 !important;
+}
+.fc-event:first {
+  margin-top: -5px !important;
+}
+.fc-event-title-container {
+  line-height: 1.1 !important;
+  margin-top: 0px !important;
+  margin-bottom: -5px !important;
+}
+/* .fc-daygrid-block-event {
+  margin-right: -20px !important;
+} */
+.grade-projects {
+  margin-right: -16px !important;
+  /* color: green !important; */
+}
+tr:nth-of-type(3) td:nth-of-type(1) a:not(.movie-monday-3) > .fc-event-main {
+  background-color: #e69f00 !important;
+}
+.movie-monday-3 {
+  margin-top: 3px !important;
+}
+.reveal table tbody tr th, .reveal table tbody tr td {
+  /* border-bottom: 0px solid white !important; */
+  border-right: 0px solid white;
+  border-top: 0px solid white;
+  /* border-left: 0px solid white !important; */
+}
+/* .reveal table tbody tr th, .reveal table tbody tr td {
+  border-bottom: 0px solid white !important;
+  border-right: 0px solid black !important;
+  border-top: 0px solid white !important;
+} */
+.fc-toolbar {
+  font-size: 1rem !important;
+}
+.fc-header-toolbar {
+  margin-bottom: 5px !important;
+}
+.fc-scroller-harness {
+  border: 0px solid white !important;
+}
+.fc-scrollgrid {
+  border-top: 0px solid white !important;
+}
+/* .fc-scrollgrid-section td {
+  border: 0px solid white !important;
+} */
+/* .fc-h-event {
+  border: 0px solid white !important;
+} */
+.fc-toolbar-title {
+  font-size: 1.6rem !important;
+}
+.fc-event-title {
+  font-size: 0.9rem !important;
+}
+.fc-daygrid-day-number {
+  font-size: 0.9rem !important;
+}
+.fc-daygrid-day {
+  border-top: 1px solid #f1f1f1 !important;
+  border-right: 1px solid #f1f1f1 !important;
+  border-bottom: 1px solid #f1f1f1 !important;
+}
+.fc-col-header-cell {
+  font-size: 1rem !important;
+  font-weight: bold !important;
+}
+.fc-h-event .fc-event-main {
+  background-color: #3788d8f0 !important;
+}
+tr:nth-of-type(1) td:nth-of-type(3) .fc-event-main > * {
+  background-color: #e69f00 !important;
+}
+tr:nth-of-type(2) td:nth-of-type(3) .fc-event-main:nth-of-type(1) {
+  background-color: #3788d8f0 !important;
+}
+tr:nth-of-type(2) td:nth-of-type(5) .fc-event-main {
+  background-color: #e69f00 !important;
+}
+</style>
+
+<center>
+
+::: {html-table-processing="none"}
+
+```{=html}
+<div id='calendar' style="width: 800; height: 530;"></div>
+```
+
+:::
+
+</center>
+
+<script>
+document.addEventListener(
+  'DOMContentLoaded',
+  function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(
+      calendarEl, {
+        initialView: 'dayGridMonth',
+        // initialView: 'multiMonthYear',
+        multiMonthMaxColumns: 1,
+        initialDate: '2025-12-01',
+        fixedWeekCount: false,
+        showNonCurrentDates: false,
+        firstDay: 1,
+        height: 530,
+        contentHeight: 530,
+        eventColor: '#3788d8',
+        eventBackgroundColor: '#3788d8',
+        aspectRatio: 1.2,
+        headerToolbar: {
+          // left: 'prev,next today',
+          left: '',
+          center: 'title',
+          right: '',
+        },
+        // eventDidMount: function(info) {
+        //   var tooltip = new bootstrap.Tooltip(info.el, {
+        //     // title: info.event.extendedProps.title,
+        //     title: 'testing',
+        //     placement: 'top',
+        //     trigger: 'hover',
+        //     container: 'body'
+        //   });
+        // },
+        events: [
+          {
+            title: 'Movie Monday',
+            start: '2025-12-01',
+          },
+          {
+            title: 'Project Showcase',
+            start: '2025-12-03',
+          },
+          {
+            title: 'Movie Monday',
+            start: '2025-12-08'
+          },
+          {
+            title: 'Present Big Data (J)',
+            start: '2025-12-08'
+          },
+          {
+            title: 'Present Big Data (A)',
+            start: '2025-12-10'
+          },
+          {
+            title: 'Project Due',
+            start: '2025-12-12'
+          },
+          {
+            title: 'Movie Monday',
+            start: '2025-12-15',
+            className: 'movie-monday-3'
+          },
+          {
+            title: 'Jeff Grades Projects',
+            start: '2025-12-15',
+            end: '2025-12-20',
+            className: 'grade-projects'
+          },
+          {
+            title: 'Movie Monday',
+            start: '2025-12-22',
+          },
+          {
+            title: 'Movie Monday',
+            start: '2025-12-29',
+          }
+        ]
+      }
+    );
+    calendar.render();
+    calendar.updateSize();
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
+  }
+);
+</script>

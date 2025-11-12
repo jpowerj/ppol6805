@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jeff Jacobs">
+<meta name="dcterms.date" content="2025-10-16">
+
+<title>Why Poisson Processes are ‘The’ Null Model for Testing Spatial Hypotheses – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-0d4a9d19931feb4fee1ddab4b2489000.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" '="" crossorigin="anonymous" referrerpolicy="no-referrer"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"><script src="../../sidebar.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../dsan-globals/jjstyles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      PPOL 6805 / DSAN 6750: GIS for Spatial Data Science
+      </li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><i class="bi bi-house pe-1"></i> Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../writeups/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writeups</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../final-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final Project</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../assignments/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://hchristy.georgetown.domains/_site" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Coding Workshop <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w01/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1: Aug 27</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w02/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2: Sep 3</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w03/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3: Sep 10</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w04/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4: Sep 17</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w05/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5: Sep 24</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w06/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6: Oct 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w07/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7: Oct 8</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w08/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8: Oct 15</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w09/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9: Oct 22</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w10/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10: Oct 29</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w11/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11: Nov 5</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w12/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12: Nov 12</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w13/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 13: Nov 19</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../w14/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 14: Dec 3</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://georgetown.zoom.us/j/92295251878?pwd=K8nOs3w9uRlj3mfn63bh0yazBpBbsC.1" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Zoom Link <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://georgetown.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=20a30444-5d14-4a4e-9994-b34400dc520d" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Recordings <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://guhub.io" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">JupyterHub <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://jjacobs.me/meet" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Book Office Hour <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://chat.google.com/room/AAQAqBiPrZk?cls=7" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Google Space <i class="bi bi-box-arrow-up-right ps-1 align-self-center justify-self-center" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://forms.gle/1qmHmeXo94BaoN7d8" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Feedback <i class="bi bi-box-arrow-up-right ps-1 align-self-center justify-self-center" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p><em>Updated 2025-11-12, 06:30:07 PM</em></p>
+</div></div></nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#part-1-the-null-model-from-introductory-statistics" id="toc-part-1-the-null-model-from-introductory-statistics" class="nav-link" data-scroll-target="#part-1-the-null-model-from-introductory-statistics">Part 1: The Null Model from Introductory Statistics</a></li>
+  <li><a href="#part-2-naïvely-generalizing-to-the-spatial-statistical-setting" id="toc-part-2-naïvely-generalizing-to-the-spatial-statistical-setting" class="nav-link" data-scroll-target="#part-2-naïvely-generalizing-to-the-spatial-statistical-setting">Part 2: “Naïvely” Generalizing to the Spatial-Statistical Setting</a></li>
+  <li><a href="#part-3-what-kinds-of-spatial-randomness-do-we-want-to-model" id="toc-part-3-what-kinds-of-spatial-randomness-do-we-want-to-model" class="nav-link" data-scroll-target="#part-3-what-kinds-of-spatial-randomness-do-we-want-to-model">Part 3: What Kind(s) of Spatial Randomness Do We Want to Model?</a>
+  <ul class="collapse">
+  <li><a href="#model-uniform-point-process" id="toc-model-uniform-point-process" class="nav-link" data-scroll-target="#model-uniform-point-process">Model 😐: Uniform Point Process</a></li>
+  <li><a href="#model-binomial-point-process" id="toc-model-binomial-point-process" class="nav-link" data-scroll-target="#model-binomial-point-process">Model 🤔: Binomial Point Process</a></li>
+  </ul></li>
+  <li><a href="#part-4-saved-by-the-poisson-distribution" id="toc-part-4-saved-by-the-poisson-distribution" class="nav-link" data-scroll-target="#part-4-saved-by-the-poisson-distribution">Part 4: Saved by the Poisson Distribution!</a>
+  <ul class="collapse">
+  <li><a href="#model-poisson-point-process" id="toc-model-poisson-point-process" class="nav-link" data-scroll-target="#model-poisson-point-process">Model 🤩: Poisson Point Process</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/writeups/why-poisson/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Why Poisson Processes are ‘The’ Null Model for Testing Spatial Hypotheses</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Extra Writeups</div>
+  </div>
+  </div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Jeff Jacobs </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <code>jj1088@georgetown.edu</code>
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 16, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>I fumbled this concept towards the end of the Week 8 lecture, since I was rushing to try and get to <strong>intensity functions</strong> and <strong>pair correlation functions</strong>. As we know, this kind of guilt will weigh on Jeff’s mind until he creates a writeup where he can slow down and walk through it with the proper attention to detail… so here we are!</p>
+<p>The reason we worry so much about the “proper” null model to use when we want to test <strong>spatial</strong> hypotheses (and the reason for creating a full-on Writeup about it), is that certain intuitions we may have developed in our standard (non-spatial) statistics courses fail to <strong>generalize</strong> easily to our current two-dimensional <strong>spatial</strong> setting! So, let’s:</p>
+<ol type="1">
+<li>Start by looking at what may be in our heads from these earlier classes when we hear the term “null model” (<a href="#part-1-the-null-model-from-introductory-statistics">Part 1</a>), then</li>
+<li>Describe the trouble we run into if we try to haphazardly take the one-dimensional statistical notion of <strong>independent and identically distributed (i.i.d.) random variables</strong> and just “lift” it into two dimensions (<a href="#part-2-naïvely-generalizing-to-the-spatial-statistical-setting">Part 2</a>),</li>
+<li>Start more slowly, building up from the simplest possible point process to see where exactly this naïve approach goes wrong (<a href="#part-3-what-kind(s-of-spatial-randomness-do-we-want-to-model)">Part 3</a>, and finally</li>
+<li>Conclude with the less-rushed version of what I said in class: that the <strong>Poisson Point Process</strong> model “saves us” by avoiding these troubles (<a href="#part-4-saved-by-the-poisson-distribution">Part 4</a>)</li>
+</ol>
+</section>
+<section id="part-1-the-null-model-from-introductory-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-the-null-model-from-introductory-statistics">Part 1: The Null Model from Introductory Statistics</h2>
+<p>In <strong>standard</strong> “one-dimensional” statistics, when we start building up our conceptual/methodological toolbox towards the goal of developing a set of statistical <strong>hypothesis tests</strong>, we usually start with the notion of a collection <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> of <strong><span class="math inline">\(N\)</span> independent and identically distributed (i.i.d.) Random Variables</strong>.</p>
+<p>The reason this odd term “independent and identically distributed” is so important is because is exactly this <strong>i.i.d.</strong> property that underlies the two key theorems of statistical sampling theory: the <strong>Law of Large Numbers (LLN)</strong> and the <strong>Central Limit Theorem (CLT)</strong>.</p>
+<p>Say we have a goal of figuring out the <strong>average height</strong> of Georgetown students, in centimeters. We don’t have any way to instantaneously “divine” this information from out of nowhere, however, so instead we decide to start <strong>sampling</strong> students from campus. We let <span class="math inline">\(X_1\)</span> be the Random Variable corresponding to the height of the first person we sample, <span class="math inline">\(X_2\)</span> be the Random Variable corresponding to the height of the second person we sample, and so on, up to <span class="math inline">\(X_n\)</span>, the Random Variable corresponding to the height of the final person we sample.</p>
+<ul>
+<li>We make the assumption that the Random Variables in this series <span class="math inline">\(\{X_1, X_2, \ldots, X_n\}\)</span> are <strong>independent</strong>, since we believe that learning the height of any one person doesn’t give us any information about the height of other people.</li>
+<li>We make the assumption that the Random Variables in this series <span class="math inline">\(\{X_1, X_2, \ldots, X_n\}\)</span> are <strong>identically distributed</strong> because we believe there is some underlying distribution (perhaps a Normal distribution) describing the <strong>population</strong> of Georgetown students, and that each of our samples is a single <strong>draw</strong> from this (assumed) underlying population distribution.</li>
+</ul>
+<p>The second assumption (that <span class="math inline">\(\{X_1, X_2, \ldots, X_n\}\)</span> are <strong>identically distributed</strong>) is super important for the wording of the LLN and CLT. To see exactly why these theorems are useful, we’ll add one more piece of information to this assumption, namely, that the underlying population distribution we’ve assumed has some well-defined <strong>mean</strong> <span class="math inline">\(\mu\)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. We actually don’t need to assume anything more than this, but for the sake of making a picture let’s also assume a well-defined standard deviation <span class="math inline">\(\sigma\)</span>.</p>
+<p>These assumptions now allow us to visualize the <strong>population distribution</strong> of height, the distribution of the heights of all possible Georgetown students in the past, present, and future:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(latex2exp) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6807</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>mu_label <span class="ot">&lt;-</span> <span class="fu">TeX</span>(<span class="st">"$</span><span class="sc">\\</span><span class="st">mu$"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>cb_palette <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#0072B2"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#CC79A7"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>height_dist <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">170</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>xlim_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="dv">135</span>, <span class="dv">205</span>))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>base_pop_plot <span class="ot">&lt;-</span> xlim_df <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x)) <span class="sc">+</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">stat =</span> <span class="st">"function"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> height_dist,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> cb_palette[<span class="dv">1</span>],</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.75</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="st">"Density"</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>base_pop_plot <span class="sc">+</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="dv">140</span>, <span class="at">to=</span><span class="dv">200</span>, <span class="at">by=</span><span class="dv">10</span>),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"μ-3σ"</span>,<span class="st">"μ-2σ"</span>,<span class="st">"μ-σ"</span>,<span class="st">"μ"</span>,<span class="st">"μ+σ"</span>,<span class="st">"μ+2σ"</span>,<span class="st">"μ+3σ"</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span><span class="st">"Hypothesized Population Distribution: N(μ,σ)"</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/pop-dist-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We won’t have any way of knowing the actual <strong>values</strong> <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> in practice (if we did, we wouldn’t need to use this whoe sampling thing in the first place), but to make our visualization a little more concrete, let’s assume that this abstract population mean height is <span class="math inline">\(\mu = 170\text{cm}\)</span> and population mean SD is <span class="math inline">\(\sigma = 10\text{cm}\)</span>. Then the above visualization becomes:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>(pop_plot <span class="ot">&lt;-</span> base_pop_plot <span class="sc">+</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span><span class="st">"Hypothesized Population Distribution: N(170, 10)"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/pop-dist-values-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If our goal is to estimate this now-assumed underling <span class="math inline">\(\mu\)</span> value, we can frame the LLN and CLT for our sample of size <span class="math inline">\(N\)</span>, <span class="math inline">\(\{X_1, X_2, \ldots, X_n\}\)</span> as follows. Consider the <strong>mean</strong> of these i.i.d. RVs, <span class="math display">\[
+\overline{X}_{N} = \frac{1}{N}(X_1 + X_2 + \cdots + X_n).
+\]</span></p>
+<p>Notice how this RV <span class="math inline">\(\overline{X}_N\)</span> is <em>itself</em> a Random Variable, with some distribution! We can actually use R again to visualize this <strong>separate</strong> distribution, of the number we get when we compute the <strong>mean</strong> of <span class="math inline">\(N\)</span> samples:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sample_from_pop <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">N =</span> <span class="dv">5</span>) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">rnorm</span>(<span class="at">n=</span>N, <span class="at">mean=</span><span class="dv">170</span>, <span class="at">sd=</span><span class="dv">10</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  cur_sample <span class="ot">&lt;-</span> <span class="fu">sample_from_pop</span>()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  sample_str <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">round</span>(cur_sample, <span class="dv">2</span>), <span class="at">collapse=</span><span class="st">", "</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeLines</span>(<span class="fu">paste0</span>(<span class="st">"Sample #"</span>,i,<span class="st">": "</span>,sample_str))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  cur_sample_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(cur_sample)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeLines</span>(<span class="fu">paste0</span>(<span class="st">"Mean = "</span>,<span class="fu">round</span>(cur_sample_mean,<span class="dv">2</span>)))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Sample #1: 162.51, 151.24, 166.77, 163.45, 161.84
+Mean = 161.16
+Sample #2: 175.28, 165.1, 182.1, 168.89, 179.84
+Mean = 174.24
+Sample #3: 159.99, 164.23, 159.36, 163.04, 167.38
+Mean = 162.8</code></pre>
+</div>
+</div>
+<p>And if we repeat this 999 times, we’ll get 999 different sample means: that is, 999 different <strong>realized values</strong> of <span class="math inline">\(\overline{X}_N\)</span> (here we display only the first 100 of these realized values, for brevity):</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">999</span>, <span class="fu">mean</span>(<span class="fu">sample_from_pop</span>()))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sample_means[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] 178.7393 171.1233 170.8265 173.7785 172.8961 173.4400 170.2095 174.4979
+  [9] 169.0981 167.7625 166.0616 171.3933 171.1436 165.5095 172.4817 171.9988
+ [17] 170.2733 172.0060 172.4475 167.4049 164.9856 164.4329 170.5725 164.8725
+ [25] 176.3991 165.4975 172.3969 179.7432 167.3862 169.4150 165.4437 173.4964
+ [33] 163.7278 171.0691 168.2547 178.5336 172.8489 170.5232 160.4038 169.8794
+ [41] 174.5240 172.5725 171.4840 164.3483 172.5593 165.5066 171.2156 177.5725
+ [49] 171.8485 180.4162 180.8225 166.3356 169.2979 169.1465 165.2127 173.3863
+ [57] 173.8254 170.3274 171.5981 171.5182 159.0368 169.3380 167.0772 166.0056
+ [65] 173.4332 164.0346 176.2426 171.7977 173.2400 169.3358 167.2296 161.8195
+ [73] 169.7620 169.8450 163.3599 167.1167 167.6754 165.3986 159.8650 166.5547
+ [81] 165.6406 163.0572 170.4247 173.8195 175.9887 173.3378 163.3578 165.9197
+ [89] 159.6700 169.7303 172.2333 171.3272 165.2502 165.3463 171.4613 167.9019
+ [97] 169.6259 174.1383 169.7894 166.5657</code></pre>
+</div>
+</div>
+<p>If we plot the distribution of <strong>these</strong> values, we get a different distribution from the above. This time, it’s a <strong>sampling</strong> distribution! It’s a distribution of the <strong>averages</strong> we get when we <strong>sample</strong> from the population distribution:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sample_mean_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span>sample_means)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sample_plot <span class="ot">&lt;-</span> sample_mean_df <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">binwidth=</span><span class="fl">0.5</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span>cb_palette[<span class="dv">2</span>],</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span><span class="fl">0.75</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Distribution of 999 Means from Samples of Size N = 5"</span>) <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>sample_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/sampling-dist-histogram-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>By overlaying this <strong>sampling</strong> distribution on top of the <strong>population</strong> distribution (though remember, again, that in the real world we’re never going to be able to discover this “true” population distribution), we can start to see what’s going on:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> xlim_df,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>x),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">stat =</span> <span class="st">"function"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> height_dist,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> cb_palette[<span class="dv">1</span>],</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.75</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> sample_mean_df,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>x),</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">stat =</span> <span class="st">"density"</span>,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="fl">0.5</span>,</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> cb_palette[<span class="dv">2</span>],</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.75</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Sampling (Blue) vs. Population (Orange) Dists (N = 5)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/pop-and-sampling-dist-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The values we’re getting for the <strong>sample mean</strong>, in blue here, <strong>vary</strong> around the <strong>true mean</strong> that we’re trying to estimate. And, intuitively, if we have the resources to take <strong>bigger</strong> samples (e.g., more time to ask more than <span class="math inline">\(N = 5\)</span> people), this should give us even <strong>more accurate</strong> estimates of the population mean, which is what we indeed find in our simulation:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sample_sizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">100</span>, <span class="dv">500</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sample_means_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">N =</span> <span class="fu">numeric</span>(), <span class="at">xbar=</span><span class="fu">numeric</span>())</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (cur_sample_size <span class="cf">in</span> sample_sizes) {</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  cur_sample_means <span class="ot">&lt;-</span> <span class="fu">replicate</span>(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1000</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_from_pop</span>(cur_sample_size) <span class="sc">|&gt;</span> <span class="fu">mean</span>()</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  cur_sm_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> cur_sample_size,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">xbar=</span>cur_sample_means</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  sample_means_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(sample_means_df, cur_sm_df)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>sample_means_df <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">xbar</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">179.5180</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">169.3783</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">177.2945</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">179.8101</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">167.2210</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">167.8652</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sample_means_df <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> xlim_df,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>x),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">stat =</span> <span class="st">"function"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> height_dist,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> cb_palette[<span class="dv">1</span>],</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.75</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> sample_means_df,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>xbar),</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">stat =</span> <span class="st">"density"</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="fl">0.5</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span>cb_palette[<span class="dv">2</span>]</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(N), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">scales=</span><span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Sampling (Blue) vs. Population (Orange) Distributions for Increasing N"</span>) <span class="sc">+</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/increasing-n-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The two key theorems of sampling theory therefore <strong>describe</strong> (along with formal mathematical proofs) what we can see intuitively from the four plots above: that is, what happens to this RV as <span class="math inline">\(N\)</span> gets bigger and bigger (goes towards <span class="math inline">\(\infty\)</span>):</p>
+<ul>
+<li>The <strong>Law of Large Numbers</strong> tells us that the <strong>middle</strong> of the blue sampling distribution will converge to the <strong>population mean</strong> <span class="math inline">\(\mu\)</span>.
+<ul>
+<li>It says in essence that we can pick any really small value <span class="math inline">\(\varepsilon\)</span>, and then, regardless of what particular small value we pick, the probability that <span class="math inline">\(\overline{X}\)</span> is more than <span class="math inline">\(\varepsilon\)</span> away from the (assumed) “true” mean value <span class="math inline">\(\mu\)</span> goes to 0 as we take more and more samples: <span class="math inline">\(\Pr\left(|\overline{X} - \mu| &gt; \varepsilon\right) \rightarrow 0\)</span> as <span class="math inline">\(N \rightarrow \infty\)</span>.</li>
+</ul></li>
+<li>The <strong>Central Limit Theorem</strong> gives us more specifics about the <strong>shape</strong> of the blue sampling distribution, and about <strong>how quickly</strong> the convergence guaranteed by the LLN will proceed.
+<ul>
+<li>It says that the blue sampling distribution will specifically be a <strong>Normal</strong> distribution, whose mean will be <span class="math inline">\(\mu\)</span> and whose standard deviation will be <span class="math inline">\(\sigma / \sqrt{N}\)</span>. In symbols: <span class="math inline">\(\overline{X}_{N} \sim \mathcal{N}\left(\mu, \frac{\sigma}{\sqrt{N}}\right)\)</span>. The presence of <span class="math inline">\(N\)</span> in the standard deviation is why we see the blue sampling distribution getting thinner and thinner above: as we raise <span class="math inline">\(N\)</span>, <span class="math inline">\(\sigma\)</span> stays the same but <span class="math inline">\(\sqrt{N}\)</span> gets bigger and bigger, which makes the overall standard deviation term get smaller and smaller!</li>
+</ul></li>
+</ul>
+<p>Having built up to these two key theorems, we can now perform statistical hypothesis testing! Because, we can:</p>
+<ul>
+<li>Take any <strong>specific</strong> sample we happen to have, <span class="math inline">\(\{X_1 = x_1, X_2 = x_2, \ldots, X_n = x_n\}\)</span>, and</li>
+<li>Compare it to the <strong>expected shape of the sampling distribution</strong> under some <strong>hypothesis</strong>!</li>
+</ul>
+<p>Continuing our above example, if we think that the “true” mean height of Georgetown students is <span class="math inline">\(\mu = 170\text{cm}\)</span>, we can take a sample of <span class="math inline">\(N\)</span> Georgetown students and compare the <strong>mean height value</strong> of <strong>this particular sample</strong> with the <strong>distribution of mean height values</strong> that a <strong>population distribution with <span class="math inline">\(\mu = 170\text{cm}\)</span> would generate</strong>.</p>
+<p>For example, if we take a sample of <span class="math inline">\(N = 30\)</span> Georgetown students, and find that the mean height of these 30 students is <strong>160cm</strong>, we can “test” how likely it is that this particular mean height value would arise relative to our <strong>working hypothesis</strong> that the “true” population mean is <span class="math inline">\(\mu = 170\text{cm}\)</span>… just take the blue distribution from the <span class="math inline">\(N = 30\)</span> plot above, and check <strong>where 160cm falls</strong> relative to this distribution! Here’s what this looks like:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>n30_df <span class="ot">&lt;-</span> sample_means_df <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(N <span class="sc">==</span> <span class="dv">30</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>n30_df <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> xbar),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> cb_palette[<span class="dv">2</span>],</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="fl">0.5</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="dv">160</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.75</span>,</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> cb_palette[<span class="dv">3</span>]</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Observed Mean (160cm) vs. 1000 Simulated Means"</span>) <span class="sc">+</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/hypothesis-test-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The vertical (dashed) green line in this plot is the <strong>mean we actually obtained</strong> from our sample of 30 students. The blue histogram represents <strong>all of the means</strong> we got when we simulated taking a sample of size <span class="math inline">\(N = 30\)</span> from the <strong>hypothesized</strong> population distribution <span class="math inline">\(\mathcal{N}(170, 10)\)</span>… and what it tells us is that the mean we actually observed is <strong>not very likely to arise</strong> from our hypothesized population… Meaning, in turn, that we <strong>decrease our confidence</strong> in our hypothesis, relative to whatever our confidence was before we collected this sample!</p>
+</section>
+<section id="part-2-naïvely-generalizing-to-the-spatial-statistical-setting" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-naïvely-generalizing-to-the-spatial-statistical-setting">Part 2: “Naïvely” Generalizing to the Spatial-Statistical Setting</h2>
+<p>The next idea is that, if we want to statistically test hypotheses about observed <strong>spatial</strong> distributions, we’d like an <strong>equivalent to the above normal distribution</strong> for the <strong>two-dimensional spatial settings</strong> (Random Fields) we analyze in this course!</p>
+<p>In the same way that we just tested our <strong>observed mean</strong> of <span class="math inline">\(160\text{cm}\)</span> against the range of means we would <strong>expect</strong> to see under some hypothesis, we’d like to test <strong>observed point patterns</strong> against some range of <strong>expected point patterns</strong> under some hypothesis. In this case, rather than a hypothesis about the <strong>mean</strong> <span class="math inline">\(\mu\)</span>, let’s start with a hypothesis about the first <strong>spatial statistic</strong> we learned in Week 7, namely, Moran’s <span class="math inline">\(I\)</span>! Let’s say we think there is a propensity for points to cluster together very tightly, so that although the specific cluster patterns may vary slightly from year to year, we think that the underlying <strong>population</strong> autocorrelation <span class="math inline">\(I\)</span> is close to <span class="math inline">\(1.0\)</span>.</p>
+<p>The reason for “overthinking” the Poisson process at this point is, we’re going to need to think about how we might <strong>falsify</strong> this hypothesis<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>Like we did above for the simpler “one-dimensional” hypothesis about the population mean height, we’ll subject our hypothesis <span class="math inline">\(\mathcal{H} = [I \approx 1]\)</span> to <strong>falsification testing</strong> by developing a “null model”: a model of what a world where our hypothesis is <strong>wrong</strong> would look like.</p>
+<p>With this “null model” in hand, we can then simulate what <strong>not-high</strong> spatial autocorrelation would look like within the same spatial domain. In fact, since the null model is a <strong>generative</strong> model, we can use it to generate as many worlds-where-my-hypothesis-is-false as we’d like! Above we arbitrarily chose to stop after we had generated 999 such worlds, and we’ll do the same for most examples in this course.</p>
+<p>Once we have these 999 simulated null-world patterns, we can compute a Moran’s <span class="math inline">\(I\)</span> value for each, producing <span class="math inline">\(\{I_1, I_2, \ldots, I_{999}\}\)</span>, which we call the “null distribution” of our “test statistic” <span class="math inline">\(I\)</span>. We then <strong>compare</strong> <span class="math inline">\(I_{\text{obs}}\)</span> with these 999 simulated <span class="math inline">\(I\)</span> values:</p>
+<ul>
+<li>If we find that the observed autocorrelation value <span class="math inline">\(I_{\text{obs}}\)</span>, calculated with respect to the point pattern we <strong>actually saw</strong>, is sufficiently <strong>different</strong> from the range of <span class="math inline">\(I\)</span> values <span class="math inline">\(\{I_1, I_2, \ldots, I_{999}\)</span>} that we calculated from the <strong>simulated</strong> patterns, we should<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <strong>increase our confidence</strong> in the idea that the <strong>underlying</strong> spatial pattern is indeed one with high autocorrelation (relative to our confidence before carrying out this test)</li>
+<li>If we find that the observed autocorrelation value <span class="math inline">\(I_{\text{obs}}\)</span>, calculated with respect to the point pattern we <strong>actually saw</strong>, is <strong>not</strong> very different from the range of <span class="math inline">\(I\)</span> values <span class="math inline">\(\{I_1, I_2, \ldots, I_{999}\)</span>} that we calculated from the <strong>simulated</strong> patterns, we should <strong>decrease our confidence</strong> in the idea that the <strong>underlying</strong> spatial pattern is indeed one with high autocorrelation (relative to our confidence before carrying out this test)</li>
+</ul>
+<p>So, if we observed (say) <span class="math inline">\(N_{\text{obs}} = 60\)</span> points in some region, and we’re hypothesizing that the <strong>underlying</strong> micro-level process generating these points is one with the property of <strong>high autocorrelation</strong>… our instinct may very reasonably be: “Cool! Let’s go generate 999 point patterns, each with <span class="math inline">\(N = 60\)</span> points spread randomly across the same region!”</p>
+<p>There is, unfortunately, a big <strong>red flag</strong> inherent in this approach that we need to train our brains to notice. The issue with this approach, that makes it <strong>inappropriate</strong> as a null model for most spatial data analyses, is <strong>extremely subtle</strong> but <strong>extremely important</strong> as we move forward with our spatial data analysis unit! It boils down to <strong>where exactly we think the “randomness” is happening in the “random spatial process”</strong>.</p>
+<p>To move from the above intuitive-but-deficient approach to the notion of <strong>Complete Spatial Randomness (CSR)</strong> that is the “standard” null model for spatial data, let’s follow Sections 5.2 and 5.3 (pages 128 to 137) of <span class="citation" data-cites="baddeley_spatial_2015">Baddeley, Rubak, and Turner (<a href="#ref-baddeley_spatial_2015" role="doc-biblioref">2015</a>)</span> by moving slowly, starting from the simplest possible point process.</p>
+</section>
+<section id="part-3-what-kinds-of-spatial-randomness-do-we-want-to-model" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-what-kinds-of-spatial-randomness-do-we-want-to-model">Part 3: What Kind(s) of Spatial Randomness Do We Want to Model?</h2>
+<section id="model-uniform-point-process" class="level3">
+<h3 class="anchored" data-anchor-id="model-uniform-point-process">Model 😐: Uniform Point Process</h3>
+<p>To start, consider the simplest possible point process we can imagine: just taking some 2D shape like a (unit) square and placing a single point randomly within it. If we place our unit square in the first quadrant of the Cartesian plane, then to generate a random point <span class="math inline">\(\mathbf{s}_0\)</span> within this square we literally just need to generate a random <span class="math inline">\(x\)</span> coordinate <span class="math inline">\(X \sim \mathcal{U}[0,1]\)</span> and a random <span class="math inline">\(y\)</span> coordinate <span class="math inline">\(Y \sim \mathcal{U}[0,1]\)</span>, as in the following plot:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(latex2exp)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6862</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>x_coords <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">4</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>y_coords <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">4</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>rand_point_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">index=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x=</span>x_coords,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">y=</span>y_coords</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>rand_point_df <span class="ot">&lt;-</span> rand_point_df <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">point_tex_str =</span> <span class="fu">paste0</span>(</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'$s_'</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    index,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'$'</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">point_prob_tex_str =</span> <span class="fu">paste0</span>(</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'$</span><span class="sc">\\</span><span class="st">Pr(s=s_'</span>,</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    index,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">') = 0$'</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">label_tex_str =</span> <span class="fu">paste0</span>(</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    point_tex_str,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">' = ('</span>,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    x,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">", "</span>,</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    y,</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">")"</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>rand_point_df<span class="sc">$</span>point_tex <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="fu">TeX</span>(rand_point_df<span class="sc">$</span>point_tex_str))</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>rand_point_df<span class="sc">$</span>point_prob_tex <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="fu">TeX</span>(rand_point_df<span class="sc">$</span>point_prob_tex_str))</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>rand_point_df <span class="sc">|&gt;</span> <span class="fu">select</span>(index, x, y, point_tex_str)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">index</th>
+<th style="text-align: right;">x</th>
+<th style="text-align: right;">y</th>
+<th style="text-align: left;">point_tex_str</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.54</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: left;"><span class="math inline">\(s_1\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">0.26</td>
+<td style="text-align: left;"><span class="math inline">\(s_2\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: left;"><span class="math inline">\(s_3\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.75</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: left;"><span class="math inline">\(s_4\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>appender <span class="ot">&lt;-</span> <span class="cf">function</span>(s) {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">TeX</span>(s))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>tex_labeller <span class="ot">=</span> <span class="fu">as_labeller</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  appender,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">default =</span> label_parsed</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>base_point_plot <span class="ot">&lt;-</span> rand_point_df <span class="sc">|&gt;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># xlim(0, 1) + ylim(0, 1) +</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.05</span>, <span class="fl">1.05</span>),</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.05</span>, <span class="fl">1.05</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>),</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>),</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>)</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>base_point_plot <span class="sc">+</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">yend=</span><span class="sc">-</span><span class="cn">Inf</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth=</span><span class="fl">0.5</span>,</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype=</span><span class="st">'dashed'</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">xend=</span><span class="sc">-</span><span class="cn">Inf</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth=</span><span class="fl">0.5</span>,</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype=</span><span class="st">'dashed'</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vars</span>(label_tex_str), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>,</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">labeller=</span>tex_labeller,</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># scales='free_x'</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Four Realizations of the Uniform Point Process"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/random-point-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Test</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, if we take this and try to generalize it into a probabilistic model, we should at minimum be able to ask a question like, what’s the probability of getting <strong>this</strong> particular point (or any other point in the unit square, but, we have a specific example above we can work with for concreteness). From <a href="https://jjacobs.me/dsan5100/w04/slides.html#/discrete-vs.-continuous">previous probability and statistics courses</a> you might know that the answer is… zero! When working in <strong>continuous spaces</strong> like the unit square, we actually <strong>can’t compute probabilities for individual, infinitesimally-small points</strong>.</p>
+<p>So, given this limitation, when we are working with probabilities in continuous spaces we employ a simple but powerful “trick” that ends up unlocking the whole world of <strong>continuous probability distributions</strong>: we shift away from thinking about probabilities of <strong>points</strong> and instead think about probabilities of <strong>areas</strong>: unlike the question</p>
+<blockquote class="blockquote">
+<p>“What is the probability that a randomly-generated point <span class="math inline">\(\mathbf{s}\)</span> in <span class="math inline">\(D\)</span> appears at the <strong>exact coordinates</strong> <span class="math inline">\((x,y) \in D\)</span>?”,</p>
+</blockquote>
+<p>which always has the answer 0, we instead ask</p>
+<blockquote class="blockquote">
+<p>“What is the probability that a randomly-generated point <span class="math inline">\(\mathbf{s}\)</span> in <span class="math inline">\(D\)</span> appears within some <strong>area</strong> <span class="math inline">\(A \subseteq D\)</span>?”,</p>
+</blockquote>
+<p>which has a well-formed, meaningful answer! An answer that we can therefore use, for example, to identify <strong>subregions</strong> of <span class="math inline">\(D\)</span> with higher and lower <strong>densities</strong> of points (the thing we’ve been hoping to do all along, since these subregions represent areas with <strong>clusters</strong> of points!)</p>
+<p>For example, the following plot illustrates how we can meaningfully ask the question</p>
+<blockquote class="blockquote">
+<p>“What is the probability that a randomly-generated point in <span class="math inline">\(D\)</span> appears in the <em>right half</em> of <span class="math inline">\(D\)</span>?”,</p>
+</blockquote>
+<p>to obtain the answer <span class="math inline">\(\frac{1}{2}\)</span>, as the <strong>proportion</strong> of the area covered by <span class="math inline">\(A\)</span> to the <strong>total area</strong> of our working domain <span class="math inline">\(D\)</span> (in this case, the total area of the unit square, which is 1).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(latex2exp)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>area_label <span class="ot">&lt;-</span> <span class="fu">TeX</span>(<span class="st">'$A </span><span class="sc">\\</span><span class="st">subseteq D$'</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>area_prob_label <span class="ot">&lt;-</span> <span class="fu">TeX</span>(<span class="st">'$</span><span class="sc">\\</span><span class="st">Pr(s </span><span class="sc">\\</span><span class="st">in A) = </span><span class="sc">\\</span><span class="st">frac{1}{2}$'</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>base_point_plot <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">xmin=</span><span class="fl">0.5</span>, <span class="at">xmax=</span><span class="fl">1.0</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin=</span><span class="fl">0.0</span>, <span class="at">ymax=</span><span class="fl">1.0</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span>cb_palette[<span class="dv">1</span>],</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span><span class="fl">0.5</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="fl">0.5</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span><span class="sc">-</span><span class="cn">Inf</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">yend=</span><span class="cn">Inf</span>,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype=</span><span class="st">"dashed"</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vars</span>(label_tex_str), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>,</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">labeller=</span>tex_labeller,</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># scales='free_x'</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="fl">0.75</span>, <span class="at">y=</span><span class="fl">0.9</span>,</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">label=</span>area_label,</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="dv">4</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="fl">0.75</span>, <span class="at">y=</span><span class="fl">0.7</span>,</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">label=</span>area_prob_label,</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">2.5</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># x = 0.75, y=0.3,</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label=</span>point_prob_tex),</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># label=point_prob_label,</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="dv">3</span>,</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_y =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_x =</span> <span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">parse =</span> <span class="cn">TRUE</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label=</span>point_tex),</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="dv">4</span>,</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_x =</span> <span class="sc">-</span><span class="fl">0.09</span>,</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_y =</span> <span class="fl">0.06</span>,</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">parse =</span> <span class="cn">TRUE</span></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Point vs. Area Probabilities"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/area-probabilities-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This notion, that we can only meaningfully ask about the probability of a point <strong>falling within some area</strong>, is key to why the next model (which is in fact the “intuitive” model from earlier) fails as a workable null model for spatial data science.</p>
+</section>
+<section id="model-binomial-point-process" class="level3">
+<h3 class="anchored" data-anchor-id="model-binomial-point-process">Model 🤔: Binomial Point Process</h3>
+<p>Now, if we want to develop a process which can generate <strong>more than one</strong> point, a natural approach might be to just run the above process <span class="math inline">\(N\)</span> times. That is, we might <strong>fix a number of points <span class="math inline">\(N\)</span></strong> in advance, and then <strong>generate coordinates for each of the <span class="math inline">\(N\)</span> points uniformly</strong> within <span class="math inline">\(D\)</span>… Does that sound familiar? That is exactly the “intuitive” null model we came up with above, as a way of testing the “randomness” (as opposed to “clustered-ness” or “regular-ness”) of some observed collection of points!</p>
+<p>The following figure generates four point patterns using this process, with <span class="math inline">\(N\)</span> set to be <span class="math inline">\(60\)</span>:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>window_to_sf <span class="ot">&lt;-</span> <span class="cf">function</span>(ppp_obj) {</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  window_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(ppp_obj) <span class="sc">|&gt;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"window"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(window_sf)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>points_to_sf <span class="ot">&lt;-</span> <span class="cf">function</span>(ppp_obj) {</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  points_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(ppp_obj) <span class="sc">|&gt;</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"point"</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(points_sf)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>sim_points_to_sf <span class="ot">&lt;-</span> <span class="cf">function</span>(ppp_obj, sim_index, <span class="at">label_num_points=</span><span class="cn">FALSE</span>) {</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract points from ppp object</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  points_sim_sf <span class="ot">&lt;-</span> <span class="fu">points_to_sf</span>(ppp_obj)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add *sim_index* as an additional column. If</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># label_num_points is TRUE, also add the number</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># of generated points to the sim column labels</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  sim_label <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    label_num_points,</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(sim_index, <span class="st">": N = "</span>, <span class="fu">nrow</span>(points_sim_sf)),</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    sim_index</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  points_sim_sf <span class="ot">&lt;-</span> points_sim_sf <span class="sc">|&gt;</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">sim_label =</span> sim_label,</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">sim_N =</span> <span class="fu">nrow</span>(points_sim_sf)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(points_sim_sf)</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>sim_list_points_to_sf <span class="ot">&lt;-</span> <span class="cf">function</span>(ppp_list_obj, <span class="at">label_num_points=</span><span class="cn">FALSE</span>) {</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># This produces a *list* of sf objects</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>  points_sf_list <span class="ot">&lt;-</span> <span class="fu">imap</span>(</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    ppp_list_obj,</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    \(x, idx) <span class="fu">sim_points_to_sf</span>(x, idx, label_num_points)</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># And this concatenates the list elements (by row)</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># together to produce a single combined sf object</span></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>  all_points_sf <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(points_sf_list)</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(all_points_sf)</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>binom_ppp_sims <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoint</span>(<span class="dv">60</span>, <span class="at">nsim=</span><span class="dv">4</span>)</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>win_sf <span class="ot">&lt;-</span> <span class="fu">window_to_sf</span>(binom_ppp_sims[[<span class="dv">1</span>]])</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>points_sf <span class="ot">&lt;-</span> <span class="fu">sim_list_points_to_sf</span>(binom_ppp_sims)</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>win_sf</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>points_sf,</span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">1.5</span></span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vars</span>(sim_label),</span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span></span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-binom" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-binom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-binom-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-binom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Four individual <strong>realizations</strong> of the <strong>Binomial Point Process</strong> described in this section
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Why is it called the <strong>Binomial</strong> Point Process? Recall our above intuition, that we can <strong>only obtain meaningful probabilities</strong> if we ask about the likelihood of <strong>points falling within areas</strong>. This means that any probabilistic point model where points are generated within a continuous space <span class="math inline">\(D\)</span> must provide answers to the question “Given some area <span class="math inline">\(A \subseteq D\)</span>, What is the probability that a point appears in <span class="math inline">\(A\)</span>?” So, if we ask this question after running our <strong>Uniform Point Process</strong> from earlier a bunch of times (producing point patterns like those plotted in <a href="#fig-binom" class="quarto-xref">Figure&nbsp;1</a>) fixing some region <span class="math inline">\(A\)</span>, we end up with the <strong>Binomial PDF</strong>:</p>
+<p><span class="math display">\[
+\Pr(\mathbf{s} \in A) = \binom{N}{k}p^{k}(1-p)^{N-k}
+\]</span></p>
+<p>For visual intuition of why we arrive at this formula, we can re-run the process four times as we did above, but this time consider asking the question of <strong>how many points</strong> we expect to see within a specific <strong>shaded (orange) region</strong> <span class="math inline">\(A\)</span>, constructed and visualized on its own in the following figure:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># One circle with large radius at (0.5, 0.7), plus</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># a circle with smaller radius at (0.25, 0.5)</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>cent_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>x, <span class="sc">~</span>y, <span class="sc">~</span>r,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="fl">0.225</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.15</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert from df to sf</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>cent_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  cent_df,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">coords=</span><span class="fu">c</span>(<span class="st">'x'</span>,<span class="st">'y'</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Use st_buffer to "transform" from points to circles</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># with desired radii</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>buf_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_buffer</span>(</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  cent_sf,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist=</span>cent_sf<span class="sc">$</span>r</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the *union* of the two circles</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>union_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_union</span>(buf_sf)</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform into a single combined shape via st_convex_hull</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>hull_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_convex_hull</span>(union_sf)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the area of this final shape</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sf<span class="sc">::</span><span class="fu">st_area</span>(hull_sf))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2381532</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># And plot it in the Cartesian plane</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>hull_sf,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span>cb_palette[<span class="dv">1</span>],</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth=</span><span class="dv">1</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span><span class="fl">0.5</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/subregion-area-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And then overlaid with the points from our Binomial patterns generated earlier:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Window</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>win_sf</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Shaded region</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>hull_sf,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill=</span>cb_palette[<span class="dv">1</span>],</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span><span class="fl">0.5</span>,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth=</span><span class="dv">1</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>points_sf,</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">1.5</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vars</span>(sim_label),</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-binom-region" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-binom-region-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-binom-region-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-binom-region-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: The same four realizations of the Binary Point Process in <a href="#fig-binom" class="quarto-xref">Figure&nbsp;1</a>, but where the goal is now to model the probability (for each <span class="math inline">\(k\)</span> between 0 and 60) that exactly <span class="math inline">\(k\)</span> out of the <span class="math inline">\(N\)</span> generated points lie within the shaded subregion <span class="math inline">\(A\)</span>. The mathematical formula for this probability turns out to be precisely the <strong>probability mass function</strong> (pmf) of the <strong>Binomial distribution</strong>, <span class="math inline">\(\Pr(K = k) = \binom{N}{k}p^k(1-p)^{N-k}\)</span>.<br><br>Intuitively, since the area of <span class="math inline">\(A\)</span> is about <span class="math inline">\(0.238\)</span>, while the area of <span class="math inline">\(D\)</span> is <span class="math inline">\(1\)</span>, the probability that a randomly (uniformly) generated point within <span class="math inline">\(D\)</span> will fall within <span class="math inline">\(A\)</span> is <span class="math inline">\(p = \frac{|A|}{|D|} = \frac{0.238}{1} = 0.238\)</span>, which thus serves as our value for <span class="math inline">\(p\)</span> in this binomial pmf. This linkage with the Binomial distribution also means that we expect <span class="math inline">\(\mathbb{E}[K] = Np = N \cdot \frac{|A|}{|D|}\)</span> points to lie within <span class="math inline">\(A\)</span>. Since <span class="math inline">\(N = 60\)</span> here, we expect <span class="math inline">\(60 \cdot \frac{0.238}{1} \approx 14.28\)</span> points within this particular shaded region.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This is <strong>almost</strong> what we want, in order to have a null model for 2D <strong>spatial</strong> data that mirrors the null model for “1D” data we saw above in <a href="#part-1-the-null-model-from-introductory-statistics">Part 1</a>.</p>
+<p>However, there is one thing wrong with this Binomial Point Process model, which we didn’t encounter with the Normal distribution above: namely, that for the points-appearing-in-areas-probabilities to be <strong>completely random</strong>, we need the property that</p>
+<blockquote class="blockquote">
+<p>For any two disjoint regions <span class="math inline">\(R_1 \subseteq D\)</span> and <span class="math inline">\(R_2 \subseteq D\)</span>, the probability <span class="math inline">\(\Pr(K_R = k)\)</span> that we’re aiming to model – in words, the probability that <span class="math inline">\(k\)</span> points appear in region <span class="math inline">\(R\)</span> – should be <strong>independent!</strong></p>
+</blockquote>
+<p>If we rephrase this to focus on what “independence” means for Random Variables: learning that there are <span class="math inline">\(k_1\)</span> points in a region <span class="math inline">\(R_1\)</span> (that is, learning that the random variable <span class="math inline">\(K_1\)</span> has been realized as the integer <span class="math inline">\(k_1\)</span>) should <strong>not give us any information</strong> about how many points are in <span class="math inline">\(R_2\)</span>.</p>
+<p>But, unfortunately for us, we only need to pick one subregion <span class="math inline">\(R\)</span> of <span class="math inline">\(D\)</span> to immediately see why the Binomial Point Process <strong>violates</strong> this independence property:</p>
+<blockquote class="blockquote">
+<p>If we learn that there are <span class="math inline">\(k_1\)</span> points in a subregion <span class="math inline">\(R_1\)</span>, we actually immediately learn something about another subregion: <span class="math inline">\(D \setminus R_1\)</span>, the remaining portion of <span class="math inline">\(D\)</span> that is <strong>not</strong> within <span class="math inline">\(R_1\)</span>!</p>
+</blockquote>
+<p>Using our grey square <span class="math inline">\(D\)</span> and orange blob region <span class="math inline">\(A\)</span> from above, for example, if we learn (for a given realization) that <strong>50 of the 60 total points</strong> are contained within the orange-shaded region, then we’ve actually immediately learned with certainty that there are <strong>exactly 10 points</strong> in the region <strong>outside of</strong> <span class="math inline">\(A\)</span>!</p>
+<p>What we’d really like, for a model of <strong>random</strong> and <strong>independent</strong> appearances of events (as spatial points within a larger domain <span class="math inline">\(D\)</span>), is a model with the property that learning the number of points in one portion of the domain does <strong>not</strong> provide any information about the number of points in other portions. Is this even possible? Are we perhaps doomed by some fact of geometry, so that any point process we can think of will have this dependence property? The answer, thankfully, is <strong>no!</strong> We <strong>can</strong> come up with a point process which, though it <em>looks</em> similar to the Binomial Point Process at first glance, in fact <strong>does</strong> satisfy the independence property we are looking for. And that magical point process is the <strong>Poisson Point Process</strong> 🥳</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Quick But Important Disclaimer: The 'Right' Null Model for *What*?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Quick But Important Disclaimer: The ‘Right’ Null Model for <em>What</em>?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Here, now that we see the main issue with the <strong>Binomial</strong> Point Process, and before we move on to its resolution via the Poisson distribution, it’s important to note one “corner case”:</p>
+<p>If the phenomenon you’re trying to model <strong>actually does involve exactly <span class="math inline">\(N\)</span> points moving around in an enclosed space</strong> – meaning, you have a case where no matter how many time the process is run, you always end up with <span class="math inline">\(N\)</span> points (e.g., a 1-meter-by-1-meter box where rats are trapped and each realization is a measurement of the rats’ positions after <span class="math inline">\(t\)</span> seconds) – then the Binomial Point Process <strong>is</strong> the proper null model!</p>
+<p>However, excepting this very specific case, the <strong>Poisson</strong> Point Process is almost always the null model you want to use, for reasons described in the next section! (e.g., if the 1-by-1 rat-box example is modified so that rats can <strong>leave</strong> or <strong>enter</strong> the box between one realization and the next, then you’re back to a case where the PPP is likely the null model you want to use)</p>
+</div>
+</div>
+</section>
+</section>
+<section id="part-4-saved-by-the-poisson-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-saved-by-the-poisson-distribution">Part 4: Saved by the Poisson Distribution!</h2>
+<p>The gist, the core property that illustrates why the Poisson Point Process magically “fixes” the issues with the Binomial Point Process mentioned above, is simply the following:</p>
+<blockquote class="blockquote">
+<p>The probability of finding <span class="math inline">\(k\)</span> points within a chosen region <span class="math inline">\(R\)</span> will now be modeled as a random process that <strong>depends only on the area of <span class="math inline">\(R\)</span> relative to the larger domain <span class="math inline">\(D\)</span></strong>.</p>
+</blockquote>
+<p>This approach, at first, probably sounds horrifically complex – at a high level it feels like we’d have to figure out some fancy fractal-based way to “scale” the Binomial distribution probabilities for randomly-chosen regions <span class="math inline">\(R\)</span> up and down based on the ratio of <span class="math inline">\(|R|\)</span> to <span class="math inline">\(|D|\)</span>.</p>
+<p>In fact, however, this <a href="https://en.wikipedia.org/wiki/Sim%C3%A9on_Denis_Poisson">French guy</a> already wrestled with precisely this issue in the early 1800s, and worked out the scary math “under the hood” so that today we get to just use the resulting distribution that’s named after him, the <strong>Poisson Distribution!</strong></p>
+<section id="model-poisson-point-process" class="level3">
+<h3 class="anchored" data-anchor-id="model-poisson-point-process">Model 🤩: Poisson Point Process</h3>
+<p>The intuition for the Poisson <strong>distribution</strong> (before we apply it to come up with a point process) is just that, as you may have learned in an earlier stats class, it is a probabilistic model of the <strong>number of “successes” in an extremely large number of independent trials, each of which has an extremely low success probability</strong>.</p>
+<p>In other words (as you may have learned in a slightly-more-intense statistics class), the Poisson distribution can be thought of as the <strong>limiting distribution</strong> that you get if you start with the <strong>Binomial</strong> distribution but take the limit as the <strong>number of trials</strong> <span class="math inline">\(N \rightarrow \infty\)</span> while simultaneously the <strong>probability of success</strong> <span class="math inline">\(p \rightarrow 0\)</span>.</p>
+<p>Why does this help us model subregions of <span class="math inline">\(D\)</span> independently from one another? The following diagram, from page 134 of <span class="citation" data-cites="baddeley_spatial_2015">Baddeley, Rubak, and Turner (<a href="#ref-baddeley_spatial_2015" role="doc-biblioref">2015</a>)</span>, visualizes how an “independent set of trials with rare success probability” might appear in a spatial setting: if we treat each <strong>infinitesimally-small grid cell</strong> here as a “trial”, with a <span class="math inline">\(1\)</span> in the grid cell in the very rare case that an event occurs within that cell, and a <span class="math inline">\(0\)</span> otherwise, the Poisson distribution then “emerges” as <strong>the</strong> probabilistic model of the <strong>number of points <span class="math inline">\(k\)</span> appearing in <span class="math inline">\(R\)</span></strong> if we know that <strong>events happen across the domain <span class="math inline">\(D\)</span> at a rate of <span class="math inline">\(\lambda\)</span> points per unit area</strong>. In particular, since we’re modeling the <strong>random appearance</strong> of points in a subregion <span class="math inline">\(R \subseteq D\)</span> as being <strong>proportional to the area of <span class="math inline">\(R\)</span></strong>, we’ve arrived at the <strong>Poisson Point Process</strong> with the rate parameter <span class="math inline">\(\lambda\)</span> set to be the portion of <span class="math inline">\(D\)</span>’s total area that is taken up by <span class="math inline">\(R\)</span>: <span class="math inline">\(\lambda = \frac{|R|}{|D|}\)</span>!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/poisson_caption.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>So, equipped with this new ability that the Poisson distribution gives us – the ability to model <strong>the rate of event occurrence within a region <span class="math inline">\(R\)</span></strong> as being <strong>proportional to the area of <span class="math inline">\(R\)</span></strong> – we can now use the <code>rpoispp()</code> function from <code>spatstat</code> to implement the (in most cases) “appropriate” null model for a spatial process, wherein events (points) occur in a given area in a manner that is independent of the occurrence of events in other areas. Four realizations of this final Poisson Point Process model are given below, though you will generate many more throughout your adventures in spatial hypothesis testing!</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(spatstat) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb20-3"><a href="#cb20-3"></a>pois_ppp_list <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="at">lambda=</span><span class="dv">60</span>, <span class="at">nsim=</span><span class="dv">4</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>)</span>
+<span id="cb20-6"><a href="#cb20-6"></a>pois_win_sf <span class="ot">&lt;-</span> <span class="fu">window_to_sf</span>(pois_ppp_list[[<span class="dv">1</span>]])</span>
+<span id="cb20-7"><a href="#cb20-7"></a>pois_points_sf <span class="ot">&lt;-</span> <span class="fu">sim_list_points_to_sf</span>(</span>
+<span id="cb20-8"><a href="#cb20-8"></a>  pois_ppp_list,</span>
+<span id="cb20-9"><a href="#cb20-9"></a>  <span class="at">label_num_points=</span><span class="cn">TRUE</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a>)</span>
+<span id="cb20-11"><a href="#cb20-11"></a><span class="co"># Compute the mean number of points across the four</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a><span class="co"># realizations</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a>mean_N <span class="ot">&lt;-</span> pois_points_sf <span class="sc">|&gt;</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a>  sf<span class="sc">::</span><span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-15"><a href="#cb20-15"></a>  <span class="fu">group_by</span>(sim_label) <span class="sc">|&gt;</span></span>
+<span id="cb20-16"><a href="#cb20-16"></a>  <span class="fu">summarize</span>(<span class="at">first_N =</span> <span class="fu">first</span>(sim_N)) <span class="sc">|&gt;</span></span>
+<span id="cb20-17"><a href="#cb20-17"></a>  <span class="fu">summarize</span>(<span class="at">mean_N =</span> <span class="fu">mean</span>(first_N))</span>
+<span id="cb20-18"><a href="#cb20-18"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb20-19"><a href="#cb20-19"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb20-20"><a href="#cb20-20"></a>    <span class="at">data=</span>pois_win_sf</span>
+<span id="cb20-21"><a href="#cb20-21"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-22"><a href="#cb20-22"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb20-23"><a href="#cb20-23"></a>    <span class="at">data=</span>pois_points_sf</span>
+<span id="cb20-24"><a href="#cb20-24"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-25"><a href="#cb20-25"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb20-26"><a href="#cb20-26"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb20-27"><a href="#cb20-27"></a>    <span class="fu">vars</span>(sim_label),</span>
+<span id="cb20-28"><a href="#cb20-28"></a>    <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span></span>
+<span id="cb20-29"><a href="#cb20-29"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-30"><a href="#cb20-30"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-31"><a href="#cb20-31"></a>    <span class="at">title=</span><span class="fu">paste0</span>(</span>
+<span id="cb20-32"><a href="#cb20-32"></a>      <span class="st">"Poisson Realizations (Mean N = "</span>,</span>
+<span id="cb20-33"><a href="#cb20-33"></a>      mean_N,</span>
+<span id="cb20-34"><a href="#cb20-34"></a>      <span class="st">")"</span></span>
+<span id="cb20-35"><a href="#cb20-35"></a>    )</span>
+<span id="cb20-36"><a href="#cb20-36"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-37"><a href="#cb20-37"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/poisson-realizations-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-baddeley_spatial_2015" class="csl-entry" role="listitem">
+Baddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. <em><a href="https://www.dropbox.com/scl/fi/egw826hopf6q53ll071n1/Baddeley-Adrian_-Rubak-Ege_-Turner-Rolf-Spatial-point-patterns.pdf?rlkey=y1n4smru4sj43sxzu4x54p5a9&amp;dl=1">Spatial <span>Point Patterns</span>: <span>Methodology</span> and <span>Applications</span> with <span>R</span></a></em>. CRC Press.
+</div>
+<div id="ref-jaynes_probability_2002" class="csl-entry" role="listitem">
+Jaynes, Edwin T. 2002. <em><a href="https://www.dropbox.com/scl/fi/duzv66baqi9y7pc37py7m/Probability-Theory-The-Logic-of-Science-E.T.-Jaynes-G.-Larry-Bretthorst-Editor.pdf?rlkey=spqf81ekio420awmsxpl9fvqh&amp;dl=1">Probability <span>Theory</span>: <span>The Logic</span> of <span>Science</span></a></em>. Cambridge University Press.
+</div>
+</div>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>In slightly more detail, in the context we’ve set up, this assumption of a “well-defined” mean <span class="math inline">\(\mu\)</span> is saying that <span class="math inline">\(\mathbb{E}[X_i] = \mu\)</span>, i.e., that the most likely value, the specific numeric value we most “expect” to see when <span class="math inline">\(X_i\)</span> is realized, is the value <span class="math inline">\(\mu\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This is not specific to spatial statistics, or even statistics in general – it’s the foundation of the so-called “Popperian” scientific method, which Jeff needs to not rant about here 😜<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The word “should” might feel weird here, as a normative/prescriptive term suddenly appearing in the middle of a descriptive statistical procedure – in Bayesian statistics, though, we actually have a good reason for using “should”: any other rule we might use for evaluating hypotheses is provably “sub-optimal”, at least in the narrow sense that we’ll make worse predictions in the future. This is true, sadly, even for the “standard” hypothesis test setup you may have learned, where you “reject” or “fail to reject” the null hypothesis: we can do better in terms of future predictions by converting “reject” into “decrease my belief by an amount determined by Bayes’ Rule” and “fail to reject” into “increase my belief by an amount determined by Bayes’ Rule”! You can find proofs and applications and etc. in <span class="citation" data-cites="jaynes_probability_2002">Jaynes (<a href="#ref-jaynes_probability_2002" role="doc-biblioref">2002</a>)</span><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/writeups/why-poisson/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>
