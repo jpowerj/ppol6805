@@ -3,7 +3,7 @@ title: "Week 11: {{< var weeks.11.title >}}"
 subtitle: "{{< var course.slides-subtitle >}}"
 author: "{{< var course.author >}}"
 institute: "{{< var course.institute >}}"
-date: "November 6, 2024"
+date: "November 5, 2025"
 date-format: full
 lecnum: 11
 categories:
@@ -24,5 +24,5 @@ format:
 
 # Midterm
 
-* The midterm will be available on Posit.Cloud from **6:30pm to 9:30pm** on **Wednesday, November 6th, 2024**.
+* The midterm will be available on Positron from **6:30pm to 9:30pm** on **Wednesday, November 5th, 2025**.
 

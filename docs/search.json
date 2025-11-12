@@ -27,11 +27,18 @@
     ]
   },
   {
-    "objectID": "w12/slides.html#choose-your-own-adventure",
-    "href": "w12/slides.html#choose-your-own-adventure",
+    "objectID": "w12/slides.html#final-project-details",
+    "href": "w12/slides.html#final-project-details",
     "title": "Week 12: Tools for Final Projects",
-    "section": "Choose Your Own Adventure",
-    "text": "Choose Your Own Adventure\n\nBonus HW5A: Re-doing Midterm Q3-Q5 (with new dataset)\n\nYou’ve incurred “fixed cost” of understanding Q1-Q3…\n\\(\\implies\\) Build on this fixed cost and complete ~Q4 + ~Q5 without time limit!\n\nBonus HW5B: Spatial Regression\n\nYour final project uses areal rather than point data…\n\\(\\implies\\) To prepare, do HW5B to learn/practice spatial regression and earn bonus points for doing so!"
+    "section": "Final Project Details",
+    "text": "Final Project Details\n\nProject Showcase: 6:30-9pm, Wed, December 3, 2025\n\nCome eat falafel and show off your cool visualizations and regression coefficients!\n\nReports: Due 5:59pm, Fri, December 12, 2025\n\nIf you’re in DSAN 6000 and you’re worried about that final project… See next slide!"
+  },
+  {
+    "objectID": "w12/slides.html#due-date-details",
+    "href": "w12/slides.html#due-date-details",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Due Date Details",
+    "text": "Due Date Details"
   },
   {
     "objectID": "w12/slides.html#presentation-setup",
@@ -114,11 +121,21 @@
     ]
   },
   {
-    "objectID": "w12/index.html#choose-your-own-adventure",
-    "href": "w12/index.html#choose-your-own-adventure",
+    "objectID": "w12/index.html#final-project-details",
+    "href": "w12/index.html#final-project-details",
     "title": "Week 12: Tools for Final Projects",
-    "section": "Choose Your Own Adventure",
-    "text": "Choose Your Own Adventure\n\nBonus HW5A: Re-doing Midterm Q3-Q5 (with new dataset)\n\nYou’ve incurred “fixed cost” of understanding Q1-Q3…\n\\(\\implies\\) Build on this fixed cost and complete ~Q4 + ~Q5 without time limit!\n\nBonus HW5B: Spatial Regression\n\nYour final project uses areal rather than point data…\n\\(\\implies\\) To prepare, do HW5B to learn/practice spatial regression and earn bonus points for doing so!",
+    "section": "Final Project Details",
+    "text": "Final Project Details\n\nProject Showcase: 6:30-9pm, Wed, December 3, 2025\n\nCome eat falafel and show off your cool visualizations and regression coefficients!\n\nReports: Due 5:59pm, Fri, December 12, 2025\n\nIf you’re in DSAN 6000 and you’re worried about that final project… See next slide!",
+    "crumbs": [
+      "Week 12: Nov 12"
+    ]
+  },
+  {
+    "objectID": "w12/index.html#due-date-details",
+    "href": "w12/index.html#due-date-details",
+    "title": "Week 12: Tools for Final Projects",
+    "section": "Due Date Details",
+    "text": "Due Date Details",
     "crumbs": [
       "Week 12: Nov 12"
     ]
@@ -319,6 +336,16 @@
     "title": "PPOL 6805 / DSAN 6750",
     "section": "GSAS and McCourt Resources and Policies",
     "text": "GSAS and McCourt Resources and Policies\nYou can find a collection of relevant resources and policies for students on the GSAS website, and the Provost’s policy on accommodating students’ religious observances on the Campus Ministry website.\nYou can also make use of the Student Academic Resource Center. In particular, within the Resource Center there is a link to Georgetown’s Disability Support page. If you believe you have a disability, you can contact the Academic Resource Center (arc@georgetown.edu) for further information. The ARC is located in the Leavey Center, Suite 335 (202-687-8354), and it is the campus office responsible for reviewing documentation provided by students with disabilities and for determining reasonable accommodations in accordance with the Americans with Disabilities Act (ADA) and University policies.\n\nMcCourt Academic Integrity Policy\nMcCourt School students are expected to uphold the academic policies set forth by Georgetown University and the Graduate School of Arts and Sciences. Students should therefore familiarize themselves with all the rules, regulations, and procedures relevant to their pursuit of a Graduate School degree. The relevant policies are listed at this link.",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "syllabus.html#footnotes",
+    "href": "syllabus.html#footnotes",
+    "title": "PPOL 6805 / DSAN 6750",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nExcused lateness exceptions, in turn, will be grounded in a policy where you can “pause” the class (due date-wise, but also just, expectation-of-progress-wise more generally) to take the time you need to handle things happening in your life. Then, you can “resume” work once you feel more centered/once you find yourself back on stable ground. The “Maslow’s hierarchy” model from psychology provides a straightforward way to think about this approach:Learning GIS is way up there in the blue triangle, so, it’s important that you feel like the first four levels are solidified before you turn your focus back to classwork. And, it’s a win-win, because it means that once you’re back in action you can be more engaged and receptive to new topics, rather than being forced to “simulate” being in the blue triangle while in reality struggling in other spots!↩︎",
     "crumbs": [
       "Syllabus"
     ]
@@ -1157,7 +1184,7 @@
     "href": "index.html",
     "title": "PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science",
     "section": "",
-    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2025, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Healy 105. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\n\nDate\n\n\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 27\n\n\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 3\n\n\n\n\n\n\nWeek 3: Vector and Raster Representations\n\n\nSep 11\n\n\n\n\n\n\nWeek 4: Unary Operations\n\n\nSep 17\n\n\n\n\n\n\nWeek 5: Binary Operations and DE-9IM\n\n\nSep 25\n\n\n\n\n\n\nWeek 6: Spatial Joins and Areal-Weighted Interpolation\n\n\nOct 2\n\n\n\n\n\n\nWeek 7: Spatial Data Science: Three Forms of Spatial Autocorrelation\n\n\nOct 9\n\n\n\n\n\n\nWeek 8: Point Processes: Null Models, Clustering, and Regularity\n\n\nOct 15\n\n\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Point Data\n\n\nOct 22\n\n\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Areal Data\n\n\nOct 29\n\n\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 6\n\n\n\n\n\n\nWeek 12: Tools for Final Projects\n\n\nNov 13\n\n\n\n\n\n\nWeek 13: In-Class Office Hours\n\n\nNov 20\n\n\n\n\n\n\nWeek 14: Final Project Poster Session\n\n\nDec 4\n\n\n\n\n\n\nNo matching items",
+    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2025, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Healy 105. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\n\nDate\n\n\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 27\n\n\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 3\n\n\n\n\n\n\nWeek 3: Vector and Raster Representations\n\n\nSep 11\n\n\n\n\n\n\nWeek 4: Unary Operations\n\n\nSep 17\n\n\n\n\n\n\nWeek 5: Binary Operations and DE-9IM\n\n\nSep 25\n\n\n\n\n\n\nWeek 6: Spatial Joins and Areal-Weighted Interpolation\n\n\nOct 2\n\n\n\n\n\n\nWeek 7: Spatial Data Science: Three Forms of Spatial Autocorrelation\n\n\nOct 9\n\n\n\n\n\n\nWeek 8: Point Processes: Null Models, Clustering, and Regularity\n\n\nOct 15\n\n\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Point Data\n\n\nOct 22\n\n\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Areal Data\n\n\nOct 29\n\n\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 5\n\n\n\n\n\n\nWeek 12: Tools for Final Projects\n\n\nNov 12\n\n\n\n\n\n\nWeek 13: In-Class Office Hours\n\n\nNov 20\n\n\n\n\n\n\nWeek 14: Final Project Poster Session\n\n\nDec 4\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "<i class='bi bi-house pe-1'></i> Home"
     ]
@@ -1167,7 +1194,7 @@
     "href": "w11/index.html",
     "title": "Week 11: In-Class Midterm",
     "section": "",
-    "text": "Midterm\n\nThe midterm will be available on Posit.Cloud from 6:30pm to 9:30pm on Wednesday, November 6th, 2024.",
+    "text": "Midterm\n\nThe midterm will be available on Positron from 6:30pm to 9:30pm on Wednesday, November 5th, 2025.",
     "crumbs": [
       "Week 11: Nov 5"
     ]
@@ -4509,7 +4536,7 @@
     "href": "w01/index.html#references",
     "title": "Week 1: Introduction to GIS",
     "section": "References",
-    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.\n\n\nRobert, Amélie. 2016. “At the Heart of the Vietnam War: Herbicides, Napalm and Bulldozers Against the A Lưới Mountains.” Journal of Alpine Research  Revue de géographie Alpine, no. 104-1 (April). https://doi.org/10.4000/rga.3266.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press. https://www.dropbox.com/scl/fi/25gj53qitsdzw9kvcvfjf/Oliver-Schabenberger-Carol-A.-Gotway-Statistical-methods-for-spatial-data-analysis.pdf?rlkey=p5ih232gmxzm3zstvszux2big&dl=1.",
+    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.\n\n\nRobert, Amélie. 2016. “At the Heart of the Vietnam War: Herbicides, Napalm and Bulldozers Against the A Lưới Mountains.” Journal of Alpine Research Revue de Géographie Alpine, no. 104-1 (April). https://doi.org/10.4000/rga.3266.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press. https://www.dropbox.com/scl/fi/25gj53qitsdzw9kvcvfjf/Oliver-Schabenberger-Carol-A.-Gotway-Statistical-methods-for-spatial-data-analysis.pdf?rlkey=p5ih232gmxzm3zstvszux2big&dl=1.",
     "crumbs": [
       "Week 1: Aug 27"
     ]
@@ -4757,7 +4784,7 @@
     "href": "w01/slides.html#references",
     "title": "Week 1: Introduction to GIS",
     "section": "References",
-    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.\n\n\nRobert, Amélie. 2016. “At the Heart of the Vietnam War: Herbicides, Napalm and Bulldozers Against the A Lưới Mountains.” Journal of Alpine Research  Revue de géographie Alpine, no. 104-1 (April). https://doi.org/10.4000/rga.3266.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press. https://www.dropbox.com/scl/fi/25gj53qitsdzw9kvcvfjf/Oliver-Schabenberger-Carol-A.-Gotway-Statistical-methods-for-spatial-data-analysis.pdf?rlkey=p5ih232gmxzm3zstvszux2big&dl=1."
+    "text": "References\n\n\nMontessori, Maria. 1916. Spontaneous Activity in Education: A Basic Guide to the Montessori Methods of Learning in the Classroom. Lulu Press.\n\n\nRobert, Amélie. 2016. “At the Heart of the Vietnam War: Herbicides, Napalm and Bulldozers Against the A Lưới Mountains.” Journal of Alpine Research Revue de Géographie Alpine, no. 104-1 (April). https://doi.org/10.4000/rga.3266.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press. https://www.dropbox.com/scl/fi/25gj53qitsdzw9kvcvfjf/Oliver-Schabenberger-Carol-A.-Gotway-Statistical-methods-for-spatial-data-analysis.pdf?rlkey=p5ih232gmxzm3zstvszux2big&dl=1."
   },
   {
     "objectID": "git_submodules.html",
@@ -4920,15 +4947,5 @@
     "title": "Week 13: In-Class Office Hours",
     "section": "References",
     "text": "References"
-  },
-  {
-    "objectID": "syllabus.html#footnotes",
-    "href": "syllabus.html#footnotes",
-    "title": "PPOL 6805 / DSAN 6750",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nExcused lateness exceptions, in turn, will be grounded in a policy where you can “pause” the class (due date-wise, but also just, expectation-of-progress-wise more generally) to take the time you need to handle things happening in your life. Then, you can “resume” work once you feel more centered/once you find yourself back on stable ground. The “Maslow’s hierarchy” model from psychology provides a straightforward way to think about this approach:Learning GIS is way up there in the blue triangle, so, it’s important that you feel like the first four levels are solidified before you turn your focus back to classwork. And, it’s a win-win, because it means that once you’re back in action you can be more engaged and receptive to new topics, rather than being forced to “simulate” being in the blue triangle while in reality struggling in other spots!↩︎",
-    "crumbs": [
-      "Syllabus"
-    ]
   }
 ]
