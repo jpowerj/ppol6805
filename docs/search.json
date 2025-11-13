@@ -445,7 +445,7 @@
     "href": "syllabus.html#assignment-structure",
     "title": "PPOL 6805 / DSAN 6750",
     "section": "Assignment Structure",
-    "text": "Assignment Structure\nOn the basis of the guidelines we’ve developed for courses offered through DSAN, this course will have one in-class midterm but no final exam! Instead, you will work on a final project throughout the second half of the course. Each of the four units will involve a homework assignment, and final grades will be determined using the following weighting scheme:\n\n\n\nCategory\nPercent of Final Grade\n\n\n\n\nIn-Class Midterm (Nov 5)\n25%\n\n\nFinal Project\n30%\n\n\nHomeworks\n45%\n\n\nHW1: GIS Concepts: Fun with Vectors and Rasters\n9%\n\n\nHW2: Unary and Binary Operations, Spatial Joins\n9%\n\n\nHW3: Autocorrelation, Clustering, and Point Processes\n9%\n\n\nHW4: Point Hypothesis Evaluation\n9%\n\n\nHW5: Spatial Regression\n9%\n\n\n\nThe course does not have any “official” prerequisites, but a general comfort with R and/or Python is helpful: most of the code shown on slides is in R, but we will also discuss equivalent Python libraries you can use if you prefer!\nIf you have never used R or Python before, however (or if you haven’t used it in a while and feel like your skills are rusty), you can:\n\nFirst browse the materials on the Resources page, and then\nAttend the weekly coding workshops led by TA Christy Hsu!",
+    "text": "Assignment Structure\nOn the basis of the guidelines we’ve developed for courses offered through DSAN, this course will have one in-class midterm but no final exam! Instead, you will work on a final project throughout the second half of the course. Each of the four units will involve a homework assignment, and final grades will be determined using the following weighting scheme:\n\n\n\nCategory\nPercent of Final Grade\n\n\n\n\nIn-Class Midterm (Nov 5)\n25%\n\n\nFinal Project\n30%\n\n\nHomeworks\n45%\n\n\nHW1: GIS Concepts: Fun with Vectors and Rasters\n9%\n\n\nHW2: Unary and Binary Operations, Spatial Joins\n9%\n\n\nHW3: Autocorrelation, Clustering, and Point Processes\n9%\n\n\nHW4: Spatial Regression\n9%\n\n\nHW5: Spatial Regression\n9%\n\n\n\nThe course does not have any “official” prerequisites, but a general comfort with R and/or Python is helpful: most of the code shown on slides is in R, but we will also discuss equivalent Python libraries you can use if you prefer!\nIf you have never used R or Python before, however (or if you haven’t used it in a while and feel like your skills are rusty), you can:\n\nFirst browse the materials on the Resources page, and then\nAttend the weekly coding workshops led by TA Christy Hsu!",
     "crumbs": [
       "Syllabus"
     ]
@@ -3374,7 +3374,7 @@
     "href": "assignments/index.html",
     "title": "Assignments: Due Dates and Point Distributions",
     "section": "",
-    "text": "The following is a quick overview of the due dates for each homework assignment. Then, for each, you can use the tabs below the table to see exactly how many points are allocated for each question.\n\n\n\n\n\n\n\n\nAssignment\nRelease Date\nDue Date\n\n\n\n\nHW1: GIS Concepts: Fun with Vectors and Rasters\nTuesday, September 9\nWednesday, September 24\n\n\nHW2: Unary and Binary Operations, Spatial Joins\nThursday, September 25\nWednesday, October 8\n\n\nHW3: Autocorrelation, Clustering, and Point Processes\nSunday, October 12\nWednesday, October 29\n\n\nHW4: Point Hypothesis Evaluation\nWednesday, November 5\nWednesday, November 19\n\n\nHW5: Spatial Regression\nWednesday, November 19\nFriday, December 5",
+    "text": "The following is a quick overview of the due dates for each homework assignment. Then, for each, you can use the tabs below the table to see exactly how many points are allocated for each question.\n\n\n\n\n\n\n\n\nAssignment\nRelease Date\nDue Date\n\n\n\n\nHW1: GIS Concepts: Fun with Vectors and Rasters\nTuesday, September 9\nWednesday, September 24\n\n\nHW2: Unary and Binary Operations, Spatial Joins\nThursday, September 25\nWednesday, October 8\n\n\nHW3: Autocorrelation, Clustering, and Point Processes\nSunday, October 12\nWednesday, October 29\n\n\nHW4: Spatial Regression\nWednesday, November 13\nWednesday, November 27\n\n\nHW5A: Spatial Regression\nWednesday, November 19\nFriday, December 5\n\n\nHW5B: Remote Sensing and Raster Data\nWednesday, November 19\nFriday, December 5",
     "crumbs": [
       "Assignments"
     ]
@@ -3384,7 +3384,7 @@
     "href": "assignments/index.html#due-dates",
     "title": "Assignments: Due Dates and Point Distributions",
     "section": "",
-    "text": "The following is a quick overview of the due dates for each homework assignment. Then, for each, you can use the tabs below the table to see exactly how many points are allocated for each question.\n\n\n\n\n\n\n\n\nAssignment\nRelease Date\nDue Date\n\n\n\n\nHW1: GIS Concepts: Fun with Vectors and Rasters\nTuesday, September 9\nWednesday, September 24\n\n\nHW2: Unary and Binary Operations, Spatial Joins\nThursday, September 25\nWednesday, October 8\n\n\nHW3: Autocorrelation, Clustering, and Point Processes\nSunday, October 12\nWednesday, October 29\n\n\nHW4: Point Hypothesis Evaluation\nWednesday, November 5\nWednesday, November 19\n\n\nHW5: Spatial Regression\nWednesday, November 19\nFriday, December 5",
+    "text": "The following is a quick overview of the due dates for each homework assignment. Then, for each, you can use the tabs below the table to see exactly how many points are allocated for each question.\n\n\n\n\n\n\n\n\nAssignment\nRelease Date\nDue Date\n\n\n\n\nHW1: GIS Concepts: Fun with Vectors and Rasters\nTuesday, September 9\nWednesday, September 24\n\n\nHW2: Unary and Binary Operations, Spatial Joins\nThursday, September 25\nWednesday, October 8\n\n\nHW3: Autocorrelation, Clustering, and Point Processes\nSunday, October 12\nWednesday, October 29\n\n\nHW4: Spatial Regression\nWednesday, November 13\nWednesday, November 27\n\n\nHW5A: Spatial Regression\nWednesday, November 19\nFriday, December 5\n\n\nHW5B: Remote Sensing and Raster Data\nWednesday, November 19\nFriday, December 5",
     "crumbs": [
       "Assignments"
     ]
@@ -4143,7 +4143,17 @@
     "href": "final-project.html",
     "title": "Final Project Details",
     "section": "",
-    "text": "First things first, to jump right into an example of what the final project can end up looking like, click the following link to see an example final project in the required Quarto Manuscript format:\n\nExample Project: “Coup-Proofing via Capital Relocation”",
+    "text": "Feel free to add this calendar to your own GCal/Apple Calendar/etc., to see each important milestone and deadline date related to the final project!",
+    "crumbs": [
+      "Final Project"
+    ]
+  },
+  {
+    "objectID": "final-project.html#final-project-timeline-google-calendar",
+    "href": "final-project.html#final-project-timeline-google-calendar",
+    "title": "Final Project Details",
+    "section": "",
+    "text": "Feel free to add this calendar to your own GCal/Apple Calendar/etc., to see each important milestone and deadline date related to the final project!",
     "crumbs": [
       "Final Project"
     ]
@@ -4152,8 +4162,8 @@
     "objectID": "final-project.html#example-final-project-submission",
     "href": "final-project.html#example-final-project-submission",
     "title": "Final Project Details",
-    "section": "",
-    "text": "First things first, to jump right into an example of what the final project can end up looking like, click the following link to see an example final project in the required Quarto Manuscript format:\n\nExample Project: “Coup-Proofing via Capital Relocation”",
+    "section": "Example Final Project Submission",
+    "text": "Example Final Project Submission\nFirst things first, to jump right into an example of what the final project can end up looking like, click the following link to see an example final project in the required Quarto Manuscript format:\n\nExample Project: “Coup-Proofing via Capital Relocation”",
     "crumbs": [
       "Final Project"
     ]
@@ -4174,16 +4184,6 @@
     "title": "Final Project Details",
     "section": "Application Areas",
     "text": "Application Areas\n\nUrban Planning\nI put this here first only as, the application area where I have the most experience, so can probably be most helpful in terms of project guidance!\nThough it is a broad topic, one way to narrow your scope to make it feasible in the time we have left is to choose between a comparative approach and a case study approach:\nComparative Approach:\nHere the idea is to understand a spatial phenomenon by analyzing how it is implemented across different urban areas. For example, you could choose a measure of transportation efficiency (on-time rate, proportion of urban population living within walking distance of a subway/bus stop, etc.), then see how it is distributed across different urban areas, whether within a specific country or internationally. Then, the project could be rooted in a hypothesis regarding why some urban areas have high efficiency and others have low efficiency.\nCase Study Approach:\nHere, rather than comparing across different urban areas, the idea would be more focused on telling a story about a particular city or urban area. The reason this approach is mentioned after the Comparative Approach is because, in reality, what you’re doing here is still comparative! It’s just that, in this case, the comparisons are being made between e.g. subregions of the urban area, or between the urban area observed at different time periods.\nFor example, a famous instance of the use of GIS to study a particular urban area is the Massachusetts state government’s Logan Airport Health Study, which found significantly higher rates of asthma among children living closer to Logan Airport. Here the point is that the rates were higher for these children relative to children living in other parts of the same urban area. That is, it’s still a “comparative” approach, just comparing areas-near-Logan with areas-not-near-Logan!\n\n\n\n\n\n\nFigure 1: Pollution expsure areas, as estimated in (Massachusetts Bureau of Environmental Health 2014, 46)\n\n\n\n\n\nClimate Change / Renewable Energy\n\n\nPublic Policy Evaluation\nHere, I specify policy evaluation rather than just public policy studies in general, since I think that some of the tools we’ve learned in class can be particularly helpful for spatially-based comparison of the effectiveness of a given policy choice.\nThat’s a fairly vague statement so, as a concrete example,\n\n\nInternational Relations\n\n\nPublic Health / Global Health\n\n\nDiffusion Processes",
-    "crumbs": [
-      "Final Project"
-    ]
-  },
-  {
-    "objectID": "final-project.html#google-cloud-platform-credits",
-    "href": "final-project.html#google-cloud-platform-credits",
-    "title": "Final Project Details",
-    "section": "Google Cloud Platform Credits",
-    "text": "Google Cloud Platform Credits\nYou should have received the Google Cloud Platform credits at your @georgetown.edu email address if you’re enrolled in this course. The code in the email should add a new billing account to your Google Cloud Console, with $50 for:\n\nCreating a full-on Virtual Machine for the project, if you think that you’ll need a bunch of storage or computing power or GPU usage, and/or\nFor use with Google Maps Engine, if you think that one of their Maps Engine datasets/tools may be useful!\n\nAs mentioned in the email: A reasonable choice, which ensures that you’ll stay within-budget even if you run the VM instance from now until the semester, is to create an instance (you can name it “gis-project”, for example) with all of the default options except:\n\nChoose ec2-small for the Machine Type (ec2-medium is the default, but based on the estimated cost for this type, it would run out of $ before the semester ends)\nClick the “Change” button under “Boot Disk” and then set the size to 25 GB (this is what I meant by “trying a few different options”: with the $ saved moving from ec2-medium to ec2-small, you can increase from the default 10 GB disk to a 25 GB disk without the expected cost going over $50 for the semester).",
     "crumbs": [
       "Final Project"
     ]

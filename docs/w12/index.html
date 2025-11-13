@@ -545,7 +545,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-11-12, 06:42:36 PM</em></p>
+<p><em>Updated 2025-11-13, 06:26:43 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -658,10 +658,208 @@ window.Quarto = {
 </section>
 <section id="due-date-details" class="level2 smaller crunch-title title-12">
 <h2 class="smaller crunch-title title-12 anchored" data-anchor-id="due-date-details">Due Date Details</h2>
+<style>
+.reveal a {
+  font-weight: unset !important;
+  background-color: unset !important;
+  text-decoration: unset !important;
+  color: black !important;
+}
+.reveal table {
+  margin: 0px !important;
+  padding: 0px !important;
+  table-layout: fixed !important;
+}
+.reveal table th, .reveal table td {
+  text-align: unset !important;
+  padding: unset !important;
+}
+.fc-scrollgrid-sync-inner {
+  text-align: center;
+}
+.fc-daygrid-day-frame {
+  /* border: 0.5px solid #f1f1f1 !important; */
+  border-right: 1px solid #f1f1f1 !important;
+}
+.fc-col-header-cell {
+  /* border: 0.5px solid #f1f1f1 !important; */
+  border-right: 1px solid #f1f1f1 !important;
+}
+th .fc-day-sun {
+  border-right: 2px solid #f1f1f1 !important;
+}
+.fc-event:first {
+  margin-top: -5px !important;
+}
+.fc-event-title-container {
+  line-height: 1.1 !important;
+  margin-top: 0px !important;
+  margin-bottom: -5px !important;
+}
+/* .fc-daygrid-block-event {
+  margin-right: -20px !important;
+} */
+.grade-projects {
+  margin-right: -16px !important;
+  /* color: green !important; */
+}
+tr:nth-of-type(3) td:nth-of-type(1) a:not(.movie-monday-3) > .fc-event-main {
+  background-color: #e69f00 !important;
+}
+.movie-monday-3 {
+  margin-top: 3px !important;
+}
+.reveal table tbody tr th, .reveal table tbody tr td {
+  /* border-bottom: 0px solid white !important; */
+  border-right: 0px solid white;
+  border-top: 0px solid white;
+  /* border-left: 0px solid white !important; */
+}
+/* .reveal table tbody tr th, .reveal table tbody tr td {
+  border-bottom: 0px solid white !important;
+  border-right: 0px solid black !important;
+  border-top: 0px solid white !important;
+} */
+.fc-toolbar {
+  font-size: 1rem !important;
+}
+.fc-header-toolbar {
+  margin-bottom: 5px !important;
+}
+.fc-scroller-harness {
+  border: 0px solid white !important;
+}
+.fc-scrollgrid {
+  border-top: 0px solid white !important;
+}
+/* .fc-scrollgrid-section td {
+  border: 0px solid white !important;
+} */
+/* .fc-h-event {
+  border: 0px solid white !important;
+} */
+.fc-toolbar-title {
+  font-size: 1.6rem !important;
+}
+.fc-event-title {
+  font-size: 0.9rem !important;
+}
+.fc-daygrid-day-number {
+  font-size: 0.9rem !important;
+}
+.fc-daygrid-day {
+  border-top: 1px solid #f1f1f1 !important;
+  border-right: 1px solid #f1f1f1 !important;
+  border-bottom: 1px solid #f1f1f1 !important;
+}
+.fc-col-header-cell {
+  font-size: 1rem !important;
+  font-weight: bold !important;
+}
+.fc-h-event .fc-event-main {
+  background-color: #3788d8f0 !important;
+}
+tr:nth-of-type(1) td:nth-of-type(3) .fc-event-main > * {
+  background-color: #e69f00 !important;
+}
+tr:nth-of-type(2) td:nth-of-type(3) .fc-event-main:nth-of-type(1) {
+  background-color: #3788d8f0 !important;
+}
+tr:nth-of-type(2) td:nth-of-type(5) .fc-event-main {
+  background-color: #e69f00 !important;
+}
+</style>
 <center>
-<iframe src="https://calendar.google.com/calendar/embed?height=550&amp;wkst=1&amp;ctz=America%2FNew_York&amp;showPrint=0&amp;src=Y19iMmNhM2I5NTM5MWY1OTk2Zjc0Y2FjMDQ5ZGE1MjZhZDY0YWIwOThmOTc3ZjIwZjQ1YTBiYTVjN2IwMmMxZWIyQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%239e69af" style="border:solid 1px #777" width="900" height="550" frameborder="0" scrolling="no">
-</iframe>
+<div id="calendar" style="width: 800; height: 530;"></div>
 </center>
+<script>
+document.addEventListener(
+  'DOMContentLoaded',
+  function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(
+      calendarEl, {
+        initialView: 'dayGridMonth',
+        // initialView: 'multiMonthYear',
+        multiMonthMaxColumns: 1,
+        initialDate: '2025-12-01',
+        fixedWeekCount: false,
+        showNonCurrentDates: false,
+        firstDay: 1,
+        height: 530,
+        contentHeight: 530,
+        eventColor: '#3788d8',
+        eventBackgroundColor: '#3788d8',
+        aspectRatio: 1.2,
+        headerToolbar: {
+          // left: 'prev,next today',
+          left: '',
+          center: 'title',
+          right: '',
+        },
+        // eventDidMount: function(info) {
+        //   var tooltip = new bootstrap.Tooltip(info.el, {
+        //     // title: info.event.extendedProps.title,
+        //     title: 'testing',
+        //     placement: 'top',
+        //     trigger: 'hover',
+        //     container: 'body'
+        //   });
+        // },
+        events: [
+          {
+            title: 'Movie Monday',
+            start: '2025-12-01',
+          },
+          {
+            title: 'Project Showcase',
+            start: '2025-12-03',
+          },
+          {
+            title: 'Movie Monday',
+            start: '2025-12-08'
+          },
+          {
+            title: 'Present Big Data (J)',
+            start: '2025-12-08'
+          },
+          {
+            title: 'Present Big Data (A)',
+            start: '2025-12-10'
+          },
+          {
+            title: 'Project Due',
+            start: '2025-12-12'
+          },
+          {
+            title: 'Movie Monday',
+            start: '2025-12-15',
+            className: 'movie-monday-3'
+          },
+          {
+            title: 'Jeff Grades Projects',
+            start: '2025-12-15',
+            end: '2025-12-20',
+            className: 'grade-projects'
+          },
+          {
+            title: 'Movie Monday',
+            start: '2025-12-22',
+          },
+          {
+            title: 'Movie Monday',
+            start: '2025-12-29',
+          }
+        ]
+      }
+    );
+    calendar.render();
+    calendar.updateSize();
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
+  }
+);
+</script>
 </section>
 <section id="presentation-setup" class="level2">
 <h2 class="anchored" data-anchor-id="presentation-setup">Presentation Setup</h2>
@@ -1004,8 +1202,8 @@ Y = \begin{cases}
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">data=</span>city_ppl_sf, <span class="at">icon =</span> People)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-fa918c0b9b6ba009a670" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-fa918c0b9b6ba009a670">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[41.98838897861337,42.07166357580589,42.02477061955514,41.84975224274566,42.01675377399658,42.0729399537606,41.79018490123543,41.91007103680471,41.80448314658349,41.96862865700863,42.55982593292625,42.36992185933546,42.47684864934688,42.56795954372666,42.37799223046967,42.29977602616961,42.33814656914983,42.41782374267919,42.41763104257301,42.30372212340315],[-88.15871557536637,-87.92868386417926,-87.92724987291122,-87.82728098851226,-87.98511085749801,-87.9538181855339,-87.99804653009576,-87.7728537797026,-87.83269902451006,-87.87734542319049,-83.35000691297985,-83.07536682180758,-83.14606975950869,-83.36827136871038,-83.39699929004334,-83.26106461783056,-83.09852024947865,-83.33546455026095,-83.28542115137752,-83.07293394392987],{"iconUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png","index":0},"iconRetinaUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png","index":0},"iconWidth":20,"iconHeight":20},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[[42.01684278828842,42.04564204321752,42.09140219341914,41.88324073942272,41.97470026042487,41.83300800692197,41.97128737434578,42.11696637282715,41.93757039284506,41.98916297806672,42.01284401665731,41.91542723881042,41.79833504450777,42.07319284607311,41.99930847620848,42.00245322251406,42.42898920079713,42.33717712865829,42.48284744585376,42.31397321469255],[-87.83000591964417,-88.05833997492786,-87.95563579337285,-88.00905608688218,-87.88607351775799,-87.94239190795555,-88.011896372747,-88.00150525509353,-88.13250822722627,-88.07324098781987,-88.06972178737949,-87.84670526607022,-87.915589047369,-87.75229122168253,-88.04866980570942,-87.85409629370673,-83.40667664491446,-83.00937452322626,-82.9626155019039,-83.03370412193929],{"iconUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png","index":0},"iconRetinaUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png","index":0},"iconWidth":20,"iconHeight":20},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[41.79018490123543,42.56795954372666],"lng":[-88.15871557536637,-82.9626155019039]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-3c9642400e48838ab76d" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-3c9642400e48838ab76d">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[41.9664883188114,41.81375373437067,41.79733981786971,41.88312615311012,42.11459521670989,42.08351327629995,41.97982517852391,41.78809318375598,42.03352868447651,41.91597786285419,42.32901702268625,42.48308117923374,42.52931504442594,42.52895768450527,42.27511965450235,42.53300061423385,42.55495451762023,42.58051124735151,42.45127924201321,42.37396128628487],[-88.1276750722059,-87.84424112058709,-88.03043913121601,-88.14314052207267,-87.91065622214295,-87.80680446175744,-87.76241288723359,-87.9877517326634,-87.75714120934424,-88.10571168759559,-83.24609732805968,-83.35717961720952,-83.2342176169478,-83.27817453978815,-83.20189593964827,-83.11551116714146,-83.05159041276606,-83.14477769120762,-83.24643465163645,-82.98832679432358],{"iconUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png","index":0},"iconRetinaUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png","index":0},"iconWidth":20,"iconHeight":20},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[[41.90489724441501,41.86309120139761,42.01704657779901,41.86821347835436,42.02510952237898,41.99970438588113,42.07730156949233,41.83707943297389,42.01545444242741,41.86728875820841,41.96019191525106,41.8968347653465,41.81983792411531,41.8040950956258,41.83407787962853,41.97160852330665,42.29547897791261,42.5212404817246,42.48113712402247,42.52408611633378],[-88.07167173288715,-87.72125371932626,-88.09994611123622,-87.81590051209933,-87.74032756928685,-87.71588908735987,-87.87867477199207,-87.81433671195175,-87.77323043063346,-87.88063364397406,-88.14022980042317,-87.98100293362698,-87.89617458991593,-88.05209791685419,-87.97846431237608,-88.10058427793058,-83.25458700070921,-83.30072961818453,-82.94276170856159,-83.23182675259845],{"iconUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png","index":0},"iconRetinaUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png","index":0},"iconWidth":20,"iconHeight":20},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[41.78809318375598,42.58051124735151],"lng":[-88.14314052207267,-82.94276170856159]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>

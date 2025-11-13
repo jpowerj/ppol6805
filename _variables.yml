@@ -91,14 +91,21 @@ hw:
     due-date-md: Oct 29
     due-date: "Wednesday, October 29"
   - hw-num: 4
-    title: "Point Hypothesis Evaluation"
-    pct: 9
-    release-date-md: Nov 5
-    release-date: "Wednesday, November 5"
-    due-date-md: Nov 19
-    due-date: "Wednesday, November 19"
-  - hw-num: "5"
     title: "Spatial Regression"
+    pct: 9
+    release-date-md: Nov 13
+    release-date: "Wednesday, November 13"
+    due-date-md: Nov 27
+    due-date: "Wednesday, November 27"
+  - hw-num: "5A"
+    title: "Spatial Regression"
+    pct: 9
+    release-date-md: Nov 19
+    release-date: "Wednesday, November 19"
+    due-date-md: Dec 5
+    due-date: "Friday, December 5"
+  - hw-num: "5B"
+    title: "Remote Sensing and Raster Data"
     pct: 9
     release-date-md: Nov 19
     release-date: "Wednesday, November 19"

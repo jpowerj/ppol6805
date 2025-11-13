@@ -268,10 +268,208 @@ Jeff Jacobs
 </section>
 <section id="due-date-details" class="slide level2 smaller crunch-title title-12">
 <h2>Due Date Details</h2>
+<style>
+.reveal a {
+  font-weight: unset !important;
+  background-color: unset !important;
+  text-decoration: unset !important;
+  color: black !important;
+}
+.reveal table {
+  margin: 0px !important;
+  padding: 0px !important;
+  table-layout: fixed !important;
+}
+.reveal table th, .reveal table td {
+  text-align: unset !important;
+  padding: unset !important;
+}
+.fc-scrollgrid-sync-inner {
+  text-align: center;
+}
+.fc-daygrid-day-frame {
+  /* border: 0.5px solid #f1f1f1 !important; */
+  border-right: 1px solid #f1f1f1 !important;
+}
+.fc-col-header-cell {
+  /* border: 0.5px solid #f1f1f1 !important; */
+  border-right: 1px solid #f1f1f1 !important;
+}
+th .fc-day-sun {
+  border-right: 2px solid #f1f1f1 !important;
+}
+.fc-event:first {
+  margin-top: -5px !important;
+}
+.fc-event-title-container {
+  line-height: 1.1 !important;
+  margin-top: 0px !important;
+  margin-bottom: -5px !important;
+}
+/* .fc-daygrid-block-event {
+  margin-right: -20px !important;
+} */
+.grade-projects {
+  margin-right: -16px !important;
+  /* color: green !important; */
+}
+tr:nth-of-type(3) td:nth-of-type(1) a:not(.movie-monday-3) > .fc-event-main {
+  background-color: #e69f00 !important;
+}
+.movie-monday-3 {
+  margin-top: 3px !important;
+}
+.reveal table tbody tr th, .reveal table tbody tr td {
+  /* border-bottom: 0px solid white !important; */
+  border-right: 0px solid white;
+  border-top: 0px solid white;
+  /* border-left: 0px solid white !important; */
+}
+/* .reveal table tbody tr th, .reveal table tbody tr td {
+  border-bottom: 0px solid white !important;
+  border-right: 0px solid black !important;
+  border-top: 0px solid white !important;
+} */
+.fc-toolbar {
+  font-size: 1rem !important;
+}
+.fc-header-toolbar {
+  margin-bottom: 5px !important;
+}
+.fc-scroller-harness {
+  border: 0px solid white !important;
+}
+.fc-scrollgrid {
+  border-top: 0px solid white !important;
+}
+/* .fc-scrollgrid-section td {
+  border: 0px solid white !important;
+} */
+/* .fc-h-event {
+  border: 0px solid white !important;
+} */
+.fc-toolbar-title {
+  font-size: 1.6rem !important;
+}
+.fc-event-title {
+  font-size: 0.9rem !important;
+}
+.fc-daygrid-day-number {
+  font-size: 0.9rem !important;
+}
+.fc-daygrid-day {
+  border-top: 1px solid #f1f1f1 !important;
+  border-right: 1px solid #f1f1f1 !important;
+  border-bottom: 1px solid #f1f1f1 !important;
+}
+.fc-col-header-cell {
+  font-size: 1rem !important;
+  font-weight: bold !important;
+}
+.fc-h-event .fc-event-main {
+  background-color: #3788d8f0 !important;
+}
+tr:nth-of-type(1) td:nth-of-type(3) .fc-event-main > * {
+  background-color: #e69f00 !important;
+}
+tr:nth-of-type(2) td:nth-of-type(3) .fc-event-main:nth-of-type(1) {
+  background-color: #3788d8f0 !important;
+}
+tr:nth-of-type(2) td:nth-of-type(5) .fc-event-main {
+  background-color: #e69f00 !important;
+}
+</style>
 <center>
-<iframe src="https://calendar.google.com/calendar/embed?height=550&amp;wkst=1&amp;ctz=America%2FNew_York&amp;showPrint=0&amp;src=Y19iMmNhM2I5NTM5MWY1OTk2Zjc0Y2FjMDQ5ZGE1MjZhZDY0YWIwOThmOTc3ZjIwZjQ1YTBiYTVjN2IwMmMxZWIyQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%239e69af" style="border:solid 1px #777" width="900" height="550" frameborder="0" scrolling="no">
-</iframe>
+<div id="calendar" style="width: 800; height: 530;"></div>
 </center>
+<script>
+document.addEventListener(
+  'DOMContentLoaded',
+  function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(
+      calendarEl, {
+        initialView: 'dayGridMonth',
+        // initialView: 'multiMonthYear',
+        multiMonthMaxColumns: 1,
+        initialDate: '2025-12-01',
+        fixedWeekCount: false,
+        showNonCurrentDates: false,
+        firstDay: 1,
+        height: 530,
+        contentHeight: 530,
+        eventColor: '#3788d8',
+        eventBackgroundColor: '#3788d8',
+        aspectRatio: 1.2,
+        headerToolbar: {
+          // left: 'prev,next today',
+          left: '',
+          center: 'title',
+          right: '',
+        },
+        // eventDidMount: function(info) {
+        //   var tooltip = new bootstrap.Tooltip(info.el, {
+        //     // title: info.event.extendedProps.title,
+        //     title: 'testing',
+        //     placement: 'top',
+        //     trigger: 'hover',
+        //     container: 'body'
+        //   });
+        // },
+        events: [
+          {
+            title: 'Movie Monday',
+            start: '2025-12-01',
+          },
+          {
+            title: 'Project Showcase',
+            start: '2025-12-03',
+          },
+          {
+            title: 'Movie Monday',
+            start: '2025-12-08'
+          },
+          {
+            title: 'Present Big Data (J)',
+            start: '2025-12-08'
+          },
+          {
+            title: 'Present Big Data (A)',
+            start: '2025-12-10'
+          },
+          {
+            title: 'Project Due',
+            start: '2025-12-12'
+          },
+          {
+            title: 'Movie Monday',
+            start: '2025-12-15',
+            className: 'movie-monday-3'
+          },
+          {
+            title: 'Jeff Grades Projects',
+            start: '2025-12-15',
+            end: '2025-12-20',
+            className: 'grade-projects'
+          },
+          {
+            title: 'Movie Monday',
+            start: '2025-12-22',
+          },
+          {
+            title: 'Movie Monday',
+            start: '2025-12-29',
+          }
+        ]
+      }
+    );
+    calendar.render();
+    calendar.updateSize();
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
+  }
+);
+</script>
 </section>
 <section id="presentation-setup" class="slide level2">
 <h2>Presentation Setup</h2>
@@ -614,8 +812,8 @@ Y = \begin{cases}
 </details>
 </div><div class="column">
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-db8d5ae5ad4914198b8b" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-db8d5ae5ad4914198b8b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[41.91385315181336,41.79023922218853,41.8601575165895,41.99587632121611,42.0121487409202,41.81605284894201,41.96721488562745,42.03004446704201,42.08825623072299,41.78657824867605,42.54309718831309,42.53771978700244,42.29648971437273,42.37661227314239,42.47718552423336,42.43614473486595,42.42868795221541,42.57968682108935,42.30691565571485,42.49166316075655],[-87.93429772833102,-87.85460331175372,-88.09805256163692,-87.73890436870956,-87.90021246390876,-87.9962460792178,-87.80736920135519,-88.02586600110583,-87.90434360816202,-88.01732731418042,-83.32556193832855,-83.33990607128121,-83.20236095578191,-82.97346414952327,-82.9884838419124,-83.28429652957202,-83.25909737865796,-83.22850179842311,-83.06057833024501,-83.0876389169718],{"iconUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png","index":0},"iconRetinaUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png","index":0},"iconWidth":20,"iconHeight":20},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[[41.99700263381036,42.04311568161189,41.95216814289998,41.90552363820558,41.868379812295,41.99885979042087,42.03364182249373,41.8546021563952,41.84277229009714,42.00090112667171,41.98407253143934,41.8956055819444,41.80162875299295,42.00744604109032,41.91838033009744,41.98083810982988,42.54232405581399,42.43505880822653,42.4201296443546,42.57523148327443],[-88.019389789337,-88.03224458995085,-88.16062958218976,-88.02098828004675,-88.12883616702916,-87.79988476672418,-87.99875104987645,-87.93068979765314,-87.73842592051079,-88.08939215257836,-88.14502218304058,-87.87690123557613,-87.81967365560912,-88.16043611614502,-88.03730207132926,-88.0309765880738,-83.2628241600185,-83.09119194907124,-82.9904477197242,-83.11457572555692],{"iconUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png","index":0},"iconRetinaUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png","index":0},"iconWidth":20,"iconHeight":20},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[41.78657824867605,42.57968682108935],"lng":[-88.16062958218976,-82.97346414952327]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-2f7030f9cff04b941874" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-2f7030f9cff04b941874">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[41.97583170233128,42.08538074138634,42.0802833981088,42.06551932898392,42.12288759798982,41.81756902610416,41.86574761971169,42.07602526308684,42.12489753914764,41.90512606662633,42.51782803998456,42.56672468704025,42.62612330733005,42.57087076536968,42.41640747933115,42.27349479248284,42.38481394574111,42.34827478228244,42.35364465247469,42.58604837958073],[-87.72090045489256,-87.93654534502689,-87.88658159091734,-88.07719158638047,-87.9278558386204,-87.80697264284858,-88.05115227118411,-88.00234581747105,-87.8607430244932,-88.05424627060849,-83.06549182161571,-83.25538496906393,-83.163754155799,-83.18998047439673,-83.00362346092439,-83.14318581605212,-83.34653900845261,-83.22241497593625,-83.03438075906135,-83.26569340158818],{"iconUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png","index":0},"iconRetinaUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png","index":0},"iconWidth":20,"iconHeight":20},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[[41.97901781791761,41.83296669400681,41.93851716160759,41.86143481488578,41.89992491505448,41.89904052476491,42.02650577153214,41.92646948158294,41.89681712434255,41.95961859385211,41.86562727506946,41.78534780959446,41.929748616211,41.9530384334589,41.80032789883554,41.92384117060653,42.44833497288095,42.43828713851038,42.34939114285017,42.39090809591789],[-87.8002653997804,-87.88160898319778,-87.77096724083169,-87.93824273808448,-87.76996972887989,-87.86330808231492,-87.99161822417993,-87.84798314093774,-88.02264427409777,-87.89921274816545,-88.10778860311241,-87.98851345485741,-87.90702230069252,-87.79706254749739,-87.95222162300047,-87.84060640540105,-83.37061597705046,-83.06186704608895,-83.19552384439406,-83.22637272126312],{"iconUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png","index":0},"iconRetinaUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png","index":0},"iconWidth":20,"iconHeight":20},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[41.78534780959446,42.62612330733005],"lng":[-88.10778860311241,-83.00362346092439]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div></div>
 </section>

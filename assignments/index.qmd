@@ -20,7 +20,8 @@ The following is a quick overview of the **due dates** for each homework assignm
 | HW2: {{< var hw.2.title >}} | {{< var hw.2.release-date >}} | {{< var hw.2.due-date >}} |
 | HW3: {{< var hw.3.title >}} | {{< var hw.3.release-date >}} | {{< var hw.3.due-date >}} |
 | HW4: {{< var hw.4.title >}} | {{< var hw.4.release-date >}} | {{< var hw.4.due-date >}} |
-| HW5: {{< var hw.5.title >}} | {{< var hw.5.release-date >}} | {{< var hw.5.due-date >}} |
+| HW5A: {{< var hw.5.title >}} | {{< var hw.5.release-date >}} | {{< var hw.5.due-date >}} |
+| HW5B: {{< var hw.6.title >}} | {{< var hw.6.release-date >}} | {{< var hw.6.due-date >}} |
 
 : {tbl-colwidths="[40, 30, 30]"}
 
