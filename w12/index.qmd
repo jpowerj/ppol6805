@@ -80,7 +80,7 @@ format:
 ## Report Setup {.crunch-title}
 
 * [**GitHub repository**](https://github.com/) (for your portfolio!)
-  * GH Pages site: `your_username.github.io/gis_project`
+  * GH Pages site: `your_username.github.io/gis-project`
 * ...What do you put in that GitHub repository?
 * [**Quarto Manuscript**](https://quarto.org/docs/manuscripts/)
 * What do you put in the Quarto manuscript?

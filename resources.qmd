@@ -63,6 +63,23 @@ Don't let the name fool you, this book contains a full-on tour through all major
 ::::
 :::::
 
+
+::::: {.callout-tip title="<i class='bi bi-4-circle'></i> The *Spatial Regression* Book: @ward_spatial_2018" icon="false" appearance="default"}
+
+**Ward and Gleditsch, *An Introduction to Spatial Regression Models in the Social Sciences*** [[`pdf`](https://www.dropbox.com/scl/fi/1hxzqcn9e1a5fntw8iqvk/Spatial-Regression-Models.pdf?rlkey=edeow7y9l1l0c8e8xhq8nxldf&dl=1)]
+
+:::: {layout="[30,70]" layout-valign="center"}
+::: {#waller-cover style="margin-right: 8px;"}
+![](images/ward_gleditsch.jpg){width="180"}
+:::
+::: {#waller-text}
+
+This one is a new addition to the course, but feels like an important addition! Because, you _could_ "piece together" how to estimate spatial regression models from @baddeley_spatial_2015 and @waller_applied_2004 mentioned above (which is what students did in previous versions of the course), but this book packs a full-on self-contained guide to how these models work into only about **80 pages**. So, whereas the above books span many different topics in the course, consider this book to be a "companion guide" to **Homework 4** specifically 😎
+
+:::
+::::
+:::::
+
 ## Learning *Base* R
 
 Recall from Week 2 that "base" R here just means, the pieces of R that are built-in, accessible to anyone with R on their computer. This is the "skeleton" which the GIS-specific libraries we use in this class, such as `sf`, build upon!
