@@ -66,7 +66,7 @@ Don't let the name fool you, this book contains a full-on tour through all major
 
 ::::: {.callout-tip title="<i class='bi bi-4-circle'></i> The *Spatial Regression* Book: @ward_spatial_2018" icon="false" appearance="default"}
 
-**Ward and Gleditsch, *An Introduction to Spatial Regression Models in the Social Sciences*** [[`pdf`](https://www.dropbox.com/scl/fi/1hxzqcn9e1a5fntw8iqvk/Spatial-Regression-Models.pdf?rlkey=edeow7y9l1l0c8e8xhq8nxldf&dl=1)]
+**Ward and Gleditsch, *An Introduction to Spatial Regression Models in the Social Sciences*** [[`pdf`](https://www.dropbox.com/scl/fi/dr3cwrjaoiis1bkq858na/W4_W7_WardGleditsch.pdf?rlkey=5xg4rxvvzylhjwv4hdc2vop03&dl=1)]
 
 :::: {layout="[30,70]" layout-valign="center"}
 ::: {#waller-cover style="margin-right: 8px;"}
@@ -84,7 +84,7 @@ This one is a new addition to the course, but feels like an important addition! 
 
 Recall from Week 2 that "base" R here just means, the pieces of R that are built-in, accessible to anyone with R on their computer. This is the "skeleton" which the GIS-specific libraries we use in this class, such as `sf`, build upon!
 
-* **Lessons 1 through 9 of [Norm Matloff's "FasteR" R tutorial](https://github.com/matloff/fasteR)** will walk you gently through the basic syntax, data structures, and functions in "base" R that we'll build upon as the course progresses!
+* **Lessons 1 through 11 of [Norm Matloff's "FasteR" R tutorial](https://github.com/matloff/fasteR)** will walk you gently through the basic syntax, data structures, and functions in "base" R that we'll build upon as the course progresses!
 
 ### GIS with R
 
