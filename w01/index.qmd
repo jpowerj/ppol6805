@@ -1,0 +1,914 @@
+---
+title: "Week 1: Introduction to GIS"
+subtitle: "{{< var course.slides-subtitle >}}"
+author: "{{< var course.author >}}"
+institute: "{{< var course.institute >}}"
+date: 2025-08-27
+date-format: full
+lecnum: 1
+categories:
+  - "Class Sessions"
+crossref:
+  fig-title: Fig
+bibliography: "../_PPOL6805.bib"
+cache: true
+format:
+  revealjs:
+    output-file: "slides.html"
+    html-math-method: mathjax
+    slide-number: true
+    scrollable: true
+    link-external-icon: true
+    link-external-newwindow: true
+    footer: "{{< var weeks.1.footer >}}"
+    include-in-header:
+      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'><link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css'><link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous'><script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous'></script>"
+    theme: [default, "../dsan-globals/jjquarto.scss"]
+    revealjs-plugins:
+      - simplemenu
+    simplemenu:
+      flat: true
+      barhtml:
+        header: "<div class='menubar'><span style='position: absolute; left: 8; padding-left: 8px;'><a href='./index.html'>&larr; Return to Notes</a></span><ul class='menu'></ul></div>"
+      scale: 0.5
+  html:
+    output-file: "index.html"
+    html-math-method: mathjax
+    df-print: kable
+---
+
+::: {.content-visible unless-format="revealjs"}
+
+<center class='mb-3'>
+<a class="h2" href="./slides.html" target="_blank">Open slides in new tab &rarr;</a>
+</center>
+
+:::
+
+# Welcome to The Wonderful World of GIS! {data-stack-name="Welcome!" .title-08}
+
+<!-- * **Unit 1**: Maps
+* **Unit 2**: Maps + Coding
+* **Unit 3**: Data Science/Statistics/Econometrics with Maps
+  * Drawing inferences about spatial phenomena using coding
+* **Unit 4**: Applying Units 1-3 to Issues in the World! -->
+
+![](images/Euler.svg){fig-align="center" width="90%"}
+
+## Your Final Project {background-color="black" background-image="images/goku_final.jpeg" background-size="100%" background-repeat="no-repeat" .title-center}
+
+## Unit 1: Maps {.smaller .crunch-title .crunch-ul .smaller-table .crunch-li}
+
+::: {.hidden}
+
+```{r}
+#| label: r-source-globals
+source("../dsan-globals/_globals.r")
+```
+
+:::
+
+* Your least favorite part of the course (per survey 😜)
+* My favorite part of the course (because I love overthinking things)
+* My goal given survey results: Let's think of this unit like learning **languages** for expressing **spatial** information:
+
+```{r}
+#| label: gen-polygon
+#| output: false
+library(sf)
+library(svglite)
+svglite("images/st_polygon.svg", width = 6, height = 4.5)
+poly_blob <- st_polygon(
+  list(
+    rbind(c(2,1), c(3,1), c(5,2), c(6,3), c(5,3), c(4,4), c(3,4), c(1,3), c(2,1)),
+    rbind(c(2,2), c(3,3), c(4,3), c(4,2), c(2,2))
+  )
+)
+plot(poly_blob,
+  border = 'black', col = '#ff8888', lwd = 4
+)
+dev.off()
+```
+
+| Temporal Information | Spatial Information |
+|:-:|:-:|
+| ![](images/stopwatch.svg){width="200"} | ![](images/st_polygon.svg){fig-align="center" width="100%" height="200"} |
+| $\Rightarrow$ `22.5 seconds` | $\Rightarrow$ `POLYGON ((2 1, 3 1, 5 2, 6 3, 5 3, 4 4, 3 4, 1 3, 2 1),(2 2, 3 3, 4 3, 4 2, 2 2))` |
+
+: {tbl-colwidths="[50,50]"}
+
+* I think you'll be surprised at how, complexity of geospatial/spatio-temporal data $\implies$ need for **programming-language-independent** representations
+
+## Unit 2: Using Code to Make Maps
+
+* (More on this in Prereqs section below!)
+* Given representations from Part 1, the task of coding becomes task of **finding "best" library for loading/manipulating/plotting them**
+  * Where "best" = best for **you!**
+* In **R**: `sf` and friends (`tidyverse`)
+* In **Python**: `geopandas`
+
+## Unit 3: Spatial Data Science
+
+* Drawing **inferences** about spatial phenomena
+* The meat of the course
+* How can we write code (Unit 2) to analyze a map (Unit 1) so as to...
+  * **Discover** patterns (EDA: Exploratory Data Analysis) or
+  * **Test** hypotheses (CDA: Confirmatory Data Analysis)
+
+## Unit 4: Applications / Final Project
+
+* Take everything you've learned in Units 1-3 and Kamehameha them onto something you care about in the world!
+* Public Policy: Which counties are most in need of more transportation infrastructure?
+* Urban Planning: Which neighborhoods are most in need of a new bus stop?
+* Epidemiology: What properties of a region make it more/less susceptible to infectious diseases? Where should we **intervene** to "cut the chain" of a disease vector?
+
+## Who Am I? Why Am I Teaching You? {.crunch-title}
+
+* Started out as PhD student in **Computer Science**
+  * UCLA: Algorithmic Game Theory
+  * Stanford (MS): Economic Network Analysis
+* Ended up with PhD in **Political Economy**
+  * Columbia: "Computational Political Theory"
+
+## My GIS Adventures
+
+* High school project: **mine defusal** in Indochina
+* As a **Telecommunications Engineer** for Huawei (HKUST)
+* As an **Urban Economist** at UC Berkeley
+  * Used, e.g., Google Maps API to evaluate effects of [**Suburbanization of Poverty**](https://www.brookings.edu/wp-content/uploads/2016/06/0120_poverty_paper.pdf){target='_blank'}
+
+## My GIS 🤯 Moment {.crunch-title .crunch-ul .crunch-li-8}
+
+:::: {.columns}
+::: {.column width="50%"}
+
+* Horrors of "Vietnam War" did not end in 1975...
+* Casualties from unexploded ordnance (cluster bombs) continue to devastate the region, over 220,000 victims:
+  * [>105K in Vietnam](https://www.baldwin.senate.gov/imo/media/doc/Legacies%20of%20War%20Recognition%20and%20UXO%20Removal%20Act.pdf){target='_blank'}
+  * [>50K in Laos](https://www.cnn.com/2016/09/05/asia/united-states-laos-secret-war/index.html){target='_blank'}
+  * [>65K in Cambodia](https://apnews.com/article/bombs-land-mines-unexploded-ordnance-demining-564f0203aeb53aa95118a1396b907246){target='_blank'}
+
+:::
+::: {.column width="50%"}
+
+![From @robert_heart_2016](images/indochina.png){fig-align="center" width="80%"}
+
+:::
+::::
+
+## Huawei: Optimizing Cell Tower Placement {.smaller .title-12}
+
+![From *[LTE 4G/5G Self-Organizing Networks](https://lte-son.blogspot.com/2018/10/inter-cell-interference-coordination.html){target='_blank}*](images/mimo.jpeg){fig-align="center"}
+
+## The Suburbanization of Poverty
+
+* Since 2008, a person living in poverty in the US is more likely to be in a **suburb** than an "inner city"
+* What does this mean for...
+  * **Access to Food / Public Services?**
+  * **Finding a job $\leadsto$ Commuting?**
+* My job: computing "suburban accessibility indices"
+* Does commuting = straight line distance?
+
+## "Distance" vs. Distance! {.smaller .crunch-title .crunch-ul .crunch-quarto-figure .crunch-p}
+
+You've just been hired as a fine art curator at [The Whitney](https://en.wikipedia.org/wiki/Whitney_Museum){target='_blank'}... Congratulations!
+
+| | |
+| - | - |
+| Commuting 1 mile to the Whitney | ![](images/whitney1.jpeg){fig-align="center"} |
+| Also commuting 1 mile to the Whitney | ![](images/whitney2.jpeg){fig-align="center"} |
+
+: {tbl-colwidths="[25,75]"}
+
+# Why Should You Care About GIS? {data-stack-name="Why GIS?"}
+
+* As a Human
+* As a Data Scientist
+* As a Public Policy Expert
+
+## As Humans {.smaller .crunch-title .crunch-ul}
+
+* To understand the world around you!
+
+![Charles Dupin, [Carte figurative de l'instruction populaire de la France](https://fr.wikipedia.org/wiki/Carte_figurative_de_l%27instruction_populaire_de_la_France){target='_blank'} (1826)](images/dupin.jpg){fig-align="center"}
+
+* $\implies$ Crucial landmark in the [**genesis of social science**](https://read.dukeupress.edu/french-historical-studies/article-abstract/33/2/307/9657/Charles-Tilly-s-Vende-e-as-a-Model-for-Social?redirectedFrom=PDF){target='_blank'}
+
+## As Data Scientists {.crunch-ul .crunch-title .crunch-blockquote}
+
+* All data scientists are expected to know how to analyze "standard" types of data: tabular, numeric data (think spreadsheets)
+* However, you can **differentiate yourself** in the scary scary job market by developing a particular focus on some "non-standard" type:
+
+> *Hello Mrs. Google Meta OpenAI, yes, indeed, I have a wealth of experience working with [**text** data / **temporal** data / **signal** processing / **geospatial** data]. This job will be no problem for me.*
+
+## As Public Policy Experts {.smaller .crunch-title .crunch-ul .crunch-quarto-figure}
+
+* Oftentimes, all it takes is one map to see why a policy has failed 😱
+
+![Who can guess what this map represents? ([Source](https://commons.wikimedia.org/wiki/File:Race_and_ethnicity_map_of_Washington,_D.C..png){target='_blank'})](images/dc_racial_dot_map.png){fig-align="center"}
+
+::: {.notes}
+
+http://www.radicalcartography.net/index.html?chicagodots, then adapted to DC: "[Eric Fisher] was astounded by Bill Rankin's map of Chicago's racial and ethnic divides</a> and wanted to see what other cities looked like mapped the same way. To match his map, Red is White, Blue is Black, Green is Asian, Orange is Hispanic, Gray is Other, and each dot is 25 people. Data from Census 2000. Base map © OpenStreetMap, CC-BY-SA" https://commons.wikimedia.org/wiki/File:Race_and_ethnicity_map_of_Washington,_D.C..png
+
+:::
+
+## GIS as an "Umbrella Term" {.smaller .crunch-title .crunch-ul}
+
+* **Libraries** and **tools** we'll use: **specific** systems/methods for geospatial analysis
+* **GIS** is an "umbrella term", which just vaguely refers to this entire universe of libraries/tools/techniques/approaches
+
+```{=html}
+<table>
+<colgroup>
+  <col style="width: 20%;">
+  <col style="width: 40%;">
+  <col style='width: 40%'>
+</colgroup>
+<thead>
+<tr>
+  <th class="tdc">Umbrella Term</td>
+  <th class='tdc'>Concepts</td>
+  <th class="tdc">Specific Skills</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td class="tdc"><b>Coding</b></td>
+  <td><div data-qmd="* Variables
+* Control Flow
+* Algorithms"></div></td>
+  <td><div data-qmd="* Python
+* R
+* JavaScript"></div></td>
+</tr>
+<tr>
+  <td class='tdc'><b>GIS</b></td>
+  <td><div data-qmd="* Projections
+* Vector vs. Raster
+* Spatial Data Formats (shapefiles, `.geojson`)"></div></td>
+  <td class='tdvc'><div data-qmd="* ArcGIS
+* GeoPandas (Python)
+* [`sf`](https://r-spatial.github.io/sf/){target='_blank'} (R)"></div></td>
+</tr>
+</tbody>
+</table>
+```
+
+## ArcGIS... {.crunch-title .crunch-ul}
+
+* For info on Georgetown's provision of ArcGIS (Online, Pro, and Desktop), see the [Library Guide](https://guides.library.georgetown.edu/esri_software){target='_blank'}
+
+![[Ukraine Level-1 Administrative Regions Map](https://georgetownuniv.maps.arcgis.com/apps/mapviewer/index.html?webmap=50668b6cb4664b79948817100400b0dc){target='_blank'} (see [CDTO talk](https://jjacobs.me/data-ethics-cdto))](images/arcgis.jpg)
+
+## Then... Why Can't We Just Use ArcGIS? {.crunch-title .title-12 .smaller .unindent-lists .tdvt-all .crunch-p .text-65}
+
+Analogy from **non**-geospatial data science:
+
+<!-- | Text Files | &rarr; | Spreadsheets | &rarr; | Equations | &rarr; | Code |
+| - |:-:| - |:-:| - |:-:| - |
+| <ul><li>Start entering information</li><li>2</li></ul> | |  | d | e | f | g |
+
+: {tbl-colwidths="[22,4,22,4,22,4,22]"} -->
+
+```{python}
+#| label: random-balance-plot
+#| echo: false
+#| output: false
+# Generates a random balance plot and saves it
+# to .svg, so we can load it into the table here
+import pandas as pd
+import numpy as np
+rng = np.random.default_rng(seed=6750)
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_theme(rc={'figure.figsize':(3,3)})
+sns.set_style('whitegrid')
+transactions = rng.standard_normal(size=25)
+balances = np.cumsum(transactions)
+df = pd.DataFrame({
+  'Week': range(len(balances)),
+  'Balance': balances
+})
+sns.lineplot(data=df, x='Week', y='Balance')
+plt.tight_layout()
+plt.savefig("balance.svg")
+```
+
+```{=html}
+<style>
+.border-all {
+  font-size: 70% !important;
+}
+.border-all td, .border-all th {
+  border: 1px solid black !important;
+}
+</style>
+<table>
+<colgroup>
+  <col style="width: 24%;">
+  <col style="width: 1.2%;">
+  <col style="width: 24%;">
+  <col style="width: 1.2%;">
+  <col style="width: 24%;">
+  <col style="width: 1.2%;">
+  <col style="width: 24%;">
+</colgroup>
+<thead>
+<tr>
+  <th align="center">Text<br><i>Drawn Map</i></th>
+  <th align="center" style='vertical-align: middle;'>&rarr;</th>
+  <th align="center">Speadsheet<br><i style='font-size: 80%'>Digital Map</i></th>
+  <th align="center" style='vertical-align: middle;'>&rarr;</th>
+  <th align="center">Equations<br><i>Maps w/ArcGIS</i></th>
+  <th align="center" style='vertical-align: middle;'>&rarr;</th>
+  <th align="center">Code<br><i>This Class</i></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td colspan="2">
+    <span data-qmd="<i class='bi bi-1-circle'></i> Start writing"></span>
+    
+    <div data-qmd="``` {filename='info.txt'}
+I gave Ana $3, then Ana paid me back $2. [...]
+```"></div>
+    
+    <span data-qmd="<i class='bi bi-2-circle'></i> Realize there's regularity/structure 🤔"></span>
+  </td>
+  <td colspan="2">
+    <span data-qmd="<i class='bi bi-1-circle'></i> Start entering info in rows"></span>
+    <table class="border-all">
+    <thead>
+    <tr>
+      <th>Fr</th>
+      <th>To</th>
+      <th>Amt</th>
+      <th>Bal</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Me</td>
+      <td>Ana</td>
+      <td>$3</td>
+      <td>-$3</td>
+    </tr>
+    <tr>
+      <td>Ana</td>
+      <td>Me</td>
+      <td>$2</td>
+      <td>-$1</td>
+    </tr>
+    </tbody>
+    </table>
+    <span data-qmd="<i class='bi bi-2-circle'></i> Realize you're manually computing things that could be automated 🤔"></span>
+  </td>
+  <td colspan="2">
+    <span data-qmd="<i class='bi bi-1-circle'></i> Start using equations"></span>
+    <table class="border-all">
+    <thead>
+    <tr>
+      <th>Fr</th>
+      <th>To</th>
+      <th>Amt</th>
+      <th>Bal</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Me</td>
+      <td>Ana</td>
+      <td>$3</td>
+      <td><span data-qmd="`=0-C1`"></span></td>
+    </tr>
+    <tr>
+      <td>Ana</td>
+      <td>Me</td>
+      <td>$2</td>
+      <td><span data-qmd="`=D1-C2`"></span></td>
+    </tr>
+    </tbody>
+    </table>
+    <span data-qmd="<i class='bi bi-2-circle'></i> Realize you need fancier equations, and/or need to coordinate with inputs (APIs), outputs (plotting libraries) 🤔"></span>
+  </td>
+  <td>
+    <div data-qmd="<i class='bi bi-1-circle'></i> Write code"></div>
+
+    <div data-qmd="``` {.python filename='plot_balance.py'}
+import pandas as pd
+df = pd.read_csv(...)
+calc_weekly_balance()
+df.plot()
+```"></div>
+  <!-- <img src="balance.svg" style='display: block; margin-left: auto; margin-right: auto; width: 50%;'></img> -->
+  <img src="balance.svg" style="width: 100%;"></img>
+  <div data-qmd="<i class='bi bi-2-circle'></i> Profit 💲💰🤑💰💲"></div>
+  </td>
+</tr>
+</tbody>
+</table>
+```
+
+## The Spatial Data Science Universe {.smaller}
+
+![](images/sf_deps.png){fig-align="center"}
+
+* We'll cover key pieces: <i class='bi bi-1-circle'></i> [GDAL](https://gdal.org/index.html){target='_blank'} (Geospatial Data Abstraction Library), <i class='bi bi-2-circle'></i> [PROJ](https://proj.org/en/9.4/){target='_blank'} to convert between projections, <i class='bi bi-3-circle'></i> [GEOS](https://libgeos.org/){target='_blank'} for computational geometry
+
+# Course Policy Things {data-stack-name="Prereqs / Policies"}
+
+* How To Not Be Scared of Prerequisites
+* ChatGPT
+* Learning How To Learn
+
+## Pedagogical Principles {.crunch-title .crunch-ul .crunch-li .crunch-blockquote}
+
+* There's literally [no such thing as "intelligence"](http://bactra.org/weblog/523.html){target='_blank'}
+* Anyone is capable of learning anything (neural plasticity)
+* Growth mindset: "I can't do this" $\leadsto$ "I can't do this **yet**!"
+* The point of a class is **learning**: understanding something about the world, either (a) For its own sake (**end in itself**) or (b) Because it's relevant to something you care about (**means to an end**)
+
+::: {.text-90}
+
+> Our teaching should be governed, not by a desire to **make** students learn things, but by the endeavor to keep burning within them that light which is called **curiosity**. [@montessori_spontaneous_1916]
+
+:::
+
+## ChatGPT and Whatnot {.crunch-title .crunch-ul .smaller}
+
+* If you feel like ChatGPT will help you learn something in the course, then **use it**!
+* If you feel like you're using it as a "crutch", try to hold yourself accountable for **not** using it!
+
+```{=html}
+<table>
+<thead>
+<tr>
+  <th>Take the time/energy you're using to worry about...</th>
+  <th>Use it instead to worry about...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><ul><li>ChatGPT</li><li>Collaboration Policies</li><li>Plagiarism</li></ul></td>
+  <td align="center" style="vertical-align: middle;">Learning GIS</td>
+</tr>
+</tbody>
+</table>
+```
+
+## On Not Worrying About Prereqs {.crunch-title .crunch-li .text-85}
+
+* I genuinely believe that I can make the course accessible to you, meeting you **wherever you're at**, no matter what!
+* Everyone learns at their own pace (who says 14 weeks is "correct" amount of time to learn GIS?), and I structure my courses as best as I possibly can to adapt to your pace
+* $\Rightarrow$ Assessments (HW, Midterm) valuable in two ways:
+* **[Valuable for you]** As an **accountability mechanism** to make sure you're learn the material (how do we know when we've learned something? When we can answer questions about it / use it to accomplish things!)
+* **[Valuable for me]** For **assessing and updating** pace
+
+## R and/or Python and/or JS {.smaller .crunch-title .crunch-ul .crunch-p .crunch-img .crunch-li .crunch-quarto-figure .crunch-math .text-65}
+
+* My Geometry vs. Algebra Rant... Euclid's *Elements*, Book VI, Proposition 28.
+* The problem: *Divide a given straight line so that the rectangle contained by its segments may be equal to a given area, not exceeding the square of half the line.*
+
+::: {.columns}
+::: {.column width="50%"}
+
+[Geometers]{.cb1} solved w/[**geometry**]{.cb1} (300 BC)...
+
+![](images/euclid_271_crop.jpeg){fig-align="center" width="80%"}
+
+:::
+::: {.column width="50%"}
+
+...[Algebraists]{.cb2} solved w/[**algebra**]{.cb2} (2000 BC)...
+
+$$
+\begin{align*}
+&ax^2 + bx + c = 0 \\
+\Rightarrow \; & x_+ = \frac{-b + \sqrt{b^2 - 4ac}}{2a}
+\end{align*}
+$$
+
+...[From 1637 onwards](https://en.wikipedia.org/wiki/Cartesian_coordinate_system#History), **[w]{.cb1}[h]{.cb2}[i]{.cb1}[c]{.cb2}[h]{.cb1}[e]{.cb2}[v]{.cb1}[e]{.cb2}[r]{.cb1} [i]{.cb2}[s]{.cb1} [e]{.cb2}[a]{.cb1}[s]{.cb2}[i]{.cb1}[e]{.cb2}[r]{.cb1}!** 🤯🤯🤯 (*Isomorphism*)
+
+:::: {#fig-descartes}
+::: {.columns}
+::: {.column width="48%"}
+
+![](images/descartes.jpg){fig-align="center" width="70%"}
+
+:::
+::: {.column width="48%"}
+
+![](images/unit_circle.svg){fig-align="center" width="100%"}
+
+:::
+:::
+
+**Circle with radius 1**? Or $(x,y)$ satisfying $x^2 + y^2 = 1$?
+::::
+
+:::
+:::
+
+## Learning How To Learn {.smaller .crunch-title .crunch-p}
+
+::: {#fig-lilwayne}
+
+{{< video https://jpj.georgetown.domains/ppol6805-scratch/repetition.mp4 >}}
+
+From [The Carter (Documentary)](https://en.wikipedia.org/wiki/The_Carter){target='_blank'}
+:::
+
+## He's Literally Extremely Correct!
+
+![From *[Elsevier Osmosis: Spaced Repetition](https://www.osmosis.org/learn/Spaced_repetition){target='_blank'}*](images/forgetting-curve.png){fig-align="center"}
+
+# Let's Make Some Dang Maps! {data-stack-name="First Maps"}
+
+## Our First Map: Polygons! {.smaller}
+
+*(Quick demo adapted from Sherry Xie's R Consortium Workshop: [*Analyzing Geospatial Data in R*](https://www.youtube.com/watch?v=DD7bXonh-_E), using DC rather than Philadelphia open data.)*
+
+```{r}
+#| echo: true
+#| code-fold: show
+library(sf)
+# Load DC tracts data
+dc_sf_fpath <- "data/DC_Census_2020/Census_Tracts_in_2020.shp"
+dc_sf <- st_read(dc_sf_fpath);
+cols_to_keep <- c("OBJECTID", "TRACT", "GEOID", "ALAND", "AWATER", "STUSAB", "SUMLEV", "GEOCODE", "STATE", "NAME", "POP100", "HU100", "geometry")
+dc_sf <- dc_sf |> select(cols_to_keep)
+```
+
+## `sf` Objects
+
+`dc_sf` is an object of type `sf` (short for **"simple feature"**), which extends `data.frame`, and contains **features** which have type **`POLYGON`**
+
+```{r}
+class(dc_sf)
+head(dc_sf)
+```
+
+## Working With `sf` Objects {.smaller}
+
+With some rare but important exceptions (which we'll learn!), can be used just like a `data.frame` / `tibble`:
+
+```{r}
+#| echo: true
+#| code-fold: show
+str(dc_sf)   # view structure
+```
+
+## Working With `sf` Objects {.smaller}
+
+```{r}
+#| echo: true
+#| code-fold: show
+head(dc_sf)  # view first several rows
+```
+
+## Working With `sf` Objects {.smaller}
+
+```{r}
+#| echo: true
+#| code-fold: show
+dim(dc_sf)   # view dimensions
+dc_sf[1,]    # select first row
+```
+
+## Working With `sf` Objects {.smaller}
+
+```{r}
+#| echo: true
+#| code-fold: show
+head(dc_sf$NAME)  # select column by name  
+head(dc_sf[,4])         # select column by number
+```
+
+## And... Actually Displaying the Map! {.smaller .crunch-quarto-figure .title-12}
+
+```{r}
+#| echo: true
+#| code-fold: show
+#| fig-align: center
+# We can extract the geometry with the st_geometry function
+dc_geo <- st_geometry(dc_sf)
+#pt_geo
+
+# Plot the geometry with base R's plot() function
+plot(dc_geo)
+```
+
+# Looking Ahead: Types of Geospatial Data {data-stack-name="Datatypes"}
+
+## Key Notation / Definition {.smaller .smaller-table .crunch-title .crunch-ul .crunch-math .text-65}
+
+::: {#full-defn style="width: 100% !important"}
+
+* $d$-Dimensional "Spatial Process" [@schabenberger_statistical_2004, 6]
+
+$$
+\text{Data} = \left\{Z(\mathbf{s}) \mid \mathbf{s} \in D \subset \mathbb{R}^d\right\}
+$$
+
+* $d > 1$: Data forms a **Random Field** (this class: $d = 2$!)
+
+:::
+
+```{=html}
+<table>
+<colgroup>
+  <col style="width: 9%;">
+  <col style="width: 30%;">
+  <col style="width: 31%;">
+  <col style="width: 30%;">
+</colgroup>
+<thead>
+<tr>
+    <th></th>
+    <th>Geostatistical Data</th>
+    <th>Lattice/Region Data</th>
+    <th>Point Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td><b>Criteria</b></td>
+    <td><span data-qmd="Fixed $D$, Continuous"></span></td>
+    <td><span data-qmd="Fixed $D$, Discrete"></span></td>
+    <td><span data-qmd="Random subset $D^* \subseteq D$"></span></td>
+    <td></td>
+</tr>
+<tr>
+    <td><b>Interest</b></td>
+    <td><span data-qmd="Infer **non-observed** parts of $D$"></span></td>
+    <td><span data-qmd="Autocorrelation, clustering"></span></td>
+    <td><span data-qmd="Point-generating process"></span></td>
+    <td></td>
+</tr>
+<tr>
+    <td><b>Example</b></td>
+    <td class='tdvt'><div data-qmd="* $N$ **trees** $\mathbf{s}_1, \mathbf{s}_2, \ldots, \mathbf{s}_N$, observed within a **sample window** $D \subset \mathbb{R}^2$, ($D$ some finite plot of land)
+* $Z(\mathbf{s}_i)$: Attribute(s) at site $\mathbf{s}_i$
+* Example: **Height**. $Z(\mathbf{s}_1) = 500\text{m}$, $Z(\mathbf{s}_2) = 850\text{m}$, $\ldots$"></div></td>
+    <td class='tdvt'><div data-qmd="* $Z(\mathbf{s})$ observed over $N \times N$ grid of **plots**
+    
+* $\Rightarrow$ Contiguity, Neighbors (next section of slides!)
+* $\Rightarrow$ Autocorrelation: Are points **around** $\mathbf{s}_i$ likely to have values similar to $Z(\mathbf{s}_i)$?"></div></td>
+    <td class='tdvt'><div data-qmd='* Unknown number of lightning strikes $\mathbf{s}_1, \mathbf{s}_2, \ldots$
+* Contrast with geostatistical: all of $D$ is observed, but what determines the subset $D^*$ where **events** occur?
+* "Unmarked": Just locations
+* "Marked": Locations+info (e.g., intensity of strike)'></div></td>
+</tr>
+</tbody>
+</table>
+```
+
+<!-- * Note the **lack of subscript** on $Z$! Important, not a typo! -->
+
+## Spatial Randomness {.smaller .smaller-table .crunch-title .crunch-img}
+
+```{r}
+#| label: sr-plot
+#| fig-align: center
+#| code-fold: true
+#| output: false
+library(tidyverse)
+library(spatstat)
+set.seed(6805)
+N <- 60
+r_core <- 0.05
+obs_window <- square(1)
+# Regularity via Inhibition
+#reg_sims <- rMaternI(N, r=r_core, win=obs_window)
+cond_reg_sims <- rSSI(r=r_core, N)
+# CSR data
+#csr_sims <- rpoispp(N, win=obs_window)
+cond_sr_sims <- rpoint(N, win=obs_window)
+### Clustered data
+#clust_sims <- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)
+#clust_sims <- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)
+#clust_sims <- rclusterBKBC(clusters="MatClust", kappa=10, mu=10, scale=0.05, verbose=FALSE)
+# Each cluster consist of 10 points in a disc of radius 0.2
+nclust <- function(x0, y0, radius, n) {
+    #print(n)
+    return(runifdisc(10, radius, centre=c(x0, y0)))
+}
+cond_clust_sims <- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)
+# And PLOT
+plot_w <- 400
+plot_h <- 400
+plot_scale <- 2.25
+cond_reg_plot <- cond_reg_sims |> sf::st_as_sf() |>
+  ggplot() +
+  geom_sf() +
+  dsan_theme()
+ggsave("images/cond_reg.png", cond_reg_plot, width=plot_w, height=plot_h, units="px", scale=plot_scale)
+cond_sr_plot <- cond_sr_sims |> sf::st_as_sf() |>
+  ggplot() +
+  geom_sf() +
+  dsan_theme()
+ggsave("images/cond_sr.png", cond_sr_plot, width=plot_w, height=plot_h, units="px", scale=plot_scale)
+cond_clust_plot <- cond_clust_sims |> sf::st_as_sf() |>
+  ggplot() +
+  geom_sf() +
+  dsan_theme()
+ggsave("images/cond_clust.png", cond_clust_plot, width=plot_w, height=plot_h, units="px", scale=plot_scale)
+```
+
+```{=html}
+<table style="width: 100%;">
+<colgroup>
+  <col style="width: 20%;">
+  <col style="width: 25%;">
+  <col style="width: 2%;">
+  <col style="width: 25%;">
+  <col style="width: 2%;">
+  <col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+    <th><span data-qmd="Autocorrelation"></span></th>
+    <th align="center" class='tdvc'><span data-qmd="$I = -1$"></span></th>
+    <th align="center" class='tdvc'>&larr;</th>
+    <th align="center" class='tdvc'><span data-qmd="$I = 0$"></span></th>
+    <th align="center" class='tdvc'>&rarr;</th>
+    <th align="center" class='tdvc'><span data-qmd="$I = 1$"></span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td><span data-qmd="**Description**"></span></td>
+    <td align="center"><span data-qmd="*Negative* Autocorr"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="*No* Autocorr"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="*Positive* Autocorr"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="**Event at $\mathbf{s} = (x,y)$ Implies**"></span></td>
+    <td align="center"><span data-qmd="*Less* likely to find another point nearby"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="No information about nearby points"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="*More* likely to find another point nearby"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="**Resulting Pattern**"></span></td>
+    <td align="center">Regularity</td>
+    <td></td>
+    <td align="center">Reg/Clustered Mix</td>
+    <td></td>
+    <td align="center">Clustering</td>
+</tr>
+<tr>
+    <td><span data-qmd="**Process(es) Which Could Produce Pattern**"></span></td>
+    <td align="left"><span data-qmd="**1st Order**: Random within even-spaced grid<br>**2nd Order**: Competition"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="**1st Order**: i.i.d. points<br>**2nd Order**: i.i.d. distances"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="**1st Order**: Tasty food at clust centers<br>**2nd Order**: Cooperation"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="**Fixed $N$**"></span></td>
+    <td align="center">60</td>
+    <td></td>
+    <td align="center">60</td>
+    <td></td>
+    <td align="center">60</td>
+</tr>
+<tr>
+    <td></td>
+    <td align="center"><img src="images/cond_reg.png" width="400px"></img></td>
+    <td></td>
+    <td align="center"><img src="images/cond_sr.png" width="400px"></img></td>
+    <td></td>
+    <td align="center"><img src="images/cond_clust.png" width="400px"></img></td>
+</tr>
+</tbody>
+</table>
+```
+
+## *Complete* Spatial Randomness (CSR) {.smaller .smaller-table .crunch-title .crunch-img .text-65}
+
+```{r}
+#| label: csr-plot
+#| fig-align: center
+#| code-fold: true
+#| output: false
+library(tidyverse)
+library(spatstat)
+set.seed(6807)
+lambda <- 60
+r_core <- 0.05
+obs_window <- square(1)
+# Regularity via Inhibition
+# Regularity via Inhibition
+reg_sims <- rMaternI(lambda, r=r_core, win=obs_window)
+# CSR data
+csr_sims <- rpoispp(N, win=obs_window)
+### Clustered data
+clust_mu <- 10
+clust_sims <- rMatClust(kappa=lambda / clust_mu, scale=2*r_core, mu=10, win=obs_window)
+# And PLOT
+plot_w <- 400
+plot_h <- 400
+plot_scale <- 2.25
+reg_plot <- reg_sims |> sf::st_as_sf() |>
+  ggplot() +
+  geom_sf() +
+  labs(title=paste0("N = ",reg_sims$n)) +
+  dsan_theme()
+ggsave("images/reg.png", reg_plot, width=plot_w, height=plot_h, units="px", scale=plot_scale)
+csr_plot <- csr_sims |> sf::st_as_sf() |>
+  ggplot() +
+  geom_sf() +
+  labs(title=paste0("N = ",csr_sims$n)) +
+  dsan_theme()
+ggsave("images/csr.png", csr_plot, width=plot_w, height=plot_h, units="px", scale=plot_scale)
+clust_plot <- clust_sims |> sf::st_as_sf() |>
+  ggplot() +
+  geom_sf() +
+  labs(title=paste0("N = ",clust_sims$n)) +
+  dsan_theme()
+ggsave("images/clust.png", clust_plot, width=plot_w, height=plot_h, units="px", scale=plot_scale)
+```
+
+```{=html}
+<table style="width: 100%;">
+<colgroup>
+  <col style="width: 20%;">
+  <col style="width: 25%;">
+  <col style="width: 2%;">
+  <col style="width: 25%;">
+  <col style="width: 2%;">
+  <col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+    <th><span data-qmd="Autocorrelation"></span></th>
+    <th align="center" class='tdvc'><span data-qmd="$I = -1$"></span></th>
+    <th align="center" class='tdvc'>&larr;</th>
+    <th align="center" class='tdvc'><span data-qmd="$I = 0$"></span></th>
+    <th align="center" class='tdvc'>&rarr;</th>
+    <th align="center" class='tdvc'><span data-qmd="$I = 1$"></span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td><span data-qmd="**Description**"></span></td>
+    <td align="center"><span data-qmd="*Negative* Autocorr"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="*No* Autocorr"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="*Positive* Autocorr"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="**Event at $\mathbf{s} = (x,y)$ Implies**"></span></td>
+    <td align="center"><span data-qmd="*Less* likely to find another point nearby"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="No information about nearby points"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="*More* likely to find another point nearby"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="**Resulting Pattern**"></span></td>
+    <td align="center">Regularity</td>
+    <td></td>
+    <td align="center">Reg/Clustered Mix</td>
+    <td></td>
+    <td align="center">Clustering</td>
+</tr>
+<tr>
+    <td><span data-qmd="**Process(es) Which Could Produce Pattern**"></span></td>
+    <td align="left"><span data-qmd="**1st Order**: Random within even-spaced grid<br>**2nd Order**: Competition"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="**1st Order**: i.i.d. points<br>**2nd Order**: i.i.d. distances"></span></td>
+    <td></td>
+    <td align="center"><span data-qmd="**1st Order**: Tasty food at clust centers<br>**2nd Order**: Cooperation"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="**Fixed Intensity $\lambda$**"></span></td>
+    <td align="center">60</td>
+    <td></td>
+    <td align="center">60</td>
+    <td></td>
+    <td align="center">60</td>
+</tr>
+<tr>
+    <td class='tdvt'><span data-qmd="**Random $N$**"></span></td>
+    <td align="center"><img src="images/reg.png" width="400px"></img></td>
+    <td></td>
+    <td align="center"><img src="images/csr.png" width="400px"></img></td>
+    <td></td>
+    <td align="center"><img src="images/clust.png" width="400px"></img></td>
+</tr>
+</tbody>
+</table>
+```
+
+## References
+
+::: {#refs}
+:::

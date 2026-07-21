@@ -1,0 +1,116 @@
+course:
+  author: "Jeff Jacobs"
+  institute: "<a href='mailto:jj1088@georgetown.edu' target='_blank'>`jj1088@georgetown.edu`</a>"
+  slides-subtitle: "*PPOL 6805 / DSAN 6750: GIS for Spatial Data Science*<br>Fall 2025"
+  zoom_url: "https://georgetown.zoom.us/j/92295251878?pwd=K8nOs3w9uRlj3mfn63bh0yazBpBbsC.1"
+  feedback_url: "https://forms.gle/1qmHmeXo94BaoN7d8"
+  intro_survey_url: "https://forms.gle/kAyGvsMYSoLjZUtbA"
+  name: "Geographic Information Systems (GIS) for Spatial Data Science"
+  code: "PPOL 6805 / DSAN 6750"
+  gspace_url: "https://chat.google.com/room/AAAAbGZ4pJk?cls=7"
+  groups_url: "https://groups.google.com/a/georgetown.edu/g/dsan6750"
+  hub_url: "https://guhub.io"
+  # posit_url: "https://posit.cloud/spaces/547750/join?access_code=pxoi5atXz19sdp1N9e2X2qUbtxGV8yqRTtN5MeeD"
+weeks:
+  - weeknum: 1
+    title: "Introduction to GIS"
+    footer: "PPOL 6805 Week 1: GIS Overview"
+    date-md: "Aug 27"
+  - weeknum: 2
+    title: "How Do Maps Work?"
+    footer: "PPOL 6805 Week 2: How Do Maps Work?"
+    date-md: "Sep 3"
+  - weeknum: 3
+    title: "Vector and Raster Representations"
+    footer: "PPOL 6805 Week 3: Unary Operations"
+    date-md: "Sep 10"
+  - weeknum: 4
+    title: "Unary Operations"
+    footer: "PPOL 6805 Week 4: Unary Operations"
+    date-md: "Sep 17"
+  - weeknum: 5
+    title: "Binary Operations and DE-9IM"
+    footer: "PPOL 6805 Week 5: Binary Operations and DE-9IM"
+    date-md: "Sep 24"
+  - weeknum: 6
+    title: "Spatial Joins and Areal-Weighted Interpolation"
+    footer: "PPOL 6805 Week 6: Spatial Joins and Interpolation"
+    date-md: "Oct 1"
+  - weeknum: 7
+    title: "Spatial Data Science: Three Forms of Spatial Autocorrelation"
+    footer: "PPOL 6805 Week 7: Spatial Data Science, Autocorrelation"
+    date-md: "Oct 8"
+  - weeknum: 8
+    title: "Point Processes: Null Models, Clustering, and Regularity"
+    footer: "PPOL 6805 Week 8: Point Processes"
+    date-md: "Oct 15"
+  - weeknum: 9
+    title: "Evaluating Spatial Hypotheses I: Point Data"
+    footer: "PPOL 6805 Week 9: Evaluating Point Hypotheses"
+    date-md: "Oct 22"
+  - weeknum: 10
+    title: "Evaluating Spatial Hypotheses II: Areal Data"
+    footer: "PPOL 6805 Week 10: Evaluating Areal Hypotheses"
+    date-md: "Oct 29"
+  - weeknum: 11
+    title: "In-Class Midterm"
+    footer: "PPOL 6805 Week 11"
+    date-md: "Nov 5"
+  - weeknum: 12
+    title: "Tools for Final Projects"
+    footer: "PPOL 6805 Week 12: Tools for Final Projects"
+    date-md: "Nov 12"
+  - weeknum: 13
+    title: "Visualizing Spatial Data"
+    footer: "PPOL 6805 Week 13: Visualization"
+    date-md: "Nov 19"
+  - weeknum: 14
+    title: "Final Project Poster Session"
+    footer: "PPOL 6805 Week 14"
+    date-md: "Dec 3"
+hw:
+  - hw-num: 1
+    title: "GIS Concepts: Fun with Vectors and Rasters"
+    pct: 9
+    release-date-md: Sep 9
+    release-date: "Tuesday, September 9"
+    due-date-md: Sep 24
+    due-date: "Wednesday, September 24"
+  - hw-num: 2
+    title: "Unary and Binary Operations, Spatial Joins"
+    pct: 9
+    release-date-md: Sep 25
+    release-date: "Thursday, September 25"
+    due-date-md: Oct 8
+    due-date: "Wednesday, October 8"
+  - hw-num: 3
+    title: "Autocorrelation, Clustering, and Point Processes"
+    pct: 9
+    release-date-md: Oct 12
+    release-date: "Sunday, October 12"
+    due-date-md: Oct 29
+    due-date: "Wednesday, October 29"
+  - hw-num: 4
+    title: "Spatial Regression"
+    pct: 9
+    release-date-md: Nov 13
+    release-date: "Wednesday, November 13"
+    due-date-md: Nov 27
+    due-date: "Wednesday, November 27"
+  - hw-num: "5"
+    title: "Evaluating Spatial Hypotheses"
+    pct: 9
+    release-date-md: Nov 19
+    release-date: "Wednesday, November 19"
+    due-date-md: Dec 5
+    due-date: "Friday, December 5"
+  # - hw-num: "5B"
+  #   title: "Remote Sensing and Raster Data"
+  #   pct: 9
+  #   release-date-md: Nov 19
+  #   release-date: "Wednesday, November 19"
+  #   due-date-md: Dec 5
+  #   due-date: "Friday, December 5"
+midterm:
+  date-md: Nov 5
+  date-full: "Wednesday, November 5"

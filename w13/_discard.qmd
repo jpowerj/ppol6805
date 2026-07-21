@@ -1,0 +1,32 @@
+
+Key package: [`osmdata`](https://rspatialdata.github.io/osm.html)
+
+```{r}
+#| label: street-map-plot
+#| fig-align: center
+library(osmdata) |> suppressPackageStartupMessages()
+library(leaflet)
+placebb <- getbb("Barcelona")
+hospitals <- placebb |>
+  opq() |>
+  add_osm_feature(key = "amenity", value = "hospital") |>
+  osmdata_sf()
+assign("has_internet_via_proxy", TRUE, environment(curl::has_internet))
+motorways <- placebb |>
+  opq() |>
+  add_osm_feature(
+    key = "highway",
+    value = "motorway"
+  ) |>
+  osmdata_sf()
+leaflet() |>
+  addTiles() |>
+  addPolylines(
+    data = motorways$osm_lines,
+    color = "black"
+  ) |>
+  addPolygons(
+    data = hospitals$osm_polygons,
+    label = hospitals$osm_polygons$name
+  )
+```

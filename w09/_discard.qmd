@@ -1,0 +1,11 @@
+## Chicago Example
+
+::: {.callout-tip title="Census.gov API Keys" icon="false"}
+
+Note: If you want to use US Census data for your project, like the data we're analyzing here, you will probably want to obtain an [API Key](https://api.census.gov/data/key_signup.html){target='_blank'}. Once obtained, you can "register" this key with `tidycensus` via the following line of code:
+
+``` {.r}
+tidycensus::census_api_key("<your API key here>", overwrite=TRUE, install=TRUE)
+```
+
+:::

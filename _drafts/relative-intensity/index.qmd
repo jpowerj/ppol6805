@@ -1,0 +1,38 @@
+---
+title: "Computing and Evaluating Relative Intensity Ratios"
+author:
+  name: "Jeff Jacobs"
+  email: "jj1088@georgetown.edu"
+date: 2024-11-27
+sidebar: mainnav
+format:
+  html:
+    df-print: kable
+---
+
+As we approached the midterm, there were two "threads" in what we were learning:
+
+* Intensity function estimation
+* Relative risk surfaces
+
+My goal was to bring them together, which I was able to do to some extent [during Week 9](../../w09/index.qmd#visualizing-relative-risk-surface), but there were a lot of details I had to sweep under the rug in order to get to the basic relative risk surface visualization.
+
+So, since it has turned out to be one of the more common techniques needed across different final projects, I wanted to create this writeup as a "how-to" guide.
+
+To give some specific examples (each of them corresponds to more than one final project!), you may find yourself with:
+
+* One set of points representing **cases** of interest (say, of a disease), with
+* Another set of points representing a sample of the **population** from which the cases are drawn.
+
+Or:
+
+* One estimated intensity function representing **damaged buildings** (and hence buildings needing reconstruction), with
+* Another intensity function representing the **danger** construction crews would face in going and rebuilding those buildings (estimated, e.g., from points representing bomb attacks).
+
+Or more generally:
+
+* One set of points representing **events**, with
+* Another set of points representing **base rates**.
+
+In each of these cases, the idea is that an intensity function representing the **ratio** of the first bullet point and the second bullet point is often more useful than the intensity functions considered on their own.
+

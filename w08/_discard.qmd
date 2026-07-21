@@ -1,0 +1,101 @@
+| | `sf` Objects | `ppp` Objects |
+| - | - | - |
+| **Creation** | (From `.csv` file)<br>`school_sf <- sf::st_as_sf(
+    school_df,
+    coords = c("longitude", "latitude"), 
+    crs = 4326
+  ) | |
+| **Conversion** | | |
+
+---
+
+
+```{=html}
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th><span data-qmd="`sf` Objects"></span></th>
+  <th><span data-qmd="`ppp` Objects"></span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><span data-qmd="**Creation**"></span></td>
+  <td><div data-qmd="``` {.r}
+my_sf <- sf::st_as_sf(
+  df_with_coords,
+  coords = c('lon', 'lat'), 
+  crs = 4326
+)
+```"></div></td>
+  <td><div data-qmd="``` {.r}
+my_ppp <- spatstat.rand::rpoispp(
+  lambda=100,
+  win=spatstat.geom::square(1)
+)
+```"></div></td>
+</tr>
+<tr>
+  <td><span data-qmd="**Conversion**"></span></td>
+  <td></td>
+  <td></td>
+</tr>
+</tbody>
+</table>
+```
+
+---
+
+`sf` to `ppp` Conversion:
+
+```{r}
+#| label: sf-to-ppp-conversion
+square_sfc <- sf::st_polygon(list(
+  matrix(c(0,0,1,0,1,1,0,1,0,0), nrow=5, byrow=TRUE)
+)) |> sf::st_sfc(crs=3857)
+tree_ppp <- as.ppp(
+  sf::st_geometry(tree_sf) |> sf::st_transform(3857),
+  W=as.owin(square_sfc)
+)
+tree_ppp
+tree_ppp |> sf::st_as_sf() |> ggplot() +
+  geom_sf() +
+  theme_classic(base_size=28)
+```
+
+---
+
+| | First-Order | Second-Order |
+|-|-|-|
+| |  |  |
+| ![](images/pines.png){fig-align="center" width="100%"} | ![](images/intensity_plot.png) | ![](images/lest.png) |
+
+: {tbl-colwidths="[29,38,33]"}
+
+---
+
+
+:::: {.columns}
+::: {.column width="50%"}
+
+<center style='margin-top: 12px;'>
+**`rMaternI()`** \[[Docs](https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMaternI.html){target='_blank'}\]
+</center>
+
+* <i class='bi bi-1-circle'></i> Generate events $\mathbf{S} = \{\mathbf{s}_1, \ldots, \mathbf{s}_{N(\lambda)}\}$ via Poisson point process with $\lambda = \kappa$
+* <i class='bi bi-2-circle'></i> Delete all **pairs** of points $\mathbf{s}_i$, $\mathbf{s}_j$ for which $\textsf{dist}(\mathbf{s}_i, \mathbf{s}_j) < \texttt{r}$
+
+:::
+::: {.column width="50%"}
+
+<center style='margin-top: 12px;'>
+**`rMaternII()`** \[[Docs](https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMaternII.html){target='_blank'}\]
+</center>
+
+* <i class='bi bi-1-circle'></i> Generate events $\mathbf{S} = \{\mathbf{s}_1, \ldots, \mathbf{s}_{N(\lambda)}\}$ via Poisson point process with $\lambda = \kappa$.
+  * Each event $\mathbf{s}_i$ has a **timestamp** $t_i \sim \mathcal{U}(0,1)$
+* <i class='bi bi-2-circle'></i> Delete all **pairs** of points $\mathbf{s}_i$, $\mathbf{s}_j$ for which $\textsf{dist}(\mathbf{s}_i, \mathbf{s}_j) < \texttt{r}$
+
+:::
+::::

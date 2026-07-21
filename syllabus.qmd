@@ -1,0 +1,400 @@
+---
+title: "PPOL 6805 / DSAN 6750"
+subtitle: "Geographic Information Systems (GIS) for Spatial Data Science"
+times: "Wednesdays 6:30-9pm, Healy 105"
+author: "Jeff Jacobs"
+email: "jj1088@georgetown.edu"
+term: "Fall 2025, Georgetown University"
+bibliography: "_PPOL6805.bib"
+csl: "chicago-17-no-url.csl"
+latex-auto-install: false
+editor:
+  render-on-save: true
+format:
+  pdf:
+    output-file: "PPOL6805_Fall_2025_Syllabus.pdf"
+    template-partials:
+      - title.tex
+    title-meta: "PPOL 6805 / DSAN 6750 Syllabus - Fall 2025"
+    documentclass: "scrartcl"
+    colorlinks: true
+    link-citations: true
+    include-in-header:
+      text: \usepackage{fullpage}
+    # documentclass: "scrreprt"
+  html:
+    output-file: "syllabus.html"
+    df-print: kable
+    html-math-method: mathjax
+    # link-external-icon: true
+    link-external-newwindow: true
+    # link-external-filter: '^(?:http:|https:)\/\/jjacobs\.me\/dsan6750'
+---
+
+Welcome to the Fall 2025 version of **Geographic Information Systems (GIS) for Spatial Data Science** at Georgetown University! Please note that the most up-to-date version of this syllabus will always be available at [jjacobs.me/ppol6805](https://jjacobs.me/ppol6805){target='_blank'}
+
+::: {.callout-note title="Course Numbering"}
+
+* For *Public Policy* students (McCourt): the course number is **PPOL 6805**
+* For *Data Science and Analytics* students: the course number is **DSAN 6750**
+
+:::
+
+## Course Staff and Office Hours
+
+* **Prof. Jeff Jacobs**, [`jj1088@georgetown.edu`](mailto:jj1088@georgetown.edu){target='_blank'}:<br> *Schedule office hour slots at [`jjacobs.me/meet`](https://jjacobs.me/meet){target='_blank'}*
+    * Tues 4:30-7:00pm, Weds 3-4pm, Thurs 3-4pm
+    * *(Please try to schedule at least 8 hours in advance, and let me know briefly what you'd like to discuss, so I have time to prepare! For example, you can provide links to anything you'd like me to read beforehand, via the "Additional Info" portion of the signup form)*
+* **TA Christy Hsu**, [[`th1010@georgetown.edu`](mailto:th1010@georgetown.edu)]
+  * Coding Workshop Coordinator (Fridays, 2-3pm in Car Barn 230)
+* **TA Yumi Li**, [[`xl794@georgetown.edu`](mailto:xl794@georgetown.edu)]
+  * Office hours by appointment
+
+## Course Description
+
+This course provides students with an overview of Geographic Information Systems (GIS), encompassing both general principles of geospatial data analysis and their applications for studying important issues of climate change, international conflict, economic development, and urban planning, among other areas of application.
+
+The beginning of the course emphasizes fundamentals of GIS design and use, such as projection systems, raster and vector data, and efficient representation and storage of geospatial data. As students become more comfortable with these foundations, the course will shift to a greater emphasis on applications during the second half of the semester. Particular emphasis will be placed on effective visualization of spatial data, through creation of static publication-quality maps as well as interactive maps for web applications and data dashboards.
+
+The course will utilize libraries from R, Python, and JavaScript as needed, so experience using any of these languages will be helpful, but is not required.
+
+## Assignment Structure
+
+On the basis of the guidelines we've developed for courses offered through DSAN, this course will have one in-class midterm but **no** final exam! Instead, you will work on a final project throughout the second half of the course. Each of the four units will involve a homework assignment, and final grades will be determined using the following weighting scheme:
+
+```{=html}
+<table>
+<thead>
+<tr>
+    <th>Category</th>
+    <th>Percent of Final Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td><span data-qmd="In-Class Midterm ({{< var midterm.date-md >}})"></span></td>
+    <td>25%</td>
+</tr>
+<tr>
+    <td>Final Project</td>
+    <td>30%</td>
+</tr>
+<tr>
+    <td>Homeworks</td>
+    <td>45%</td>
+</tr>
+<tr>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW1**: {{< var hw.1.title >}}"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.1.pct >}}%"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW2**: {{< var hw.2.title >}}"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.2.pct >}}%"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW3**: {{< var hw.3.title >}}"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.3.pct >}}%"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW4**: {{< var hw.4.title >}}"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.4.pct >}}%"></span></td>
+</tr>
+<tr>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW5**: {{< var hw.5.title >}}"></span></td>
+    <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.5.pct >}}%"></span></td>
+</tr>
+</tbody>
+</table>
+```
+
+The course does not have any "official" prerequisites, but a general comfort with **R** and/or **Python** is helpful: most of the code shown on slides is in R, but we will also discuss equivalent Python libraries you can use if you prefer!
+
+If you have never used R or Python before, however (or if you haven't used it in a while and feel like your skills are rusty), you can:
+
+* First **browse the materials on the [Resources page](resources.qmd)**, and then
+* Attend the weekly [**coding workshops**](https://hchristy.georgetown.domains/_site) led by TA Christy Hsu!
+
+## Course Topics / Calendar
+
+The following is a rough map of what we will work through together throughout the semester; given that **everyone learns at a different pace**, my aim is to leave us with a good amount of **flexibility** in terms of how much time we spend on each topic.
+
+If I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!
+
+If you find any discrepancies between this schedule and Georgetown's [official calendar](https://registrar.georgetown.edu/academic-calendar/maincampus/), please let me know.
+
+```{=html}
+<table class='sticky-table'>
+<colgroup>
+  <col style='width: 25%;'>
+  <col style='width: 10%;'>
+  <col style='width: 20%;'>
+  <col style='width: 45%;'>
+</colgroup>
+<thead>
+<tr class='sticky-head'>
+    <th>Unit</th>
+    <th>Week</th>
+    <th>Date</th>
+    <th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td><span data-qmd="**Unit 1**: GIS Concepts"></span></td>
+    <td>1</td>
+    <td><span data-qmd="{{< var weeks.1.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.1.title >}}](./w01/)"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td>2</td>
+    <td><span data-qmd="{{< var weeks.2.date-md >}}"></span></td>
+    <td>
+        <span data-qmd="[{{< var weeks.2.title >}}](./w02/)"></span>
+    </td>
+</tr>
+<tr>
+    <td>
+    </td>
+    <td>3</td>
+    <td><span data-qmd="{{< var weeks.3.date-md >}}"></span></td>
+    <td>
+        <span data-qmd="[{{< var weeks.3.title >}}](./w03/)"></span>
+        <br>
+        <span data-qmd="*HW1 Released*"></span>
+    </td>
+</tr>
+<tr class='new-unit'>
+    <td><span data-qmd="**Unit 2:** Geospatial Operations"></span></td>
+    <td>4</td>
+    <td><span data-qmd="{{< var weeks.4.date-md >}}"></span></td>
+    <td>
+        <span data-qmd="[{{< var weeks.4.title >}}](./w04/)"></span>
+    </td>
+</tr>
+<tr>
+    <td></td>
+    <td>5</td>
+    <td><span data-qmd="{{< var weeks.5.date-md >}}"></span></td>
+    <td>
+        <span data-qmd="[{{< var weeks.5.title >}}](./w05/)"></span>
+        <br>
+        <span data-qmd="*[Deliverable] HW1 due 11:59pm EDT; HW2 Release*"></span>
+    </td>
+</tr>
+<tr>
+    <td></td> 
+    <td>6</td>
+    <td><span data-qmd="{{< var weeks.6.date-md >}}"></span></td>
+    <td>
+        <span data-qmd="[{{<var weeks.6.title >}}](./w06/)"></span>
+    </td>
+</tr>
+<tr class='new-unit'>
+    <td style='border-bottom: 0px;'><span data-qmd="**Unit 3:** Spatial Data Science I: Foundations"></span></td>
+    <td style='border-bottom: 0px;'>7</td>
+    <td style='border-bottom: 0px;'><span data-qmd="{{< var weeks.7.date-md >}}"></span></td>
+    <td style='border-bottom: 0px;'>
+        <span data-qmd="[{{< var weeks.7.title >}}](./w07/)"></span>
+        <br>
+        <span data-qmd="*[Deliverable] HW2, 11:59pm; HW3 Release*"></span>
+    </td>
+</tr>
+<tr>
+    <td></td>
+    <td colspan="3" style="padding-top: 0px !important;"><div data-qmd="::: {.callout-tip title='Recommended Readings/Resources (In Order)' icon='false' style='margin: 0px !important;'}
+1. Amazing video introduction to analyzing spatial autocorrelation for *epidemiology* using R: @xie_analyzing_2022
+1. Three 'core' spatial-statistical datatypes: @schabenberger_statistical_2004, Section 1.2: *Types of Spatial Data* (pgs. 6-13)
+1. @baddeley_spatial_2015, Chapter 5: *Point Process Methods* (pgs. 127-154)
+:::
+"></span></td>
+</tr>
+<tr>
+    <td></td> 
+    <td>8</td>
+    <td><span data-qmd="{{< var weeks.8.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.8.title >}}](./w08/)"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td colspan="3" style="padding-top: 0px !important;"><div data-qmd="::: {.callout-tip title='Recommended Readings/Resources (In Order)' icon='false' style='margin: 0px !important;'}
+1. Intensity Functions (First-order properties of point processes): @baddeley_spatial_2015, Chapter 6: *Intensity* (pgs. 157-198)
+1. Pair Correlation Functions (Second-order properties of point processes): @baddeley_spatial_2015, Chapter 7: *Correlation* (pgs. 199-254)
+1. Monte Carlo Simulation: @waller_applied_2004, Section 5.2.3: *Hypothesis Tests of CSR via Monte Carlo Methods* (pgs. 125-126*ff*)
+:::
+"></span></td>
+</tr>
+<tr class='new-unit'>
+    <td>
+        <span data-qmd="**Unit 4:** Spatial Data Science II: Methods"></span>
+    </td>
+    <td>9</td>
+    <td><span data-qmd="{{< var weeks.9.date-md >}}"></span></td>
+    <td>
+        <span data-qmd="[{{< var weeks.9.title >}}](./w09/)"></span>
+        <br>
+        <span data-qmd="*[Deliverable] HW3 due 11:59pm EDT; Midterm Guide Release*"></span>
+    </td>
+</tr>
+<tr>
+    <td></td>
+    <td>10</td>
+    <td><span data-qmd="{{< var weeks.10.date-md >}}"></span></td>
+    <td>
+        <span data-qmd="[{{< var weeks.10.title >}}](./w10/)"></span>
+        <br>
+        <!-- <span data-qmd="*[Deliverable, 11:59pm] HW4: {{< var hw.4.title >}}*"></span> -->
+    </td>
+</tr>
+<tr>
+    <td></td>
+    <td>11</td>
+    <td><span data-qmd="{{< var weeks.11.date-md >}}"></span></td>
+    <td>
+        <span data-qmd="[{{< var weeks.11.title >}}](./w11/)"></span>
+        <br>
+        <span data-qmd="*HW4 Release*"></span>
+    </td>
+</tr>
+<tr class='new-unit'>
+    <td><span data-qmd="**Unit 5**: Final Projects"></span></td>
+    <td>12</td>
+    <td><span data-qmd="{{< var weeks.12.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.12.title >}}](./w12/)"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td>13</td>
+    <td><span data-qmd="{{< var weeks.13.date-md >}}"></span></td>
+    <td>
+        <span data-qmd="[{{< var weeks.13.title >}}](./w13/)"></span>
+        <br>
+        <span data-qmd="*[Deliverable] HW4 due 11:59pm EDT; HW5 Release*"></span>
+    </td>
+</tr>
+<tr>
+    <td></td>
+    <td></td>
+    <td><span data-qmd="*Nov 26*"></span></td>
+    <td><span data-qmd="*No Class (Fall Break)*"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td>14</td>
+    <td><span data-qmd="{{< var weeks.14.date-md >}}"></span></td>
+    <td><span data-qmd="[{{< var weeks.14.title >}}](./w14/)"></span></td>
+</tr>
+<tr>
+    <td></td>
+    <td></td>
+    <td><span data-qmd="*Dec 5 (Friday), 5:59pm*"></span></td>
+    <td><span data-qmd="*[Deliverable] Final Project, HW5*"></span></td>
+</tr>
+</tbody>
+</table>
+```
+
+## Assignment Distribution, Submission, and Grading
+
+The programming assignments for the course will be managed through a [JupyterHub server]({{< var course.hub_url >}}), which you will connect to in order to work on assignments with more computing power than is possible on your laptops (and with the necessary GIS libraries pre-installed)! This means that, to work on and submit the assignments, you will use the workflow described in the [Positron connection guide](./writeups/positron/index.qmd), which you can always find within the ["Writeups" section](./writeups/index.qmd) linked in the sidebar.
+
+## Late Policy
+
+After the due date, for each **homework** assignment, you will have a grace period of 24 hours to submit the assignment without a lateness penalty. After this 24 hour grace period, late penalties will be applied up until 66 hours after the due date. Specifically, late penalties will be applied based on the following scale (unless you obtain an excused lateness from one of the instructional staff!):
+
+* **0 to 24 hours** after due date: no penalty
+* **24 to 30 hours** after due date: 2.5% penalty
+* **30 to 42 hours** after due date: 5% penalty
+* **42 to 54 hours** after due date: 10% penalty
+* **54 to 66 hours** after due date: 20% penalty
+* **More than 66 hours** after due date: Assignment submissions no longer accepted (without instructor approval)
+
+Excused lateness exceptions will be grounded in a policy where you can "pause" the class (due-date-wise, but also just, expectation-of-progress-wise more generally) to take the time you need to handle things happening in your life. Then, you can "resume" work once you feel more centered/once you find yourself back on stable ground. The ["Maslow's hierarchy"](https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs) model from psychology (@fig-maslow) provides a straightforward way to think about this approach.
+
+![Maslow's Hierarchy of Needs, from [Wikimedia](https://commons.wikimedia.org/wiki/File:Maslow%27s_Hierarchy_of_Needs_Pyramid_(original_five-level_model).png)](images/maslow.png){#fig-maslow fig-align="center" width="70%"}
+
+Learning GIS is way up there in the blue triangle, so, it's important that you feel like the first four levels are solidified before you turn your focus back to classwork. And, it's a win-win, because it means that once you're back in action you can be more engaged and receptive to new topics, rather than being forced to "simulate" being in the blue triangle while in reality struggling in other spots!
+
+## Final Letter Grade Determination
+
+Once all assignments have been graded, we will compute your final **numeric grade** according to the above weighting, rounded to two decimal places. The **letter grade** that we report to Georgetown on the basis of this numeric grade will then follow the DSAN letter grade policy as follows, where start and end points for each range are **inclusive**:
+
+```{=html}
+<table>
+<thead>
+<tr>
+    <th align="right">Range Start</th>
+    <th align="right">Range End</th>
+    <th align="left">Letter Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td align="right">92.50</td>
+    <td align="right">100.00</td>
+    <td align="left">A</td>
+</tr>
+<tr>
+    <td>89.50</td>
+    <td>92.49</td>
+    <td>A-</td>
+</tr>
+<tr>
+    <td>87.99</td>
+    <td>89.49</td>
+    <td>B+</td>
+</tr>
+<tr>
+    <td>81.50</td>
+    <td>87.98</td>
+    <td>B</td>
+</tr>
+<tr>
+    <td>79.50</td>
+    <td>81.49</td>
+    <td>B-</td>
+</tr>
+<tr>
+    <td>69.50</td>
+    <td>79.49</td>
+    <td>C</td>
+</tr>
+<tr>
+    <td>59.50</td>
+    <td>69.49</td>
+    <td>D</td>
+</tr>
+<tr>
+    <td>0.00</td>
+    <td>59.49</td>
+    <td>F</td>
+</tr>
+</tbody>
+</table>
+```
+
+## Title IX/Sexual Misconduct Statement
+
+Georgetown University and its faculty are committed to supporting survivors and those impacted by sexual misconduct, which includes sexual assault, sexual harassment, relationship violence, and stalking. Georgetown requires faculty members, unless otherwise designated as confidential, to report all disclosures of sexual misconduct to the University Title IX Coordinator or a Deputy Title IX Coordinator.
+
+If you disclose an incident of sexual misconduct to a professor in or outside of the classroom (with the exception of disclosures in papers), that faculty member must report the incident to the Title IX Coordinator, or Deputy Title IX Coordinator. The coordinator will, in turn, reach out to the student to provide support, resources, and the option to meet. [Please note that the student is not required to meet with the Title IX coordinator.]. More information about reporting options and resources can be found in the [Sexual Misconduct Resource Center](https://sexualassault.georgetown.edu/get-help/resourcecenter/#).
+
+If you would prefer to speak to someone confidentially, Georgetown has a number of fully confidential professional resources that can provide support and assistance. These resources include:
+
+* *Health Education Services for Sexual Assault Response and Prevention*: Confidential email [`sarp@georgetown.edu`](mailto:sarp@georgetown.edu)
+* *Counseling and Psychiatric Services (CAPS)*: 202-687-6985 [After hours you can call 833-960-3006 to reach Fonemed, a telehealth service, and ask for the on-call CAPS clinician]
+
+## GSAS and McCourt Resources and Policies
+
+You can find a collection of relevant resources and policies for students on the [GSAS website](https://grad.georgetown.edu/academics/current-students/), and the Provost's policy on accommodating students' religious observances on the [Campus Ministry website](https://campusministry.georgetown.edu/faith-traditions/religious_holy_days/#).
+
+You can also make use of the [Student Academic Resource Center](http://academicsupport.georgetown.edu/). In particular, within the Resource Center there is a link to Georgetown's [Disability Support page](http://academicsupport.georgetown.edu/disability/). If you believe you have a disability, you can contact the Academic Resource Center ([`arc@georgetown.edu`](mailto:arc@georgetown.edu)) for further information. The ARC is located in the Leavey Center, Suite 335 (202-687-8354), and it is the campus office responsible for reviewing documentation provided by students with disabilities and for determining reasonable accommodations in accordance with the Americans with Disabilities Act (ADA) and University policies.
+
+### McCourt Academic Integrity Policy
+
+McCourt School students are expected to uphold the academic policies set forth by Georgetown University and the Graduate School of Arts and Sciences. Students should therefore familiarize themselves with all the rules, regulations, and procedures relevant to their pursuit of a Graduate School degree. The relevant policies are listed at [this link](https://sites.google.com/a/georgetown.edu/gsas-graduate-bulletin/vi-academic-integrity-policies-procedures).
+
+## References
+
+::: {#refs}
+:::

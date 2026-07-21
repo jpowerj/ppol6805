@@ -1,0 +1,245 @@
+---
+title: "Week 13: {{< var weeks.13.title >}}"
+subtitle: "{{< var course.slides-subtitle >}}"
+author: "{{< var course.author >}}"
+institute: "{{< var course.institute >}}"
+date: "November 20, 2024"
+date-format: full
+lecnum: 13
+categories:
+  - "Class Sessions"
+bibliography: "../_PPOL6805.bib"
+csl: "../chicago-17-no-url.csl"
+# Shared across formats:
+echo: true
+code-fold: show
+html-math-method: mathjax
+cache: false
+# Format-specific settings:
+format:
+  revealjs:
+    output-file: "slides.html"
+    df-print: kable
+    slide-number: true
+    scrollable: true
+    tbl-cap-location: bottom
+    link-external-icon: true
+    link-external-newwindow: true
+    footer: "{{< var weeks.13.footer >}}"
+    include-in-header:
+      text: "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css' integrity='sha512-2bBQCjcnw658Lho4nlXJcc6WkV/UxpE/sAokbXPxQNGqmNdQrWqtw26Ns9kFF/yG792pKR1Sx8/Y1Lf1XN4GKA==' crossorigin='anonymous' referrerpolicy='no-referrer' /><script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.min.js' integrity='sha512-nKXmKvJyiGQy343jatQlzDprflyB5c+tKCzGP3Uq67v+lmzfnZUi/ZT+fc6ITZfSC5HhaBKUIvr/nTLCV+7F+Q==' crossorigin='anonymous' referrerpolicy='no-referrer'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js' integrity='sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==' crossorigin='anonymous' referrerpolicy='no-referrer'></script><link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'><link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css'><script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js'></script>"
+    theme: [default, "../dsan-globals/jjquarto.scss"]
+    revealjs-plugins:
+      - simplemenu
+    simplemenu:
+      flat: true
+      barhtml:
+        header: "<div class='menubar'><span style='position: absolute; left: 8; padding-left: 8px;'><a href='./index.html'>&larr; Return to Notes</a></span><ul class='menu'></ul></div>"
+      scale: 0.5
+  html:
+    output-file: "index.html"
+    html-math-method: mathjax
+    df-print: kable
+---
+
+::: {.content-visible unless-format="revealjs"}
+
+<center class='mb-3'>
+<a class="h2" href="./slides.html" target="_blank">Open slides in new tab &rarr;</a>
+</center>
+
+:::
+
+
+## Final Project Details {.crunch-title data-name="Final Projects"}
+
+* **Project Showcase**: 6:30-9pm, Wed, **December 3**, 2025
+  * Come eat falafel and show off your cool visualizations and regression coefficients!
+* **Reports**: Due 5:59pm, Fri, **December 12**, 2025
+  * If you're in DSAN 6000 and you're worried about that final project... See next slide!
+
+<!-- ![](images/grading_week.jpeg){fig-align="center"} -->
+
+::: {.hidden}
+
+```{r}
+#| label: r-source-globals
+source("../dsan-globals/_globals.r")
+```
+
+:::
+
+## Due Date Details {.smaller .crunch-title .title-12}
+
+<center>
+
+<iframe src="https://calendar.google.com/calendar/embed?height=550&wkst=1&ctz=America%2FNew_York&showPrint=0&src=Y19iMmNhM2I5NTM5MWY1OTk2Zjc0Y2FjMDQ5ZGE1MjZhZDY0YWIwOThmOTc3ZjIwZjQ1YTBiYTVjN2IwMmMxZWIyQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&color=%239e69af" style="border:solid 1px #777" width="100%" height="550" frameborder="0" scrolling="no"></iframe>
+
+</center>
+
+## Visualizing Spatial Data {.smaller .crunch-title .crunch-ul data-name="Leaflet"}
+
+* My recommendation for final presentations: Tiptoe from **`mapview`** $\leadsto$ **Leaflet!**
+
+```{r}
+#| label: midwest-pop-plot
+#| output-location: column
+library(tidyverse) |> suppressPackageStartupMessages()
+library(sf) |> suppressPackageStartupMessages()
+library(leaflet) |> suppressPackageStartupMessages()
+library(leaflet.extras2) |> suppressPackageStartupMessages()
+library(mapview) |> suppressPackageStartupMessages()
+city_df <- tibble::tribble(
+  ~city, ~lon, ~lat, ~pop,
+  "Chicago", 41.950567516553896, -87.93011127491978, 2746388,
+  "Detroit", 42.45123004999075, -83.18402319217698, 631524
+)
+city_sf <- sf::st_as_sf(
+  city_df,
+  coords = c("lat", "lon"),
+  crs=4326
+)
+city_buf_sf <- city_sf |> sf::st_buffer(20000)
+city_cases_sf <- city_buf_sf |> sf::st_sample(size=rep(10,2)) |> sf::st_as_sf()
+city_cases_sf$city <- "Detroit (10 Cases)"
+city_cases_sf[1:10, 'city'] <- "Chicago (10 Cases)"
+city_cases_sf$sample <- "Flu"
+city_pop_sf <- city_buf_sf |>
+  sf::st_sample(size=c(16, 4)) |> sf::st_as_sf()
+city_pop_sf$city <- "Detroit"
+city_pop_sf[1:16, 'city'] <- "Chicago"
+city_pop_sf$sample <- "People"
+city_combined_sf <- bind_rows(city_cases_sf, city_pop_sf)
+# mapview(city_combined_sf, zcol="city", marker="sample")
+Flu = makeIcon(
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png",
+    20,
+    20
+)
+People = makeIcon(
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png",
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png",
+  20,
+  20
+)
+
+city_combined_sf$r <- ifelse(city_combined_sf$sample == "Flu", 0, 4)
+city_flu_sf <- city_combined_sf |> filter(sample == "Flu")
+city_ppl_sf <- city_combined_sf |> filter(sample == "People")
+leaflet(city_flu_sf) |>
+  addProviderTiles("CartoDB.Positron") |>
+  addMarkers(data=city_flu_sf, icon = Flu) |>
+  addMarkers(data=city_ppl_sf, icon = People)
+```
+
+## You've Secretly Been Using Leaflet All Along! {.smaller .crunch-title .crunch-quarto-figure .title-10 .leaflet-300}
+
+```{r}
+#| label: mapview-leaflet-setup
+#| code-fold: true
+library(tidyverse) |> suppressPackageStartupMessages()
+library(sf) |> suppressPackageStartupMessages()
+library(osmdata) |> suppressPackageStartupMessages()
+library(mapview) |> suppressPackageStartupMessages()
+nh_query <- opq("New Haven")
+highway_result <- nh_query |>
+  add_osm_feature(
+    key = "highway",
+    value = "motorway"
+  )
+transport_result <- nh_query |>
+  add_osm_feature(
+    key="public_transport"
+  )
+nh_road_sfs <- osmdata_sf(highway_result)
+nh_transport_sfs <- osmdata_sf(transport_result)
+nh_road_sf <- nh_road_sfs$osm_lines
+```
+
+```{r}
+mapview(nh_road_sf)
+```
+
+:::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| label: mapview-basic
+#| code-fold: show
+mapview(nh_road_sf)
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: leaflet-basic
+#| code-fold: show
+leaflet() |>
+  leaflet::addProviderTiles("CartoDB.Positron") |>
+  leaflet::addPolylines(
+    data=nh_road_sf, weight=2
+  )
+```
+
+:::
+::::
+
+## Step 1: Constructing "Overpass Queries"
+
+[`getbb()`](https://docs.ropensci.org/osmdata/reference/getbb.html)
+
+[Map features](https://wiki.openstreetmap.org/wiki/Map_features)
+
+## Application: Urban Segregation {data-name="Urban GIS"}
+
+[Mapping Inequality](https://dsl.richmond.edu/panorama/redlining/)
+
+:::: {.columns}
+::: {.column width="50%"}
+
+:::
+::: {.column width="50%"}
+
+![](images/american_apartheid.jpg){fig-align="center" width="360"}
+
+:::
+::::
+
+## Custom Bounding Box
+
+```{r}
+#| label: new-haven-custom
+custom_upper_left <- c(41.362432360113566, -72.9722636671877)
+custom_lower_right <- c(41.34295668062255, -72.9385289699316)
+bbox_coords <- c(
+  custom_upper_left[2],
+  custom_upper_left[1],
+  custom_lower_right[2],
+  custom_lower_right[1]
+)
+names(bbox_coords) = c("xmin","ymin","xmax","ymax")
+custom_sf <- st_as_sf(
+  st_as_sfc(
+    st_bbox(bbox_coords)
+  ),
+  crs=4326
+)
+mapview(custom_sf)
+```
+
+```{r}
+# nh_query <- opq(bbox=bbox_coords) |>
+#   add_osm_feature(
+#     key = "highway"
+#   )
+# nh_sfs <- osmdata_sf(nh_query)
+# nh_road_sf <- nh_sfs$osm_lines
+# mapview(nh_road_sf)
+```
+
+## References
+
+::: {#refs}
+:::

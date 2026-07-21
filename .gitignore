@@ -1,0 +1,8 @@
+/.quarto/
+.Rproj.user
+*.tif
+*.hdr
+*.tfw
+*.zip
+
+**/*.quarto_ipynb

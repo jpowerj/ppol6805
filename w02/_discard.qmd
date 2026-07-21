@@ -1,0 +1,11 @@
+## And with `tidyterra`! {.crunch-title}
+
+```{r}
+#| label: rasterized-dc-tidy
+#| fig-align: center
+library(tidyterra)
+ggplot(data=dc_SpatRaster, aes(fill=layer)) +
+  geom_spatraster(data=dc_SpatRaster) # +
+  # guides(fill="none") # +
+  # scale_fill_continuous(na.value="transparent")
+```

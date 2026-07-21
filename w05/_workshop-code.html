@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>workshop-code</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="_workshop-code_files/libs/clipboard/clipboard.min.js"></script>
+<script src="_workshop-code_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="_workshop-code_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="_workshop-code_files/libs/quarto-html/popper.min.js"></script>
+<script src="_workshop-code_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="_workshop-code_files/libs/quarto-html/anchor.min.js"></script>
+<link href="_workshop-code_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="_workshop-code_files/libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="_workshop-code_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="_workshop-code_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="_workshop-code_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="_workshop-code_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="_workshop-code_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="_workshop-code_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="_workshop-code_files/libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="_workshop-code_files/libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="_workshop-code_files/libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="_workshop-code_files/libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="_workshop-code_files/libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="_workshop-code_files/libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="_workshop-code_files/libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="_workshop-code_files/libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+<script src="_workshop-code_files/libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
+<link href="_workshop-code_files/libs/HomeButton-0.0.1/home-button.css" rel="stylesheet">
+<script src="_workshop-code_files/libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="_workshop-code_files/libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="_workshop-code_files/libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="_workshop-code_files/libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet">
+<link href="_workshop-code_files/libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>egy_sf <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">country =</span> <span class="st">'Egypt'</span>, <span class="at">scale =</span> <span class="dv">50</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>syr_sf <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">country =</span> <span class="st">'Syria'</span>, <span class="at">scale =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>uar_sf <span class="ot">&lt;-</span> <span class="fu">st_union</span>(egy_sf, syr_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: attribute variables are assumed to be spatially constant throughout
+all geometries</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>uar_sf <span class="sc">|&gt;</span> <span class="fu">st_convex_hull</span>() <span class="sc">|&gt;</span> <span class="fu">mapview</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-c73454c7c8302dc0aaa9" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-c73454c7c8302dc0aaa9">{"x":{"options":{"minZoom":1,"maxZoom":52,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"preferCanvas":false,"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron","CartoDB.Positron","CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["CartoDB.DarkMatter","CartoDB.DarkMatter","CartoDB.DarkMatter",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenStreetMap","OpenStreetMap","OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery","Esri.WorldImagery","Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenTopoMap","OpenTopoMap","OpenTopoMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"createMapPane","args":["polygon",420]},{"method":"addPolygons","args":[[[[{"lng":[33.59033203125,33.91845703125,34.24648437500002,34.57460937500002,34.90273437500003,35.23085937500003,35.55898437500002,35.88701171875002,36.21523437500002,36.54326171875002,36.87138671875002,42.35009765625,42.35908203125001,42.35898437500001,42.31289062500002,42.2685546875,42.20273437500001,36.65859375000002,25.15048828125001,25.11201171875001,25.05722656250001,24.92998046875002,24.852734375,24.70322265625001,24.98027343750002,25.3623046875,25.74433593750001,26.12636718750002,26.50839843750001,26.89042968750002,27.27246093750001,27.65449218750001,28.03642578125002,28.41855468750001,28.80058593750002,29.18251953125002,29.56455078125,29.94667968750002,30.32861328125,30.71064453125,31.09267578125003,31.20917968750001,31.62167968750001,31.94980468750001,32.27783203125,32.6060546875,32.93408203125,33.26220703125,33.59033203125],"lat":[21.99619140624999,21.996240234375,21.99628906249999,21.996337890625,21.99638671875,21.99643554687499,21.99648437499999,21.996533203125,21.99658203125,21.996630859375,21.99672851562499,37.060595703125,37.09501953125,37.10859375,37.22958984375001,37.2765625,37.29726562499999,36.8025390625,31.65498046875,31.626904296875,31.5671875,31.42749023437501,31.334814453125,30.20107421875,21.99584960937499,21.99580078125,21.995751953125,21.995654296875,21.99560546875,21.995556640625,21.9955078125,21.99545898437499,21.995361328125,21.9953125,21.99526367187499,21.99521484375,21.99511718749999,21.9951171875,21.99501953124999,21.994921875,21.994873046875,21.99487304687499,21.995849609375,21.9958984375,21.99599609374999,21.99599609375,21.99609375,21.996142578125,21.99619140624999]}]]],null,"st_convex_hull(uar_sf)",{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"pane":"polygon","stroke":true,"color":"#333333","weight":0.5,"opacity":0.9,"fill":true,"fillColor":"#6666FF","fillOpacity":0.6,"smoothFactor":1,"noClip":false},"<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>177&emsp;<\/td><\/tr><tr><td>1<\/td><th>featurecla&emsp;<\/th><td>Admin-0 country&emsp;<\/td><\/tr><tr><td>2<\/td><th>scalerank&emsp;<\/th><td>1&emsp;<\/td><\/tr><tr><td>3<\/td><th>labelrank&emsp;<\/th><td>2&emsp;<\/td><\/tr><tr><td>4<\/td><th>sovereignt&emsp;<\/th><td>Egypt&emsp;<\/td><\/tr><tr><td>5<\/td><th>sov_a3&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>6<\/td><th>adm0_dif&emsp;<\/th><td>0&emsp;<\/td><\/tr><tr><td>7<\/td><th>level&emsp;<\/th><td>2&emsp;<\/td><\/tr><tr><td>8<\/td><th>type&emsp;<\/th><td>Sovereign country&emsp;<\/td><\/tr><tr><td>9<\/td><th>tlc&emsp;<\/th><td>1&emsp;<\/td><\/tr><tr><td>10<\/td><th>admin&emsp;<\/th><td>Egypt&emsp;<\/td><\/tr><tr><td>11<\/td><th>adm0_a3&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>12<\/td><th>geou_dif&emsp;<\/th><td>0&emsp;<\/td><\/tr><tr><td>13<\/td><th>geounit&emsp;<\/th><td>Egypt&emsp;<\/td><\/tr><tr><td>14<\/td><th>gu_a3&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>15<\/td><th>su_dif&emsp;<\/th><td>0&emsp;<\/td><\/tr><tr><td>16<\/td><th>subunit&emsp;<\/th><td>Egypt&emsp;<\/td><\/tr><tr><td>17<\/td><th>su_a3&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>18<\/td><th>brk_diff&emsp;<\/th><td>0&emsp;<\/td><\/tr><tr><td>19<\/td><th>name&emsp;<\/th><td>Egypt&emsp;<\/td><\/tr><tr><td>20<\/td><th>name_long&emsp;<\/th><td>Egypt&emsp;<\/td><\/tr><tr><td>21<\/td><th>brk_a3&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>22<\/td><th>brk_name&emsp;<\/th><td>Egypt&emsp;<\/td><\/tr><tr><td>23<\/td><th>brk_group&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>24<\/td><th>abbrev&emsp;<\/th><td>Egypt&emsp;<\/td><\/tr><tr><td>25<\/td><th>postal&emsp;<\/th><td>EG&emsp;<\/td><\/tr><tr><td>26<\/td><th>formal_en&emsp;<\/th><td>Arab Republic of Egypt&emsp;<\/td><\/tr><tr><td>27<\/td><th>formal_fr&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>28<\/td><th>name_ciawf&emsp;<\/th><td>Egypt&emsp;<\/td><\/tr><tr><td>29<\/td><th>note_adm0&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>30<\/td><th>note_brk&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>31<\/td><th>name_sort&emsp;<\/th><td>Egypt, Arab Rep.&emsp;<\/td><\/tr><tr><td>32<\/td><th>name_alt&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>33<\/td><th>mapcolor7&emsp;<\/th><td>4&emsp;<\/td><\/tr><tr><td>34<\/td><th>mapcolor8&emsp;<\/th><td>6&emsp;<\/td><\/tr><tr><td>35<\/td><th>mapcolor9&emsp;<\/th><td>7&emsp;<\/td><\/tr><tr><td>36<\/td><th>mapcolor13&emsp;<\/th><td>2&emsp;<\/td><\/tr><tr><td>37<\/td><th>pop_est&emsp;<\/th><td>100388073&emsp;<\/td><\/tr><tr><td>38<\/td><th>pop_rank&emsp;<\/th><td>17&emsp;<\/td><\/tr><tr><td>39<\/td><th>pop_year&emsp;<\/th><td>2019&emsp;<\/td><\/tr><tr><td>40<\/td><th>gdp_md&emsp;<\/th><td>303092&emsp;<\/td><\/tr><tr><td>41<\/td><th>gdp_year&emsp;<\/th><td>2019&emsp;<\/td><\/tr><tr><td>42<\/td><th>economy&emsp;<\/th><td>5. Emerging region: G20&emsp;<\/td><\/tr><tr><td>43<\/td><th>income_grp&emsp;<\/th><td>4. Lower middle income&emsp;<\/td><\/tr><tr><td>44<\/td><th>fips_10&emsp;<\/th><td>EG&emsp;<\/td><\/tr><tr><td>45<\/td><th>iso_a2&emsp;<\/th><td>EG&emsp;<\/td><\/tr><tr><td>46<\/td><th>iso_a2_eh&emsp;<\/th><td>EG&emsp;<\/td><\/tr><tr><td>47<\/td><th>iso_a3&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>48<\/td><th>iso_a3_eh&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>49<\/td><th>iso_n3&emsp;<\/th><td>818&emsp;<\/td><\/tr><tr><td>50<\/td><th>iso_n3_eh&emsp;<\/th><td>818&emsp;<\/td><\/tr><tr><td>51<\/td><th>un_a3&emsp;<\/th><td>818&emsp;<\/td><\/tr><tr><td>52<\/td><th>wb_a2&emsp;<\/th><td>EG&emsp;<\/td><\/tr><tr><td>53<\/td><th>wb_a3&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>54<\/td><th>woe_id&emsp;<\/th><td>23424802&emsp;<\/td><\/tr><tr><td>55<\/td><th>woe_id_eh&emsp;<\/th><td>23424802&emsp;<\/td><\/tr><tr><td>56<\/td><th>woe_note&emsp;<\/th><td>Exact WOE match as country&emsp;<\/td><\/tr><tr><td>57<\/td><th>adm0_iso&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>58<\/td><th>adm0_diff&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>59<\/td><th>adm0_tlc&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>60<\/td><th>adm0_a3_us&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>61<\/td><th>adm0_a3_fr&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>62<\/td><th>adm0_a3_ru&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>63<\/td><th>adm0_a3_es&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>64<\/td><th>adm0_a3_cn&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>65<\/td><th>adm0_a3_tw&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>66<\/td><th>adm0_a3_in&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>67<\/td><th>adm0_a3_np&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>68<\/td><th>adm0_a3_pk&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>69<\/td><th>adm0_a3_de&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>70<\/td><th>adm0_a3_gb&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>71<\/td><th>adm0_a3_br&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>72<\/td><th>adm0_a3_il&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>73<\/td><th>adm0_a3_ps&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>74<\/td><th>adm0_a3_sa&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>75<\/td><th>adm0_a3_eg&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>76<\/td><th>adm0_a3_ma&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>77<\/td><th>adm0_a3_pt&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>78<\/td><th>adm0_a3_ar&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>79<\/td><th>adm0_a3_jp&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>80<\/td><th>adm0_a3_ko&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>81<\/td><th>adm0_a3_vn&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>82<\/td><th>adm0_a3_tr&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>83<\/td><th>adm0_a3_id&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>84<\/td><th>adm0_a3_pl&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>85<\/td><th>adm0_a3_gr&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>86<\/td><th>adm0_a3_it&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>87<\/td><th>adm0_a3_nl&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>88<\/td><th>adm0_a3_se&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>89<\/td><th>adm0_a3_bd&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>90<\/td><th>adm0_a3_ua&emsp;<\/th><td>EGY&emsp;<\/td><\/tr><tr><td>91<\/td><th>adm0_a3_un&emsp;<\/th><td>-99&emsp;<\/td><\/tr><tr><td>92<\/td><th>adm0_a3_wb&emsp;<\/th><td>-99&emsp;<\/td><\/tr><tr><td>93<\/td><th>continent&emsp;<\/th><td>Africa&emsp;<\/td><\/tr><tr><td>94<\/td><th>region_un&emsp;<\/th><td>Africa&emsp;<\/td><\/tr><tr><td>95<\/td><th>subregion&emsp;<\/th><td>Northern Africa&emsp;<\/td><\/tr><tr><td>96<\/td><th>region_wb&emsp;<\/th><td>Middle East & North Africa&emsp;<\/td><\/tr><tr><td>97<\/td><th>name_len&emsp;<\/th><td>5&emsp;<\/td><\/tr><tr><td>98<\/td><th>long_len&emsp;<\/th><td>5&emsp;<\/td><\/tr><tr><td>99<\/td><th>abbrev_len&emsp;<\/th><td>5&emsp;<\/td><\/tr><tr><td>100<\/td><th>tiny&emsp;<\/th><td>-99&emsp;<\/td><\/tr><tr><td>101<\/td><th>homepart&emsp;<\/th><td>1&emsp;<\/td><\/tr><tr><td>102<\/td><th>min_zoom&emsp;<\/th><td>0&emsp;<\/td><\/tr><tr><td>103<\/td><th>min_label&emsp;<\/th><td>1.7&emsp;<\/td><\/tr><tr><td>104<\/td><th>max_label&emsp;<\/th><td>6.7&emsp;<\/td><\/tr><tr><td>105<\/td><th>label_x&emsp;<\/th><td>29.44584&emsp;<\/td><\/tr><tr><td>106<\/td><th>label_y&emsp;<\/th><td>26.18617&emsp;<\/td><\/tr><tr><td>107<\/td><th>ne_id&emsp;<\/th><td>1159320575&emsp;<\/td><\/tr><tr><td>108<\/td><th>wikidataid&emsp;<\/th><td>Q79&emsp;<\/td><\/tr><tr><td>109<\/td><th>name_ar&emsp;<\/th><td>مصر&emsp;<\/td><\/tr><tr><td>110<\/td><th>name_bn&emsp;<\/th><td>মিশর&emsp;<\/td><\/tr><tr><td>111<\/td><th>name_de&emsp;<\/th><td>Ägypten&emsp;<\/td><\/tr><tr><td>112<\/td><th>name_en&emsp;<\/th><td>Egypt&emsp;<\/td><\/tr><tr><td>113<\/td><th>name_es&emsp;<\/th><td>Egipto&emsp;<\/td><\/tr><tr><td>114<\/td><th>name_fa&emsp;<\/th><td>مصر&emsp;<\/td><\/tr><tr><td>115<\/td><th>name_fr&emsp;<\/th><td>Égypte&emsp;<\/td><\/tr><tr><td>116<\/td><th>name_el&emsp;<\/th><td>Αίγυπτος&emsp;<\/td><\/tr><tr><td>117<\/td><th>name_he&emsp;<\/th><td>מצרים&emsp;<\/td><\/tr><tr><td>118<\/td><th>name_hi&emsp;<\/th><td>मिस्र&emsp;<\/td><\/tr><tr><td>119<\/td><th>name_hu&emsp;<\/th><td>Egyiptom&emsp;<\/td><\/tr><tr><td>120<\/td><th>name_id&emsp;<\/th><td>Mesir&emsp;<\/td><\/tr><tr><td>121<\/td><th>name_it&emsp;<\/th><td>Egitto&emsp;<\/td><\/tr><tr><td>122<\/td><th>name_ja&emsp;<\/th><td>エジプト&emsp;<\/td><\/tr><tr><td>123<\/td><th>name_ko&emsp;<\/th><td>이집트&emsp;<\/td><\/tr><tr><td>124<\/td><th>name_nl&emsp;<\/th><td>Egypte&emsp;<\/td><\/tr><tr><td>125<\/td><th>name_pl&emsp;<\/th><td>Egipt&emsp;<\/td><\/tr><tr><td>126<\/td><th>name_pt&emsp;<\/th><td>Egito&emsp;<\/td><\/tr><tr><td>127<\/td><th>name_ru&emsp;<\/th><td>Египет&emsp;<\/td><\/tr><tr><td>128<\/td><th>name_sv&emsp;<\/th><td>Egypten&emsp;<\/td><\/tr><tr><td>129<\/td><th>name_tr&emsp;<\/th><td>Mısır&emsp;<\/td><\/tr><tr><td>130<\/td><th>name_uk&emsp;<\/th><td>Єгипет&emsp;<\/td><\/tr><tr><td>131<\/td><th>name_ur&emsp;<\/th><td>مصر&emsp;<\/td><\/tr><tr><td>132<\/td><th>name_vi&emsp;<\/th><td>Ai Cập&emsp;<\/td><\/tr><tr><td>133<\/td><th>name_zh&emsp;<\/th><td>埃及&emsp;<\/td><\/tr><tr><td>134<\/td><th>name_zht&emsp;<\/th><td>埃及&emsp;<\/td><\/tr><tr><td>135<\/td><th>fclass_iso&emsp;<\/th><td>Admin-0 country&emsp;<\/td><\/tr><tr><td>136<\/td><th>tlc_diff&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>137<\/td><th>fclass_tlc&emsp;<\/th><td>Admin-0 country&emsp;<\/td><\/tr><tr><td>138<\/td><th>fclass_us&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>139<\/td><th>fclass_fr&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>140<\/td><th>fclass_ru&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>141<\/td><th>fclass_es&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>142<\/td><th>fclass_cn&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>143<\/td><th>fclass_tw&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>144<\/td><th>fclass_in&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>145<\/td><th>fclass_np&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>146<\/td><th>fclass_pk&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>147<\/td><th>fclass_de&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>148<\/td><th>fclass_gb&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>149<\/td><th>fclass_br&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>150<\/td><th>fclass_il&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>151<\/td><th>fclass_ps&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>152<\/td><th>fclass_sa&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>153<\/td><th>fclass_eg&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>154<\/td><th>fclass_ma&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>155<\/td><th>fclass_pt&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>156<\/td><th>fclass_ar&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>157<\/td><th>fclass_jp&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>158<\/td><th>fclass_ko&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>159<\/td><th>fclass_vn&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>160<\/td><th>fclass_tr&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>161<\/td><th>fclass_id&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>162<\/td><th>fclass_pl&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>163<\/td><th>fclass_gr&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>164<\/td><th>fclass_it&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>165<\/td><th>fclass_nl&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>166<\/td><th>fclass_se&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>167<\/td><th>fclass_bd&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>168<\/td><th>fclass_ua&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>169<\/td><th>featurecla.1&emsp;<\/th><td>Admin-0 country&emsp;<\/td><\/tr><tr><td>170<\/td><th>scalerank.1&emsp;<\/th><td>1&emsp;<\/td><\/tr><tr><td>171<\/td><th>labelrank.1&emsp;<\/th><td>3&emsp;<\/td><\/tr><tr><td>172<\/td><th>sovereignt.1&emsp;<\/th><td>Syria&emsp;<\/td><\/tr><tr><td>173<\/td><th>sov_a3.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>174<\/td><th>adm0_dif.1&emsp;<\/th><td>0&emsp;<\/td><\/tr><tr><td>175<\/td><th>level.1&emsp;<\/th><td>2&emsp;<\/td><\/tr><tr><td>176<\/td><th>type.1&emsp;<\/th><td>Sovereign country&emsp;<\/td><\/tr><tr><td>177<\/td><th>tlc.1&emsp;<\/th><td>1&emsp;<\/td><\/tr><tr><td>178<\/td><th>admin.1&emsp;<\/th><td>Syria&emsp;<\/td><\/tr><tr><td>179<\/td><th>adm0_a3.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>180<\/td><th>geou_dif.1&emsp;<\/th><td>0&emsp;<\/td><\/tr><tr><td>181<\/td><th>geounit.1&emsp;<\/th><td>Syria&emsp;<\/td><\/tr><tr><td>182<\/td><th>gu_a3.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>183<\/td><th>su_dif.1&emsp;<\/th><td>0&emsp;<\/td><\/tr><tr><td>184<\/td><th>subunit.1&emsp;<\/th><td>Syria&emsp;<\/td><\/tr><tr><td>185<\/td><th>su_a3.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>186<\/td><th>brk_diff.1&emsp;<\/th><td>0&emsp;<\/td><\/tr><tr><td>187<\/td><th>name.1&emsp;<\/th><td>Syria&emsp;<\/td><\/tr><tr><td>188<\/td><th>name_long.1&emsp;<\/th><td>Syria&emsp;<\/td><\/tr><tr><td>189<\/td><th>brk_a3.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>190<\/td><th>brk_name.1&emsp;<\/th><td>Syria&emsp;<\/td><\/tr><tr><td>191<\/td><th>brk_group.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>192<\/td><th>abbrev.1&emsp;<\/th><td>Syria&emsp;<\/td><\/tr><tr><td>193<\/td><th>postal.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>194<\/td><th>formal_en.1&emsp;<\/th><td>Syrian Arab Republic&emsp;<\/td><\/tr><tr><td>195<\/td><th>formal_fr.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>196<\/td><th>name_ciawf.1&emsp;<\/th><td>Syria&emsp;<\/td><\/tr><tr><td>197<\/td><th>note_adm0.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>198<\/td><th>note_brk.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>199<\/td><th>name_sort.1&emsp;<\/th><td>Syrian Arab Republic&emsp;<\/td><\/tr><tr><td>200<\/td><th>name_alt.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>201<\/td><th>mapcolor7.1&emsp;<\/th><td>2&emsp;<\/td><\/tr><tr><td>202<\/td><th>mapcolor8.1&emsp;<\/th><td>6&emsp;<\/td><\/tr><tr><td>203<\/td><th>mapcolor9.1&emsp;<\/th><td>2&emsp;<\/td><\/tr><tr><td>204<\/td><th>mapcolor13.1&emsp;<\/th><td>6&emsp;<\/td><\/tr><tr><td>205<\/td><th>pop_est.1&emsp;<\/th><td>17070135&emsp;<\/td><\/tr><tr><td>206<\/td><th>pop_rank.1&emsp;<\/th><td>14&emsp;<\/td><\/tr><tr><td>207<\/td><th>pop_year.1&emsp;<\/th><td>2019&emsp;<\/td><\/tr><tr><td>208<\/td><th>gdp_md.1&emsp;<\/th><td>98830&emsp;<\/td><\/tr><tr><td>209<\/td><th>gdp_year.1&emsp;<\/th><td>2015&emsp;<\/td><\/tr><tr><td>210<\/td><th>economy.1&emsp;<\/th><td>6. Developing region&emsp;<\/td><\/tr><tr><td>211<\/td><th>income_grp.1&emsp;<\/th><td>4. Lower middle income&emsp;<\/td><\/tr><tr><td>212<\/td><th>fips_10.1&emsp;<\/th><td>SY&emsp;<\/td><\/tr><tr><td>213<\/td><th>iso_a2.1&emsp;<\/th><td>SY&emsp;<\/td><\/tr><tr><td>214<\/td><th>iso_a2_eh.1&emsp;<\/th><td>SY&emsp;<\/td><\/tr><tr><td>215<\/td><th>iso_a3.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>216<\/td><th>iso_a3_eh.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>217<\/td><th>iso_n3.1&emsp;<\/th><td>760&emsp;<\/td><\/tr><tr><td>218<\/td><th>iso_n3_eh.1&emsp;<\/th><td>760&emsp;<\/td><\/tr><tr><td>219<\/td><th>un_a3.1&emsp;<\/th><td>760&emsp;<\/td><\/tr><tr><td>220<\/td><th>wb_a2.1&emsp;<\/th><td>SY&emsp;<\/td><\/tr><tr><td>221<\/td><th>wb_a3.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>222<\/td><th>woe_id.1&emsp;<\/th><td>23424956&emsp;<\/td><\/tr><tr><td>223<\/td><th>woe_id_eh.1&emsp;<\/th><td>23424956&emsp;<\/td><\/tr><tr><td>224<\/td><th>woe_note.1&emsp;<\/th><td>Exact WOE match as country&emsp;<\/td><\/tr><tr><td>225<\/td><th>adm0_iso.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>226<\/td><th>adm0_diff.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>227<\/td><th>adm0_tlc.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>228<\/td><th>adm0_a3_us.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>229<\/td><th>adm0_a3_fr.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>230<\/td><th>adm0_a3_ru.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>231<\/td><th>adm0_a3_es.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>232<\/td><th>adm0_a3_cn.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>233<\/td><th>adm0_a3_tw.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>234<\/td><th>adm0_a3_in.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>235<\/td><th>adm0_a3_np.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>236<\/td><th>adm0_a3_pk.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>237<\/td><th>adm0_a3_de.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>238<\/td><th>adm0_a3_gb.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>239<\/td><th>adm0_a3_br.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>240<\/td><th>adm0_a3_il.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>241<\/td><th>adm0_a3_ps.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>242<\/td><th>adm0_a3_sa.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>243<\/td><th>adm0_a3_eg.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>244<\/td><th>adm0_a3_ma.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>245<\/td><th>adm0_a3_pt.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>246<\/td><th>adm0_a3_ar.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>247<\/td><th>adm0_a3_jp.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>248<\/td><th>adm0_a3_ko.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>249<\/td><th>adm0_a3_vn.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>250<\/td><th>adm0_a3_tr.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>251<\/td><th>adm0_a3_id.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>252<\/td><th>adm0_a3_pl.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>253<\/td><th>adm0_a3_gr.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>254<\/td><th>adm0_a3_it.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>255<\/td><th>adm0_a3_nl.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>256<\/td><th>adm0_a3_se.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>257<\/td><th>adm0_a3_bd.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>258<\/td><th>adm0_a3_ua.1&emsp;<\/th><td>SYR&emsp;<\/td><\/tr><tr><td>259<\/td><th>adm0_a3_un.1&emsp;<\/th><td>-99&emsp;<\/td><\/tr><tr><td>260<\/td><th>adm0_a3_wb.1&emsp;<\/th><td>-99&emsp;<\/td><\/tr><tr><td>261<\/td><th>continent.1&emsp;<\/th><td>Asia&emsp;<\/td><\/tr><tr><td>262<\/td><th>region_un.1&emsp;<\/th><td>Asia&emsp;<\/td><\/tr><tr><td>263<\/td><th>subregion.1&emsp;<\/th><td>Western Asia&emsp;<\/td><\/tr><tr><td>264<\/td><th>region_wb.1&emsp;<\/th><td>Middle East & North Africa&emsp;<\/td><\/tr><tr><td>265<\/td><th>name_len.1&emsp;<\/th><td>5&emsp;<\/td><\/tr><tr><td>266<\/td><th>long_len.1&emsp;<\/th><td>5&emsp;<\/td><\/tr><tr><td>267<\/td><th>abbrev_len.1&emsp;<\/th><td>5&emsp;<\/td><\/tr><tr><td>268<\/td><th>tiny.1&emsp;<\/th><td>-99&emsp;<\/td><\/tr><tr><td>269<\/td><th>homepart.1&emsp;<\/th><td>1&emsp;<\/td><\/tr><tr><td>270<\/td><th>min_zoom.1&emsp;<\/th><td>0&emsp;<\/td><\/tr><tr><td>271<\/td><th>min_label.1&emsp;<\/th><td>3&emsp;<\/td><\/tr><tr><td>272<\/td><th>max_label.1&emsp;<\/th><td>8&emsp;<\/td><\/tr><tr><td>273<\/td><th>label_x.1&emsp;<\/th><td>38.27778&emsp;<\/td><\/tr><tr><td>274<\/td><th>label_y.1&emsp;<\/th><td>35.00664&emsp;<\/td><\/tr><tr><td>275<\/td><th>ne_id.1&emsp;<\/th><td>1159321295&emsp;<\/td><\/tr><tr><td>276<\/td><th>wikidataid.1&emsp;<\/th><td>Q858&emsp;<\/td><\/tr><tr><td>277<\/td><th>name_ar.1&emsp;<\/th><td>سوريا&emsp;<\/td><\/tr><tr><td>278<\/td><th>name_bn.1&emsp;<\/th><td>সিরিয়া&emsp;<\/td><\/tr><tr><td>279<\/td><th>name_de.1&emsp;<\/th><td>Syrien&emsp;<\/td><\/tr><tr><td>280<\/td><th>name_en.1&emsp;<\/th><td>Syria&emsp;<\/td><\/tr><tr><td>281<\/td><th>name_es.1&emsp;<\/th><td>Siria&emsp;<\/td><\/tr><tr><td>282<\/td><th>name_fa.1&emsp;<\/th><td>سوریه&emsp;<\/td><\/tr><tr><td>283<\/td><th>name_fr.1&emsp;<\/th><td>Syrie&emsp;<\/td><\/tr><tr><td>284<\/td><th>name_el.1&emsp;<\/th><td>Συρία&emsp;<\/td><\/tr><tr><td>285<\/td><th>name_he.1&emsp;<\/th><td>סוריה&emsp;<\/td><\/tr><tr><td>286<\/td><th>name_hi.1&emsp;<\/th><td>सीरिया&emsp;<\/td><\/tr><tr><td>287<\/td><th>name_hu.1&emsp;<\/th><td>Szíria&emsp;<\/td><\/tr><tr><td>288<\/td><th>name_id.1&emsp;<\/th><td>Suriah&emsp;<\/td><\/tr><tr><td>289<\/td><th>name_it.1&emsp;<\/th><td>Siria&emsp;<\/td><\/tr><tr><td>290<\/td><th>name_ja.1&emsp;<\/th><td>シリア&emsp;<\/td><\/tr><tr><td>291<\/td><th>name_ko.1&emsp;<\/th><td>시리아&emsp;<\/td><\/tr><tr><td>292<\/td><th>name_nl.1&emsp;<\/th><td>Syrië&emsp;<\/td><\/tr><tr><td>293<\/td><th>name_pl.1&emsp;<\/th><td>Syria&emsp;<\/td><\/tr><tr><td>294<\/td><th>name_pt.1&emsp;<\/th><td>Síria&emsp;<\/td><\/tr><tr><td>295<\/td><th>name_ru.1&emsp;<\/th><td>Сирия&emsp;<\/td><\/tr><tr><td>296<\/td><th>name_sv.1&emsp;<\/th><td>Syrien&emsp;<\/td><\/tr><tr><td>297<\/td><th>name_tr.1&emsp;<\/th><td>Suriye&emsp;<\/td><\/tr><tr><td>298<\/td><th>name_uk.1&emsp;<\/th><td>Сирія&emsp;<\/td><\/tr><tr><td>299<\/td><th>name_ur.1&emsp;<\/th><td>سوریہ&emsp;<\/td><\/tr><tr><td>300<\/td><th>name_vi.1&emsp;<\/th><td>Syria&emsp;<\/td><\/tr><tr><td>301<\/td><th>name_zh.1&emsp;<\/th><td>叙利亚&emsp;<\/td><\/tr><tr><td>302<\/td><th>name_zht.1&emsp;<\/th><td>敘利亞&emsp;<\/td><\/tr><tr><td>303<\/td><th>fclass_iso.1&emsp;<\/th><td>Admin-0 country&emsp;<\/td><\/tr><tr><td>304<\/td><th>tlc_diff.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>305<\/td><th>fclass_tlc.1&emsp;<\/th><td>Admin-0 country&emsp;<\/td><\/tr><tr><td>306<\/td><th>fclass_us.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>307<\/td><th>fclass_fr.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>308<\/td><th>fclass_ru.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>309<\/td><th>fclass_es.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>310<\/td><th>fclass_cn.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>311<\/td><th>fclass_tw.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>312<\/td><th>fclass_in.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>313<\/td><th>fclass_np.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>314<\/td><th>fclass_pk.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>315<\/td><th>fclass_de.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>316<\/td><th>fclass_gb.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>317<\/td><th>fclass_br.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>318<\/td><th>fclass_il.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>319<\/td><th>fclass_ps.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>320<\/td><th>fclass_sa.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>321<\/td><th>fclass_eg.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>322<\/td><th>fclass_ma.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>323<\/td><th>fclass_pt.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>324<\/td><th>fclass_ar.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>325<\/td><th>fclass_jp.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>326<\/td><th>fclass_ko.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>327<\/td><th>fclass_vn.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>328<\/td><th>fclass_tr.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>329<\/td><th>fclass_id.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>330<\/td><th>fclass_pl.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>331<\/td><th>fclass_gr.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>332<\/td><th>fclass_it.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>333<\/td><th>fclass_nl.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>334<\/td><th>fclass_se.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>335<\/td><th>fclass_bd.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>336<\/td><th>fclass_ua.1&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>337<\/td><th>geometry&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>",{"maxWidth":800,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"closeOnClick":true,"className":""},"177",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},{"stroke":true,"weight":1,"opacity":0.9,"fillOpacity":0.84,"bringToFront":false,"sendToBack":false}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[24.70322265625001,21.99487304687499,42.35908203125001,37.29726562499999,true,"st_convex_hull(uar_sf)","Zoom to st_convex_hull(uar_sf)","<strong> st_convex_hull(uar_sf) <\/strong>","bottomright"]},{"method":"addLayersControl","args":[["CartoDB.Positron","CartoDB.DarkMatter","OpenStreetMap","Esri.WorldImagery","OpenTopoMap"],"st_convex_hull(uar_sf)",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"addLegend","args":[{"colors":["#6666FF"],"labels":["st_convex_hull(uar_sf)"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"factor","title":"","extra":null,"layerId":null,"className":"info legend","group":"st_convex_hull(uar_sf)"}]}],"limits":{"lat":[21.99487304687499,37.29726562499999],"lng":[24.70322265625001,42.35908203125001]},"fitBounds":[21.99487304687499,24.70322265625001,37.29726562499999,42.35908203125001,[]]},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n      function(el, x, data) {\n      // get the leaflet map\n      var map = this; //HTMLWidgets.find('#' + el.id);\n      // we need a new div element because we have to handle\n      // the mouseover output separately\n      // debugger;\n      function addElement () {\n      // generate new div Element\n      var newDiv = $(document.createElement('div'));\n      // append at end of leaflet htmlwidget container\n      $(el).append(newDiv);\n      //provide ID and style\n      newDiv.addClass('lnlt');\n      newDiv.css({\n      'position': 'relative',\n      'bottomleft':  '0px',\n      'background-color': 'rgba(255, 255, 255, 0.7)',\n      'box-shadow': '0 0 2px #bbb',\n      'background-clip': 'padding-box',\n      'margin': '0',\n      'padding-left': '5px',\n      'color': '#333',\n      'font': '9px/1.5 \"Helvetica Neue\", Arial, Helvetica, sans-serif',\n      'z-index': '700',\n      });\n      return newDiv;\n      }\n\n\n      // check for already existing lnlt class to not duplicate\n      var lnlt = $(el).find('.lnlt');\n\n      if(!lnlt.length) {\n      lnlt = addElement();\n\n      // grab the special div we generated in the beginning\n      // and put the mousmove output there\n\n      map.on('mousemove', function (e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                           ' lon: ' + (e.latlng.lng).toFixed(5) +\n                           ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                           ' | zoom: ' + map.getZoom() +\n                           ' | x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n                           ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n                           ' | epsg: 3857 ' +\n                           ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ');\n      } else {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      }\n      });\n\n      // remove the lnlt div when mouse leaves map\n      map.on('mouseout', function (e) {\n      var strip = document.querySelector('.lnlt');\n      if( strip !==null) strip.remove();\n      });\n\n      };\n\n      //$(el).keypress(67, function(e) {\n      map.on('preclick', function(e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      var txt = document.querySelector('.lnlt').textContent;\n      console.log(txt);\n      //txt.innerText.focus();\n      //txt.select();\n      setClipboardText('\"' + txt + '\"');\n      }\n      });\n\n      }\n      ).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el,x,data){\n           var map = this;\n\n           map.on('keypress', function(e) {\n               console.log(e.originalEvent.code);\n               var key = e.originalEvent.code;\n               if (key === 'KeyE') {\n                   var bb = this.getBounds();\n                   var txt = JSON.stringify(bb);\n                   console.log(txt);\n\n                   setClipboardText('\\'' + txt + '\\'');\n               }\n           })\n        }).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>uar_cvx <span class="ot">&lt;-</span> uar_sf <span class="sc">|&gt;</span> <span class="fu">st_convex_hull</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>uar_bbox <span class="ot">&lt;-</span> uar_sf <span class="sc">|&gt;</span> <span class="fu">st_bbox</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(uar_bbox)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-69cbe8daef6aba971a4c" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-69cbe8daef6aba971a4c">{"x":{"options":{"minZoom":1,"maxZoom":52,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"preferCanvas":false,"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron","CartoDB.Positron","CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["CartoDB.DarkMatter","CartoDB.DarkMatter","CartoDB.DarkMatter",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenStreetMap","OpenStreetMap","OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery","Esri.WorldImagery","Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenTopoMap","OpenTopoMap","OpenTopoMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"createMapPane","args":["polygon",420]},{"method":"addPolygons","args":[[[[{"lng":[24.70322265625001,42.35908203125001,42.35908203125001,24.70322265625001,24.70322265625001],"lat":[21.994873046875,21.994873046875,37.29726562499999,37.29726562499999,21.994873046875]}]]],null,"uar_bbox",{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"pane":"polygon","stroke":true,"color":"#333333","weight":0.5,"opacity":0.9,"fill":true,"fillColor":"#6666ff","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,{"maxWidth":800,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"closeOnClick":true,"className":""},"1",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},{"stroke":true,"weight":1,"opacity":0.9,"fillOpacity":0.28,"bringToFront":false,"sendToBack":false}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[24.70322265625001,21.994873046875,42.35908203125001,37.29726562499999,true,"uar_bbox","Zoom to uar_bbox","<strong> uar_bbox <\/strong>","bottomright"]},{"method":"addLayersControl","args":[["CartoDB.Positron","CartoDB.DarkMatter","OpenStreetMap","Esri.WorldImagery","OpenTopoMap"],"uar_bbox",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]}],"limits":{"lat":[21.994873046875,37.29726562499999],"lng":[24.70322265625001,42.35908203125001]},"fitBounds":[21.994873046875,24.70322265625001,37.29726562499999,42.35908203125001,[]]},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n      function(el, x, data) {\n      // get the leaflet map\n      var map = this; //HTMLWidgets.find('#' + el.id);\n      // we need a new div element because we have to handle\n      // the mouseover output separately\n      // debugger;\n      function addElement () {\n      // generate new div Element\n      var newDiv = $(document.createElement('div'));\n      // append at end of leaflet htmlwidget container\n      $(el).append(newDiv);\n      //provide ID and style\n      newDiv.addClass('lnlt');\n      newDiv.css({\n      'position': 'relative',\n      'bottomleft':  '0px',\n      'background-color': 'rgba(255, 255, 255, 0.7)',\n      'box-shadow': '0 0 2px #bbb',\n      'background-clip': 'padding-box',\n      'margin': '0',\n      'padding-left': '5px',\n      'color': '#333',\n      'font': '9px/1.5 \"Helvetica Neue\", Arial, Helvetica, sans-serif',\n      'z-index': '700',\n      });\n      return newDiv;\n      }\n\n\n      // check for already existing lnlt class to not duplicate\n      var lnlt = $(el).find('.lnlt');\n\n      if(!lnlt.length) {\n      lnlt = addElement();\n\n      // grab the special div we generated in the beginning\n      // and put the mousmove output there\n\n      map.on('mousemove', function (e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                           ' lon: ' + (e.latlng.lng).toFixed(5) +\n                           ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                           ' | zoom: ' + map.getZoom() +\n                           ' | x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n                           ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n                           ' | epsg: 3857 ' +\n                           ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ');\n      } else {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      }\n      });\n\n      // remove the lnlt div when mouse leaves map\n      map.on('mouseout', function (e) {\n      var strip = document.querySelector('.lnlt');\n      if( strip !==null) strip.remove();\n      });\n\n      };\n\n      //$(el).keypress(67, function(e) {\n      map.on('preclick', function(e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      var txt = document.querySelector('.lnlt').textContent;\n      console.log(txt);\n      //txt.innerText.focus();\n      //txt.select();\n      setClipboardText('\"' + txt + '\"');\n      }\n      });\n\n      }\n      ).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el,x,data){\n           var map = this;\n\n           map.on('keypress', function(e) {\n               console.log(e.originalEvent.code);\n               var key = e.originalEvent.code;\n               if (key === 'KeyE') {\n                   var bb = this.getBounds();\n                   var txt = JSON.stringify(bb);\n                   console.log(txt);\n\n                   setClipboardText('\\'' + txt + '\\'');\n               }\n           })\n        }).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>uar_bbox <span class="sc">|&gt;</span> <span class="fu">class</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "bbox"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>uar_sf <span class="sc">|&gt;</span> <span class="fu">st_bbox</span>() <span class="sc">|&gt;</span> <span class="fu">st_as_sfc</span>() <span class="sc">|&gt;</span> <span class="fu">st_as_sf</span>(<span class="at">crs =</span> <span class="dv">4326</span>) <span class="sc">|&gt;</span> <span class="fu">mapview</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-cdd6f4f701e3676e162a" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-cdd6f4f701e3676e162a">{"x":{"options":{"minZoom":1,"maxZoom":52,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"preferCanvas":false,"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron","CartoDB.Positron","CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["CartoDB.DarkMatter","CartoDB.DarkMatter","CartoDB.DarkMatter",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenStreetMap","OpenStreetMap","OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery","Esri.WorldImagery","Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenTopoMap","OpenTopoMap","OpenTopoMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"createMapPane","args":["polygon",420]},{"method":"addPolygons","args":[[[[{"lng":[24.70322265625001,42.35908203125001,42.35908203125001,24.70322265625001,24.70322265625001],"lat":[21.994873046875,21.994873046875,37.29726562499999,37.29726562499999,21.994873046875]}]]],null,"st_as_sf(st_as_sfc(st_bbox(uar_sf)), crs = 4326)",{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"pane":"polygon","stroke":true,"color":"#333333","weight":0.5,"opacity":0.9,"fill":true,"fillColor":"#6666FF","fillOpacity":0.6,"smoothFactor":1,"noClip":false},"<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>1&emsp;<\/td><\/tr><tr><td>1<\/td><th>x&emsp;<\/th><td>sfc_POLYGON&emsp;<\/td><\/tr><\/table><\/div>",{"maxWidth":800,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"closeOnClick":true,"className":""},"1",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},{"stroke":true,"weight":1,"opacity":0.9,"fillOpacity":0.84,"bringToFront":false,"sendToBack":false}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[24.70322265625001,21.994873046875,42.35908203125001,37.29726562499999,true,"st_as_sf(st_as_sfc(st_bbox(uar_sf)), crs = 4326)","Zoom to st_as_sf(st_as_sfc(st_bbox(uar_sf)), crs = 4326)","<strong> st_as_sf(st_as_sfc(st_bbox(uar_sf)), crs = 4326) <\/strong>","bottomright"]},{"method":"addLayersControl","args":[["CartoDB.Positron","CartoDB.DarkMatter","OpenStreetMap","Esri.WorldImagery","OpenTopoMap"],"st_as_sf(st_as_sfc(st_bbox(uar_sf)), crs = 4326)",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"addLegend","args":[{"colors":["#6666FF"],"labels":["st_as_sf(st_as_sfc(st_bbox(uar_sf)), crs = 4326)"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"factor","title":"","extra":null,"layerId":null,"className":"info legend","group":"st_as_sf(st_as_sfc(st_bbox(uar_sf)), crs = 4326)"}]}],"limits":{"lat":[21.994873046875,37.29726562499999],"lng":[24.70322265625001,42.35908203125001]},"fitBounds":[21.994873046875,24.70322265625001,37.29726562499999,42.35908203125001,[]]},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n      function(el, x, data) {\n      // get the leaflet map\n      var map = this; //HTMLWidgets.find('#' + el.id);\n      // we need a new div element because we have to handle\n      // the mouseover output separately\n      // debugger;\n      function addElement () {\n      // generate new div Element\n      var newDiv = $(document.createElement('div'));\n      // append at end of leaflet htmlwidget container\n      $(el).append(newDiv);\n      //provide ID and style\n      newDiv.addClass('lnlt');\n      newDiv.css({\n      'position': 'relative',\n      'bottomleft':  '0px',\n      'background-color': 'rgba(255, 255, 255, 0.7)',\n      'box-shadow': '0 0 2px #bbb',\n      'background-clip': 'padding-box',\n      'margin': '0',\n      'padding-left': '5px',\n      'color': '#333',\n      'font': '9px/1.5 \"Helvetica Neue\", Arial, Helvetica, sans-serif',\n      'z-index': '700',\n      });\n      return newDiv;\n      }\n\n\n      // check for already existing lnlt class to not duplicate\n      var lnlt = $(el).find('.lnlt');\n\n      if(!lnlt.length) {\n      lnlt = addElement();\n\n      // grab the special div we generated in the beginning\n      // and put the mousmove output there\n\n      map.on('mousemove', function (e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                           ' lon: ' + (e.latlng.lng).toFixed(5) +\n                           ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                           ' | zoom: ' + map.getZoom() +\n                           ' | x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n                           ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n                           ' | epsg: 3857 ' +\n                           ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ');\n      } else {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      }\n      });\n\n      // remove the lnlt div when mouse leaves map\n      map.on('mouseout', function (e) {\n      var strip = document.querySelector('.lnlt');\n      if( strip !==null) strip.remove();\n      });\n\n      };\n\n      //$(el).keypress(67, function(e) {\n      map.on('preclick', function(e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      var txt = document.querySelector('.lnlt').textContent;\n      console.log(txt);\n      //txt.innerText.focus();\n      //txt.select();\n      setClipboardText('\"' + txt + '\"');\n      }\n      });\n\n      }\n      ).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el,x,data){\n           var map = this;\n\n           map.on('keypress', function(e) {\n               console.log(e.originalEvent.code);\n               var key = e.originalEvent.code;\n               if (key === 'KeyE') {\n                   var bb = this.getBounds();\n                   var txt = JSON.stringify(bb);\n                   console.log(txt);\n\n                   setClipboardText('\\'' + txt + '\\'');\n               }\n           })\n        }).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

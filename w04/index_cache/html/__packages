@@ -1,0 +1,17 @@
+ggplot2
+tidyverse
+tibble
+tidyr
+readr
+purrr
+dplyr
+stringr
+forcats
+lubridate
+sf
+tidycensus
+tigris
+mapview
+rnaturalearth
+leaflet
+leaflet.extras2

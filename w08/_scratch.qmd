@@ -1,0 +1,56 @@
+---
+title: "W08 Scratch"
+---
+
+```{r}
+if (!endsWith(getwd(), "w08")) {
+  setwd("w08")
+}
+library(tidyverse)
+library(spatstat)
+set.seed(6827)
+lambda <- 60
+r_core <- 0.05
+nclust <- function(x0, y0, radius, n) {
+    #print(n)
+    return(runifdisc(10, radius, centre=c(x0, y0)))
+}
+cond_clust_sims <- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)
+plot(cond_clust_sims)
+```
+
+Kest first
+
+```{r}
+(kest_result <- Kest(
+  cond_clust_sims,
+  rmax=1.0,
+  correction="best"
+))
+plot(kest_result)
+```
+
+pcf with the original `ppp`
+
+```{r}
+(pcf_result <- spatstat.explore::pcf.ppp(
+  cond_clust_sims,
+  divisor="d",
+  stoyan=0.25,
+  bw=0.05,
+  r=seq(from=0.0, to=1.0, by=0.001)
+))
+plot(pcf_result, xlim=c(0,1))
+```
+
+pcf derived from K function
+
+```{r}
+(pcf_K_result <- spatstat.explore::pcf(
+  kest_result,
+  method="b",
+  spar=0.5
+  # bw=0.01
+))
+plot(pcf_K_result, xlim=c(0,1))
+```

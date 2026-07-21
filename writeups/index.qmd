@@ -1,0 +1,22 @@
+---
+title: "Extra Writeups"
+sidebar: mainnav
+listing:
+  #sort-ui: false
+  #filter-ui: false
+  type: table
+  categories: true
+  include:
+    categories: "{Labs,Extra Writeups,Clarifications,Assignment Hints}"
+  fields: [title,date,assignments,categories]
+  field-display-names: 
+    title: "Title"
+    date: "Last Updated"
+    assignments: "Relevant Assignments"
+    categories: "Category"
+  sort: "date desc"
+  table-hover: true
+  # date-format: full
+  #date-format: "dddd MMM D, YYYY, HH:mm:ss"
+---
+

@@ -1,0 +1,19 @@
+---
+title: "PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science"
+listing:
+  sort-ui: false
+  filter-ui: false
+  type: table
+  include:
+    categories: "{Class Sessions}"
+  fields: [title,date]
+  sort: "lecnum asc"
+  table-hover: true
+  date-format: "MMM D"
+format:
+  html:
+    # link-external-icon: true
+    link-external-newwindow: true
+---
+
+Welcome to the homepage for **{{< var course.code >}}: {{< var course.name >}}**, Fall 2025, at Georgetown University! The course takes place on **Wednesdays** from **6:30 to 9:00pm** in **Healy 105**. More details are provided on the [syllabus](syllabus.qmd).
