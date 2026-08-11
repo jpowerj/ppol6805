@@ -3,7 +3,8 @@ title: "HW1 Hints"
 author:
   name: "Jeff Jacobs"
   email: "jj1088@georgetown.edu"
-date: 2025-09-19
+cache: true
+date: 2026-09-19
 sidebar: mainnav
 categories:
   - Assignment Hints

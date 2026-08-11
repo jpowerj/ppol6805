@@ -1,5 +1,6 @@
 # Git Submodules - Basic Explanation
 
+git submodule add https://github.com/jpowerj/dsan-globals.git dsan-globals
 
 ### Why submodules?
 
@@ -40,7 +41,7 @@ prevents unexpected behaviour.
 You can add a submodule to a repository like this:
 
     git submodule add git@github.com:path_to/submodule.git path-to-submodule
-    git submodule add jpowerj@github.com:dsan-globals.git dsan-globals
+    git submodule add https://github.com/jpowerj/dsan-globals.git dsan-globals
 
 With default configuration, this will check out the **code** of the
 `submodule.git` repository to the `path-to-submodule` directory, and

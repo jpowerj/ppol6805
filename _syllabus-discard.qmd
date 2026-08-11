@@ -1,0 +1,13 @@
+<tr>
+    <td></td>
+    <td colspan="3" style="padding-top: 0px !important;"><div data-qmd="::: {.callout-tip title='Recommended Readings/Resources (In Order)' icon='false' style='margin: 0px !important;'}
+1. Amazing video introduction to analyzing spatial autocorrelation for *epidemiology* using R: @xie_analyzing_2022
+1. Three 'core' spatial-statistical datatypes: @schabenberger_statistical_2004, Section 1.2: *Types of Spatial Data* (pgs. 6-13)
+1. @baddeley_spatial_2015, Chapter 5: *Point Process Methods* (pgs. 127-154)
+:::
+"></span></td>
+</tr>
+
+---
+
+</tr>

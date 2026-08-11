@@ -1,37 +1,36 @@
 ---
 title: "PPOL 6805 / DSAN 6750"
 subtitle: "Geographic Information Systems (GIS) for Spatial Data Science"
-times: "Wednesdays 6:30-9pm, Healy 105"
+times: "Wednesdays 6:30-9pm, Car Barn 203"
 author: "Jeff Jacobs"
 email: "jj1088@georgetown.edu"
-term: "Fall 2025, Georgetown University"
+term: "Fall 2026, Georgetown University"
 bibliography: "_PPOL6805.bib"
 csl: "chicago-17-no-url.csl"
-latex-auto-install: false
-editor:
-  render-on-save: true
+# latex-auto-install: false
 format:
-  pdf:
-    output-file: "PPOL6805_Fall_2025_Syllabus.pdf"
-    template-partials:
-      - title.tex
-    title-meta: "PPOL 6805 / DSAN 6750 Syllabus - Fall 2025"
-    documentclass: "scrartcl"
-    colorlinks: true
-    link-citations: true
-    include-in-header:
-      text: \usepackage{fullpage}
-    # documentclass: "scrreprt"
   html:
     output-file: "syllabus.html"
     df-print: kable
     html-math-method: mathjax
-    # link-external-icon: true
+    link-external-icon: true
     link-external-newwindow: true
-    # link-external-filter: '^(?:http:|https:)\/\/jjacobs\.me\/dsan6750'
+  pdf:
+    output-file: "PPOL6805_Fall_2026_Syllabus.pdf"
+    template-partials:
+      - title.tex
+    title-meta: "PPOL 6805 / DSAN 6750 Syllabus - Fall 2026"
+    documentclass: "scrartcl"
+    colorlinks: true
+    link-citations: true
+    include-in-header:
+      text: |
+        \usepackage{fullpage}
 ---
 
-Welcome to the Fall 2025 version of **Geographic Information Systems (GIS) for Spatial Data Science** at Georgetown University! Please note that the most up-to-date version of this syllabus will always be available at [jjacobs.me/ppol6805](https://jjacobs.me/ppol6805){target='_blank'}
+\vspace{-8mm}
+
+Welcome to the Fall 2026 version of **Geographic Information Systems (GIS) for Spatial Data Science** at Georgetown University! Please note that the most up-to-date version of this syllabus will always be available at [jjacobs.me/ppol6805](https://jjacobs.me/ppol6805){target='_blank'}
 
 ::: {.callout-note title="Course Numbering"}
 
@@ -44,11 +43,7 @@ Welcome to the Fall 2025 version of **Geographic Information Systems (GIS) for S
 
 * **Prof. Jeff Jacobs**, [`jj1088@georgetown.edu`](mailto:jj1088@georgetown.edu){target='_blank'}:<br> *Schedule office hour slots at [`jjacobs.me/meet`](https://jjacobs.me/meet){target='_blank'}*
     * Tues 4:30-7:00pm, Weds 3-4pm, Thurs 3-4pm
-    * *(Please try to schedule at least 8 hours in advance, and let me know briefly what you'd like to discuss, so I have time to prepare! For example, you can provide links to anything you'd like me to read beforehand, via the "Additional Info" portion of the signup form)*
-* **TA Christy Hsu**, [[`th1010@georgetown.edu`](mailto:th1010@georgetown.edu)]
-  * Coding Workshop Coordinator (Fridays, 2-3pm in Car Barn 230)
-* **TA Yumi Li**, [[`xl794@georgetown.edu`](mailto:xl794@georgetown.edu)]
-  * Office hours by appointment
+    * *(Please try to schedule at least 8 hours in advance, and let me know briefly in the "Additional Info" portion of the signup form what you'd like to discuss, so I have time to prepare!)*
 
 ## Course Description
 
@@ -112,7 +107,7 @@ The course does not have any "official" prerequisites, but a general comfort wit
 If you have never used R or Python before, however (or if you haven't used it in a while and feel like your skills are rusty), you can:
 
 * First **browse the materials on the [Resources page](resources.qmd)**, and then
-* Attend the weekly [**coding workshops**](https://hchristy.georgetown.domains/_site) led by TA Christy Hsu!
+* Attend the weekly [**coding workshops**](https://hchristy.georgetown.domains/_site)!
 
 ## Course Topics / Calendar
 
@@ -160,8 +155,6 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="{{< var weeks.3.date-md >}}"></span></td>
     <td>
         <span data-qmd="[{{< var weeks.3.title >}}](./w03/)"></span>
-        <br>
-        <span data-qmd="*HW1 Released*"></span>
     </td>
 </tr>
 <tr class='new-unit'>
@@ -178,8 +171,6 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="{{< var weeks.5.date-md >}}"></span></td>
     <td>
         <span data-qmd="[{{< var weeks.5.title >}}](./w05/)"></span>
-        <br>
-        <span data-qmd="*[Deliverable] HW1 due 11:59pm EDT; HW2 Release*"></span>
     </td>
 </tr>
 <tr>
@@ -196,18 +187,19 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td style='border-bottom: 0px;'><span data-qmd="{{< var weeks.7.date-md >}}"></span></td>
     <td style='border-bottom: 0px;'>
         <span data-qmd="[{{< var weeks.7.title >}}](./w07/)"></span>
-        <br>
-        <span data-qmd="*[Deliverable] HW2, 11:59pm; HW3 Release*"></span>
     </td>
 </tr>
+<tr class='td-nb'>
+  <td class='td-nb'></td>
+  <td colspan="3" align="center" class='td-nb'>Recommended Readings</td>
+</tr>
 <tr>
-    <td></td>
-    <td colspan="3" style="padding-top: 0px !important;"><div data-qmd="::: {.callout-tip title='Recommended Readings/Resources (In Order)' icon='false' style='margin: 0px !important;'}
-1. Amazing video introduction to analyzing spatial autocorrelation for *epidemiology* using R: @xie_analyzing_2022
-1. Three 'core' spatial-statistical datatypes: @schabenberger_statistical_2004, Section 1.2: *Types of Spatial Data* (pgs. 6-13)
-1. @baddeley_spatial_2015, Chapter 5: *Point Process Methods* (pgs. 127-154)
-:::
-"></span></td>
+  <td></td>
+  <td colspan="3" class='text-85' style='padding-top: 0px;'><span data-qmd="1\. Amazing video introduction to analyzing spatial autocorrelation for *epidemiology* using R: @xie_analyzing_2022
+  
+  2\. Three 'core' spatial-statistical datatypes: @schabenberger_statistical_2004, Section 1.2: *Types of Spatial Data* (pgs. 6-13)
+  
+  3\. @baddeley_spatial_2015, Chapter 5: *Point Process Methods* (pgs. 127-154)</li></ol>"></span></td>
 </tr>
 <tr>
     <td></td> 
@@ -215,14 +207,17 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="{{< var weeks.8.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var weeks.8.title >}}](./w08/)"></span></td>
 </tr>
+<tr class='td-nb'>
+  <td class='td-nb'></td>
+  <td colspan="3" align="center" class='td-nb'>Recommended Readings</td>
+</tr>
 <tr>
-    <td></td>
-    <td colspan="3" style="padding-top: 0px !important;"><div data-qmd="::: {.callout-tip title='Recommended Readings/Resources (In Order)' icon='false' style='margin: 0px !important;'}
-1. Intensity Functions (First-order properties of point processes): @baddeley_spatial_2015, Chapter 6: *Intensity* (pgs. 157-198)
-1. Pair Correlation Functions (Second-order properties of point processes): @baddeley_spatial_2015, Chapter 7: *Correlation* (pgs. 199-254)
-1. Monte Carlo Simulation: @waller_applied_2004, Section 5.2.3: *Hypothesis Tests of CSR via Monte Carlo Methods* (pgs. 125-126*ff*)
-:::
-"></span></td>
+  <td></td>
+  <td colspan="3" class="text-85" style="padding-top: 0px;"><span data-qmd="1\. Intensity Functions (First-order properties of point processes): @baddeley_spatial_2015, Chapter 6: *Intensity* (pgs. 157-198)
+
+  2\. Pair Correlation Functions (Second-order properties of point processes): @baddeley_spatial_2015, Chapter 7: *Correlation* (pgs. 199-254)
+  
+  3\. Monte Carlo Simulation: @waller_applied_2004, Section 5.2.3: *Hypothesis Tests of CSR via Monte Carlo Methods* (pgs. 125-126*ff*)"></span></td>
 </tr>
 <tr class='new-unit'>
     <td>
@@ -232,8 +227,6 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="{{< var weeks.9.date-md >}}"></span></td>
     <td>
         <span data-qmd="[{{< var weeks.9.title >}}](./w09/)"></span>
-        <br>
-        <span data-qmd="*[Deliverable] HW3 due 11:59pm EDT; Midterm Guide Release*"></span>
     </td>
 </tr>
 <tr>
@@ -252,8 +245,6 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="{{< var weeks.11.date-md >}}"></span></td>
     <td>
         <span data-qmd="[{{< var weeks.11.title >}}](./w11/)"></span>
-        <br>
-        <span data-qmd="*HW4 Release*"></span>
     </td>
 </tr>
 <tr class='new-unit'>
@@ -268,8 +259,6 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="{{< var weeks.13.date-md >}}"></span></td>
     <td>
         <span data-qmd="[{{< var weeks.13.title >}}](./w13/)"></span>
-        <br>
-        <span data-qmd="*[Deliverable] HW4 due 11:59pm EDT; HW5 Release*"></span>
     </td>
 </tr>
 <tr>
@@ -283,12 +272,6 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td>14</td>
     <td><span data-qmd="{{< var weeks.14.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var weeks.14.title >}}](./w14/)"></span></td>
-</tr>
-<tr>
-    <td></td>
-    <td></td>
-    <td><span data-qmd="*Dec 5 (Friday), 5:59pm*"></span></td>
-    <td><span data-qmd="*[Deliverable] Final Project, HW5*"></span></td>
 </tr>
 </tbody>
 </table>

@@ -7,14 +7,14 @@ project:
 
 website:
   title: "PPOL 6805 / DSAN 6750: GIS for Spatial Data Science"
-  favicon: "favicon.png"
+  favicon: favicon.png
   repo-url: "https://github.com/jpowerj/ppol6805"
   repo-actions: [source]
   repo-link-target: "_blank"
   sidebar:
     id: mainnav
     title: "PPOL 6805 / DSAN 6750: GIS for Spatial Data Science"
-    footer: "*Updated {{< env PPOL6805_LAST_UPDATED \"2024-08-28\" >}}*"
+    footer: "*Updated {{< env PPOL6805_LAST_UPDATED \"2026-08-28\" >}}*"
     contents:
       - href: index.qmd
         text: "<i class='bi bi-house pe-1'></i> Home"
@@ -32,40 +32,33 @@ website:
         text: "Coding Workshop <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
       - "---"
       - href: w01/index.qmd
-        text: "Week 1: Aug 27"
+        text: "Week 1: Aug 26"
       - href: w02/index.qmd
-        text: "Week 2: Sep 3"
+        text: "Week 2: Sep 2"
       - href: w03/index.qmd
-        text: "Week 3: Sep 10"
+        text: "Week 3: Sep 9"
       - href: w04/index.qmd
-        text: "Week 4: Sep 17"
+        text: "Week 4: Sep 16"
       - href: w05/index.qmd
-        text: "Week 5: Sep 24"
+        text: "Week 5: Sep 23"
       - href: w06/index.qmd
-        text: "Week 6: Oct 1"
+        text: "Week 6: Sep 30"
       - href: w07/index.qmd
-        text: "Week 7: Oct 8"
+        text: "Week 7: Oct 7"
       - href: w08/index.qmd
-        text: "Week 8: Oct 15"
+        text: "Week 8: Oct 14"
       - href: w09/index.qmd
-        text: "Week 9: Oct 22"
+        text: "Week 9: Oct 21"
       - href: w10/index.qmd
-        text: "Week 10: Oct 29"
+        text: "Week 10: Oct 28"
       - href: w11/index.qmd
-        text: "Week 11: Nov 5"
+        text: "Week 11: Nov 4"
       - href: w12/index.qmd
-        text: "Week 12: Nov 12"
+        text: "Week 12: Nov 11"
       - href: w13/index.qmd
-        text: "Week 13: Nov 19"
+        text: "Week 13: Nov 18"
       - href: w14/index.qmd
-        text: "Week 14: Dec 3"
-      - "---"
-      - href: "https://georgetown.zoom.us/j/92295251878?pwd=K8nOs3w9uRlj3mfn63bh0yazBpBbsC.1"
-        text: "Zoom Link <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
-        target: "_blank"
-      - href: "https://georgetown.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=20a30444-5d14-4a4e-9994-b34400dc520d"
-        text: "Recordings <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
-        target: "_blank"
+        text: "Week 14: Dec 2"
       - "---"
       - href: "https://guhub.io"
         text: "JupyterHub <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
@@ -79,13 +72,27 @@ website:
       - href: "https://forms.gle/1qmHmeXo94BaoN7d8"
         text: "Feedback <i class='bi bi-box-arrow-up-right ps-1 align-self-center justify-self-center' style='font-size: 75%;'></i>"
         target: "_blank"
+      - href: ""
+        text: "Zoom Link <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
+        target: "_blank"
+      - href: ""
+        text: "Recordings <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
+        target: "_blank"
+      - href: "https://georgetown.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=20a30444-5d14-4a4e-9994-b34400dc520d"
+        text: "2025 Recordings <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
+        target: "_blank"
 
 format:
   html:
     theme:
-      light: default
-      dark: darkly
-    css: "/dsan-globals/jjstyles.css"
+      light:
+        - default
+        - "./dsan-globals/jjquarto.scss"
+        - "./dsan-globals/jjquarto-light.scss"
+      dark:
+        - darkly
+        - "./dsan-globals/jjquarto.scss"
+        - "./dsan-globals/jjquarto-dark.scss"
     toc: true
     link-external-newwindow: true
     link-external-icon: true

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.10.3">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,6 +10,9 @@
 
 <title>PPOL 6805 / DSAN 6750 – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -54,19 +57,18 @@ div.csl-indent {
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e44360b8a8db1e130c7792fece1c8032.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-fedc0afa5eed45b88079642ee2c6e752.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e44360b8a8db1e130c7792fece1c8032.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-0d4a9d19931feb4fee1ddab4b2489000.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-32931890ea684945e6eac17beb7d9d8a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-350dfa9e8b9f002e522fb95f9a013339.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-32931890ea684945e6eac17beb7d9d8a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -97,7 +99,6 @@ div.csl-indent {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" '="" crossorigin="anonymous" referrerpolicy="no-referrer"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"><script src="./sidebar.js"></script>
 
 
-<link rel="stylesheet" href="./dsan-globals/jjstyles.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -284,9 +285,7 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</a> 
         <div class="sidebar-tools-main">
@@ -347,98 +346,85 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./w01/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 1: Aug 27</span></a>
+ <span class="menu-text">Week 1: Aug 26</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./w02/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 2: Sep 3</span></a>
+ <span class="menu-text">Week 2: Sep 2</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./w03/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 3: Sep 10</span></a>
+ <span class="menu-text">Week 3: Sep 9</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./w04/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 4: Sep 17</span></a>
+ <span class="menu-text">Week 4: Sep 16</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./w05/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 5: Sep 24</span></a>
+ <span class="menu-text">Week 5: Sep 23</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./w06/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 6: Oct 1</span></a>
+ <span class="menu-text">Week 6: Sep 30</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./w07/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 7: Oct 8</span></a>
+ <span class="menu-text">Week 7: Oct 7</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./w08/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 8: Oct 15</span></a>
+ <span class="menu-text">Week 8: Oct 14</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./w09/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 9: Oct 22</span></a>
+ <span class="menu-text">Week 9: Oct 21</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./w10/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 10: Oct 29</span></a>
+ <span class="menu-text">Week 10: Oct 28</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./w11/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 11: Nov 5</span></a>
+ <span class="menu-text">Week 11: Nov 4</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./w12/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 12: Nov 12</span></a>
+ <span class="menu-text">Week 12: Nov 11</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./w13/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 13: Nov 19</span></a>
+ <span class="menu-text">Week 13: Nov 18</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./w14/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 14: Dec 3</span></a>
-  </div>
-</li>
-        <li class="px-0"><hr class="sidebar-divider hi "></li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://georgetown.zoom.us/j/92295251878?pwd=K8nOs3w9uRlj3mfn63bh0yazBpBbsC.1" class="sidebar-item-text sidebar-link" target="_blank">
- <span class="menu-text">Zoom Link <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://georgetown.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=20a30444-5d14-4a4e-9994-b34400dc520d" class="sidebar-item-text sidebar-link" target="_blank">
- <span class="menu-text">Recordings <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+ <span class="menu-text">Week 14: Dec 2</span></a>
   </div>
 </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -466,10 +452,22 @@ div.csl-indent {
  <span class="menu-text">Feedback <i class="bi bi-box-arrow-up-right ps-1 align-self-center justify-self-center" style="font-size: 75%;"></i></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+ <span class="menu-text">Zoom Link <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span>
+  </li>
+        <li class="sidebar-item">
+ <span class="menu-text">Recordings <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://georgetown.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=20a30444-5d14-4a4e-9994-b34400dc520d" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">2025 Recordings <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2025-12-04, 06:17:44 PM</em></p>
+<p><em>Updated 2026-08-11, 05:47:59 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -492,7 +490,7 @@ div.csl-indent {
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/syllabus.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="PPOL6805_Fall_2025_Syllabus.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/syllabus.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="PPOL6805_Fall_2026_Syllabus.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -524,7 +522,7 @@ div.csl-indent {
 </header>
 
 
-<p>Welcome to the Fall 2025 version of <strong>Geographic Information Systems (GIS) for Spatial Data Science</strong> at Georgetown University! Please note that the most up-to-date version of this syllabus will always be available at <a href="https://jjacobs.me/ppol6805" target="_blank">jjacobs.me/ppol6805</a></p>
+<p>Welcome to the Fall 2026 version of <strong>Geographic Information Systems (GIS) for Spatial Data Science</strong> at Georgetown University! Please note that the most up-to-date version of this syllabus will always be available at <a href="https://jjacobs.me/ppol6805" target="_blank">jjacobs.me/ppol6805</a></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Course Numbering">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -547,15 +545,7 @@ div.csl-indent {
 <li><strong>Prof.&nbsp;Jeff Jacobs</strong>, <a href="mailto:jj1088@georgetown.edu" target="_blank"><code>jj1088@georgetown.edu</code></a>:<br> <em>Schedule office hour slots at <a href="https://jjacobs.me/meet" target="_blank"><code>jjacobs.me/meet</code></a></em>
 <ul>
 <li>Tues 4:30-7:00pm, Weds 3-4pm, Thurs 3-4pm</li>
-<li><em>(Please try to schedule at least 8 hours in advance, and let me know briefly what you’d like to discuss, so I have time to prepare! For example, you can provide links to anything you’d like me to read beforehand, via the “Additional Info” portion of the signup form)</em></li>
-</ul></li>
-<li><strong>TA Christy Hsu</strong>, [<a href="mailto:th1010@georgetown.edu"><code>th1010@georgetown.edu</code></a>]
-<ul>
-<li>Coding Workshop Coordinator (Fridays, 2-3pm in Car Barn 230)</li>
-</ul></li>
-<li><strong>TA Yumi Li</strong>, [<a href="mailto:xl794@georgetown.edu"><code>xl794@georgetown.edu</code></a>]
-<ul>
-<li>Office hours by appointment</li>
+<li><em>(Please try to schedule at least 8 hours in advance, and let me know briefly in the “Additional Info” portion of the signup form what you’d like to discuss, so I have time to prepare!)</em></li>
 </ul></li>
 </ul>
 </section>
@@ -614,7 +604,7 @@ div.csl-indent {
 <p>If you have never used R or Python before, however (or if you haven’t used it in a while and feel like your skills are rusty), you can:</p>
 <ul>
 <li>First <strong>browse the materials on the <a href="./resources.html">Resources page</a></strong>, and then</li>
-<li>Attend the weekly <a href="https://hchristy.georgetown.domains/_site"><strong>coding workshops</strong></a> led by TA Christy Hsu!</li>
+<li>Attend the weekly <a href="https://hchristy.georgetown.domains/_site"><strong>coding workshops</strong></a>!</li>
 </ul>
 </section>
 <section id="course-topics-calendar" class="level2">
@@ -641,127 +631,103 @@ div.csl-indent {
 <tr class="odd">
 <td><strong>Unit 1</strong>: GIS Concepts</td>
 <td>1</td>
-<td>Aug 27</td>
+<td>Aug 26</td>
 <td><a href="./w01/">Introduction to GIS</a></td>
 </tr>
 <tr class="even">
 <td></td>
 <td>2</td>
-<td>Sep 3</td>
+<td>Sep 2</td>
 <td><a href="./w02/">How Do Maps Work?</a></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>3</td>
-<td>Sep 10</td>
-<td><a href="./w03/">Vector and Raster Representations</a><br>
-<em>HW1 Released</em></td>
+<td>Sep 9</td>
+<td><a href="./w03/">Vector and Raster Representations</a></td>
 </tr>
 <tr class="new-unit even">
 <td><strong>Unit 2:</strong> Geospatial Operations</td>
 <td>4</td>
-<td>Sep 17</td>
+<td>Sep 16</td>
 <td><a href="./w04/">Unary Operations</a></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>5</td>
-<td>Sep 24</td>
-<td><a href="./w05/">Binary Operations and DE-9IM</a><br>
-<em>[Deliverable] HW1 due 11:59pm EDT; HW2 Release</em></td>
+<td>Sep 23</td>
+<td><a href="./w05/">Binary Operations and DE-9IM</a></td>
 </tr>
 <tr class="even">
 <td></td>
 <td>6</td>
-<td>Oct 1</td>
+<td>Sep 30</td>
 <td><a href="./w06/">Spatial Joins and Areal-Weighted Interpolation</a></td>
 </tr>
 <tr class="new-unit odd">
 <td style="border-bottom: 0px"><strong>Unit 3:</strong> Spatial Data Science I: Foundations</td>
 <td style="border-bottom: 0px">7</td>
-<td style="border-bottom: 0px">Oct 8</td>
-<td style="border-bottom: 0px"><a href="./w07/">Spatial Data Science: Three Forms of Spatial Autocorrelation</a><br>
-<em>[Deliverable] HW2, 11:59pm; HW3 Release</em></td>
+<td style="border-bottom: 0px">Oct 7</td>
+<td style="border-bottom: 0px"><a href="./w07/">Spatial Data Science: Three Forms of Spatial Autocorrelation</a></td>
 </tr>
-<tr class="even">
-<td></td>
-<td colspan="3" style="padding-top: 0px !important"><div class="callout callout-style-default callout-tip no-icon callout-titled" title="Recommended Readings/Resources (In Order)" style="margin: 0px !important;">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Recommended Readings/Resources (In Order)
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Amazing video introduction to analyzing spatial autocorrelation for <em>epidemiology</em> using R: <span class="citation" data-cites="xie_analyzing_2022">Xie (<a href="#ref-xie_analyzing_2022" role="doc-biblioref">2022</a>)</span></li>
-<li>Three ‘core’ spatial-statistical datatypes: <span class="citation" data-cites="schabenberger_statistical_2004">Schabenberger and Gotway (<a href="#ref-schabenberger_statistical_2004" role="doc-biblioref">2004</a>)</span>, Section 1.2: <em>Types of Spatial Data</em> (pgs. 6-13)</li>
-<li><span class="citation" data-cites="baddeley_spatial_2015">Baddeley, Rubak, and Turner (<a href="#ref-baddeley_spatial_2015" role="doc-biblioref">2015</a>)</span>, Chapter 5: <em>Point Process Methods</em> (pgs. 127-154)</li>
-</ol>
-</div>
-</div></td>
+<tr class="td-nb even">
+<td class="td-nb"></td>
+<td colspan="3" class="td-nb" style="text-align: center;">Recommended Readings</td>
 </tr>
 <tr class="odd">
 <td></td>
-<td>8</td>
-<td>Oct 15</td>
-<td><a href="./w08/">Point Processes: Null Models, Clustering, and Regularity</a></td>
+<td colspan="3" class="text-85" style="padding-top: 0px">1. Amazing video introduction to analyzing spatial autocorrelation for <em>epidemiology</em> using R: <span class="citation" data-cites="xie_analyzing_2022">Xie (<a href="#ref-xie_analyzing_2022" role="doc-biblioref">2022</a>)</span><br>
+2. Three ‘core’ spatial-statistical datatypes: <span class="citation" data-cites="schabenberger_statistical_2004">Schabenberger and Gotway (<a href="#ref-schabenberger_statistical_2004" role="doc-biblioref">2004</a>)</span>, Section 1.2: <em>Types of Spatial Data</em> (pgs. 6-13)<br>
+3. <span class="citation" data-cites="baddeley_spatial_2015">Baddeley, Rubak, and Turner (<a href="#ref-baddeley_spatial_2015" role="doc-biblioref">2015</a>)</span>, Chapter 5: <em>Point Process Methods</em> (pgs. 127-154)<br>
+<br>
+</td>
 </tr>
 <tr class="even">
 <td></td>
-<td colspan="3" style="padding-top: 0px !important"><div class="callout callout-style-default callout-tip no-icon callout-titled" title="Recommended Readings/Resources (In Order)" style="margin: 0px !important;">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Recommended Readings/Resources (In Order)
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Intensity Functions (First-order properties of point processes): <span class="citation" data-cites="baddeley_spatial_2015">Baddeley, Rubak, and Turner (<a href="#ref-baddeley_spatial_2015" role="doc-biblioref">2015</a>)</span>, Chapter 6: <em>Intensity</em> (pgs. 157-198)</li>
-<li>Pair Correlation Functions (Second-order properties of point processes): <span class="citation" data-cites="baddeley_spatial_2015">Baddeley, Rubak, and Turner (<a href="#ref-baddeley_spatial_2015" role="doc-biblioref">2015</a>)</span>, Chapter 7: <em>Correlation</em> (pgs. 199-254)</li>
-<li>Monte Carlo Simulation: <span class="citation" data-cites="waller_applied_2004">Waller and Gotway (<a href="#ref-waller_applied_2004" role="doc-biblioref">2004</a>)</span>, Section 5.2.3: <em>Hypothesis Tests of CSR via Monte Carlo Methods</em> (pgs. 125-126<em>ff</em>)</li>
-</ol>
-</div>
-</div></td>
+<td>8</td>
+<td>Oct 14</td>
+<td><a href="./w08/">Point Processes: Null Models, Clustering, and Regularity</a></td>
+</tr>
+<tr class="td-nb odd">
+<td class="td-nb"></td>
+<td colspan="3" class="td-nb" style="text-align: center;">Recommended Readings</td>
+</tr>
+<tr class="even">
+<td></td>
+<td colspan="3" class="text-85" style="padding-top: 0px">1. Intensity Functions (First-order properties of point processes): <span class="citation" data-cites="baddeley_spatial_2015">Baddeley, Rubak, and Turner (<a href="#ref-baddeley_spatial_2015" role="doc-biblioref">2015</a>)</span>, Chapter 6: <em>Intensity</em> (pgs. 157-198)<br>
+2. Pair Correlation Functions (Second-order properties of point processes): <span class="citation" data-cites="baddeley_spatial_2015">Baddeley, Rubak, and Turner (<a href="#ref-baddeley_spatial_2015" role="doc-biblioref">2015</a>)</span>, Chapter 7: <em>Correlation</em> (pgs. 199-254)<br>
+3. Monte Carlo Simulation: <span class="citation" data-cites="waller_applied_2004">Waller and Gotway (<a href="#ref-waller_applied_2004" role="doc-biblioref">2004</a>)</span>, Section 5.2.3: <em>Hypothesis Tests of CSR via Monte Carlo Methods</em> (pgs. 125-126<em>ff</em>)</td>
 </tr>
 <tr class="new-unit odd">
 <td><strong>Unit 4:</strong> Spatial Data Science II: Methods</td>
 <td>9</td>
-<td>Oct 22</td>
-<td><a href="./w09/">Evaluating Spatial Hypotheses I: Point Data</a><br>
-<em>[Deliverable] HW3 due 11:59pm EDT; Midterm Guide Release</em></td>
+<td>Oct 21</td>
+<td><a href="./w09/">Evaluating Spatial Hypotheses I: Point Data</a></td>
 </tr>
 <tr class="even">
 <td></td>
 <td>10</td>
-<td>Oct 29</td>
+<td>Oct 28</td>
 <td><a href="./w10/">Evaluating Spatial Hypotheses II: Areal Data</a><br>
 <!-- <span data-qmd="*[Deliverable, 11:59pm] HW4: Spatial Regression*"></span> --></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>11</td>
-<td>Nov 5</td>
-<td><a href="./w11/">In-Class Midterm</a><br>
-<em>HW4 Release</em></td>
+<td>Nov 4</td>
+<td><a href="./w11/">In-Class Midterm</a></td>
 </tr>
 <tr class="new-unit even">
 <td><strong>Unit 5</strong>: Final Projects</td>
 <td>12</td>
-<td>Nov 12</td>
+<td>Nov 11</td>
 <td><a href="./w12/">Tools for Final Projects</a></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>13</td>
-<td>Nov 19</td>
-<td><a href="./w13/">Visualizing Spatial Data</a><br>
-<em>[Deliverable] HW4 due 11:59pm EDT; HW5 Release</em></td>
+<td>Nov 18</td>
+<td><a href="./w13/">Visualizing Spatial Data</a></td>
 </tr>
 <tr class="even">
 <td></td>
@@ -772,14 +738,8 @@ div.csl-indent {
 <tr class="odd">
 <td></td>
 <td>14</td>
-<td>Dec 3</td>
+<td>Dec 2</td>
 <td><a href="./w14/">Final Project Poster Session</a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td><em>Dec 5 (Friday), 5:59pm</em></td>
-<td><em>[Deliverable] Final Project, HW5</em></td>
 </tr>
 </tbody>
 </table>
@@ -899,7 +859,7 @@ Schabenberger, Oliver, and Carol A. Gotway. 2004. <em><a href="https://www.dropb
 Waller, Lance A., and Carol A. Gotway. 2004. <em><a href="https://www.dropbox.com/scl/fi/kyq9h64e3x2zcd5qezaeh/Lance-A.-Waller-Carol-A.-Gotway-Applied-Spatial-Analysis-of-Public-Health-Data.pdf?rlkey=ajc3pfm3j01htkflidgd6jx28&amp;dl=1">Applied <span>Spatial Statistics</span> for <span>Public Health Data</span></a></em>. John Wiley &amp; Sons.
 </div>
 <div id="ref-xie_analyzing_2022" class="csl-entry" role="listitem">
-Xie, Sherrie. 2022. <span>“<a href="https://www.youtube.com/watch?v=DD7bXonh-_E">Analyzing <span>Geospatial Data</span> in <span>R</span></a>.”</span> R/Medicine Virtual Conference: YouTube.
+Xie, Sherrie. 2022. <span>“<a href="https://www.youtube.com/watch?v=DD7bXonh-_E">Analyzing <span>Geospatial Data</span> in <span>R</span></a>.”</span> In <em>R/<span>Medicine Virtual Conference</span></em>.
 </div>
 </div>
 

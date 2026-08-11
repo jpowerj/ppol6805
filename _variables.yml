@@ -3,6 +3,7 @@ course:
   institute: "<a href='mailto:jj1088@georgetown.edu' target='_blank'>`jj1088@georgetown.edu`</a>"
   slides-subtitle: "*PPOL 6805 / DSAN 6750: GIS for Spatial Data Science*<br>Fall 2025"
   zoom_url: "https://georgetown.zoom.us/j/92295251878?pwd=K8nOs3w9uRlj3mfn63bh0yazBpBbsC.1"
+  recordings_url: https://georgetown.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=204eed30-35d9-4914-af91-b4a301536c94
   feedback_url: "https://forms.gle/1qmHmeXo94BaoN7d8"
   intro_survey_url: "https://forms.gle/kAyGvsMYSoLjZUtbA"
   name: "Geographic Information Systems (GIS) for Spatial Data Science"
@@ -15,59 +16,59 @@ weeks:
   - weeknum: 1
     title: "Introduction to GIS"
     footer: "PPOL 6805 Week 1: GIS Overview"
-    date-md: "Aug 27"
+    date-md: "Aug 26"
   - weeknum: 2
     title: "How Do Maps Work?"
     footer: "PPOL 6805 Week 2: How Do Maps Work?"
-    date-md: "Sep 3"
+    date-md: "Sep 2"
   - weeknum: 3
     title: "Vector and Raster Representations"
     footer: "PPOL 6805 Week 3: Unary Operations"
-    date-md: "Sep 10"
+    date-md: "Sep 9"
   - weeknum: 4
     title: "Unary Operations"
     footer: "PPOL 6805 Week 4: Unary Operations"
-    date-md: "Sep 17"
+    date-md: "Sep 16"
   - weeknum: 5
     title: "Binary Operations and DE-9IM"
     footer: "PPOL 6805 Week 5: Binary Operations and DE-9IM"
-    date-md: "Sep 24"
+    date-md: "Sep 23"
   - weeknum: 6
     title: "Spatial Joins and Areal-Weighted Interpolation"
     footer: "PPOL 6805 Week 6: Spatial Joins and Interpolation"
-    date-md: "Oct 1"
+    date-md: "Sep 30"
   - weeknum: 7
     title: "Spatial Data Science: Three Forms of Spatial Autocorrelation"
     footer: "PPOL 6805 Week 7: Spatial Data Science, Autocorrelation"
-    date-md: "Oct 8"
+    date-md: "Oct 7"
   - weeknum: 8
     title: "Point Processes: Null Models, Clustering, and Regularity"
     footer: "PPOL 6805 Week 8: Point Processes"
-    date-md: "Oct 15"
+    date-md: "Oct 14"
   - weeknum: 9
     title: "Evaluating Spatial Hypotheses I: Point Data"
     footer: "PPOL 6805 Week 9: Evaluating Point Hypotheses"
-    date-md: "Oct 22"
+    date-md: "Oct 21"
   - weeknum: 10
     title: "Evaluating Spatial Hypotheses II: Areal Data"
     footer: "PPOL 6805 Week 10: Evaluating Areal Hypotheses"
-    date-md: "Oct 29"
+    date-md: "Oct 28"
   - weeknum: 11
     title: "In-Class Midterm"
     footer: "PPOL 6805 Week 11"
-    date-md: "Nov 5"
+    date-md: "Nov 4"
   - weeknum: 12
     title: "Tools for Final Projects"
     footer: "PPOL 6805 Week 12: Tools for Final Projects"
-    date-md: "Nov 12"
+    date-md: "Nov 11"
   - weeknum: 13
     title: "Visualizing Spatial Data"
     footer: "PPOL 6805 Week 13: Visualization"
-    date-md: "Nov 19"
+    date-md: "Nov 18"
   - weeknum: 14
     title: "Final Project Poster Session"
     footer: "PPOL 6805 Week 14"
-    date-md: "Dec 3"
+    date-md: "Dec 2"
 hw:
   - hw-num: 1
     title: "GIS Concepts: Fun with Vectors and Rasters"
@@ -104,13 +105,13 @@ hw:
     release-date: "Wednesday, November 19"
     due-date-md: Dec 5
     due-date: "Friday, December 5"
-  # - hw-num: "5B"
-  #   title: "Remote Sensing and Raster Data"
-  #   pct: 9
-  #   release-date-md: Nov 19
-  #   release-date: "Wednesday, November 19"
-  #   due-date-md: Dec 5
-  #   due-date: "Friday, December 5"
+  - hw-num: "5B"
+    title: "Remote Sensing and Raster Data"
+    pct: 9
+    release-date-md: Nov 19
+    release-date: "Wednesday, November 19"
+    due-date-md: Dec 5
+    due-date: "Friday, December 5"
 midterm:
   date-md: Nov 5
   date-full: "Wednesday, November 5"
