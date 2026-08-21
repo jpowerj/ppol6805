@@ -26,6 +26,7 @@ format:
     include-in-header:
       text: |
         \usepackage{fullpage}
+        \usepackage{lmodern}
 ---
 
 \vspace{-8mm}
@@ -41,9 +42,13 @@ Welcome to the Fall 2026 version of **Geographic Information Systems (GIS) for S
 
 ## Course Staff and Office Hours
 
-* **Prof. Jeff Jacobs**, [`jj1088@georgetown.edu`](mailto:jj1088@georgetown.edu){target='_blank'}:<br> *Schedule office hour slots at [`jjacobs.me/meet`](https://jjacobs.me/meet){target='_blank'}*
+* **Prof. Jeff Jacobs**, [`jj1088@georgetown.edu`](mailto:jj1088@georgetown.edu){target='_blank'}:<br> *Schedule office hours at [`jjacobs.me/meet`](https://jjacobs.me/meet){target='_blank'}*
     * Tues 4:30-7:00pm, Weds 3-4pm, Thurs 3-4pm
     * *(Please try to schedule at least 8 hours in advance, and let me know briefly in the "Additional Info" portion of the signup form what you'd like to discuss, so I have time to prepare!)*
+* **TA Jackson Howes (Data Science and Analytics)**, [`jh2787@georgetown.edu`](mailto:jh2787@georgetown.edu){target='_blank'}
+  * Office hours by appointment
+* **TA Hermine Wilhelmsen (McCourt School of Public Policy)**, [`hw623@georgetown.edu`](mailto:hw623@georgetown.edu){target='_blank'}
+  * Office hours by appointment
 
 ## Course Description
 
@@ -51,7 +56,7 @@ This course provides students with an overview of Geographic Information Systems
 
 The beginning of the course emphasizes fundamentals of GIS design and use, such as projection systems, raster and vector data, and efficient representation and storage of geospatial data. As students become more comfortable with these foundations, the course will shift to a greater emphasis on applications during the second half of the semester. Particular emphasis will be placed on effective visualization of spatial data, through creation of static publication-quality maps as well as interactive maps for web applications and data dashboards.
 
-The course will utilize libraries from R, Python, and JavaScript as needed, so experience using any of these languages will be helpful, but is not required.
+The course will utilize libraries from R, Python, Stata, and JavaScript as needed, so experience using any of these languages will be helpful, but is not required.
 
 ## Assignment Structure
 
@@ -113,9 +118,13 @@ If you have never used R or Python before, however (or if you haven't used it in
 
 The following is a rough map of what we will work through together throughout the semester; given that **everyone learns at a different pace**, my aim is to leave us with a good amount of **flexibility** in terms of how much time we spend on each topic.
 
-If I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week!
+If I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week.
 
-If you find any discrepancies between this schedule and Georgetown's [official calendar](https://registrar.georgetown.edu/academic-calendar/maincampus/), please let me know.
+Nonetheless, if you are able to do the recommended readings listed below *before* the start of each week's lecture, this will be a good indication that you are "on pace", relative to the overall set of topics I aim to cover by the end of the semester.
+
+*If you find any discrepancies between this schedule and Georgetown's [official calendar](https://registrar.georgetown.edu/academic-calendar/maincampus/), let us know!*
+
+\renewcommand{\arraystretch}{1.15}
 
 ```{=html}
 <table class='sticky-table'>
@@ -134,21 +143,37 @@ If you find any discrepancies between this schedule and Georgetown's [official c
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class='td-nb'>
     <td><span data-qmd="**Unit 1**: GIS Concepts"></span></td>
-    <td>1</td>
+    <td align="left">1</td>
     <td><span data-qmd="{{< var weeks.1.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var weeks.1.title >}}](./w01/)"></span></td>
 </tr>
-<tr>
-    <td></td>
-    <td>2</td>
-    <td><span data-qmd="{{< var weeks.2.date-md >}}"></span></td>
-    <td>
-        <span data-qmd="[{{< var weeks.2.title >}}](./w02/)"></span>
-    </td>
+<tr class='td-nb'>
+  <td class='td-nb'></td>
+  <td colspan="3" align="center" class='td-nb text-85'><span data-qmd="\small [Recommended Readings]{.underline}"></span></td>
 </tr>
 <tr>
+  <td></td>
+  <td colspan="3" class='text-85' style='padding-top: 0px;' align='left'><span data-qmd="\small 1\. @pebesma_spatial_2023, Section 3.1: *Simple Feature Geometries* (pp. 29-33)"></span></td>
+</tr>
+<tr class='td-nb'>
+  <td></td>
+  <td>2</td>
+  <td><span data-qmd="{{< var weeks.2.date-md >}}"></span></td>
+  <td>
+      <span data-qmd="[{{< var weeks.2.title >}}](./w02/)"></span>
+  </td>
+</tr>
+<tr class='td-nb'>
+  <td class='td-nb'></td>
+  <td colspan="3" align="center" class='td-nb text-85'><span data-qmd="\small [Recommended Readings]{.underline}"></span></td>
+</tr>
+<tr>
+  <td></td>
+  <td colspan="3" class='text-85' style='padding-top: 0px;' align="left"><span data-qmd="\small 1\. @monmonier_how_2018, Chapter 2: *Elements of the Map* (pp. 5-26)"></span></td>
+</tr>
+<tr class='td-nb'>
     <td>
     </td>
     <td>3</td>
@@ -157,7 +182,15 @@ If you find any discrepancies between this schedule and Georgetown's [official c
         <span data-qmd="[{{< var weeks.3.title >}}](./w03/)"></span>
     </td>
 </tr>
-<tr class='new-unit'>
+<tr class='td-nb'>
+  <td class='td-nb'></td>
+  <td colspan="3" align="center" class='td-nb text-85'><span data-qmd="\small [Recommended Readings]{.underline}"></span></td>
+</tr>
+<tr>
+  <td></td>
+  <td colspan="3" class='text-85' style='padding-top: 0px;'><span data-qmd="\small 1\. @pebesma_spatial_2023, Section 1.3-1.4: *Raster and Vector Data* and *Raster Types* (pp. 8-11)"></span></td>
+</tr>
+<tr class='new-unit td-nb'>
     <td><span data-qmd="**Unit 2:** Geospatial Operations"></span></td>
     <td>4</td>
     <td><span data-qmd="{{< var weeks.4.date-md >}}"></span></td>
@@ -165,7 +198,15 @@ If you find any discrepancies between this schedule and Georgetown's [official c
         <span data-qmd="[{{< var weeks.4.title >}}](./w04/)"></span>
     </td>
 </tr>
+<tr class='td-nb'>
+  <td class='td-nb'></td>
+  <td colspan="3" align="center" class='td-nb text-85'><span data-qmd="\small [Recommended Readings]{.underline}"></span></td>
+</tr>
 <tr>
+  <td></td>
+  <td colspan="3" class='text-85' style='padding-top: 0px;'><span data-qmd="\small 1\. @pebesma_spatial_2023, Section 3.2: *Operations on Geometries* (pp. 34-39)"></span></td>
+</tr>
+<tr class='td-nb'>
     <td></td>
     <td>5</td>
     <td><span data-qmd="{{< var weeks.5.date-md >}}"></span></td>
@@ -173,7 +214,15 @@ If you find any discrepancies between this schedule and Georgetown's [official c
         <span data-qmd="[{{< var weeks.5.title >}}](./w05/)"></span>
     </td>
 </tr>
+<tr class='td-nb'>
+  <td class='td-nb'></td>
+  <td colspan="3" align="center" class='td-nb text-85'><span data-qmd="\small [Recommended Readings]{.underline}"></span></td>
+</tr>
 <tr>
+  <td></td>
+  <td colspan="3" class='text-85' style='padding-top: 0px;'><span data-qmd="\small 1\. @moraga_spatial_2024, Chapter 3: *The `sf` Package for Spatial Vector Data* (pp. 27-39)"></span></td>
+</tr>
+<tr class='td-nb'>
     <td></td> 
     <td>6</td>
     <td><span data-qmd="{{< var weeks.6.date-md >}}"></span></td>
@@ -181,27 +230,35 @@ If you find any discrepancies between this schedule and Georgetown's [official c
         <span data-qmd="[{{<var weeks.6.title >}}](./w06/)"></span>
     </td>
 </tr>
-<tr class='new-unit'>
-    <td style='border-bottom: 0px;'><span data-qmd="**Unit 3:** Spatial Data Science I: Foundations"></span></td>
-    <td style='border-bottom: 0px;'>7</td>
-    <td style='border-bottom: 0px;'><span data-qmd="{{< var weeks.7.date-md >}}"></span></td>
-    <td style='border-bottom: 0px;'>
-        <span data-qmd="[{{< var weeks.7.title >}}](./w07/)"></span>
-    </td>
-</tr>
 <tr class='td-nb'>
   <td class='td-nb'></td>
-  <td colspan="3" align="center" class='td-nb'>Recommended Readings</td>
+  <td colspan="3" align="center" class='td-nb text-85'><span data-qmd="\small [Recommended Readings]{.underline}"></span></td>
 </tr>
 <tr>
   <td></td>
-  <td colspan="3" class='text-85' style='padding-top: 0px;'><span data-qmd="1\. Amazing video introduction to analyzing spatial autocorrelation for *epidemiology* using R: @xie_analyzing_2022
-  
-  2\. Three 'core' spatial-statistical datatypes: @schabenberger_statistical_2004, Section 1.2: *Types of Spatial Data* (pgs. 6-13)
-  
-  3\. @baddeley_spatial_2015, Chapter 5: *Point Process Methods* (pgs. 127-154)</li></ol>"></span></td>
+  <td colspan="3" class='text-85' style='padding-top: 0px;'><span data-qmd="\small 1\. @pebesma_spatial_2023, Chapter 5: *Attributes and Support* (pp. 49-57)"></span></td>
+</tr>
+<tr class='new-unit'>
+  <td style='border-bottom: 0px;'><span data-qmd="**Unit 3:** Spatial Data Science I: Foundations"></span></td>
+  <td style='border-bottom: 0px;'>7</td>
+  <td style='border-bottom: 0px;'><span data-qmd="{{< var weeks.7.date-md >}}"></span></td>
+  <td style='border-bottom: 0px;'>
+      <span data-qmd="[{{< var weeks.7.title >}}](./w07/)"></span>
+  </td>
+</tr>
+<tr class='td-nb'>
+  <td class='td-nb'></td>
+  <td colspan="3" align="center" class='td-nb text-85'><span data-qmd="\small [Recommended Readings]{.underline}"></span></td>
 </tr>
 <tr>
+  <td></td>
+  <td colspan="3" class='text-85' style='padding-top: 0px;'><span data-qmd="\small 1\. Amazing video introduction to analyzing spatial autocorrelation for *epidemiology* using R: @xie_analyzing_2022
+  
+  2\. Three 'core' spatial-statistical datatypes: @schabenberger_statistical_2004, Section 1.2: *Types of Spatial Data* (pp. 6-13)
+  
+  3\. @baddeley_spatial_2015, Chapter 5: *Point Process Methods* (pp. 127-154)"></span></td>
+</tr>
+<tr class='td-nb'>
     <td></td> 
     <td>8</td>
     <td><span data-qmd="{{< var weeks.8.date-md >}}"></span></td>
@@ -209,17 +266,15 @@ If you find any discrepancies between this schedule and Georgetown's [official c
 </tr>
 <tr class='td-nb'>
   <td class='td-nb'></td>
-  <td colspan="3" align="center" class='td-nb'>Recommended Readings</td>
+  <td colspan="3" align="center" class='td-nb text-85'><span data-qmd="\small [Recommended Readings]{.underline}"></span></td>
 </tr>
 <tr>
   <td></td>
-  <td colspan="3" class="text-85" style="padding-top: 0px;"><span data-qmd="1\. Intensity Functions (First-order properties of point processes): @baddeley_spatial_2015, Chapter 6: *Intensity* (pgs. 157-198)
+  <td colspan="3" class="text-85" style="padding-top: 0px;"><span data-qmd="\small 1\. Intensity Functions (First-order properties of point processes): @baddeley_spatial_2015, Chapter 6: *Intensity* (pp. 157-198)
 
-  2\. Pair Correlation Functions (Second-order properties of point processes): @baddeley_spatial_2015, Chapter 7: *Correlation* (pgs. 199-254)
-  
-  3\. Monte Carlo Simulation: @waller_applied_2004, Section 5.2.3: *Hypothesis Tests of CSR via Monte Carlo Methods* (pgs. 125-126*ff*)"></span></td>
+  2\. Pair Correlation Functions (Second-order properties of point processes): @baddeley_spatial_2015, Chapter 7: *Correlation* (pp. 199-254)"></span></td>
 </tr>
-<tr class='new-unit'>
+<tr class='new-unit td-nb'>
     <td>
         <span data-qmd="**Unit 4:** Spatial Data Science II: Methods"></span>
     </td>
@@ -229,7 +284,15 @@ If you find any discrepancies between this schedule and Georgetown's [official c
         <span data-qmd="[{{< var weeks.9.title >}}](./w09/)"></span>
     </td>
 </tr>
+<tr class='td-nb'>
+  <td class='td-nb'></td>
+  <td colspan="3" align="center" class='td-nb text-85'><span data-qmd="\small [Recommended Readings]{.underline}"></span></td>
+</tr>
 <tr>
+  <td></td>
+  <td colspan="3" class="text-85" style="padding-top: 0px;"><span data-qmd="\small 1\. Monte Carlo Simulation: @waller_applied_2004, Section 5.2.3: *Hypothesis Tests of CSR via Monte Carlo Methods* (pp. 125-126*ff*)"></span></td>
+</tr>
+<tr class='td-nb'>
     <td></td>
     <td>10</td>
     <td><span data-qmd="{{< var weeks.10.date-md >}}"></span></td>
@@ -238,6 +301,14 @@ If you find any discrepancies between this schedule and Georgetown's [official c
         <br>
         <!-- <span data-qmd="*[Deliverable, 11:59pm] HW4: {{< var hw.4.title >}}*"></span> -->
     </td>
+</tr>
+<tr class='td-nb'>
+  <td class='td-nb'></td>
+  <td colspan="3" align="center" class='td-nb text-85'><span data-qmd="\small [Recommended Readings]{.underline}"></span></td>
+</tr>
+<tr>
+  <td></td>
+  <td colspan="3" class="text-85" style="padding-top: 0px;"><span data-qmd="\small 1\. @ward_spatial_2018, Chapter 2: *Spatially-Lagged Dependent Variables* (pp. 35-64)"></span></td>
 </tr>
 <tr>
     <td></td>
@@ -253,13 +324,21 @@ If you find any discrepancies between this schedule and Georgetown's [official c
     <td><span data-qmd="{{< var weeks.12.date-md >}}"></span></td>
     <td><span data-qmd="[{{< var weeks.12.title >}}](./w12/)"></span></td>
 </tr>
-<tr>
+<tr class='td-nb'>
     <td></td>
     <td>13</td>
     <td><span data-qmd="{{< var weeks.13.date-md >}}"></span></td>
     <td>
         <span data-qmd="[{{< var weeks.13.title >}}](./w13/)"></span>
     </td>
+</tr>
+<tr class='td-nb'>
+  <td class='td-nb'></td>
+  <td colspan="3" align="center" class='td-nb text-85'><span data-qmd="\small [Recommended Readings]{.underline}"></span></td>
+</tr>
+<tr>
+  <td></td>
+  <td colspan="3" class="text-85" style="padding-top: 0px;"><span data-qmd="\small 1\. @monmonier_how_2018, Chapter 3: *Map Generalization: Little White Lies and Lots of Them* (pp. 27-44)"></span></td>
 </tr>
 <tr>
     <td></td>
@@ -300,7 +379,7 @@ Learning GIS is way up there in the blue triangle, so, it's important that you f
 
 ## Final Letter Grade Determination
 
-Once all assignments have been graded, we will compute your final **numeric grade** according to the above weighting, rounded to two decimal places. The **letter grade** that we report to Georgetown on the basis of this numeric grade will then follow the DSAN letter grade policy as follows, where start and end points for each range are **inclusive**:
+Once all assignments have been graded, we will compute your final **numeric grade** according to the above weighting, rounded to two decimal places. The **letter grade** that we report to Georgetown on the basis of this numeric grade will then follow the DSAN letter grade policy (updated Fall 2026) as follows, where start and end points for each range are **inclusive**:
 
 ```{=html}
 <table>
@@ -313,23 +392,23 @@ Once all assignments have been graded, we will compute your final **numeric grad
 </thead>
 <tbody>
 <tr>
-    <td align="right">92.50</td>
+    <td align="right">93.50</td>
     <td align="right">100.00</td>
     <td align="left">A</td>
 </tr>
 <tr>
     <td>89.50</td>
-    <td>92.49</td>
+    <td>93.49</td>
     <td>A-</td>
 </tr>
 <tr>
-    <td>87.99</td>
+    <td>88.00</td>
     <td>89.49</td>
     <td>B+</td>
 </tr>
 <tr>
     <td>81.50</td>
-    <td>87.98</td>
+    <td>87.99</td>
     <td>B</td>
 </tr>
 <tr>
@@ -338,18 +417,13 @@ Once all assignments have been graded, we will compute your final **numeric grad
     <td>B-</td>
 </tr>
 <tr>
-    <td>69.50</td>
+    <td>60.00</td>
     <td>79.49</td>
     <td>C</td>
 </tr>
 <tr>
-    <td>59.50</td>
-    <td>69.49</td>
-    <td>D</td>
-</tr>
-<tr>
     <td>0.00</td>
-    <td>59.49</td>
+    <td>59.99</td>
     <td>F</td>
 </tr>
 </tbody>
@@ -376,6 +450,11 @@ You can also make use of the [Student Academic Resource Center](http://academics
 ### McCourt Academic Integrity Policy
 
 McCourt School students are expected to uphold the academic policies set forth by Georgetown University and the Graduate School of Arts and Sciences. Students should therefore familiarize themselves with all the rules, regulations, and procedures relevant to their pursuit of a Graduate School degree. The relevant policies are listed at [this link](https://sites.google.com/a/georgetown.edu/gsas-graduate-bulletin/vi-academic-integrity-policies-procedures).
+
+### McCourt Policy-Writing Center (MPWC)
+
+The McCourt Policy-Writing Center (MPWC) offers services and resources for students to help improve policy-writing skills. These include workshops, peer review facilitation, open houses, lectures, online modules, and [individual appointments](https://mccourt.georgetown.edu/life-at-mccourt/student-resources/writingcenter/services/). Click [here](https://mccourt.georgetown.edu/news-events/) for the full calendar of events, and email [`mpwc@georgetown.edu`](mailto:mpwc@georgetown.edu){target='_blank'} for general inquiries.
+
 
 ## References
 

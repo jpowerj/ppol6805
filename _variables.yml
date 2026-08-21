@@ -99,7 +99,7 @@ hw:
     due-date-md: Nov 27
     due-date: "Wednesday, November 27"
   - hw-num: "5"
-    title: "Evaluating Spatial Hypotheses"
+    title: "Evaluating Spatial Hypotheses (Monte Carlo Simulation)"
     pct: 9
     release-date-md: Nov 19
     release-date: "Wednesday, November 19"
@@ -113,5 +113,5 @@ hw:
     due-date-md: Dec 5
     due-date: "Friday, December 5"
 midterm:
-  date-md: Nov 5
-  date-full: "Wednesday, November 5"
+  date-md: Nov 4
+  date-full: "Wednesday, November 4"
