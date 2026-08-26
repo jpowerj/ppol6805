@@ -100,9 +100,9 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-e44360b8a8db1e130c7792fece1c8032.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-7c76c2dffe5515f35afe8320a3e48408.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-350dfa9e8b9f002e522fb95f9a013339.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-7c76c2dffe5515f35afe8320a3e48408.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-956f1b8b1ad7457ce90c3b3cf32fafa3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-9d64053f103bb0b51932b49240ffac54.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-956f1b8b1ad7457ce90c3b3cf32fafa3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -560,7 +560,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2026-08-20, 08:14:20 PM</em></p>
+<p><em>Updated 2026-08-26, 06:11:07 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -1098,17 +1098,9 @@ window.Quarto = {
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample random points</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>africa_points_list <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(africa_union_sf, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in st_poly_sample(x, size = size, ..., type = type, by_polygon =
-by_polygon, : coordinate ranges not computed along great circles; install
-package lwgeom to get rid of this warning</code></pre>
-</div>
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>africa_points_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sf</span>(africa_points_list)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>africa_points_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_points_sf, <span class="at">label=</span><span class="st">"Random Point"</span>, <span class="at">col.regions=</span>cb_palette[<span class="dv">1</span>], <span class="at">legend=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>africa_points_list <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(africa_union_sf, <span class="dv">10</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>africa_points_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sf</span>(africa_points_list)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>africa_points_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_points_sf, <span class="at">label=</span><span class="st">"Random Point"</span>, <span class="at">col.regions=</span>cb_palette[<span class="dv">1</span>], <span class="at">legend=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in cbind(`Feature ID` = fid, mat): number of rows of result is not a
@@ -1116,7 +1108,7 @@ multiple of vector length (arg 1)</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>africa_map <span class="sc">+</span> africa_points_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>africa_map <span class="sc">+</span> africa_points_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-0730ff8bf8ba6f558f32" style="width:100%;height:464px;"></div>
@@ -1129,8 +1121,8 @@ multiple of vector length (arg 1)</code></pre>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>countries_w_points <span class="ot">&lt;-</span> africa_sf[africa_points_sf,]</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(countries_w_points, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> africa_points_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>countries_w_points <span class="ot">&lt;-</span> africa_sf[africa_points_sf,]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(countries_w_points, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> africa_points_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-b6e0c41bed0fc8bb24f4" style="width:100%;height:464px;"></div>
@@ -1143,9 +1135,9 @@ multiple of vector length (arg 1)</code></pre>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>country_inter <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_intersects</span>(africa_sf, africa_points_sf)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Computes point counts for each polygon</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>(num_intersections <span class="ot">&lt;-</span> <span class="fu">lengths</span>(country_inter))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>country_inter <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_intersects</span>(africa_sf, africa_points_sf)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Computes point counts for each polygon</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>(num_intersections <span class="ot">&lt;-</span> <span class="fu">lengths</span>(country_inter))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0 1 0 0 0
@@ -1153,10 +1145,10 @@ multiple of vector length (arg 1)</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>africa_sf <span class="ot">&lt;-</span> africa_sf <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">num_points =</span> num_intersections</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(geounit)</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>africa_sf <span class="sc">|&gt;</span> <span class="fu">select</span>(geounit, num_points) <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>africa_sf <span class="ot">&lt;-</span> africa_sf <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">num_points =</span> num_intersections</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(geounit)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>africa_sf <span class="sc">|&gt;</span> <span class="fu">select</span>(geounit, num_points) <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -1210,7 +1202,7 @@ multiple of vector length (arg 1)</code></pre>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(africa_sf, <span class="at">zcol=</span><span class="st">"num_points"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(africa_sf, <span class="at">zcol=</span><span class="st">"num_points"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-d81726f5d9decd82f807" style="width:100%;height:464px;"></div>
@@ -1224,9 +1216,9 @@ multiple of vector length (arg 1)</code></pre>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>africa_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill=</span>num_points)) <span class="sc">+</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>africa_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill=</span>num_points)) <span class="sc">+</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1254,53 +1246,53 @@ multiple of vector length (arg 1)</code></pre>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>polygon <span class="ot">&lt;-</span> po <span class="ot">&lt;-</span> <span class="fu">st_polygon</span>(<span class="fu">list</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>))))</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fu">st_polygon</span>(<span class="fu">list</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">2</span>,<span class="sc">-</span><span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">2</span>), <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>))))</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>line <span class="ot">&lt;-</span> li <span class="ot">&lt;-</span> <span class="fu">st_linestring</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(.<span class="dv">5</span>, <span class="sc">-</span>.<span class="dv">5</span>), <span class="fu">c</span>(.<span class="dv">5</span>, <span class="fl">0.5</span>)))</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(po, li)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co"># "1020F1102"</span></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 1: 1</span></span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"I(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"I(line) = 1"</span>)))</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(.<span class="dv">5</span>,<span class="dv">0</span>), <span class="fu">c</span>(.<span class="dv">5</span>,.<span class="dv">495</span>)), <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="at">pch =</span> <span class="dv">1</span>)</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 2: 0</span></span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"I(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"B(line) = 0"</span>)))</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">pch =</span> <span class="dv">16</span>)</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 3: 2</span></span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"I(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"E(line) = 2"</span>)))</span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(po, <span class="at">col =</span> <span class="st">'#ff8888'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 4: 0</span></span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"B(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"I(line) = 0"</span>)))</span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(.<span class="dv">5</span>, <span class="dv">0</span>, <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">pch =</span> <span class="dv">16</span>)</span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 5: F</span></span>
-<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"B(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"B(line) = F"</span>)))</span>
-<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a><span class="co"># 6: 1</span></span>
-<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"B(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"E(line) = 1"</span>)))</span>
-<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(po, <span class="at">border =</span> <span class="st">'red'</span>, <span class="at">col =</span> <span class="cn">NA</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 7: 1</span></span>
-<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"E(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"I(line) = 1"</span>)))</span>
-<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(.<span class="dv">5</span>, <span class="sc">-</span>.<span class="dv">5</span>), <span class="fu">c</span>(.<span class="dv">5</span>, <span class="dv">0</span>)), <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a><span class="co"># 8: 0</span></span>
-<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"E(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"B(line) = 0"</span>)))</span>
-<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(.<span class="dv">5</span>, <span class="sc">-</span>.<span class="dv">5</span>, <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">pch =</span> <span class="dv">16</span>)</span>
-<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a><span class="co"># 9: 2</span></span>
-<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"E(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"E(line) = 2"</span>)))</span>
-<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p0 <span class="sc">/</span> po, <span class="at">col =</span> <span class="st">'#ff8888'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>polygon <span class="ot">&lt;-</span> po <span class="ot">&lt;-</span> <span class="fu">st_polygon</span>(<span class="fu">list</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>))))</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fu">st_polygon</span>(<span class="fu">list</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">2</span>,<span class="sc">-</span><span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">2</span>), <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>))))</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>line <span class="ot">&lt;-</span> li <span class="ot">&lt;-</span> <span class="fu">st_linestring</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(.<span class="dv">5</span>, <span class="sc">-</span>.<span class="dv">5</span>), <span class="fu">c</span>(.<span class="dv">5</span>, <span class="fl">0.5</span>)))</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">st_sfc</span>(po, li)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co"># "1020F1102"</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 1: 1</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"I(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"I(line) = 1"</span>)))</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(.<span class="dv">5</span>,<span class="dv">0</span>), <span class="fu">c</span>(.<span class="dv">5</span>,.<span class="dv">495</span>)), <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="at">pch =</span> <span class="dv">1</span>)</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 2: 0</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"I(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"B(line) = 0"</span>)))</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">pch =</span> <span class="dv">16</span>)</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 3: 2</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"I(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"E(line) = 2"</span>)))</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(po, <span class="at">col =</span> <span class="st">'#ff8888'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 4: 0</span></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"B(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"I(line) = 0"</span>)))</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(.<span class="dv">5</span>, <span class="dv">0</span>, <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">pch =</span> <span class="dv">16</span>)</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 5: F</span></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"B(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"B(line) = F"</span>)))</span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a><span class="co"># 6: 1</span></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"B(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"E(line) = 1"</span>)))</span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(po, <span class="at">border =</span> <span class="st">'red'</span>, <span class="at">col =</span> <span class="cn">NA</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 7: 1</span></span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"E(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"I(line) = 1"</span>)))</span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(.<span class="dv">5</span>, <span class="sc">-</span>.<span class="dv">5</span>), <span class="fu">c</span>(.<span class="dv">5</span>, <span class="dv">0</span>)), <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a><span class="co"># 8: 0</span></span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"E(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"B(line) = 0"</span>)))</span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(.<span class="dv">5</span>, <span class="sc">-</span>.<span class="dv">5</span>, <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">pch =</span> <span class="dv">16</span>)</span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a><span class="co"># 9: 2</span></span>
+<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"E(pol)"</span>,<span class="fu">intersect</span>(),<span class="st">"E(line) = 2"</span>)))</span>
+<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p0 <span class="sc">/</span> po, <span class="at">col =</span> <span class="st">'#ff8888'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s, <span class="at">col =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">'darkgreen'</span>), <span class="at">border =</span> <span class="st">'blue'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1318,7 +1310,7 @@ multiple of vector length (arg 1)</code></pre>
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-rodrigue_geography_2016" class="csl-entry" role="listitem">
-Rodrigue, Jean-Paul. 2016. <em>The <span>Geography</span> of <span>Transport Systems</span></em>. Taylor &amp; Francis.
+Rodrigue, Jean-Paul. 2016. <em>The <span>Geography</span> of <span>Transport Systems</span></em>. Taylor &amp; Francis. <a href="https://books.google.com?id=hCslDwAAQBAJ">https://books.google.com?id=hCslDwAAQBAJ</a>.
 </div>
 </div>
 

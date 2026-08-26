@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='432.00pt' height='324.00pt' viewBox='0 0 432.00 324.00'>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='432.00pt' height='324.00pt' viewBox='0 0 432.00 324.00'>
+<g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
     .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
@@ -11,6 +12,10 @@
     }
     .svglite text {
       white-space: pre;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
     }
   ]]></style>
 </defs>
@@ -30,5 +35,6 @@
 <g clip-path='url(#cpNTkuMDR8NDAxLjc2fDU5LjA0fDI1MC41Ng==)'>
 <rect x='59.04' y='59.04' width='342.72' height='191.52' style='stroke-width: 0.75; stroke: #FFFFFF; fill: #FFFFFF;' />
 <path d='M 141.73 243.47 L 200.84 243.47 L 319.07 184.36 L 378.18 125.24 L 319.07 125.24 L 259.96 66.13 L 200.84 66.13 L 82.62 125.24 L 141.73 243.47 ZM 141.73 184.36 L 200.84 125.24 L 259.96 125.24 L 259.96 184.36 L 141.73 184.36 Z' style='fill-rule: evenodd; fill: #FF8888; stroke-width: 3.00;' />
+</g>
 </g>
 </svg>

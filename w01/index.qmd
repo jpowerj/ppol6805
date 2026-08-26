@@ -12,7 +12,7 @@ crossref:
   fig-title: Fig
 bibliography: "../_PPOL6805.bib"
 csl: "../chicago-17-no-url.csl"
-cache: true
+cache: false
 format:
   revealjs:
     output-file: "slides.html"
@@ -122,7 +122,7 @@ dev.off()
 
 ## Unit 4: Applications / Final Project
 
-* Take everything you've learned in Units 1-3 and Kamehameha them onto something you care about in the world!
+* Take everything you've learned in Units 1-3 and use them to learn something about the world!
 * Public Policy: Which counties are most in need of more transportation infrastructure?
 * Urban Planning: Which neighborhoods are most in need of a new bus stop?
 * Epidemiology: What properties of a region make it more/less susceptible to infectious diseases? Where should we **intervene** to "cut the chain" of a disease vector?
@@ -163,7 +163,7 @@ dev.off()
 
 ## Huawei: Optimizing Cell Tower Placement {.smaller .title-12}
 
-![From *[LTE 4G/5G Self-Organizing Networks](https://lte-son.blogspot.com/2018/10/inter-cell-interference-coordination.html){target='_blank}*](images/mimo.jpeg){fig-align="center"}
+![From *[LTE 4G/5G Self-Organizing Networks](https://lte-son.blogspot.com/2018/10/inter-cell-interference-coordination.html){target='_blank'}* [&nbsp;](https://www.youtube.com/watch?v=5W-ufw5Z7ac){target='_blank'}](images/mimo.jpeg){fig-align="center"}
 
 ## The Suburbanization of Poverty
 
@@ -174,16 +174,30 @@ dev.off()
 * My job: computing "suburban accessibility indices"
 * Does commuting = straight line distance?
 
-## "Distance" vs. Distance! {.smaller .crunch-title .crunch-ul .crunch-quarto-figure .crunch-p}
+## "Distance" vs. Distance! {.smaller .crunch-title .crunch-ul .crunch-quarto-figure .crunch-p .crunch-img}
 
 You've just been hired as a fine art curator at [The Whitney](https://en.wikipedia.org/wiki/Whitney_Museum){target='_blank'}... Congratulations!
 
-| | |
-| - | - |
-| Commuting 1 mile to the Whitney | ![](images/whitney1.jpeg){fig-align="center"} |
-| Also commuting 1 mile to the Whitney | ![](images/whitney2.jpeg){fig-align="center"} |
-
-: {tbl-colwidths="[25,75]"}
+```{=html}
+<table>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+</thead>
+<tbody>
+<tr>
+  <td class='tdvc tdc'><i>Commuting 1 mile to the Whitney</i></td>
+  <td><span data-qmd="![](images/whitney1.jpeg){fig-align='center' width='85%'}"></span></td>
+</tr>
+<tr>
+  <td class='tdvc tdc'><i>Also commuting 1 mile to the Whitney</i></td>
+  <td><span data-qmd="![](images/whitney2.jpeg){fig-align='center' width='85%'}"></span></td>
+</tr>
+</tbody>
+</table>
+```
 
 # Why Should You Care About GIS? {data-stack-name="Why GIS?"}
 
@@ -191,7 +205,7 @@ You've just been hired as a fine art curator at [The Whitney](https://en.wikiped
 * As a Data Scientist
 * As a Public Policy Expert
 
-## As Humans {.smaller .crunch-title .crunch-ul}
+## As Humans {.smaller .crunch-title .crunch-ul .crunch-img .crunch-quarto-figure}
 
 * To understand the world around you!
 
@@ -275,30 +289,6 @@ Analogy from **non**-geospatial data science:
 | <ul><li>Start entering information</li><li>2</li></ul> | |  | d | e | f | g |
 
 : {tbl-colwidths="[22,4,22,4,22,4,22]"} -->
-
-```{python}
-#| label: random-balance-plot
-#| echo: false
-#| output: false
-# Generates a random balance plot and saves it
-# to .svg, so we can load it into the table here
-import pandas as pd
-import numpy as np
-rng = np.random.default_rng(seed=6750)
-import matplotlib.pyplot as plt
-import seaborn as sns
-sns.set_theme(rc={'figure.figsize':(3,3)})
-sns.set_style('whitegrid')
-transactions = rng.standard_normal(size=25)
-balances = np.cumsum(transactions)
-df = pd.DataFrame({
-  'Week': range(len(balances)),
-  'Balance': balances
-})
-sns.lineplot(data=df, x='Week', y='Balance')
-plt.tight_layout()
-plt.savefig("balance.svg")
-```
 
 ```{=html}
 <style>
@@ -431,7 +421,7 @@ df.plot()
 
 * There's literally [no such thing as "intelligence"](http://bactra.org/weblog/523.html){target='_blank'}
 * Anyone is capable of learning anything (neural plasticity)
-* Growth mindset: "I can't do this" $\leadsto$ "I can't do this **yet**!"
+* [Growth mindset](https://muse.jhu.edu/article/793356): "I can't do this" $\leadsto$ "I can't do this **yet**!"
 * The point of a class is **learning**: understanding something about the world, either (a) For its own sake (**end in itself**) or (b) Because it's relevant to something you care about (**means to an end**)
 
 ::: {.text-90}
@@ -440,10 +430,10 @@ df.plot()
 
 :::
 
-## ChatGPT and Whatnot {.crunch-title .crunch-ul .smaller}
+## AI and Whatnot {.crunch-title .crunch-ul .smaller}
 
-* If you feel like ChatGPT will help you learn something in the course, then **use it**!
-* If you feel like you're using it as a "crutch", try to hold yourself accountable for **not** using it!
+* If you feel like AI things will help you learn something in the course, then **use them**!
+* If you feel like you're using them as a "crutch", try to hold yourself accountable for **not** using it!
 
 ```{=html}
 <table>
@@ -480,7 +470,7 @@ df.plot()
 
 [Geometers]{.cb1} solved w/[**geometry**]{.cb1} (300 BC)...
 
-![](images/euclid_271_crop.jpeg){fig-align="center" width="80%"}
+![](images/euclid_271_crop.jpeg){fig-align="center" width="75%"}
 
 :::
 ::: {.column width="50%"}
@@ -525,7 +515,7 @@ $$
 From [The Carter (Documentary)](https://en.wikipedia.org/wiki/The_Carter){target='_blank'}
 :::
 
-## He's Literally Extremely Correct!
+## He's Literally Extremely Correct! {.smaller}
 
 ![From *[Elsevier Osmosis: Spaced Repetition](https://www.osmosis.org/learn/Spaced_repetition){target='_blank'}*](images/forgetting-curve.png){fig-align="center"}
 
@@ -533,73 +523,111 @@ From [The Carter (Documentary)](https://en.wikipedia.org/wiki/The_Carter){target
 
 ## Our First Map: Polygons! {.smaller}
 
-*(Quick demo adapted from Sherry Xie's R Consortium Workshop: [*Analyzing Geospatial Data in R*](https://www.youtube.com/watch?v=DD7bXonh-_E), using DC rather than Philadelphia open data.)*
-
 ```{r}
+#| label: load-dc-sf
 #| echo: true
 #| code-fold: show
+library(tidyverse)
+library(rmarkdown)
 library(sf)
 # Load DC tracts data
 dc_sf_fpath <- "data/DC_Census_2020/Census_Tracts_in_2020.shp"
 dc_sf <- st_read(dc_sf_fpath);
-cols_to_keep <- c("OBJECTID", "TRACT", "GEOID", "ALAND", "AWATER", "STUSAB", "SUMLEV", "GEOCODE", "STATE", "NAME", "POP100", "HU100", "geometry")
+cols_to_keep <- c(
+  "OBJECTID", "TRACT", "GEOID", "ALAND", "AWATER",
+  "STUSAB", "SUMLEV", "GEOCODE", "STATE", "NAME",
+  "POP100", "HU100", "geometry"
+)
 dc_sf <- dc_sf |> select(cols_to_keep)
 ```
 
-## `sf` Objects
+## `sf` Objects {.smaller .crunch-title .crunch-p}
 
-`dc_sf` is an object of type `sf` (short for **"simple feature"**), which extends `data.frame`, and contains **features** which have type **`POLYGON`**
+`dc_sf` is an R [object]{.boxed-g} of type `sf` (short for **"simple features"**), which extends [`data.frame`]{.boxed-g} by adding a **special column** named [`geometry`]{.boxed-g} (containing **`POLYGON`**s)
 
 ```{r}
+#| label: dc-sf-properties
+#| echo: true
 class(dc_sf)
+dim(dc_sf)
+rmarkdown::paged_table(dc_sf, options=list(rows.print=6))
+```
+
+## What Are These `POLYGON` Objects? {.smaller}
+
+```{r}
+#| label: disp-polygons
+#| echo: true
+#| code-fold: show
 head(dc_sf)
 ```
 
-## Working With `sf` Objects {.smaller}
+## Zoom... Enhance... {.smaller}
 
-With some rare but important exceptions (which we'll learn!), can be used just like a `data.frame` / `tibble`:
+:::: {.columns}
+::: {.column width="50%"}
+
+<i class='bi bi-1-circle'></i> Let's try printing just the first row?
 
 ```{r}
+#| label: disp-first-row
 #| echo: true
 #| code-fold: show
-str(dc_sf)   # view structure
+rmarkdown::paged_table(dc_sf[1,])
 ```
 
-## Working With `sf` Objects {.smaller}
+:::
+::: {.column width="50%"}
+
+<i class='bi bi-2-circle'></i> Printing the special `geometry` column?
 
 ```{r}
+#| label: disp-first-poly
 #| echo: true
 #| code-fold: show
-head(dc_sf)  # view first several rows
+rmarkdown::paged_table(dc_sf[1, "geometry"])
 ```
 
-## Working With `sf` Objects {.smaller}
+:::
+::::
+
+:::: {.columns}
+::: {.column width="50%"}
+
+<i class='bi bi-3-circle'></i> Nope, we'll have to **open the "black box"** using the [`st_coordinates()` function](https://r-spatial.github.io/sf/reference/st_coordinates.html) from the `sf` library &rarr;
+
+:::
+::: {.column width="50%"}
 
 ```{r}
+#| label: open-poly-box
 #| echo: true
 #| code-fold: show
-dim(dc_sf)   # view dimensions
-dc_sf[1,]    # select first row
+sf::st_coordinates(dc_sf[1,"geometry"])
 ```
 
+:::
+::::
+
 ## Working With `sf` Objects {.smaller}
 
 ```{r}
+#| label: dc-sf-select
 #| echo: true
 #| code-fold: show
-head(dc_sf$NAME)  # select column by name  
-head(dc_sf[,4])         # select column by number
+head(dc_sf$NAME) # Select column by name  
+head(dc_sf[,4]) # Select column by number
 ```
 
 ## And... Actually Displaying the Map! {.smaller .crunch-quarto-figure .title-12}
 
 ```{r}
+#| label: dc-sf-display
 #| echo: true
 #| code-fold: show
 #| fig-align: center
 # We can extract the geometry with the st_geometry function
 dc_geo <- st_geometry(dc_sf)
-#pt_geo
 
 # Plot the geometry with base R's plot() function
 plot(dc_geo)
@@ -611,13 +639,11 @@ plot(dc_geo)
 
 ::: {#full-defn style="width: 100% !important"}
 
-* $d$-Dimensional "Spatial Process" [@schabenberger_statistical_2004, 6]
+* 2-Dimensional "Spatial Process" [@schabenberger_statistical_2004, 6]
 
 $$
-\text{Data} = \left\{Z(\mathbf{s}) \mid \mathbf{s} \in D \subset \mathbb{R}^d\right\}
+\text{Data} = \left\{Z(\mathbf{s}) \mid \mathbf{s} \in D \subset \mathbb{R}^2\right\}
 $$
-
-* $d > 1$: Data forms a **Random Field** (this class: $d = 2$!)
 
 :::
 

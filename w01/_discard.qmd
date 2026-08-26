@@ -254,3 +254,36 @@ lyme$NAME[c(11, 20, 42, 45, 46, 47)]
 *Like, even more made up than other made-up tech terms... Almost as bad as "AI"* 😵‍💫
 
 {{< video https://www.youtube.com/watch?v=yjw_DuNkOUw height="500" width="100%" >}}
+
+---
+
+Randomized balance plot with Python:
+
+
+```{python}
+#| label: random-balance-plot
+#| echo: false
+#| output: false
+# Generates a random balance plot and saves it
+# to .svg, so we can load it into the table here
+import pandas as pd
+import numpy as np
+rng = np.random.default_rng(seed=6750)
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_theme(rc={'figure.figsize':(3,3)})
+sns.set_style('whitegrid')
+transactions = rng.standard_normal(size=25)
+balances = np.cumsum(transactions)
+df = pd.DataFrame({
+  'Week': range(len(balances)),
+  'Balance': balances
+})
+sns.lineplot(data=df, x='Week', y='Balance')
+plt.tight_layout()
+plt.savefig("balance.svg")
+```
+
+---
+
+*(Quick demo adapted from Sherry Xie's R Consortium Workshop: [*Analyzing Geospatial Data in R*](https://www.youtube.com/watch?v=DD7bXonh-_E), using DC rather than Philadelphia open data.)*
