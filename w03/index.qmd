@@ -1,22 +1,21 @@
 ---
-title: "Week 3: {{< var weeks.3.title >}}"
+title: "Week 3: Vector and Raster Representations"
 subtitle: "{{< var course.slides-subtitle >}}"
 author: "{{< var course.author >}}"
 institute: "{{< var course.institute >}}"
 date: 2026-09-09
 date-format: full
 lecnum: 3
-cache: false
 categories:
   - "Class Sessions"
 bibliography: "../_PPOL6805.bib"
+csl: "../chicago-17-no-url.csl"
 echo: true
 code-fold: show
 # Format-specific settings:
 format:
   revealjs:
     output-file: "slides.html"
-    df-print: kable
     slide-number: true
     scrollable: true
     link-external-icon: true
@@ -28,7 +27,10 @@ format:
         <link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css'>
         <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous'>
         <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous'></script>
-    theme: [default, "../dsan-globals/jjquarto.scss"]
+    theme:
+      - default
+      - "../dsan-globals/jjquarto.scss"
+      - "../dsan-globals/jjquarto-light.scss"
     revealjs-plugins:
       - simplemenu
     simplemenu:
@@ -52,48 +54,48 @@ format:
 
 # Logistical Table-Setting {.title-09}
 
-* [Super quick] Syllabus dates, new Wednesday office hours [https://jjacobs.me/meet](https://jjacobs.me/meet)
+* HW1 Public Tests will be updated ASAP
 * TA Intros!
 * Coding Workshops!
-* HW1!
 
 ::: {.hidden}
 
 ```{r}
 #| label: r-source-globals
 source("../dsan-globals/_globals.r")
+source("../dsan-globals/_globals-sf.r")
 final_render <- FALSE
 ```
 
 :::
 
-## TA Intros {.crunch-title .smaller}
+## TA Intros {.title-11 .crunch-title .smaller .text-65 .crunch-p-top .crunch-img}
 
-*(In alphabetical order by surname wohoo)*
+[*(In alphabetical order by surname wohoo)*]{.text-80}
 
 :::: {.columns}
 ::: {.column width="50%"}
 
 <center>
 
-**Christy Hsu**<br>`th1010@georgetown.edu`
+**Jackson Howes** (DSAN)<br>`jh2787@georgetown.edu`
 
 </center>
 
-* Coding workshop leader
-* Survived the fire and flames of **this class** in first semester after studying **history** 🤯
+* BS in Government AND Mathematics (Honors), [St. Lawrence](https://maps.app.goo.gl/RNfyuPWCeSySwx528), Canton, NY
+* Survived fire and flames of **this class** 🤯
 
 :::
 ::: {.column width="50%"}
 
 <center>
 
-**Yumi Li**<br>`xl794@georgetown.edu`
+**Hermine Wilhelmsen** (McCourt)<br>`hw623@georgetown.edu`
 
 </center>
 
-* Ombuds-person
-* Survived several Jeff classes + background in **computer science** (including Java!)
+* Recent MSc in Sustainability and Social Innovation, [HEC Paris](https://maps.app.goo.gl/jVRDTu4DzkERn9vY6) 🥳🧑‍🎓
+* Ombuds-person, [UNFCCC alum](https://unfccc.int/)
 
 :::
 ::::
@@ -101,12 +103,12 @@ final_render <- FALSE
 :::: {.columns}
 ::: {.column width="50%"}
 
-![](images/ntu.jpg){fig-align="center"}
+![](images/jackson.jpg){fig-align="center" width="200"}
 
 :::
 ::: {.column width="50%"}
 
-![](images/newcastle_university.jpg){fig-align="center"}
+![](images/hermine.jpg){fig-align="center" width="260"}
 
 :::
 ::::
@@ -117,17 +119,144 @@ Relevant Word of the Day: **山** (*Shān*) = **Mountain**
 
 :::
 
-## Coding Workshops Starting This Friday!
+# Where We Left Off: Let's Make Some Dang Maps! {data-stack-name="WKT Geoms in sf"}
 
-* **Car Barn [Room 230](https://gradadmin.georgetown.edu/reserving-meeting-space-in-the-car-barn/car-barn-230-grad-school-conf-room)** (conference room across hallway from DSAN Suite 207), if you can make it **in person**!
-* [Zoom Link](https://georgetown.zoom.us/j/91709606336?pwd=C7Xq1MWIBE2oaQzSO7tNjQRiPoDcgD.1) if you can join **remotely**!
-* Video recording to be posted on **Panopto** (link TBD) once processed
+## Our First Map: Polygons! {.smaller .crunch-title}
 
-## HW1: Fun with Vectors and Rasters
+From [OpenData DC](https://opendata.dc.gov/datasets/DCGIS::census-tracts-in-2020/explore?location=38.892213%2C-77.017144%2C11)... Last week `.shp`, this week `.geojson`!
 
-* Question 1 [**Multiple Choice!**]: Understanding the **WKT geometries** conceptually
-* Question 2: **Using** the WKT geometries to create **Vectortown**
-* Question 3: **Using** the raster format (today's lecture) to create **Gridtopia**
+```{r}
+#| label: load-dc-sf
+#| echo: true
+#| code-fold: show
+library(tidyverse)
+library(rmarkdown)
+library(sf)
+# Load DC tracts data
+dc_sf_fpath <- "data/Census_Tracts_-_2020.geojson"
+dc_sf <- st_read(dc_sf_fpath);
+cols_to_keep <- c(
+  "OBJECTID", "TRACT", "GEOID", "ALAND", "AWATER",
+  "STUSAB", "SUMLEV", "GEOCODE", "STATE", "NAME",
+  "POP100", "HU100", "geometry"
+)
+dc_sf <- dc_sf |> select(cols_to_keep)
+```
+
+## `sf` Objects {.smaller .crunch-title .crunch-p}
+
+`dc_sf` is an R [object]{.boxed-g} of type `sf` (short for **"simple features"**), which extends [`data.frame`]{.boxed-g} by adding a **special column** named [`geometry`]{.boxed-g} (containing **`POLYGON`**s)
+
+```{r}
+#| label: dc-sf-properties
+#| echo: true
+class(dc_sf)
+dim(dc_sf)
+rmarkdown::paged_table(dc_sf, options=list(rows.print=6))
+```
+
+## What Are These `POLYGON` Objects? {.smaller}
+
+```{r}
+#| label: disp-polygons
+#| echo: true
+#| code-fold: show
+head(dc_sf)
+```
+
+## Zoom... Enhance... {.smaller}
+
+:::: {.columns}
+::: {.column width="50%"}
+
+<i class='bi bi-1-circle'></i> Let's try printing just the first row?
+
+```{r}
+#| label: disp-first-row
+#| echo: true
+#| code-fold: show
+rmarkdown::paged_table(dc_sf[1,])
+```
+
+:::
+::: {.column width="50%"}
+
+<i class='bi bi-2-circle'></i> Printing the special `geometry` column?
+
+```{r}
+#| label: disp-first-poly
+#| echo: true
+#| code-fold: show
+rmarkdown::paged_table(dc_sf[1, "geometry"])
+```
+
+:::
+::::
+
+:::: {.columns}
+::: {.column width="50%"}
+
+<i class='bi bi-3-circle'></i> Nope, we'll have to **open the "black box"** using the [`st_coordinates()` function](https://r-spatial.github.io/sf/reference/st_coordinates.html) from the `sf` library &rarr;
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: open-poly-box
+#| echo: true
+#| code-fold: show
+sf::st_coordinates(dc_sf[1,"geometry"])
+```
+
+:::
+::::
+
+## Working With `sf` Objects {.smaller}
+
+```{r}
+#| label: dc-sf-select
+#| echo: true
+#| code-fold: show
+# Select column by name
+head(dc_sf$NAME)
+# Select column by index
+head(dc_sf[,4])
+```
+
+## And... Actually Displaying the Map! {.smaller .crunch-quarto-figure .title-12}
+
+```{r}
+#| label: dc-sf-display
+#| echo: true
+#| code-fold: show
+#| fig-align: center
+# We can extract *just* the geometry column with the st_geometry function...
+dc_geo <- sf::st_geometry(dc_sf)
+# This produces an object of type "sfc"
+class(dc_geo)
+
+# Plot the geometry with base R's plot() function
+plot(dc_geo)
+```
+
+## More "Modern" Plots with `ggplot2`! {.smaller .crunch-title .title-11}
+
+```{r}
+#| label: dc-map-ggplot
+#| fig-align: center
+library(ggplot2)
+dc_sf |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf() +
+  ggplot2::theme_classic()
+```
+
+```{r}
+dc_sf |>
+  ggplot2::ggplot() +
+  ggplot2::geom_sf() +
+  ggplot2::theme_classic()
+```
 
 # How to *Do Things* with Geometries {data-stack-name="Overview"}
 
@@ -415,63 +544,6 @@ africa_sf |> ggplot(aes(fill=num_points)) +
 * To this end: **predicates**
 
 ![](images/relations.png){fig-align="center"}
-
-## DE-9IM Strings {.smaller}
-
-```{r}
-#| label: de-9im-strings
-#| echo: true
-#| code-fold: true
-library(sf)
-polygon <- po <- st_polygon(list(rbind(c(0,0), c(1,0), c(1,1), c(0,1), c(0,0))))
-p0 <- st_polygon(list(rbind(c(-1,-1), c(2,-1), c(2,2), c(-1,2), c(-1,-1))))
-line <- li <- st_linestring(rbind(c(.5, -.5), c(.5, 0.5)))
-s <- st_sfc(po, li)
-
-par(mfrow = c(3,3))
-par(mar = c(1,1,1,1))
-
-# "1020F1102"
-# 1: 1
-plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("I(pol)",intersect(),"I(line) = 1")))
-lines(rbind(c(.5,0), c(.5,.495)), col = 'red', lwd = 2)
-points(0.5, 0.5, pch = 1)
-
-# 2: 0
-plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("I(pol)",intersect(),"B(line) = 0")))
-points(0.5, 0.5, col = 'red', pch = 16)
-
-# 3: 2
-plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("I(pol)",intersect(),"E(line) = 2")))
-plot(po, col = '#ff8888', add = TRUE)
-plot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)
-
-# 4: 0
-plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("B(pol)",intersect(),"I(line) = 0")))
-points(.5, 0, col = 'red', pch = 16)
-
-# 5: F
-plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("B(pol)",intersect(),"B(line) = F")))
-
-# 6: 1
-plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("B(pol)",intersect(),"E(line) = 1")))
-plot(po, border = 'red', col = NA, add = TRUE, lwd = 2)
-
-# 7: 1
-plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("E(pol)",intersect(),"I(line) = 1")))
-lines(rbind(c(.5, -.5), c(.5, 0)), col = 'red', lwd = 2)
-
-# 8: 0
-plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("E(pol)",intersect(),"B(line) = 0")))
-points(.5, -.5, col = 'red', pch = 16)
-
-# 9: 2
-plot(s, col = c(NA, 'darkgreen'), border = 'blue', main = expression(paste("E(pol)",intersect(),"E(line) = 2")))
-plot(p0 / po, col = '#ff8888', add = TRUE)
-plot(s, col = c(NA, 'darkgreen'), border = 'blue', add = TRUE)
-```
-
-* The predicate `equals` corresponds to the DE-9IM string `"T*F**FFF*"`. If any two geometries obey this relationship, they are (topologically) equal!
 
 ## References
 
