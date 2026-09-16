@@ -23,11 +23,11 @@ weeks:
     date-md: "Sep 2"
   - weeknum: 3
     title: "Vector and Raster Representations"
-    footer: "PPOL 6805 Week 3: Unary Operations"
+    footer: "PPOL 6805 Week 3: Vectors and Rasters"
     date-md: "Sep 9"
   - weeknum: 4
-    title: "Unary Operations"
-    footer: "PPOL 6805 Week 4: Unary Operations"
+    title: "Unary and Binary Operations"
+    footer: "PPOL 6805 Week 4: Unary and Binary Operations"
     date-md: "Sep 16"
   - weeknum: 5
     title: "Binary Operations and DE-9IM"

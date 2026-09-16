@@ -1,0 +1,43 @@
+## HW1 Question 1 Generally
+
+* "Simplest" / Most Efficient Representation
+
+  > *"Indicate which of the seven geometries above would provide the **simplest** representation of the entity"*
+
+* `GEOMETRYCOLLECTION` *could* represent any of the geographic entities in Q1, but would be overkill for representing e.g. a single point or line
+
+## HW1 Question 1.8 Specifically {.smaller .leaflet-300 .crunch-title}
+
+For the United Arab Emirates (UAE) data... we have what we call the **[Not-Paraguay-Problem]{style="font-variant: small-caps;"}**: Most countries, including the UAE, have a bunch of lil "pieces":
+
+:::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| label: russia-pieces
+ru_national_map <- ne_countries(type = "countries", country = "Russia", scale = "medium", returnclass = "sf")
+mapview(ru_national_map)
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: uae-pieces
+uae_national_map <- ne_countries(type = "countries", country = "United Arab Emirates", scale = "large", returnclass = "sf")
+mapview(uae_national_map)
+```
+
+:::
+::::
+
+So, for Q1.8: Assume we're just trying to have the computer represent the **"mainland"** (the biggest contiguous landmass, with Dubai on it!)
+
+---
+
+
+
+## Public vs. Hidden Tests
+
+* Public Tests are basically **"Quality Assurance Test"**
+* Hidden Tests check for **correctness**
