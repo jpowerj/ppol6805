@@ -28,7 +28,7 @@ website:
         text: Final Project
       - text: Assignments
         href: "assignments/index.qmd"
-      - href: "https://hchristy.georgetown.domains/_site"
+      - href: "https://hchristy.georgetown.domains/_site/w3-idx.html"
         text: "Coding Workshop <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
       - "---"
       - href: w01/index.qmd
