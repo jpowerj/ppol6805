@@ -1,0 +1,28 @@
+## Spatial Joins {.smaller .crunch-title .crunch-img}
+
+```{r}
+#| label: spatial-join
+#| output-location: column
+#| fig-height: 6
+africa_sf <- ne_countries(continent = "Africa", scale = 50)
+africa_union_sf <- sf::st_union(africa_sf)
+africa_map <- mapview(africa_sf, label="geounit", legend=FALSE)
+nc <- system.file("shape/nc.shp", package="sf") |>
+  read_sf() |>
+  st_transform('EPSG:2264')
+gr <- st_sf(
+         label = apply(expand.grid(1:10, LETTERS[10:1])[,2:1], 1, paste0, collapse = ""),
+         geom = st_make_grid(nc))
+gr$col <- sf.colors(10, categorical = TRUE, alpha = .3)
+# cut, to verify that NA's work out:
+gr <- gr[-(1:30),]
+suppressWarnings(nc_j <- st_join(nc, gr, largest = TRUE))
+par(mfrow = c(2,1), mar = rep(0,4))
+plot(st_geometry(nc_j), border = 'grey')
+plot(st_geometry(gr), add = TRUE, col = gr$col)
+text(st_coordinates(st_centroid(st_geometry(gr))), labels = gr$label, cex = .85)
+# the joined dataset:
+plot(st_geometry(nc_j), border = 'grey', col = nc_j$col)
+text(st_coordinates(st_centroid(st_geometry(nc_j))), labels = nc_j$label, cex = .7)
+plot(st_geometry(gr), border = '#88ff88aa', add = TRUE)
+```

@@ -6,3 +6,8 @@
 *.zip
 
 **/*.quarto_ipynb
+
+.env
+_environment.local
+
+/_*.local

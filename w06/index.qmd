@@ -1,5 +1,5 @@
 ---
-title: "Week 6: {{< var weeks.6.title >}}"
+title: "Week 6: Spatial Joins and Areal-Weighted Interpolation"
 subtitle: "{{< var course.slides-subtitle >}}"
 author: "{{< var course.author >}}"
 institute: "{{< var course.institute >}}"

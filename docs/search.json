@@ -3114,21 +3114,11 @@
     ]
   },
   {
-    "objectID": "w05/index.html#spatial-joins",
-    "href": "w05/index.html#spatial-joins",
-    "title": "Week 5: Binary Operations and DE-9IM",
-    "section": "Spatial Joins",
-    "text": "Spatial Joins\n\n\nCode\nafrica_sf &lt;- ne_countries(continent = \"Africa\", scale = 50)\nafrica_union_sf &lt;- sf::st_union(africa_sf)\nafrica_map &lt;- mapview(africa_sf, label=\"geounit\", legend=FALSE)\nnc &lt;- system.file(\"shape/nc.shp\", package=\"sf\") |&gt;\n  read_sf() |&gt;\n  st_transform('EPSG:2264')\ngr &lt;- st_sf(\n         label = apply(expand.grid(1:10, LETTERS[10:1])[,2:1], 1, paste0, collapse = \"\"),\n         geom = st_make_grid(nc))\ngr$col &lt;- sf.colors(10, categorical = TRUE, alpha = .3)\n# cut, to verify that NA's work out:\ngr &lt;- gr[-(1:30),]\nsuppressWarnings(nc_j &lt;- st_join(nc, gr, largest = TRUE))\npar(mfrow = c(2,1), mar = rep(0,4))\nplot(st_geometry(nc_j), border = 'grey')\nplot(st_geometry(gr), add = TRUE, col = gr$col)\ntext(st_coordinates(st_centroid(st_geometry(gr))), labels = gr$label, cex = .85)\n# the joined dataset:\nplot(st_geometry(nc_j), border = 'grey', col = nc_j$col)\ntext(st_coordinates(st_centroid(st_geometry(nc_j))), labels = nc_j$label, cex = .7)\nplot(st_geometry(gr), border = '#88ff88aa', add = TRUE)",
-    "crumbs": [
-      "Week 5: Sep 23"
-    ]
-  },
-  {
     "objectID": "w05/index.html#spatial-sampling",
     "href": "w05/index.html#spatial-sampling",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "Spatial Sampling",
-    "text": "Spatial Sampling\n\n\nCode\n# Sample random points\nafrica_points_list &lt;- sf::st_sample(africa_union_sf, 10)\nafrica_points_sf &lt;- sf::st_sf(africa_points_list)\nafrica_points_map &lt;- mapview(africa_points_sf, label=\"Random Point\", col.regions=cb_palette[1], legend=FALSE)\n\n\nWarning in cbind(`Feature ID` = fid, mat): number of rows of result is not a\nmultiple of vector length (arg 1)\n\n\nCode\nafrica_map + africa_points_map",
+    "text": "Spatial Sampling\n\n\nCode\nafrica_countries_sf &lt;- ne_countries(continent = \"Africa\", scale = 50)\nafrica_union_sf &lt;- sf::st_union(africa_countries_sf)\nafrica_map &lt;- mapview(africa_countries_sf, label=\"geounit\", legend=FALSE)\n# Sample random points\nset.seed(6805)\nafrica_points_list &lt;- sf::st_sample(africa_union_sf, 10)\nafrica_points_sf &lt;- sf::st_sf(africa_points_list)\nafrica_points_map &lt;- mapview(africa_points_sf, label=\"Random Point\", col.regions=cb_palette[1], legend=FALSE)\n\n\nWarning in cbind(`Feature ID` = fid, mat): number of rows of result is not a\nmultiple of vector length (arg 1)\n\n\nCode\nafrica_map + africa_points_map",
     "crumbs": [
       "Week 5: Sep 23"
     ]
@@ -3138,7 +3128,7 @@
     "href": "w05/index.html#the-default-predicate-st_intersects",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "The “Default” Predicate: st_intersects",
-    "text": "The “Default” Predicate: st_intersects\n\n\nCode\ncountries_w_points &lt;- africa_sf[africa_points_sf,]\nmapview(countries_w_points, label=\"geounit\", legend=FALSE) + africa_points_map",
+    "text": "The “Default” Predicate: st_intersects\n\n\nCode\ncountries_with_points &lt;- africa_countries_sf[africa_points_sf,]\nmapview(countries_with_points, label=\"geounit\", legend=FALSE) + africa_points_map",
     "crumbs": [
       "Week 5: Sep 23"
     ]
@@ -3148,7 +3138,7 @@
     "href": "w05/index.html#counting-with-lengths",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "Counting with lengths()",
-    "text": "Counting with lengths()\n\n\nCode\ncountry_inter &lt;- sf::st_intersects(africa_sf, africa_points_sf)\n# Computes point counts for each polygon\n(num_intersections &lt;- lengths(country_inter))\n\n\n [1] 0 1 0 0 0 0 0 3 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0\n[39] 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0\n\n\nCode\nafrica_sf &lt;- africa_sf |&gt; mutate(\n  num_points = num_intersections\n) |&gt; arrange(geounit)\nafrica_sf |&gt; select(geounit, num_points) |&gt; head()\n\n\n\n\n\n\ngeounit\nnum_points\ngeometry\n\n\n\n\nAlgeria\n0\nMULTIPOLYGON (((8.576563 36…\n\n\nAngola\n1\nMULTIPOLYGON (((13.07275 -4…\n\n\nBenin\n0\nMULTIPOLYGON (((1.622656 6….\n\n\nBotswana\n0\nMULTIPOLYGON (((25.25879 -1…\n\n\nBurkina Faso\n0\nMULTIPOLYGON (((0.9004883 1…\n\n\nBurundi\n0\nMULTIPOLYGON (((30.55361 -2…",
+    "text": "Counting with lengths()\n\n\nCode\ncountry_inter &lt;- sf::st_intersects(africa_countries_sf, africa_points_sf)\n# Computes point counts for each polygon\n(num_intersections &lt;- lengths(country_inter))\n\n\n [1] 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0 1 0 0 0\n[39] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 2\n\n\nCode\nafrica_countries_sf &lt;- africa_countries_sf |&gt; mutate(\n  num_points = num_intersections\n) |&gt; arrange(geounit)\nafrica_countries_sf |&gt; select(geounit, num_points) |&gt; head(4)\n\n\n\n\n\n\ngeounit\nnum_points\ngeometry\n\n\n\n\nAlgeria\n2\nMULTIPOLYGON (((8.576563 36…\n\n\nAngola\n2\nMULTIPOLYGON (((13.07275 -4…\n\n\nBenin\n0\nMULTIPOLYGON (((1.622656 6….\n\n\nBotswana\n0\nMULTIPOLYGON (((25.25879 -1…",
     "crumbs": [
       "Week 5: Sep 23"
     ]
@@ -3158,7 +3148,7 @@
     "href": "w05/index.html#plotting-with-mapview",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "Plotting with mapview",
-    "text": "Plotting with mapview\n\n\nCode\nmapview(africa_sf, zcol=\"num_points\")",
+    "text": "Plotting with mapview\nzcol: Since our screens are 2D, how should we represent the third dimension?\n\n\nCode\nmapview(africa_countries_sf, label=\"geounit\", zcol=\"num_points\")",
     "crumbs": [
       "Week 5: Sep 23"
     ]
@@ -3168,7 +3158,7 @@
     "href": "w05/index.html#plotting-with-ggplot2",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "Plotting with ggplot2",
-    "text": "Plotting with ggplot2\nSince we’re starting to get into data attributes rather than geometric features, switching to ggplot2 is recommended!\n\n\nCode\nafrica_sf |&gt; ggplot(aes(fill=num_points)) +\n  geom_sf() +\n  theme_classic()",
+    "text": "Plotting with ggplot2\nSince we’re incorporating data attributes (all columns besides geometry) on top of geometric features (the geometry column), switching to ggplot2 is recommended! (Think of mapview() as a viewer for just geometry, plus maybe one data attribute)\n\n\nCode\nafrica_countries_sf |&gt; ggplot(aes(fill=num_points)) +\n  geom_sf() +\n  theme_classic() + theme(plot.title=element_text(hjust=0.5)) +\n  labs(title=\"Number of Points Per Country\")",
     "crumbs": [
       "Week 5: Sep 23"
     ]
@@ -3178,27 +3168,37 @@
     "href": "w05/index.html#one-more-unary-operation-st_buffer",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "One More Unary Operation: st_buffer()",
-    "text": "One More Unary Operation: st_buffer()\n\nThink about how you might answer questions like:\n\n“How far is your house (POINT) from Manhattan (POLYGON)?”\n“Are there any chemical plants within a mile of this building (POLYGON) / stretch of road (LINESTRING)?”\n\nLazy mode (my favorite mode): Compute distances from the centroid\nGIS master mode: Construct the buffer!",
+    "text": "One More Unary Operation: st_buffer()\n\nThink about how you might answer questions like:\n\n“How far is your house (POINT) from Manhattan (POLYGON)?”\n“Are there any chemical plants within a mile of this building (POLYGON) / stretch of road (LINESTRING)?”\n\nLazy mode: Compute distances from the centroid\nGIS master mode: Construct the buffer!",
     "crumbs": [
       "Week 5: Sep 23"
     ]
   },
   {
-    "objectID": "w05/index.html#on-polygons",
-    "href": "w05/index.html#on-polygons",
+    "objectID": "w05/index.html#st_bufferpolygon-mapsto-bigger-polygon",
+    "href": "w05/index.html#st_bufferpolygon-mapsto-bigger-polygon",
     "title": "Week 5: Binary Operations and DE-9IM",
-    "section": "On POLYGONs",
-    "text": "On POLYGONs\nKey line: manhattan_buffer_sf &lt;- manhattan_union_sf |&gt; st_buffer(dist = 1609.34) (1 mile \\(\\approx\\) 1609.34 meters)\n\n\nCode\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(tidycensus)\nlibrary(tigris)\nlibrary(mapview)\noptions(tigris_use_cache = TRUE)\nmanhattan_sf &lt;- get_acs(\n  geography = \"tract\",\n  variables = \"B19013_001\",\n  state = \"NY\",\n  county = \"New York\",\n  year = 2020,\n  geometry = TRUE,\n  cb = FALSE\n)\n# Erase the island tracts real quick\nisland_tracts &lt;- c(\n  \"Census Tract 1, New York County, New York\",\n  \"Census Tract 2.02, New York County, New York\"\n)\nmanhattan_sf &lt;- manhattan_sf |&gt; filter(\n  !(NAME %in% island_tracts)\n)\n# Union of all census tracts within the county\nmanhattan_union_sf &lt;- st_union(manhattan_sf)\nmanhattan_union_map &lt;- mapview(manhattan_union_sf, label=\"New York County\")\n# Construct buffer (1 mile ~= 1609.34 meters)\nmanhattan_buffer_sf &lt;- manhattan_union_sf |&gt; st_buffer(dist = 1609.34)\nmanhattan_buffer_map &lt;- mapview(manhattan_buffer_sf, label=\"Buffer (1 Mile)\", col.regions = cbPalette[1], legend = TRUE)\nmanhattan_buffer_map + manhattan_union_map",
+    "section": "st_buffer(POLYGON) \\(\\mapsto\\) Bigger POLYGON",
+    "text": "st_buffer(POLYGON) \\(\\mapsto\\) Bigger POLYGON\n Census Tracts: tidycensus::get_acs(state = \"NY\", county = \"New York\")\n County-Wide POLYGON: manhattan_union_sf &lt;- st_union(manhattan_sf)\n buffer_sf &lt;- manhattan_union_sf |&gt; st_buffer(dist = 1609.34) (mile \\(\\approx\\) 1609.34 meters)\n\n\nCode\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(tidycensus)\nlibrary(tigris)\nlibrary(mapview)\noptions(tigris_use_cache = TRUE)\nmanhattan_sf &lt;- tidycensus::get_acs(\n  geography = \"tract\",\n  variables = \"B19013_001\",\n  state = \"NY\",\n  county = \"New York\",\n  year = 2020,\n  geometry = TRUE,\n  cb = FALSE,\n  key = Sys.getenv('CENSUS_API_KEY')\n)\n# Erase the island tracts real quick\nisland_tracts &lt;- c(\n  \"Census Tract 1, New York County, New York\",\n  \"Census Tract 2.02, New York County, New York\"\n)\nmanhattan_sf &lt;- manhattan_sf |&gt; filter(\n  !(NAME %in% island_tracts)\n)\n# Union of all census tracts within the county\nmanhattan_union_sf &lt;- st_union(manhattan_sf)\nmanhattan_union_map &lt;- mapview(manhattan_union_sf, label=\"New York County\")\n# Construct buffer (1 mile ~= 1609.34 meters)\nmanhattan_buffer_sf &lt;- manhattan_union_sf |&gt; st_buffer(dist = 1609.34)\nmanhattan_buffer_map &lt;- mapview(manhattan_buffer_sf, label=\"Buffer (1 Mile)\", col.regions = cb_palette[1], legend = TRUE)\nmanhattan_buffer_map + manhattan_union_map",
     "crumbs": [
       "Week 5: Sep 23"
     ]
   },
   {
-    "objectID": "w05/index.html#on-linestrings",
-    "href": "w05/index.html#on-linestrings",
+    "objectID": "w05/index.html#just-the-ring-another-binary-operation-st_difference",
+    "href": "w05/index.html#just-the-ring-another-binary-operation-st_difference",
     "title": "Week 5: Binary Operations and DE-9IM",
-    "section": "On LINESTRINGs",
-    "text": "On LINESTRINGs\n\n\nCode\nlibrary(tidyverse)\nlibrary(sf)\n## st_buffer, style options (taken from rgeos gBuffer)\nl1 = st_as_sfc(\"LINESTRING(0 0,1 5,4 5,5 2,8 2,9 4,4 6.5)\")\nop = par(mfrow=c(2,3))\nplot(st_buffer(l1, dist = 1, endCapStyle=\"ROUND\"), reset = FALSE, main = \"endCapStyle: ROUND\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, endCapStyle=\"FLAT\"), reset = FALSE, main = \"endCapStyle: FLAT\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, endCapStyle=\"SQUARE\"), reset = FALSE, main = \"endCapStyle: SQUARE\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs=1), reset = FALSE, main = \"nQuadSegs: 1\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs=2), reset = FALSE, main = \"nQuadSegs: 2\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs= 5), reset = FALSE, main = \"nQuadSegs: 5\")\nplot(l1,col='blue',add=TRUE)\n\n\n\n\n\nFrom the sf Documentation",
+    "section": "Just the “Ring”? Another Binary Operation! st_difference()",
+    "text": "Just the “Ring”? Another Binary Operation! st_difference()\n\n\nCode\nbuffer_only_sf &lt;- sf::st_difference(manhattan_buffer_sf, manhattan_union_sf)\nmapview(buffer_only_sf, col.regions=cb_palette[1])\n\n\n\n\n\n\n(You may know this as the disjoint union… But st_disjoint() is a predicate!)",
+    "crumbs": [
+      "Week 5: Sep 23"
+    ]
+  },
+  {
+    "objectID": "w05/index.html#st_bufferlinestring-mapsto-polygon",
+    "href": "w05/index.html#st_bufferlinestring-mapsto-polygon",
+    "title": "Week 5: Binary Operations and DE-9IM",
+    "section": "st_buffer(LINESTRING) \\(\\mapsto\\) POLYGON",
+    "text": "st_buffer(LINESTRING) \\(\\mapsto\\) POLYGON\n\n\nCode\nlibrary(tidyverse)\nlibrary(sf)\n## st_buffer, style options (taken from rgeos gBuffer)\nl1 = st_as_sfc(\"LINESTRING(0 0,1 5,4 5,5 2,8 2,9 4,4 6.5)\")\nop = par(mfrow=c(2,3))\nplot(st_buffer(l1, dist = 1, endCapStyle=\"ROUND\"), reset = FALSE, main = \"endCapStyle: ROUND\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, endCapStyle=\"FLAT\"), reset = FALSE, main = \"endCapStyle: FLAT\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, endCapStyle=\"SQUARE\"), reset = FALSE, main = \"endCapStyle: SQUARE\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs=1), reset = FALSE, main = \"nQuadSegs: 1\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs=2), reset = FALSE, main = \"nQuadSegs: 2\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs= 5), reset = FALSE, main = \"nQuadSegs: 5\")\nplot(l1,col='blue',add=TRUE)\n\n\n\n\n\nFrom the sf Documentation",
     "crumbs": [
       "Week 5: Sep 23"
     ]
@@ -3208,17 +3208,17 @@
     "href": "w05/index.html#what-makes-binary-operations-fancier",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "What Makes Binary Operations “Fancier”?",
-    "text": "What Makes Binary Operations “Fancier”?\n\n\n\nUnary\n\n\nst_centroid()\n\nPOLYGON \\(\\mapsto\\) POINT\nMULTIPOLYGON \\(\\mapsto\\) POINT\n\nst_convex_hull()\n\nPOLYGON \\(\\mapsto\\) POLYGON\nMULTIPOINT \\(\\mapsto\\) POLYGON\n\n\n\n\nBinary\n\n\nst_intersection()\n\n(POINT, POINT) \\(\\mapsto\\) POINT | POINT EMPTY\n(POLYGON, POLYGON) \\(\\mapsto\\) POLYGON | LINESTRING | POINT | POLYGON EMPTY\n\n\n\n\n\nst_is_empty() and st_dimension() become your new best friends 😉\nst_is_empty(): Distinguishes between, e.g., POINT EMPTY and POINT(0 0)\nst_dimension(): NA for empty versions, otherwise\n\n2 for surfaces (POLYGON, MULTIPOLYGON)\n1 for lines (LINESTRING, MULTILINESTRING)\n0 for points (POINT, MULTIPOINT)",
+    "text": "What Makes Binary Operations “Fancier”?\n\n\n\nUnary\n\n\nst_centroid()\n\nPOLYGON \\(\\mapsto\\) POINT\nMULTIPOLYGON \\(\\mapsto\\) POINT\n\nst_convex_hull()\n\nPOLYGON \\(\\mapsto\\) POLYGON\nMULTIPOINT \\(\\mapsto\\) POLYGON\n\n\n\n\nBinary\n\n\nst_intersection()\n\n(POINT, POINT) \\(\\mapsto\\) POINT | POINT EMPTY\n(POLYGON, POLYGON) \\(\\mapsto\\) POLYGON | LINESTRING | POINT | POLYGON EMPTY\n\n\n\n\n(Test yourself by asking: what would st_x(g) produce, for different types g!)\n\nst_is_empty() and st_dimension() become your new best friends 😉\nst_is_empty(): Distinguishes between, e.g., POINT EMPTY and POINT(0 0)\nst_dimension(): NA for EMPTY, otherwise\n\n2 for surfaces (POLYGON, MULTIPOLYGON)\n1 for lines (LINESTRING, MULTILINESTRING)\n0 for points (POINT, MULTIPOINT)",
     "crumbs": [
       "Week 5: Sep 23"
     ]
   },
   {
-    "objectID": "w05/index.html#the-bad-kind-of-overthinking-will-my-life-just-get-harder-and-harder",
-    "href": "w05/index.html#the-bad-kind-of-overthinking-will-my-life-just-get-harder-and-harder",
+    "objectID": "w05/index.html#bad-overthinking-will-my-life-just-get-harder-and-harder",
+    "href": "w05/index.html#bad-overthinking-will-my-life-just-get-harder-and-harder",
     "title": "Week 5: Binary Operations and DE-9IM",
-    "section": "The Bad Kind of Overthinking: Will My Life Just Get Harder and Harder?",
-    "text": "The Bad Kind of Overthinking: Will My Life Just Get Harder and Harder?\n\n\n\n\n\n\n\n\n\n\nUnary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nBinary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nTernary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuaternary Operations",
+    "section": "Bad Overthinking: Will My Life Just Get Harder and Harder?",
+    "text": "Bad Overthinking: Will My Life Just Get Harder and Harder?\n\n\n\n\n\n\n\n\n\n\nUnary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nBinary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nTernary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuaternary Operations",
     "crumbs": [
       "Week 5: Sep 23"
     ]
@@ -3234,11 +3234,11 @@
     ]
   },
   {
-    "objectID": "w05/index.html#the-good-kind-of-overthinking",
-    "href": "w05/index.html#the-good-kind-of-overthinking",
+    "objectID": "w05/index.html#good-overthinking-a-language-for-binary-predicates",
+    "href": "w05/index.html#good-overthinking-a-language-for-binary-predicates",
     "title": "Week 5: Binary Operations and DE-9IM",
-    "section": "The Good Kind of Overthinking…",
-    "text": "The Good Kind of Overthinking…\n\nFor fancier geospatial operations, we’ll need to start overthinking, about the possible relationships between two (or more) geometries! \\(\\leadsto\\) Relational Predicates:\n\n\n\n\nFigure 4.2 in Lovelace et al. (2024)",
+    "section": "Good Overthinking: A Language for Binary Predicates!",
+    "text": "Good Overthinking: A Language for Binary Predicates!\n\nFor fancier geospatial operations, need a language that can “capture” all possible geometric relationships\n\n(Like how WKT can handle all possible 2D geometric objects)\n(Or how WGS84 can handle all possible points on Earth’s surface)\n\n\\(\\leadsto\\) Relational Predicates combined with and, or, not\n\n\n\n\nFigure 4.2 in Lovelace, Nowosad, and Muenchow (2024)",
     "crumbs": [
       "Week 5: Sep 23"
     ]
@@ -3278,7 +3278,7 @@
     "href": "w05/index.html#crunching-it-down-into-a-tiny-box",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "Crunching it Down into a Tiny Box",
-    "text": "Crunching it Down into a Tiny Box\n\n\n\nDE-9IM\nInterior\nBoundary\nExterior\n\n\n\n\nInterior\n2\n1\n2\n\n\nBoundary\n1\n0\n1\n\n\nExterior\n2\n1\n2\n\n\n\n\nAnd Then into a Tiny String\n\n\n212101212\n\n\nAnd Then into an Infinitesimally-Small Point",
+    "text": "Crunching it Down into a Tiny Box\n\n\n\nDE-9IM\nInterior\nBoundary\nExterior\n\n\n\n\nInterior\n2\n1\n2\n\n\nBoundary\n1\n0\n1\n\n\nExterior\n2\n1\n2\n\n\n\n…And Then into a Tiny String\n\n212101212\n\n…And Then into an Infinitesimally-Small Point",
     "crumbs": [
       "Week 5: Sep 23"
     ]
@@ -3298,7 +3298,7 @@
     "href": "w05/index.html#de-9im-vs.-everyday-language",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "DE-9IM vs. Everyday Language",
-    "text": "DE-9IM vs. Everyday Language\n\nDE-9IM can (in theory) represent \\(6^9 = 10~077~696\\) possible geometric relationships!\nThe English language has like 10, and they’re ambiguous ☠️ (Compromise employed by GIS systems: allow multiple masks for same English word:)\n\n\n\n\nEnglish\nMask\n212101212\nResult\n\n\n\n\n“Disjoint”\nFF*FF****\nFALSE\nx not disjoint from y\n\n\n“Touches”\nFT*******\nFALSE\nx doesn’t touch y\n\n\n“Touches”\nF***T****\nFALSE\nx doesn’t touch y\n\n\n“Crosses”\nT*T***T**\nTRUE\nx crosses y\n\n\n“Within”\nTF*F*****\nFALSE\nx is not within y\n\n\n“Overlaps”\nT*T***T**\nTRUE\nx overlaps y",
+    "text": "DE-9IM vs. Everyday Language\n\nDE-9IM can (in theory) represent \\(6^9 = 10~077~696\\) possible geometric relationships!\nThe English language has like 10, and they’re ambiguous ☠️ (Compromise employed by GIS systems: allow multiple masks for same English word):\n\n\n\n\nEnglish\nMask\n212101212\nResult\n\n\n\n\n“Disjoint”\nFF*FF****\nFALSE\nx not disjoint from y\n\n\n“Touches”\nFT*******\nFALSE\nx doesn’t touch y\n\n\n“Touches”\nF***T****\nFALSE\nx doesn’t touch y\n\n\n“Crosses”\nT*T***T**\nTRUE\nx crosses y\n\n\n“Within”\nTF*F*****\nFALSE\nx is not within y\n\n\n“Overlaps”\nT*T***T**\nTRUE\nx overlaps y",
     "crumbs": [
       "Week 5: Sep 23"
     ]
@@ -3318,87 +3318,97 @@
     "href": "w05/index.html#if-you-dont-want-to-scroll",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "(If You Don’t Want to Scroll)",
-    "text": "(If You Don’t Want to Scroll)\n\n\nCode\nus |&gt; filter(touch)\n\n\nWarning: Using one column matrices in `filter()` was deprecated in dplyr 1.1.0.\nℹ Please use one dimensional logical vectors instead.\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_3166_2\nname\nde9im\ntouch\ngeometry\n\n\n\n\nUS-MD\nMaryland\nFF2F11212\nTRUE\nMULTIPOLYGON (((-75.64786 3…\n\n\nUS-VA\nVirginia\nFF2F11212\nTRUE\nMULTIPOLYGON (((-76.01325 3…",
+    "text": "(If You Don’t Want to Scroll)\n\n\nCode\nus |&gt; filter(touch)\n\n\nWarning: Using one column matrices in `filter()` or `filter_out()` was deprecated in\ndplyr 1.1.0.\nℹ Please use one dimensional logical vectors instead.\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_3166_2\nname\nde9im\ntouch\ngeometry\n\n\n\n\nUS-MD\nMaryland\nFF2F11212\nTRUE\nMULTIPOLYGON (((-75.64786 3…\n\n\nUS-VA\nVirginia\nFF2F11212\nTRUE\nMULTIPOLYGON (((-76.01325 3…",
     "crumbs": [
       "Week 5: Sep 23"
     ]
   },
   {
-    "objectID": "w05/slides.html#spatial-joins",
-    "href": "w05/slides.html#spatial-joins",
+    "objectID": "w05/index.html#references",
+    "href": "w05/index.html#references",
     "title": "Week 5: Binary Operations and DE-9IM",
-    "section": "Spatial Joins",
-    "text": "Spatial Joins\n\n\n\nCode\nafrica_sf &lt;- ne_countries(continent = \"Africa\", scale = 50)\nafrica_union_sf &lt;- sf::st_union(africa_sf)\nafrica_map &lt;- mapview(africa_sf, label=\"geounit\", legend=FALSE)\nnc &lt;- system.file(\"shape/nc.shp\", package=\"sf\") |&gt;\n  read_sf() |&gt;\n  st_transform('EPSG:2264')\ngr &lt;- st_sf(\n         label = apply(expand.grid(1:10, LETTERS[10:1])[,2:1], 1, paste0, collapse = \"\"),\n         geom = st_make_grid(nc))\ngr$col &lt;- sf.colors(10, categorical = TRUE, alpha = .3)\n# cut, to verify that NA's work out:\ngr &lt;- gr[-(1:30),]\nsuppressWarnings(nc_j &lt;- st_join(nc, gr, largest = TRUE))\npar(mfrow = c(2,1), mar = rep(0,4))\nplot(st_geometry(nc_j), border = 'grey')\nplot(st_geometry(gr), add = TRUE, col = gr$col)\ntext(st_coordinates(st_centroid(st_geometry(gr))), labels = gr$label, cex = .85)\n# the joined dataset:\nplot(st_geometry(nc_j), border = 'grey', col = nc_j$col)\ntext(st_coordinates(st_centroid(st_geometry(nc_j))), labels = nc_j$label, cex = .7)\nplot(st_geometry(gr), border = '#88ff88aa', add = TRUE)"
+    "section": "References",
+    "text": "References\n\n\nCohn, P. M. 1965. Universal Algebra. Springer Science & Business Media.\n\n\nLovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2024. Geocomputation with R. CRC Press.\n\n\nPebesma, Edzer, and Roger Bivand. 2023. Spatial Data Science: With Applications in R. CRC Press.",
+    "crumbs": [
+      "Week 5: Sep 23"
+    ]
   },
   {
     "objectID": "w05/slides.html#spatial-sampling",
     "href": "w05/slides.html#spatial-sampling",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "Spatial Sampling",
-    "text": "Spatial Sampling\n\n\nCode\n# Sample random points\nafrica_points_list &lt;- sf::st_sample(africa_union_sf, 10)\nafrica_points_sf &lt;- sf::st_sf(africa_points_list)\nafrica_points_map &lt;- mapview(africa_points_sf, label=\"Random Point\", col.regions=cb_palette[1], legend=FALSE)\nafrica_map + africa_points_map"
+    "text": "Spatial Sampling\n\n\nCode\nafrica_countries_sf &lt;- ne_countries(continent = \"Africa\", scale = 50)\nafrica_union_sf &lt;- sf::st_union(africa_countries_sf)\nafrica_map &lt;- mapview(africa_countries_sf, label=\"geounit\", legend=FALSE)\n# Sample random points\nset.seed(6805)\nafrica_points_list &lt;- sf::st_sample(africa_union_sf, 10)\nafrica_points_sf &lt;- sf::st_sf(africa_points_list)\nafrica_points_map &lt;- mapview(africa_points_sf, label=\"Random Point\", col.regions=cb_palette[1], legend=FALSE)\nafrica_map + africa_points_map"
   },
   {
     "objectID": "w05/slides.html#the-default-predicate-st_intersects",
     "href": "w05/slides.html#the-default-predicate-st_intersects",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "The “Default” Predicate: st_intersects",
-    "text": "The “Default” Predicate: st_intersects\n\n\nCode\ncountries_w_points &lt;- africa_sf[africa_points_sf,]\nmapview(countries_w_points, label=\"geounit\", legend=FALSE) + africa_points_map"
+    "text": "The “Default” Predicate: st_intersects\n\n\nCode\ncountries_with_points &lt;- africa_countries_sf[africa_points_sf,]\nmapview(countries_with_points, label=\"geounit\", legend=FALSE) + africa_points_map"
   },
   {
     "objectID": "w05/slides.html#counting-with-lengths",
     "href": "w05/slides.html#counting-with-lengths",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "Counting with lengths()",
-    "text": "Counting with lengths()\n\n\nCode\ncountry_inter &lt;- sf::st_intersects(africa_sf, africa_points_sf)\n# Computes point counts for each polygon\n(num_intersections &lt;- lengths(country_inter))\n\n\n [1] 0 0 0 1 0 1 0 0 1 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0\n[39] 0 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0\n\n\nCode\nafrica_sf &lt;- africa_sf |&gt; mutate(\n  num_points = num_intersections\n) |&gt; arrange(geounit)\nafrica_sf |&gt; select(geounit, num_points) |&gt; head()\n\n\n\n\n\n\ngeounit\nnum_points\ngeometry\n\n\n\n\nAlgeria\n0\nMULTIPOLYGON (((8.576563 36…\n\n\nAngola\n1\nMULTIPOLYGON (((13.07275 -4…\n\n\nBenin\n0\nMULTIPOLYGON (((1.622656 6….\n\n\nBotswana\n0\nMULTIPOLYGON (((25.25879 -1…\n\n\nBurkina Faso\n0\nMULTIPOLYGON (((0.9004883 1…\n\n\nBurundi\n0\nMULTIPOLYGON (((30.55361 -2…"
+    "text": "Counting with lengths()\n\n\nCode\ncountry_inter &lt;- sf::st_intersects(africa_countries_sf, africa_points_sf)\n# Computes point counts for each polygon\n(num_intersections &lt;- lengths(country_inter))\n\n\n [1] 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0 1 0 0 0\n[39] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 2\n\n\nCode\nafrica_countries_sf &lt;- africa_countries_sf |&gt; mutate(\n  num_points = num_intersections\n) |&gt; arrange(geounit)\nafrica_countries_sf |&gt; select(geounit, num_points) |&gt; head(4)\n\n\n\n\n\n\ngeounit\nnum_points\ngeometry\n\n\n\n\nAlgeria\n2\nMULTIPOLYGON (((8.576563 36…\n\n\nAngola\n2\nMULTIPOLYGON (((13.07275 -4…\n\n\nBenin\n0\nMULTIPOLYGON (((1.622656 6….\n\n\nBotswana\n0\nMULTIPOLYGON (((25.25879 -1…"
   },
   {
     "objectID": "w05/slides.html#plotting-with-mapview",
     "href": "w05/slides.html#plotting-with-mapview",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "Plotting with mapview",
-    "text": "Plotting with mapview\n\n\nCode\nmapview(africa_sf, zcol=\"num_points\")"
+    "text": "Plotting with mapview\nzcol: Since our screens are 2D, how should we represent the third dimension?\n\n\nCode\nmapview(africa_countries_sf, label=\"geounit\", zcol=\"num_points\")"
   },
   {
     "objectID": "w05/slides.html#plotting-with-ggplot2",
     "href": "w05/slides.html#plotting-with-ggplot2",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "Plotting with ggplot2",
-    "text": "Plotting with ggplot2\nSince we’re starting to get into data attributes rather than geometric features, switching to ggplot2 is recommended!\n\n\nCode\nafrica_sf |&gt; ggplot(aes(fill=num_points)) +\n  geom_sf() +\n  theme_classic()"
+    "text": "Plotting with ggplot2\nSince we’re incorporating data attributes (all columns besides geometry) on top of geometric features (the geometry column), switching to ggplot2 is recommended! (Think of mapview() as a viewer for just geometry, plus maybe one data attribute)\n\n\nCode\nafrica_countries_sf |&gt; ggplot(aes(fill=num_points)) +\n  geom_sf() +\n  theme_classic() + theme(plot.title=element_text(hjust=0.5)) +\n  labs(title=\"Number of Points Per Country\")"
   },
   {
     "objectID": "w05/slides.html#one-more-unary-operation-st_buffer",
     "href": "w05/slides.html#one-more-unary-operation-st_buffer",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "One More Unary Operation: st_buffer()",
-    "text": "One More Unary Operation: st_buffer()\n\nThink about how you might answer questions like:\n\n“How far is your house (POINT) from Manhattan (POLYGON)?”\n“Are there any chemical plants within a mile of this building (POLYGON) / stretch of road (LINESTRING)?”\n\nLazy mode (my favorite mode): Compute distances from the centroid\nGIS master mode: Construct the buffer!"
+    "text": "One More Unary Operation: st_buffer()\n\nThink about how you might answer questions like:\n\n“How far is your house (POINT) from Manhattan (POLYGON)?”\n“Are there any chemical plants within a mile of this building (POLYGON) / stretch of road (LINESTRING)?”\n\nLazy mode: Compute distances from the centroid\nGIS master mode: Construct the buffer!"
   },
   {
-    "objectID": "w05/slides.html#on-polygons",
-    "href": "w05/slides.html#on-polygons",
+    "objectID": "w05/slides.html#st_bufferpolygon-mapsto-bigger-polygon",
+    "href": "w05/slides.html#st_bufferpolygon-mapsto-bigger-polygon",
     "title": "Week 5: Binary Operations and DE-9IM",
-    "section": "On POLYGONs",
-    "text": "On POLYGONs\nKey line: manhattan_buffer_sf &lt;- manhattan_union_sf |&gt; st_buffer(dist = 1609.34) (1 mile \\(\\approx\\) 1609.34 meters)\n\n\nCode\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(tidycensus)\nlibrary(tigris)\nlibrary(mapview)\noptions(tigris_use_cache = TRUE)\nmanhattan_sf &lt;- get_acs(\n  geography = \"tract\",\n  variables = \"B19013_001\",\n  state = \"NY\",\n  county = \"New York\",\n  year = 2020,\n  geometry = TRUE,\n  cb = FALSE\n)\n# Erase the island tracts real quick\nisland_tracts &lt;- c(\n  \"Census Tract 1, New York County, New York\",\n  \"Census Tract 2.02, New York County, New York\"\n)\nmanhattan_sf &lt;- manhattan_sf |&gt; filter(\n  !(NAME %in% island_tracts)\n)\n# Union of all census tracts within the county\nmanhattan_union_sf &lt;- st_union(manhattan_sf)\nmanhattan_union_map &lt;- mapview(manhattan_union_sf, label=\"New York County\")\n# Construct buffer (1 mile ~= 1609.34 meters)\nmanhattan_buffer_sf &lt;- manhattan_union_sf |&gt; st_buffer(dist = 1609.34)\nmanhattan_buffer_map &lt;- mapview(manhattan_buffer_sf, label=\"Buffer (1 Mile)\", col.regions = cbPalette[1], legend = TRUE)\nmanhattan_buffer_map + manhattan_union_map"
+    "section": "st_buffer(POLYGON) \\(\\mapsto\\) Bigger POLYGON",
+    "text": "st_buffer(POLYGON) \\(\\mapsto\\) Bigger POLYGON\n Census Tracts: tidycensus::get_acs(state = \"NY\", county = \"New York\")\n County-Wide POLYGON: manhattan_union_sf &lt;- st_union(manhattan_sf)\n buffer_sf &lt;- manhattan_union_sf |&gt; st_buffer(dist = 1609.34) (mile \\(\\approx\\) 1609.34 meters)\n\n\nCode\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(tidycensus)\nlibrary(tigris)\nlibrary(mapview)\noptions(tigris_use_cache = TRUE)\nmanhattan_sf &lt;- tidycensus::get_acs(\n  geography = \"tract\",\n  variables = \"B19013_001\",\n  state = \"NY\",\n  county = \"New York\",\n  year = 2020,\n  geometry = TRUE,\n  cb = FALSE,\n  key = Sys.getenv('CENSUS_API_KEY')\n)\n# Erase the island tracts real quick\nisland_tracts &lt;- c(\n  \"Census Tract 1, New York County, New York\",\n  \"Census Tract 2.02, New York County, New York\"\n)\nmanhattan_sf &lt;- manhattan_sf |&gt; filter(\n  !(NAME %in% island_tracts)\n)\n# Union of all census tracts within the county\nmanhattan_union_sf &lt;- st_union(manhattan_sf)\nmanhattan_union_map &lt;- mapview(manhattan_union_sf, label=\"New York County\")\n# Construct buffer (1 mile ~= 1609.34 meters)\nmanhattan_buffer_sf &lt;- manhattan_union_sf |&gt; st_buffer(dist = 1609.34)\nmanhattan_buffer_map &lt;- mapview(manhattan_buffer_sf, label=\"Buffer (1 Mile)\", col.regions = cb_palette[1], legend = TRUE)\nmanhattan_buffer_map + manhattan_union_map"
   },
   {
-    "objectID": "w05/slides.html#on-linestrings",
-    "href": "w05/slides.html#on-linestrings",
+    "objectID": "w05/slides.html#just-the-ring-another-binary-operation-st_difference",
+    "href": "w05/slides.html#just-the-ring-another-binary-operation-st_difference",
     "title": "Week 5: Binary Operations and DE-9IM",
-    "section": "On LINESTRINGs",
-    "text": "On LINESTRINGs\n\n\nCode\nlibrary(tidyverse)\nlibrary(sf)\n## st_buffer, style options (taken from rgeos gBuffer)\nl1 = st_as_sfc(\"LINESTRING(0 0,1 5,4 5,5 2,8 2,9 4,4 6.5)\")\nop = par(mfrow=c(2,3))\nplot(st_buffer(l1, dist = 1, endCapStyle=\"ROUND\"), reset = FALSE, main = \"endCapStyle: ROUND\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, endCapStyle=\"FLAT\"), reset = FALSE, main = \"endCapStyle: FLAT\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, endCapStyle=\"SQUARE\"), reset = FALSE, main = \"endCapStyle: SQUARE\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs=1), reset = FALSE, main = \"nQuadSegs: 1\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs=2), reset = FALSE, main = \"nQuadSegs: 2\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs= 5), reset = FALSE, main = \"nQuadSegs: 5\")\nplot(l1,col='blue',add=TRUE)\n\n\n\nFrom the sf Documentation"
+    "section": "Just the “Ring”? Another Binary Operation! st_difference()",
+    "text": "Just the “Ring”? Another Binary Operation! st_difference()\n\n\nCode\nbuffer_only_sf &lt;- sf::st_difference(manhattan_buffer_sf, manhattan_union_sf)\nmapview(buffer_only_sf, col.regions=cb_palette[1])\n\n\n\n\n\n\n(You may know this as the disjoint union… But st_disjoint() is a predicate!)"
+  },
+  {
+    "objectID": "w05/slides.html#st_bufferlinestring-mapsto-polygon",
+    "href": "w05/slides.html#st_bufferlinestring-mapsto-polygon",
+    "title": "Week 5: Binary Operations and DE-9IM",
+    "section": "st_buffer(LINESTRING) \\(\\mapsto\\) POLYGON",
+    "text": "st_buffer(LINESTRING) \\(\\mapsto\\) POLYGON\n\n\nCode\nlibrary(tidyverse)\nlibrary(sf)\n## st_buffer, style options (taken from rgeos gBuffer)\nl1 = st_as_sfc(\"LINESTRING(0 0,1 5,4 5,5 2,8 2,9 4,4 6.5)\")\nop = par(mfrow=c(2,3))\nplot(st_buffer(l1, dist = 1, endCapStyle=\"ROUND\"), reset = FALSE, main = \"endCapStyle: ROUND\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, endCapStyle=\"FLAT\"), reset = FALSE, main = \"endCapStyle: FLAT\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, endCapStyle=\"SQUARE\"), reset = FALSE, main = \"endCapStyle: SQUARE\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs=1), reset = FALSE, main = \"nQuadSegs: 1\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs=2), reset = FALSE, main = \"nQuadSegs: 2\")\nplot(l1,col='blue',add=TRUE)\nplot(st_buffer(l1, dist = 1, nQuadSegs= 5), reset = FALSE, main = \"nQuadSegs: 5\")\nplot(l1,col='blue',add=TRUE)\n\n\n\nFrom the sf Documentation"
   },
   {
     "objectID": "w05/slides.html#what-makes-binary-operations-fancier",
     "href": "w05/slides.html#what-makes-binary-operations-fancier",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "What Makes Binary Operations “Fancier”?",
-    "text": "What Makes Binary Operations “Fancier”?\n\n\n\nUnary\n\n\nst_centroid()\n\nPOLYGON \\(\\mapsto\\) POINT\nMULTIPOLYGON \\(\\mapsto\\) POINT\n\nst_convex_hull()\n\nPOLYGON \\(\\mapsto\\) POLYGON\nMULTIPOINT \\(\\mapsto\\) POLYGON\n\n\n\n\nBinary\n\n\nst_intersection()\n\n(POINT, POINT) \\(\\mapsto\\) POINT | POINT EMPTY\n(POLYGON, POLYGON) \\(\\mapsto\\) POLYGON | LINESTRING | POINT | POLYGON EMPTY\n\n\n\n\nst_is_empty() and st_dimension() become your new best friends 😉\nst_is_empty(): Distinguishes between, e.g., POINT EMPTY and POINT(0 0)\nst_dimension(): NA for empty versions, otherwise\n\n2 for surfaces (POLYGON, MULTIPOLYGON)\n1 for lines (LINESTRING, MULTILINESTRING)\n0 for points (POINT, MULTIPOINT)"
+    "text": "What Makes Binary Operations “Fancier”?\n\n\n\nUnary\n\n\nst_centroid()\n\nPOLYGON \\(\\mapsto\\) POINT\nMULTIPOLYGON \\(\\mapsto\\) POINT\n\nst_convex_hull()\n\nPOLYGON \\(\\mapsto\\) POLYGON\nMULTIPOINT \\(\\mapsto\\) POLYGON\n\n\n\n\nBinary\n\n\nst_intersection()\n\n(POINT, POINT) \\(\\mapsto\\) POINT | POINT EMPTY\n(POLYGON, POLYGON) \\(\\mapsto\\) POLYGON | LINESTRING | POINT | POLYGON EMPTY\n\n\n\n(Test yourself by asking: what would st_x(g) produce, for different types g!)\n\nst_is_empty() and st_dimension() become your new best friends 😉\nst_is_empty(): Distinguishes between, e.g., POINT EMPTY and POINT(0 0)\nst_dimension(): NA for EMPTY, otherwise\n\n2 for surfaces (POLYGON, MULTIPOLYGON)\n1 for lines (LINESTRING, MULTILINESTRING)\n0 for points (POINT, MULTIPOINT)"
   },
   {
-    "objectID": "w05/slides.html#the-bad-kind-of-overthinking-will-my-life-just-get-harder-and-harder",
-    "href": "w05/slides.html#the-bad-kind-of-overthinking-will-my-life-just-get-harder-and-harder",
+    "objectID": "w05/slides.html#bad-overthinking-will-my-life-just-get-harder-and-harder",
+    "href": "w05/slides.html#bad-overthinking-will-my-life-just-get-harder-and-harder",
     "title": "Week 5: Binary Operations and DE-9IM",
-    "section": "The Bad Kind of Overthinking: Will My Life Just Get Harder and Harder?",
-    "text": "The Bad Kind of Overthinking: Will My Life Just Get Harder and Harder?\n\n\n\n\n\n\n\n\n\n\nUnary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nBinary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nTernary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuaternary Operations"
+    "section": "Bad Overthinking: Will My Life Just Get Harder and Harder?",
+    "text": "Bad Overthinking: Will My Life Just Get Harder and Harder?\n\n\n\n\n\n\n\n\n\n\nUnary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nBinary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nTernary Operations\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuaternary Operations"
   },
   {
     "objectID": "w05/slides.html#good-news-and-bad-news",
@@ -3408,11 +3418,11 @@
     "text": "Good News and Bad News\n\nThe good news: No!\nThe bad news: You’ll have to read the 465-page Volume I and then the 451-page Volume II and then to page 15 of Volume III of Cohn (1965) to know why:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n(i spent 4 yrs of undergrad studying abstract algebra and now it all sits gathering dust somewhere deep within my brain plz just let me have this moment i’ll never mention it again i promise)"
   },
   {
-    "objectID": "w05/slides.html#the-good-kind-of-overthinking",
-    "href": "w05/slides.html#the-good-kind-of-overthinking",
+    "objectID": "w05/slides.html#good-overthinking-a-language-for-binary-predicates",
+    "href": "w05/slides.html#good-overthinking-a-language-for-binary-predicates",
     "title": "Week 5: Binary Operations and DE-9IM",
-    "section": "The Good Kind of Overthinking…",
-    "text": "The Good Kind of Overthinking…\n\nFor fancier geospatial operations, we’ll need to start overthinking, about the possible relationships between two (or more) geometries! \\(\\leadsto\\) Relational Predicates:\n\n\nFigure 4.2 in Lovelace et al. (2024)"
+    "section": "Good Overthinking: A Language for Binary Predicates!",
+    "text": "Good Overthinking: A Language for Binary Predicates!\n\nFor fancier geospatial operations, need a language that can “capture” all possible geometric relationships\n\n(Like how WKT can handle all possible 2D geometric objects)\n(Or how WGS84 can handle all possible points on Earth’s surface)\n\n\\(\\leadsto\\) Relational Predicates combined with and, or, not\n\n\nFigure 4.2 in Lovelace, Nowosad, and Muenchow (2024)"
   },
   {
     "objectID": "w05/slides.html#de-9im-strings",
@@ -3440,7 +3450,7 @@
     "href": "w05/slides.html#crunching-it-down-into-a-tiny-box",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "Crunching it Down into a Tiny Box",
-    "text": "Crunching it Down into a Tiny Box\n\n\n\nDE-9IM\nInterior\nBoundary\nExterior\n\n\n\n\nInterior\n2\n1\n2\n\n\nBoundary\n1\n0\n1\n\n\nExterior\n2\n1\n2\n\n\n\n\nAnd Then into a Tiny String\n\n\n212101212\n\n\nAnd Then into an Infinitesimally-Small Point"
+    "text": "Crunching it Down into a Tiny Box\n\n\n\nDE-9IM\nInterior\nBoundary\nExterior\n\n\n\n\nInterior\n2\n1\n2\n\n\nBoundary\n1\n0\n1\n\n\nExterior\n2\n1\n2\n\n\n\n…And Then into a Tiny String\n\n212101212\n\n…And Then into an Infinitesimally-Small Point"
   },
   {
     "objectID": "w05/slides.html#de-9im-masks",
@@ -3454,7 +3464,7 @@
     "href": "w05/slides.html#de-9im-vs.-everyday-language",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "DE-9IM vs. Everyday Language",
-    "text": "DE-9IM vs. Everyday Language\n\nDE-9IM can (in theory) represent \\(6^9 = 10~077~696\\) possible geometric relationships!\nThe English language has like 10, and they’re ambiguous ☠️ (Compromise employed by GIS systems: allow multiple masks for same English word:)\n\n\n\n\nEnglish\nMask\n212101212\nResult\n\n\n\n\n“Disjoint”\nFF*FF****\nFALSE\nx not disjoint from y\n\n\n“Touches”\nFT*******\nFALSE\nx doesn’t touch y\n\n\n“Touches”\nF***T****\nFALSE\nx doesn’t touch y\n\n\n“Crosses”\nT*T***T**\nTRUE\nx crosses y\n\n\n“Within”\nTF*F*****\nFALSE\nx is not within y\n\n\n“Overlaps”\nT*T***T**\nTRUE\nx overlaps y"
+    "text": "DE-9IM vs. Everyday Language\n\nDE-9IM can (in theory) represent \\(6^9 = 10~077~696\\) possible geometric relationships!\nThe English language has like 10, and they’re ambiguous ☠️ (Compromise employed by GIS systems: allow multiple masks for same English word):\n\n\n\n\nEnglish\nMask\n212101212\nResult\n\n\n\n\n“Disjoint”\nFF*FF****\nFALSE\nx not disjoint from y\n\n\n“Touches”\nFT*******\nFALSE\nx doesn’t touch y\n\n\n“Touches”\nF***T****\nFALSE\nx doesn’t touch y\n\n\n“Crosses”\nT*T***T**\nTRUE\nx crosses y\n\n\n“Within”\nTF*F*****\nFALSE\nx is not within y\n\n\n“Overlaps”\nT*T***T**\nTRUE\nx overlaps y"
   },
   {
     "objectID": "w05/slides.html#st_relate-the-ultimate-predicate",
@@ -3468,7 +3478,14 @@
     "href": "w05/slides.html#if-you-dont-want-to-scroll",
     "title": "Week 5: Binary Operations and DE-9IM",
     "section": "(If You Don’t Want to Scroll)",
-    "text": "(If You Don’t Want to Scroll)\n\n\nCode\nus |&gt; filter(touch)\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_3166_2\nname\nde9im\ntouch\ngeometry\n\n\n\n\nUS-MD\nMaryland\nFF2F11212\nTRUE\nMULTIPOLYGON (((-75.64786 3…\n\n\nUS-VA\nVirginia\nFF2F11212\nTRUE\nMULTIPOLYGON (((-76.01325 3…\n\n\n\n\n\n\n\n\n\n\nCohn, P. M. 1965. Universal Algebra. Springer Science & Business Media. https://books.google.com?id=6tbuCAAAQBAJ.\n\n\nLovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2024. Geocomputation with R. CRC Press. https://r.geocompx.org/.\n\n\nPebesma, Edzer, and Roger Bivand. 2023. Spatial Data Science: With Applications in R. CRC Press. https://r-spatial.org/book/."
+    "text": "(If You Don’t Want to Scroll)\n\n\nCode\nus |&gt; filter(touch)\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_3166_2\nname\nde9im\ntouch\ngeometry\n\n\n\n\nUS-MD\nMaryland\nFF2F11212\nTRUE\nMULTIPOLYGON (((-75.64786 3…\n\n\nUS-VA\nVirginia\nFF2F11212\nTRUE\nMULTIPOLYGON (((-76.01325 3…"
+  },
+  {
+    "objectID": "w05/slides.html#references",
+    "href": "w05/slides.html#references",
+    "title": "Week 5: Binary Operations and DE-9IM",
+    "section": "References",
+    "text": "References\n\n\nCohn, P. M. 1965. Universal Algebra. Springer Science & Business Media.\n\n\nLovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2024. Geocomputation with R. CRC Press.\n\n\nPebesma, Edzer, and Roger Bivand. 2023. Spatial Data Science: With Applications in R. CRC Press."
   },
   {
     "objectID": "assignments/hw4/index.html",
