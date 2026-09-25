@@ -5,6 +5,7 @@ sidebar: mainnav
 listing:
   contents: "**/*.qmd"
   type: table
+  fields: [title]
 format:
   html:
     df-print: kable

@@ -46,7 +46,7 @@ Welcome to the Fall 2026 version of **Geographic Information Systems (GIS) for S
     * Tues 4:30-7:00pm, Weds 3-4pm, Thurs 4-5pm
     * *(Please try to schedule at least 8 hours in advance, and let me know briefly in the "Additional Info" portion of the signup form what you'd like to discuss, so I have time to prepare!)*
 * **TA Jackson Howes (Data Science and Analytics)**, [`jh2787@georgetown.edu`](mailto:jh2787@georgetown.edu){target='_blank'}
-  * Thurs 3-4pm (DSAN Suite / Zoom): [Schedule a slot in advance here](https://calendar.app.google/hePvAF8EBKvu43CA8)
+  * Thurs 3-4pm (DSAN Suite, Car Barn 207 / Zoom): [Schedule a slot in advance here](https://calendar.app.google/hePvAF8EBKvu43CA8)
 * **TA Hermine Wilhelmsen (McCourt School of Public Policy)**, [`hw623@georgetown.edu`](mailto:hw623@georgetown.edu){target='_blank'}
   * Mon 1-2pm (McCourt Buiding, 125 E St NW / Zoom): [Schedule a slot in advance here](https://calendar.app.google/d2C1ZFyohzJugBxe9)
 
