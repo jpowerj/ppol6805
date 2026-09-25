@@ -73,7 +73,7 @@ On the basis of the guidelines we've developed for courses offered through DSAN,
 <tbody>
 <tr>
     <td><span data-qmd="In-Class Midterm ({{< var midterm.date-md >}})"></span></td>
-    <td>25%</td>
+    <td>20%</td>
 </tr>
 <tr>
     <td>Final Project</td>
@@ -102,6 +102,10 @@ On the basis of the guidelines we've developed for courses offered through DSAN,
 <tr>
     <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>**HW5**: {{< var hw.5.title >}}"></span></td>
     <td><span data-qmd="<i class='bi bi-arrow-return-right pe-1'></i>{{< var hw.5.pct >}}%"></span></td>
+</tr>
+<tr>
+    <td>Attendance</td>
+    <td>5%</td>
 </tr>
 </tbody>
 </table>

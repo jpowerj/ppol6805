@@ -78,12 +78,12 @@ hw:
     due-date-md: Sep 23
     due-date: "Wednesday, September 23"
   - hw-num: 2
-    title: "Unary and Binary Operations, Spatial Joins"
+    title: "Unary and Binary Operations"
     pct: 9
     release-date-md: Sep 16
     release-date: "Wednesday, September 16"
-    due-date-md: Oct 8
-    due-date: "Wednesday, October 8"
+    due-date-md: Oct 7
+    due-date: "Wednesday, October 7"
   - hw-num: 3
     title: "Autocorrelation, Clustering, and Point Processes"
     pct: 9
