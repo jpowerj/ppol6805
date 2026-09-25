@@ -71,45 +71,45 @@ weeks:
     date-md: "Dec 2"
 hw:
   - hw-num: 1
-    title: "GIS Concepts: Fun with Vectors and Rasters"
+    title: "Fun with Vectors and Rasters"
     pct: 9
-    release-date-md: Sep 9
-    release-date: "Tuesday, September 9"
-    due-date-md: Sep 24
-    due-date: "Wednesday, September 24"
+    release-date-md: Sep 2
+    release-date: "Wednesday, September 2"
+    due-date-md: Sep 23
+    due-date: "Wednesday, September 23"
   - hw-num: 2
     title: "Unary and Binary Operations, Spatial Joins"
     pct: 9
-    release-date-md: Sep 25
-    release-date: "Thursday, September 25"
+    release-date-md: Sep 16
+    release-date: "Wednesday, September 16"
     due-date-md: Oct 8
     due-date: "Wednesday, October 8"
   - hw-num: 3
     title: "Autocorrelation, Clustering, and Point Processes"
     pct: 9
-    release-date-md: Oct 12
-    release-date: "Sunday, October 12"
-    due-date-md: Oct 29
-    due-date: "Wednesday, October 29"
+    release-date-md: Sep 25
+    release-date: "Wednesday, September 30"
+    due-date-md: Oct 21
+    due-date: "Wednesday, October 21"
   - hw-num: 4
     title: "Spatial Regression"
     pct: 9
-    release-date-md: Nov 13
-    release-date: "Wednesday, November 13"
-    due-date-md: Nov 27
-    due-date: "Wednesday, November 27"
+    release-date-md: Oct 14
+    release-date: "Wednesday, October 14"
+    due-date-md: Nov 3
+    due-date: "Tuesday, November 3"
   - hw-num: "5"
     title: "Evaluating Spatial Hypotheses (Monte Carlo Simulation)"
     pct: 9
-    release-date-md: Nov 19
-    release-date: "Wednesday, November 19"
+    release-date-md: Nov 11
+    release-date: "Wednesday, November 11"
     due-date-md: Dec 5
     due-date: "Friday, December 5"
   - hw-num: "5B"
     title: "Remote Sensing and Raster Data"
     pct: 9
-    release-date-md: Nov 19
-    release-date: "Wednesday, November 19"
+    release-date-md: Nov 11
+    release-date: "Wednesday, November 11"
     due-date-md: Dec 5
     due-date: "Friday, December 5"
 midterm:
