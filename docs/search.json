@@ -3574,7 +3574,7 @@
     "href": "writeups/positron/index.html#footnotes",
     "title": "Connecting to Positron and Accessing Assignments",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nIn class I walked through a more laborious process, where we set up and added an entry into a special config file, but since lots of people are having issues with this approach, here we’re skipping the config file entirely, and instead just entering the two pieces of information manually into the Command Palette↩︎\nYou can also check the “Trust the authors of all files in the parent folder” checkbox, if you’d like, though it’s irrelevant since we won’t be loading or executing any files from that parent folder.↩︎"
+    "text": "Footnotes\n\n\nYou can also check the “Trust the authors of all files in the parent folder” checkbox, if you’d like, though it’s irrelevant since we won’t be loading or executing any files from that parent folder.↩︎"
   },
   {
     "objectID": "writeups/random-fields/index.html",
@@ -4346,7 +4346,7 @@
     "href": "final-project.html#gis-datasetsproject-ideas-collection",
     "title": "Final Project Details",
     "section": "GIS Datasets/Project Ideas Collection",
-    "text": "GIS Datasets/Project Ideas Collection\nOnce we get to the Spatial Data Science unit, I’m hoping that you will have lots of inspiration in terms of the different methods that can be used for drawing inferences about spatial phenomena! Until then, me and TA Billy will add links to the following Raindrop.io collection, which you can browse to potentially draw inspiration for your own final project topic:",
+    "text": "GIS Datasets/Project Ideas Collection\nOnce we get to the Spatial Data Science unit, I’m hoping that you will have lots of inspiration in terms of the different methods that can be used for drawing inferences about spatial phenomena! Until then, the TAs and I will add links to the following Raindrop.io collection, which you can browse to potentially draw inspiration for your own final project topic:",
     "crumbs": [
       "Final Project"
     ]

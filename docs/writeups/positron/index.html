@@ -516,7 +516,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2026-09-25, 07:01:25 PM</em></p>
+<p><em>Updated 2026-09-25, 11:56:52 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -635,8 +635,7 @@ window.Quarto = {
 <p><img src="images/warp_button.jpeg" class="img-fluid"></p>
 <p>Clicking this button is the key step in connecting to the GIS course server! Once you click it, you should see a “Command Palette” open near the top of the Positron interface, that looks as follows:</p>
 <p><img src="images/command_palette.jpeg" class="img-fluid"></p>
-<p>Now, from among the three options shown, please select the <strong>Connect Current Window to Host…</strong> option<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<p>The interface will then prompt you with the text <code>"Enter [user@]hostname[:port]"</code>, with a blank text box underneath this prompt. Please enter the following address, where you should replace the <code>YOUR_NETID</code> portion with your actual Georgetown-assigned <strong>NetID</strong>:</p>
+<p>Now, from among the three options shown, select the <strong>Connect Current Window to Host…</strong> option. The interface will then prompt you with the text <code>"Enter [user@]hostname[:port]"</code>, with a blank text box underneath this prompt. Please enter the following address, where you should replace the <code>YOUR_NETID</code> portion with your actual Georgetown-assigned <strong>NetID</strong>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-YOUR_NETID@guhub.io</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>So, for example, since my NetID is <code>jj1088</code>, I would enter</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-jj1088@guhub.io</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -669,7 +668,7 @@ window.Quarto = {
 <p>As you can see in that screenshot, Positron may pop up a box asking you if you <strong>trust the authors of the files in this folder</strong>. This turns out to be not very much of a security concern, and more of a “relic” of how Positron would be running if you were running it locally.</p>
 <p>Here, since you’re <strong>already connected to the server</strong> and <strong>running Positron remotely</strong>, it’s basically asking you if you want the files placed on the server to be able to execute code on the server… which is exactly what you want to do in order to work on the assignments in the course!</p>
 <p>I write all that out just to clarify that this popup is <strong>not</strong> asking whether or not you trust the files to run on your <strong>local laptop</strong> – the execution of all the code, once you’ve connected to the course server using the Warp Button, is <strong>carried out on the server itself</strong>, so that you don’t need to worry about e.g.&nbsp;malicious code being run on your laptop!</p>
-<p>So, hopefully that eases your mind about this possibly-scary-looking popup, in which you should click the button labeled <strong>“Yes, I trust the authors”</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>So, hopefully that eases your mind about this possibly-scary-looking popup, in which you should click the button labeled <strong>“Yes, I trust the authors”</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>Once you have approved the message in that popup, you should now (more clearly) see the files in the File Explorer sidebar on the left side of the interface:</p>
 <p><img src="images/trusted.jpeg" class="img-fluid"></p>
 </section>
@@ -697,8 +696,7 @@ window.Quarto = {
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>In class I walked through a more laborious process, where we set up and added an entry into a special <code>config</code> file, but since lots of people are having issues with this approach, here we’re skipping the <code>config</code> file entirely, and instead just entering the two pieces of information manually into the Command Palette<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>You can also check the “Trust the authors of all files in the parent folder” checkbox, if you’d like, though it’s irrelevant since we won’t be loading or executing any files from that parent folder.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>You can also check the “Trust the authors of all files in the parent folder” checkbox, if you’d like, though it’s irrelevant since we won’t be loading or executing any files from that parent folder.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

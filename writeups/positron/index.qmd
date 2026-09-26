@@ -103,9 +103,7 @@ Clicking this button is the key step in connecting to the GIS course server! Onc
 
 ![](images/command_palette.jpeg)
 
-Now, from among the three options shown, please select the **Connect Current Window to Host...** option^[In class I walked through a more laborious process, where we set up and added an entry into a special `config` file, but since lots of people are having issues with this approach, here we're skipping the `config` file entirely, and instead just entering the two pieces of information manually into the Command Palette].
-
-The interface will then prompt you with the text `"Enter [user@]hostname[:port]"`, with a blank text box underneath this prompt. Please enter the following address, where you should replace the `YOUR_NETID` portion with your actual Georgetown-assigned **NetID**:
+Now, from among the three options shown, select the **Connect Current Window to Host...** option. The interface will then prompt you with the text `"Enter [user@]hostname[:port]"`, with a blank text box underneath this prompt. Please enter the following address, where you should replace the `YOUR_NETID` portion with your actual Georgetown-assigned **NetID**:
 
 ``` {.bash code-line-numbers="false"}
 jupyter-YOUR_NETID@guhub.io
