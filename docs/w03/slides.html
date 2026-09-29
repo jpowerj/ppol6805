@@ -7,8 +7,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e44360b8a8db1e130c7792fece1c8032.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.3">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Jeff Jacobs">
   <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 3: Vector and Raster Representations</title>
@@ -21,10 +21,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -261,7 +264,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Jeff Jacobs 
+Jeff Jacobs
 </div>
         <p class="quarto-title-affiliation">
             <a href="mailto:jj1088@georgetown.edu" target="_blank"><code>jj1088@georgetown.edu</code></a>
@@ -283,9 +286,9 @@ Jeff Jacobs
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
-<span id="cb1-2"><a></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals-sf.r"</span>)</span>
-<span id="cb1-3"><a></a>final_render <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals-sf.r"</span>)</span>
+<span id="cb1-3"><a aria-label="3"></a>final_render <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </div>
@@ -344,12 +347,12 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-2"><a></a><span class="fu">library</span>(rmarkdown)</span>
-<span id="cb2-3"><a></a><span class="fu">library</span>(sf)</span>
-<span id="cb2-4"><a></a><span class="co"># Load DC tracts data</span></span>
-<span id="cb2-5"><a></a>dc_sf_fpath <span class="ot">&lt;-</span> <span class="st">"data/Census_Tracts_-_2020.geojson"</span></span>
-<span id="cb2-6"><a></a>dc_sf <span class="ot">&lt;-</span> <span class="fu">st_read</span>(dc_sf_fpath);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a aria-label="2"></a><span class="fu">library</span>(rmarkdown)</span>
+<span id="cb2-3"><a aria-label="3"></a><span class="fu">library</span>(sf)</span>
+<span id="cb2-4"><a aria-label="4"></a><span class="co"># Load DC tracts data</span></span>
+<span id="cb2-5"><a aria-label="5"></a>dc_sf_fpath <span class="ot">&lt;-</span> <span class="st">"data/Census_Tracts_-_2020.geojson"</span></span>
+<span id="cb2-6"><a aria-label="6"></a>dc_sf <span class="ot">&lt;-</span> <span class="fu">st_read</span>(dc_sf_fpath);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `Census_Tracts_-_2020' from data source 
@@ -363,12 +366,12 @@ Geodetic CRS:  WGS 84</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>cols_to_keep <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb4-2"><a></a>  <span class="st">"OBJECTID"</span>, <span class="st">"TRACT"</span>, <span class="st">"GEOID"</span>, <span class="st">"ALAND"</span>, <span class="st">"AWATER"</span>,</span>
-<span id="cb4-3"><a></a>  <span class="st">"STUSAB"</span>, <span class="st">"SUMLEV"</span>, <span class="st">"GEOCODE"</span>, <span class="st">"STATE"</span>, <span class="st">"NAME"</span>,</span>
-<span id="cb4-4"><a></a>  <span class="st">"POP100"</span>, <span class="st">"HU100"</span>, <span class="st">"geometry"</span></span>
-<span id="cb4-5"><a></a>)</span>
-<span id="cb4-6"><a></a>dc_sf <span class="ot">&lt;-</span> dc_sf <span class="sc">|&gt;</span> <span class="fu">select</span>(cols_to_keep)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a>cols_to_keep <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb4-2"><a aria-label="2"></a>  <span class="st">"OBJECTID"</span>, <span class="st">"TRACT"</span>, <span class="st">"GEOID"</span>, <span class="st">"ALAND"</span>, <span class="st">"AWATER"</span>,</span>
+<span id="cb4-3"><a aria-label="3"></a>  <span class="st">"STUSAB"</span>, <span class="st">"SUMLEV"</span>, <span class="st">"GEOCODE"</span>, <span class="st">"STATE"</span>, <span class="st">"NAME"</span>,</span>
+<span id="cb4-4"><a aria-label="4"></a>  <span class="st">"POP100"</span>, <span class="st">"HU100"</span>, <span class="st">"geometry"</span></span>
+<span id="cb4-5"><a aria-label="5"></a>)</span>
+<span id="cb4-6"><a aria-label="6"></a>dc_sf <span class="ot">&lt;-</span> dc_sf <span class="sc">|&gt;</span> <span class="fu">select</span>(cols_to_keep)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -378,21 +381,21 @@ Geodetic CRS:  WGS 84</code></pre>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">class</span>(dc_sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a><span class="fu">class</span>(dc_sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "sf"         "data.frame"</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">dim</span>(dc_sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-label="1"></a><span class="fu">dim</span>(dc_sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 206  13</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>(dc_sf, <span class="at">options=</span><span class="fu">list</span>(<span class="at">rows.print=</span><span class="dv">6</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-label="1"></a>rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>(dc_sf, <span class="at">options=</span><span class="fu">list</span>(<span class="at">rows.print=</span><span class="dv">6</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div data-pagedtable="false">
@@ -408,7 +411,7 @@ Geodetic CRS:  WGS 84</code></pre>
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">head</span>(dc_sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a aria-label="1"></a><span class="fu">head</span>(dc_sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 6 features and 12 fields
@@ -441,7 +444,7 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>(dc_sf[<span class="dv">1</span>,])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-label="1"></a>rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>(dc_sf[<span class="dv">1</span>,])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div data-pagedtable="false">
@@ -456,7 +459,7 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>(dc_sf[<span class="dv">1</span>, <span class="st">"geometry"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-label="1"></a>rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>(dc_sf[<span class="dv">1</span>, <span class="st">"geometry"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div data-pagedtable="false">
@@ -474,7 +477,7 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>sf<span class="sc">::</span><span class="fu">st_coordinates</span>(dc_sf[<span class="dv">1</span>,<span class="st">"geometry"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-label="1"></a>sf<span class="sc">::</span><span class="fu">st_coordinates</span>(dc_sf[<span class="dv">1</span>,<span class="st">"geometry"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>               X        Y L1 L2
@@ -642,8 +645,8 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># Select column by name</span></span>
-<span id="cb16-2"><a></a><span class="fu">head</span>(dc_sf<span class="sc">$</span>NAME)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-label="1"></a><span class="co"># Select column by name</span></span>
+<span id="cb16-2"><a aria-label="2"></a><span class="fu">head</span>(dc_sf<span class="sc">$</span>NAME)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Census Tract 20.02" "Census Tract 21.01" "Census Tract 21.02"
@@ -651,8 +654,8 @@ Geodetic CRS:  WGS 84
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="co"># Select column by index</span></span>
-<span id="cb18-2"><a></a><span class="fu">head</span>(dc_sf[,<span class="dv">4</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-label="1"></a><span class="co"># Select column by index</span></span>
+<span id="cb18-2"><a aria-label="2"></a><span class="fu">head</span>(dc_sf[,<span class="dv">4</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 6 features and 1 field
@@ -675,18 +678,18 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># We can extract *just* the geometry column with the st_geometry function...</span></span>
-<span id="cb20-2"><a></a>dc_geo <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_geometry</span>(dc_sf)</span>
-<span id="cb20-3"><a></a><span class="co"># This produces an object of type "sfc"</span></span>
-<span id="cb20-4"><a></a><span class="fu">class</span>(dc_geo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-label="1"></a><span class="co"># We can extract *just* the geometry column with the st_geometry function...</span></span>
+<span id="cb20-2"><a aria-label="2"></a>dc_geo <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_geometry</span>(dc_sf)</span>
+<span id="cb20-3"><a aria-label="3"></a><span class="co"># This produces an object of type "sfc"</span></span>
+<span id="cb20-4"><a aria-label="4"></a><span class="fu">class</span>(dc_geo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "sfc_POLYGON" "sfc"        </code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Plot the geometry with base R's plot() function</span></span>
-<span id="cb22-2"><a></a><span class="fu">plot</span>(dc_geo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-label="1"></a><span class="co"># Plot the geometry with base R's plot() function</span></span>
+<span id="cb22-2"><a aria-label="2"></a><span class="fu">plot</span>(dc_geo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 
 </div>
@@ -696,11 +699,11 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb23-2"><a></a>dc_sf <span class="sc">|&gt;</span></span>
-<span id="cb23-3"><a></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb23-4"><a></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb23-5"><a></a>  ggplot2<span class="sc">::</span><span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-label="1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb23-2"><a aria-label="2"></a>dc_sf <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a aria-label="3"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb23-4"><a aria-label="4"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb23-5"><a aria-label="5"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -713,10 +716,10 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>dc_sf <span class="sc">|&gt;</span></span>
-<span id="cb24-2"><a></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb24-3"><a></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb24-4"><a></a>  ggplot2<span class="sc">::</span><span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-label="1"></a>dc_sf <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a aria-label="2"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb24-3"><a aria-label="3"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb24-4"><a aria-label="4"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -797,44 +800,44 @@ Geodetic CRS:  WGS 84
 <div class="code-with-filename-file">
 <pre><strong>my_data.geojson</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25" data-filename="my_data.geojson"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb25-1"><a></a><span class="fu">{</span></span>
-<span id="cb25-2"><a></a>  <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"FeatureCollection"</span><span class="fu">,</span></span>
-<span id="cb25-3"><a></a>  <span class="dt">"features"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb25-4"><a></a>    <span class="fu">{</span></span>
-<span id="cb25-5"><a></a>      <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"Feature"</span><span class="fu">,</span></span>
-<span id="cb25-6"><a></a>      <span class="dt">"geometry"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb25-7"><a></a>        <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"Polygon"</span><span class="fu">,</span></span>
-<span id="cb25-8"><a></a>        <span class="dt">"coordinates"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb25-9"><a></a>          <span class="ot">[</span></span>
-<span id="cb25-10"><a></a>            <span class="ot">[</span><span class="dv">30</span><span class="ot">,</span> <span class="dv">20</span><span class="ot">],</span> <span class="ot">[</span><span class="dv">45</span><span class="ot">,</span> <span class="dv">40</span><span class="ot">],</span></span>
-<span id="cb25-11"><a></a>            <span class="ot">[</span><span class="dv">10</span><span class="ot">,</span> <span class="dv">40</span><span class="ot">],</span> <span class="ot">[</span><span class="dv">30</span><span class="ot">,</span> <span class="dv">20</span><span class="ot">]</span></span>
-<span id="cb25-12"><a></a>          <span class="ot">]</span></span>
-<span id="cb25-13"><a></a>        <span class="ot">]</span></span>
-<span id="cb25-14"><a></a>      <span class="fu">},</span></span>
-<span id="cb25-15"><a></a>      <span class="dt">"properties"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb25-16"><a></a>        <span class="dt">"color"</span><span class="fu">:</span> <span class="st">"green"</span><span class="fu">,</span></span>
-<span id="cb25-17"><a></a>        <span class="dt">"area"</span><span class="fu">:</span> <span class="dv">3565747</span></span>
-<span id="cb25-18"><a></a>      <span class="fu">}</span></span>
-<span id="cb25-19"><a></a>    <span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb25-20"><a></a>    <span class="fu">{</span></span>
-<span id="cb25-21"><a></a>      <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"Feature"</span><span class="fu">,</span></span>
-<span id="cb25-22"><a></a>      <span class="dt">"geometry"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb25-23"><a></a>        <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"Polygon"</span><span class="fu">,</span></span>
-<span id="cb25-24"><a></a>        <span class="dt">"coordinates"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb25-25"><a></a>          <span class="ot">[</span></span>
-<span id="cb25-26"><a></a>            <span class="ot">[</span><span class="dv">15</span><span class="ot">,</span> <span class="dv">5</span><span class="ot">],</span> <span class="ot">[</span><span class="dv">40</span><span class="ot">,</span> <span class="dv">10</span><span class="ot">],</span></span>
-<span id="cb25-27"><a></a>            <span class="ot">[</span><span class="dv">10</span><span class="ot">,</span> <span class="dv">20</span><span class="ot">],</span> <span class="ot">[</span><span class="dv">5</span><span class="ot">,</span> <span class="dv">10</span><span class="ot">],</span> </span>
-<span id="cb25-28"><a></a>            <span class="ot">[</span><span class="dv">15</span><span class="ot">,</span> <span class="dv">5</span><span class="ot">]</span></span>
-<span id="cb25-29"><a></a>          <span class="ot">]</span></span>
-<span id="cb25-30"><a></a>        <span class="ot">]</span></span>
-<span id="cb25-31"><a></a>      <span class="fu">},</span></span>
-<span id="cb25-32"><a></a>      <span class="dt">"properties"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb25-33"><a></a>        <span class="dt">"color"</span><span class="fu">:</span> <span class="st">"red"</span><span class="fu">,</span></span>
-<span id="cb25-34"><a></a>        <span class="dt">"area"</span><span class="fu">:</span> <span class="dv">3272386</span></span>
-<span id="cb25-35"><a></a>      <span class="fu">}</span></span>
-<span id="cb25-36"><a></a>    <span class="fu">}</span></span>
-<span id="cb25-37"><a></a>  <span class="ot">]</span></span>
-<span id="cb25-38"><a></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25" data-filename="my_data.geojson"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb25-1"><a aria-label="1"></a><span class="fu">{</span></span>
+<span id="cb25-2"><a aria-label="2"></a>  <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"FeatureCollection"</span><span class="fu">,</span></span>
+<span id="cb25-3"><a aria-label="3"></a>  <span class="dt">"features"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb25-4"><a aria-label="4"></a>    <span class="fu">{</span></span>
+<span id="cb25-5"><a aria-label="5"></a>      <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"Feature"</span><span class="fu">,</span></span>
+<span id="cb25-6"><a aria-label="6"></a>      <span class="dt">"geometry"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb25-7"><a aria-label="7"></a>        <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"Polygon"</span><span class="fu">,</span></span>
+<span id="cb25-8"><a aria-label="8"></a>        <span class="dt">"coordinates"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb25-9"><a aria-label="9"></a>          <span class="ot">[</span></span>
+<span id="cb25-10"><a aria-label="10"></a>            <span class="ot">[</span><span class="dv">30</span><span class="ot">,</span> <span class="dv">20</span><span class="ot">],</span> <span class="ot">[</span><span class="dv">45</span><span class="ot">,</span> <span class="dv">40</span><span class="ot">],</span></span>
+<span id="cb25-11"><a aria-label="11"></a>            <span class="ot">[</span><span class="dv">10</span><span class="ot">,</span> <span class="dv">40</span><span class="ot">],</span> <span class="ot">[</span><span class="dv">30</span><span class="ot">,</span> <span class="dv">20</span><span class="ot">]</span></span>
+<span id="cb25-12"><a aria-label="12"></a>          <span class="ot">]</span></span>
+<span id="cb25-13"><a aria-label="13"></a>        <span class="ot">]</span></span>
+<span id="cb25-14"><a aria-label="14"></a>      <span class="fu">},</span></span>
+<span id="cb25-15"><a aria-label="15"></a>      <span class="dt">"properties"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb25-16"><a aria-label="16"></a>        <span class="dt">"color"</span><span class="fu">:</span> <span class="st">"green"</span><span class="fu">,</span></span>
+<span id="cb25-17"><a aria-label="17"></a>        <span class="dt">"area"</span><span class="fu">:</span> <span class="dv">3565747</span></span>
+<span id="cb25-18"><a aria-label="18"></a>      <span class="fu">}</span></span>
+<span id="cb25-19"><a aria-label="19"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb25-20"><a aria-label="20"></a>    <span class="fu">{</span></span>
+<span id="cb25-21"><a aria-label="21"></a>      <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"Feature"</span><span class="fu">,</span></span>
+<span id="cb25-22"><a aria-label="22"></a>      <span class="dt">"geometry"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb25-23"><a aria-label="23"></a>        <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"Polygon"</span><span class="fu">,</span></span>
+<span id="cb25-24"><a aria-label="24"></a>        <span class="dt">"coordinates"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb25-25"><a aria-label="25"></a>          <span class="ot">[</span></span>
+<span id="cb25-26"><a aria-label="26"></a>            <span class="ot">[</span><span class="dv">15</span><span class="ot">,</span> <span class="dv">5</span><span class="ot">],</span> <span class="ot">[</span><span class="dv">40</span><span class="ot">,</span> <span class="dv">10</span><span class="ot">],</span></span>
+<span id="cb25-27"><a aria-label="27"></a>            <span class="ot">[</span><span class="dv">10</span><span class="ot">,</span> <span class="dv">20</span><span class="ot">],</span> <span class="ot">[</span><span class="dv">5</span><span class="ot">,</span> <span class="dv">10</span><span class="ot">],</span> </span>
+<span id="cb25-28"><a aria-label="28"></a>            <span class="ot">[</span><span class="dv">15</span><span class="ot">,</span> <span class="dv">5</span><span class="ot">]</span></span>
+<span id="cb25-29"><a aria-label="29"></a>          <span class="ot">]</span></span>
+<span id="cb25-30"><a aria-label="30"></a>        <span class="ot">]</span></span>
+<span id="cb25-31"><a aria-label="31"></a>      <span class="fu">},</span></span>
+<span id="cb25-32"><a aria-label="32"></a>      <span class="dt">"properties"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb25-33"><a aria-label="33"></a>        <span class="dt">"color"</span><span class="fu">:</span> <span class="st">"red"</span><span class="fu">,</span></span>
+<span id="cb25-34"><a aria-label="34"></a>        <span class="dt">"area"</span><span class="fu">:</span> <span class="dv">3272386</span></span>
+<span id="cb25-35"><a aria-label="35"></a>      <span class="fu">}</span></span>
+<span id="cb25-36"><a aria-label="36"></a>    <span class="fu">}</span></span>
+<span id="cb25-37"><a aria-label="37"></a>  <span class="ot">]</span></span>
+<span id="cb25-38"><a aria-label="38"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div></div>
 </section>
@@ -880,13 +883,13 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
-<span id="cb27-2"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb27-3"><a></a><span class="fu">library</span>(sf)</span>
-<span id="cb27-4"><a></a><span class="fu">library</span>(rnaturalearth)</span>
-<span id="cb27-5"><a></a><span class="fu">library</span>(mapview)</span>
-<span id="cb27-6"><a></a>france_sf <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">country =</span> <span class="st">"France"</span>, <span class="at">scale =</span> <span class="dv">50</span>)</span>
-<span id="cb27-7"><a></a>(france_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(france_sf, <span class="at">label =</span> <span class="st">"geounit"</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb27-2"><a aria-label="2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb27-3"><a aria-label="3"></a><span class="fu">library</span>(sf)</span>
+<span id="cb27-4"><a aria-label="4"></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb27-5"><a aria-label="5"></a><span class="fu">library</span>(mapview)</span>
+<span id="cb27-6"><a aria-label="6"></a>france_sf <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">country =</span> <span class="st">"France"</span>, <span class="at">scale =</span> <span class="dv">50</span>)</span>
+<span id="cb27-7"><a aria-label="7"></a>(france_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(france_sf, <span class="at">label =</span> <span class="st">"geounit"</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-11f314694b5091c7edbb" style="width:960px;height:480px;"></div>
@@ -899,8 +902,8 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>france_cent_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_centroid</span>(france_sf)</span>
-<span id="cb28-2"><a></a>france_map <span class="sc">+</span> <span class="fu">mapview</span>(france_cent_sf, <span class="at">label =</span> <span class="st">"Centroid"</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a aria-label="1"></a>france_cent_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_centroid</span>(france_sf)</span>
+<span id="cb28-2"><a aria-label="2"></a>france_map <span class="sc">+</span> <span class="fu">mapview</span>(france_cent_sf, <span class="at">label =</span> <span class="st">"Centroid"</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-98c367b142f44ba5eb19" style="width:960px;height:480px;"></div>
@@ -914,12 +917,12 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">library</span>(leaflet.extras2)</span>
-<span id="cb29-2"><a></a>africa_sf <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">continent =</span> <span class="st">"Africa"</span>, <span class="at">scale =</span> <span class="dv">50</span>)</span>
-<span id="cb29-3"><a></a>africa_union_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_union</span>(africa_sf)</span>
-<span id="cb29-4"><a></a>africa_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb29-5"><a></a>africa_union_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_union_sf, <span class="at">label=</span><span class="st">"st_union(africa)"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb29-6"><a></a>africa_map <span class="sc">|</span> africa_union_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a aria-label="1"></a><span class="fu">library</span>(leaflet.extras2)</span>
+<span id="cb29-2"><a aria-label="2"></a>africa_sf <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">continent =</span> <span class="st">"Africa"</span>, <span class="at">scale =</span> <span class="dv">50</span>)</span>
+<span id="cb29-3"><a aria-label="3"></a>africa_union_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_union</span>(africa_sf)</span>
+<span id="cb29-4"><a aria-label="4"></a>africa_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb29-5"><a aria-label="5"></a>africa_union_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_union_sf, <span class="at">label=</span><span class="st">"st_union(africa)"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb29-6"><a aria-label="6"></a>africa_map <span class="sc">|</span> africa_union_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-87685ddd3edda7b2b062" style="width:960px;height:480px;"></div>
@@ -932,9 +935,9 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>africa_bbox_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_bbox</span>(africa_sf)</span>
-<span id="cb30-2"><a></a>africa_bbox_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_bbox_sf, <span class="at">label=</span><span class="st">"st_bbox(africa)"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb30-3"><a></a>africa_map <span class="sc">|</span> africa_bbox_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a aria-label="1"></a>africa_bbox_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_bbox</span>(africa_sf)</span>
+<span id="cb30-2"><a aria-label="2"></a>africa_bbox_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_bbox_sf, <span class="at">label=</span><span class="st">"st_bbox(africa)"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb30-3"><a aria-label="3"></a>africa_map <span class="sc">|</span> africa_bbox_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-819a54f23d5ea0f2dae9" style="width:960px;height:480px;"></div>
@@ -947,9 +950,9 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>africa_countries_cvx <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_convex_hull</span>(africa_sf)</span>
-<span id="cb31-2"><a></a>africa_countries_cvx_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_countries_cvx, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb31-3"><a></a>africa_map <span class="sc">|</span> africa_countries_cvx_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a aria-label="1"></a>africa_countries_cvx <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_convex_hull</span>(africa_sf)</span>
+<span id="cb31-2"><a aria-label="2"></a>africa_countries_cvx_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_countries_cvx, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb31-3"><a aria-label="3"></a>africa_map <span class="sc">|</span> africa_countries_cvx_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-c65b646c0484fbe0a069" style="width:960px;height:480px;"></div>
@@ -963,9 +966,9 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>africa_cvx <span class="ot">&lt;-</span> africa_sf <span class="sc">|&gt;</span> <span class="fu">st_union</span>() <span class="sc">|&gt;</span> <span class="fu">st_convex_hull</span>()</span>
-<span id="cb32-2"><a></a>africa_cvx_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_cvx, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb32-3"><a></a>africa_map <span class="sc">|</span> africa_cvx_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a aria-label="1"></a>africa_cvx <span class="ot">&lt;-</span> africa_sf <span class="sc">|&gt;</span> <span class="fu">st_union</span>() <span class="sc">|&gt;</span> <span class="fu">st_convex_hull</span>()</span>
+<span id="cb32-2"><a aria-label="2"></a>africa_cvx_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_cvx, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb32-3"><a aria-label="3"></a>africa_map <span class="sc">|</span> africa_cvx_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-be61e8acf1ea5b195e64" style="width:960px;height:480px;"></div>
@@ -979,9 +982,9 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>africa_cents_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_centroid</span>(africa_sf)</span>
-<span id="cb33-2"><a></a>africa_cents_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_cents_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb33-3"><a></a>africa_map <span class="sc">|</span> africa_cents_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a aria-label="1"></a>africa_cents_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_centroid</span>(africa_sf)</span>
+<span id="cb33-2"><a aria-label="2"></a>africa_cents_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_cents_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb33-3"><a aria-label="3"></a>africa_map <span class="sc">|</span> africa_cents_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-e0be7aa4ad290f7da524" style="width:960px;height:480px;"></div>
@@ -1000,24 +1003,24 @@ Geodetic CRS:  WGS 84
 <div class="column">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>nc <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"shape/nc.shp"</span>, <span class="at">package=</span><span class="st">"sf"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb34-2"><a></a>  <span class="fu">read_sf</span>() <span class="sc">|&gt;</span></span>
-<span id="cb34-3"><a></a>  <span class="fu">st_transform</span>(<span class="st">'EPSG:2264'</span>)</span>
-<span id="cb34-4"><a></a>gr <span class="ot">&lt;-</span> <span class="fu">st_sf</span>(</span>
-<span id="cb34-5"><a></a>         <span class="at">label =</span> <span class="fu">apply</span>(<span class="fu">expand.grid</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, LETTERS[<span class="dv">10</span><span class="sc">:</span><span class="dv">1</span>])[,<span class="dv">2</span><span class="sc">:</span><span class="dv">1</span>], <span class="dv">1</span>, paste0, <span class="at">collapse =</span> <span class="st">""</span>),</span>
-<span id="cb34-6"><a></a>         <span class="at">geom =</span> <span class="fu">st_make_grid</span>(nc))</span>
-<span id="cb34-7"><a></a>gr<span class="sc">$</span>col <span class="ot">&lt;-</span> <span class="fu">sf.colors</span>(<span class="dv">10</span>, <span class="at">categorical =</span> <span class="cn">TRUE</span>, <span class="at">alpha =</span> .<span class="dv">3</span>)</span>
-<span id="cb34-8"><a></a><span class="co"># cut, to verify that NA's work out:</span></span>
-<span id="cb34-9"><a></a>gr <span class="ot">&lt;-</span> gr[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>),]</span>
-<span id="cb34-10"><a></a><span class="fu">suppressWarnings</span>(nc_j <span class="ot">&lt;-</span> <span class="fu">st_join</span>(nc, gr, <span class="at">largest =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb34-11"><a></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>), <span class="at">mar =</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">4</span>))</span>
-<span id="cb34-12"><a></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(nc_j), <span class="at">border =</span> <span class="st">'grey'</span>)</span>
-<span id="cb34-13"><a></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(gr), <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> gr<span class="sc">$</span>col)</span>
-<span id="cb34-14"><a></a><span class="fu">text</span>(<span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(<span class="fu">st_geometry</span>(gr))), <span class="at">labels =</span> gr<span class="sc">$</span>label, <span class="at">cex =</span> .<span class="dv">85</span>)</span>
-<span id="cb34-15"><a></a><span class="co"># the joined dataset:</span></span>
-<span id="cb34-16"><a></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(nc_j), <span class="at">border =</span> <span class="st">'grey'</span>, <span class="at">col =</span> nc_j<span class="sc">$</span>col)</span>
-<span id="cb34-17"><a></a><span class="fu">text</span>(<span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(<span class="fu">st_geometry</span>(nc_j))), <span class="at">labels =</span> nc_j<span class="sc">$</span>label, <span class="at">cex =</span> .<span class="dv">7</span>)</span>
-<span id="cb34-18"><a></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(gr), <span class="at">border =</span> <span class="st">'#88ff88aa'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a aria-label="1"></a>nc <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"shape/nc.shp"</span>, <span class="at">package=</span><span class="st">"sf"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a aria-label="2"></a>  <span class="fu">read_sf</span>() <span class="sc">|&gt;</span></span>
+<span id="cb34-3"><a aria-label="3"></a>  <span class="fu">st_transform</span>(<span class="st">'EPSG:2264'</span>)</span>
+<span id="cb34-4"><a aria-label="4"></a>gr <span class="ot">&lt;-</span> <span class="fu">st_sf</span>(</span>
+<span id="cb34-5"><a aria-label="5"></a>         <span class="at">label =</span> <span class="fu">apply</span>(<span class="fu">expand.grid</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, LETTERS[<span class="dv">10</span><span class="sc">:</span><span class="dv">1</span>])[,<span class="dv">2</span><span class="sc">:</span><span class="dv">1</span>], <span class="dv">1</span>, paste0, <span class="at">collapse =</span> <span class="st">""</span>),</span>
+<span id="cb34-6"><a aria-label="6"></a>         <span class="at">geom =</span> <span class="fu">st_make_grid</span>(nc))</span>
+<span id="cb34-7"><a aria-label="7"></a>gr<span class="sc">$</span>col <span class="ot">&lt;-</span> <span class="fu">sf.colors</span>(<span class="dv">10</span>, <span class="at">categorical =</span> <span class="cn">TRUE</span>, <span class="at">alpha =</span> .<span class="dv">3</span>)</span>
+<span id="cb34-8"><a aria-label="8"></a><span class="co"># cut, to verify that NA's work out:</span></span>
+<span id="cb34-9"><a aria-label="9"></a>gr <span class="ot">&lt;-</span> gr[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>),]</span>
+<span id="cb34-10"><a aria-label="10"></a><span class="fu">suppressWarnings</span>(nc_j <span class="ot">&lt;-</span> <span class="fu">st_join</span>(nc, gr, <span class="at">largest =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb34-11"><a aria-label="11"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>), <span class="at">mar =</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">4</span>))</span>
+<span id="cb34-12"><a aria-label="12"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(nc_j), <span class="at">border =</span> <span class="st">'grey'</span>)</span>
+<span id="cb34-13"><a aria-label="13"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(gr), <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> gr<span class="sc">$</span>col)</span>
+<span id="cb34-14"><a aria-label="14"></a><span class="fu">text</span>(<span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(<span class="fu">st_geometry</span>(gr))), <span class="at">labels =</span> gr<span class="sc">$</span>label, <span class="at">cex =</span> .<span class="dv">85</span>)</span>
+<span id="cb34-15"><a aria-label="15"></a><span class="co"># the joined dataset:</span></span>
+<span id="cb34-16"><a aria-label="16"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(nc_j), <span class="at">border =</span> <span class="st">'grey'</span>, <span class="at">col =</span> nc_j<span class="sc">$</span>col)</span>
+<span id="cb34-17"><a aria-label="17"></a><span class="fu">text</span>(<span class="fu">st_coordinates</span>(<span class="fu">st_centroid</span>(<span class="fu">st_geometry</span>(nc_j))), <span class="at">labels =</span> nc_j<span class="sc">$</span>label, <span class="at">cex =</span> .<span class="dv">7</span>)</span>
+<span id="cb34-18"><a aria-label="18"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(gr), <span class="at">border =</span> <span class="st">'#88ff88aa'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div><div class="column">
 <div class="cell-output-display">
@@ -1034,11 +1037,11 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="co"># Sample random points</span></span>
-<span id="cb35-2"><a></a>africa_points_list <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(africa_union_sf, <span class="dv">10</span>)</span>
-<span id="cb35-3"><a></a>africa_points_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sf</span>(africa_points_list)</span>
-<span id="cb35-4"><a></a>africa_points_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_points_sf, <span class="at">label=</span><span class="st">"Random Point"</span>, <span class="at">col.regions=</span>cb_palette[<span class="dv">1</span>], <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb35-5"><a></a>africa_map <span class="sc">+</span> africa_points_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a aria-label="1"></a><span class="co"># Sample random points</span></span>
+<span id="cb35-2"><a aria-label="2"></a>africa_points_list <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(africa_union_sf, <span class="dv">10</span>)</span>
+<span id="cb35-3"><a aria-label="3"></a>africa_points_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sf</span>(africa_points_list)</span>
+<span id="cb35-4"><a aria-label="4"></a>africa_points_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_points_sf, <span class="at">label=</span><span class="st">"Random Point"</span>, <span class="at">col.regions=</span>cb_palette[<span class="dv">1</span>], <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb35-5"><a aria-label="5"></a>africa_map <span class="sc">+</span> africa_points_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-0730ff8bf8ba6f558f32" style="width:960px;height:480px;"></div>
@@ -1051,8 +1054,8 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>countries_w_points <span class="ot">&lt;-</span> africa_sf[africa_points_sf,]</span>
-<span id="cb36-2"><a></a><span class="fu">mapview</span>(countries_w_points, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> africa_points_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a aria-label="1"></a>countries_w_points <span class="ot">&lt;-</span> africa_sf[africa_points_sf,]</span>
+<span id="cb36-2"><a aria-label="2"></a><span class="fu">mapview</span>(countries_w_points, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> africa_points_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-b6e0c41bed0fc8bb24f4" style="width:960px;height:480px;"></div>
@@ -1065,9 +1068,9 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>country_inter <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_intersects</span>(africa_sf, africa_points_sf)</span>
-<span id="cb37-2"><a></a><span class="co"># Computes point counts for each polygon</span></span>
-<span id="cb37-3"><a></a>(num_intersections <span class="ot">&lt;-</span> <span class="fu">lengths</span>(country_inter))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a aria-label="1"></a>country_inter <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_intersects</span>(africa_sf, africa_points_sf)</span>
+<span id="cb37-2"><a aria-label="2"></a><span class="co"># Computes point counts for each polygon</span></span>
+<span id="cb37-3"><a aria-label="3"></a>(num_intersections <span class="ot">&lt;-</span> <span class="fu">lengths</span>(country_inter))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0 1 0 0 0
@@ -1075,10 +1078,10 @@ Geodetic CRS:  WGS 84
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>africa_sf <span class="ot">&lt;-</span> africa_sf <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
-<span id="cb39-2"><a></a>  <span class="at">num_points =</span> num_intersections</span>
-<span id="cb39-3"><a></a>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(geounit)</span>
-<span id="cb39-4"><a></a>africa_sf <span class="sc">|&gt;</span> <span class="fu">select</span>(geounit, num_points) <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a aria-label="1"></a>africa_sf <span class="ot">&lt;-</span> africa_sf <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
+<span id="cb39-2"><a aria-label="2"></a>  <span class="at">num_points =</span> num_intersections</span>
+<span id="cb39-3"><a aria-label="3"></a>) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(geounit)</span>
+<span id="cb39-4"><a aria-label="4"></a>africa_sf <span class="sc">|&gt;</span> <span class="fu">select</span>(geounit, num_points) <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 6 features and 2 fields
@@ -1101,7 +1104,7 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">mapview</span>(africa_sf, <span class="at">zcol=</span><span class="st">"num_points"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a aria-label="1"></a><span class="fu">mapview</span>(africa_sf, <span class="at">zcol=</span><span class="st">"num_points"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-d81726f5d9decd82f807" style="width:960px;height:480px;"></div>
@@ -1115,9 +1118,9 @@ Geodetic CRS:  WGS 84
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>africa_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill=</span>num_points)) <span class="sc">+</span></span>
-<span id="cb42-2"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb42-3"><a></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a aria-label="1"></a>africa_sf <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill=</span>num_points)) <span class="sc">+</span></span>
+<span id="cb42-2"><a aria-label="2"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb42-3"><a aria-label="3"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 
 </div>

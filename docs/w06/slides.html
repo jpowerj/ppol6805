@@ -7,8 +7,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e44360b8a8db1e130c7792fece1c8032.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.3">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Jeff Jacobs">
   <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 6: Spatial Joins and Areal-Weighted Interpolation</title>
@@ -21,10 +21,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -245,7 +248,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Jeff Jacobs 
+Jeff Jacobs
 </div>
         <p class="quarto-title-affiliation">
             <a href="mailto:jj1088@georgetown.edu" target="_blank"><code>jj1088@georgetown.edu</code></a>
@@ -265,20 +268,20 @@ Jeff Jacobs
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
-<span id="cb1-2"><a></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb1-3"><a></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb1-4"><a></a><span class="fu">library</span>(rnaturalearth) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb1-5"><a></a><span class="fu">library</span>(mapview) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb1-6"><a></a>africa_sf <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">continent =</span> <span class="st">"Africa"</span>, <span class="at">scale =</span> <span class="dv">50</span>)</span>
-<span id="cb1-7"><a></a>africa_union_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_union</span>(africa_sf)</span>
-<span id="cb1-8"><a></a>africa_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb1-9"><a></a>N <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb1-10"><a></a>sampled_points_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(africa_union_sf, N) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_sf</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">temp =</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">100</span>))</span>
-<span id="cb1-11"><a></a>sampled_points_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(sampled_points_sf, <span class="at">label=</span><span class="st">"Random Point"</span>, <span class="at">col.regions=</span>cbPalette[<span class="dv">1</span>], <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb1-12"><a></a>countries_points_sf <span class="ot">&lt;-</span> africa_sf[sampled_points_sf,]</span>
-<span id="cb1-13"><a></a>filtered_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(countries_points_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> sampled_points_map</span>
-<span id="cb1-14"><a></a>(africa_map <span class="sc">+</span> sampled_points_map) <span class="sc">|</span> filtered_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-3"><a aria-label="3"></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-4"><a aria-label="4"></a><span class="fu">library</span>(rnaturalearth) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-5"><a aria-label="5"></a><span class="fu">library</span>(mapview) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-6"><a aria-label="6"></a>africa_sf <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">continent =</span> <span class="st">"Africa"</span>, <span class="at">scale =</span> <span class="dv">50</span>)</span>
+<span id="cb1-7"><a aria-label="7"></a>africa_union_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_union</span>(africa_sf)</span>
+<span id="cb1-8"><a aria-label="8"></a>africa_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb1-9"><a aria-label="9"></a>N <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb1-10"><a aria-label="10"></a>sampled_points_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(africa_union_sf, N) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_sf</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">temp =</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">100</span>))</span>
+<span id="cb1-11"><a aria-label="11"></a>sampled_points_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(sampled_points_sf, <span class="at">label=</span><span class="st">"Random Point"</span>, <span class="at">col.regions=</span>cbPalette[<span class="dv">1</span>], <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb1-12"><a aria-label="12"></a>countries_points_sf <span class="ot">&lt;-</span> africa_sf[sampled_points_sf,]</span>
+<span id="cb1-13"><a aria-label="13"></a>filtered_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(countries_points_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> sampled_points_map</span>
+<span id="cb1-14"><a aria-label="14"></a>(africa_map <span class="sc">+</span> sampled_points_map) <span class="sc">|</span> filtered_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-06c3bace33ce77861086" style="width:960px;height:480px;"></div>
@@ -299,8 +302,8 @@ Jeff Jacobs
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">st_geometry</span>(sampled_points_sf) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"geom"</span>)</span>
-<span id="cb2-2"><a></a>sampled_points_sf <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="fu">st_geometry</span>(sampled_points_sf) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"geom"</span>)</span>
+<span id="cb2-2"><a aria-label="2"></a>sampled_points_sf <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -348,7 +351,7 @@ Jeff Jacobs
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>countries_points_sf <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a>countries_points_sf <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -1400,8 +1403,8 @@ Jeff Jacobs
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>joined_sf <span class="ot">&lt;-</span> countries_points_sf <span class="sc">|&gt;</span> <span class="fu">st_join</span>(sampled_points_sf)</span>
-<span id="cb4-2"><a></a>joined_sf <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a>joined_sf <span class="ot">&lt;-</span> countries_points_sf <span class="sc">|&gt;</span> <span class="fu">st_join</span>(sampled_points_sf)</span>
+<span id="cb4-2"><a aria-label="2"></a>joined_sf <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -2808,11 +2811,11 @@ Jeff Jacobs
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>g <span class="ot">&lt;-</span> <span class="fu">st_make_grid</span>(<span class="fu">st_bbox</span>(<span class="fu">st_as_sfc</span>(<span class="st">"LINESTRING(0 0,1 1)"</span>)), <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb5-2"><a></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">4</span>))</span>
-<span id="cb5-3"><a></a><span class="fu">plot</span>(g)</span>
-<span id="cb5-4"><a></a><span class="fu">plot</span>(g[<span class="dv">1</span>] <span class="sc">*</span> <span class="fu">diag</span>(<span class="fu">c</span>(<span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>, <span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.125</span>), <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb5-5"><a></a><span class="fu">text</span>(<span class="fu">c</span>(.<span class="dv">2</span>, .<span class="dv">8</span>, .<span class="dv">2</span>, .<span class="dv">8</span>), <span class="fu">c</span>(.<span class="dv">2</span>, .<span class="dv">2</span>, .<span class="dv">8</span>, .<span class="dv">8</span>), <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>), <span class="at">col =</span> <span class="st">'red'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a>g <span class="ot">&lt;-</span> <span class="fu">st_make_grid</span>(<span class="fu">st_bbox</span>(<span class="fu">st_as_sfc</span>(<span class="st">"LINESTRING(0 0,1 1)"</span>)), <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb5-2"><a aria-label="2"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">4</span>))</span>
+<span id="cb5-3"><a aria-label="3"></a><span class="fu">plot</span>(g)</span>
+<span id="cb5-4"><a aria-label="4"></a><span class="fu">plot</span>(g[<span class="dv">1</span>] <span class="sc">*</span> <span class="fu">diag</span>(<span class="fu">c</span>(<span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>, <span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.125</span>), <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb5-5"><a aria-label="5"></a><span class="fu">text</span>(<span class="fu">c</span>(.<span class="dv">2</span>, .<span class="dv">8</span>, .<span class="dv">2</span>, .<span class="dv">8</span>), <span class="fu">c</span>(.<span class="dv">2</span>, .<span class="dv">2</span>, .<span class="dv">8</span>, .<span class="dv">8</span>), <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>), <span class="at">col =</span> <span class="st">'red'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 
 </div>
@@ -3070,7 +3073,7 @@ Jeff Jacobs
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],

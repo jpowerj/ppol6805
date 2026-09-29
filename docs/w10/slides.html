@@ -7,8 +7,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e44360b8a8db1e130c7792fece1c8032.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.3">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Jeff Jacobs">
   <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 10: Evaluating Spatial Hypotheses II: Areal Data</title>
@@ -21,10 +21,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -244,7 +247,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Jeff Jacobs 
+Jeff Jacobs
 </div>
         <p class="quarto-title-affiliation">
             <a href="mailto:jj1088@georgetown.edu" target="_blank"><code>jj1088@georgetown.edu</code></a>
@@ -265,14 +268,14 @@ Jeff Jacobs
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
-<span id="cb1-2"><a></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
-<span id="cb1-3"><a></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb1-4"><a></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb1-5"><a></a><span class="fu">library</span>(spatstat) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb1-6"><a></a><span class="fu">library</span>(mdthemes) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb1-7"><a></a><span class="fu">library</span>(mapview) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb1-8"><a></a><span class="fu">library</span>(leaflet) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb1-3"><a aria-label="3"></a><span class="fu">library</span>(tidyverse) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-4"><a aria-label="4"></a><span class="fu">library</span>(sf) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-5"><a aria-label="5"></a><span class="fu">library</span>(spatstat) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-6"><a aria-label="6"></a><span class="fu">library</span>(mdthemes) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-7"><a aria-label="7"></a><span class="fu">library</span>(mapview) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb1-8"><a aria-label="8"></a><span class="fu">library</span>(leaflet) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </div>
@@ -299,23 +302,23 @@ Jeff Jacobs
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(mapview) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb2-2"><a></a>city_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
-<span id="cb2-3"><a></a>  <span class="sc">~</span>city, <span class="sc">~</span>lon, <span class="sc">~</span>lat, <span class="sc">~</span>pop,</span>
-<span id="cb2-4"><a></a>  <span class="st">"Chicago"</span>, <span class="fl">41.950567516553896</span>, <span class="sc">-</span><span class="fl">87.93011127491978</span>, <span class="dv">2746388</span>,</span>
-<span id="cb2-5"><a></a>  <span class="st">"Detroit"</span>, <span class="fl">42.45123004999075</span>, <span class="sc">-</span><span class="fl">83.18402319217698</span>, <span class="dv">631524</span></span>
-<span id="cb2-6"><a></a>)</span>
-<span id="cb2-7"><a></a>city_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(</span>
-<span id="cb2-8"><a></a>  city_df,</span>
-<span id="cb2-9"><a></a>  <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"lat"</span>, <span class="st">"lon"</span>),</span>
-<span id="cb2-10"><a></a>  <span class="at">crs=</span><span class="dv">4326</span></span>
-<span id="cb2-11"><a></a>)</span>
-<span id="cb2-12"><a></a>city_buf_sf <span class="ot">&lt;-</span> city_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_buffer</span>(<span class="dv">20000</span>)</span>
-<span id="cb2-13"><a></a>city_cases_sf <span class="ot">&lt;-</span> city_buf_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(<span class="at">size=</span><span class="fu">rep</span>(<span class="dv">10</span>,<span class="dv">2</span>)) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
-<span id="cb2-14"><a></a>city_cases_sf<span class="sc">$</span>city <span class="ot">&lt;-</span> <span class="st">"Detroit (10 Cases)"</span></span>
-<span id="cb2-15"><a></a>city_cases_sf[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="st">'city'</span>] <span class="ot">&lt;-</span> <span class="st">"Chicago (10 Cases)"</span></span>
-<span id="cb2-16"><a></a>city_cases_sf<span class="sc">$</span>sample <span class="ot">&lt;-</span> <span class="st">"Flu"</span></span>
-<span id="cb2-17"><a></a><span class="fu">mapview</span>(city_cases_sf, <span class="at">zcol=</span><span class="st">"city"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="fu">library</span>(mapview) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb2-2"><a aria-label="2"></a>city_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb2-3"><a aria-label="3"></a>  <span class="sc">~</span>city, <span class="sc">~</span>lon, <span class="sc">~</span>lat, <span class="sc">~</span>pop,</span>
+<span id="cb2-4"><a aria-label="4"></a>  <span class="st">"Chicago"</span>, <span class="fl">41.950567516553896</span>, <span class="sc">-</span><span class="fl">87.93011127491978</span>, <span class="dv">2746388</span>,</span>
+<span id="cb2-5"><a aria-label="5"></a>  <span class="st">"Detroit"</span>, <span class="fl">42.45123004999075</span>, <span class="sc">-</span><span class="fl">83.18402319217698</span>, <span class="dv">631524</span></span>
+<span id="cb2-6"><a aria-label="6"></a>)</span>
+<span id="cb2-7"><a aria-label="7"></a>city_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(</span>
+<span id="cb2-8"><a aria-label="8"></a>  city_df,</span>
+<span id="cb2-9"><a aria-label="9"></a>  <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"lat"</span>, <span class="st">"lon"</span>),</span>
+<span id="cb2-10"><a aria-label="10"></a>  <span class="at">crs=</span><span class="dv">4326</span></span>
+<span id="cb2-11"><a aria-label="11"></a>)</span>
+<span id="cb2-12"><a aria-label="12"></a>city_buf_sf <span class="ot">&lt;-</span> city_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_buffer</span>(<span class="dv">20000</span>)</span>
+<span id="cb2-13"><a aria-label="13"></a>city_cases_sf <span class="ot">&lt;-</span> city_buf_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(<span class="at">size=</span><span class="fu">rep</span>(<span class="dv">10</span>,<span class="dv">2</span>)) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb2-14"><a aria-label="14"></a>city_cases_sf<span class="sc">$</span>city <span class="ot">&lt;-</span> <span class="st">"Detroit (10 Cases)"</span></span>
+<span id="cb2-15"><a aria-label="15"></a>city_cases_sf[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="st">'city'</span>] <span class="ot">&lt;-</span> <span class="st">"Chicago (10 Cases)"</span></span>
+<span id="cb2-16"><a aria-label="16"></a>city_cases_sf<span class="sc">$</span>sample <span class="ot">&lt;-</span> <span class="st">"Flu"</span></span>
+<span id="cb2-17"><a aria-label="17"></a><span class="fu">mapview</span>(city_cases_sf, <span class="at">zcol=</span><span class="st">"city"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-e8acf1ea5b195e64e0be" style="width:960px;height:480px;"></div>
@@ -344,34 +347,34 @@ Jeff Jacobs
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(leaflet) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb3-2"><a></a><span class="fu">library</span>(leaflet.extras2) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb3-3"><a></a>city_pop_sf <span class="ot">&lt;-</span> city_buf_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(<span class="at">size=</span><span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">4</span>)) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
-<span id="cb3-4"><a></a>city_pop_sf<span class="sc">$</span>city <span class="ot">&lt;-</span> <span class="st">"Detroit"</span></span>
-<span id="cb3-5"><a></a>city_pop_sf[<span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>, <span class="st">'city'</span>] <span class="ot">&lt;-</span> <span class="st">"Chicago"</span></span>
-<span id="cb3-6"><a></a>city_pop_sf<span class="sc">$</span>sample <span class="ot">&lt;-</span> <span class="st">"People"</span></span>
-<span id="cb3-7"><a></a>city_combined_sf <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(city_cases_sf, city_pop_sf)</span>
-<span id="cb3-8"><a></a><span class="co"># mapview(city_combined_sf, zcol="city", marker="sample")</span></span>
-<span id="cb3-9"><a></a>Flu <span class="ot">=</span> <span class="fu">makeIcon</span>(</span>
-<span id="cb3-10"><a></a>    <span class="st">"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png"</span>,</span>
-<span id="cb3-11"><a></a>    <span class="st">"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png"</span>,</span>
-<span id="cb3-12"><a></a>    <span class="dv">20</span>,</span>
-<span id="cb3-13"><a></a>    <span class="dv">20</span></span>
-<span id="cb3-14"><a></a>)</span>
-<span id="cb3-15"><a></a>People <span class="ot">=</span> <span class="fu">makeIcon</span>(</span>
-<span id="cb3-16"><a></a>  <span class="st">"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png"</span>,</span>
-<span id="cb3-17"><a></a>  <span class="st">"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png"</span>,</span>
-<span id="cb3-18"><a></a>  <span class="dv">20</span>,</span>
-<span id="cb3-19"><a></a>  <span class="dv">20</span></span>
-<span id="cb3-20"><a></a>)</span>
-<span id="cb3-21"><a></a></span>
-<span id="cb3-22"><a></a>city_combined_sf<span class="sc">$</span>r <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(city_combined_sf<span class="sc">$</span>sample <span class="sc">==</span> <span class="st">"Flu"</span>, <span class="dv">0</span>, <span class="dv">4</span>)</span>
-<span id="cb3-23"><a></a>city_flu_sf <span class="ot">&lt;-</span> city_combined_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(sample <span class="sc">==</span> <span class="st">"Flu"</span>)</span>
-<span id="cb3-24"><a></a>city_ppl_sf <span class="ot">&lt;-</span> city_combined_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(sample <span class="sc">==</span> <span class="st">"People"</span>)</span>
-<span id="cb3-25"><a></a><span class="fu">leaflet</span>(city_flu_sf) <span class="sc">|&gt;</span></span>
-<span id="cb3-26"><a></a>  <span class="fu">addProviderTiles</span>(<span class="st">"CartoDB.Positron"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-27"><a></a>  <span class="fu">addMarkers</span>(<span class="at">data=</span>city_flu_sf, <span class="at">icon =</span> Flu) <span class="sc">|&gt;</span></span>
-<span id="cb3-28"><a></a>  <span class="fu">addMarkers</span>(<span class="at">data=</span>city_ppl_sf, <span class="at">icon =</span> People)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a><span class="fu">library</span>(leaflet) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb3-2"><a aria-label="2"></a><span class="fu">library</span>(leaflet.extras2) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb3-3"><a aria-label="3"></a>city_pop_sf <span class="ot">&lt;-</span> city_buf_sf <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(<span class="at">size=</span><span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">4</span>)) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb3-4"><a aria-label="4"></a>city_pop_sf<span class="sc">$</span>city <span class="ot">&lt;-</span> <span class="st">"Detroit"</span></span>
+<span id="cb3-5"><a aria-label="5"></a>city_pop_sf[<span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>, <span class="st">'city'</span>] <span class="ot">&lt;-</span> <span class="st">"Chicago"</span></span>
+<span id="cb3-6"><a aria-label="6"></a>city_pop_sf<span class="sc">$</span>sample <span class="ot">&lt;-</span> <span class="st">"People"</span></span>
+<span id="cb3-7"><a aria-label="7"></a>city_combined_sf <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(city_cases_sf, city_pop_sf)</span>
+<span id="cb3-8"><a aria-label="8"></a><span class="co"># mapview(city_combined_sf, zcol="city", marker="sample")</span></span>
+<span id="cb3-9"><a aria-label="9"></a>Flu <span class="ot">=</span> <span class="fu">makeIcon</span>(</span>
+<span id="cb3-10"><a aria-label="10"></a>    <span class="st">"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/240px-Maki2-danger-24.svg.png"</span>,</span>
+<span id="cb3-11"><a aria-label="11"></a>    <span class="st">"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Maki2-danger-24.svg/24px-Maki2-danger-24.svg.png"</span>,</span>
+<span id="cb3-12"><a aria-label="12"></a>    <span class="dv">20</span>,</span>
+<span id="cb3-13"><a aria-label="13"></a>    <span class="dv">20</span></span>
+<span id="cb3-14"><a aria-label="14"></a>)</span>
+<span id="cb3-15"><a aria-label="15"></a>People <span class="ot">=</span> <span class="fu">makeIcon</span>(</span>
+<span id="cb3-16"><a aria-label="16"></a>  <span class="st">"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png"</span>,</span>
+<span id="cb3-17"><a aria-label="17"></a>  <span class="st">"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Maki2-pitch-24.svg/24px-Maki2-pitch-24.svg.png"</span>,</span>
+<span id="cb3-18"><a aria-label="18"></a>  <span class="dv">20</span>,</span>
+<span id="cb3-19"><a aria-label="19"></a>  <span class="dv">20</span></span>
+<span id="cb3-20"><a aria-label="20"></a>)</span>
+<span id="cb3-21"><a aria-label="21"></a></span>
+<span id="cb3-22"><a aria-label="22"></a>city_combined_sf<span class="sc">$</span>r <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(city_combined_sf<span class="sc">$</span>sample <span class="sc">==</span> <span class="st">"Flu"</span>, <span class="dv">0</span>, <span class="dv">4</span>)</span>
+<span id="cb3-23"><a aria-label="23"></a>city_flu_sf <span class="ot">&lt;-</span> city_combined_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(sample <span class="sc">==</span> <span class="st">"Flu"</span>)</span>
+<span id="cb3-24"><a aria-label="24"></a>city_ppl_sf <span class="ot">&lt;-</span> city_combined_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(sample <span class="sc">==</span> <span class="st">"People"</span>)</span>
+<span id="cb3-25"><a aria-label="25"></a><span class="fu">leaflet</span>(city_flu_sf) <span class="sc">|&gt;</span></span>
+<span id="cb3-26"><a aria-label="26"></a>  <span class="fu">addProviderTiles</span>(<span class="st">"CartoDB.Positron"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-27"><a aria-label="27"></a>  <span class="fu">addMarkers</span>(<span class="at">data=</span>city_flu_sf, <span class="at">icon =</span> Flu) <span class="sc">|&gt;</span></span>
+<span id="cb3-28"><a aria-label="28"></a>  <span class="fu">addMarkers</span>(<span class="at">data=</span>city_ppl_sf, <span class="at">icon =</span> People)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-7aa4ad290f7da5240730" style="width:960px;height:480px;"></div>
@@ -405,13 +408,13 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(sparr) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
-<span id="cb4-2"><a></a><span class="fu">data</span>(pbc)</span>
-<span id="cb4-3"><a></a>controls <span class="ot">&lt;-</span> <span class="fu">unmark</span>(pbc[<span class="fu">which</span>(pbc<span class="sc">$</span>marks <span class="sc">==</span> <span class="st">"control"</span>), ])</span>
-<span id="cb4-4"><a></a>controls <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb4-5"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb4-6"><a></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb4-7"><a></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Controls (Population Sample)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a><span class="fu">library</span>(sparr) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
+<span id="cb4-2"><a aria-label="2"></a><span class="fu">data</span>(pbc)</span>
+<span id="cb4-3"><a aria-label="3"></a>controls <span class="ot">&lt;-</span> <span class="fu">unmark</span>(pbc[<span class="fu">which</span>(pbc<span class="sc">$</span>marks <span class="sc">==</span> <span class="st">"control"</span>), ])</span>
+<span id="cb4-4"><a aria-label="4"></a>controls <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb4-5"><a aria-label="5"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb4-6"><a aria-label="6"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb4-7"><a aria-label="7"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Controls (Population Sample)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -425,11 +428,11 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>cases <span class="ot">&lt;-</span> <span class="fu">unmark</span>(pbc[<span class="fu">which</span>(pbc<span class="sc">$</span>marks <span class="sc">==</span> <span class="st">"case"</span>), ])</span>
-<span id="cb5-2"><a></a>cases <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb5-3"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb5-4"><a></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb5-5"><a></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"PBC Cases"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a>cases <span class="ot">&lt;-</span> <span class="fu">unmark</span>(pbc[<span class="fu">which</span>(pbc<span class="sc">$</span>marks <span class="sc">==</span> <span class="st">"case"</span>), ])</span>
+<span id="cb5-2"><a aria-label="2"></a>cases <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb5-3"><a aria-label="3"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb5-4"><a aria-label="4"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb5-5"><a aria-label="5"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"PBC Cases"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -450,13 +453,13 @@ Jeff Jacobs
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">library</span>(sparr)</span>
-<span id="cb6-2"><a></a><span class="fu">data</span>(pbc)</span>
-<span id="cb6-3"><a></a>cases <span class="ot">&lt;-</span> <span class="fu">unmark</span>(pbc[<span class="fu">which</span>(pbc<span class="sc">$</span>marks <span class="sc">==</span> <span class="st">"case"</span>), ])</span>
-<span id="cb6-4"><a></a>controls <span class="ot">&lt;-</span> <span class="fu">unmark</span>(pbc[<span class="fu">which</span>(pbc<span class="sc">$</span>marks <span class="sc">==</span> <span class="st">"control"</span>), ])</span>
-<span id="cb6-5"><a></a>bwcases <span class="ot">&lt;-</span> <span class="fu">attr</span>(<span class="fu">density</span>(cases), <span class="st">"sigma"</span>)</span>
-<span id="cb6-6"><a></a>bwcontr <span class="ot">&lt;-</span> <span class="fu">attr</span>(<span class="fu">density</span>(controls), <span class="st">"sigma"</span>)</span>
-<span id="cb6-7"><a></a>(bw <span class="ot">&lt;-</span> (bwcases <span class="sc">+</span> bwcontr)<span class="sc">/</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a><span class="fu">library</span>(sparr)</span>
+<span id="cb6-2"><a aria-label="2"></a><span class="fu">data</span>(pbc)</span>
+<span id="cb6-3"><a aria-label="3"></a>cases <span class="ot">&lt;-</span> <span class="fu">unmark</span>(pbc[<span class="fu">which</span>(pbc<span class="sc">$</span>marks <span class="sc">==</span> <span class="st">"case"</span>), ])</span>
+<span id="cb6-4"><a aria-label="4"></a>controls <span class="ot">&lt;-</span> <span class="fu">unmark</span>(pbc[<span class="fu">which</span>(pbc<span class="sc">$</span>marks <span class="sc">==</span> <span class="st">"control"</span>), ])</span>
+<span id="cb6-5"><a aria-label="5"></a>bwcases <span class="ot">&lt;-</span> <span class="fu">attr</span>(<span class="fu">density</span>(cases), <span class="st">"sigma"</span>)</span>
+<span id="cb6-6"><a aria-label="6"></a>bwcontr <span class="ot">&lt;-</span> <span class="fu">attr</span>(<span class="fu">density</span>(controls), <span class="st">"sigma"</span>)</span>
+<span id="cb6-7"><a aria-label="7"></a>(bw <span class="ot">&lt;-</span> (bwcases <span class="sc">+</span> bwcontr)<span class="sc">/</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11.45837</code></pre>
@@ -467,8 +470,8 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>int_controls <span class="ot">&lt;-</span> <span class="fu">density</span>(controls, <span class="at">sigma =</span> bw, <span class="at">eps=</span><span class="fl">0.25</span>)</span>
-<span id="cb8-2"><a></a><span class="fu">plot</span>(int_controls, <span class="at">main =</span> <span class="st">"Control Intensity"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-label="1"></a>int_controls <span class="ot">&lt;-</span> <span class="fu">density</span>(controls, <span class="at">sigma =</span> bw, <span class="at">eps=</span><span class="fl">0.25</span>)</span>
+<span id="cb8-2"><a aria-label="2"></a><span class="fu">plot</span>(int_controls, <span class="at">main =</span> <span class="st">"Control Intensity"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -482,8 +485,8 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center" data-crop="true">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>int_cases <span class="ot">&lt;-</span> <span class="fu">density</span>(cases, <span class="at">sigma =</span> bw, <span class="at">eps=</span><span class="fl">0.25</span>)</span>
-<span id="cb9-2"><a></a><span class="fu">plot</span>(int_cases, <span class="at">main =</span> <span class="st">"Case Intensity"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-label="1"></a>int_cases <span class="ot">&lt;-</span> <span class="fu">density</span>(cases, <span class="at">sigma =</span> bw, <span class="at">eps=</span><span class="fl">0.25</span>)</span>
+<span id="cb9-2"><a aria-label="2"></a><span class="fu">plot</span>(int_cases, <span class="at">main =</span> <span class="st">"Case Intensity"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -503,19 +506,19 @@ Jeff Jacobs
 <div class="cell" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">library</span>(fields)</span>
-<span id="cb10-2"><a></a>(alpha_hat <span class="ot">&lt;-</span> cases<span class="sc">$</span>n<span class="sc">/</span>controls<span class="sc">$</span>n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a aria-label="1"></a><span class="fu">library</span>(fields)</span>
+<span id="cb10-2"><a aria-label="2"></a>(alpha_hat <span class="ot">&lt;-</span> cases<span class="sc">$</span>n<span class="sc">/</span>controls<span class="sc">$</span>n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2519868</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>x <span class="ot">&lt;-</span> int_cases<span class="sc">$</span>xcol</span>
-<span id="cb12-2"><a></a>y <span class="ot">&lt;-</span> int_cases<span class="sc">$</span>yrow</span>
-<span id="cb12-3"><a></a>rr <span class="ot">&lt;-</span> <span class="fu">t</span>(int_cases<span class="sc">$</span>v)<span class="sc">/</span><span class="fu">t</span>(alpha_hat <span class="sc">*</span> int_controls<span class="sc">$</span>v)</span>
-<span id="cb12-4"><a></a><span class="fu">image.plot</span>(x, y, rr, <span class="at">asp =</span> <span class="dv">1</span>)</span>
-<span id="cb12-5"><a></a><span class="fu">title</span>(<span class="at">xlab =</span> <span class="st">"Easting"</span>, <span class="at">ylab =</span> <span class="st">"Northing"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-label="1"></a>x <span class="ot">&lt;-</span> int_cases<span class="sc">$</span>xcol</span>
+<span id="cb12-2"><a aria-label="2"></a>y <span class="ot">&lt;-</span> int_cases<span class="sc">$</span>yrow</span>
+<span id="cb12-3"><a aria-label="3"></a>rr <span class="ot">&lt;-</span> <span class="fu">t</span>(int_cases<span class="sc">$</span>v)<span class="sc">/</span><span class="fu">t</span>(alpha_hat <span class="sc">*</span> int_controls<span class="sc">$</span>v)</span>
+<span id="cb12-4"><a aria-label="4"></a><span class="fu">image.plot</span>(x, y, rr, <span class="at">asp =</span> <span class="dv">1</span>)</span>
+<span id="cb12-5"><a aria-label="5"></a><span class="fu">title</span>(<span class="at">xlab =</span> <span class="st">"Easting"</span>, <span class="at">ylab =</span> <span class="st">"Northing"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 
 </div>
@@ -562,47 +565,47 @@ Jeff Jacobs
 <div class="cell" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>plot_rlabel <span class="ot">&lt;-</span> <span class="cf">function</span>(rl_ppp) {</span>
-<span id="cb13-2"><a></a>  rl_win_sf <span class="ot">&lt;-</span> <span class="fu">window_to_sf</span>(rl_ppp)</span>
-<span id="cb13-3"><a></a>  rl_points_sf <span class="ot">&lt;-</span> <span class="fu">points_to_sf</span>(rl_ppp) <span class="sc">|&gt;</span></span>
-<span id="cb13-4"><a></a>    <span class="fu">rename</span>(</span>
-<span id="cb13-5"><a></a>      <span class="at">type =</span> spatstat.geom..marks.x.</span>
-<span id="cb13-6"><a></a>    )</span>
-<span id="cb13-7"><a></a>  rl_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb13-8"><a></a>    <span class="fu">geom_sf</span>(</span>
-<span id="cb13-9"><a></a>      <span class="at">data=</span>rl_win_sf,</span>
-<span id="cb13-10"><a></a>      <span class="at">alpha=</span><span class="fl">0.3</span></span>
-<span id="cb13-11"><a></a>    ) <span class="sc">+</span></span>
-<span id="cb13-12"><a></a>    <span class="fu">geom_sf</span>(</span>
-<span id="cb13-13"><a></a>      <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">fill=</span>type, <span class="at">alpha=</span>type),</span>
-<span id="cb13-14"><a></a>      <span class="at">data=</span>rl_points_sf,</span>
-<span id="cb13-15"><a></a>      <span class="at">size=</span><span class="dv">2</span>,</span>
-<span id="cb13-16"><a></a>      <span class="co"># alpha=0.75,</span></span>
-<span id="cb13-17"><a></a>      <span class="at">shape=</span><span class="dv">21</span>,</span>
-<span id="cb13-18"><a></a>      <span class="at">stroke=</span><span class="fl">0.1</span>,</span>
-<span id="cb13-19"><a></a>      <span class="co"># color='white',</span></span>
-<span id="cb13-20"><a></a>    ) <span class="sc">+</span></span>
-<span id="cb13-21"><a></a>    <span class="co"># scale_color_manual(</span></span>
-<span id="cb13-22"><a></a>    <span class="co">#   "Point Type",</span></span>
-<span id="cb13-23"><a></a>    <span class="co">#   values=c("control"="gray","case"=cb_palette[1])</span></span>
-<span id="cb13-24"><a></a>    <span class="co"># ) +</span></span>
-<span id="cb13-25"><a></a>    <span class="fu">scale_fill_manual</span>(</span>
-<span id="cb13-26"><a></a>      <span class="st">"Type"</span>,</span>
-<span id="cb13-27"><a></a>      <span class="at">values=</span><span class="fu">c</span>(<span class="st">"control"</span><span class="ot">=</span><span class="st">"gray"</span>,<span class="st">"case"</span><span class="ot">=</span>cb_palette[<span class="dv">1</span>])</span>
-<span id="cb13-28"><a></a>    ) <span class="sc">+</span></span>
-<span id="cb13-29"><a></a>    <span class="fu">scale_alpha_manual</span>(</span>
-<span id="cb13-30"><a></a>      <span class="st">"Type"</span>,</span>
-<span id="cb13-31"><a></a>      <span class="at">values=</span><span class="fu">c</span>(<span class="st">"control"</span><span class="ot">=</span><span class="fl">0.5</span>, <span class="st">"case"</span><span class="ot">=</span><span class="fl">1.0</span>)</span>
-<span id="cb13-32"><a></a>    ) <span class="sc">+</span></span>
-<span id="cb13-33"><a></a>    <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">16</span>) <span class="sc">+</span></span>
-<span id="cb13-34"><a></a>    <span class="fu">labs</span>(</span>
-<span id="cb13-35"><a></a>      <span class="at">title=</span><span class="st">"NE Britain Disease Cases"</span></span>
-<span id="cb13-36"><a></a>    )</span>
-<span id="cb13-37"><a></a>  <span class="fu">return</span>(rl_plot)</span>
-<span id="cb13-38"><a></a>}</span>
-<span id="cb13-39"><a></a><span class="fu">set.seed</span>(<span class="dv">6810</span>)</span>
-<span id="cb13-40"><a></a>rl1_ppp <span class="ot">&lt;-</span> <span class="fu">rlabel</span>(pbc)</span>
-<span id="cb13-41"><a></a><span class="fu">plot_rlabel</span>(rl1_ppp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-label="1"></a>plot_rlabel <span class="ot">&lt;-</span> <span class="cf">function</span>(rl_ppp) {</span>
+<span id="cb13-2"><a aria-label="2"></a>  rl_win_sf <span class="ot">&lt;-</span> <span class="fu">window_to_sf</span>(rl_ppp)</span>
+<span id="cb13-3"><a aria-label="3"></a>  rl_points_sf <span class="ot">&lt;-</span> <span class="fu">points_to_sf</span>(rl_ppp) <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a aria-label="4"></a>    <span class="fu">rename</span>(</span>
+<span id="cb13-5"><a aria-label="5"></a>      <span class="at">type =</span> spatstat.geom..marks.x.</span>
+<span id="cb13-6"><a aria-label="6"></a>    )</span>
+<span id="cb13-7"><a aria-label="7"></a>  rl_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-8"><a aria-label="8"></a>    <span class="fu">geom_sf</span>(</span>
+<span id="cb13-9"><a aria-label="9"></a>      <span class="at">data=</span>rl_win_sf,</span>
+<span id="cb13-10"><a aria-label="10"></a>      <span class="at">alpha=</span><span class="fl">0.3</span></span>
+<span id="cb13-11"><a aria-label="11"></a>    ) <span class="sc">+</span></span>
+<span id="cb13-12"><a aria-label="12"></a>    <span class="fu">geom_sf</span>(</span>
+<span id="cb13-13"><a aria-label="13"></a>      <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">fill=</span>type, <span class="at">alpha=</span>type),</span>
+<span id="cb13-14"><a aria-label="14"></a>      <span class="at">data=</span>rl_points_sf,</span>
+<span id="cb13-15"><a aria-label="15"></a>      <span class="at">size=</span><span class="dv">2</span>,</span>
+<span id="cb13-16"><a aria-label="16"></a>      <span class="co"># alpha=0.75,</span></span>
+<span id="cb13-17"><a aria-label="17"></a>      <span class="at">shape=</span><span class="dv">21</span>,</span>
+<span id="cb13-18"><a aria-label="18"></a>      <span class="at">stroke=</span><span class="fl">0.1</span>,</span>
+<span id="cb13-19"><a aria-label="19"></a>      <span class="co"># color='white',</span></span>
+<span id="cb13-20"><a aria-label="20"></a>    ) <span class="sc">+</span></span>
+<span id="cb13-21"><a aria-label="21"></a>    <span class="co"># scale_color_manual(</span></span>
+<span id="cb13-22"><a aria-label="22"></a>    <span class="co">#   "Point Type",</span></span>
+<span id="cb13-23"><a aria-label="23"></a>    <span class="co">#   values=c("control"="gray","case"=cb_palette[1])</span></span>
+<span id="cb13-24"><a aria-label="24"></a>    <span class="co"># ) +</span></span>
+<span id="cb13-25"><a aria-label="25"></a>    <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb13-26"><a aria-label="26"></a>      <span class="st">"Type"</span>,</span>
+<span id="cb13-27"><a aria-label="27"></a>      <span class="at">values=</span><span class="fu">c</span>(<span class="st">"control"</span><span class="ot">=</span><span class="st">"gray"</span>,<span class="st">"case"</span><span class="ot">=</span>cb_palette[<span class="dv">1</span>])</span>
+<span id="cb13-28"><a aria-label="28"></a>    ) <span class="sc">+</span></span>
+<span id="cb13-29"><a aria-label="29"></a>    <span class="fu">scale_alpha_manual</span>(</span>
+<span id="cb13-30"><a aria-label="30"></a>      <span class="st">"Type"</span>,</span>
+<span id="cb13-31"><a aria-label="31"></a>      <span class="at">values=</span><span class="fu">c</span>(<span class="st">"control"</span><span class="ot">=</span><span class="fl">0.5</span>, <span class="st">"case"</span><span class="ot">=</span><span class="fl">1.0</span>)</span>
+<span id="cb13-32"><a aria-label="32"></a>    ) <span class="sc">+</span></span>
+<span id="cb13-33"><a aria-label="33"></a>    <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb13-34"><a aria-label="34"></a>    <span class="fu">labs</span>(</span>
+<span id="cb13-35"><a aria-label="35"></a>      <span class="at">title=</span><span class="st">"NE Britain Disease Cases"</span></span>
+<span id="cb13-36"><a aria-label="36"></a>    )</span>
+<span id="cb13-37"><a aria-label="37"></a>  <span class="fu">return</span>(rl_plot)</span>
+<span id="cb13-38"><a aria-label="38"></a>}</span>
+<span id="cb13-39"><a aria-label="39"></a><span class="fu">set.seed</span>(<span class="dv">6810</span>)</span>
+<span id="cb13-40"><a aria-label="40"></a>rl1_ppp <span class="ot">&lt;-</span> <span class="fu">rlabel</span>(pbc)</span>
+<span id="cb13-41"><a aria-label="41"></a><span class="fu">plot_rlabel</span>(rl1_ppp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -616,9 +619,9 @@ Jeff Jacobs
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">set.seed</span>(<span class="dv">6811</span>)</span>
-<span id="cb14-2"><a></a>pbc_2 <span class="ot">&lt;-</span> <span class="fu">rlabel</span>(pbc)</span>
-<span id="cb14-3"><a></a><span class="fu">plot_rlabel</span>(pbc_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">6811</span>)</span>
+<span id="cb14-2"><a aria-label="2"></a>pbc_2 <span class="ot">&lt;-</span> <span class="fu">rlabel</span>(pbc)</span>
+<span id="cb14-3"><a aria-label="3"></a><span class="fu">plot_rlabel</span>(pbc_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -632,9 +635,9 @@ Jeff Jacobs
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">set.seed</span>(<span class="dv">6812</span>)</span>
-<span id="cb15-2"><a></a>pbc_3 <span class="ot">&lt;-</span> <span class="fu">rlabel</span>(pbc)</span>
-<span id="cb15-3"><a></a><span class="fu">plot_rlabel</span>(pbc_3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">6812</span>)</span>
+<span id="cb15-2"><a aria-label="2"></a>pbc_3 <span class="ot">&lt;-</span> <span class="fu">rlabel</span>(pbc)</span>
+<span id="cb15-3"><a aria-label="3"></a><span class="fu">plot_rlabel</span>(pbc_3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -657,22 +660,22 @@ Jeff Jacobs
 <div class="cell" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>pbc_win_sf <span class="ot">&lt;-</span> pbc <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"window"</span>)</span>
-<span id="cb16-2"><a></a>plot_pbc_sim <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb16-3"><a></a>    pbc_sim <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
-<span id="cb16-4"><a></a>        <span class="at">lambda =</span> alpha_hat <span class="sc">*</span> int_controls</span>
-<span id="cb16-5"><a></a>    )</span>
-<span id="cb16-6"><a></a>    <span class="co"># Separate window and points</span></span>
-<span id="cb16-7"><a></a>    pbc_sf <span class="ot">&lt;-</span> pbc_sim <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
-<span id="cb16-8"><a></a>    pbc_point_sf <span class="ot">&lt;-</span> pbc_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"point"</span>)</span>
-<span id="cb16-9"><a></a>    pbc_win_sf <span class="ot">&lt;-</span> pbc_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"window"</span>)</span>
-<span id="cb16-10"><a></a>    pbc_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb16-11"><a></a>      <span class="fu">geom_sf</span>(<span class="at">data=</span>pbc_win_sf) <span class="sc">+</span></span>
-<span id="cb16-12"><a></a>      <span class="fu">geom_sf</span>(<span class="at">data=</span>pbc_point_sf, <span class="at">size=</span><span class="fl">0.5</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb16-13"><a></a>      <span class="fu">theme_classic</span>()</span>
-<span id="cb16-14"><a></a>    <span class="fu">return</span>(pbc_plot)</span>
-<span id="cb16-15"><a></a>}</span>
-<span id="cb16-16"><a></a><span class="fu">plot_pbc_sim</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-label="1"></a>pbc_win_sf <span class="ot">&lt;-</span> pbc <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"window"</span>)</span>
+<span id="cb16-2"><a aria-label="2"></a>plot_pbc_sim <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb16-3"><a aria-label="3"></a>    pbc_sim <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
+<span id="cb16-4"><a aria-label="4"></a>        <span class="at">lambda =</span> alpha_hat <span class="sc">*</span> int_controls</span>
+<span id="cb16-5"><a aria-label="5"></a>    )</span>
+<span id="cb16-6"><a aria-label="6"></a>    <span class="co"># Separate window and points</span></span>
+<span id="cb16-7"><a aria-label="7"></a>    pbc_sf <span class="ot">&lt;-</span> pbc_sim <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
+<span id="cb16-8"><a aria-label="8"></a>    pbc_point_sf <span class="ot">&lt;-</span> pbc_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"point"</span>)</span>
+<span id="cb16-9"><a aria-label="9"></a>    pbc_win_sf <span class="ot">&lt;-</span> pbc_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"window"</span>)</span>
+<span id="cb16-10"><a aria-label="10"></a>    pbc_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb16-11"><a aria-label="11"></a>      <span class="fu">geom_sf</span>(<span class="at">data=</span>pbc_win_sf) <span class="sc">+</span></span>
+<span id="cb16-12"><a aria-label="12"></a>      <span class="fu">geom_sf</span>(<span class="at">data=</span>pbc_point_sf, <span class="at">size=</span><span class="fl">0.5</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb16-13"><a aria-label="13"></a>      <span class="fu">theme_classic</span>()</span>
+<span id="cb16-14"><a aria-label="14"></a>    <span class="fu">return</span>(pbc_plot)</span>
+<span id="cb16-15"><a aria-label="15"></a>}</span>
+<span id="cb16-16"><a aria-label="16"></a><span class="fu">plot_pbc_sim</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -686,7 +689,7 @@ Jeff Jacobs
 <div class="cell" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">plot_pbc_sim</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a aria-label="1"></a><span class="fu">plot_pbc_sim</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -700,7 +703,7 @@ Jeff Jacobs
 <div class="cell" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">plot_pbc_sim</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-label="1"></a><span class="fu">plot_pbc_sim</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -993,7 +996,7 @@ Gimond, Manuel. 2024. <em><a href="https://mgimond.github.io/Spatial/">Introduct
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],

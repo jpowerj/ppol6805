@@ -3567,14 +3567,14 @@
     "href": "writeups/positron/index.html",
     "title": "Connecting to Positron and Accessing Assignments",
     "section": "",
-    "text": "For both MacOS and Windows, you can download the latest version of Positron from its homepage. Once you have downloaded and installed it follow these instructions to connect to your JupyterHub space through Positron:\nFirst things first, note that this guide used a brand new installation of MacOS Sequioa 15.6.1 from scratch:\nBut also that, a fresh install of Windows 11 was used separately to test that the steps here work on Windows as well!\nMy hope is that the screenshots generated with this clean installation will therefore better resemble what you see when you first go to connect!"
+    "text": "NoteSaxaNet vs. GuestNet\n\n\n\nIf you are on Georgetown’s campus, make sure that you are connected to the SaxaNet wifi network, and not the GuestNet wifi network. SSHing into a remote instance is blocked on GuestNet, which means if you are on GuestNet you wil not be able to connect to your EC2 instances.1]\nFor both MacOS and Windows, you can download the latest version of Positron from its homepage. Once you have downloaded and installed it follow these instructions to connect to your JupyterHub space through Positron:\nFirst things first, note that this guide used a brand new installation of MacOS Sequioa 15.6.1 from scratch:\nBut also that, a fresh install of Windows 11 was used separately to test that the steps here work on Windows as well!\nMy hope is that the screenshots generated with this clean installation will therefore better resemble what you see when you first go to connect!"
   },
   {
     "objectID": "writeups/positron/index.html#footnotes",
     "href": "writeups/positron/index.html#footnotes",
     "title": "Connecting to Positron and Accessing Assignments",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nYou can also check the “Trust the authors of all files in the parent folder” checkbox, if you’d like, though it’s irrelevant since we won’t be loading or executing any files from that parent folder.↩︎"
+    "text": "Footnotes\n\n\nAs an alternative, if you’re unable to connect to SaxaNet, using VPN like ProtonVPN will “re-unlock” the ability to connect to Positron via SSH.↩︎\nYou can also check the “Trust the authors of all files in the parent folder” checkbox, if you’d like, though it’s irrelevant since we won’t be loading or executing any files from that parent folder.↩︎"
   },
   {
     "objectID": "writeups/random-fields/index.html",

@@ -15,6 +15,12 @@ format:
     fig-align: center
 ---
 
+::: {.callout-note title="SaxaNet vs. GuestNet"}
+
+If you are on Georgetown's campus, make sure that you are connected to the [**SaxaNet** wifi network](https://uis.georgetown.edu/saxanet/), and **not** the **GuestNet** wifi network. SSHing into a remote instance is **blocked** on GuestNet, which means if you are on GuestNet you wil not be able to connect to your EC2 instances.^[As an alternative, if you're unable to connect to SaxaNet, using VPN like [ProtonVPN](https://protonvpn.com/) will "re-unlock" the ability to connect to Positron via SSH.]]
+
+:::
+
 For both MacOS and Windows, you can download the latest version of Positron from [its homepage](https://positron.posit.co/). Once you have downloaded and installed it follow these instructions to **connect to your JupyterHub space through Positron**:
 
 First things first, note that this guide used a brand new installation of **MacOS Sequioa 15.6.1** from scratch:

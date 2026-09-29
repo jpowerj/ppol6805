@@ -7,8 +7,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e44360b8a8db1e130c7792fece1c8032.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.3">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Jeff Jacobs">
   <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation</title>
@@ -21,10 +21,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -226,7 +229,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Jeff Jacobs 
+Jeff Jacobs
 </div>
         <p class="quarto-title-affiliation">
             <a href="mailto:jj1088@georgetown.edu" target="_blank"><code>jj1088@georgetown.edu</code></a>
@@ -408,74 +411,74 @@ Figure&nbsp;4: <span class="math inline">\(\omega_4 \in \Omega\)</span>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
-<span id="cb1-2"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a></a><span class="fu">library</span>(sf)</span>
-<span id="cb1-4"><a></a><span class="fu">library</span>(terra)</span>
-<span id="cb1-5"><a></a><span class="fu">library</span>(latex2exp)</span>
-<span id="cb1-6"><a></a><span class="do">#### Define area</span></span>
-<span id="cb1-7"><a></a>lat_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">5.0</span>, <span class="sc">-</span><span class="fl">6.0</span>)</span>
-<span id="cb1-8"><a></a>lon_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>)</span>
-<span id="cb1-9"><a></a><span class="co">#lon_center &lt;- -5.4</span></span>
-<span id="cb1-10"><a></a><span class="co">#lat_center &lt;- 36.75</span></span>
-<span id="cb1-11"><a></a><span class="co"># And the window around this centroid</span></span>
-<span id="cb1-12"><a></a>lat_radius <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb1-13"><a></a>lon_radius <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
-<span id="cb1-14"><a></a></span>
-<span id="cb1-15"><a></a>gen_random_table <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">world_num=</span><span class="dv">1</span>, <span class="at">return_data=</span><span class="cn">FALSE</span>, <span class="at">rand_seed=</span><span class="cn">NULL</span>) {</span>
-<span id="cb1-16"><a></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(rand_seed)) {</span>
-<span id="cb1-17"><a></a>    <span class="fu">set.seed</span>(rand_seed)</span>
-<span id="cb1-18"><a></a>  } <span class="cf">else</span> {</span>
-<span id="cb1-19"><a></a>    rand_seed <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9999</span>, <span class="at">size=</span><span class="dv">1</span>)</span>
-<span id="cb1-20"><a></a>    <span class="fu">set.seed</span>(rand_seed)</span>
-<span id="cb1-21"><a></a>  }</span>
-<span id="cb1-22"><a></a>  lat_center <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="fu">min</span>(lat_range), <span class="at">max=</span><span class="fu">max</span>(lat_range))</span>
-<span id="cb1-23"><a></a>  lon_center <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="fu">min</span>(lon_range), <span class="at">max=</span><span class="fu">max</span>(lon_range))</span>
-<span id="cb1-24"><a></a>  lon_lower <span class="ot">&lt;-</span> lon_center <span class="sc">-</span> lon_radius</span>
-<span id="cb1-25"><a></a>  lon_upper <span class="ot">&lt;-</span> lon_center <span class="sc">+</span> lon_radius</span>
-<span id="cb1-26"><a></a>  lat_lower <span class="ot">&lt;-</span> lat_center <span class="sc">-</span> lat_radius</span>
-<span id="cb1-27"><a></a>  lat_upper <span class="ot">&lt;-</span> lat_center <span class="sc">+</span> lat_radius</span>
-<span id="cb1-28"><a></a>  coords <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(lon_lower, lon_lower, lon_upper, lon_upper),</span>
-<span id="cb1-29"><a></a>                       <span class="at">y =</span> <span class="fu">c</span>(lat_lower, lat_upper, lat_lower, lat_upper))</span>
-<span id="cb1-30"><a></a>  coords_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(coords, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
-<span id="cb1-31"><a></a>  <span class="co"># Using geodata</span></span>
-<span id="cb1-32"><a></a>  elev <span class="ot">&lt;-</span> geodata<span class="sc">::</span><span class="fu">elevation_3s</span>(<span class="at">lon =</span> lon_center, <span class="at">lat =</span> lat_center, <span class="at">res=</span><span class="fl">2.5</span>, <span class="at">path =</span> <span class="fu">getwd</span>())</span>
-<span id="cb1-33"><a></a>  elev <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(elev, coords_sf)</span>
-<span id="cb1-34"><a></a>  <span class="fu">return</span>(elev)</span>
-<span id="cb1-35"><a></a>}</span>
-<span id="cb1-36"><a></a></span>
-<span id="cb1-37"><a></a>compute_hillshade <span class="ot">&lt;-</span> <span class="cf">function</span>(elev) {</span>
-<span id="cb1-38"><a></a>  <span class="co"># Calculate hillshade</span></span>
-<span id="cb1-39"><a></a>  slopes <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">terrain</span>(elev, <span class="st">"slope"</span>, <span class="at">unit =</span> <span class="st">"radians"</span>)</span>
-<span id="cb1-40"><a></a>  aspect <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">terrain</span>(elev, <span class="st">"aspect"</span>, <span class="at">unit =</span> <span class="st">"radians"</span>)</span>
-<span id="cb1-41"><a></a>  hs <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">shade</span>(slopes, aspect)</span>
-<span id="cb1-42"><a></a>  <span class="fu">return</span>(hs)</span>
-<span id="cb1-43"><a></a>}</span>
-<span id="cb1-44"><a></a></span>
-<span id="cb1-45"><a></a>plot_hillshade <span class="ot">&lt;-</span> <span class="cf">function</span>(elev, hs, <span class="at">title=</span><span class="cn">NULL</span>) {</span>
-<span id="cb1-46"><a></a>  <span class="do">## Plot hillshading as basemap</span></span>
-<span id="cb1-47"><a></a>  <span class="co"># (here using terra::plot, but could use tmap)</span></span>
-<span id="cb1-48"><a></a>  <span class="co"># lat_upper_trimmed &lt;- lat_upper - 0.001*lat_upper</span></span>
-<span id="cb1-49"><a></a>  <span class="co"># lat_lower_trimmed &lt;- lat_lower - 0.001*lat_lower</span></span>
-<span id="cb1-50"><a></a>  base_plot <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">plot</span>(</span>
-<span id="cb1-51"><a></a>    hs, <span class="at">col =</span> <span class="fu">gray</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span> <span class="sc">/</span> <span class="dv">100</span>), <span class="at">legend =</span> <span class="cn">FALSE</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">grid=</span><span class="cn">TRUE</span></span>
-<span id="cb1-52"><a></a>  )</span>
-<span id="cb1-53"><a></a>  <span class="co">#    xlim = c(elev_xmin, elev_xmax), ylim = c(elev_ymin, elev_ymax))</span></span>
-<span id="cb1-54"><a></a>  <span class="co"># overlay with elevation</span></span>
-<span id="cb1-55"><a></a>  </span>
-<span id="cb1-56"><a></a>  color_vec <span class="ot">&lt;-</span> <span class="fu">terrain.colors</span>(<span class="dv">25</span>)</span>
-<span id="cb1-57"><a></a>  <span class="fu">plot</span>(elev, <span class="at">col =</span> color_vec, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-58"><a></a>  </span>
-<span id="cb1-59"><a></a>  <span class="co"># add contour lines</span></span>
-<span id="cb1-60"><a></a>  terra<span class="sc">::</span><span class="fu">contour</span>(elev, <span class="at">col =</span> <span class="st">"grey30"</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-61"><a></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(title)) {</span>
-<span id="cb1-62"><a></a>    world_name <span class="ot">&lt;-</span> <span class="fu">TeX</span>(<span class="fu">sprintf</span>(r<span class="st">"(World $\omega_{%d} \in \Omega$)"</span>, world_num))</span>
-<span id="cb1-63"><a></a>    <span class="fu">title</span>(world_name)</span>
-<span id="cb1-64"><a></a>  }</span>
-<span id="cb1-65"><a></a>}</span>
-<span id="cb1-66"><a></a>elev_r1 <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6810</span>)</span>
-<span id="cb1-67"><a></a>hs_r1 <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(elev_r1)</span>
-<span id="cb1-68"><a></a><span class="fu">plot_hillshade</span>(elev_r1, hs_r1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a aria-label="3"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-4"><a aria-label="4"></a><span class="fu">library</span>(terra)</span>
+<span id="cb1-5"><a aria-label="5"></a><span class="fu">library</span>(latex2exp)</span>
+<span id="cb1-6"><a aria-label="6"></a><span class="do">#### Define area</span></span>
+<span id="cb1-7"><a aria-label="7"></a>lat_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">5.0</span>, <span class="sc">-</span><span class="fl">6.0</span>)</span>
+<span id="cb1-8"><a aria-label="8"></a>lon_range <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>)</span>
+<span id="cb1-9"><a aria-label="9"></a><span class="co">#lon_center &lt;- -5.4</span></span>
+<span id="cb1-10"><a aria-label="10"></a><span class="co">#lat_center &lt;- 36.75</span></span>
+<span id="cb1-11"><a aria-label="11"></a><span class="co"># And the window around this centroid</span></span>
+<span id="cb1-12"><a aria-label="12"></a>lat_radius <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb1-13"><a aria-label="13"></a>lon_radius <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb1-14"><a aria-label="14"></a></span>
+<span id="cb1-15"><a aria-label="15"></a>gen_random_table <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">world_num=</span><span class="dv">1</span>, <span class="at">return_data=</span><span class="cn">FALSE</span>, <span class="at">rand_seed=</span><span class="cn">NULL</span>) {</span>
+<span id="cb1-16"><a aria-label="16"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(rand_seed)) {</span>
+<span id="cb1-17"><a aria-label="17"></a>    <span class="fu">set.seed</span>(rand_seed)</span>
+<span id="cb1-18"><a aria-label="18"></a>  } <span class="cf">else</span> {</span>
+<span id="cb1-19"><a aria-label="19"></a>    rand_seed <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9999</span>, <span class="at">size=</span><span class="dv">1</span>)</span>
+<span id="cb1-20"><a aria-label="20"></a>    <span class="fu">set.seed</span>(rand_seed)</span>
+<span id="cb1-21"><a aria-label="21"></a>  }</span>
+<span id="cb1-22"><a aria-label="22"></a>  lat_center <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="fu">min</span>(lat_range), <span class="at">max=</span><span class="fu">max</span>(lat_range))</span>
+<span id="cb1-23"><a aria-label="23"></a>  lon_center <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min=</span><span class="fu">min</span>(lon_range), <span class="at">max=</span><span class="fu">max</span>(lon_range))</span>
+<span id="cb1-24"><a aria-label="24"></a>  lon_lower <span class="ot">&lt;-</span> lon_center <span class="sc">-</span> lon_radius</span>
+<span id="cb1-25"><a aria-label="25"></a>  lon_upper <span class="ot">&lt;-</span> lon_center <span class="sc">+</span> lon_radius</span>
+<span id="cb1-26"><a aria-label="26"></a>  lat_lower <span class="ot">&lt;-</span> lat_center <span class="sc">-</span> lat_radius</span>
+<span id="cb1-27"><a aria-label="27"></a>  lat_upper <span class="ot">&lt;-</span> lat_center <span class="sc">+</span> lat_radius</span>
+<span id="cb1-28"><a aria-label="28"></a>  coords <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(lon_lower, lon_lower, lon_upper, lon_upper),</span>
+<span id="cb1-29"><a aria-label="29"></a>                       <span class="at">y =</span> <span class="fu">c</span>(lat_lower, lat_upper, lat_lower, lat_upper))</span>
+<span id="cb1-30"><a aria-label="30"></a>  coords_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(coords, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb1-31"><a aria-label="31"></a>  <span class="co"># Using geodata</span></span>
+<span id="cb1-32"><a aria-label="32"></a>  elev <span class="ot">&lt;-</span> geodata<span class="sc">::</span><span class="fu">elevation_3s</span>(<span class="at">lon =</span> lon_center, <span class="at">lat =</span> lat_center, <span class="at">res=</span><span class="fl">2.5</span>, <span class="at">path =</span> <span class="fu">getwd</span>())</span>
+<span id="cb1-33"><a aria-label="33"></a>  elev <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(elev, coords_sf)</span>
+<span id="cb1-34"><a aria-label="34"></a>  <span class="fu">return</span>(elev)</span>
+<span id="cb1-35"><a aria-label="35"></a>}</span>
+<span id="cb1-36"><a aria-label="36"></a></span>
+<span id="cb1-37"><a aria-label="37"></a>compute_hillshade <span class="ot">&lt;-</span> <span class="cf">function</span>(elev) {</span>
+<span id="cb1-38"><a aria-label="38"></a>  <span class="co"># Calculate hillshade</span></span>
+<span id="cb1-39"><a aria-label="39"></a>  slopes <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">terrain</span>(elev, <span class="st">"slope"</span>, <span class="at">unit =</span> <span class="st">"radians"</span>)</span>
+<span id="cb1-40"><a aria-label="40"></a>  aspect <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">terrain</span>(elev, <span class="st">"aspect"</span>, <span class="at">unit =</span> <span class="st">"radians"</span>)</span>
+<span id="cb1-41"><a aria-label="41"></a>  hs <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">shade</span>(slopes, aspect)</span>
+<span id="cb1-42"><a aria-label="42"></a>  <span class="fu">return</span>(hs)</span>
+<span id="cb1-43"><a aria-label="43"></a>}</span>
+<span id="cb1-44"><a aria-label="44"></a></span>
+<span id="cb1-45"><a aria-label="45"></a>plot_hillshade <span class="ot">&lt;-</span> <span class="cf">function</span>(elev, hs, <span class="at">title=</span><span class="cn">NULL</span>) {</span>
+<span id="cb1-46"><a aria-label="46"></a>  <span class="do">## Plot hillshading as basemap</span></span>
+<span id="cb1-47"><a aria-label="47"></a>  <span class="co"># (here using terra::plot, but could use tmap)</span></span>
+<span id="cb1-48"><a aria-label="48"></a>  <span class="co"># lat_upper_trimmed &lt;- lat_upper - 0.001*lat_upper</span></span>
+<span id="cb1-49"><a aria-label="49"></a>  <span class="co"># lat_lower_trimmed &lt;- lat_lower - 0.001*lat_lower</span></span>
+<span id="cb1-50"><a aria-label="50"></a>  base_plot <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">plot</span>(</span>
+<span id="cb1-51"><a aria-label="51"></a>    hs, <span class="at">col =</span> <span class="fu">gray</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span> <span class="sc">/</span> <span class="dv">100</span>), <span class="at">legend =</span> <span class="cn">FALSE</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">grid=</span><span class="cn">TRUE</span></span>
+<span id="cb1-52"><a aria-label="52"></a>  )</span>
+<span id="cb1-53"><a aria-label="53"></a>  <span class="co">#    xlim = c(elev_xmin, elev_xmax), ylim = c(elev_ymin, elev_ymax))</span></span>
+<span id="cb1-54"><a aria-label="54"></a>  <span class="co"># overlay with elevation</span></span>
+<span id="cb1-55"><a aria-label="55"></a>  </span>
+<span id="cb1-56"><a aria-label="56"></a>  color_vec <span class="ot">&lt;-</span> <span class="fu">terrain.colors</span>(<span class="dv">25</span>)</span>
+<span id="cb1-57"><a aria-label="57"></a>  <span class="fu">plot</span>(elev, <span class="at">col =</span> color_vec, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-58"><a aria-label="58"></a>  </span>
+<span id="cb1-59"><a aria-label="59"></a>  <span class="co"># add contour lines</span></span>
+<span id="cb1-60"><a aria-label="60"></a>  terra<span class="sc">::</span><span class="fu">contour</span>(elev, <span class="at">col =</span> <span class="st">"grey30"</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-61"><a aria-label="61"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(title)) {</span>
+<span id="cb1-62"><a aria-label="62"></a>    world_name <span class="ot">&lt;-</span> <span class="fu">TeX</span>(<span class="fu">sprintf</span>(r<span class="st">"(World $\omega_{%d} \in \Omega$)"</span>, world_num))</span>
+<span id="cb1-63"><a aria-label="63"></a>    <span class="fu">title</span>(world_name)</span>
+<span id="cb1-64"><a aria-label="64"></a>  }</span>
+<span id="cb1-65"><a aria-label="65"></a>}</span>
+<span id="cb1-66"><a aria-label="66"></a>elev_r1 <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6810</span>)</span>
+<span id="cb1-67"><a aria-label="67"></a>hs_r1 <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(elev_r1)</span>
+<span id="cb1-68"><a aria-label="68"></a><span class="fu">plot_hillshade</span>(elev_r1, hs_r1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -489,9 +492,9 @@ Figure&nbsp;4: <span class="math inline">\(\omega_4 \in \Omega\)</span>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>terra<span class="sc">::</span><span class="fu">ifel</span>(</span>
-<span id="cb2-2"><a></a>  elev_r1 <span class="sc">&gt;</span> <span class="dv">860</span>, elev_r1, <span class="cn">NA</span></span>
-<span id="cb2-3"><a></a>) <span class="sc">|&gt;</span> <span class="fu">plot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a>terra<span class="sc">::</span><span class="fu">ifel</span>(</span>
+<span id="cb2-2"><a aria-label="2"></a>  elev_r1 <span class="sc">&gt;</span> <span class="dv">860</span>, elev_r1, <span class="cn">NA</span></span>
+<span id="cb2-3"><a aria-label="3"></a>) <span class="sc">|&gt;</span> <span class="fu">plot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -507,9 +510,9 @@ Figure&nbsp;4: <span class="math inline">\(\omega_4 \in \Omega\)</span>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>elev_r2 <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6815</span>)</span>
-<span id="cb3-2"><a></a>hs_r2 <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(elev_r2)</span>
-<span id="cb3-3"><a></a><span class="fu">plot_hillshade</span>(elev_r2, hs_r2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a>elev_r2 <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6815</span>)</span>
+<span id="cb3-2"><a aria-label="2"></a>hs_r2 <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(elev_r2)</span>
+<span id="cb3-3"><a aria-label="3"></a><span class="fu">plot_hillshade</span>(elev_r2, hs_r2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -523,12 +526,12 @@ Figure&nbsp;4: <span class="math inline">\(\omega_4 \in \Omega\)</span>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>my_quant <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">quantile</span>(x, <span class="fl">0.99</span>)</span>
-<span id="cb4-2"><a></a>elev_99 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">global</span>(elev_r2, my_quant)[<span class="dv">1</span>,<span class="dv">1</span>]</span>
-<span id="cb4-3"><a></a>elev_indic_r2 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">ifel</span>(</span>
-<span id="cb4-4"><a></a>  elev_r2 <span class="sc">&gt;</span> elev_99, elev_r2, <span class="cn">NA</span></span>
-<span id="cb4-5"><a></a>)</span>
-<span id="cb4-6"><a></a><span class="fu">plot</span>(elev_indic_r2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a>my_quant <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">quantile</span>(x, <span class="fl">0.99</span>)</span>
+<span id="cb4-2"><a aria-label="2"></a>elev_99 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">global</span>(elev_r2, my_quant)[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb4-3"><a aria-label="3"></a>elev_indic_r2 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">ifel</span>(</span>
+<span id="cb4-4"><a aria-label="4"></a>  elev_r2 <span class="sc">&gt;</span> elev_99, elev_r2, <span class="cn">NA</span></span>
+<span id="cb4-5"><a aria-label="5"></a>)</span>
+<span id="cb4-6"><a aria-label="6"></a><span class="fu">plot</span>(elev_indic_r2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -547,11 +550,11 @@ Figure&nbsp;4: <span class="math inline">\(\omega_4 \in \Omega\)</span>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>table_elev <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6805</span>)</span>
-<span id="cb5-2"><a></a>table_hs <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(table_elev)</span>
-<span id="cb5-3"><a></a><span class="co">#plot_hillshade(table_elev, table_hs)</span></span>
-<span id="cb5-4"><a></a><span class="co">#par(mfrow=c(1,2), mar=c(0,0,1,1))</span></span>
-<span id="cb5-5"><a></a><span class="fu">plot</span>(table_elev)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a>table_elev <span class="ot">&lt;-</span> <span class="fu">gen_random_table</span>(<span class="at">rand_seed=</span><span class="dv">6805</span>)</span>
+<span id="cb5-2"><a aria-label="2"></a>table_hs <span class="ot">&lt;-</span> <span class="fu">compute_hillshade</span>(table_elev)</span>
+<span id="cb5-3"><a aria-label="3"></a><span class="co">#plot_hillshade(table_elev, table_hs)</span></span>
+<span id="cb5-4"><a aria-label="4"></a><span class="co">#par(mfrow=c(1,2), mar=c(0,0,1,1))</span></span>
+<span id="cb5-5"><a aria-label="5"></a><span class="fu">plot</span>(table_elev)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -566,8 +569,8 @@ Figure&nbsp;4: <span class="math inline">\(\omega_4 \in \Omega\)</span>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>elev_coarse <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">aggregate</span>(table_elev, <span class="dv">12</span>)</span>
-<span id="cb6-2"><a></a><span class="fu">plot</span>(elev_coarse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a>elev_coarse <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">aggregate</span>(table_elev, <span class="dv">12</span>)</span>
+<span id="cb6-2"><a aria-label="2"></a><span class="fu">plot</span>(elev_coarse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -849,7 +852,7 @@ Xie, Sherrie. 2022. <span>“<a href="https://www.youtube.com/watch?v=DD7bXonh-_
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],

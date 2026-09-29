@@ -7,10 +7,10 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e44360b8a8db1e130c7792fece1c8032.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/quarto-contrib/videojs/video.min.js"></script>
 <link href="../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.3">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Jeff Jacobs">
   <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 4: Unary and Binary Operations</title>
@@ -23,10 +23,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -258,7 +261,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Jeff Jacobs 
+Jeff Jacobs
 </div>
         <p class="quarto-title-affiliation">
             <a href="mailto:jj1088@georgetown.edu" target="_blank"><code>jj1088@georgetown.edu</code></a>
@@ -279,10 +282,10 @@ Jeff Jacobs
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
-<span id="cb1-2"><a></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals-sf.r"</span>)</span>
-<span id="cb1-3"><a></a><span class="fu">library</span>(rnaturalearth)</span>
-<span id="cb1-4"><a></a><span class="fu">library</span>(mapview)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals.r"</span>)</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="fu">source</span>(<span class="st">"../dsan-globals/_globals-sf.r"</span>)</span>
+<span id="cb1-3"><a aria-label="3"></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb1-4"><a aria-label="4"></a><span class="fu">library</span>(mapview)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </div>
@@ -299,13 +302,13 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
-<span id="cb2-2"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-3"><a></a><span class="fu">library</span>(sf)</span>
-<span id="cb2-4"><a></a><span class="fu">library</span>(rnaturalearth)</span>
-<span id="cb2-5"><a></a><span class="fu">library</span>(mapview)</span>
-<span id="cb2-6"><a></a>france_sf <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">country =</span> <span class="st">"France"</span>, <span class="at">scale =</span> <span class="dv">50</span>)</span>
-<span id="cb2-7"><a></a>(france_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(france_sf, <span class="at">label =</span> <span class="st">"geounit"</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">6805</span>)</span>
+<span id="cb2-2"><a aria-label="2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-3"><a aria-label="3"></a><span class="fu">library</span>(sf)</span>
+<span id="cb2-4"><a aria-label="4"></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb2-5"><a aria-label="5"></a><span class="fu">library</span>(mapview)</span>
+<span id="cb2-6"><a aria-label="6"></a>france_sf <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">country =</span> <span class="st">"France"</span>, <span class="at">scale =</span> <span class="dv">50</span>)</span>
+<span id="cb2-7"><a aria-label="7"></a>(france_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(france_sf, <span class="at">label =</span> <span class="st">"geounit"</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-11f314694b5091c7edbb" style="width:960px;height:480px;"></div>
@@ -318,8 +321,8 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>france_cent_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_centroid</span>(france_sf)</span>
-<span id="cb3-2"><a></a>france_map <span class="sc">+</span> <span class="fu">mapview</span>(france_cent_sf, <span class="at">label =</span> <span class="st">"Centroid"</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a>france_cent_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_centroid</span>(france_sf)</span>
+<span id="cb3-2"><a aria-label="2"></a>france_map <span class="sc">+</span> <span class="fu">mapview</span>(france_cent_sf, <span class="at">label =</span> <span class="st">"Centroid"</span>, <span class="at">legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-98c367b142f44ba5eb19" style="width:960px;height:480px;"></div>
@@ -333,12 +336,12 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(leaflet.extras2)</span>
-<span id="cb4-2"><a></a>africa_sf <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">continent =</span> <span class="st">"Africa"</span>, <span class="at">scale =</span> <span class="dv">50</span>)</span>
-<span id="cb4-3"><a></a>africa_union_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_union</span>(africa_sf)</span>
-<span id="cb4-4"><a></a>africa_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb4-5"><a></a>africa_union_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_union_sf, <span class="at">label=</span><span class="st">"st_union(africa)"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb4-6"><a></a>africa_map <span class="sc">|</span> africa_union_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a><span class="fu">library</span>(leaflet.extras2)</span>
+<span id="cb4-2"><a aria-label="2"></a>africa_sf <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">continent =</span> <span class="st">"Africa"</span>, <span class="at">scale =</span> <span class="dv">50</span>)</span>
+<span id="cb4-3"><a aria-label="3"></a>africa_union_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_union</span>(africa_sf)</span>
+<span id="cb4-4"><a aria-label="4"></a>africa_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb4-5"><a aria-label="5"></a>africa_union_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_union_sf, <span class="at">label=</span><span class="st">"st_union(africa)"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb4-6"><a aria-label="6"></a>africa_map <span class="sc">|</span> africa_union_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-87685ddd3edda7b2b062" style="width:960px;height:480px;"></div>
@@ -351,9 +354,9 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>africa_bbox_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_bbox</span>(africa_sf)</span>
-<span id="cb5-2"><a></a>africa_bbox_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_bbox_sf, <span class="at">label=</span><span class="st">"st_bbox(africa)"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb5-3"><a></a>africa_map <span class="sc">|</span> africa_bbox_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a>africa_bbox_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_bbox</span>(africa_sf)</span>
+<span id="cb5-2"><a aria-label="2"></a>africa_bbox_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_bbox_sf, <span class="at">label=</span><span class="st">"st_bbox(africa)"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb5-3"><a aria-label="3"></a>africa_map <span class="sc">|</span> africa_bbox_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-819a54f23d5ea0f2dae9" style="width:960px;height:480px;"></div>
@@ -366,9 +369,9 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>africa_countries_cvx <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_convex_hull</span>(africa_sf)</span>
-<span id="cb6-2"><a></a>africa_countries_cvx_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_countries_cvx, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb6-3"><a></a>africa_map <span class="sc">|</span> africa_countries_cvx_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a>africa_countries_cvx <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_convex_hull</span>(africa_sf)</span>
+<span id="cb6-2"><a aria-label="2"></a>africa_countries_cvx_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_countries_cvx, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb6-3"><a aria-label="3"></a>africa_map <span class="sc">|</span> africa_countries_cvx_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-c65b646c0484fbe0a069" style="width:960px;height:480px;"></div>
@@ -382,9 +385,9 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>africa_cvx <span class="ot">&lt;-</span> africa_sf <span class="sc">|&gt;</span> <span class="fu">st_union</span>() <span class="sc">|&gt;</span> <span class="fu">st_convex_hull</span>()</span>
-<span id="cb7-2"><a></a>africa_cvx_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_cvx, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb7-3"><a></a>africa_map <span class="sc">|</span> africa_cvx_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-label="1"></a>africa_cvx <span class="ot">&lt;-</span> africa_sf <span class="sc">|&gt;</span> <span class="fu">st_union</span>() <span class="sc">|&gt;</span> <span class="fu">st_convex_hull</span>()</span>
+<span id="cb7-2"><a aria-label="2"></a>africa_cvx_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_cvx, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb7-3"><a aria-label="3"></a>africa_map <span class="sc">|</span> africa_cvx_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-be61e8acf1ea5b195e64" style="width:960px;height:480px;"></div>
@@ -398,9 +401,9 @@ Jeff Jacobs
 <div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>africa_cents_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_centroid</span>(africa_sf)</span>
-<span id="cb8-2"><a></a>africa_cents_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_cents_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
-<span id="cb8-3"><a></a>africa_map <span class="sc">|</span> africa_cents_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-label="1"></a>africa_cents_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_centroid</span>(africa_sf)</span>
+<span id="cb8-2"><a aria-label="2"></a>africa_cents_map <span class="ot">&lt;-</span> <span class="fu">mapview</span>(africa_cents_sf, <span class="at">label=</span><span class="st">"geounit"</span>, <span class="at">legend=</span><span class="cn">FALSE</span>)</span>
+<span id="cb8-3"><a aria-label="3"></a>africa_map <span class="sc">|</span> africa_cents_map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-e0be7aa4ad290f7da524" style="width:960px;height:480px;"></div>
