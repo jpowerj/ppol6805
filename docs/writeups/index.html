@@ -50,9 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-66fa6570337b77aba47758a41e88c309.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-f056ed5cd16fd30d104e1080ff047166.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-66fa6570337b77aba47758a41e88c309.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-126632283be34e3fe3d334485118fd1e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-ca49b30da7ca00bbdfd5cdea60f9c670.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-126632283be34e3fe3d334485118fd1e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -90,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-date','listing-assignments','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-title','listing-unit','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
       searchColumns: ["listing-date","listing-title","listing-author"],
     };
@@ -509,13 +509,13 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2026-09-29, 11:52:56 PM</em></p>
+<p><em>Updated 2026-09-30, 06:19:43 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(9)</span></div><div class="category" data-category="QXNzaWdubWVudCUyMEhpbnRz">Assignment Hints <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RXh0cmElMjBXcml0ZXVwcw==">Extra Writeups <span class="quarto-category-count">(7)</span></div><div class="category" data-category="TGFicw==">Labs <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(9)</span></div><div class="category" data-category="QXNzaWdubWVudCUyMEhpbnRz">Assignment Hints <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGVtb3M=">Demos <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RXh0cmElMjBXcml0ZXVwcw==">Extra Writeups <span class="quarto-category-count">(7)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -550,12 +550,6 @@ window.Quarto = {
     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
       <option value="" disabled="" selected="" hidden="">Order By</option>
       <option value="index" data-direction="asc">Default</option>
-      <option value="listing-date-sort" data-direction="asc">
-        Last Updated - Oldest
-      </option>
-      <option value="listing-date-sort" data-direction="desc">
-        Last Updated - Newest
-      </option>
       <option value="listing-title-sort" data-direction="asc">
         Title
       </option>
@@ -575,11 +569,7 @@ window.Quarto = {
 </th>
 
 <th>
-<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Last Updated</a>
-</th>
-
-<th>
-Relevant Assignments
+Unit
 </th>
 
 <th>
@@ -590,16 +580,55 @@ Category
 </thead>
 <tbody class="list">
 
-<tr data-index="0" data-categories="QXNzaWdubWVudCUyMEhpbnRz" data-listing-date-sort="1789790400000" data-listing-file-modified-sort="1784625398714" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2514" data-listing-title-sort="HW1 Hints" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="0" data-categories="RXh0cmElMjBXcml0ZXVwcw==" data-listing-date-sort="1757217600000" data-listing-file-modified-sort="1790794685320" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1997" data-listing-title-sort="Connecting to Positron and Accessing Assignments" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../writeups/positron/index.html" class="title listing-title">Connecting to Positron and Accessing Assignments</a>
+</td>
+<td>
+<span class="listing-unit">All</span>
+</td>
+<td>
+<span class="listing-categories">Extra Writeups</span>
+</td>
+
+</tr>
+
+<tr data-index="1" data-categories="RXh0cmElMjBXcml0ZXVwcw==" data-listing-date-sort="1758081600000" data-listing-file-modified-sort="1790794550070" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="325" data-listing-title-sort="Finding GIS Data" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../writeups/data-sources/index.html" class="title listing-title">Finding GIS Data</a>
+</td>
+<td>
+<span class="listing-unit">All</span>
+</td>
+<td>
+<span class="listing-categories">Extra Writeups</span>
+</td>
+
+</tr>
+
+<tr data-index="2" data-categories="RXh0cmElMjBXcml0ZXVwcw==" data-listing-date-sort="1789617600000" data-listing-file-modified-sort="1790794802512" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="125" data-listing-title-sort="Things We Put On Maps" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<a href="../writeups/things-on-maps/index.html" class="title listing-title">Things We Put On Maps</a>
+</td>
+<td>
+<span class="listing-unit">Unit 1: GIS Concepts</span>
+</td>
+<td>
+<span class="listing-categories">Extra Writeups</span>
+</td>
+
+</tr>
+
+<tr data-index="3" data-categories="QXNzaWdubWVudCUyMEhpbnRz" data-listing-date-sort="1789790400000" data-listing-file-modified-sort="1790794983919" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2514" data-listing-title-sort="HW1 Hints" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
 <a href="../writeups/hw1-guide/index.html" class="title listing-title">HW1 Hints</a>
 </td>
 <td>
-<span class="listing-date">Sep 19, 2026</span>
-</td>
-<td>
-<span class="listing-assignments">HW1</span>
+<span class="listing-unit">Unit 1: GIS Concepts</span>
 </td>
 <td>
 <span class="listing-categories">Assignment Hints</span>
@@ -607,67 +636,13 @@ Category
 
 </tr>
 
-<tr data-index="1" data-categories="RXh0cmElMjBXcml0ZXVwcw==" data-listing-date-sort="1760587200000" data-listing-file-modified-sort="1761204035781" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="30" data-listing-word-count-sort="5923" data-listing-title-sort="Why Poisson Processes are 'The' Null Model for Testing Spatial Hypotheses" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td>
-<a href="../writeups/why-poisson/index.html" class="title listing-title">Why Poisson Processes are ‘The’ Null Model for Testing Spatial Hypotheses</a>
-</td>
-<td>
-<span class="listing-date">Oct 16, 2025</span>
-</td>
-<td>
-<span class="listing-assignments">All</span>
-</td>
-<td>
-<span class="listing-categories">Extra Writeups</span>
-</td>
-
-</tr>
-
-<tr data-index="2" data-categories="RXh0cmElMjBXcml0ZXVwcw==" data-listing-date-sort="1760414400000" data-listing-file-modified-sort="1760508135024" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="151" data-listing-title-sort="Unambiguous Neighborhoods with `sfdep`" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td>
-<a href="../writeups/sfdep/index.html" class="title listing-title">Unambiguous Neighborhoods with <code>sfdep</code></a>
-</td>
-<td>
-<span class="listing-date">Oct 14, 2025</span>
-</td>
-<td>
-<span class="listing-assignments">HW3</span>
-</td>
-<td>
-<span class="listing-categories">Extra Writeups</span>
-</td>
-
-</tr>
-
-<tr data-index="3" data-categories="RXh0cmElMjBXcml0ZXVwcw==" data-listing-date-sort="1760241600000" data-listing-file-modified-sort="1760509635462" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="573" data-listing-title-sort="Visualizing Random Fields" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
- if (href) { window.location=href ; return false; }">
-<td>
-<a href="../writeups/random-fields/index.html" class="title listing-title">Visualizing Random Fields</a>
-</td>
-<td>
-<span class="listing-date">Oct 12, 2025</span>
-</td>
-<td>
-<span class="listing-assignments">All</span>
-</td>
-<td>
-<span class="listing-categories">Extra Writeups</span>
-</td>
-
-</tr>
-
-<tr data-index="4" data-categories="RXh0cmElMjBXcml0ZXVwcw==" data-listing-date-sort="1759291200000" data-listing-file-modified-sort="1759627805199" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1042" data-listing-title-sort="Working with Coordinate Reference Systems (CRS)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="4" data-categories="RXh0cmElMjBXcml0ZXVwcw==" data-listing-date-sort="1759291200000" data-listing-file-modified-sort="1790794865105" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1042" data-listing-title-sort="Working with Coordinate Reference Systems (CRS)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
 <a href="../writeups/working-with-crs/index.html" class="title listing-title">Working with Coordinate Reference Systems (CRS)</a>
 </td>
 <td>
-<span class="listing-date">Oct 1, 2025</span>
-</td>
-<td>
-<span class="listing-assignments">HW2</span>
+<span class="listing-unit">Unit 2: Geospatial Operations</span>
 </td>
 <td>
 <span class="listing-categories">Extra Writeups</span>
@@ -675,33 +650,27 @@ Category
 
 </tr>
 
-<tr data-index="5" data-categories="TGFicw==" data-listing-date-sort="1759291200000" data-listing-file-modified-sort="1759627672352" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1514" data-listing-title-sort="PPOL 6805 Week 6 Lab: Interpolating Kurdistan" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="5" data-categories="RGVtb3M=" data-listing-date-sort="1790827200000" data-listing-file-modified-sort="1790806762212" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2480" data-listing-title-sort="PPOL 6805 Week 6 Demo: Interpolating Kurdistan" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<a href="../writeups/interpolation/index.html" class="title listing-title">PPOL 6805 Week 6 Lab: Interpolating Kurdistan</a>
+<a href="../writeups/interpolation/index.html" class="title listing-title">PPOL 6805 Week 6 Demo: Interpolating Kurdistan</a>
 </td>
 <td>
-<span class="listing-date">Oct 1, 2025</span>
+<span class="listing-unit">Unit 2: Geospatial Operations</span>
 </td>
 <td>
-<span class="listing-assignments">HW2</span>
-</td>
-<td>
-<span class="listing-categories">Labs</span>
+<span class="listing-categories">Demos</span>
 </td>
 
 </tr>
 
-<tr data-index="6" data-categories="RXh0cmElMjBXcml0ZXVwcw==" data-listing-date-sort="1758081600000" data-listing-file-modified-sort="1759622687709" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="125" data-listing-title-sort="Things We Put On Maps" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="6" data-categories="RXh0cmElMjBXcml0ZXVwcw==" data-listing-date-sort="1760241600000" data-listing-file-modified-sort="1790795081271" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="573" data-listing-title-sort="Visualizing Random Fields" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<a href="../writeups/things-on-maps/index.html" class="title listing-title">Things We Put On Maps</a>
+<a href="../writeups/random-fields/index.html" class="title listing-title">Visualizing Random Fields</a>
 </td>
 <td>
-<span class="listing-date">Sep 17, 2025</span>
-</td>
-<td>
-<span class="listing-assignments">All</span>
+<span class="listing-unit">Unit 3: Spatial Data Science Foundations</span>
 </td>
 <td>
 <span class="listing-categories">Extra Writeups</span>
@@ -709,16 +678,13 @@ Category
 
 </tr>
 
-<tr data-index="7" data-categories="RXh0cmElMjBXcml0ZXVwcw==" data-listing-date-sort="1758081600000" data-listing-file-modified-sort="1763600911228" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="325" data-listing-title-sort="Finding GIS Data" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="7" data-categories="RXh0cmElMjBXcml0ZXVwcw==" data-listing-date-sort="1760414400000" data-listing-file-modified-sort="1790795123961" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="151" data-listing-title-sort="Unambiguous Neighborhoods with `sfdep`" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<a href="../writeups/data-sources/index.html" class="title listing-title">Finding GIS Data</a>
+<a href="../writeups/sfdep/index.html" class="title listing-title">Unambiguous Neighborhoods with <code>sfdep</code></a>
 </td>
 <td>
-<span class="listing-date">Sep 17, 2025</span>
-</td>
-<td>
-<span class="listing-assignments">All</span>
+<span class="listing-unit">Unit 3: Spatial Data Science Foundations</span>
 </td>
 <td>
 <span class="listing-categories">Extra Writeups</span>
@@ -726,16 +692,13 @@ Category
 
 </tr>
 
-<tr data-index="8" data-categories="RXh0cmElMjBXcml0ZXVwcw==" data-listing-date-sort="1757217600000" data-listing-file-modified-sort="1790719212784" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1997" data-listing-title-sort="Connecting to Positron and Accessing Assignments" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="8" data-categories="RXh0cmElMjBXcml0ZXVwcw==" data-listing-date-sort="1760587200000" data-listing-file-modified-sort="1790795148665" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="30" data-listing-word-count-sort="5923" data-listing-title-sort="Why Poisson Processes are 'The' Null Model for Testing Spatial Hypotheses" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
 <td>
-<a href="../writeups/positron/index.html" class="title listing-title">Connecting to Positron and Accessing Assignments</a>
+<a href="../writeups/why-poisson/index.html" class="title listing-title">Why Poisson Processes are ‘The’ Null Model for Testing Spatial Hypotheses</a>
 </td>
 <td>
-<span class="listing-date">Sep 7, 2025</span>
-</td>
-<td>
-<span class="listing-assignments">HW1</span>
+<span class="listing-unit">Unit 4: Spatial Data Science Methods</span>
 </td>
 <td>
 <span class="listing-categories">Extra Writeups</span>

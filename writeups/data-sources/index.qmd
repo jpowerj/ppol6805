@@ -7,8 +7,7 @@ date: 2025-09-17
 sidebar: mainnav
 categories:
   - Extra Writeups
-assignments:
-  - All
+unit: "All"
 cache: true
 format:
   html:

@@ -3,14 +3,13 @@ title: "Things We Put On Maps"
 author:
   name: "Jeff Jacobs"
   email: "jj1088@georgetown.edu"
-date: 2025-09-17
+date: 2026-09-17
 sidebar: mainnav
 bibliography: "../../_PPOL6805.bib"
 csl: "../../chicago-17-no-url.csl"
 categories:
   - Extra Writeups
-assignments:
-  - All
+unit: "Unit 1: GIS Concepts"
 cache: true
 format:
   html:

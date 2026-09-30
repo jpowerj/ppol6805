@@ -5,6 +5,7 @@ date: 2025-10-14
 sidebar: mainnav
 categories:
   - Extra Writeups
+unit: "Unit 3: Spatial Data Science Foundations"
 assignments:
   - HW3
 format:

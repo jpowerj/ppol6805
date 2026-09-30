@@ -1,0 +1,1 @@
+*   If an area is split in half, population density of the two halves is **not** $\frac{1}{2}$ the density of the whole!

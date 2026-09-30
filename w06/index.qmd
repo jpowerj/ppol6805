@@ -328,11 +328,11 @@ dc_zip_df |> select(overlap) |> sum() |> round(digits=3)
 
 -   **Extensive** attributes: associated with a physical size (length, area, volume, counts of items). Ex: **population count**.
     -   Associated with an area $\implies$ if that area is cut into smaller areas, the population count needs to be split too
-    -   (At minimum, the **sum** of the population counts for the smaller areas needs to equal the total for the larger area)
+    -   Constraint: The **sum** of the population counts for the smaller areas needs to equal the **total** population across the combined area
 -   **Intensive** attributes: **Not** proportional to support: if the area is split, values may vary but on average remain the same. Ex: **population density**
     -   If an area is split into smaller areas, population density is not split similarly!
     -   The **sum** of population densities for the smaller areas is a meaningless measure
-    -   Instead, the **mean** will be more useful as \~similar to the density of the total
+    -   Constraint: the **mean** of the population density for the smaller areas needs to equal the **overall** population density across the combined area
 
 ## Handling the Extensive Case {.smaller .crunch-title}
 

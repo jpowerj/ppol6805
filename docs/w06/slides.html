@@ -124,7 +124,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-697c734db6f753fb93e77503d5948323.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-2c785b89966288c4986637b4f755e3f6.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -769,13 +769,13 @@ Table&nbsp;2: From <a href="https://docs.geotools.org/latest/userguide/library/j
 <li><strong>Extensive</strong> attributes: associated with a physical size (length, area, volume, counts of items). Ex: <strong>population count</strong>.
 <ul>
 <li>Associated with an area <span class="math inline">\(\implies\)</span> if that area is cut into smaller areas, the population count needs to be split too</li>
-<li>(At minimum, the <strong>sum</strong> of the population counts for the smaller areas needs to equal the total for the larger area)</li>
+<li>Constraint: The <strong>sum</strong> of the population counts for the smaller areas needs to equal the <strong>total</strong> population across the combined area</li>
 </ul></li>
 <li><strong>Intensive</strong> attributes: <strong>Not</strong> proportional to support: if the area is split, values may vary but on average remain the same. Ex: <strong>population density</strong>
 <ul>
 <li>If an area is split into smaller areas, population density is not split similarly!</li>
 <li>The <strong>sum</strong> of population densities for the smaller areas is a meaningless measure</li>
-<li>Instead, the <strong>mean</strong> will be more useful as ~similar to the density of the total</li>
+<li>Constraint: the <strong>mean</strong> of the population density for the smaller areas needs to equal the <strong>overall</strong> population density across the combined area</li>
 </ul></li>
 </ul>
 </section>

@@ -103,9 +103,9 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-66fa6570337b77aba47758a41e88c309.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-f056ed5cd16fd30d104e1080ff047166.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-66fa6570337b77aba47758a41e88c309.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-126632283be34e3fe3d334485118fd1e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-ca49b30da7ca00bbdfd5cdea60f9c670.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-126632283be34e3fe3d334485118fd1e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -560,7 +560,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2026-09-29, 11:52:56 PM</em></p>
+<p><em>Updated 2026-09-30, 06:19:43 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -1196,13 +1196,13 @@ dbl (5): zip, fips, geoid, pop_2020, overlap
 <li><strong>Extensive</strong> attributes: associated with a physical size (length, area, volume, counts of items). Ex: <strong>population count</strong>.
 <ul>
 <li>Associated with an area <span class="math inline">\(\implies\)</span> if that area is cut into smaller areas, the population count needs to be split too</li>
-<li>(At minimum, the <strong>sum</strong> of the population counts for the smaller areas needs to equal the total for the larger area)</li>
+<li>Constraint: The <strong>sum</strong> of the population counts for the smaller areas needs to equal the <strong>total</strong> population across the combined area</li>
 </ul></li>
 <li><strong>Intensive</strong> attributes: <strong>Not</strong> proportional to support: if the area is split, values may vary but on average remain the same. Ex: <strong>population density</strong>
 <ul>
 <li>If an area is split into smaller areas, population density is not split similarly!</li>
 <li>The <strong>sum</strong> of population densities for the smaller areas is a meaningless measure</li>
-<li>Instead, the <strong>mean</strong> will be more useful as ~similar to the density of the total</li>
+<li>Constraint: the <strong>mean</strong> of the population density for the smaller areas needs to equal the <strong>overall</strong> population density across the combined area</li>
 </ul></li>
 </ul>
 </section>

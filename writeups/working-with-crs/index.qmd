@@ -9,6 +9,7 @@ sidebar: mainnav
 image: "images/line_sample_result.jpg"
 categories:
   - Extra Writeups
+unit: "Unit 2: Geospatial Operations"
 assignments:
   - HW2
 format:

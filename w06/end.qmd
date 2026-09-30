@@ -1,0 +1,47 @@
+---
+format:
+  revealjs: default
+---
+
+## Spatially *Intensive* vs. Spatially *Extensive* {.smaller .crunch-title .title-12}
+
+-   **Extensive** attributes: associated with a physical size (length, area, volume, counts of items). Ex: **population count**.
+    -   Associated with an area $\implies$ if that area is cut into smaller areas, the population count needs to be split too
+    -   Constraint: The **sum** of the population counts for the smaller areas needs to equal the **total** population across the combined area
+-   **Intensive** attributes: **Not** proportional to support: if the area is split, values may vary but on average remain the same. Ex: **population density**
+    -   If an area is split into smaller areas, population density is not split similarly!
+    -   The **sum** of population densities for the smaller areas is a meaningless measure
+    -   Constraint: the **mean** of the population density for the smaller areas needs to equal the **overall** population density across the combined area
+
+## Handling the Extensive Case {.smaller .crunch-title}
+
+-   Assume the **extensive** attribute $Y$ is **uniformly distributed** over a space $S_i$ (e.g., for **population counts** we assume everyone is evenly-spaced across the region)
+
+-   We first compute $Y_{ij}$, derived from $Y_i$ for a sub-area of $S_i$, $A_{ij} = S_i \cap T_j$:
+
+    $$
+    \hat{Y}_{ij}(A_{ij}) = \frac{|A_{ij}|}{|S_i|}Y_i(S_i)
+    $$
+
+    where $|\cdot|$ denotes area.
+
+-   Then we can compute $Y_j(T_j)$ by summing all the elements over area $T_j$:
+
+$$
+\hat{Y}_j(T_j) = \sum_{i=1}^{p}\frac{|A_{ij}|}{|S_i|}Y_i(S_i)
+$$
+
+## Handling the *Intensive* Case {.smaller .crunch-title}
+
+-   Assume the variable $Y$ has **constant value** over a space $S_i$ (e.g., **population density** in assumed to be the same across all sub-areas)
+-   Then the estimate for a sub-area is the **same** as the estimate for the total area:
+
+$$
+\hat{Y}_{ij} = Y_i(S_i)
+$$
+
+-   So that we can obtain estimates of $Y$ for new spatial units $T_j$ via **area-weighted average** of the source values:
+
+$$
+\hat{Y}_j(T_j) = \sum_{i=1}^{p}\frac{|A_{ij}|}{|T_j|}Y_j(S_i)
+$$

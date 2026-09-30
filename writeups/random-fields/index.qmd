@@ -7,13 +7,16 @@ sidebar: mainnav
 cache: true
 categories:
   - Extra Writeups
+unit: "Unit 3: Spatial Data Science Foundations"
 assignments:
   - All
 format:
   live-html:
     render-df: kable
-    theme: [default, "../../dsan-globals/jjquarto.scss"]
-    css: "/dsan-globals/jjstyles.css"
+    theme:
+      - default
+      - "../../dsan-globals/jjquarto.scss"
+      - "../../dsan-globals/jjquarto-light.scss"
     toc: true
     link-external-newwindow: true
     link-external-icon: true

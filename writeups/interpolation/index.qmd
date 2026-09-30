@@ -1,12 +1,13 @@
 ---
-title: "PPOL 6805 Week 6 Lab: Interpolating Kurdistan"
+title: "PPOL 6805 Week 6 Demo: Interpolating Kurdistan"
 author: "Jeff Jacobs"
-date: 2025-10-01
+date: 2026-10-01
 bibliography: "../../_PPOL6805.bib"
 csl: "../../chicago-17-no-url.csl"
 sidebar: mainnav
 categories:
-  - Labs
+  - Demos
+unit: "Unit 2: Geospatial Operations"
 assignments:
   - HW2
 format:
@@ -14,17 +15,27 @@ format:
     df-print: kable
 ---
 
-# Part 1: Overview and Data Loading
+# (1) Overview and Data Loading
 
-## Historical Kurdistan Geoms from ESRI
+## (1.1) Historical Kurdistan Geoms from ESRI
 
 First, check out [this amazing ESRI StoryMap](https://storymaps.arcgis.com/stories/0e0151ceb16741d992ed18edfa5f7909), which we'll cite as @hanson_putting_2023. If you're interested, you can read a bunch more about the modern history of the Kurds in @mcdowall_modern_2021.
 
 For the sake of this assignment, though, we'll focus in on the following 1946 map, which Jeff will give the fuller details of (condensing @mcdowall_modern_2021 into less than 5 minutes, hopefully!) in class:
 
-![](images/map_1946.jpeg){fig-align="center"}
+![](images/map_1946.jpeg){.lightbox fig-align="center"}
 
-## From ESRI StoryMaps to `sf` Objects
+The gist of where this map comes from can be gleaned by just... starting with UN Security Council Resolution 1, and going forward from there to UNSC Res. 2, Res. 3, and so on (as one does, of course, for learning about International Relations). You won't need to do that for long to get a sense for the early importance of Kurdistan to the drawing of modern, post-WWII borders, since:
+
+* [UNSC Res. 2](https://en.wikipedia.org/wiki/United_Nations_Security_Council_Resolution_2),
+* [UNSC Res. 3](https://en.wikipedia.org/wiki/United_Nations_Security_Council_Resolution_3), and
+* [UNSC Res. 5](https://en.wikipedia.org/wiki/United_Nations_Security_Council_Resolution_5) (after UNSC Res. 4 condemned Francoist Spain real quick)
+
+all revolved around placing diplomatic pressure on the USSR to withdraw from (soon-to-become) Iranian Kurdistan.
+
+With Kurds thus about to lose their remaining piece of territory that hadn't been absorbed into a postwar nation-state — the independent (USSR-backed) [Kurdish Republic of Mahabad](https://en.wikipedia.org/wiki/Republic_of_Mahabad) — a Kurdish diaspora group meeting in Egypt created this map that same year, as a tool for advocates of a Kurdish nation-state.
+
+## (1.2) From ESRI StoryMaps to `sf` Objects
 
 Digging into the code using Developer Tools reveals the magical **API endpoint**: [https://services.arcgis.com/3xOwF6p0r7IHIjfn/arcgis/rest/services/Kurdistan1947Boundaries](https://services.arcgis.com/3xOwF6p0r7IHIjfn/arcgis/rest/services/Kurdistan1947Boundaries)
 
@@ -36,11 +47,14 @@ The details of how `pyesridump` converts ESRI StoryMap **Features** into "standa
 
 The remainder of the lab uses these files, along with `rnaturalearth`!
 
-## Now Modern Border Geoms
+## (1.3) Modern Border Geometries
 
 ```{r}
 #| label: init
+source("fix-mapview-basemap.r")
 library(tidyverse) |> suppressPackageStartupMessages()
+library(scales) |> suppressPackageStartupMessages()
+library(ggarrow) |> suppressPackageStartupMessages()
 library(sf) |> suppressPackageStartupMessages()
 library(rnaturalearth) |> suppressPackageStartupMessages()
 library(mapview) |> suppressPackageStartupMessages()
@@ -67,9 +81,6 @@ From among allll the variables in `countries_sf`, we're only going to need `geou
 #| label: simplify-countries-sf
 countries_sf <- countries_sf |>
   select(geounit, pop_est)
-```
-
-```{r}
 countries_map <- mapview(
   countries_sf,
   zcol='geounit'
@@ -96,18 +107,18 @@ krd_map
 ```
 
 ```{r}
-#| label: display-map
+#| label: display-countries-krd-map
 countries_map + krd_map
 ```
 
-# Part 2: Areal-Weighted Interpolation for "Division"
+# (2) Areal-Weighted Interpolation for "Division"
 
-## First: Splitting KRD
+## (2.1) Splitting 1946 Kurdistan via `st_filter()`
 
 Intersects as the default predicate... not very helpful here!
 
 ```{r}
-#| label: krd-regions
+#| label: krd-regions-filter
 default_sf <- countries_sf[krd_sf,]
 mapview(default_sf)
 ```
@@ -118,60 +129,63 @@ But, intersect**ion**, via `st_intersection()`, does give us what we want!
 #| label: krd-intersection
 # inter_sf <- st_as_sf(st_union(st_intersection(countries_sf, krd_sf)))
 inter_sf <- st_intersection(countries_sf, krd_sf)
-mapview(inter_sf)
-```
-
-## New Name Column
-
-```{r}
+# New name column, for labeling the intersections
 inter_sf <- inter_sf |> mutate(
   krd_name = paste0(geounit, " Kurdistan")
 )
+mapview(inter_sf, label="krd_name")
 ```
+
+## (2.2) The Four Pieces
 
 Now let's view the four rows of the `sf` object individually:
 
 ```{r}
+#| label: view-turkish-krd
 mapview(inter_sf[1,], zcol='krd_name')
 ```
 
 ```{r}
+#| label: view-syrian-krd
 mapview(inter_sf[2,], zcol='krd_name')
 ```
 
 ```{r}
+#| label: view-iraqi-krd
 mapview(inter_sf[3,], zcol='krd_name')
 ```
 
 ```{r}
+#| label: view-iranian-krd
 mapview(inter_sf[4,], zcol='krd_name')
 ```
 
-## ...And All at Once
+...and all at once:
 
 ```{r}
+#| label: view-all-intersections
 mapview(inter_sf, zcol='krd_name')
 ```
 
 Very cool, but, we haven't taken **population** into account at all, which was the whole point of this exercise... spatial join / interpolation time!
 
-## Spatial Join / Interpolation
+## (2.3) Spatial Join / Interpolation
 
 Again drawing on @mcdowall_modern_2021 (this table is on page 4), we can estimate that the overall population across the four modern countries is approximately **32 million**:
 
-| Country | % of Country | Count |
-| - |-:|:- |
-| Turkey | 18 | 15 million |
-| Iran | 10 | 8 million |
-| Iraq | 18 | 7.2 million |
-| Syria | 9 | 1.8 million |
-| Diaspora and Caucasus | - | 2 million |
-| **Total** | - | 34 million |
+| Country   | % of Country | Count       |
+|-----------|-------------:|:------------|
+| Turkey    | 18           | 15 million  |
+| Iran      | 10           | 8 million   |
+| Iraq      | 18           | 7.2 million |
+| Syria     | 9            | 1.8 million |
+| Diaspora  | -            | 2 million   |
+| **Total** | -            | 34 million  |
 
 So, given this estimate, we can now "start over", this time with the goal of keeping track of the **population** as we do our operations:
 
 ```{r}
-#| label: krd-with-pop
+#| label: view-krd-with-pop
 fmt_pop <- function(x) formatC(x,big.mark=",",format='d')
 krd_sf <- krd_sf |> mutate(
   pop = 32000000,
@@ -187,7 +201,7 @@ Now, if we just use `st_intersection()`... it doesn't know that it should pay at
 pop_intersected_sf <- st_intersection(countries_sf, krd_sf) |>
   mutate(
     pop_str = fmt_pop(pop),
-    map_label = paste0(geounit, ' ', pop_str)
+    map_label = paste0(geounit, ': ', pop_str)
   )
 mapview(pop_intersected_sf, zcol='pop', label='map_label')
 ```
@@ -219,14 +233,22 @@ pop_interpolated_sf <- pop_interpolated_sf |> mutate(
 mapview(pop_interpolated_sf, zcol='pop', label='pop_str')
 ```
 
-Cool, this tells us, if we **didn't** create a Kurdistan, and just drew the borders of the four states (hypothetically.......), how many Kurds would be in each country (again, **assuming *uniform* distribution across 1947 Kurdistan!**)
+Cool, this tells us, if we **didn't** create a Kurdistan, and just drew the borders of the four states without concern for this community (hypothetically.......), how many Kurds would be in each country (again, **assuming *uniform* distribution across 1946 Kurdistan!**)
+
+Since we know the **total** population of 1946 Kurdistan, it would be a bad sign for the method if the **sum** of the four inferred populations didn't equal this total! Let's check:
 
 ```{r}
+#| label: check-pop-sum
 pop_interpolated_sf
 pop_interpolated_sf$pop |> sum() |> fmt_pop()
 ```
 
-## Now Interpolating Over the *Intersection*
+Great! `st_interpolate_aw()` has perfectly "chopped" the total of 32 million into 4 sub-populations $p_1$, $p_2$, $p_3$, and $p_4$, where:
+
+* The **fraction of the 32 million people** estimated to be in territory $p_i$...
+* Is equal to the **fraction of the overall Kurdistan area** that is **within country $i$**
+
+## (2.4) Now Interpolating Over the *Intersection*
 
 I think of the above as kind of a... "partially-spatially-aware" interpolation. This isn't a great description, but, what I'm getting at is the fact that:
 
@@ -259,7 +281,7 @@ So, if you find yourself needing to keep **all the other information** along wit
 ```{r}
 #| label: interpolate-as-join
 inter_sf <- inter_sf |> mutate(
-  interpolated_pop = fully_joined_sf$pop
+  pop_interpolated = fully_joined_sf$pop
 )
 inter_sf
 ```
@@ -270,15 +292,119 @@ And now we can use all the other info, like the name, for the rest of our analys
 #| label: interpolated-final
 inter_sf <- inter_sf |> mutate(
   krd_name = paste0(geounit, ' Kurdistan'),
-  pop_str = fmt_pop(interpolated_pop),
+  pop_str = fmt_pop(pop_interpolated),
   krd_label = paste0(krd_name, ': ', pop_str)
 )
-mapview(inter_sf, zcol='interpolated_pop', label='krd_label')
+mapview(inter_sf, zcol='pop_interpolated', label='krd_label')
 ```
 
-# Part 3: Areal-Weighted Interpolation as "Aggregation"
+## (2.5) How Did We Do?
 
-## Part 3.1: Estimating *Kurdistan* Population from Country Populations
+If we only care about the GIS methodology in and of itself (learning how to perform these areal weighted interpolations), we'd move on to the next section here...
+
+But, since the point of learning this is to *accomplish* something — the geographically-aware estimation of these sub-populations — let's see how we did! (Remember, if the estimates are "bad", it doesn't mean the method itself is faulty — it means that the **assumptions made by the method** are **violated** to a significant extent in **this particular case**)
+
+We can take the population estimates from @mcdowall_modern_2021, given in the table above, and compare them with the interpolation-derived populations:
+
+```{r}
+#| label: compare-estimates
+mcdowall_df <- tibble::tribble(
+  ~geounit, ~pop_mcdowall,
+  "Turkey", 15000000,
+  "Iran", 8000000,
+  "Iraq", 7200000,
+  "Syria", 2000000,
+)
+pop_est_sf <- inter_sf |>
+  left_join(mcdowall_df) |>
+  select(geounit, pop_mcdowall, pop_interpolated) |>
+  mutate(pop_diff=pop_interpolated - pop_mcdowall)
+```
+
+```{r}
+#| label: plot-estimates-numeric
+ggplot() +
+  # You can get more "basic" arrows using Base R functions
+  # like this, if you don't want to deal with ggarrow
+  # geom_segment(
+  #   data=pop_est_sf,
+  #   mapping=aes(
+  #     x=pop_mcdowall, xend=pop_interpolated, y=geounit
+  #   ),
+  #   arrow=arrow(length = unit(0.25, "cm"))
+  # ) +
+  geom_arrow_segment(
+    data=pop_est_sf,
+    mapping=aes(
+      x=pop_mcdowall,
+      xend=pop_interpolated,
+      y=geounit
+    ),
+    resect_head=1, resect_fins=0,
+    linewidth=0.8
+  ) +
+  geom_point(
+    data=pop_est_sf,
+    mapping=aes(
+      x=pop_mcdowall,
+      y=geounit,
+      color='mcd'
+    ),
+    size=3
+  ) +
+  geom_point(
+    data=pop_est_sf,
+    mapping=aes(
+      x=pop_interpolated,
+      y=geounit,
+      color='interp'
+    ),
+    size=2.5
+  ) +
+  theme_classic(base_size=11) +
+  theme(plot.title=element_text(hjust=0.5)) +
+  scale_x_continuous(labels = label_comma()) +
+  scale_color_manual(
+    labels=c(
+      "mcd"="McDowall (2021)",
+      "interp"="Interpolated"
+    ),
+    values=c(
+      "mcd"="black",
+      "interp"="#e69f00"
+    )
+  ) +
+  labs(
+    x="Population",
+    title="True vs. Interpolated Populations"
+  )
+```
+
+And we can plot the residuals on the map, to visualize where exactly our method over- and under-estimated:
+
+```{r}
+#| label: krd-residuals
+mapview(pop_est_sf, zcol="pop_diff")
+```
+
+This brings up one important data-visualization point, however: when you have values that **diverge from zero** like this, you almost always want your color palette to reflect the zero point, which `mapview` currently fails to do! So, this is a point where we might break out `ggplot2`, which has significantly more functionality for this (as a full visualization "grammar"):
+
+```{r}
+#| label: krd-residuals-ggplot
+pop_est_sf |> ggplot(aes(fill=pop_diff)) +
+  geom_sf() +
+  scale_fill_gradient2(
+    low="#4b0055", mid="white", high="#fde333",
+    labels=label_comma()
+  ) +
+  theme_classic(base_size=12) +
+  theme(plot.title=element_text(hjust=0.5)) +
+  labs(
+    title="Population Estimates: (Interpolated - True)"
+  )
+```
+
+# (3) Areal-Weighted Interpolation as "Aggregation": Estimating *Kurdistan* Population from Country Populations
 
 Here, we pretend we don't know the population of Kurdistan, and try to **estimate it** from the four country populations, based on how much of each country `POLYGON`s **overlap** with the Kurdistan `POLYGON`:
 
@@ -321,7 +447,7 @@ And, visualized!
 mapview(countries_sf, zcol="pop_est", label="pop_label") + mapview(krd_sf, zcol="pop_est", label="pop_label")
 ```
 
-We can also just combine our estimated Kurdistan data with the country data into one, big `sf` object with **5 rows**, where we just have to keep in mind that we've technically changed the unit of observation in each row from "UN-recognized country" to essentially "Geopolitical entity of some sort"
+We can also just combine our estimated Kurdistan data with the country data into one, big `sf` object with **5 rows**, where we just have to keep in mind that we've technically changed the **unit of observation** in each row from "UN-recognized country" to essentially "Geopolitical entity of some sort"
 
 ```{r}
 krd_sub_sf <- krd_sf |> select(
@@ -338,7 +464,7 @@ And now, with a single `mapview` call:
 mapview(pol_ent_sf, zcol='pop_est', label='pop_label')
 ```
 
-# Part 4: Calibrating Two *Grids*
+# (4) Calibrating Two *Grids*
 
 There is a "Northern" Kurdish language, Kurmanji, as well as a "Central" Kurdish language called Sorani^[There is also a "Southern" Kurdish language called [Xwarin](https://en.wikipedia.org/wiki/Southern_Kurdish)] While it's a bit difficult (though, very possible!) to get **`POLYGON`s** for language groups, there are standardized datasets like [Glottolog](https://glottolog.org/resource/languoid/id/cent1972.bigmap.html#4/35.65/45.81) and [WALS](https://wals.info/languoid/lect/wals_code_kji) that we can use to get at least the **centroid** of where the language is spoken, as a `POINT`:
 
@@ -363,6 +489,7 @@ kl_cent_sf <- st_as_sf(
 So, let's use **Voronoi tessellation** to split Kurdistan into two sections, based on whether each point is closer to the **Kurmanji** or **Sorani** centroid!
 
 ```{r}
+#| label: lang-centroids-voronoi
 krd_voronoi <- st_voronoi(
   st_union(kl_cent_sf),
   envelope=st_as_sfc(st_bbox(krd_sf))
@@ -374,11 +501,6 @@ krd_inter_sf <- st_sf(geometry = krd_extracted) |>
   st_intersection(krd_sf)
 krd_inter_sf$label <- c("Kurmanji Speakers", "Sorani Speakers")
 mapview(krd_inter_sf, zcol='label') + cent_map
-
-#northern_sf <- krd_voronoi[1,]
-#southern_sf <- krd_voronoi[2,]
-# mapview(northern_sf) + mapview(southern_sf)
-#mapview(st_intersection(st_cast(krd_voronoi),krd_sf))
 ```
 
 So now our job becomes: can we re-do the above estimate of Kurdistan's population, but this time derive **two separate estimates**, where the original estimate is "chopped" into two pieces on the basis of the distribution of area between Kurmanji and Sorani...
@@ -386,6 +508,7 @@ So now our job becomes: can we re-do the above estimate of Kurdistan's populatio
 The answer is: yes! That's also the job of `st_interpolate_aw()` 😎
 
 ```{r}
+#| label: lang-centroids-interpolate
 lang_pop_sf <- st_interpolate_aw(
   countries_sf['pop_est'],
   krd_inter_sf,
@@ -397,6 +520,7 @@ mapview(lang_pop_sf)
 And, adding back into our `krd_inter_sf` object so we have all the data "carried over":
 
 ```{r}
+#| label: interpolate-with-attributes
 krd_inter_sf <- krd_inter_sf |> mutate(
   pop_est = lang_pop_sf$pop_est,
   pop_str = fmt_pop(pop_est),
@@ -405,4 +529,12 @@ krd_inter_sf <- krd_inter_sf |> mutate(
 mapview(krd_inter_sf, zcol='pop_est', label='pop_label')
 ```
 
-Wohoo!
+Wohoo! Once again, we can confirm that this process of "superimposing" one grid onto another has preserved **total** population:
+
+```{r}
+#| label: check-interp-sum
+krd_inter_sf
+krd_inter_sf$pop_est |> sum() |> fmt_pop()
+```
+
+It *nearly* matches our interpolated population estimate from before — it is off by about 1000 people. This is likely just the result of our Voronoi tesselation being an approximate (as in, not infinitely pixel-perfect) algorithm, run on an approximate geographic area (the 10-scale `rnaturalearth` `POLYGON`s). If we ran it with a more detailed map, and had it run for more iterations, it would likely converge to the exact sum we're looking for!

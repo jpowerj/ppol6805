@@ -9,6 +9,7 @@ csl: "../../chicago-17-no-url.csl"
 code-fold: show
 categories:
   - Extra Writeups
+unit: "Unit 4: Spatial Data Science Methods"
 assignments:
   - All
 format:
