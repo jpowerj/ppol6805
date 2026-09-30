@@ -1,5 +1,5 @@
 ---
-title: "Week 6: Spatial Joins and Areal-Weighted Interpolation"
+title: "Week 6: Spatial Joins and Areal Weighted Interpolation"
 subtitle: "{{< var course.slides-subtitle >}}"
 author: "{{< var course.author >}}"
 institute: "{{< var course.institute >}}"
@@ -12,13 +12,11 @@ bibliography: "../_PPOL6805.bib"
 # Shared across formats:
 echo: true
 code-fold: show
-cache: true
 html-math-method: mathjax
-# Format-specific settings:
 format:
   revealjs:
     output-file: "slides.html"
-    df-print: kable
+    df-print: paged
     slide-number: true
     scrollable: true
     tbl-cap-location: bottom
@@ -26,8 +24,13 @@ format:
     link-external-newwindow: true
     footer: "{{< var weeks.6.footer >}}"
     include-in-header:
-      text: "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'><link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css'><link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous'><script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous'></script>"
-    theme: [default, "../dsan-globals/jjquarto.scss"]
+      text: |
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
+        <link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css'>
+    theme:
+      - default
+      - "../dsan-globals/jjquarto.scss"
+      - "../dsan-globals/jjquarto-light.scss"
     revealjs-plugins:
       - simplemenu
     simplemenu:
@@ -49,66 +52,197 @@ format:
 
 :::
 
-# Doing Things with DE-9IM (Back to Binary Operations)
+# Doing Things with DE-9IM (Back to Binary Operations) {data-stack-name="DE-9IM"}
 
-## *Almost* a Spatial Join {.smaller .crunch-title .leaflet-350}
+::: {.hidden}
 
 ```{r}
-#| label: almost-spatial-join
+#| label: slides-init
 source("../dsan-globals/_globals.r")
+source("../dsan-globals/_globals-sf.r")
 library(tidyverse) |> suppressPackageStartupMessages()
 library(sf) |> suppressPackageStartupMessages()
 library(rnaturalearth) |> suppressPackageStartupMessages()
 library(mapview) |> suppressPackageStartupMessages()
-africa_sf <- ne_countries(continent = "Africa", scale = 50)
-africa_union_sf <- sf::st_union(africa_sf)
-africa_map <- mapview(africa_sf, label="geounit", legend=FALSE)
-N <- 10
-sampled_points_sf <- sf::st_sample(africa_union_sf, N) |> sf::st_sf() |> mutate(temp = runif(N, 0, 100))
-sampled_points_map <- mapview(sampled_points_sf, label="Random Point", col.regions=cbPalette[1], legend=FALSE)
-countries_points_sf <- africa_sf[sampled_points_sf,]
-filtered_map <- mapview(countries_points_sf, label="geounit", legend=FALSE) + sampled_points_map
-(africa_map + sampled_points_map) | filtered_map
 ```
 
-## Spatial Filter $\neq$ Spatial Join {.smaller .smaller-table}
-
--   The issue: **Data attributes of `POINT`s are not merged into data attributes of `POLYGON`s**
-
-::::: columns
-::: {.column width="50%"}
-<center>**`POINT` Attributes**</center>
-
-```{r}
-#| label: point-attributes-filter
-st_geometry(sampled_points_sf) <- c("geom")
-sampled_points_sf |> head()
-```
 :::
 
-::: {.column width="50%"}
+## Slowing Down: 9IM *(no DE yet!)* {.smaller .crunch-title .crunch-img .table-va}
+
+::: {#tbl-polys}
+| 9IM | Interior | Boundary | Exterior |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| **Interior** | ![](images/matrix_x0_y0.png){.de9im fig-align="center"}<br>  | ![](images/matrix_x0_dy.png){.de9im fig-align="center"}<br>  | ![](images/matrix_x0_ny.png){.de9im fig-align="center"}<br>  |
+| **Boundary** | ![](images/matrix_dx_y0.png){.de9im fig-align="center"}<br>  | ![](images/matrix_dx_dy.png){.de9im fig-align="center"}<br>  | ![](images/matrix_dx_ny.png){.de9im fig-align="center"}<br>  |
+| **Exterior** | ![](images/matrix_nx_y0.png){.de9im fig-align="center"}<br>  | ![](images/matrix_nx_dy.png){.de9im fig-align="center"}<br>  | ![](images/matrix_nx_ny.png){.de9im fig-align="center"}<br>  |
+
+From [OSGeo Project](https://docs.geotools.org/latest/userguide/library/jts/dim9.html){target="_blank"}
+:::
+
+## *Dimensionally Extended* (DE) 9IM {.smaller .crunch-title .crunch-img .table-va}
+
+::: {#tbl-de-polys}
+| 9IM | Interior | Boundary | Exterior |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| **Interior** | ![](images/matrix_x0_y0.png){.de9im fig-align="center"}<br>2 | ![](images/matrix_x0_dy.png){.de9im fig-align="center"}<br>1 | ![](images/matrix_x0_ny.png){.de9im fig-align="center"}<br>2 |
+| **Boundary** | ![](images/matrix_dx_y0.png){.de9im fig-align="center"}<br>1 | ![](images/matrix_dx_dy.png){.de9im fig-align="center"}<br>0 | ![](images/matrix_dx_ny.png){.de9im fig-align="center"}<br>1 |
+| **Exterior** | ![](images/matrix_nx_y0.png){.de9im fig-align="center"}<br>2 | ![](images/matrix_nx_dy.png){.de9im fig-align="center"}<br>1 | ![](images/matrix_nx_ny.png){.de9im fig-align="center"}<br>2 |
+
+From [OSGeo Project](https://docs.geotools.org/latest/userguide/library/jts/dim9.html){target="_blank"}
+:::
+
+## Crunching it Down into a Tiny Box {.crunch-title}
+
+| DE-9IM       | Interior | Boundary | Exterior |
+|:-------------|:--------:|:--------:|:--------:|
+| **Interior** |    2     |    1     |    2     |
+| **Boundary** |    1     |    0     |    1     |
+| **Exterior** |    2     |    1     |    2     |
+
+**...And Then into a Tiny String**
+
+<center style="margin-bottom: 10px;">
+
+[`212101212`]{.boxed-cb}
+
+</center>
+
+...And Then into an Infinitesimally-Small Point
+
+![](images/gangster_spongebob.jpg){.nostretch .lightbox fig-align="center" width="15px"}
+
+## DE-9IM *Masks* {.smaller .crunch-title .crunch-ul}
+
+-   Now terms can be given **unambiguous, precise meaning!**
+
+| [`st_overlaps()`](https://r-spatial.github.io/sf/reference/geos_binary_pred.html){target="_blank"} | Interior | Boundary | Exterior |
+|:-----------------|:----------------:|:----------------:|:----------------:|
+| **Interior** | `T` | `*` | `T` |
+| **Boundary** | `*` | `*` | `*` |
+| **Exterior** | `T` | `*` | `*` |
+
+-   Special Values (besides `0`, `1`, `2`):
+    -   `T`: "True" (non-empty, `st_dimension() >= 0`)
+    -   `F`: "False" (empty, `st_dimension() == NA`)
+    -   `*`: "Wildcard" (Don't care what the value is)
+-   `st_overlaps()`: `T*T***T**`, `st_equals()`: `T*F**FFF*`
+
+## DE-9IM vs. Everyday Language {.smaller .crunch-title .crunch-ul-left}
+
+-   DE-9IM can (in theory) represent $6^9 = 10~077~696$ possible geometric relationships!
+-   The English language has like 10, and they're ambiguous ☠️ *(Compromise employed by GIS systems: allow [multiple masks](https://postgis.net/docs/ST_Intersects.html) for **same** English word)*:
+
+| English    | Mask        | `212101212` | Result                    |
+|------------|-------------|-------------|---------------------------|
+| "Disjoint" | `FF*FF****` | `FALSE`     | `x` not disjoint from `y` |
+| "Touches"  | `FT*******` | `FALSE`     | `x` doesn't touch `y`     |
+| "Touches"  | `F***T****` | `FALSE`     | `x` doesn't touch `y`     |
+| "Crosses"  | `T*T***T**` | `TRUE`      | `x` crosses `y`           |
+| "Within"   | `TF*F*****` | `FALSE`     | `x` is not within `y`     |
+| "Overlaps" | `T*T***T**` | `TRUE`      | `x` overlaps `y`          |
+
+## `st_relate()`: The Ultimate Predicate {.smaller .crunch-title .title-11}
+
+```{r}
+#| label: st-relate
+#| cols.min.print: 5
+#| cols.print: 5
+us_sf <- ne_states(iso_a2 = "US") |> add_colonies()
+dc_sf <- us_sf |> filter(iso_3166_2 == "US-DC")
+us_sf <- us_sf |> mutate(
+    de9im = st_relate(us_sf, dc_sf),
+    touches_dc = st_touches(us_sf, dc_sf, sparse = F)
+  ) |>
+  select(iso_3166_2, name, de9im, touches_dc) |>
+  arrange(name)
+us_sf
+```
+
+## (If You Don't Want to Scroll) {.smaller}
+
+```{r}
+#| label: st-relate-filtered
+us_sf |> filter(touches_dc)
+```
+
+# Spatial Joins {data-stack-name="Spatial Joins"}
+
+## Spatial Filter: *Almost* a Spatial Join {.smaller .crunch-title .title-11 .leaflet-350}
+
+```{r}
+#| label: almost-spatial-join
+set.seed(6805)
+N <- 10
+africa_sf <- ne_countries(continent = "Africa", scale = 50) |> select(geounit, gdp_md)
+africa_union_sf <- sf::st_union(africa_sf)
+africa_map <- mapview(africa_sf, label="geounit", legend=FALSE, col.regions=cb_palette[2], alpha.regions=0.5)
+sampled_points_sf <- sf::st_sample(africa_union_sf, N) |> sf::st_sf() |> mutate(temp_c = runif(N, 0, 100), pop=rdunif(N, 1, 1000))
+sampled_points_map <- mapview(sampled_points_sf, label="Random Point", col.regions=cb_palette[1], legend=FALSE)
+countries_points_sf <- africa_sf[sampled_points_sf,]
+filtered_map <- mapview(countries_points_sf, label="geounit", legend=FALSE, col.regions=cb_palette[2], alpha.regions=0.5)
+(africa_map + sampled_points_map) | (filtered_map + sampled_points_map)
+```
+
+## Spatial Filter $\neq$ Spatial Join {.smaller .smaller-table .crunch-title .title-11 .crunch-ul .crunch-p}
+
+* Initial problem: **Attributes of `POINT`s are *not merged into* attributes of `POLYGON`s**
+* Deeper problem: **How to merge *multiple* `POINT` attributes into *single* row?**
+
+:::: {.columns}
+::: {.column width="48%"}
+
 <center>**`POLYGON` Attributes**</center>
+
+:::
+::: {.column width="4%"}
+
+$\overset{?}{\leftarrow}$
+
+:::
+::: {.column width="48%"}
+
+<center>**`POINT` Attributes**</center>
+
+:::
+::::
+
+:::: {.columns}
+::: {.column width="50%"}
 
 ```{r}
 #| label: poly-attributes-filter
-countries_points_sf |> head(4)
+#| rownames.print: false
+countries_points_sf |> relocate(geometry, geounit)
 ```
-:::
-:::::
 
-## Our First Real Spatial Join: `st_join()` {.smaller .crunch-title .title-12}
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: point-attributes-filter
+#| rownames.print: false
+st_geometry(sampled_points_sf) <- c("geometry")
+sampled_points_sf
+```
+
+:::
+::::
+
+## Our First Real Spatial Join: `st_join()` {.smaller .crunch-title .title-11}
 
 ```{r}
 #| label: st-join-first
+#| rownames.print: false
 joined_sf <- countries_points_sf |> st_join(sampled_points_sf)
-joined_sf |> head()
+joined_sf |> relocate(geounit, temp_c, pop) |> head()
 ```
 
 ![](images/dance_with_doge.gif){fig-align="center"}
 
-## But... We Were Still in Easy Mode {.crunch-title}
+## But... We Were Still in Easy Mode {.crunch-title .crunch-p .text-95}
 
--   Every point could be matched **one-to-one** with a country. But what if... 😱
+Every point could be matched to **one** country. But what if... 😱
 
 ```{r}
 #| label: area-weighted-interpolation-first
@@ -119,6 +253,76 @@ plot(g)
 plot(g[1] * diag(c(3/4, 1)) + c(0.25, 0.125), add = TRUE, lty = 2)
 text(c(.2, .8, .2, .8), c(.2, .2, .8, .8), c(1,2,4,8), col = 'red')
 ```
+
+# Areal Weighted Interpolation {data-stack-name="Areal Weighted Interpolation"}
+
+## ZIP Codes vs. Census Tracts {.crunch-title .text-75}
+
+```{=html}
+<table>
+<colgroup>
+<col style="width: 5%;">
+<col style="width: 34%;">
+<col style="width: 33%;">
+<col style="width: 28%;">
+</colgroup>
+<thead>
+<tr>
+  <th></th>
+  <th class='tdl tdvc'>Geographic Unit</th>
+  <th class='tdc tdvc'>Administered By</th>
+  <th class='tdc tdvc'>For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td class='tdvc tdc' rowspan='2'><span data-qmd="<i class='bi bi-people-fill'></i>"></span></td>
+  <td class='tdl tdvc tdnb'><span data-qmd="**Census Tracts**"></span></td>
+  <td class='tdc tdvc tdnb'>US Census Bureau</td>
+  <td class='tdc tdvc tdnb'>Demographic statistics</td>
+</tr>
+<tr>
+  <td colspan='3' class='tdl tdvc'><span data-qmd="<i class='bi bi-arrow-return-right'></i> We are in GeoID $\overbrace{\underbrace{\large\texttt{11}}_{\small\text{State}}\underbrace{\large\texttt{001}}_{\small\text{County}}}^{\small\text{FIPS Code}}\overbrace{\underbrace{\large\texttt{0002}}_{\small\text{Number}}\underbrace{\large\texttt{01}}_{\small\text{Suffix}}}^{\small\text{Census Tract}}$: DC [Census Tract 2.02](https://tigerweb.geo.census.gov/tigerweb/)"></span></td>
+</tr>
+<tr>
+  <td class='tdvc tdc' rowspan='2'><span data-qmd="<i class='bi bi-mailbox-flag'></i>"></span></td>
+  <td class='tdl tdvc tdnb'><span data-qmd="**ZIP Code**&trade;"></span></td>
+  <td class='tdc tdvc tdnb'>US Postal Service</td>
+  <td class='tdc tdvc tdnb'>Mail delivery</td>
+</tr>
+<tr>
+  <td colspan='3' class='tdl tdvc'><span data-qmd="<i class='bi bi-arrow-return-right'></i> We are in [20007](https://maps.app.goo.gl/K2HSPRzzRdj6oDAG8) *([20057](https://maps.app.goo.gl/r9uoe8oEwcyKxNND9) = Hilltop Campus West of 37th St NW!)*"></span></td>
+</tr>
+<tr>
+  <td class='tdvc tdc' rowspan="2"><span data-qmd="<i class='bi bi-map'></i>"></span></td>
+  <td class='tdl tdvc tdnb'><span data-qmd="**Topographic Quadrangles**"></span></td>
+  <td class='tdc tdvc tdnb'>US Geological Survey</td>
+  <td class='tdc tdvc tdnb'>Land resource management</td>
+</tr>
+<tr>
+  <td colspan="3" class='tdl tdvc tdyb'><span data-qmd="<i class='bi bi-arrow-return-right'></i> We are in [Washington West Quadrangle](https://topobuilder.nationalmap.gov/)"></span></td>
+</tr>
+</tbody>
+</table>
+```
+
+## ZIP Code *Not On Geographic Spine!* {.crunch-title .title-11 .smaller}
+
+```{r}
+#| label: dc-zip-tracts
+#| rows.print: 11
+(dc_zip_df <- read_csv("dc.csv") |> arrange(desc(overlap)) |> mutate(geoid=format(geoid,scientific=F)))
+```
+
+```{r}
+dc_zip_df |> select(overlap) |> sum() |> round(digits=3)
+```
+
+::: {.notes}
+
+*From CV XE GIS [Documentation](https://proximityone.com/ziptractequiv.htm)*
+
+:::
 
 ## Spatially *Intensive* vs. Spatially *Extensive* {.smaller .crunch-title .title-12}
 
@@ -169,7 +373,7 @@ $$
 
 <center>
 
-[**Week 6 Lab: Interpolating Kurdistan**](../writeups/interpolation/index.qmd)
+[**Week 6 Lab: Interpolating Kurdistan**](../writeups/interpolation/index.qmd){.external target="_blank"}
 
 </center>
 

@@ -1,0 +1,65 @@
+---
+title: "Dynamic paginated table"
+format:
+  revealjs:
+    theme: default
+    slide-number: true
+---
+
+## Posts (loaded page-by-page from an API)
+
+```{ojs}
+//| echo: false
+base = "https://jsonplaceholder.typicode.com/posts"
+pageSize = 8
+
+// Ask the API for the total row count once
+totalPages = fetch(`${base}?_limit=1`)
+  .then(r => Math.ceil(+r.headers.get("x-total-count") / pageSize))
+
+// Pager control: exposes the current page number as `page`
+viewof page = {
+  const root = html`<div class="pager">
+    <button class="prev">◀ Prev</button>
+    <span class="lbl"></span>
+    <button class="next">Next ▶</button>
+  </div>`;
+  const lbl = root.querySelector(".lbl");
+  const prev = root.querySelector(".prev");
+  const next = root.querySelector(".next");
+
+  const render = () => {
+    lbl.textContent = `Page ${root.value} of ${totalPages}`;
+    prev.disabled = root.value <= 1;
+    next.disabled = root.value >= totalPages;
+  };
+  const go = d => {
+    root.value = Math.min(totalPages, Math.max(1, root.value + d));
+    render();
+    root.dispatchEvent(new Event("input", {bubbles: true}));
+  };
+  prev.onclick = () => go(-1);
+  next.onclick = () => go(1);
+
+  root.value = 1;
+  render();
+  return root;
+}
+
+// Fetches ONLY the requested page; re-runs whenever `page` changes
+data = fetch(`${base}?_page=${page}&_limit=${pageSize}`).then(r => r.json())
+
+Inputs.table(data, {
+  columns: ["id", "title"],
+  header: {id: "ID", title: "Title"},
+  width: {id: 50},
+  rows: pageSize + 1,
+  select: false
+})
+```
+
+<style>
+.reveal .pager { display:flex; gap:1em; align-items:center; font-size:0.6em; margin-bottom:0.5em; }
+.reveal .pager button { padding:0.3em 0.9em; cursor:pointer; }
+.reveal table { font-size:0.55em; }
+</style>
