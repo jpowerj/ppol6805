@@ -1,5 +1,6 @@
 ---
 title: "Additional Resources"
+sidebar: mainnav
 bibliography: "_PPOL6805.bib"
 csl: chicago-17-no-url.csl
 format:

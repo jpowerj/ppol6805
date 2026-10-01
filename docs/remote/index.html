@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Jeff Jacobs">
 
-<title>Week 11: In-Class Midterm – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
+<title>Remote Attendance – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -38,6 +37,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-listing/list.min.js"></script>
+<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -79,10 +80,67 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-weeknum','listing-name',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-weeknum","listing-name"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" '="" crossorigin="anonymous" referrerpolicy="no-referrer"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"><script src="../sidebar.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../dsan-globals/jjstyles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -256,7 +314,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../w11/index.html">Week 11: Nov 4</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../remote/index.html">Remote Attendance <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -389,7 +447,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../w11/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../w11/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 11: Nov 4</span></a>
   </div>
 </li>
@@ -438,7 +496,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../remote/index.html" class="sidebar-item-text sidebar-link" target="_blank">
+  <a href="../remote/index.html" class="sidebar-item-text sidebar-link active" target="_blank">
  <span class="menu-text">Remote Attendance <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
   </div>
 </li>
@@ -461,14 +519,8 @@ ul.task-list li input[type="checkbox"] {
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#midterm" id="toc-midterm" class="nav-link active" data-scroll-target="#midterm">Midterm</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/w11/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -476,37 +528,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 11: In-Class Midterm</h1>
-<p class="subtitle lead"><em>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</em><br>Fall 2026</p>
-  <div class="quarto-categories">
-    <div class="quarto-category">Class Sessions</div>
-  </div>
-  </div>
+<h1 class="title">Remote Attendance</h1>
+</div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Jeff Jacobs </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            <a href="mailto:jj1088@georgetown.edu" target="_blank"><code>jj1088@georgetown.edu</code></a>
-          </p>
-      </div>
-  </div>
 
 <div class="quarto-title-meta">
 
-      
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">Wednesday, November 4, 2026</p>
-    </div>
-  </div>
+    
   
     
   </div>
@@ -516,16 +545,114 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="midterm" class="level1">
-<h1>Midterm</h1>
-<ul>
-<li>The midterm will be available on Positron from <strong>6:30pm to 9:30pm</strong> on <strong>Wednesday, November 4th, 2026</strong>.</li>
-</ul>
+<p>Students are allowed up to <strong>2 class sessions</strong> where, if you are unable to attend in-person, you can use the following links to register for the Zoom session, which will add you (via your email) as a registered attendee.</p>
+<p>Note that this means you must be logged into Zoom with your <code>@georgetown.edu</code> email address – if you registered to attend over Zoom, but you aren’t logged in with the <code>@georgetown.edu</code> email you entered when registering, Zoom will not allow you to view the stream!</p>
+<p>Registering for a Zoom session also means that you will be emailed a link to the Panopto recording for that session as soon as it is available (for all others, the recording is made public one week after the end of the Zoom session).</p>
 
 
-</section>
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+
+<th>
+Week
+</th>
+
+<th>
+Registration Link
+</th>
+
+</tr>
+</thead>
+<tbody class="list">
+
+<tr data-index="0">
+<td>
+<span class="listing-weeknum">7</span>
+</td>
+<td>
+<span class="listing-name"><a href="https://georgetown.zoom.us/meeting/register/dCwRy2f9TVSKNKq7qqDdtg">Week 7: Wednesday, October 7, 2026</a></span>
+</td>
+
+</tr>
+
+<tr data-index="1">
+<td>
+<span class="listing-weeknum">8</span>
+</td>
+<td>
+<span class="listing-name"><a href="https://georgetown.zoom.us/meeting/register/7mLmM2ZqSpWkyJpNJWyL-g">Week 8: Wednesday, October 14, 2026</a></span>
+</td>
+
+</tr>
+
+<tr data-index="2">
+<td>
+<span class="listing-weeknum">9</span>
+</td>
+<td>
+<span class="listing-name"><a href="https://georgetown.zoom.us/meeting/register/63ps_yFBQUOiPXbkvHA5zw">Week 9: Wednesday, October 21, 2026</a></span>
+</td>
+
+</tr>
+
+<tr data-index="3">
+<td>
+<span class="listing-weeknum">10</span>
+</td>
+<td>
+<span class="listing-name"><a href="https://georgetown.zoom.us/meeting/register/IWi0v6ILTnqt9aWqZu06tw">Week 10: Wednesday, October 28, 2026</a></span>
+</td>
+
+</tr>
+
+<tr data-index="4">
+<td>
+<span class="listing-weeknum">11</span>
+</td>
+<td>
+<span class="listing-name"><em>No Lecture (In-Class Midterm)</em></span>
+</td>
+
+</tr>
+
+<tr data-index="5">
+<td>
+<span class="listing-weeknum">12</span>
+</td>
+<td>
+<span class="listing-name"><a href="https://georgetown.zoom.us/meeting/register/C54s_LwqQuKrIYME8W-OjQ">Week 12: Wednesday, November 11, 2026</a></span>
+</td>
+
+</tr>
+
+<tr data-index="6">
+<td>
+<span class="listing-weeknum">13</span>
+</td>
+<td>
+<span class="listing-name"><a href="https://georgetown.zoom.us/meeting/register/ifN2sjG3TKSjzcHcqOY4QQ">Week 13: Wednesday, November 18, 2026</a></span>
+</td>
+
+</tr>
+
+<tr data-index="7">
+<td>
+<span class="listing-weeknum">14</span>
+</td>
+<td>
+<span class="listing-name"><em>No Zoom Option (Final Project Showcase)</em></span>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+<div class="listing-no-matching d-none">No matching items</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -951,4 +1078,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/w11/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/remote/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>

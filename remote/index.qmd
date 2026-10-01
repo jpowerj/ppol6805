@@ -1,0 +1,25 @@
+---
+title: "Remote Attendance"
+sidebar: mainnav
+listing:
+  type: table
+  sort-ui: false
+  filter-ui: false
+  contents:
+    - remote-links.yml
+  field-types:
+    custom-number: weeknum
+  field-display-names: 
+    weeknum: "Week"
+    name: "Registration Link"
+format:
+  html:
+    link-external-icon: true
+    link-external-newwindow: true
+---
+
+Students are allowed up to **2 class sessions** where, if you are unable to attend in-person, you can use the following links to register for the Zoom session, which will add you (via your email) as a registered attendee.
+
+Note that this means you must be logged into Zoom with your `@georgetown.edu` email address – if you registered to attend over Zoom, but you aren't logged in with the `@georgetown.edu` email you entered when registering, Zoom will not allow you to view the stream!
+
+Registering for a Zoom session also means that you will be emailed a link to the Panopto recording for that session as soon as it is available (for all others, the recording is made public one week after the end of the Zoom session).

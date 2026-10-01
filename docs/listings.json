@@ -1,5 +1,30 @@
 [
   {
+    "listing": "/remote/index.html",
+    "items": []
+  },
+  {
+    "listing": "/writeups/index.html",
+    "items": [
+      "/writeups/positron/index.html",
+      "/writeups/data-sources/index.html",
+      "/writeups/things-on-maps/index.html",
+      "/writeups/hw1-guide/index.html",
+      "/writeups/working-with-crs/index.html",
+      "/writeups/interpolation/index.html",
+      "/writeups/random-fields/index.html",
+      "/writeups/sfdep/index.html",
+      "/writeups/why-poisson/index.html"
+    ]
+  },
+  {
+    "listing": "/assignments/index.html",
+    "items": [
+      "/assignments/hw4/index.html",
+      "/assignments/mt-practice/index.html"
+    ]
+  },
+  {
     "listing": "/index.html",
     "items": [
       "/w01/index.html",
@@ -16,27 +41,6 @@
       "/w12/index.html",
       "/w13/index.html",
       "/w14/index.html"
-    ]
-  },
-  {
-    "listing": "/assignments/index.html",
-    "items": [
-      "/assignments/hw4/index.html",
-      "/assignments/mt-practice/index.html"
-    ]
-  },
-  {
-    "listing": "/writeups/index.html",
-    "items": [
-      "/writeups/positron/index.html",
-      "/writeups/data-sources/index.html",
-      "/writeups/things-on-maps/index.html",
-      "/writeups/hw1-guide/index.html",
-      "/writeups/working-with-crs/index.html",
-      "/writeups/interpolation/index.html",
-      "/writeups/random-fields/index.html",
-      "/writeups/sfdep/index.html",
-      "/writeups/why-poisson/index.html"
     ]
   }
 ]
