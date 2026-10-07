@@ -104,9 +104,9 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-126632283be34e3fe3d334485118fd1e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-ca49b30da7ca00bbdfd5cdea60f9c670.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-126632283be34e3fe3d334485118fd1e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ca867d15e40445eff11b3838a88e63a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-24fdf33c1779a1f0838f23242691d80e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-ca867d15e40445eff11b3838a88e63a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -521,7 +521,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../remote/index.html" class="sidebar-item-text sidebar-link" target="_blank">
+  <a href="../remote/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Remote Attendance <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
   </div>
 </li>
@@ -540,7 +540,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2026-10-01, 02:17:09 PM</em></p>
+<p><em>Updated 2026-10-07, 06:10:50 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -563,9 +563,10 @@ window.Quarto = {
   <li><a href="#who-are-my-neighbors" id="toc-who-are-my-neighbors" class="nav-link" data-scroll-target="#who-are-my-neighbors">Who Are My Neighbors?</a></li>
   <li><a href="#distance-based-neighbors" id="toc-distance-based-neighbors" class="nav-link" data-scroll-target="#distance-based-neighbors">Distance-Based Neighbors</a></li>
   <li><a href="#spatial-autocorrelation" id="toc-spatial-autocorrelation" class="nav-link" data-scroll-target="#spatial-autocorrelation">Spatial Autocorrelation</a></li>
-  <li><a href="#morans-i" id="toc-morans-i" class="nav-link" data-scroll-target="#morans-i">Moran’s <span class="math inline">\(I\)</span></a></li>
+  <li><a href="#morans-i-slightly-simplified-version" id="toc-morans-i-slightly-simplified-version" class="nav-link" data-scroll-target="#morans-i-slightly-simplified-version">Moran’s <span class="math inline">\(I\)</span> (Slightly Simplified Version)</a></li>
   <li><a href="#local-indicators-of-spatial-autocorrelation-lisa" id="toc-local-indicators-of-spatial-autocorrelation-lisa" class="nav-link" data-scroll-target="#local-indicators-of-spatial-autocorrelation-lisa">Local Indicators of Spatial Autocorrelation (LISA)</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#appendix-slide-the-full-morans-i-formula" id="toc-appendix-slide-the-full-morans-i-formula" class="nav-link" data-scroll-target="#appendix-slide-the-full-morans-i-formula">Appendix Slide: The Full Moran’s <span class="math inline">\(I\)</span> Formula</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/w07/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -619,8 +620,8 @@ window.Quarto = {
 <center class="mb-3">
 <a class="h2" href="./slides.html" target="_blank">Open slides in new tab →</a>
 </center>
-<section id="random-fields" class="level1 crunch-title crunch-ul title-13 crunch-math not-title-slide smaller" data-stack-name="Random Fields">
-<h1 class="crunch-title crunch-ul title-13 crunch-math not-title-slide smaller" data-stack-name="Random Fields">Random Fields</h1>
+<section id="random-fields" class="level1 crunch-title crunch-ul title-12 crunch-math not-title-slide smaller" data-stack-name="Random Fields">
+<h1 class="crunch-title crunch-ul title-12 crunch-math not-title-slide smaller" data-stack-name="Random Fields">Random Fields</h1>
 <p><span class="math display">\[
 \text{Data} = \left\{Z(\mathbf{s}) \mid \mathbf{s} \in D \subset \mathbb{R}^2\right\}
 \]</span></p>
@@ -630,8 +631,8 @@ window.Quarto = {
 <figcaption><span class="math inline">\(D\)</span> = Rectangle; <span class="math inline">\(Z(\mathbf{s})\)</span> here: <strong>height</strong> at coordinate <span class="math inline">\(\mathbf{s} \in D\)</span></figcaption>
 </figure>
 </div>
-<section id="key-notation-definition" class="level2 smaller smaller-table crunch-title crunch-ul crunch-li-5 crunch-math shift-ul inline-90 math-90 title-12">
-<h2 class="smaller smaller-table crunch-title crunch-ul crunch-li-5 crunch-math shift-ul inline-90 math-90 title-12 anchored" data-anchor-id="key-notation-definition">Key Notation / Definition</h2>
+<section id="key-notation-definition" class="level2 smaller smaller-table crunch-title crunch-ul crunch-ul-left-3 crunch-li-5 crunch-math shift-ul inline-90 math-90 title-12 crunch-p">
+<h2 class="smaller smaller-table crunch-title crunch-ul crunch-ul-left-3 crunch-li-5 crunch-math shift-ul inline-90 math-90 title-12 crunch-p anchored" data-anchor-id="key-notation-definition">Key Notation / Definition</h2>
 <div id="full-defn" style="width: 100% !important">
 <p>2-Dimensional <strong>Spatial Process</strong> <span class="citation" data-cites="schabenberger_statistical_2004">(<a href="#ref-schabenberger_statistical_2004" role="doc-biblioref">Schabenberger and Gotway 2004, 6</a>)</span></p>
 <p><span class="math display">\[
@@ -640,10 +641,10 @@ window.Quarto = {
 </div>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 7%">
-<col style="width: 30%">
-<col style="width: 31%">
+<col style="width: 6%">
 <col style="width: 32%">
+<col style="width: 31%">
+<col style="width: 31%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -675,18 +676,18 @@ What's Random?</b></td>
 </tr>
 <tr class="even">
 <td><strong>Example</strong></td>
-<td class="tdvt"><ul>
-<li>Dumping sand on a table <span class="math inline">\(D = \{(x,y) \mid x \in [0,2], y \in [0,1]\}\)</span></li>
-<li><span class="math inline">\(Z(\mathbf{s}_i)\)</span>: Attribute(s) at site <span class="math inline">\(\mathbf{s}_i\)</span> (at coordinate <span class="math inline">\(\mathbf{s}_i = (x_i,y_i)\)</span>)</li>
-<li>Example: <strong>Height</strong> of sand. <span class="math inline">\(Z(\mathbf{s}_1) = 500\text{m}\)</span>, <span class="math inline">\(Z(\mathbf{s}_2) = 850\text{m}\)</span>, <span class="math inline">\(\ldots\)</span></li>
+<td class="tdvt"><p>Dumping sand on a table: <span class="math inline">\(D = \{(x,y) \mid x \in [0,2], y \in [0,1]\}\)</span></p>
+<ul>
+<li><span class="math inline">\(Z(\mathbf{s}_i)\)</span>: Attribute(s) at site <span class="math inline">\(\mathbf{s}_i\)</span> (<span class="math inline">\(\mathbf{s}_i = (x_i,y_i)\)</span>)</li>
+<li><span class="math inline">\(Z(\mathbf{s}_i)\)</span> example: <strong>Height</strong> of sand. <span class="math inline">\(Z(\mathbf{s}_1) = 500\text{m}\)</span>, <span class="math inline">\(Z(\mathbf{s}_2) = 850\text{m}\)</span>, <span class="math inline">\(\ldots\)</span></li>
 </ul></td>
-<td class="tdvt"><ul>
-<li><p><span class="math inline">\(Z(\mathbf{s})\)</span> observed over <span class="math inline">\(N \times N\)</span> grid of <strong>plots</strong></p></li>
-<li><p>Well-defined ‘Neighbors’ (next section!)</p></li>
-<li><p>Autocorrelation: Are points <strong>around</strong> <span class="math inline">\(\mathbf{s}_i\)</span> likely to have values similar to <span class="math inline">\(Z(\mathbf{s}_i)\)</span>?</p></li>
+<td class="tdvt"><p><span class="math inline">\(Z(\mathbf{s})\)</span> observed over <span class="math inline">\(N \times N\)</span> grid of <strong>plots</strong> of land</p>
+<ul>
+<li>Well-defined ‘Neighbors’ (next section!)</li>
+<li>Autocorrelation: Are points <strong>around</strong> <span class="math inline">\(\mathbf{s}_i\)</span> likely to have values similar to <span class="math inline">\(Z(\mathbf{s}_i)\)</span>?</li>
 </ul></td>
-<td class="tdvt"><ul>
-<li>Unknown number of lightning strikes <span class="math inline">\(\mathbf{s}_1, \mathbf{s}_2, \ldots\)</span></li>
+<td class="tdvt"><p>Unknown number of lightning strikes <span class="math inline">\(\mathbf{s}_1, \mathbf{s}_2, \ldots\)</span></p>
+<ul>
 <li>All of <span class="math inline">\(D\)</span> is observed, but what determines subset <span class="math inline">\(D^*\)</span> where <strong>events</strong> occur?</li>
 <li><em>Unmarked</em>: Locations only</li>
 <li><em>Marked</em>: Locations+info (e.g., intensity of strike)</li>
@@ -780,21 +781,21 @@ Figure&nbsp;4: <span class="math inline">\(\omega_4 \in \Omega\)</span>
 </div>
 </div>
 </section>
-<section id="geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes" class="level2 smaller crunch-title title-12">
-<h2 class="smaller crunch-title title-12 anchored" data-anchor-id="geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes">Geostatistical <em>Modeling</em>: Terrains Are <em>Not</em> Spiky Chaotic Landscapes!</h2>
+<section id="geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes" class="level2 smaller crunch-title title-10 crunch-p">
+<h2 class="smaller crunch-title title-10 crunch-p anchored" data-anchor-id="geostatistical-modeling-terrains-are-not-spiky-chaotic-landscapes">Geostatistical <em>Modeling</em>: Terrains Are <em>Not</em> Spiky Chaotic Landscapes!</h2>
+<p><em>(If they were… we’d have to worry about suddenly plunging 1000km with each step!)</em></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/w2_missing.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
-<section id="geostatistical-data-rightarrow-point-pattern" class="level2 crunch-title crunch-ul smaller crunch-quarto-layout-panel crunch-img crunch-quarto-figure title-12 text-65">
-<h2 class="crunch-title crunch-ul smaller crunch-quarto-layout-panel crunch-img crunch-quarto-figure title-12 text-65 anchored" data-anchor-id="geostatistical-data-rightarrow-point-pattern">Geostatistical Data <span class="math inline">\(\rightarrow\)</span> Point Pattern</h2>
+<section id="geostatistical-data-rightarrow-point-pattern" class="level2 crunch-title crunch-ul smaller crunch-quarto-layout-panel crunch-img crunch-quarto-figure title-12 text-65 crunch-p">
+<h2 class="crunch-title crunch-ul smaller crunch-quarto-layout-panel crunch-img crunch-quarto-figure title-12 text-65 crunch-p anchored" data-anchor-id="geostatistical-data-rightarrow-point-pattern">Geostatistical Data <span class="math inline">\(\rightarrow\)</span> Point Pattern</h2>
+<p><em>(Example “event”: Discovery of a point higher than Washington Monument)</em></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<ul>
-<li><strong>Indicator function</strong>: <span class="math inline">\(\mathbb{1}\left[Z(\mathbf{s}) &gt; 860\text{m}\right]\)</span></li>
-</ul>
+<p><strong>Indicator function</strong>: <span class="math inline">\(\mathbb{1}\left[Z(\mathbf{s}) &gt; 860\text{m}\right]\)</span></p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -912,9 +913,7 @@ The following object is masked from 'package:tidyr':
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">ifel</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  elev_r1 <span class="sc">&gt;</span> <span class="dv">860</span>, elev_r1, <span class="cn">NA</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> <span class="fu">plot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">ifel</span>(elev_r1 <span class="sc">&gt;</span> <span class="dv">860</span>, elev_r1, <span class="cn">NA</span>) <span class="sc">|&gt;</span> <span class="fu">plot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -1038,10 +1037,10 @@ The following object is masked from 'package:tidyr':
 </figure>
 </div>
 </section>
-<section id="spatial-autocorrelation" class="level2">
-<h2 class="anchored" data-anchor-id="spatial-autocorrelation">Spatial Autocorrelation</h2>
+<section id="spatial-autocorrelation" class="level2 crunch-title">
+<h2 class="crunch-title anchored" data-anchor-id="spatial-autocorrelation">Spatial Autocorrelation</h2>
 <ul>
-<li>Location <span class="math inline">\(i\)</span> has high value <span class="math inline">\(\implies\)</span> locations <strong>near</strong> <span class="math inline">\(i\)</span> more likely to have high values</li>
+<li>Location <span class="math inline">\(i\)</span> has extreme value <span class="math inline">\(\implies\)</span> locations <strong>near</strong> <span class="math inline">\(i\)</span> more likely to have extreme values</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1049,8 +1048,8 @@ The following object is masked from 'package:tidyr':
 </figure>
 </div>
 </section>
-<section id="morans-i" class="level2">
-<h2 class="anchored" data-anchor-id="morans-i">Moran’s <span class="math inline">\(I\)</span></h2>
+<section id="morans-i-slightly-simplified-version" class="level2 smaller crunch-title">
+<h2 class="smaller crunch-title anchored" data-anchor-id="morans-i-slightly-simplified-version">Moran’s <span class="math inline">\(I\)</span> (Slightly Simplified Version)</h2>
 <p><span class="math display">\[
 I =
 \underset{\text{Inverse of Variance}}{\boxed{\frac{n}{\sum_{i=1}^{n}(y_i - \overline{y})^2}}}
@@ -1059,9 +1058,9 @@ I =
   {\underbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}_{\text{Normalize Weights}}}
 \]</span></p>
 <ul>
-<li><span class="math inline">\(I\)</span> is <strong>Large</strong> when:
+<li><span class="math inline">\(I\)</span> is <strong>large</strong> when:
 <ul>
-<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> are <strong>neighbors</strong>: <span class="math inline">\(w_{ij}\)</span>, and</li>
+<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> are <strong>neighbors</strong>: <span class="math inline">\(w_{ij} = 1\)</span>, and</li>
 <li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> <strong>large at the same time</strong>: <span class="math inline">\((y_i - \overline{y})(y_j - \overline{y})\)</span></li>
 </ul></li>
 </ul>
@@ -1089,6 +1088,23 @@ Schabenberger, Oliver, and Carol A. Gotway. 2004. <em><a href="https://www.dropb
 Xie, Sherrie. 2022. <span>“<a href="https://www.youtube.com/watch?v=DD7bXonh-_E">Analyzing <span>Geospatial Data</span> in <span>R</span></a>.”</span> In <em>R/<span>Medicine Virtual Conference</span></em>.
 </div>
 </div>
+</section>
+<section id="appendix-slide-the-full-morans-i-formula" class="level2 smaller crunch-title title-11">
+<h2 class="smaller crunch-title title-11 anchored" data-anchor-id="appendix-slide-the-full-morans-i-formula">Appendix Slide: The Full Moran’s <span class="math inline">\(I\)</span> Formula</h2>
+<p><span class="math display">\[
+I =
+\underset{\text{Inverse of Variance}}{\boxed{\frac{n}{\sum_{i=1}^{n}(y_i - \overline{y})^2}}}
+\frac
+  {\overbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(y_i - \overline{y})(y_j - \overline{y})}^{\text{Weighted Covariance}}}
+  {\underbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}_{\text{Normalize Weights}}}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(I\)</span> is <strong>large</strong> when:
+<ul>
+<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> are <strong>neighbors</strong>: <span class="math inline">\(w_{ij} = 1\)</span>, and</li>
+<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> <strong>large at the same time</strong>: <span class="math inline">\((y_i - \overline{y})(y_j - \overline{y})\)</span></li>
+</ul></li>
+</ul>
 
 
 </section>

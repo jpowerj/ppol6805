@@ -1,3 +1,5 @@
+git submodule add git@github.com:path_to/submodule.git path-to-submodule
+
 https://gist.github.com/gitaarik/8735255
 
 * git config --global submodule.recurse true
