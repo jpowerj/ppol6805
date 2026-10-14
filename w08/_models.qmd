@@ -1,0 +1,334 @@
+# A Menagerie of Models {.title-12 .not-title-slide data-stack-name="Visualizing Models"}
+
+<center>
+
+[Open Interactive (WebR) Version](https://jjacobs.me/gis-webr)
+
+</center>
+
+## Poisson Point Processes (CSR) {.crunch-title .crunch-img .crunch-ul .inline-90}
+
+``` {.r}
+spatstat.random::rpoispp(lambda, win)
+```
+
+* <i class='bi bi-1-circle'></i> $N \sim \text{Pois}(\lambda)$
+* <i class='bi bi-2-circle'></i> For $i \in \{1, \ldots, N\}$:
+  * Generate $X_i, Y_i \sim \mathcal{U}(\texttt{win})$
+
+```{r}
+#| label: pois-ppp-sims
+#| code-fold: true
+#| fig-align: center
+#| crop: true
+sim_base <- 22
+sim_psize <- 2
+sim_xticks <- seq(from=0.0, to=1.0, by=0.2)
+sim_yticks <- seq(from=0.0, to=1.0, by=0.2)
+gen_pois_df <- function(num_sims=1) {
+  pois_sims <- spatstat.random::rpoispp(
+    lambda = 60, nsim=num_sims
+  )
+  return(tibble::as_tibble(pois_sims))
+}
+#pois_dfs <- gen_pois_df()
+#pois_dfs |> head()
+pois_sims <- spatstat.random::rpoispp(
+  lambda = 60, nsim=3
+)
+to_sim_df <- function(cur_sim, sim_name) {
+  cur_df <- tibble::as_tibble(cur_sim) |> mutate(sim=sim_name)
+  return(cur_df)
+}
+combined_df <- imap(.x=pois_sims, .f=to_sim_df) |> bind_rows()
+combined_df |> ggplot(aes(x=x, y=y)) +
+  geom_point(size=sim_psize) +
+  facet_wrap(vars(sim)) +
+  coord_equal() +
+  theme_classic(base_size=sim_base) +
+  theme(panel.spacing.x = unit(2, "lines")) +
+  scale_x_continuous(breaks=sim_xticks) +
+  scale_y_continuous(breaks=sim_yticks)
+```
+
+## Simple Sequential Inhibition (SSI) {.smaller .crunch-title .title-11 .inline-90 .code-90 .crunch-img .crunch-quarto-figure .crunch-ul}
+
+``` {.r}
+spatstat.random::rSSI(r, n=Inf, giveup=1000, win)
+```
+
+* $\mathbf{S} = \varnothing$
+* While not `done`:
+  * <i class='bi bi-1-circle'></i> Generate $\mathbf{E} = (X, Y) \sim \mathcal{U}(\texttt{win})$
+  * <i class='bi bi-2-circle'></i> Check if $\mathbf{E}$ within `r` units of any existing point in $\mathbf{S}$
+    * If it is, **throw $\mathbf{E}$ away**. Otherwise, **add $\mathbf{E}$ to $\mathbf{S}$**
+  * <i class='bi bi-3-circle'></i> `done=TRUE` if $\mathbf{S}$ has `n` points OR has been the same for `giveup` steps
+
+```{r}
+#| label: ssi-sims
+#| code-fold: true
+#| fig-align: center
+#| warning: false
+#| crop: true
+capture.output(ssi_sims <- spatstat.random::rSSI(
+  r = 0.05, n=60, nsim=3
+), file=nullfile())
+combined_df <- imap(.x=ssi_sims, .f=to_sim_df) |> bind_rows()
+combined_df |> ggplot(aes(x=x, y=y)) +
+  geom_point(size=sim_psize) +
+  facet_wrap(vars(sim)) +
+  coord_equal() +
+  theme_classic(base_size=24) +
+  theme(panel.spacing.x = unit(3, "lines")) +
+  scale_x_continuous(breaks=sim_xticks) +
+  scale_y_continuous(breaks=sim_yticks)
+```
+
+## Matérn Cluster Process {.crunch-title .smaller .code-90}
+
+:::: {.columns}
+::: {.column width="75%"}
+
+``` {.r}
+spatstat.random::rMatClust(kappa, scale, mu, win)
+```
+
+:::
+::: {.column width="25%"}
+
+[Docs](https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMatClust.html){target='_blank'}
+
+:::
+::::
+
+* <i class='bi bi-1-circle'></i> Generate $K(\kappa)$ **parent points** via Poisson Point Process with intensity $\lambda = \kappa$
+* <i class='bi bi-2-circle'></i> For each parent point $\mathbf{s}_i \in \left\{\mathbf{s}_1, \ldots, \mathbf{s}_{K(\kappa)}\right\}$:
+  * Generate $N(\mu)$ **offspring points** via Poisson Point Process with intensity $\lambda = \mu$, distributed uniformly within a **circle of radius `scale`** centered at $\mathbf{s}_i$
+* <i class='bi bi-3-circle'></i> **Offspring points** form the outcome (parent points are thrown away)
+
+```{r}
+#| label: matclust-plot
+#| code-fold: true
+#| fig-align: center
+#| crop: true
+matclust_sims <- rMatClust(
+  kappa = 6,
+  scale = 0.075,
+  mu = 10,
+  nsim = 3
+)
+matclust_df <- imap(.x=matclust_sims, .f=to_sim_df) |> bind_rows()
+matclust_plot <- matclust_df |> ggplot(aes(x=x, y=y)) +
+  geom_point(size=sim_psize) +
+  facet_wrap(vars(sim), nrow=1) +
+  coord_equal() +
+  theme_classic(base_size=sim_base) +
+  theme(panel.spacing.x = unit(2, "lines")) +
+  scale_x_continuous(breaks=sim_xticks) +
+  scale_y_continuous(breaks=sim_yticks)
+matclust_plot
+```
+
+## Matérn Inhibition Process (I and II) {.smaller .crunch-title .inline-85 .crunch-ul .title-12 .text-65}
+
+```{.r}
+spatstat.random::rMaternI(kappa, r, win)
+spatstat.random::rMaternII(kappa, r, win)
+```
+
+```{=html}
+<table>
+<thead>
+<tr>
+  <th align="center"><span data-qmd="**`rMaternI()`** \[[Docs](https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMaternI.html){target='_blank'}\]"></span></th>
+  <th align="center"><span data-qmd="**`rMaternII()`** \[[Docs](https://search.r-project.org/CRAN/refmans/spatstat.random/html/rMaternII.html){target='_blank'}\]
+</center>"></span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td class='tdvt'><div data-qmd="* <i class='bi bi-1-circle'></i> Generate events $\mathbf{S} = \{\mathbf{s}_1, \ldots, \mathbf{s}_{N(\lambda)}\}$ via Poisson point process with $\lambda = \kappa$"></div></td>
+  <td class='tdvt'><div data-qmd="* <i class='bi bi-1-circle'></i> Generate events $\mathbf{S} = \{\mathbf{s}_1, \ldots, \mathbf{s}_{N(\lambda)}\}$ via Poisson point process with $\lambda = \kappa$, plus **timestamp** $t_i \sim \mathcal{U}(0,1)$ for each $\mathbf{s}_i$"></div></td>
+</tr>
+<tr>
+  <td class='tdvt'><div data-qmd="* <i class='bi bi-2-circle'></i> Delete all **pairs** of points $\mathbf{s}_i$, $\mathbf{s}_j$ for which $\textsf{dist}(\mathbf{s}_i, \mathbf{s}_j) < \texttt{r}$"></div></td>
+  <td><div data-qmd="* <i class='bi bi-2-circle'></i> For each pair of points $\mathbf{s}_i$, $\mathbf{s}_j$: if $\textsf{dist}(\mathbf{s}_i, \mathbf{s}_j) < \texttt{r}$, delete the **later** point"></div></td>
+</tr>
+</tbody>
+</table>
+```
+
+```{r}
+#| label: matern-inhib-plots
+#| code-fold: true
+#| fig-align: center
+#| crop: true
+mI_sims <- rMaternI(
+  kappa = 60, r = 0.075, nsim=2
+)
+mII_sims <- rMaternII(
+  kappa = 60, r = 0.075, nsim=2
+)
+mI_combined_df <- imap(.x=mI_sims, .f=to_sim_df) |> bind_rows() |> mutate(sim=paste0("MI ",sim))
+mII_combined_df <- imap(.x=mII_sims, .f=to_sim_df) |> bind_rows() |> mutate(sim=paste0("MII ",sim))
+m_combined_df <- bind_rows(mI_combined_df, mII_combined_df)
+m_plot <- m_combined_df |> ggplot(aes(x=x, y=y)) +
+  geom_point(size=sim_psize) +
+  facet_wrap(vars(sim), nrow=1) +
+  coord_equal() +
+  theme_classic(base_size=sim_base) +
+  theme(panel.spacing.x = unit(2, "lines")) +
+  scale_x_continuous(breaks=sim_xticks) +
+  scale_y_continuous(breaks=sim_yticks)
+m_plot
+```
+
+## Cox Processes: Random Intensity &rarr; Random Events {.smaller .crunch-title .title-10 .code-90}
+
+:::: {.columns}
+::: {.column width="60%"}
+
+``` {.r}
+spatstat.random::rLGCP(model, mu, param, win)
+models=c("exponential", "gauss", "stable", "gencauchy", "matern")
+```
+
+:::
+::: {.column width="40%"}
+
+[Docs](https://search.r-project.org/CRAN/refmans/spatstat.random/html/rLGCP.html){target='_blank'}
+
+:::
+::::
+
+```{r}
+#| label: lgcp-sim
+#| code-fold: true
+#| fig-align: center
+#| crop: true
+cox_pcol <- "black"
+cox_bg <- "grey90"
+cox_pch <- 21
+# inhomogeneous LGCP with Gaussian covariance function
+m <- as.im(function(x, y){
+  5 - 1.5 * (x - 0.5)^2 + 2 * (y - 0.5)^2
+}, W=owin())
+lgcp_sims <- rLGCP("gauss", m, var=0.15, scale =0.5, nsim=3)
+# lgcp_combined_df <- imap(.x=ssi_sims, .f=to_sim_df) |> bind_rows()
+plot_lgcp <- function(lgcp_sim) {
+  plot(attr(lgcp_sim, "Lambda"), main=NULL)
+  points(lgcp_sim, col=cox_pcol, bg=cox_bg, pch=cox_pch)
+}
+par(mfrow=c(1,3), mar=c(0,0,0,2), oma=c(0,0,0,0), las=2)
+nulls <- lapply(X=lgcp_sims, FUN=plot_lgcp)
+```
+
+
+# HW3 Tips! {data-stack-name="HW3"}
+
+* `ppp` Objects
+* Converting between `ppp` and `sf`
+* Plotting
+
+## `ppp` Objects {.smaller .crunch-title .crunch-ul .smaller-table}
+
+* The **main** datatype used to represent **P**lanar **P**oint **P**atterns [`spatstat` book p. 41]
+* Unlike `sf` objects, which contain data+geometries for any desired collection of $N$ entities, `ppp` objects are **required** to have at least an **observation window**!
+
+:::: {.columns}
+::: {.column width="50%"}
+
+`sf` Creation:
+
+```{r}
+#| label: sf-creation
+tree_df <- tibble::tibble(lon=runif(100,0,1), lat=runif(100,0,1), age=runif(100,0,1))
+tree_sf <- sf::st_as_sf(
+  tree_df,
+  coords = c('lon', 'lat')
+)
+tree_sf |> head(4)
+```
+
+:::
+::: {.column width="50%"}
+
+`ppp` Creation:
+
+```{r}
+#| label: ppp-creation
+pois_ppp <- spatstat.random::rpoispp(
+  lambda=100, win=spatstat.geom::square(1)
+)
+pois_ppp
+attributes(pois_ppp)$names
+pois_ppp$x |> head(4)
+```
+
+:::
+::::
+
+## `ppp` $\leftrightarrow$ `sf` Conversion {.smaller .smaller-table .crunch-title .crunch-details .crunch-img .crunch-quarto-figure}
+
+:::: {.columns}
+::: {.column width="50%"}
+
+`ppp` to `sf` Conversion:
+
+```{r}
+#| label: ppp-to-sf-conversion
+pois_sf <- pois_ppp |> sf::st_as_sf()
+pois_sf |> head(4)
+```
+
+```{r}
+#| label: converted-sf-plot
+#| code-fold: true
+library(mdthemes) |> suppressPackageStartupMessages()
+pois_sf |> ggplot() +
+  geom_sf(data=pois_sf |> filter(label=="window"), aes(fill='grey')) +
+  geom_sf(data=pois_sf |> filter(label != "window"), aes(color='black')) +
+  md_theme_classic(base_size=26) +
+  scale_fill_manual(name=NULL, values=c("gray90"), labels=c("<span style='font-family: mono'>label == 'window'</span>")) +
+  scale_color_manual(name=NULL, values=c("black"), labels=c("<span style='font-family: mono'>label == 'point'</span>")) +
+  labs(title = "<span style='font-family: mono'>ppp</span> &rarr; <span style='font-family: mono'>sf</span> Result")
+```
+
+:::
+::: {.column width="50%"}
+
+`sf` to `ppp` Conversion:
+
+```{r}
+#| label: sf-to-ppp-conversion
+square_sfc <- sf::st_polygon(list(
+  matrix(c(0,0,1,0,1,1,0,1,0,0), nrow=5, byrow=TRUE)
+)) |> sf::st_sfc()
+tree_ppp <- as.ppp(
+  sf::st_as_sfc(tree_sf),
+  W=as.owin(square_sfc)
+)
+tree_ppp
+```
+
+```{r}
+#| label: converted-ppp-plot
+#| code-fold: true
+tree_ppp_sf <- tree_ppp |> sf::st_as_sf()
+tree_ppp_sf |> ggplot() +
+  geom_sf(aes(fill='gray90')) +
+  geom_sf(data=tree_ppp_sf |> filter(label != "window"), aes(color='black')) +
+  md_theme_classic(base_size=26) +
+  scale_fill_manual(name=NULL, values=c("gray90"), labels=c("<span style='font-family: mono'>tree_ppp$window</span>")) +
+  scale_color_manual(name=NULL, values=c("black"), labels=c("<span style='font-family: mono'>tree_ppp${x,y}</span>")) +
+  labs(
+    title = "<span style='font-family: mono'>sf</span> &rarr; <span style='font-family: mono'>ppp</span> Result",
+    x="<span style='font-family: mono'>tree_ppp$x</span>",
+    y="<span style='font-family: mono'>tree_ppp$y</span>"
+  ) + 
+  guides(fill = guide_legend(order = 1), 
+              color = guide_legend(order = 2))
+```
+
+:::
+::::

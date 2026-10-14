@@ -38,15 +38,15 @@ weeks:
     footer: "PPOL 6805 Week 6: Spatial Joins and Interpolation"
     date-md: "Sep 30"
   - weeknum: 7
-    title: "Spatial Data Science: Three Forms of Spatial Autocorrelation"
-    footer: "PPOL 6805 Week 7: Spatial Data Science, Autocorrelation"
+    title: "Spatial Data Science: Three Types of Geographic Data"
+    footer: "PPOL 6805 Week 7: Geographic Data Types"
     date-md: "Oct 7"
   - weeknum: 8
-    title: "Point Processes: Null Models, Clustering, and Regularity"
-    footer: "PPOL 6805 Week 8: Point Processes"
+    title: "Spatial Autocorrelation"
+    footer: "PPOL 6805 Week 8: Spatial Autocorrelation"
     date-md: "Oct 14"
   - weeknum: 9
-    title: "Evaluating Spatial Hypotheses I: Point Data"
+    title: "Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity"
     footer: "PPOL 6805 Week 9: Evaluating Point Hypotheses"
     date-md: "Oct 21"
   - weeknum: 10

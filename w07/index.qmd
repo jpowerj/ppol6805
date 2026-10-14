@@ -328,70 +328,7 @@ plot(elev_coarse)
 :::
 ::::
 
-# Doing Things with `nbdep` {data-stack-name="Autocorrelation"}
-
-* "Neighbor" Definitions
-* Testing Hypotheses About Neighborhoods!
-
-## Who Are My Neighbors?
-
-* Contiguity-Based:
-
-  | | |
-  |-|-|
-  | ![](images/queen.png) | ![](images/rook.png) |
-
-* Distance-Based
-* $K$-Nearest Neighbors
-
-## Distance-Based Neighbors
-
-![From @xie_analyzing_2022](images/dist-based.jpeg){fig-align="center"}
-
-## Spatial Autocorrelation {.crunch-title}
-
-* Location $i$ has extreme value $\implies$ locations **near** $i$ more likely to have extreme values
-
-![](images/autocorr.jpg){fig-align="center"}
-
-## Moran's $I$ (Slightly Simplified Version) {.smaller .crunch-title}
-
-$$
-I =
-\underset{\text{Inverse of Variance}}{\boxed{\frac{n}{\sum_{i=1}^{n}(y_i - \overline{y})^2}}}
-\frac
-  {\overbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(y_i - \overline{y})(y_j - \overline{y})}^{\text{Weighted Covariance}}}
-  {\underbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}_{\text{Normalize Weights}}}
-$$
-
-* $I$ is **large** when:
-  * $y_i$ and $y_j$ are **neighbors**: $w_{ij} = 1$, and
-  * $y_i$ and $y_j$ **large at the same time**: $(y_i - \overline{y})(y_j - \overline{y})$
-
-## Local Indicators of Spatial Autocorrelation (LISA)
-
-* tldr: See how much a given location $\mathbf{s}$ **contributes to** overall Moran's $I$
-* Local Moran's $I$:
-
-$$
-I_i = \frac{y_i - \overline{y}}{S_i^2}\sum_{j=1}^{n}w_{ij}(y_j - \overline{y})
-$$
-
 ## References {.crunch-title .smaller}
 
 ::: {#refs}
 :::
-
-## Appendix Slide: The Full Moran's $I$ Formula {.smaller .crunch-title .title-11}
-
-$$
-I =
-\underset{\text{Inverse of Variance}}{\boxed{\frac{n}{\sum_{i=1}^{n}(y_i - \overline{y})^2}}}
-\frac
-  {\overbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(y_i - \overline{y})(y_j - \overline{y})}^{\text{Weighted Covariance}}}
-  {\underbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}_{\text{Normalize Weights}}}
-$$
-
-* $I$ is **large** when:
-  * $y_i$ and $y_j$ are **neighbors**: $w_{ij} = 1$, and
-  * $y_i$ and $y_j$ **large at the same time**: $(y_i - \overline{y})(y_j - \overline{y})$

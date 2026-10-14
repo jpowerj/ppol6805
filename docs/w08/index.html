@@ -8,7 +8,7 @@
 
 <meta name="author" content="Jeff Jacobs">
 
-<title>Week 8: Point Processes: Null Models, Clustering, and Regularity – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
+<title>Week 8: Spatial Autocorrelation – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -540,7 +540,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2026-10-07, 06:10:50 PM</em></p>
+<p><em>Updated 2026-10-14, 06:35:44 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -549,9 +549,12 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#naïve-spatial-autocorrelation" id="toc-naïve-spatial-autocorrelation" class="nav-link active" data-scroll-target="#naïve-spatial-autocorrelation">[Naïve] Spatial Autocorrelation</a>
+  <li><a href="#doing-things-with-nbdep" id="toc-doing-things-with-nbdep" class="nav-link active" data-scroll-target="#doing-things-with-nbdep">Doing Things with <code>nbdep</code></a>
   <ul class="collapse">
-  <li><a href="#morans-i" id="toc-morans-i" class="nav-link" data-scroll-target="#morans-i">Moran’s <span class="math inline">\(I\)</span></a></li>
+  <li><a href="#who-are-my-neighbors" id="toc-who-are-my-neighbors" class="nav-link" data-scroll-target="#who-are-my-neighbors">Who Are My Neighbors?</a></li>
+  <li><a href="#distance-based-neighbors" id="toc-distance-based-neighbors" class="nav-link" data-scroll-target="#distance-based-neighbors">Distance-Based Neighbors</a></li>
+  <li><a href="#regional-spatial-autocorrelation" id="toc-regional-spatial-autocorrelation" class="nav-link" data-scroll-target="#regional-spatial-autocorrelation">[Regional] Spatial Autocorrelation</a></li>
+  <li><a href="#morans-i-slightly-simplified" id="toc-morans-i-slightly-simplified" class="nav-link" data-scroll-target="#morans-i-slightly-simplified">Moran’s <span class="math inline">\(I\)</span> (Slightly Simplified)</a></li>
   <li><a href="#local-indicators-of-spatial-autocorrelation-lisa" id="toc-local-indicators-of-spatial-autocorrelation-lisa" class="nav-link" data-scroll-target="#local-indicators-of-spatial-autocorrelation-lisa">Local Indicators of Spatial Autocorrelation (LISA)</a></li>
   </ul></li>
   <li><a href="#agenda-for-point-patterns-something-noteworthy-is-happening-if-pattern-unlikely-to-arise-randomly-under-csr" id="toc-agenda-for-point-patterns-something-noteworthy-is-happening-if-pattern-unlikely-to-arise-randomly-under-csr" class="nav-link" data-scroll-target="#agenda-for-point-patterns-something-noteworthy-is-happening-if-pattern-unlikely-to-arise-randomly-under-csr">Agenda for Point Patterns: Something “Noteworthy” is Happening if Pattern Unlikely to Arise <del>Randomly</del> Under CSR!</a>
@@ -591,6 +594,7 @@ window.Quarto = {
   <li><a href="#ppp-objects" id="toc-ppp-objects" class="nav-link" data-scroll-target="#ppp-objects"><code>ppp</code> Objects</a></li>
   <li><a href="#ppp-leftrightarrow-sf-conversion" id="toc-ppp-leftrightarrow-sf-conversion" class="nav-link" data-scroll-target="#ppp-leftrightarrow-sf-conversion"><code>ppp</code> <span class="math inline">\(\leftrightarrow\)</span> <code>sf</code> Conversion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#appendix-slide-the-full-morans-i-formula" id="toc-appendix-slide-the-full-morans-i-formula" class="nav-link" data-scroll-target="#appendix-slide-the-full-morans-i-formula">Appendix Slide: The Full Moran’s <span class="math inline">\(I\)</span> Formula</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/w08/index.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -601,7 +605,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 8: Point Processes: Null Models, Clustering, and Regularity</h1>
+<h1 class="title">Week 8: Spatial Autocorrelation</h1>
 <p class="subtitle lead"><em>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</em><br>Fall 2026</p>
   <div class="quarto-categories">
     <div class="quarto-category">Class Sessions</div>
@@ -644,16 +648,12 @@ window.Quarto = {
 <center class="mb-3">
 <a class="h2" href="./slides.html" target="_blank">Open slides in new tab →</a>
 </center>
-<section id="naïve-spatial-autocorrelation" class="level1 title-11 not-title-slide" data-stack-name="Beyond Naïve Clustering">
-<h1 class="title-11 not-title-slide" data-stack-name="Beyond Naïve Clustering">[Naïve] Spatial Autocorrelation</h1>
+<section id="doing-things-with-nbdep" class="level1" data-stack-name="Autocorrelation">
+<h1 data-stack-name="Autocorrelation">Doing Things with <code>nbdep</code></h1>
 <ul>
-<li>Where we left off: Location <span class="math inline">\(i\)</span> has high value <span class="math inline">\(\implies\)</span> locations <strong>near</strong> <span class="math inline">\(i\)</span> more likely to have high values</li>
+<li>“Neighbor” Definitions</li>
+<li>Testing Hypotheses About Neighborhoods!</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/autocorr.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
 <div class="hidden">
 <div class="cell">
 <details open="" class="code-fold">
@@ -669,31 +669,69 @@ window.Quarto = {
 </details>
 </div>
 </div>
-<section id="morans-i" class="level2">
-<h2 class="anchored" data-anchor-id="morans-i">Moran’s <span class="math inline">\(I\)</span></h2>
+<section id="who-are-my-neighbors" class="level2">
+<h2 class="anchored" data-anchor-id="who-are-my-neighbors">Who Are My Neighbors?</h2>
+<ul>
+<li><p>Contiguity-Based:</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><img src="images/queen.png" class="img-fluid"></td>
+<td><img src="images/rook.png" class="img-fluid"></td>
+</tr>
+</tbody>
+</table></li>
+<li><p>Distance-Based</p></li>
+<li><p><span class="math inline">\(K\)</span>-Nearest Neighbors</p></li>
+</ul>
+</section>
+<section id="distance-based-neighbors" class="level2">
+<h2 class="anchored" data-anchor-id="distance-based-neighbors">Distance-Based Neighbors</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/dist-based.jpeg" class="img-fluid figure-img"></p>
+<figcaption>From <span class="citation" data-cites="xie_analyzing_2022">Xie (<a href="#ref-xie_analyzing_2022" role="doc-biblioref">2022</a>)</span></figcaption>
+</figure>
+</div>
+</section>
+<section id="regional-spatial-autocorrelation" class="level2 crunch-title">
+<h2 class="crunch-title anchored" data-anchor-id="regional-spatial-autocorrelation">[Regional] Spatial Autocorrelation</h2>
+<ul>
+<li>Location <span class="math inline">\(i\)</span> has extreme value <span class="math inline">\(\implies\)</span> locations <strong>near</strong> <span class="math inline">\(i\)</span> more likely to have extreme values</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/autocorr.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="morans-i-slightly-simplified" class="level2 crunch-title crunch-ul-left text-90">
+<h2 class="crunch-title crunch-ul-left text-90 anchored" data-anchor-id="morans-i-slightly-simplified">Moran’s <span class="math inline">\(I\)</span> (Slightly Simplified)</h2>
 <p><span class="math display">\[
-I =
-\underset{\text{Inverse of Variance}}{\boxed{\frac{n}{\sum_{i=1}^{n}(y_i - \overline{y})^2}}}
-\frac
-  {\overbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(y_i - \overline{y})(y_j - \overline{y})}^{\text{Weighted Covariance}}}
-  {\underbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}_{\text{Normalize Weights}}}
+I = \sum_{i=1}^{n}\sum_{j=1}^{n}\left[~~~~
+\underbrace{w_{ij}}_{\mathclap{\small \substack{\text{How related} \\ \text{are }i\text{ and }j\text{?}}}}
+\overbrace{(y_i - \overline{y})}^{\mathclap{\small \substack{\text{How extreme} \\ \text{is }y_i\text{ relative} \\ \text{to mean?}}}}~
+\overbrace{(y_j - \overline{y})}^{\mathclap{\small \substack{\text{How extreme} \\ \text{is }y_j\text{ relative} \\ \text{to mean?}}}}
+\right]
 \]</span></p>
 <ul>
-<li><span class="math inline">\(I\)</span> is <strong>Large</strong> when:
+<li><span class="math inline">\(I\)</span> is <strong>large</strong> when:
 <ul>
-<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> are <strong>neighbors</strong>: <span class="math inline">\(w_{ij}\)</span>, and</li>
-<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> <strong>large at the same time</strong>: <span class="math inline">\((y_i - \overline{y})(y_j - \overline{y})\)</span></li>
+<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> are <strong>neighbors</strong>: <span class="math inline">\(w_{ij} = 1\)</span>, and</li>
+<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> <strong>extreme at the same time</strong>: <span class="math inline">\((y_i - \overline{y})(y_j - \overline{y})\)</span></li>
 </ul></li>
 </ul>
 </section>
-<section id="local-indicators-of-spatial-autocorrelation-lisa" class="level2">
-<h2 class="anchored" data-anchor-id="local-indicators-of-spatial-autocorrelation-lisa">Local Indicators of Spatial Autocorrelation (LISA)</h2>
+<section id="local-indicators-of-spatial-autocorrelation-lisa" class="level2 title-08 crunch-title">
+<h2 class="title-08 crunch-title anchored" data-anchor-id="local-indicators-of-spatial-autocorrelation-lisa">Local Indicators of Spatial Autocorrelation (LISA)</h2>
+<div class="text-85">
 <ul>
-<li>tldr: See how much a given location <span class="math inline">\(\mathbf{s}\)</span> <strong>contributes to</strong> overall Moran’s <span class="math inline">\(I\)</span></li>
-<li>Local Moran’s <span class="math inline">\(I\)</span>:</li>
+<li>How much a <strong>specific</strong> location <span class="math inline">\(\mathbf{s}_i\)</span> <strong>contributes to</strong> overall Moran’s <span class="math inline">\(I\)</span></li>
+<li>Local Moran’s <span class="math inline">\(I\)</span> for location <span class="math inline">\(i\)</span>:</li>
 </ul>
+</div>
 <p><span class="math display">\[
-I_i = \frac{y_i - \overline{y}}{S_i^2}\sum_{j=1}^{n}w_{ij}(y_j - \overline{y})
+I_i = \sum_{j=1}^{n}w_{ij}(y_j - \overline{y})
 \]</span></p>
 </section>
 </section>
@@ -1107,7 +1145,7 @@ I_i = \frac{y_i - \overline{y}}{S_i^2}\sum_{j=1}^{n}w_{ij}(y_j - \overline{y})
 <section id="caveat-1-measures-are-relative-to-window-of-observation" class="level2 smaller title-12">
 <h2 class="smaller title-12 anchored" data-anchor-id="caveat-1-measures-are-relative-to-window-of-observation">Caveat 1: Measures are <em>Relative</em> to Window of Observation</h2>
 <p>Same data can be <strong>spatially random</strong> within one window, <strong>clustered</strong> or <strong>regular</strong> in others!</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">60</span></span>
@@ -1177,7 +1215,7 @@ I_i = \frac{y_i - \overline{y}}{S_i^2}\sum_{j=1}^{n}w_{ij}(y_j - \overline{y})
 </section>
 <section id="why-do-events-appear-where-they-do" class="level2 smaller title-10 inline-90">
 <h2 class="smaller title-10 inline-90 anchored" data-anchor-id="why-do-events-appear-where-they-do">[<i class="bi bi-tree-fill"></i>] <em>Why</em> Do Events Appear Where They Do?</h2>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>center_l_function <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
@@ -1274,7 +1312,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Art}}\)</span>: Arti
 </center>
 <div class="columns">
 <div class="column" style="width:33%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code (Step 1: Grid Creation)</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ha_base <span class="ot">&lt;-</span> <span class="dv">28</span></span>
@@ -1286,15 +1324,15 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Art}}\)</span>: Arti
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>ha_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/artificial-grid-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/artificial-grid-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:33%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code (Step 2: Point Generation)</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>grid_points <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(grid_buffer_sf, <span class="at">size=</span><span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">100</span>))</span>
@@ -1309,15 +1347,15 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Art}}\)</span>: Arti
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/artificial-grid-points-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/artificial-grid-points-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:33%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code (Step 3: Observed Result)</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>grid_ppp <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(grid_points, <span class="at">W=</span>spatstat.geom<span class="sc">::</span><span class="fu">square</span>(<span class="dv">1</span>))</span>
@@ -1326,9 +1364,9 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Art}}\)</span>: Arti
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>ha_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/artificial-grid-result-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/artificial-grid-result-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1340,7 +1378,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 </center>
 <div class="columns">
 <div class="column" style="width:33%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code (Step 1: Tree Generation)</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>hn_base <span class="ot">&lt;-</span> <span class="dv">28</span></span>
@@ -1352,9 +1390,9 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>hn_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/gen-trees-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/gen-trees-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1394,7 +1432,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 </div>
 </div>
 </div><div class="column" style="width:32%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code (Step 3: Observed Result)</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>alive_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -1402,9 +1440,9 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>hn_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/post-tree-killing-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/post-tree-killing-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1493,7 +1531,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <h2 class="crunch-title smaller crunch-img crunch-quarto-figure crunch-columns title-12 anchored" data-anchor-id="what-do-these-functions-detect">What Do These Functions “Detect”?</h2>
 <div class="columns">
 <div class="column" style="width:33%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code (Fixed Points)</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sq_base <span class="ot">&lt;-</span> <span class="dv">16</span></span>
@@ -1517,15 +1555,15 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/sq-point-plot-1.png" class="img-fluid figure-img" width="264"></p>
+<p><img src="index_files/figure-html/sq-point-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="264"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:33%;">
-<div class="cell" data-crop="true">
+<div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">las=</span><span class="dv">2</span>, <span class="at">oma=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
@@ -1534,15 +1572,15 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(sq_density, <span class="at">xaxs=</span><span class="st">'i'</span>, <span class="at">yaxs=</span><span class="st">'i'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/sq-intensity-plot-1.png" class="img-fluid figure-img" width="288"></p>
+<p><img src="index_files/figure-html/sq-intensity-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="288"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:33%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">### PCF</span></span>
@@ -1558,9 +1596,9 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/sq-pcf-plot-1.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="index_files/figure-html/sq-pcf-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -1570,7 +1608,7 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <!-- CSR pattern -->
 <div class="columns">
 <div class="column" style="width:33%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code (CSR Points)</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>csr_ppp <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
@@ -1582,15 +1620,15 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/csr-properties-plot-1.png" class="img-fluid figure-img" width="264"></p>
+<p><img src="index_files/figure-html/csr-properties-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="264"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:33%;">
-<div class="cell" data-crop="true">
+<div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(</span>
@@ -1603,15 +1641,15 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(csr_density, <span class="at">xaxs=</span><span class="st">"i"</span>, <span class="at">yaxs=</span><span class="st">"i"</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd=</span><span class="fl">1.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/csr-intensity-plot-1.png" class="img-fluid figure-img" width="288"></p>
+<p><img src="index_files/figure-html/csr-intensity-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="288"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:33%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>csr_pcf_result <span class="ot">&lt;-</span> spatstat.explore<span class="sc">::</span><span class="fu">pcf</span>(</span>
@@ -1626,9 +1664,9 @@ Hypothesis <span class="math inline">\(\mathcal{H}_{\textsf{Nat}}\)</span>: Natu
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size=</span>sq_base)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/csr-pcf-plot-1.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="index_files/figure-html/csr-pcf-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -1907,7 +1945,7 @@ root were negative, and were set to zero. Range: [-2.96, 1910]</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><code>sf</code> Creation:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>tree_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">lon=</span><span class="fu">runif</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">lat=</span><span class="fu">runif</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">age=</span><span class="fu">runif</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
@@ -1950,7 +1988,7 @@ root were negative, and were set to zero. Range: [-2.96, 1910]</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <p><code>ppp</code> Creation:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>pois_ppp <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
@@ -1985,7 +2023,7 @@ window: rectangle = [0, 1] x [0, 1] units</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><code>ppp</code> to <code>sf</code> Conversion:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>pois_sf <span class="ot">&lt;-</span> pois_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
@@ -2022,7 +2060,7 @@ window: rectangle = [0, 1] x [0, 1] units</code></pre>
 </div>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mdthemes) <span class="sc">|&gt;</span> <span class="fu">suppressPackageStartupMessages</span>()</span>
@@ -2035,16 +2073,16 @@ window: rectangle = [0, 1] x [0, 1] units</code></pre>
 <span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"&lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; &amp;rarr; &lt;span style='font-family: mono'&gt;sf&lt;/span&gt; Result"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/converted-sf-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/converted-sf-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
 <p><code>sf</code> to <code>ppp</code> Conversion:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>square_sfc <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_polygon</span>(<span class="fu">list</span>(</span>
@@ -2062,7 +2100,7 @@ window: polygonal boundary
 enclosing rectangle: [0, 1] x [0, 1] units</code></pre>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>tree_ppp_sf <span class="ot">&lt;-</span> tree_ppp <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
@@ -2081,9 +2119,9 @@ enclosing rectangle: [0, 1] x [0, 1] units</code></pre>
 <span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">order =</span> <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/converted-ppp-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/converted-ppp-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2109,7 +2147,27 @@ Schabenberger, Oliver, and Carol A. Gotway. 2004. <em><a href="https://www.dropb
 <div id="ref-waller_applied_2004" class="csl-entry" role="listitem">
 Waller, Lance A., and Carol A. Gotway. 2004. <em><a href="https://www.dropbox.com/scl/fi/kyq9h64e3x2zcd5qezaeh/Lance-A.-Waller-Carol-A.-Gotway-Applied-Spatial-Analysis-of-Public-Health-Data.pdf?rlkey=ajc3pfm3j01htkflidgd6jx28&amp;dl=1">Applied <span>Spatial Statistics</span> for <span>Public Health Data</span></a></em>. John Wiley &amp; Sons.
 </div>
+<div id="ref-xie_analyzing_2022" class="csl-entry" role="listitem">
+Xie, Sherrie. 2022. <span>“<a href="https://www.youtube.com/watch?v=DD7bXonh-_E">Analyzing <span>Geospatial Data</span> in <span>R</span></a>.”</span> In <em>R/<span>Medicine Virtual Conference</span></em>.
 </div>
+</div>
+</section>
+<section id="appendix-slide-the-full-morans-i-formula" class="level2 smaller crunch-title title-11">
+<h2 class="smaller crunch-title title-11 anchored" data-anchor-id="appendix-slide-the-full-morans-i-formula">Appendix Slide: The Full Moran’s <span class="math inline">\(I\)</span> Formula</h2>
+<p><span class="math display">\[
+I =
+\underset{\text{Inverse of Variance}}{\boxed{\frac{n}{\sum_{i=1}^{n}(y_i - \overline{y})^2}}}
+\frac
+  {\overbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(y_i - \overline{y})(y_j - \overline{y})}^{\text{Weighted Covariance}}}
+  {\underbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}_{\text{Normalize Weights}}}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(I\)</span> is <strong>large</strong> when:
+<ul>
+<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> are <strong>neighbors</strong>: <span class="math inline">\(w_{ij} = 1\)</span>, and</li>
+<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> <strong>large at the same time</strong>: <span class="math inline">\((y_i - \overline{y})(y_j - \overline{y})\)</span></li>
+</ul></li>
+</ul>
 
 
 </section>

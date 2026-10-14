@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Jeff Jacobs">
-  <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation</title>
+  <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 7: Spatial Data Science: Three Types of Geographic Data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -223,7 +223,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Week 7: Spatial Data Science: Three Forms of Spatial Autocorrelation</h1>
+  <h1 class="title">Week 7: Spatial Data Science: Three Types of Geographic Data</h1>
   <p class="subtitle"><em>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</em><br>Fall 2026</p>
 
 <div class="quarto-title-authors">
@@ -580,68 +580,6 @@ Figure&nbsp;4: <span class="math inline">\(\omega_4 \in \Omega\)</span>
 </div>
 </div>
 </div></div>
-</section></section>
-<section>
-<section id="doing-things-with-nbdep" class="title-slide slide level1 center" data-stack-name="Autocorrelation">
-<h1>Doing Things with <code>nbdep</code></h1>
-<ul>
-<li>“Neighbor” Definitions</li>
-<li>Testing Hypotheses About Neighborhoods!</li>
-</ul>
-</section>
-<section id="who-are-my-neighbors" class="slide level2">
-<h2>Who Are My Neighbors?</h2>
-<ul>
-<li><p>Contiguity-Based:</p>
-<table>
-<tbody>
-<tr class="odd">
-<td><img data-src="images/queen.png"></td>
-<td><img data-src="images/rook.png"></td>
-</tr>
-</tbody>
-</table></li>
-<li><p>Distance-Based</p></li>
-<li><p><span class="math inline">\(K\)</span>-Nearest Neighbors</p></li>
-</ul>
-</section>
-<section id="distance-based-neighbors" class="slide level2">
-<h2>Distance-Based Neighbors</h2>
-
-<img data-src="images/dist-based.jpeg" class="r-stretch quarto-figure-center"><p class="caption">From <span class="citation" data-cites="xie_analyzing_2022">Xie (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></section>
-<section id="spatial-autocorrelation" class="slide level2 crunch-title">
-<h2>Spatial Autocorrelation</h2>
-<ul>
-<li>Location <span class="math inline">\(i\)</span> has extreme value <span class="math inline">\(\implies\)</span> locations <strong>near</strong> <span class="math inline">\(i\)</span> more likely to have extreme values</li>
-</ul>
-
-<img data-src="images/autocorr.jpg" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="morans-i-slightly-simplified-version" class="slide level2 smaller crunch-title">
-<h2>Moran’s <span class="math inline">\(I\)</span> (Slightly Simplified Version)</h2>
-<p><span class="math display">\[
-I =
-\underset{\text{Inverse of Variance}}{\boxed{\frac{n}{\sum_{i=1}^{n}(y_i - \overline{y})^2}}}
-\frac
-  {\overbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(y_i - \overline{y})(y_j - \overline{y})}^{\text{Weighted Covariance}}}
-  {\underbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}_{\text{Normalize Weights}}}
-\]</span></p>
-<ul>
-<li><span class="math inline">\(I\)</span> is <strong>large</strong> when:
-<ul>
-<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> are <strong>neighbors</strong>: <span class="math inline">\(w_{ij} = 1\)</span>, and</li>
-<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> <strong>large at the same time</strong>: <span class="math inline">\((y_i - \overline{y})(y_j - \overline{y})\)</span></li>
-</ul></li>
-</ul>
-</section>
-<section id="local-indicators-of-spatial-autocorrelation-lisa" class="slide level2">
-<h2>Local Indicators of Spatial Autocorrelation (LISA)</h2>
-<ul>
-<li>tldr: See how much a given location <span class="math inline">\(\mathbf{s}\)</span> <strong>contributes to</strong> overall Moran’s <span class="math inline">\(I\)</span></li>
-<li>Local Moran’s <span class="math inline">\(I\)</span>:</li>
-</ul>
-<p><span class="math display">\[
-I_i = \frac{y_i - \overline{y}}{S_i^2}\sum_{j=1}^{n}w_{ij}(y_j - \overline{y})
-\]</span></p>
 </section>
 <section id="references" class="slide level2 crunch-title smaller scrollable">
 <h2>References</h2>
@@ -652,34 +590,14 @@ Parenti, Christian. 2011. <em><a href="https://books.google.com?id=MwUBAwAAQBAJ"
 <div id="ref-schabenberger_statistical_2004" class="csl-entry" role="listitem">
 Schabenberger, Oliver, and Carol A. Gotway. 2004. <em><a href="https://www.dropbox.com/scl/fi/25gj53qitsdzw9kvcvfjf/Oliver-Schabenberger-Carol-A.-Gotway-Statistical-methods-for-spatial-data-analysis.pdf?rlkey=p5ih232gmxzm3zstvszux2big&amp;dl=1">Statistical <span>Methods</span> for <span>Spatial Data Analysis</span></a></em>. CRC Press.
 </div>
-<div id="ref-xie_analyzing_2022" class="csl-entry" role="listitem">
-Xie, Sherrie. 2022. <span>“<a href="https://www.youtube.com/watch?v=DD7bXonh-_E">Analyzing <span>Geospatial Data</span> in <span>R</span></a>.”</span> In <em>R/<span>Medicine Virtual Conference</span></em>.
 </div>
-</div>
-</section>
-<section id="appendix-slide-the-full-morans-i-formula" class="slide level2 smaller crunch-title title-11">
-<h2>Appendix Slide: The Full Moran’s <span class="math inline">\(I\)</span> Formula</h2>
-<p><span class="math display">\[
-I =
-\underset{\text{Inverse of Variance}}{\boxed{\frac{n}{\sum_{i=1}^{n}(y_i - \overline{y})^2}}}
-\frac
-  {\overbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}(y_i - \overline{y})(y_j - \overline{y})}^{\text{Weighted Covariance}}}
-  {\underbrace{\sum_{i=1}^{n}\sum_{j=1}^{n}w_{ij}}_{\text{Normalize Weights}}}
-\]</span></p>
-<ul>
-<li><span class="math inline">\(I\)</span> is <strong>large</strong> when:
-<ul>
-<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> are <strong>neighbors</strong>: <span class="math inline">\(w_{ij} = 1\)</span>, and</li>
-<li><span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> <strong>large at the same time</strong>: <span class="math inline">\((y_i - \overline{y})(y_j - \overline{y})\)</span></li>
-</ul></li>
-</ul>
 
 
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>PPOL 6805 Week 7: Spatial Data Science, Autocorrelation</p>
+<p>PPOL 6805 Week 7: Geographic Data Types</p>
 </div>
 </div></div>
 

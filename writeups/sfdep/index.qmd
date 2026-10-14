@@ -1,7 +1,7 @@
 ---
-title: "Unambiguous Neighborhoods with `sfdep`"
+title: "Unambiguous Neighborhoods with `spdep`"
 author: "Jeff Jacobs"
-date: 2025-10-14
+date: 2026-10-14
 sidebar: mainnav
 categories:
   - Extra Writeups
@@ -13,14 +13,30 @@ format:
     df-print: kable
     link-external-icon: true
     link-external-newwindow: true
+    toc: true
+    include-in-header:
+      text: |
+        <style>
+        .cell-output-stderr code {
+          white-space: pre-wrap;
+        }
+        </style>
 ---
 
-## Initialization Code
+<center>
+
+[**[Interactive Version](https://jjacobs.me/gis-webr/w08-spdep/)**]{.boxed-cb}
+
+</center>
+
+## (0) Initialization Code
 
 ```{r}
 #| label: init-sfdep
 library(tidyverse) |> suppressPackageStartupMessages()
 library(mapview) |> suppressPackageStartupMessages()
+# Fixes "API Key Required" message in mapview
+mapviewOptions(basemaps = c("Esri.WorldGrayCanvas","Stadia.AlidadeSmoothDark","OpenStreetMap", "Esri.WorldImagery", "OpenTopoMap"))
 library(rnaturalearth) |> suppressPackageStartupMessages()
 library(spdep) |> suppressPackageStartupMessages()
 ```
@@ -28,13 +44,25 @@ library(spdep) |> suppressPackageStartupMessages()
 * [Relevant Moraga](https://www.paulamoraga.com/book-spatial/spatial-neighborhood-matrices.html)
 * [Relevant Pebesma](https://r-spatial.org/book/14-Areal.html#contiguous-neighbours)
 
-## Finding Neighbors in Asia
+## (1) Finding Neighbors in Asia
+
+### (1.1) Download Countries as `POLYGON`s from `rnaturalearth`
+
+Here we use `rnaturalearth::ne_countres()`, with the `continent` option. We specify `scale=50` since otherwise smaller countries like Bahrain get excluded!
 
 ```{r}
-#| label: get-asia-data
-asia_countries_sf <- ne_countries(continent = "Asia", scale=50)
+#| label: get-asia-polys
+asia_countries_sf <- rnaturalearth::ne_countries(
+  continent = "Asia", scale=50
+)
 mapview(asia_countries_sf, label="geounit")
 ```
+
+### (1.2) Detecting Neighbors with `spdep::poly2nb()`
+
+Given an `sf` object, `spdep::poly2nb()` identifies **all pairs** of touching `POLYGON`s.
+
+
 
 ```{r}
 #| label: compute-neighbors
@@ -48,9 +76,14 @@ asia_countries_nb
 ```
 
 ```{r}
-#| label: plot-neighbors
+#| label: plot-centroids
 nb_cents <- sf::st_point_on_surface(asia_countries_sf) |>
   sf::st_as_sf()
+mapview(nb_cents, label="geounit")
+```
+
+```{r}
+#| label: plot-neighbors
 nb_lines <- spdep::nb2lines(
   asia_countries_nb,
   coords=st_coordinates(nb_cents),
@@ -90,6 +123,7 @@ mapview(afg_sf, zcol="neighbors", label="geounit")
 #| label: nb-weights
 nb_weights <- asia_countries_nb |>
   spdep::nb2listw(zero.policy=TRUE)
+nb_weights
 ```
 
 ```{r}
@@ -106,6 +140,7 @@ afg_df
 #| label: distance-weights
 nb_dist_weights <- asia_countries_nb |>
   spdep::nb2listwdist(nb_cents, zero.policy=TRUE)
+nb_dist_weights
 ```
 
 ```{r}
