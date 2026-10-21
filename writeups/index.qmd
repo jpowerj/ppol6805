@@ -24,5 +24,7 @@ listing:
   table-hover: true
   # date-format: full
   #date-format: "dddd MMM D, YYYY, HH:mm:ss"
+format:
+  html: default
 ---
 
