@@ -87,17 +87,17 @@ hw:
   - hw-num: 3
     title: "Autocorrelation, Clustering, and Point Processes"
     pct: 9
-    release-date-md: Sep 25
+    release-date-md: Sep 30
     release-date: "Wednesday, September 30"
-    due-date-md: Oct 21
-    due-date: "Wednesday, October 21"
+    due-date-md: Oct 28
+    due-date: "Wednesday, October 28"
   - hw-num: 4
     title: "Spatial Regression"
     pct: 9
-    release-date-md: Oct 14
-    release-date: "Wednesday, October 14"
-    due-date-md: Nov 3
-    due-date: "Tuesday, November 3"
+    release-date-md: Oct 21
+    release-date: "Wednesday, October 21"
+    due-date-md: Nov 18
+    due-date: "Wednesday, November 18"
   - hw-num: "5"
     title: "Evaluating Spatial Hypotheses (Monte Carlo Simulation)"
     pct: 9

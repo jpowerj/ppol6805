@@ -72,6 +72,9 @@ div.csl-indent {
 <link href="site_libs/bootstrap/bootstrap-f884d6ce95b6d67672fa6a199f8fd089.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-ae21b89b404540379329d02db4b622fa.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-f884d6ce95b6d67672fa6a199f8fd089.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -100,6 +103,8 @@ div.csl-indent {
   }
 }</script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet">
 <script src="./sidebar.js"></script>
 
@@ -347,6 +352,12 @@ div.csl-indent {
  <span class="menu-text">Coding Workshop <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://jjacobs.me/gis-webr" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">WebR Demos <i class="bi bi-box-arrow-up-right ps-1" style="font-size: 75%;"></i></span></a>
+  </div>
+</li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -478,7 +489,7 @@ div.csl-indent {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2026-10-21, 04:50:34 PM</em></p>
+<p><em>Updated 2026-10-22, 03:29:30 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -849,10 +860,10 @@ div.csl-indent {
 <li><strong>More than 66 hours</strong> after due date: Assignment submissions no longer accepted (without instructor approval)</li>
 </ul>
 <p>Excused lateness exceptions will be grounded in a policy where you can “pause” the class (due-date-wise, but also just, expectation-of-progress-wise more generally) to take the time you need to handle things happening in your life. Then, you can “resume” work once you feel more centered/once you find yourself back on stable ground. The <a href="https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs">“Maslow’s hierarchy”</a> model from psychology (<a href="#fig-maslow" class="quarto-xref">Figure&nbsp;1</a>) provides a straightforward way to think about this approach.</p>
-<div id="fig-maslow" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<div id="fig-maslow" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-maslow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/maslow.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%">
+<a href="images/maslow.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Maslow’s Hierarchy of Needs, from Wikimedia"><img src="images/maslow.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-maslow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Maslow’s Hierarchy of Needs, from <a href="https://commons.wikimedia.org/wiki/File:Maslow%27s_Hierarchy_of_Needs_Pyramid_(original_five-level_model).png">Wikimedia</a>
@@ -1388,8 +1399,40 @@ Xie, Sherrie. 2022. <span>“<a href="https://www.youtube.com/watch?v=DD7bXonh-_
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/syllabus.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jpowerj/ppol6805/blob/main/syllabus.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>
+</body></html>

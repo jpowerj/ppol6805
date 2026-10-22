@@ -4,7 +4,6 @@ project:
   pre-render: _pre-set-updated.py
   preview:
     port: 4321
-
 website:
   title: "PPOL 6805 / DSAN 6750: GIS for Spatial Data Science"
   favicon: favicon.png
@@ -30,6 +29,8 @@ website:
         href: "assignments/index.qmd"
       - href: "https://gugis.dev"
         text: "Coding Workshop <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
+      - text: "WebR Demos <i class='bi bi-box-arrow-up-right ps-1' style='font-size: 75%;'></i>"
+        href: "https://jjacobs.me/gis-webr"
       - "---"
       - href: w01/index.qmd
         text: "Week 1: Aug 26"
@@ -98,6 +99,8 @@ format:
     include-in-header:
       text: |
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
         <script src='/sidebar.js'></script>
   revealjs:

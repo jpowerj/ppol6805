@@ -367,7 +367,7 @@ After the due date, for each **homework** assignment, you will have a grace peri
 
 Excused lateness exceptions will be grounded in a policy where you can "pause" the class (due-date-wise, but also just, expectation-of-progress-wise more generally) to take the time you need to handle things happening in your life. Then, you can "resume" work once you feel more centered/once you find yourself back on stable ground. The ["Maslow's hierarchy"](https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs) model from psychology (@fig-maslow) provides a straightforward way to think about this approach.
 
-![Maslow's Hierarchy of Needs, from [Wikimedia](https://commons.wikimedia.org/wiki/File:Maslow%27s_Hierarchy_of_Needs_Pyramid_(original_five-level_model).png)](images/maslow.png){#fig-maslow fig-align="center" width="70%"}
+![Maslow's Hierarchy of Needs, from [Wikimedia](https://commons.wikimedia.org/wiki/File:Maslow%27s_Hierarchy_of_Needs_Pyramid_(original_five-level_model).png)](images/maslow.png){.lightbox #fig-maslow fig-align="center" width="70%"}
 
 Learning GIS is way up there in the blue triangle, so, it's important that you feel like the first four levels are solidified before you turn your focus back to classwork. And, it's a win-win, because it means that once you're back in action you can be more engaged and receptive to new topics, rather than being forced to "simulate" being in the blue triangle while in reality struggling in other spots!
 

@@ -34,7 +34,7 @@ The following point distributions are imported from Google Sheets mainly for tra
 #| label: points-table-fn
 #| warning: false
 #| echo: false
-library(tidyverse)
+library(tidyverse) |> suppressPackageStartupMessages()
 gen_points_table <- function(hw_url) {
   hw_df <- read_csv(hw_url, col_types="ccdc")
   # print(hw_df)
