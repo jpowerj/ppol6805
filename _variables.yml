@@ -46,12 +46,12 @@ weeks:
     footer: "PPOL 6805 Week 8: Spatial Autocorrelation"
     date-md: "Oct 14"
   - weeknum: 9
-    title: "Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity"
+    title: "Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness"
     footer: "PPOL 6805 Week 9: Evaluating Point Hypotheses"
     date-md: "Oct 21"
   - weeknum: 10
-    title: "Evaluating Spatial Hypotheses II: Areal Data"
-    footer: "PPOL 6805 Week 10: Evaluating Areal Hypotheses"
+    title: "Evaluating Spatial Hypotheses II: Base Rates and Null Models"
+    footer: "PPOL 6805 Week 10: Base Rates and Null Models"
     date-md: "Oct 28"
   - weeknum: 11
     title: "In-Class Midterm"

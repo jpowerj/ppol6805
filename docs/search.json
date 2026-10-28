@@ -871,161 +871,161 @@
   {
     "objectID": "w09/slides.html#so-what-do-we-do-with-morans-i",
     "href": "w09/slides.html#so-what-do-we-do-with-morans-i",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "So… What Do We Do With Moran’s I?",
     "text": "So… What Do We Do With Moran’s I?\n\n\n\n\n\n\n\n\n\n\nDoctor\nMidterm Practice\nMidterm\n\n\n\n\n\nYour temperature is 40° C\nMoran’s I of Protestant Churches is 0.58\nMoran’s I of waste dump sites is 0.67\n\n\n\nOne cause could be malaria, 40% likelihood\nOne cause could be urbanization, 40% likelihood\nOne cause could be density of stigmatized group, 60% likelihood\n\n\n\nOne cause could be lupus, 75% likelihood\nOne cause could be distance from Luther, 75% likelihood\nOne cause could be distance from UNOCI HQ, 75% likelihood\n\n\n\nI judge lupus as more likely cause, we should treat it\nI judge distance from Luther as more likely, we should study Luther more\nI judge distance from UNOCI as more likely; handle in UN not ICC"
   },
   {
     "objectID": "w09/slides.html#agenda-for-point-patterns-something-noteworthy-is-happening-if-pattern-unlikely-to-arise-randomly-under-csr",
     "href": "w09/slides.html#agenda-for-point-patterns-something-noteworthy-is-happening-if-pattern-unlikely-to-arise-randomly-under-csr",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Agenda for Point Patterns: Something “Noteworthy” is Happening if Pattern Unlikely to Arise Randomly Under CSR!",
     "text": "Agenda for Point Patterns: Something “Noteworthy” is Happening if Pattern Unlikely to Arise Randomly Under CSR!\n\n\n\n\nLess clustering than expected\n\n\n\n\nRoughly expected amount of clustering under CSR\n\n\n\n\nMore clustering than expected\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIs this likely to arise under CSR?But is it because of repulsion?BBC, Aug 10 2025\n\n\n\n\n\n\n\n\n\n\nA pattern arising from CSR!(Realizations \\omega_{\\tiny\\triangle} and \\omega_{\\tiny\\square} from same D)From Parable of the Polygons\n\n\n\n\n\n\n\n\n\n\nIs this likely to arise under CSR?Is it because of homophily?(Realization \\omega_1 in red, \\omega_2 in blue)"
   },
   {
     "objectID": "w09/slides.html#or-non-human-nature-examples",
     "href": "w09/slides.html#or-non-human-nature-examples",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "…Or, [Non-Human] Nature Examples",
     "text": "…Or, [Non-Human] Nature Examples\n\n\n\n\n\n\n\n\n\n\nNamibian “Fairy Circles”; Smithsonian Magazine: Namibia’s mysterious fairy circles may be competition 👀 between plants\n\n\n\n\n\n\n\n\n\nTermite mounds in Mozambique\n\n\n\n\n\n\n\n\n\n\nFree stock photo by @natalinadmay\n\n\n\n\n\n\n\n\n\n\nThree kestral (bird) colonies form a triangle straddling the Basilicata and Apulia regions of Italy; from Morinay et al. (2023)\n\n\n\n\n\n\n\n\n\nSpatial clustering of birdsongs; from Crates et al. (2021)"
   },
   {
     "objectID": "w09/slides.html#but-a-challenge",
     "href": "w09/slides.html#but-a-challenge",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "But, a Challenge…",
     "text": "But, a Challenge…\nTypically depends on context and/or level of resolution and/or level of analysis\n\nFrom Waller and Gotway (2004)"
   },
   {
     "objectID": "w09/slides.html#naïve-clustering",
     "href": "w09/slides.html#naïve-clustering",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Naïve Clustering",
     "text": "Naïve Clustering\n \n\n\n\n\n\n\n\n\n\n\n\n\n\nWeeks 8-9(My labels)\nNaïve Clustering\n→\nPoint Process Models\n→\nAutocorrelation in Point Data\n→\nAutocorrelation in Lattice Data\n\n\nWaller and Gotway (2004)\n(A bunch of stuff we already learned)\n→\nCh 5: Analysis of Spatial Point Patterns\n→\nCh 6: Point Data (Cases and Controls)\n→\nCh 7: Regional Count Data(First mention of autocorrelation on pg. 227)\n\n\nSchabenberger and Gotway (2004)\nCh 1 (pg. 14): Autocorrelation\n→\n(A bunch of more complicated stuff we’ll learn at the end)"
   },
   {
     "objectID": "w09/slides.html#why-naïve",
     "href": "w09/slides.html#why-naïve",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Why “Naïve”?",
     "text": "Why “Naïve”?\n\nRegional data: easiest way to visualize simple measures of clustering via spatial autocorrelation\nSo, we develop intuitions for measures like Moran’s I by looking at lattice data, but…\nNaïve because we’re not modeling the lattice regions (cells) themselves!\nNon-naïve clustering: Modeling clusters but also what process led to their formation! Which brings us to…"
   },
   {
     "objectID": "w09/slides.html#spatial-randomness",
     "href": "w09/slides.html#spatial-randomness",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Spatial Randomness",
     "text": "Spatial Randomness\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6805)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)\ncond_reg_sims &lt;- rSSI(r=r_core, N)\n# CSR data\n#csr_sims &lt;- rpoispp(N, win=obs_window)\ncond_sr_sims &lt;- rpoint(N, win=obs_window)\n### Clustered data\n#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)\n#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)\n#clust_sims &lt;- rclusterBKBC(clusters=\"MatClust\", kappa=10, mu=10, scale=0.05, verbose=FALSE)\n# Each cluster consist of 10 points in a disc of radius 0.2\nnclust &lt;- function(x0, y0, radius, n) {\n    #print(n)\n    return(runifdisc(10, radius, centre=c(x0, y0)))\n}\ncond_clust_sims &lt;- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\ncond_reg_plot &lt;- cond_reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme() +\n  transparent_bg()\nggsave(\"images/cond_reg.png\", cond_reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_sr_plot &lt;- cond_sr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme() +\n  transparent_bg()\nggsave(\"images/cond_sr.png\", cond_sr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_clust_plot &lt;- cond_clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme() +\n  transparent_bg()\nggsave(\"images/cond_clust.png\", cond_clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\nI = -1\n←\nI = 0\n→\nI = 1\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\mathbf{s} = (x,y) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed N\n60\n\n60\n\n60\n\n\nProblem with fixed N: Learning there are n_1 points in region R_1 \\Rightarrow there are N - n_1 points outside R_1"
   },
   {
     "objectID": "w09/slides.html#complete-spatial-randomness-csr",
     "href": "w09/slides.html#complete-spatial-randomness-csr",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Complete Spatial Randomness (CSR)",
     "text": "Complete Spatial Randomness (CSR)\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6807)\nlambda &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n# Regularity via Inhibition\nreg_sims &lt;- rMaternI(lambda, r=r_core, win=obs_window)\n# CSR data\ncsr_sims &lt;- rpoispp(N, win=obs_window)\n### Clustered data\nclust_mu &lt;- 10\nclust_sims &lt;- rMatClust(kappa=lambda / clust_mu, scale=2*r_core, mu=10, win=obs_window)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\nreg_plot &lt;- reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",reg_sims$n)) +\n  dsan_theme() +\n  transparent_bg()\nggsave(\"images/reg.png\", reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncsr_plot &lt;- csr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",csr_sims$n)) +\n  dsan_theme() +\n  transparent_bg()\nggsave(\"images/csr.png\", csr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\nclust_plot &lt;- clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",clust_sims$n)) +\n  dsan_theme() +\n  transparent_bg()\nggsave(\"images/clust.png\", clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\nI = -1\n←\nI = 0\n→\nI = 1\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\mathbf{s} = (x,y) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed Intensity \\lambda\n60\n\n60\n\n60\n\n\nRandom N"
   },
   {
     "objectID": "w09/slides.html#caveat-1-measures-are-relative-to-window-of-observation",
     "href": "w09/slides.html#caveat-1-measures-are-relative-to-window-of-observation",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Caveat 1: Measures are Relative to Window of Observation",
     "text": "Caveat 1: Measures are Relative to Window of Observation\nSame data can be spatially random in one window, clustered or regular in others!\n\n\nCode\nN &lt;- 60\nobs_window &lt;- square(1)\nwindow_scale &lt;- 3.5\ncsr_sims_square &lt;- rpoispp(N, win=obs_window)\n# Triangular window\nobs_window_tri &lt;- st_sfc(st_polygon(list(\n    matrix(c(0.3,0.1,0.7,0.1,0.5,0.5,0.3,0.1), byrow=TRUE, nrow=4)\n)))\nobs_window_geom &lt;- st_sfc(st_linestring(\n    matrix(c(0,0,1,0,1,1,0,1,0,0), byrow=TRUE, nrow=5)\n))\ncsr_sims_tri &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_tri))\ntri_plot &lt;- csr_sims_tri |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"quarter\") +\n  transparent_bg()\nggsave(\"images/window_tri.png\", tri_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Square window\nsquare_plot &lt;- csr_sims_square |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_tri |&gt; sf::st_boundary()) +\n  dsan_theme(\"quarter\") +\n  transparent_bg()\nggsave(\"images/window_square.png\", square_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Circular window\nobs_window_disc &lt;- st_sfc(st_point(c(1, 0.5))) |&gt; st_buffer(1.2)\ncsr_sims_circ &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_disc))\ncirc_plot &lt;- csr_sims_circ |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_geom) +\n  dsan_theme(\"quarter\") +\n  transparent_bg()\nggsave(\"images/window_circ.png\", circ_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n\n\n\n\n\n\n\n\n\n\nRegular\nCSR\nClustered"
   },
   {
     "objectID": "w09/slides.html#caveat-2-summary-statistics-like-i-are-not-models",
     "href": "w09/slides.html#caveat-2-summary-statistics-like-i-are-not-models",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Caveat 2: Summary Statistics Like I are Not Models!",
     "text": "Caveat 2: Summary Statistics Like I are Not Models!\n\nMoran’s I is to GISers what a thermometer is to doctors\nMeasures symptoms; many possible underlying causes!\nNeed to ask why autocorrelation seems to be present!"
   },
   {
     "objectID": "w09/slides.html#the-tree-grid-mystery",
     "href": "w09/slides.html#the-tree-grid-mystery",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "The Tree-Grid Mystery",
     "text": "The Tree-Grid Mystery\nYou’ve been hired as an archaeologist – congratulations! Your job: determine whether arrangement of trees formed:\n\nNaturally, via a process of resource competition, or\nArtificially, via an ancient civilization planting in a grid…"
   },
   {
     "objectID": "w09/slides.html#two-possible-histories",
     "href": "w09/slides.html#two-possible-histories",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Two Possible Histories…",
     "text": "Two Possible Histories…\n\nHypothesis \\mathcal{H}_{\\textsf{Art}}: Artificial Formation\n\n\n\n\n\nCode (Step 1: Grid Creation)\nha_base &lt;- 28\nsquare_sf &lt;- sf::st_as_sf(spatstat.geom::square(1))\ngrid_sf &lt;- sf::st_as_sf(sf::st_make_grid(square_sf))\ngrid_buffer_sf &lt;- grid_sf |&gt; sf::st_buffer(dist=-0.01, singleSide = TRUE)\ngrid_buffer_sf |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=ha_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 2: Point Generation)\ngrid_points &lt;- sf::st_sample(grid_buffer_sf, size=rep(1,100))\ngrid_buffer_sf |&gt; ggplot(aes(shape='Cell')) +\n  geom_sf() +\n  geom_sf(data=grid_points) +\n  scale_shape_manual(\"Shape\", values=c('Cell'=19)) +\n  theme_classic(base_size=ha_base) +\n  theme(\n    legend.title = element_blank(),\n    # legend.text = element_text(size=18)\n  ) +\n    transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 3: Observed Result)\ngrid_ppp &lt;- as.ppp(grid_points, W=spatstat.geom::square(1))\ngrid_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=ha_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\nHypothesis \\mathcal{H}_{\\textsf{Nat}}: Natural Formation\n\n\n\n\n\nCode (Step 1: Tree Generation)\nhn_base &lt;- 28\nr &lt;- 0.05\npois_ppp &lt;- rpoispp(150)\npois_sf &lt;- pois_ppp |&gt; sf::st_as_sf()\npois_sf |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=hn_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 2: Competition)\nage &lt;- runif(npoints(pois_ppp))\npair_dists &lt;- pairdist(pois_ppp)\nclose &lt;- (pair_dists &lt; r)\nlater &lt;- outer(age, age, \"&gt;\")\nkilled &lt;- apply(close & later, 1, any)\nkilled_ppp &lt;- pois_ppp[killed]\nalive_ppp &lt;- pois_ppp[!killed]\npois_window_sf &lt;- pois_ppp |&gt; sf::st_as_sf() |&gt; filter(label==\"window\")\npois_killed_sf &lt;- killed_ppp |&gt; sf::st_as_sf() |&gt; filter(label==\"point\")\npois_alive_sf &lt;- alive_ppp |&gt; sf::st_as_sf() |&gt; filter(label==\"point\")\nalive_buff_sf &lt;- pois_alive_sf |&gt; sf::st_buffer(r) |&gt; sf::st_union() |&gt; sf::st_intersection(pois_window_sf)\nggplot() +\n  geom_sf(data=pois_window_sf) +\n  geom_sf(data=alive_buff_sf, aes(color='Inhibition', shape='Inhibition'), linetype='dashed') +\n  geom_sf(data=pois_killed_sf, aes(color='Dead', shape='Dead'), size=2, stroke=2) +\n  geom_sf(data=pois_alive_sf, aes(color='Alive', shape='Alive'), size=1, stroke=1) +\n  scale_shape_manual(name=NULL, values=c(\"Alive\"=19, \"Dead\"=4, 'Inhibition'=21), labels=c(\"Alive\", \"Dead\", \"Inhibition\")) +\n  scale_color_manual(name=NULL, values=c(\"Alive\"=\"black\", \"Dead\"=cb_palette[1], \"Inhibition\"=\"black\"), labels=c(\"Alive\", \"Dead\", \"Inhibition\")) +\n  guides(shape=guide_legend(override.aes=list(fill = \"white\"))) +\n  theme_classic(base_size = hn_base) +\n  theme(plot.margin = unit(c(0,0,0,0), \"cm\")) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 3: Observed Result)\nalive_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=hn_base) +\n  transparent_bg()"
   },
   {
     "objectID": "w09/slides.html#why-do-events-appear-where-they-do",
     "href": "w09/slides.html#why-do-events-appear-where-they-do",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Why Do Events Appear Where They Do?",
     "text": "Why Do Events Appear Where They Do?\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6809)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n### Clustered data\nclust_ppp &lt;- rMatClust(\n  kappa=6,\n  scale=r_core,\n  mu=10\n)\nclust_sf &lt;- clust_ppp |&gt; sf::st_as_sf()\nclust_plot &lt;- clust_sf |&gt;\n  ggplot() +\n  geom_sf(size=2) +\n  theme_classic(base_size=18) +\n  transparent_bg()\nggsave(\"images/clust_ppp.png\", clust_plot, width=3, height=3)\n# Intensity fn\nclust_intensity &lt;- density(clust_ppp, sigma = 0.1)\npng(\"images/clust_intensity.png\")\npar(mar=c(1.5,0,0,2), las=2, oma=c(0,0,0,0), cex=2, bg=NA)\nplot(clust_intensity, main=NULL)\ncontour(clust_intensity, add = TRUE)\ndev.off()\n### PCF\nclust_pcf &lt;- spatstat.explore::pcf(\n  clust_ppp, divisor=\"d\",\n  r=seq(from=0.00, to=0.50, by=0.01)\n)\nclust_pcf_plot &lt;- clust_pcf |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  labs(x=\"Distance\", y=\"Density\") +\n  theme_classic(base_size=14) +\n  transparent_bg()\nggsave(\"images/clust_pcf.png\", clust_pcf_plot, width=3, height=3)\n\n\n\n\n\n\n\n\n\n\nOriginal Data\nFirst-Order\nSecond-Order\n\n\n\n\nN = 60 Events\nEvents modeled individually\\Rightarrow Intensity Function \\lambda(\\mathbf{s})\nEvents modeled pairwise \\Rightarrow Pairwise-Corr Function \\textrm{pcf}(\\vec{h})"
   },
   {
     "objectID": "w09/slides.html#what-do-these-functions-detect",
     "href": "w09/slides.html#what-do-these-functions-detect",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "What Do These Functions “Detect”?",
     "text": "What Do These Functions “Detect”?\n\n\n\n\nCode (Fixed Points)\nsq_base &lt;- 16\nsq_psize &lt;- 2.5\nobs_window &lt;- square(1)\nr0 &lt;- 0.2\nsq_df &lt;- tibble::tribble(\n  ~x, ~y,\n  0.5-r0,0.5-r0,\n  0.5+r0,0.5+r0,\n  0.5-r0,0.5+r0,\n  0.5+r0,0.5-r0\n)\nsq_sf &lt;- sf::st_as_sf(\n  sq_df,\n  coords = c(\"x\",\"y\")\n)\nsq_ppp &lt;- as.ppp(sq_sf, W=obs_window)\nsq_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(\n  mar=c(0,0,1,2),\n  # mai=c(0,0,0.1,0),\n  las=2,\n  oma=c(0,0,1,0)\n)\nsq_density &lt;- density(sq_ppp)\nplot(sq_density, main=NULL, xaxs='i', yaxs='i', bg=NA)\ncontour(sq_density, xaxs='i', yaxs='i', add = TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\n### PCF\npcf_result &lt;- spatstat.explore::pcf(\n  sq_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\npcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode (CSR Points)\ncsr_ppp &lt;- spatstat.random::rpoispp(\n  lambda = 60,\n  win=obs_window\n)\ncsr_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(\n  mar=c(0,0,1,2),\n  las=2,\n  oma=c(0,0,1,0)\n)\ncsr_density &lt;- density(csr_ppp)\nplot(csr_density, main=NULL, xaxs=\"i\", yaxs=\"i\", bg=NA)\ncontour(csr_density, xaxs=\"i\", yaxs=\"i\", add = TRUE, lwd=1.5)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncsr_pcf_result &lt;- spatstat.explore::pcf(\n  csr_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\ncsr_pcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()"
   },
   {
     "objectID": "w09/slides.html#poisson-point-processes-csr",
     "href": "w09/slides.html#poisson-point-processes-csr",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Poisson Point Processes (CSR)",
     "text": "Poisson Point Processes (CSR)\nspatstat.random::rpoispp(lambda, win)\n\n N \\sim \\text{Pois}(\\lambda)\n For i \\in \\{1, \\ldots, N\\}:\n\nGenerate X_i, Y_i \\sim \\mathcal{U}(\\texttt{win})\n\n\n\n\nCode\nsim_base &lt;- 20\nsim_psize &lt;- 2\nsim_xticks &lt;- seq(from=0.0, to=1.0, by=0.2)\nsim_yticks &lt;- seq(from=0.0, to=1.0, by=0.2)\ngen_pois_df &lt;- function(num_sims=1) {\n  pois_sims &lt;- spatstat.random::rpoispp(\n    lambda = 60, nsim=num_sims\n  )\n  return(tibble::as_tibble(pois_sims))\n}\n#pois_dfs &lt;- gen_pois_df()\n#pois_dfs |&gt; head()\npois_sims &lt;- spatstat.random::rpoispp(\n  lambda = 60, nsim=3\n)\nto_sim_df &lt;- function(cur_sim, sim_name) {\n  cur_df &lt;- tibble::as_tibble(cur_sim) |&gt; mutate(sim=sim_name)\n  return(cur_df)\n}\ncombined_df &lt;- imap(.x=pois_sims, .f=to_sim_df) |&gt; bind_rows()\ncombined_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim)) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()"
   },
   {
     "objectID": "w09/slides.html#simple-sequential-inhibition-ssi",
     "href": "w09/slides.html#simple-sequential-inhibition-ssi",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Simple Sequential Inhibition (SSI)",
     "text": "Simple Sequential Inhibition (SSI)\nspatstat.random::rSSI(r, n=Inf, giveup=1000, win)\n\n\\mathbf{S} = \\varnothing\nWhile not done:\n\n Generate \\mathbf{E} = (X, Y) \\sim \\mathcal{U}(\\texttt{win})\n Check if \\mathbf{E} within r units of any existing point in \\mathbf{S}\n\nIf it is, throw \\mathbf{E} away. Otherwise, add \\mathbf{E} to \\mathbf{S}\n\n done=TRUE if \\mathbf{S} has n points OR has been the same for giveup steps\n\n\n\n\nCode\ncapture.output(ssi_sims &lt;- spatstat.random::rSSI(\n  r = 0.05, n=60, nsim=3\n), file=nullfile())\ncombined_df &lt;- imap(.x=ssi_sims, .f=to_sim_df) |&gt; bind_rows()\ncombined_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim)) +\n  coord_equal() +\n  theme_classic(base_size=24) +\n  theme(panel.spacing.x = unit(3, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()"
   },
   {
     "objectID": "w09/slides.html#matérn-cluster-process",
     "href": "w09/slides.html#matérn-cluster-process",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Matérn Cluster Process",
     "text": "Matérn Cluster Process\n\n\nspatstat.random::rMatClust(kappa, scale, mu, win)\n\nDocs\n\n\n Generate K(\\kappa) parent points via Poisson Point Process with intensity \\lambda = \\kappa\n For each parent point \\mathbf{s}_i \\in \\left\\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{K(\\kappa)}\\right\\}:\n\nGenerate N(\\mu) offspring points via Poisson Point Process with intensity \\lambda = \\mu, distributed uniformly within a circle of radius scale centered at \\mathbf{s}_i\n\n Offspring points form the outcome (parent points are thrown away)\n\n\n\nCode\nmatclust_sims &lt;- rMatClust(\n  kappa = 6,\n  scale = 0.075,\n  mu = 10,\n  nsim = 3\n)\nmatclust_df &lt;- imap(.x=matclust_sims, .f=to_sim_df) |&gt; bind_rows()\nmatclust_plot &lt;- matclust_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim), nrow=1) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()\nmatclust_plot"
   },
   {
     "objectID": "w09/slides.html#matérn-inhibition-process-i-and-ii",
     "href": "w09/slides.html#matérn-inhibition-process-i-and-ii",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Matérn Inhibition Process (I and II)",
     "text": "Matérn Inhibition Process (I and II)\n\n\nspatstat.random::rMaternI(kappa, r, win)\n\nspatstat.random::rMaternII(kappa, r, win)\n\n\n\n\n\n\n\n\nrMaternI() [Docs]\nrMaternII() [Docs]\n\n\n\n\n\n\n Generate events \\mathbf{S} = \\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{N(\\lambda)}\\} via Poisson point process with \\lambda = \\kappa\n\n\n Generate events \\mathbf{S} = \\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{N(\\lambda)}\\} via Poisson point process with \\lambda = \\kappa, plus timestamp t_i \\sim \\mathcal{U}(0,1) for each \\mathbf{s}_i\n\n\n\n\n Delete all pairs of points \\mathbf{s}_i, \\mathbf{s}_j for which \\textsf{dist}(\\mathbf{s}_i, \\mathbf{s}_j) &lt; \\texttt{r}\n\n\n For each pair of points \\mathbf{s}_i, \\mathbf{s}_j: if \\textsf{dist}(\\mathbf{s}_i, \\mathbf{s}_j) &lt; \\texttt{r}, delete the later point\n\n\n\n\n\n\nCode\nmI_sims &lt;- rMaternI(\n  kappa = 60, r = 0.075, nsim=2\n)\nmII_sims &lt;- rMaternII(\n  kappa = 60, r = 0.075, nsim=2\n)\nmI_combined_df &lt;- imap(.x=mI_sims, .f=to_sim_df) |&gt; bind_rows() |&gt; mutate(sim=paste0(\"MI \",sim))\nmII_combined_df &lt;- imap(.x=mII_sims, .f=to_sim_df) |&gt; bind_rows() |&gt; mutate(sim=paste0(\"MII \",sim))\nm_combined_df &lt;- bind_rows(mI_combined_df, mII_combined_df)\nm_plot &lt;- m_combined_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim), nrow=1) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()\nm_plot"
   },
   {
     "objectID": "w09/slides.html#cox-processes-random-intensity-random-events",
     "href": "w09/slides.html#cox-processes-random-intensity-random-events",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Cox Processes: Random Intensity → Random Events",
     "text": "Cox Processes: Random Intensity → Random Events\n\n\nspatstat.random::rLGCP(model, mu, param, win)\nmodels=c(\"exponential\", \"gauss\", \"stable\", \"gencauchy\", \"matern\")\n\nDocs\n\n\n\nCode\ncox_pcol &lt;- \"black\"\ncox_bg &lt;- \"grey90\"\ncox_pch &lt;- 21\n# inhomogeneous LGCP with Gaussian covariance function\nm &lt;- as.im(function(x, y){\n  5 - 1.5 * (x - 0.5)^2 + 2 * (y - 0.5)^2\n}, W=owin())\nlgcp_sims &lt;- rLGCP(\"gauss\", m, var=0.15, scale =0.5, nsim=3)\n# lgcp_combined_df &lt;- imap(.x=ssi_sims, .f=to_sim_df) |&gt; bind_rows()\nplot_lgcp &lt;- function(lgcp_sim) {\n  plot(attr(lgcp_sim, \"Lambda\"), main=NULL)\n  points(lgcp_sim, col=cox_pcol, bg=cox_bg, pch=cox_pch)\n}\npar(mfrow=c(1,3), mar=c(0,0,0,2), oma=c(0,0,0,0), las=2)\nnulls &lt;- lapply(X=lgcp_sims, FUN=plot_lgcp)"
   },
   {
     "objectID": "w09/slides.html#ppp-objects",
     "href": "w09/slides.html#ppp-objects",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "ppp Objects",
     "text": "ppp Objects\n\nThe main datatype used to represent Planar Point Patterns [spatstat book p. 41]\nUnlike sf objects, which contain data+geometries for any desired collection of N entities, ppp objects are required to have at least an observation window!\n\n\n\nsf Creation:\n\n\nCode\ntree_df &lt;- tibble::tibble(\n  lon=runif(100,0,1), lat=runif(100,0,1), age=runif(100,0,1)\n)\ntree_sf &lt;- sf::st_as_sf(\n  tree_df, coords = c('lon', 'lat')\n)\ntree_sf |&gt; head(4)\n\n\n\n\n\n\nage\ngeometry\n\n\n\n\n0.8593935\nPOINT (0.5035446 0.05519595)\n\n\n0.9770798\nPOINT (0.2606818 0.3874983)\n\n\n0.9517643\nPOINT (0.5464588 0.8271631)\n\n\n0.0592741\nPOINT (0.7999682 0.5852131)\n\n\n\n\n\n\n\nppp Creation:\n\n\nCode\npois_ppp &lt;- spatstat.random::rpoispp(\n  lambda=100, win=spatstat.geom::square(1)\n)\npois_ppp\n\n\nPlanar point pattern: 93 points\nwindow: rectangle = [0, 1] x [0, 1] units\n\n\nCode\nattributes(pois_ppp)$names\n\n\n[1] \"window\"     \"n\"          \"x\"          \"y\"          \"markformat\"\n\n\nCode\npois_ppp$x |&gt; head(4)\n\n\n[1] 0.51779807 0.62213583 0.84467836 0.05354204"
   },
   {
     "objectID": "w09/slides.html#ppp-leftrightarrow-sf-conversion",
     "href": "w09/slides.html#ppp-leftrightarrow-sf-conversion",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "ppp \\leftrightarrow sf Conversion",
     "text": "ppp \\leftrightarrow sf Conversion\n\n\nppp to sf Conversion:\n\n\nCode\npois_sf &lt;- pois_ppp |&gt; sf::st_as_sf()\npois_sf |&gt; head(4)\n\n\n\n\n\n\nlabel\ngeom\n\n\n\n\nwindow\nPOLYGON ((0 0, 1 0, 1 1, 0 …\n\n\npoint\nPOINT (0.5177981 0.553718)\n\n\npoint\nPOINT (0.6221358 0.3933781)\n\n\npoint\nPOINT (0.8446784 0.8187611)\n\n\n\n\n\n\n\n\nCode\nlibrary(mdthemes) |&gt; suppressPackageStartupMessages()\npois_sf |&gt; ggplot() +\n  geom_sf(data=pois_sf |&gt; filter(label==\"window\"), aes(fill='grey')) +\n  geom_sf(data=pois_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'window'&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'point'&lt;/span&gt;\")) +\n  labs(title = \"&lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;sf&lt;/span&gt; Result\") +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\nsf to ppp Conversion:\n\n\nCode\nsquare_sfc &lt;- sf::st_polygon(list(\n  matrix(c(0,0,1,0,1,1,0,1,0,0), nrow=5, byrow=TRUE)\n)) |&gt; sf::st_sfc()\ntree_ppp &lt;- as.ppp(\n  sf::st_as_sfc(tree_sf),\n  W=as.owin(square_sfc)\n)\ntree_ppp\n\n\nPlanar point pattern: 100 points\nwindow: polygonal boundary\nenclosing rectangle: [0, 1] x [0, 1] units\n\n\n\n\nCode\ntree_ppp_sf &lt;- tree_ppp |&gt; sf::st_as_sf()\ntree_ppp_sf |&gt; ggplot() +\n  geom_sf(aes(fill='gray90')) +\n  geom_sf(data=tree_ppp_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp$window&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp${x,y}&lt;/span&gt;\")) +\n  labs(\n    title = \"&lt;span style='font-family: mono'&gt;sf&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; Result\",\n    x=\"&lt;span style='font-family: mono'&gt;tree_ppp$x&lt;/span&gt;\",\n    y=\"&lt;span style='font-family: mono'&gt;tree_ppp$y&lt;/span&gt;\"\n  ) + \n  guides(\n    fill = guide_legend(order = 1),\n    color = guide_legend(order = 2)\n  ) +\n  transparent_bg()"
   },
   {
     "objectID": "w09/slides.html#references",
     "href": "w09/slides.html#references",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "References",
     "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press.\n\n\nCrates, Ross, Naomi Langmore, Louis Ranjard, Dejan Stojanovic, Laura Rayner, Dean Ingwersen, and Robert Heinsohn. 2021. “Loss of Vocal Culture and Fitness Costs in a Critically Endangered Songbird.” Proceedings of the Royal Society B: Biological Sciences 288 (1947): 20210225.\n\n\nMorinay, Jennifer, Louise Riotte-Lambert, Geert Aarts, Federico De Pascalis, Simona Imperio, Michelangelo Morganti, Carlo Catoni, et al. 2023. “Within-Colony Segregation of Foraging Areas: From Patterns to Processes.” Oikos 2023 (8): e09926.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.\n\n\nWaller, Lance A., and Carol A. Gotway. 2004. Applied Spatial Statistics for Public Health Data. John Wiley & Sons."
   },
   {
     "objectID": "w09/index.html",
     "href": "w09/index.html",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "",
     "text": "Open slides in new tab →",
     "crumbs": [
@@ -1035,7 +1035,7 @@
   {
     "objectID": "w09/index.html#so-what-do-we-do-with-morans-i",
     "href": "w09/index.html#so-what-do-we-do-with-morans-i",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "So… What Do We Do With Moran’s I?",
     "text": "So… What Do We Do With Moran’s I?\n\n\n\n\n\n\n\n\n\n\nDoctor\nMidterm Practice\nMidterm\n\n\n\n\n\nYour temperature is 40° C\nMoran’s I of Protestant Churches is 0.58\nMoran’s I of waste dump sites is 0.67\n\n\n\nOne cause could be malaria, 40% likelihood\nOne cause could be urbanization, 40% likelihood\nOne cause could be density of stigmatized group, 60% likelihood\n\n\n\nOne cause could be lupus, 75% likelihood\nOne cause could be distance from Luther, 75% likelihood\nOne cause could be distance from UNOCI HQ, 75% likelihood\n\n\n\nI judge lupus as more likely cause, we should treat it\nI judge distance from Luther as more likely, we should study Luther more\nI judge distance from UNOCI as more likely; handle in UN not ICC",
     "crumbs": [
@@ -1045,7 +1045,7 @@
   {
     "objectID": "w09/index.html#agenda-for-point-patterns-something-noteworthy-is-happening-if-pattern-unlikely-to-arise-randomly-under-csr",
     "href": "w09/index.html#agenda-for-point-patterns-something-noteworthy-is-happening-if-pattern-unlikely-to-arise-randomly-under-csr",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Agenda for Point Patterns: Something “Noteworthy” is Happening if Pattern Unlikely to Arise Randomly Under CSR!",
     "text": "Agenda for Point Patterns: Something “Noteworthy” is Happening if Pattern Unlikely to Arise Randomly Under CSR!\n\n\n\n\nLess clustering than expected\n\n\n\n\nRoughly expected amount of clustering under CSR\n\n\n\n\nMore clustering than expected\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIs this likely to arise under CSR?But is it because of repulsion?BBC, Aug 10 2025\n\n\n\n\n\n\n\n\n\n\n\nA pattern arising from CSR!(Realizations \\omega_{\\tiny\\triangle} and \\omega_{\\tiny\\square} from same D)From Parable of the Polygons\n\n\n\n\n\n\n\n\n\n\n\nIs this likely to arise under CSR?Is it because of homophily?(Realization \\omega_1 in red, \\omega_2 in blue)",
     "crumbs": [
@@ -1055,7 +1055,7 @@
   {
     "objectID": "w09/index.html#or-non-human-nature-examples",
     "href": "w09/index.html#or-non-human-nature-examples",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "…Or, [Non-Human] Nature Examples",
     "text": "…Or, [Non-Human] Nature Examples\n\n\n\n\n\n\n\n\n\n\nNamibian “Fairy Circles”; Smithsonian Magazine: Namibia’s mysterious fairy circles may be competition 👀 between plants\n\n\n\n\n\n\n\n\n\nTermite mounds in Mozambique\n\n\n\n\n\n\n\n\n\n\n\nFree stock photo by @natalinadmay\n\n\n\n\n\n\n\n\n\n\n\nThree kestral (bird) colonies form a triangle straddling the Basilicata and Apulia regions of Italy; from Morinay et al. (2023)\n\n\n\n\n\n\n\n\n\nSpatial clustering of birdsongs; from Crates et al. (2021)",
     "crumbs": [
@@ -1065,7 +1065,7 @@
   {
     "objectID": "w09/index.html#but-a-challenge",
     "href": "w09/index.html#but-a-challenge",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "But, a Challenge…",
     "text": "But, a Challenge…\nTypically depends on context and/or level of resolution and/or level of analysis\n\n\n\nFrom Waller and Gotway (2004)",
     "crumbs": [
@@ -1075,7 +1075,7 @@
   {
     "objectID": "w09/index.html#naïve-clustering",
     "href": "w09/index.html#naïve-clustering",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Naïve Clustering",
     "text": "Naïve Clustering\n \n\n\n\n\n\n\n\n\n\n\n\n\n\nWeeks 8-9(My labels)\nNaïve Clustering\n→\nPoint Process Models\n→\nAutocorrelation in Point Data\n→\nAutocorrelation in Lattice Data\n\n\nWaller and Gotway (2004)\n(A bunch of stuff we already learned)\n→\nCh 5: Analysis of Spatial Point Patterns\n→\nCh 6: Point Data (Cases and Controls)\n→\nCh 7: Regional Count Data(First mention of autocorrelation on pg. 227)\n\n\nSchabenberger and Gotway (2004)\nCh 1 (pg. 14): Autocorrelation\n→\n(A bunch of more complicated stuff we’ll learn at the end)",
     "crumbs": [
@@ -1085,7 +1085,7 @@
   {
     "objectID": "w09/index.html#why-naïve",
     "href": "w09/index.html#why-naïve",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Why “Naïve”?",
     "text": "Why “Naïve”?\n\nRegional data: easiest way to visualize simple measures of clustering via spatial autocorrelation\nSo, we develop intuitions for measures like Moran’s I by looking at lattice data, but…\nNaïve because we’re not modeling the lattice regions (cells) themselves!\nNon-naïve clustering: Modeling clusters but also what process led to their formation! Which brings us to…",
     "crumbs": [
@@ -1095,7 +1095,7 @@
   {
     "objectID": "w09/index.html#spatial-randomness",
     "href": "w09/index.html#spatial-randomness",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Spatial Randomness",
     "text": "Spatial Randomness\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6805)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n#reg_sims &lt;- rMaternI(N, r=r_core, win=obs_window)\ncond_reg_sims &lt;- rSSI(r=r_core, N)\n# CSR data\n#csr_sims &lt;- rpoispp(N, win=obs_window)\ncond_sr_sims &lt;- rpoint(N, win=obs_window)\n### Clustered data\n#clust_sims &lt;- rMatClust(kappa=6, r=2.5*r_core, mu=10, win=obs_window)\n#clust_sims &lt;- rMatClust(mu=5, kappa=1, scale=0.1, win=obs_window, n.cond=N, w.cond=obs_window)\n#clust_sims &lt;- rclusterBKBC(clusters=\"MatClust\", kappa=10, mu=10, scale=0.05, verbose=FALSE)\n# Each cluster consist of 10 points in a disc of radius 0.2\nnclust &lt;- function(x0, y0, radius, n) {\n    #print(n)\n    return(runifdisc(10, radius, centre=c(x0, y0)))\n}\ncond_clust_sims &lt;- rNeymanScott(kappa=5, expand=0.0, rclust=nclust, radius=2*r_core, n=10)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\ncond_reg_plot &lt;- cond_reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme() +\n  transparent_bg()\nggsave(\"images/cond_reg.png\", cond_reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_sr_plot &lt;- cond_sr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme() +\n  transparent_bg()\nggsave(\"images/cond_sr.png\", cond_sr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncond_clust_plot &lt;- cond_clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme() +\n  transparent_bg()\nggsave(\"images/cond_clust.png\", cond_clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\nI = -1\n←\nI = 0\n→\nI = 1\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\mathbf{s} = (x,y) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed N\n60\n\n60\n\n60\n\n\nProblem with fixed N: Learning there are n_1 points in region R_1 \\Rightarrow there are N - n_1 points outside R_1",
     "crumbs": [
@@ -1105,7 +1105,7 @@
   {
     "objectID": "w09/index.html#complete-spatial-randomness-csr",
     "href": "w09/index.html#complete-spatial-randomness-csr",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Complete Spatial Randomness (CSR)",
     "text": "Complete Spatial Randomness (CSR)\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6807)\nlambda &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n# Regularity via Inhibition\n# Regularity via Inhibition\nreg_sims &lt;- rMaternI(lambda, r=r_core, win=obs_window)\n# CSR data\ncsr_sims &lt;- rpoispp(N, win=obs_window)\n### Clustered data\nclust_mu &lt;- 10\nclust_sims &lt;- rMatClust(kappa=lambda / clust_mu, scale=2*r_core, mu=10, win=obs_window)\n# And PLOT\nplot_w &lt;- 400\nplot_h &lt;- 400\nplot_scale &lt;- 2.25\nreg_plot &lt;- reg_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",reg_sims$n)) +\n  dsan_theme() +\n  transparent_bg()\nggsave(\"images/reg.png\", reg_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\ncsr_plot &lt;- csr_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",csr_sims$n)) +\n  dsan_theme() +\n  transparent_bg()\nggsave(\"images/csr.png\", csr_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\nclust_plot &lt;- clust_sims |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  labs(title=paste0(\"N = \",clust_sims$n)) +\n  dsan_theme() +\n  transparent_bg()\nggsave(\"images/clust.png\", clust_plot, width=plot_w, height=plot_h, units=\"px\", scale=plot_scale)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutocorrelation\nI = -1\n←\nI = 0\n→\nI = 1\n\n\n\n\nDescription\nNegative Autocorr\n\nNo Autocorr\n\nPositive Autocorr\n\n\nEvent at \\mathbf{s} = (x,y) Implies\nLess likely to find another point nearby\n\nNo information about nearby points\n\nMore likely to find another point nearby\n\n\nResulting Pattern\nRegularity\n\nReg/Clustered Mix\n\nClustering\n\n\nProcess(es) Which Could Produce Pattern\n1st Order: Random within even-spaced grid2nd Order: Competition\n\n1st Order: i.i.d. points2nd Order: i.i.d. distances\n\n1st Order: Tasty food at clust centers2nd Order: Cooperation\n\n\nFixed Intensity \\lambda\n60\n\n60\n\n60\n\n\nRandom N",
     "crumbs": [
@@ -1115,7 +1115,7 @@
   {
     "objectID": "w09/index.html#caveat-1-measures-are-relative-to-window-of-observation",
     "href": "w09/index.html#caveat-1-measures-are-relative-to-window-of-observation",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Caveat 1: Measures are Relative to Window of Observation",
     "text": "Caveat 1: Measures are Relative to Window of Observation\nSame data can be spatially random in one window, clustered or regular in others!\n\n\nCode\nN &lt;- 60\nobs_window &lt;- square(1)\nwindow_scale &lt;- 3.5\ncsr_sims_square &lt;- rpoispp(N, win=obs_window)\n# Triangular window\nobs_window_tri &lt;- st_sfc(st_polygon(list(\n    matrix(c(0.3,0.1,0.7,0.1,0.5,0.5,0.3,0.1), byrow=TRUE, nrow=4)\n)))\nobs_window_geom &lt;- st_sfc(st_linestring(\n    matrix(c(0,0,1,0,1,1,0,1,0,0), byrow=TRUE, nrow=5)\n))\ncsr_sims_tri &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_tri))\ntri_plot &lt;- csr_sims_tri |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  dsan_theme(\"quarter\") +\n  transparent_bg()\nggsave(\"images/window_tri.png\", tri_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Square window\nsquare_plot &lt;- csr_sims_square |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_tri |&gt; sf::st_boundary()) +\n  dsan_theme(\"quarter\") +\n  transparent_bg()\nggsave(\"images/window_square.png\", square_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n# Circular window\nobs_window_disc &lt;- st_sfc(st_point(c(1, 0.5))) |&gt; st_buffer(1.2)\ncsr_sims_circ &lt;- ppp(csr_sims_square$x, csr_sims_square$y, window=as.owin(obs_window_disc))\ncirc_plot &lt;- csr_sims_circ |&gt; sf::st_as_sf() |&gt;\n  ggplot() +\n  geom_sf() +\n  geom_sf(data=obs_window_geom) +\n  dsan_theme(\"quarter\") +\n  transparent_bg()\nggsave(\"images/window_circ.png\", circ_plot, width=plot_w, height=plot_h, units=\"px\", scale=window_scale)\n\n\n\n\n\n\n\n\n\n\nRegular\nCSR\nClustered",
     "crumbs": [
@@ -1125,7 +1125,7 @@
   {
     "objectID": "w09/index.html#caveat-2-summary-statistics-like-i-are-not-models",
     "href": "w09/index.html#caveat-2-summary-statistics-like-i-are-not-models",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Caveat 2: Summary Statistics Like I are Not Models!",
     "text": "Caveat 2: Summary Statistics Like I are Not Models!\n\nMoran’s I is to GISers what a thermometer is to doctors\nMeasures symptoms; many possible underlying causes!\nNeed to ask why autocorrelation seems to be present!",
     "crumbs": [
@@ -1135,7 +1135,7 @@
   {
     "objectID": "w09/index.html#the-tree-grid-mystery",
     "href": "w09/index.html#the-tree-grid-mystery",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "The Tree-Grid Mystery",
     "text": "The Tree-Grid Mystery\nYou’ve been hired as an archaeologist – congratulations! Your job: determine whether arrangement of trees formed:\n\nNaturally, via a process of resource competition, or\nArtificially, via an ancient civilization planting in a grid…",
     "crumbs": [
@@ -1145,7 +1145,7 @@
   {
     "objectID": "w09/index.html#two-possible-histories",
     "href": "w09/index.html#two-possible-histories",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Two Possible Histories…",
     "text": "Two Possible Histories…\n\nHypothesis \\mathcal{H}_{\\textsf{Art}}: Artificial Formation\n\n\n\n\n\nCode (Step 1: Grid Creation)\nha_base &lt;- 28\nsquare_sf &lt;- sf::st_as_sf(spatstat.geom::square(1))\ngrid_sf &lt;- sf::st_as_sf(sf::st_make_grid(square_sf))\ngrid_buffer_sf &lt;- grid_sf |&gt; sf::st_buffer(dist=-0.01, singleSide = TRUE)\ngrid_buffer_sf |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=ha_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 2: Point Generation)\ngrid_points &lt;- sf::st_sample(grid_buffer_sf, size=rep(1,100))\ngrid_buffer_sf |&gt; ggplot(aes(shape='Cell')) +\n  geom_sf() +\n  geom_sf(data=grid_points) +\n  scale_shape_manual(\"Shape\", values=c('Cell'=19)) +\n  theme_classic(base_size=ha_base) +\n  theme(\n    legend.title = element_blank(),\n    # legend.text = element_text(size=18)\n  ) +\n    transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 3: Observed Result)\ngrid_ppp &lt;- as.ppp(grid_points, W=spatstat.geom::square(1))\ngrid_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=ha_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nHypothesis \\mathcal{H}_{\\textsf{Nat}}: Natural Formation\n\n\n\n\n\nCode (Step 1: Tree Generation)\nhn_base &lt;- 28\nr &lt;- 0.05\npois_ppp &lt;- rpoispp(150)\npois_sf &lt;- pois_ppp |&gt; sf::st_as_sf()\npois_sf |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=hn_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 2: Competition)\nage &lt;- runif(npoints(pois_ppp))\npair_dists &lt;- pairdist(pois_ppp)\nclose &lt;- (pair_dists &lt; r)\nlater &lt;- outer(age, age, \"&gt;\")\nkilled &lt;- apply(close & later, 1, any)\nkilled_ppp &lt;- pois_ppp[killed]\nalive_ppp &lt;- pois_ppp[!killed]\npois_window_sf &lt;- pois_ppp |&gt; sf::st_as_sf() |&gt; filter(label==\"window\")\npois_killed_sf &lt;- killed_ppp |&gt; sf::st_as_sf() |&gt; filter(label==\"point\")\npois_alive_sf &lt;- alive_ppp |&gt; sf::st_as_sf() |&gt; filter(label==\"point\")\nalive_buff_sf &lt;- pois_alive_sf |&gt; sf::st_buffer(r) |&gt; sf::st_union() |&gt; sf::st_intersection(pois_window_sf)\nggplot() +\n  geom_sf(data=pois_window_sf) +\n  geom_sf(data=alive_buff_sf, aes(color='Inhibition', shape='Inhibition'), linetype='dashed') +\n  geom_sf(data=pois_killed_sf, aes(color='Dead', shape='Dead'), size=2, stroke=2) +\n  geom_sf(data=pois_alive_sf, aes(color='Alive', shape='Alive'), size=1, stroke=1) +\n  scale_shape_manual(name=NULL, values=c(\"Alive\"=19, \"Dead\"=4, 'Inhibition'=21), labels=c(\"Alive\", \"Dead\", \"Inhibition\")) +\n  scale_color_manual(name=NULL, values=c(\"Alive\"=\"black\", \"Dead\"=cb_palette[1], \"Inhibition\"=\"black\"), labels=c(\"Alive\", \"Dead\", \"Inhibition\")) +\n  guides(shape=guide_legend(override.aes=list(fill = \"white\"))) +\n  theme_classic(base_size = hn_base) +\n  theme(plot.margin = unit(c(0,0,0,0), \"cm\")) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 3: Observed Result)\nalive_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=hn_base) +\n  transparent_bg()",
     "crumbs": [
@@ -1155,7 +1155,7 @@
   {
     "objectID": "w09/index.html#why-do-events-appear-where-they-do",
     "href": "w09/index.html#why-do-events-appear-where-they-do",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Why Do Events Appear Where They Do?",
     "text": "Why Do Events Appear Where They Do?\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6809)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n### Clustered data\nclust_ppp &lt;- rMatClust(\n  kappa=6,\n  scale=r_core,\n  mu=10\n)\nclust_sf &lt;- clust_ppp |&gt; sf::st_as_sf()\nclust_plot &lt;- clust_sf |&gt;\n  ggplot() +\n  geom_sf(size=2) +\n  theme_classic(base_size=18) +\n  transparent_bg()\nggsave(\"images/clust_ppp.png\", clust_plot, width=3, height=3)\n# Intensity fn\nclust_intensity &lt;- density(clust_ppp, sigma = 0.1)\npng(\"images/clust_intensity.png\")\npar(mar=c(1.5,0,0,2), las=2, oma=c(0,0,0,0), cex=2, bg=NA)\nplot(clust_intensity, main=NULL)\ncontour(clust_intensity, add = TRUE)\ndev.off()\n### PCF\nclust_pcf &lt;- spatstat.explore::pcf(\n  clust_ppp, divisor=\"d\",\n  r=seq(from=0.00, to=0.50, by=0.01)\n)\nclust_pcf_plot &lt;- clust_pcf |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  labs(x=\"Distance\", y=\"Density\") +\n  theme_classic(base_size=14) +\n  transparent_bg()\nggsave(\"images/clust_pcf.png\", clust_pcf_plot, width=3, height=3)\n\n\n\n\n\n\n\n\n\n\nOriginal Data\nFirst-Order\nSecond-Order\n\n\n\n\nN = 60 Events\nEvents modeled individually\\Rightarrow Intensity Function \\lambda(\\mathbf{s})\nEvents modeled pairwise \\Rightarrow Pairwise-Corr Function \\textrm{pcf}(\\vec{h})",
     "crumbs": [
@@ -1165,7 +1165,7 @@
   {
     "objectID": "w09/index.html#what-do-these-functions-detect",
     "href": "w09/index.html#what-do-these-functions-detect",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "What Do These Functions “Detect”?",
     "text": "What Do These Functions “Detect”?\n\n\n\n\nCode (Fixed Points)\nsq_base &lt;- 16\nsq_psize &lt;- 2.5\nobs_window &lt;- square(1)\nr0 &lt;- 0.2\nsq_df &lt;- tibble::tribble(\n  ~x, ~y,\n  0.5-r0,0.5-r0,\n  0.5+r0,0.5+r0,\n  0.5-r0,0.5+r0,\n  0.5+r0,0.5-r0\n)\nsq_sf &lt;- sf::st_as_sf(\n  sq_df,\n  coords = c(\"x\",\"y\")\n)\nsq_ppp &lt;- as.ppp(sq_sf, W=obs_window)\nsq_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(\n  mar=c(0,0,1,2),\n  # mai=c(0,0,0.1,0),\n  las=2,\n  oma=c(0,0,1,0)\n)\nsq_density &lt;- density(sq_ppp)\nplot(sq_density, main=NULL, xaxs='i', yaxs='i', bg=NA)\ncontour(sq_density, xaxs='i', yaxs='i', add = TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\n### PCF\npcf_result &lt;- spatstat.explore::pcf(\n  sq_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\npcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode (CSR Points)\ncsr_ppp &lt;- spatstat.random::rpoispp(\n  lambda = 60,\n  win=obs_window\n)\ncsr_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(\n  mar=c(0,0,1,2),\n  las=2,\n  oma=c(0,0,1,0)\n)\ncsr_density &lt;- density(csr_ppp)\nplot(csr_density, main=NULL, xaxs=\"i\", yaxs=\"i\", bg=NA)\ncontour(csr_density, xaxs=\"i\", yaxs=\"i\", add = TRUE, lwd=1.5)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncsr_pcf_result &lt;- spatstat.explore::pcf(\n  csr_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\ncsr_pcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()",
     "crumbs": [
@@ -1175,7 +1175,7 @@
   {
     "objectID": "w09/index.html#poisson-point-processes-csr",
     "href": "w09/index.html#poisson-point-processes-csr",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Poisson Point Processes (CSR)",
     "text": "Poisson Point Processes (CSR)\nspatstat.random::rpoispp(lambda, win)\n\n N \\sim \\text{Pois}(\\lambda)\n For i \\in \\{1, \\ldots, N\\}:\n\nGenerate X_i, Y_i \\sim \\mathcal{U}(\\texttt{win})\n\n\n\n\nCode\nsim_base &lt;- 20\nsim_psize &lt;- 2\nsim_xticks &lt;- seq(from=0.0, to=1.0, by=0.2)\nsim_yticks &lt;- seq(from=0.0, to=1.0, by=0.2)\ngen_pois_df &lt;- function(num_sims=1) {\n  pois_sims &lt;- spatstat.random::rpoispp(\n    lambda = 60, nsim=num_sims\n  )\n  return(tibble::as_tibble(pois_sims))\n}\n#pois_dfs &lt;- gen_pois_df()\n#pois_dfs |&gt; head()\npois_sims &lt;- spatstat.random::rpoispp(\n  lambda = 60, nsim=3\n)\nto_sim_df &lt;- function(cur_sim, sim_name) {\n  cur_df &lt;- tibble::as_tibble(cur_sim) |&gt; mutate(sim=sim_name)\n  return(cur_df)\n}\ncombined_df &lt;- imap(.x=pois_sims, .f=to_sim_df) |&gt; bind_rows()\ncombined_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim)) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()",
     "crumbs": [
@@ -1185,7 +1185,7 @@
   {
     "objectID": "w09/index.html#simple-sequential-inhibition-ssi",
     "href": "w09/index.html#simple-sequential-inhibition-ssi",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Simple Sequential Inhibition (SSI)",
     "text": "Simple Sequential Inhibition (SSI)\nspatstat.random::rSSI(r, n=Inf, giveup=1000, win)\n\n\\mathbf{S} = \\varnothing\nWhile not done:\n\n Generate \\mathbf{E} = (X, Y) \\sim \\mathcal{U}(\\texttt{win})\n Check if \\mathbf{E} within r units of any existing point in \\mathbf{S}\n\nIf it is, throw \\mathbf{E} away. Otherwise, add \\mathbf{E} to \\mathbf{S}\n\n done=TRUE if \\mathbf{S} has n points OR has been the same for giveup steps\n\n\n\n\nCode\ncapture.output(ssi_sims &lt;- spatstat.random::rSSI(\n  r = 0.05, n=60, nsim=3\n), file=nullfile())\ncombined_df &lt;- imap(.x=ssi_sims, .f=to_sim_df) |&gt; bind_rows()\ncombined_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim)) +\n  coord_equal() +\n  theme_classic(base_size=24) +\n  theme(panel.spacing.x = unit(3, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()",
     "crumbs": [
@@ -1195,7 +1195,7 @@
   {
     "objectID": "w09/index.html#matérn-cluster-process",
     "href": "w09/index.html#matérn-cluster-process",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Matérn Cluster Process",
     "text": "Matérn Cluster Process\n\n\nspatstat.random::rMatClust(kappa, scale, mu, win)\n\nDocs\n\n\n\n Generate K(\\kappa) parent points via Poisson Point Process with intensity \\lambda = \\kappa\n For each parent point \\mathbf{s}_i \\in \\left\\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{K(\\kappa)}\\right\\}:\n\nGenerate N(\\mu) offspring points via Poisson Point Process with intensity \\lambda = \\mu, distributed uniformly within a circle of radius scale centered at \\mathbf{s}_i\n\n Offspring points form the outcome (parent points are thrown away)\n\n\n\nCode\nmatclust_sims &lt;- rMatClust(\n  kappa = 6,\n  scale = 0.075,\n  mu = 10,\n  nsim = 3\n)\nmatclust_df &lt;- imap(.x=matclust_sims, .f=to_sim_df) |&gt; bind_rows()\nmatclust_plot &lt;- matclust_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim), nrow=1) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()\nmatclust_plot",
     "crumbs": [
@@ -1205,7 +1205,7 @@
   {
     "objectID": "w09/index.html#matérn-inhibition-process-i-and-ii",
     "href": "w09/index.html#matérn-inhibition-process-i-and-ii",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Matérn Inhibition Process (I and II)",
     "text": "Matérn Inhibition Process (I and II)\n\n\nspatstat.random::rMaternI(kappa, r, win)\n\nspatstat.random::rMaternII(kappa, r, win)\n\n\n\n\n\n\n\n\n\nrMaternI() [Docs]\nrMaternII() [Docs]\n\n\n\n\n\n\n Generate events \\mathbf{S} = \\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{N(\\lambda)}\\} via Poisson point process with \\lambda = \\kappa\n\n\n Generate events \\mathbf{S} = \\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{N(\\lambda)}\\} via Poisson point process with \\lambda = \\kappa, plus timestamp t_i \\sim \\mathcal{U}(0,1) for each \\mathbf{s}_i\n\n\n\n\n Delete all pairs of points \\mathbf{s}_i, \\mathbf{s}_j for which \\textsf{dist}(\\mathbf{s}_i, \\mathbf{s}_j) &lt; \\texttt{r}\n\n\n For each pair of points \\mathbf{s}_i, \\mathbf{s}_j: if \\textsf{dist}(\\mathbf{s}_i, \\mathbf{s}_j) &lt; \\texttt{r}, delete the later point\n\n\n\n\n\n\nCode\nmI_sims &lt;- rMaternI(\n  kappa = 60, r = 0.075, nsim=2\n)\nmII_sims &lt;- rMaternII(\n  kappa = 60, r = 0.075, nsim=2\n)\nmI_combined_df &lt;- imap(.x=mI_sims, .f=to_sim_df) |&gt; bind_rows() |&gt; mutate(sim=paste0(\"MI \",sim))\nmII_combined_df &lt;- imap(.x=mII_sims, .f=to_sim_df) |&gt; bind_rows() |&gt; mutate(sim=paste0(\"MII \",sim))\nm_combined_df &lt;- bind_rows(mI_combined_df, mII_combined_df)\nm_plot &lt;- m_combined_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim), nrow=1) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()\nm_plot",
     "crumbs": [
@@ -1215,7 +1215,7 @@
   {
     "objectID": "w09/index.html#cox-processes-random-intensity-random-events",
     "href": "w09/index.html#cox-processes-random-intensity-random-events",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "Cox Processes: Random Intensity → Random Events",
     "text": "Cox Processes: Random Intensity → Random Events\n\n\nspatstat.random::rLGCP(model, mu, param, win)\nmodels=c(\"exponential\", \"gauss\", \"stable\", \"gencauchy\", \"matern\")\n\nDocs\n\n\n\n\nCode\ncox_pcol &lt;- \"black\"\ncox_bg &lt;- \"grey90\"\ncox_pch &lt;- 21\n# inhomogeneous LGCP with Gaussian covariance function\nm &lt;- as.im(function(x, y){\n  5 - 1.5 * (x - 0.5)^2 + 2 * (y - 0.5)^2\n}, W=owin())\nlgcp_sims &lt;- rLGCP(\"gauss\", m, var=0.15, scale =0.5, nsim=3)\n\n\nWarning: 32750 out of 65536 terms (50%) in FFT calculation of matrix square\nroot were negative, and were set to zero. Range: [-2.96, 1910]\n\n\nCode\n# lgcp_combined_df &lt;- imap(.x=ssi_sims, .f=to_sim_df) |&gt; bind_rows()\nplot_lgcp &lt;- function(lgcp_sim) {\n  plot(attr(lgcp_sim, \"Lambda\"), main=NULL)\n  points(lgcp_sim, col=cox_pcol, bg=cox_bg, pch=cox_pch)\n}\npar(mfrow=c(1,3), mar=c(0,0,0,2), oma=c(0,0,0,0), las=2)\nnulls &lt;- lapply(X=lgcp_sims, FUN=plot_lgcp)",
     "crumbs": [
@@ -1225,7 +1225,7 @@
   {
     "objectID": "w09/index.html#ppp-objects",
     "href": "w09/index.html#ppp-objects",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "ppp Objects",
     "text": "ppp Objects\n\nThe main datatype used to represent Planar Point Patterns [spatstat book p. 41]\nUnlike sf objects, which contain data+geometries for any desired collection of N entities, ppp objects are required to have at least an observation window!\n\n\n\nsf Creation:\n\n\nCode\ntree_df &lt;- tibble::tibble(\n  lon=runif(100,0,1), lat=runif(100,0,1), age=runif(100,0,1)\n)\ntree_sf &lt;- sf::st_as_sf(\n  tree_df, coords = c('lon', 'lat')\n)\ntree_sf |&gt; head(4)\n\n\n\n\n\n\nage\ngeometry\n\n\n\n\n0.8593935\nPOINT (0.5035446 0.05519595)\n\n\n0.9770798\nPOINT (0.2606818 0.3874983)\n\n\n0.9517643\nPOINT (0.5464588 0.8271631)\n\n\n0.0592741\nPOINT (0.7999682 0.5852131)\n\n\n\n\n\n\n\nppp Creation:\n\n\nCode\npois_ppp &lt;- spatstat.random::rpoispp(\n  lambda=100, win=spatstat.geom::square(1)\n)\npois_ppp\n\n\nPlanar point pattern: 93 points\nwindow: rectangle = [0, 1] x [0, 1] units\n\n\nCode\nattributes(pois_ppp)$names\n\n\n[1] \"window\"     \"n\"          \"x\"          \"y\"          \"markformat\"\n\n\nCode\npois_ppp$x |&gt; head(4)\n\n\n[1] 0.51779807 0.62213583 0.84467836 0.05354204",
     "crumbs": [
@@ -1235,7 +1235,7 @@
   {
     "objectID": "w09/index.html#ppp-leftrightarrow-sf-conversion",
     "href": "w09/index.html#ppp-leftrightarrow-sf-conversion",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "ppp \\leftrightarrow sf Conversion",
     "text": "ppp \\leftrightarrow sf Conversion\n\n\nppp to sf Conversion:\n\n\nCode\npois_sf &lt;- pois_ppp |&gt; sf::st_as_sf()\npois_sf |&gt; head(4)\n\n\n\n\n\n\nlabel\ngeom\n\n\n\n\nwindow\nPOLYGON ((0 0, 1 0, 1 1, 0 …\n\n\npoint\nPOINT (0.5177981 0.553718)\n\n\npoint\nPOINT (0.6221358 0.3933781)\n\n\npoint\nPOINT (0.8446784 0.8187611)\n\n\n\n\n\n\n\n\nCode\nlibrary(mdthemes) |&gt; suppressPackageStartupMessages()\npois_sf |&gt; ggplot() +\n  geom_sf(data=pois_sf |&gt; filter(label==\"window\"), aes(fill='grey')) +\n  geom_sf(data=pois_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'window'&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'point'&lt;/span&gt;\")) +\n  labs(title = \"&lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;sf&lt;/span&gt; Result\") +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\nsf to ppp Conversion:\n\n\nCode\nsquare_sfc &lt;- sf::st_polygon(list(\n  matrix(c(0,0,1,0,1,1,0,1,0,0), nrow=5, byrow=TRUE)\n)) |&gt; sf::st_sfc()\ntree_ppp &lt;- as.ppp(\n  sf::st_as_sfc(tree_sf),\n  W=as.owin(square_sfc)\n)\ntree_ppp\n\n\nPlanar point pattern: 100 points\nwindow: polygonal boundary\nenclosing rectangle: [0, 1] x [0, 1] units\n\n\n\n\nCode\ntree_ppp_sf &lt;- tree_ppp |&gt; sf::st_as_sf()\ntree_ppp_sf |&gt; ggplot() +\n  geom_sf(aes(fill='gray90')) +\n  geom_sf(data=tree_ppp_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp$window&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp${x,y}&lt;/span&gt;\")) +\n  labs(\n    title = \"&lt;span style='font-family: mono'&gt;sf&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; Result\",\n    x=\"&lt;span style='font-family: mono'&gt;tree_ppp$x&lt;/span&gt;\",\n    y=\"&lt;span style='font-family: mono'&gt;tree_ppp$y&lt;/span&gt;\"\n  ) + \n  guides(\n    fill = guide_legend(order = 1),\n    color = guide_legend(order = 2)\n  ) +\n  transparent_bg()",
     "crumbs": [
@@ -1245,7 +1245,7 @@
   {
     "objectID": "w09/index.html#references",
     "href": "w09/index.html#references",
-    "title": "Week 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity",
+    "title": "Week 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness",
     "section": "References",
     "text": "References\n\n\nBaddeley, Adrian, Ege Rubak, and Rolf Turner. 2015. Spatial Point Patterns: Methodology and Applications with R. CRC Press.\n\n\nCrates, Ross, Naomi Langmore, Louis Ranjard, Dejan Stojanovic, Laura Rayner, Dean Ingwersen, and Robert Heinsohn. 2021. “Loss of Vocal Culture and Fitness Costs in a Critically Endangered Songbird.” Proceedings of the Royal Society B: Biological Sciences 288 (1947): 20210225.\n\n\nMorinay, Jennifer, Louise Riotte-Lambert, Geert Aarts, Federico De Pascalis, Simona Imperio, Michelangelo Morganti, Carlo Catoni, et al. 2023. “Within-Colony Segregation of Foraging Areas: From Patterns to Processes.” Oikos 2023 (8): e09926.\n\n\nSchabenberger, Oliver, and Carol A. Gotway. 2004. Statistical Methods for Spatial Data Analysis. CRC Press.\n\n\nWaller, Lance A., and Carol A. Gotway. 2004. Applied Spatial Statistics for Public Health Data. John Wiley & Sons.",
     "crumbs": [
@@ -1257,7 +1257,7 @@
     "href": "index.html",
     "title": "PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science",
     "section": "",
-    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2026, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn 203. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\n\nDate\n\n\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 26\n\n\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 2\n\n\n\n\n\n\nWeek 3: Vector and Raster Representations\n\n\nSep 9\n\n\n\n\n\n\nWeek 4: Unary and Binary Operations\n\n\nSep 16\n\n\n\n\n\n\nWeek 5: Binary Operations and DE-9IM\n\n\nSep 23\n\n\n\n\n\n\nWeek 6: Spatial Joins and Areal Weighted Interpolation\n\n\nSep 30\n\n\n\n\n\n\nWeek 7: Spatial Data Science: Three Types of Geographic Data\n\n\nOct 7\n\n\n\n\n\n\nWeek 8: Spatial Autocorrelation\n\n\nOct 14\n\n\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity\n\n\nOct 21\n\n\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Areal Data\n\n\nOct 28\n\n\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 4\n\n\n\n\n\n\nWeek 12: Tools for Final Projects\n\n\nNov 11\n\n\n\n\n\n\nWeek 13: Visualizing Spatial Data\n\n\nNov 18\n\n\n\n\n\n\nWeek 14: Final Project Poster Session\n\n\nDec 2\n\n\n\n\n\n\nNo matching items",
+    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2026, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn 203. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\n\nDate\n\n\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 26\n\n\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 2\n\n\n\n\n\n\nWeek 3: Vector and Raster Representations\n\n\nSep 9\n\n\n\n\n\n\nWeek 4: Unary and Binary Operations\n\n\nSep 16\n\n\n\n\n\n\nWeek 5: Binary Operations and DE-9IM\n\n\nSep 23\n\n\n\n\n\n\nWeek 6: Spatial Joins and Areal Weighted Interpolation\n\n\nSep 30\n\n\n\n\n\n\nWeek 7: Spatial Data Science: Three Types of Geographic Data\n\n\nOct 7\n\n\n\n\n\n\nWeek 8: Spatial Autocorrelation\n\n\nOct 14\n\n\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness\n\n\nOct 21\n\n\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models\n\n\nOct 28\n\n\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 4\n\n\n\n\n\n\nWeek 12: Tools for Final Projects\n\n\nNov 11\n\n\n\n\n\n\nWeek 13: Visualizing Spatial Data\n\n\nNov 18\n\n\n\n\n\n\nWeek 14: Final Project Poster Session\n\n\nDec 2\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "<i class='bi bi-house pe-1'></i> Home"
     ]
@@ -3694,7 +3694,7 @@
   {
     "objectID": "w10/index.html",
     "href": "w10/index.html",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "",
     "text": "Open slides in new tab →",
     "crumbs": [
@@ -3704,7 +3704,7 @@
   {
     "objectID": "w10/index.html#roadmap-to-the-midterm",
     "href": "w10/index.html#roadmap-to-the-midterm",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Roadmap to the Midterm!",
     "text": "Roadmap to the Midterm!\n✅ Last Week (Oct 21): Framework for Formalizing Point \\(\\leadsto\\) Areal Hypotheses\n\n\n\n\n\n\n\n\n\n\nRepulsion\n←\nComplete Spatial Randomness\n→\nClustering\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n🔲 Today (Oct 28): Using this framework to Evaluate Point \\(\\leadsto\\) Areal Hypotheses\n🔲 Midterm (Nov 4): “Mini-homework” on Spatial Data Science unit (same topics as HW2-3)!\n\n\n\n\nCode\nsource(\"../dsan-globals/_globals.r\")\nsource(\"../dsan-globals/_globals-sf.r\")\nset.seed(6805)\nlibrary(tidyverse) |&gt; suppressPackageStartupMessages()\nlibrary(sf) |&gt; suppressPackageStartupMessages()\nlibrary(spatstat) |&gt; suppressPackageStartupMessages()\nlibrary(mdthemes) |&gt; suppressPackageStartupMessages()\nlibrary(leaflet) |&gt; suppressPackageStartupMessages()",
     "crumbs": [
@@ -3714,7 +3714,7 @@
   {
     "objectID": "w10/index.html#where-we-left-off-the-tree-grid-mystery",
     "href": "w10/index.html#where-we-left-off-the-tree-grid-mystery",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Where We Left Off: The Tree-Grid Mystery",
     "text": "Where We Left Off: The Tree-Grid Mystery\nYou’ve been hired as an archaeologist – congratulations! Your job: determine whether arrangement of trees formed:\n\nNaturally, via a process of resource competition, or\nArtificially, via an ancient civilization planting in a grid…",
     "crumbs": [
@@ -3724,7 +3724,7 @@
   {
     "objectID": "w10/index.html#two-possible-histories",
     "href": "w10/index.html#two-possible-histories",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Two Possible Histories…",
     "text": "Two Possible Histories…\n\nHypothesis \\(\\mathcal{H}_{\\textsf{Art}}\\): Artificial Formation\n\n\n\n\n\nCode (Step 1: Grid Creation)\nha_base &lt;- 28\nsquare_sf &lt;- sf::st_as_sf(spatstat.geom::square(1))\ngrid_sf &lt;- sf::st_as_sf(sf::st_make_grid(square_sf))\ngrid_buffer_sf &lt;- grid_sf |&gt; sf::st_buffer(dist=-0.01, singleSide = TRUE)\ngrid_buffer_sf |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=ha_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 2: Point Generation)\ngrid_points &lt;- sf::st_sample(grid_buffer_sf, size=rep(1,100))\ngrid_buffer_sf |&gt; ggplot(aes(shape='Cell')) +\n  geom_sf() +\n  geom_sf(data=grid_points) +\n  scale_shape_manual(\"Shape\", values=c('Cell'=19)) +\n  theme_classic(base_size=ha_base) +\n  theme(\n    legend.title = element_blank(),\n    # legend.text = element_text(size=18)\n  ) +\n    transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 3: Observed Result)\ngrid_ppp &lt;- as.ppp(grid_points, W=spatstat.geom::square(1))\ngrid_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=ha_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nHypothesis \\(\\mathcal{H}_{\\textsf{Nat}}\\): Natural Formation\n\n\n\n\n\nCode (Step 1: Tree Generation)\nhn_base &lt;- 28\nr &lt;- 0.05\npois_ppp &lt;- rpoispp(150)\npois_sf &lt;- pois_ppp |&gt; sf::st_as_sf()\npois_sf |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=hn_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 2: Competition)\nage &lt;- runif(npoints(pois_ppp))\npair_dists &lt;- pairdist(pois_ppp)\nclose &lt;- (pair_dists &lt; r)\nlater &lt;- outer(age, age, \"&gt;\")\nkilled &lt;- apply(close & later, 1, any)\nkilled_ppp &lt;- pois_ppp[killed]\nalive_ppp &lt;- pois_ppp[!killed]\npois_window_sf &lt;- pois_ppp |&gt; sf::st_as_sf() |&gt; filter(label==\"window\")\npois_killed_sf &lt;- killed_ppp |&gt; sf::st_as_sf() |&gt; filter(label==\"point\")\npois_alive_sf &lt;- alive_ppp |&gt; sf::st_as_sf() |&gt; filter(label==\"point\")\nalive_buff_sf &lt;- pois_alive_sf |&gt; sf::st_buffer(r) |&gt; sf::st_union() |&gt; sf::st_intersection(pois_window_sf)\nggplot() +\n  geom_sf(data=pois_window_sf) +\n  geom_sf(data=alive_buff_sf, aes(color='Inhibition', shape='Inhibition'), linetype='dashed') +\n  geom_sf(data=pois_killed_sf, aes(color='Dead', shape='Dead'), size=2, stroke=2) +\n  geom_sf(data=pois_alive_sf, aes(color='Alive', shape='Alive'), size=1, stroke=1) +\n  scale_shape_manual(name=NULL, values=c(\"Alive\"=19, \"Dead\"=4, 'Inhibition'=21), labels=c(\"Alive\", \"Dead\", \"Inhibition\")) +\n  scale_color_manual(name=NULL, values=c(\"Alive\"=\"black\", \"Dead\"=cb_palette[1], \"Inhibition\"=\"black\"), labels=c(\"Alive\", \"Dead\", \"Inhibition\")) +\n  guides(shape=guide_legend(override.aes=list(fill = \"white\"))) +\n  theme_classic(base_size = hn_base) +\n  theme(plot.margin = unit(c(0,0,0,0), \"cm\")) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 3: Observed Result)\nalive_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=hn_base) +\n  transparent_bg()",
     "crumbs": [
@@ -3734,7 +3734,7 @@
   {
     "objectID": "w10/index.html#why-do-events-appear-where-they-do",
     "href": "w10/index.html#why-do-events-appear-where-they-do",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Why Do Events Appear Where They Do?",
     "text": "Why Do Events Appear Where They Do?\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6809)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n### Clustered data\nclust_ppp &lt;- rMatClust(\n  kappa=6,\n  scale=r_core,\n  mu=10\n)\nclust_sf &lt;- clust_ppp |&gt; sf::st_as_sf()\nclust_plot &lt;- clust_sf |&gt;\n  ggplot() +\n  geom_sf(size=2) +\n  theme_classic(base_size=18) +\n  transparent_bg()\nggsave(\"images/clust_ppp.png\", clust_plot, width=3, height=3)\n# Intensity fn\nclust_intensity &lt;- density(clust_ppp, sigma = 0.1)\npng(\"images/clust_intensity.png\")\npar(mar=c(1.5,0,0,2), las=2, oma=c(0,0,0,0), cex=2, bg=NA)\nplot(clust_intensity, main=NULL)\ncontour(clust_intensity, add = TRUE)\ndev.off()\n### PCF\nclust_pcf &lt;- spatstat.explore::pcf(\n  clust_ppp, divisor=\"d\",\n  r=seq(from=0.00, to=0.50, by=0.01)\n)\nclust_pcf_plot &lt;- clust_pcf |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  labs(x=\"Distance\", y=\"Density\") +\n  theme_classic(base_size=14) +\n  transparent_bg()\nggsave(\"images/clust_pcf.png\", clust_pcf_plot, width=3, height=3)\n\n\n\n\n\n\n\n\n\n\nOriginal Data\nFirst-Order\nSecond-Order\n\n\n\n\n\\(N = 60\\) Events\nEvents modeled individually\\(\\Rightarrow\\) Intensity Function \\(\\lambda(\\mathbf{s})\\)\nEvents modeled pairwise \\(\\Rightarrow\\) Pairwise-Corr Function \\(\\textrm{pcf}(\\vec{h})\\)",
     "crumbs": [
@@ -3744,7 +3744,7 @@
   {
     "objectID": "w10/index.html#what-do-these-functions-detect",
     "href": "w10/index.html#what-do-these-functions-detect",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "What Do These Functions “Detect”?",
     "text": "What Do These Functions “Detect”?\n\n\n\n\nCode (Fixed Points)\nsq_base &lt;- 16\nsq_psize &lt;- 2.5\nobs_window &lt;- square(1)\nr0 &lt;- 0.2\nsq_df &lt;- tibble::tribble(\n  ~x, ~y,\n  0.5-r0,0.5-r0,\n  0.5+r0,0.5+r0,\n  0.5-r0,0.5+r0,\n  0.5+r0,0.5-r0\n)\nsq_sf &lt;- sf::st_as_sf(\n  sq_df,\n  coords = c(\"x\",\"y\")\n)\nsq_ppp &lt;- as.ppp(sq_sf, W=obs_window)\nsq_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(\n  mar=c(0,0,1,2),\n  # mai=c(0,0,0.1,0),\n  las=2,\n  oma=c(0,0,1,0)\n)\nsq_density &lt;- density(sq_ppp)\nplot(sq_density, main=NULL, xaxs='i', yaxs='i', bg=NA)\ncontour(sq_density, xaxs='i', yaxs='i', add = TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\n### PCF\npcf_result &lt;- spatstat.explore::pcf(\n  sq_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\npcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode (CSR Points)\ncsr_ppp &lt;- spatstat.random::rpoispp(\n  lambda = 60,\n  win=obs_window\n)\ncsr_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(\n  mar=c(0,0,1,2),\n  las=2,\n  oma=c(0,0,1,0)\n)\ncsr_density &lt;- density(csr_ppp)\nplot(csr_density, main=NULL, xaxs=\"i\", yaxs=\"i\", bg=NA)\ncontour(csr_density, xaxs=\"i\", yaxs=\"i\", add = TRUE, lwd=1.5)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncsr_pcf_result &lt;- spatstat.explore::pcf(\n  csr_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\ncsr_pcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()",
     "crumbs": [
@@ -3754,7 +3754,7 @@
   {
     "objectID": "w10/index.html#poisson-point-processes-csr",
     "href": "w10/index.html#poisson-point-processes-csr",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Poisson Point Processes (CSR)",
     "text": "Poisson Point Processes (CSR)\nspatstat.random::rpoispp(lambda, win)\n\n \\(N \\sim \\text{Pois}(\\lambda)\\)\n For \\(i \\in \\{1, \\ldots, N\\}\\):\n\nGenerate \\(X_i, Y_i \\sim \\mathcal{U}(\\texttt{win})\\)\n\n\n\n\nCode\nsim_base &lt;- 20\nsim_psize &lt;- 2\nsim_xticks &lt;- seq(from=0.0, to=1.0, by=0.2)\nsim_yticks &lt;- seq(from=0.0, to=1.0, by=0.2)\ngen_pois_df &lt;- function(num_sims=1) {\n  pois_sims &lt;- spatstat.random::rpoispp(\n    lambda = 60, nsim=num_sims\n  )\n  return(tibble::as_tibble(pois_sims))\n}\n#pois_dfs &lt;- gen_pois_df()\n#pois_dfs |&gt; head()\npois_sims &lt;- spatstat.random::rpoispp(\n  lambda = 60, nsim=3\n)\nto_sim_df &lt;- function(cur_sim, sim_name) {\n  cur_df &lt;- tibble::as_tibble(cur_sim) |&gt; mutate(sim=sim_name)\n  return(cur_df)\n}\ncombined_df &lt;- imap(.x=pois_sims, .f=to_sim_df) |&gt; bind_rows()\ncombined_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim)) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()",
     "crumbs": [
@@ -3764,7 +3764,7 @@
   {
     "objectID": "w10/index.html#simple-sequential-inhibition-ssi",
     "href": "w10/index.html#simple-sequential-inhibition-ssi",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Simple Sequential Inhibition (SSI)",
     "text": "Simple Sequential Inhibition (SSI)\nspatstat.random::rSSI(r, n=Inf, giveup=1000, win)\n\n\\(\\mathbf{S} = \\varnothing\\)\nWhile not done:\n\n Generate \\(\\mathbf{E} = (X, Y) \\sim \\mathcal{U}(\\texttt{win})\\)\n Check if \\(\\mathbf{E}\\) within r units of any existing point in \\(\\mathbf{S}\\)\n\nIf it is, throw \\(\\mathbf{E}\\) away. Otherwise, add \\(\\mathbf{E}\\) to \\(\\mathbf{S}\\)\n\n done=TRUE if \\(\\mathbf{S}\\) has n points OR has been the same for giveup steps\n\n\n\n\nCode\ncapture.output(ssi_sims &lt;- spatstat.random::rSSI(\n  r = 0.05, n=60, nsim=3\n), file=nullfile())\ncombined_df &lt;- imap(.x=ssi_sims, .f=to_sim_df) |&gt; bind_rows()\ncombined_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim)) +\n  coord_equal() +\n  theme_classic(base_size=24) +\n  theme(panel.spacing.x = unit(3, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()",
     "crumbs": [
@@ -3774,7 +3774,7 @@
   {
     "objectID": "w10/index.html#matérn-cluster-process",
     "href": "w10/index.html#matérn-cluster-process",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Matérn Cluster Process",
     "text": "Matérn Cluster Process\n\n\nspatstat.random::rMatClust(kappa, scale, mu, win)\n\nDocs\n\n\n\n Generate \\(K(\\kappa)\\) parent points via Poisson Point Process with intensity \\(\\lambda = \\kappa\\)\n For each parent point \\(\\mathbf{s}_i \\in \\left\\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{K(\\kappa)}\\right\\}\\):\n\nGenerate \\(N(\\mu)\\) offspring points via Poisson Point Process with intensity \\(\\lambda = \\mu\\), distributed uniformly within a circle of radius scale centered at \\(\\mathbf{s}_i\\)\n\n Offspring points form the outcome (parent points are thrown away)\n\n\n\nCode\nmatclust_sims &lt;- rMatClust(\n  kappa = 6,\n  scale = 0.075,\n  mu = 10,\n  nsim = 3\n)\nmatclust_df &lt;- imap(.x=matclust_sims, .f=to_sim_df) |&gt; bind_rows()\nmatclust_plot &lt;- matclust_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim), nrow=1) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()\nmatclust_plot",
     "crumbs": [
@@ -3784,7 +3784,7 @@
   {
     "objectID": "w10/index.html#matérn-inhibition-process-i-and-ii",
     "href": "w10/index.html#matérn-inhibition-process-i-and-ii",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Matérn Inhibition Process (I and II)",
     "text": "Matérn Inhibition Process (I and II)\n\n\nspatstat.random::rMaternI(kappa, r, win)\n\nspatstat.random::rMaternII(kappa, r, win)\n\n\n\n\n\n\n\n\n\nrMaternI() [Docs]\nrMaternII() [Docs]\n\n\n\n\n\n\n Generate events \\(\\mathbf{S} = \\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{N(\\lambda)}\\}\\) via Poisson point process with \\(\\lambda = \\kappa\\)\n\n\n Generate events \\(\\mathbf{S} = \\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{N(\\lambda)}\\}\\) via Poisson point process with \\(\\lambda = \\kappa\\), plus timestamp \\(t_i \\sim \\mathcal{U}(0,1)\\) for each \\(\\mathbf{s}_i\\)\n\n\n\n\n Delete all pairs of points \\(\\mathbf{s}_i\\), \\(\\mathbf{s}_j\\) for which \\(\\textsf{dist}(\\mathbf{s}_i, \\mathbf{s}_j) &lt; \\texttt{r}\\)\n\n\n For each pair of points \\(\\mathbf{s}_i\\), \\(\\mathbf{s}_j\\): if \\(\\textsf{dist}(\\mathbf{s}_i, \\mathbf{s}_j) &lt; \\texttt{r}\\), delete the later point\n\n\n\n\n\n\nCode\nmI_sims &lt;- rMaternI(\n  kappa = 60, r = 0.075, nsim=2\n)\nmII_sims &lt;- rMaternII(\n  kappa = 60, r = 0.075, nsim=2\n)\nmI_combined_df &lt;- imap(.x=mI_sims, .f=to_sim_df) |&gt; bind_rows() |&gt; mutate(sim=paste0(\"MI \",sim))\nmII_combined_df &lt;- imap(.x=mII_sims, .f=to_sim_df) |&gt; bind_rows() |&gt; mutate(sim=paste0(\"MII \",sim))\nm_combined_df &lt;- bind_rows(mI_combined_df, mII_combined_df)\nm_plot &lt;- m_combined_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim), nrow=1) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()\nm_plot",
     "crumbs": [
@@ -3794,7 +3794,7 @@
   {
     "objectID": "w10/index.html#cox-processes-random-intensity-random-events",
     "href": "w10/index.html#cox-processes-random-intensity-random-events",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Cox Processes: Random Intensity → Random Events",
     "text": "Cox Processes: Random Intensity → Random Events\n\n\nspatstat.random::rLGCP(model, mu, param, win)\nmodels=c(\"exponential\", \"gauss\", \"stable\", \"gencauchy\", \"matern\")\n\nDocs\n\n\n\n\nCode\ncox_pcol &lt;- \"black\"\ncox_bg &lt;- \"grey90\"\ncox_pch &lt;- 21\n# inhomogeneous LGCP with Gaussian covariance function\nm &lt;- as.im(function(x, y){\n  5 - 1.5 * (x - 0.5)^2 + 2 * (y - 0.5)^2\n}, W=owin())\nlgcp_sims &lt;- rLGCP(\"gauss\", m, var=0.15, scale =0.5, nsim=3)\n\n\nWarning: 32750 out of 65536 terms (50%) in FFT calculation of matrix square\nroot were negative, and were set to zero. Range: [-2.96, 1910]\n\n\nCode\n# lgcp_combined_df &lt;- imap(.x=ssi_sims, .f=to_sim_df) |&gt; bind_rows()\nplot_lgcp &lt;- function(lgcp_sim) {\n  plot(attr(lgcp_sim, \"Lambda\"), main=NULL)\n  points(lgcp_sim, col=cox_pcol, bg=cox_bg, pch=cox_pch)\n}\npar(mfrow=c(1,3), mar=c(0,0,0,2), oma=c(0,0,0,0), las=2)\nnulls &lt;- lapply(X=lgcp_sims, FUN=plot_lgcp)",
     "crumbs": [
@@ -3804,7 +3804,7 @@
   {
     "objectID": "w10/index.html#the-point-base-rates-rightarrow-null-models",
     "href": "w10/index.html#the-point-base-rates-rightarrow-null-models",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "The Point: Base Rates \\(\\Rightarrow\\) Null Models!",
     "text": "The Point: Base Rates \\(\\Rightarrow\\) Null Models!\n\nA “baseline” intensity function, \\(\\lambda(\\mathbf{s})\\) (possibly \\(c\\) for all \\(\\mathbf{s}\\)) defines a null model, from which we can simulate a bunch of point patterns…\nThen we compare: How does an observed point pattern differ from these simulated point patterns?\nNot expecting any clusters? Prior expectation = Uniform distribution \\(\\Rightarrow\\) null model = homogeneous point process  Do I see clustering? \\(I \\overset{\\tiny{?}}{\\gg} 0\\)\nExpecting clusters in cities? Prior expectation = Population density \\(\\Rightarrow\\) null model = heterogeneous point process  Do I see clustering above and beyond what I expected? \\(I_{\\text{obs}} \\overset{\\tiny{?}}{\\gg} I_{\\text{base}}\\)",
     "crumbs": [
@@ -3814,7 +3814,7 @@
   {
     "objectID": "w10/index.html#these-null-models-have-names",
     "href": "w10/index.html#these-null-models-have-names",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "These Null Models Have Names!",
     "text": "These Null Models Have Names!\n\nNot expecting any clusters? Null model = Complete Spatial Randomness (CSR)\nExpecting clusters (e.g.) in cities? Null model = Constant Risk Hypothesis\nWhy “constant risk”? From epidemiology:\n\n\\[\n\\underbrace{\\rho(\\mathbf{s})}_{\\text{Risk near }\\mathbf{s}}\n~~=~~~~~~ \\frac{\n  \\overbrace{\\lambda(\\mathbf{s})}^{\\mathclap{\\text{Density of cases near }s}}\n}{\n  \\underbrace{\\lambda_0(\\mathbf{s})}_{\\mathclap{\\text{Population density near }\\mathbf{s}}}\n}\n\\]",
     "crumbs": [
@@ -3824,7 +3824,7 @@
   {
     "objectID": "w10/index.html#constant-risk-hypothesis-motivation",
     "href": "w10/index.html#constant-risk-hypothesis-motivation",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Constant Risk Hypothesis: Motivation",
     "text": "Constant Risk Hypothesis: Motivation\n\nHere is a (fictional) map of 2026 flu cases in the US “Midwest”\nAre people in Chicago (pop. 2,731,585) and Detroit (pop. 649,095) equally “at risk”?\n\n\n\nCode\nlibrary(mapview) |&gt; suppressPackageStartupMessages()\ncity_df &lt;- tibble::tribble(\n  ~city, ~lon, ~lat, ~pop,\n  \"Chicago\", 41.950567516553896, -87.93011127491978, 2746388,\n  \"Detroit\", 42.45123004999075, -83.18402319217698, 631524\n)\ncity_sf &lt;- sf::st_as_sf(\n  city_df,\n  coords = c(\"lat\", \"lon\"),\n  crs=4326\n)\ncity_buf_sf &lt;- city_sf |&gt; sf::st_buffer(20000)\ncity_cases_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=rep(10,2)) |&gt; sf::st_as_sf()\ncity_cases_sf$city &lt;- \"Detroit (10 Cases)\"\ncity_cases_sf[1:10, 'city'] &lt;- \"Chicago (10 Cases)\"\ncity_cases_sf$sample &lt;- \"Flu\"\nmapview(city_cases_sf, zcol=\"city\")",
     "crumbs": [
@@ -3834,7 +3834,7 @@
   {
     "objectID": "w10/index.html#constant-risk-hypothesis-base-rates",
     "href": "w10/index.html#constant-risk-hypothesis-base-rates",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Constant Risk Hypothesis: Base Rates",
     "text": "Constant Risk Hypothesis: Base Rates\n\n\n\n\n\nChicago\nDetroit\n\n\n\n\nPopulation\n2,731,585\n649,095\n\n\n\n\n\nCode\nlibrary(leaflet) |&gt; suppressPackageStartupMessages()\nlibrary(leaflet.extras2) |&gt; suppressPackageStartupMessages()\ncity_pop_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=c(16, 4)) |&gt; sf::st_as_sf()\ncity_pop_sf$city &lt;- \"Detroit\"\ncity_pop_sf[1:16, 'city'] &lt;- \"Chicago\"\ncity_pop_sf$sample &lt;- \"People\"\ncity_combined_sf &lt;- bind_rows(city_cases_sf, city_pop_sf)\n# mapview(city_combined_sf, zcol=\"city\", marker=\"sample\")\nFlu = makeIcon(\n    iconUrl=\"images/Maki2-danger-24.svg\",\n    iconRetinaUrl=\"images/Maki2-danger-24.svg\",\n    iconWidth=20,\n    iconHeight=20,\n    className='highlight-icon'\n)\nPeople = makeIcon(\n  iconUrl=\"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg\",\n  iconRetinaUrl=\"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg\",\n  iconWidth=20,\n  iconHeight=20,\n  # className='boxed-cb'\n)\n\ncity_combined_sf$r &lt;- ifelse(city_combined_sf$sample == \"Flu\", 0, 4)\ncity_flu_sf &lt;- city_combined_sf |&gt; filter(sample == \"Flu\")\ncity_ppl_sf &lt;- city_combined_sf |&gt; filter(sample == \"People\")\nleaflet(city_flu_sf) |&gt;\n  addProviderTiles(\"Esri.WorldGrayCanvas\") |&gt;\n  # addProviderTiles(\"CartoDB.Positron\") |&gt;\n  addMarkers(data=city_flu_sf, icon = Flu) |&gt;\n  addMarkers(data=city_ppl_sf, icon = People)",
     "crumbs": [
@@ -3844,7 +3844,7 @@
   {
     "objectID": "w10/index.html#example-from-moraga-2024",
     "href": "w10/index.html#example-from-moraga-2024",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Example from Moraga (2024)",
     "text": "Example from Moraga (2024)\n\nData: \\(N = 761\\) primary biliary cirrhosis (PBC) cases, \\(N_0 = 3020\\) controls, UK 1987-94\n\n\n\n\n\nCode\nlibrary(sparr) |&gt; suppressPackageStartupMessages()\ndata(pbc)\ncontrols &lt;- unmark(pbc[which(pbc$marks == \"control\"), ])\ncontrols |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic() +\n  labs(title=\"Controls (Population Sample)\") +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncases &lt;- unmark(pbc[which(pbc$marks == \"case\"), ])\ncases |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic() +\n  labs(title=\"PBC Cases\") +\n  transparent_bg()",
     "crumbs": [
@@ -3854,7 +3854,7 @@
   {
     "objectID": "w10/index.html#estimating-comparable-intensity-surfaces",
     "href": "w10/index.html#estimating-comparable-intensity-surfaces",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Estimating Comparable Intensity Surfaces",
     "text": "Estimating Comparable Intensity Surfaces\n\nTo ensure comparable intensity functions, need a common bandwidth value\ndensity() from spatstat makes “smart” choices for this bandwidth, so for now we just average the bandwidths estimated for cases and controls:\n\n\n\nCode\nlibrary(sparr)\ndata(pbc)\npar(mar=c(2,0,2,0))\ncases &lt;- unmark(pbc[which(pbc$marks == \"case\"), ])\ncontrols &lt;- unmark(pbc[which(pbc$marks == \"control\"), ])\nbwcases &lt;- attr(density(cases), \"sigma\")\nbwcontr &lt;- attr(density(controls), \"sigma\")\n(bw &lt;- (bwcases + bwcontr)/2)\n\n\n[1] 11.45837\n\n\n\n\n\n\nCode\nint_controls &lt;- density(controls, sigma = bw, eps=0.25)\nplot(int_controls, main = \"λ(Controls)\", bg=NA)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nint_cases &lt;- density(cases, sigma = bw, eps=0.25)\nplot(int_cases, main = \"λ(Cases)\", bg=NA)",
     "crumbs": [
@@ -3864,7 +3864,7 @@
   {
     "objectID": "w10/index.html#visualizing-relative-risk-surface",
     "href": "w10/index.html#visualizing-relative-risk-surface",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Visualizing Relative Risk Surface",
     "text": "Visualizing Relative Risk Surface\n\n\nTo account for \\(N_0 \\neq N\\), normalize numerator and denominator:\n\\[\n\\hat{\\rho}(\\mathbf{s}) = \\frac{\\hat{\\lambda}(\\mathbf{s}) / N}{\\hat{\\lambda}_0(\\mathbf{s}) / N_0}\n\\]\n\\(\\Rightarrow \\hat{\\rho}(\\mathbf{s}) = \\frac{\\hat{\\lambda}(\\mathbf{s})}{\\alpha\\hat{\\lambda}_0(\\mathbf{s})}\\), where \\(\\alpha = \\frac{N}{N_0}\\)\n\n\nCode\n(alpha &lt;- cases$n/controls$n)\n\n\n[1] 0.2519868\n\n\n\n\n\nCode\nlibrary(fields)\n\n\nLoading required package: spam\n\n\nSpam version 2.11-4 (2026-05-28) is loaded.\nType 'help( Spam)' or 'demo( spam)' for a short introduction \nand overview of this package.\nHelp for individual functions is also obtained by adding the\nsuffix '.spam' to the function name, e.g. 'help( chol.spam)'.\n\n\n\nAttaching package: 'spam'\n\n\nThe following objects are masked from 'package:base':\n\n    backsolve, forwardsolve\n\n\nLoading required package: viridisLite\n\n\nLoading required package: RColorBrewer\n\n\n\nTry help(fields) to get started.\n\n\n\nAttaching package: 'fields'\n\n\nThe following object is masked from 'package:leaflet':\n\n    addLegend\n\n\nCode\nlibrary(scico)\nx &lt;- int_cases$xcol\ny &lt;- int_cases$yrow\nrr &lt;- t(int_cases$v)/t(alpha * int_controls$v)\ncenter &lt;- 1.0\nlim &lt;- max(abs(rr - center), na.rm = TRUE)\n# pal &lt;- colorRampPalette(c(\"#2166AC\", \"white\", \"#B2182B\"))(101)\npar(\n  mar=c(6.5,3,1.5,0.5),\n  oma=c(1,1,1,1),\n  xpd=NA,\n  mgp = c(1.6, 0.6, 0)\n)\npal &lt;- scico(101, palette = \"vik\")\nimage.plot(x, y, rr, asp = 1, col=pal, zlim = c(center - lim, center + lim), main=\"Relative Risk Surface\", xlab=\"Easting\", ylab=\"Northing\", bty='l')",
     "crumbs": [
@@ -3874,7 +3874,7 @@
   {
     "objectID": "w10/index.html#null-model-csr",
     "href": "w10/index.html#null-model-csr",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Null Model: CSR",
     "text": "Null Model: CSR\n\n\n\nFigure from Gimond (2024)",
     "crumbs": [
@@ -3884,7 +3884,7 @@
   {
     "objectID": "w10/index.html#the-random-labeling-hypothesis",
     "href": "w10/index.html#the-random-labeling-hypothesis",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "The Random Labeling Hypothesis",
     "text": "The Random Labeling Hypothesis\n\n\nRandomly apply 761 “sick” labels to the \\(761 + 3020 = 3781\\) points!\n\n\n\n\n\n\nCode\nplot_rlabel &lt;- function(rl_ppp) {\n  rl_win_sf &lt;- window_to_sf(rl_ppp)\n  rl_points_sf &lt;- points_to_sf(rl_ppp) |&gt;\n    rename(\n      type = spatstat.geom..marks.x.\n    )\n  rl_plot &lt;- ggplot() +\n    geom_sf(\n      data=rl_win_sf,\n      alpha=0.3\n    ) +\n    geom_sf(\n      mapping=aes(fill=type, alpha=type),\n      data=rl_points_sf,\n      size=2,\n      # alpha=0.75,\n      shape=21,\n      stroke=0.1,\n      # color='white',\n    ) +\n    # scale_color_manual(\n    #   \"Point Type\",\n    #   values=c(\"control\"=\"gray\",\"case\"=cb_palette[1])\n    # ) +\n    scale_fill_manual(\n      \"Type\",\n      values=c(\"control\"=\"gray\",\"case\"=cb_palette[1])\n    ) +\n    scale_alpha_manual(\n      \"Type\",\n      values=c(\"control\"=0.5, \"case\"=1.0)\n    ) +\n    theme_classic(base_size=16) +\n    labs(\n      title=\"NE Britain Disease Cases\"\n    ) +\n    transparent_bg()\n  return(rl_plot)\n}\nset.seed(6810)\nrl1_ppp &lt;- rlabel(pbc)\nplot_rlabel(rl1_ppp)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nset.seed(6811)\npbc_2 &lt;- rlabel(pbc)\nplot_rlabel(pbc_2)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nset.seed(6812)\npbc_3 &lt;- rlabel(pbc)\nplot_rlabel(pbc_3)",
     "crumbs": [
@@ -3894,7 +3894,7 @@
   {
     "objectID": "w10/index.html#the-constant-risk-hypothesis",
     "href": "w10/index.html#the-constant-risk-hypothesis",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "The Constant Risk Hypothesis",
     "text": "The Constant Risk Hypothesis\n\nEveryone equally at risk of contracting disease, regardless of location: \\(\\rho(\\mathbf{s}) = 1\\)\nIn this case: \\(\\lambda_{CR}(\\mathbf{s}) = \\alpha \\lambda_0(\\mathbf{s})\\) (some constant \\(\\alpha\\) \\(\\times\\) base rate \\(\\lambda_0(\\mathbf{s})\\))\n\n\n\n\n\nCode\npbc_win_sf &lt;- pbc |&gt; sf::st_as_sf() |&gt; filter(label == \"window\")\nplot_pbc_sim &lt;- function() {\n    pbc_sim &lt;- spatstat.random::rpoispp(\n        lambda = alpha * int_controls\n    )\n    # Separate window and points\n    pbc_sf &lt;- pbc_sim |&gt; sf::st_as_sf()\n    pbc_point_sf &lt;- pbc_sf |&gt; filter(label == \"point\")\n    pbc_win_sf &lt;- pbc_sf |&gt; filter(label == \"window\")\n    pbc_plot &lt;- ggplot() +\n      geom_sf(data=pbc_win_sf) +\n      geom_sf(data=pbc_point_sf, size=0.5, alpha=0.5) +\n      theme_classic() +\n      transparent_bg()\n    return(pbc_plot)\n}\nplot_pbc_sim()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nplot_pbc_sim()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nplot_pbc_sim()",
     "crumbs": [
@@ -3904,7 +3904,7 @@
   {
     "objectID": "w10/index.html#ppp-objects",
     "href": "w10/index.html#ppp-objects",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "ppp Objects",
     "text": "ppp Objects\n\nThe main datatype used to represent Planar Point Patterns [spatstat book p. 41]\nUnlike sf objects, which contain data+geometries for any desired collection of \\(N\\) entities, ppp objects are required to have at least an observation window!\n\n\n\nsf Creation:\n\n\nCode\ntree_df &lt;- tibble::tibble(\n  lon=runif(100,0,1), lat=runif(100,0,1), age=runif(100,0,1)\n)\ntree_sf &lt;- sf::st_as_sf(\n  tree_df, coords = c('lon', 'lat')\n)\ntree_sf |&gt; head(4)\n\n\n\n\n\n\nage\ngeometry\n\n\n\n\n0.4083865\nPOINT (0.9493056 0.7413338)\n\n\n0.2109350\nPOINT (0.4885575 0.626284)\n\n\n0.1177755\nPOINT (0.1203148 0.2863668)\n\n\n0.7475464\nPOINT (0.6020442 0.4303325)\n\n\n\n\n\n\n\nppp Creation:\n\n\nCode\npois_ppp &lt;- spatstat.random::rpoispp(\n  lambda=100, win=spatstat.geom::square(1)\n)\npois_ppp\n\n\nPlanar point pattern: 98 points\nwindow: rectangle = [0, 1] x [0, 1] units\n\n\nCode\nattributes(pois_ppp)$names\n\n\n[1] \"window\"     \"n\"          \"x\"          \"y\"          \"markformat\"\n\n\nCode\npois_ppp$x |&gt; head(4)\n\n\n[1] 0.7185641 0.9781310 0.1744719 0.4256203",
     "crumbs": [
@@ -3914,7 +3914,7 @@
   {
     "objectID": "w10/index.html#ppp-leftrightarrow-sf-conversion",
     "href": "w10/index.html#ppp-leftrightarrow-sf-conversion",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "ppp \\(\\leftrightarrow\\) sf Conversion",
     "text": "ppp \\(\\leftrightarrow\\) sf Conversion\n\n\nppp to sf Conversion:\n\n\nCode\npois_sf &lt;- pois_ppp |&gt; sf::st_as_sf()\npois_sf |&gt; head(4)\n\n\n\n\n\n\nlabel\ngeom\n\n\n\n\nwindow\nPOLYGON ((0 0, 1 0, 1 1, 0 …\n\n\npoint\nPOINT (0.7185641 0.5606081)\n\n\npoint\nPOINT (0.978131 0.9523815)\n\n\npoint\nPOINT (0.1744719 0.06257196)\n\n\n\n\n\n\n\n\nCode\nlibrary(mdthemes) |&gt; suppressPackageStartupMessages()\npois_sf |&gt; ggplot() +\n  geom_sf(data=pois_sf |&gt; filter(label==\"window\"), aes(fill='grey')) +\n  geom_sf(data=pois_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'window'&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'point'&lt;/span&gt;\")) +\n  labs(title = \"&lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;sf&lt;/span&gt; Result\") +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\nsf to ppp Conversion:\n\n\nCode\nsquare_sfc &lt;- sf::st_polygon(list(\n  matrix(c(0,0,1,0,1,1,0,1,0,0), nrow=5, byrow=TRUE)\n)) |&gt; sf::st_sfc()\ntree_ppp &lt;- as.ppp(\n  sf::st_as_sfc(tree_sf),\n  W=as.owin(square_sfc)\n)\ntree_ppp\n\n\nPlanar point pattern: 100 points\nwindow: polygonal boundary\nenclosing rectangle: [0, 1] x [0, 1] units\n\n\n\n\nCode\ntree_ppp_sf &lt;- tree_ppp |&gt; sf::st_as_sf()\ntree_ppp_sf |&gt; ggplot() +\n  geom_sf(aes(fill='gray90')) +\n  geom_sf(data=tree_ppp_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp$window&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp${x,y}&lt;/span&gt;\")) +\n  labs(\n    title = \"&lt;span style='font-family: mono'&gt;sf&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; Result\",\n    x=\"&lt;span style='font-family: mono'&gt;tree_ppp$x&lt;/span&gt;\",\n    y=\"&lt;span style='font-family: mono'&gt;tree_ppp$y&lt;/span&gt;\"\n  ) + \n  guides(\n    fill = guide_legend(order = 1),\n    color = guide_legend(order = 2)\n  ) +\n  transparent_bg()",
     "crumbs": [
@@ -3924,7 +3924,7 @@
   {
     "objectID": "w10/index.html#references",
     "href": "w10/index.html#references",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "References",
     "text": "References\n\n\nGimond, Manuel. 2024. Introduction to GIS and Spatial Analysis. Colby College (ES214).",
     "crumbs": [
@@ -3934,161 +3934,161 @@
   {
     "objectID": "w10/slides.html#roadmap-to-the-midterm",
     "href": "w10/slides.html#roadmap-to-the-midterm",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Roadmap to the Midterm!",
     "text": "Roadmap to the Midterm!\n✅ Last Week (Oct 21): Framework for Formalizing Point \\leadsto Areal Hypotheses\n\n\n\n\n\n\n\n\n\n\nRepulsion\n←\nComplete Spatial Randomness\n→\nClustering\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n🔲 Today (Oct 28): Using this framework to Evaluate Point \\leadsto Areal Hypotheses\n🔲 Midterm (Nov 4): “Mini-homework” on Spatial Data Science unit (same topics as HW2-3)!\n\n\n\n\nCode\nsource(\"../dsan-globals/_globals.r\")\nsource(\"../dsan-globals/_globals-sf.r\")\nset.seed(6805)\nlibrary(tidyverse) |&gt; suppressPackageStartupMessages()\nlibrary(sf) |&gt; suppressPackageStartupMessages()\nlibrary(spatstat) |&gt; suppressPackageStartupMessages()\nlibrary(mdthemes) |&gt; suppressPackageStartupMessages()\nlibrary(leaflet) |&gt; suppressPackageStartupMessages()"
   },
   {
     "objectID": "w10/slides.html#where-we-left-off-the-tree-grid-mystery",
     "href": "w10/slides.html#where-we-left-off-the-tree-grid-mystery",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Where We Left Off: The Tree-Grid Mystery",
     "text": "Where We Left Off: The Tree-Grid Mystery\nYou’ve been hired as an archaeologist – congratulations! Your job: determine whether arrangement of trees formed:\n\nNaturally, via a process of resource competition, or\nArtificially, via an ancient civilization planting in a grid…"
   },
   {
     "objectID": "w10/slides.html#two-possible-histories",
     "href": "w10/slides.html#two-possible-histories",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Two Possible Histories…",
     "text": "Two Possible Histories…\n\nHypothesis \\mathcal{H}_{\\textsf{Art}}: Artificial Formation\n\n\n\n\n\nCode (Step 1: Grid Creation)\nha_base &lt;- 28\nsquare_sf &lt;- sf::st_as_sf(spatstat.geom::square(1))\ngrid_sf &lt;- sf::st_as_sf(sf::st_make_grid(square_sf))\ngrid_buffer_sf &lt;- grid_sf |&gt; sf::st_buffer(dist=-0.01, singleSide = TRUE)\ngrid_buffer_sf |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=ha_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 2: Point Generation)\ngrid_points &lt;- sf::st_sample(grid_buffer_sf, size=rep(1,100))\ngrid_buffer_sf |&gt; ggplot(aes(shape='Cell')) +\n  geom_sf() +\n  geom_sf(data=grid_points) +\n  scale_shape_manual(\"Shape\", values=c('Cell'=19)) +\n  theme_classic(base_size=ha_base) +\n  theme(\n    legend.title = element_blank(),\n    # legend.text = element_text(size=18)\n  ) +\n    transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 3: Observed Result)\ngrid_ppp &lt;- as.ppp(grid_points, W=spatstat.geom::square(1))\ngrid_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=ha_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\nHypothesis \\mathcal{H}_{\\textsf{Nat}}: Natural Formation\n\n\n\n\n\nCode (Step 1: Tree Generation)\nhn_base &lt;- 28\nr &lt;- 0.05\npois_ppp &lt;- rpoispp(150)\npois_sf &lt;- pois_ppp |&gt; sf::st_as_sf()\npois_sf |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=hn_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 2: Competition)\nage &lt;- runif(npoints(pois_ppp))\npair_dists &lt;- pairdist(pois_ppp)\nclose &lt;- (pair_dists &lt; r)\nlater &lt;- outer(age, age, \"&gt;\")\nkilled &lt;- apply(close & later, 1, any)\nkilled_ppp &lt;- pois_ppp[killed]\nalive_ppp &lt;- pois_ppp[!killed]\npois_window_sf &lt;- pois_ppp |&gt; sf::st_as_sf() |&gt; filter(label==\"window\")\npois_killed_sf &lt;- killed_ppp |&gt; sf::st_as_sf() |&gt; filter(label==\"point\")\npois_alive_sf &lt;- alive_ppp |&gt; sf::st_as_sf() |&gt; filter(label==\"point\")\nalive_buff_sf &lt;- pois_alive_sf |&gt; sf::st_buffer(r) |&gt; sf::st_union() |&gt; sf::st_intersection(pois_window_sf)\nggplot() +\n  geom_sf(data=pois_window_sf) +\n  geom_sf(data=alive_buff_sf, aes(color='Inhibition', shape='Inhibition'), linetype='dashed') +\n  geom_sf(data=pois_killed_sf, aes(color='Dead', shape='Dead'), size=2, stroke=2) +\n  geom_sf(data=pois_alive_sf, aes(color='Alive', shape='Alive'), size=1, stroke=1) +\n  scale_shape_manual(name=NULL, values=c(\"Alive\"=19, \"Dead\"=4, 'Inhibition'=21), labels=c(\"Alive\", \"Dead\", \"Inhibition\")) +\n  scale_color_manual(name=NULL, values=c(\"Alive\"=\"black\", \"Dead\"=cb_palette[1], \"Inhibition\"=\"black\"), labels=c(\"Alive\", \"Dead\", \"Inhibition\")) +\n  guides(shape=guide_legend(override.aes=list(fill = \"white\"))) +\n  theme_classic(base_size = hn_base) +\n  theme(plot.margin = unit(c(0,0,0,0), \"cm\")) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode (Step 3: Observed Result)\nalive_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic(base_size=hn_base) +\n  transparent_bg()"
   },
   {
     "objectID": "w10/slides.html#why-do-events-appear-where-they-do",
     "href": "w10/slides.html#why-do-events-appear-where-they-do",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Why Do Events Appear Where They Do?",
     "text": "Why Do Events Appear Where They Do?\n\n\nCode\nlibrary(tidyverse)\nlibrary(spatstat)\nset.seed(6809)\nN &lt;- 60\nr_core &lt;- 0.05\nobs_window &lt;- square(1)\n### Clustered data\nclust_ppp &lt;- rMatClust(\n  kappa=6,\n  scale=r_core,\n  mu=10\n)\nclust_sf &lt;- clust_ppp |&gt; sf::st_as_sf()\nclust_plot &lt;- clust_sf |&gt;\n  ggplot() +\n  geom_sf(size=2) +\n  theme_classic(base_size=18) +\n  transparent_bg()\nggsave(\"images/clust_ppp.png\", clust_plot, width=3, height=3)\n# Intensity fn\nclust_intensity &lt;- density(clust_ppp, sigma = 0.1)\npng(\"images/clust_intensity.png\")\npar(mar=c(1.5,0,0,2), las=2, oma=c(0,0,0,0), cex=2, bg=NA)\nplot(clust_intensity, main=NULL)\ncontour(clust_intensity, add = TRUE)\ndev.off()\n### PCF\nclust_pcf &lt;- spatstat.explore::pcf(\n  clust_ppp, divisor=\"d\",\n  r=seq(from=0.00, to=0.50, by=0.01)\n)\nclust_pcf_plot &lt;- clust_pcf |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  labs(x=\"Distance\", y=\"Density\") +\n  theme_classic(base_size=14) +\n  transparent_bg()\nggsave(\"images/clust_pcf.png\", clust_pcf_plot, width=3, height=3)\n\n\n\n\n\n\n\n\n\n\nOriginal Data\nFirst-Order\nSecond-Order\n\n\n\n\nN = 60 Events\nEvents modeled individually\\Rightarrow Intensity Function \\lambda(\\mathbf{s})\nEvents modeled pairwise \\Rightarrow Pairwise-Corr Function \\textrm{pcf}(\\vec{h})"
   },
   {
     "objectID": "w10/slides.html#what-do-these-functions-detect",
     "href": "w10/slides.html#what-do-these-functions-detect",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "What Do These Functions “Detect”?",
     "text": "What Do These Functions “Detect”?\n\n\n\n\nCode (Fixed Points)\nsq_base &lt;- 16\nsq_psize &lt;- 2.5\nobs_window &lt;- square(1)\nr0 &lt;- 0.2\nsq_df &lt;- tibble::tribble(\n  ~x, ~y,\n  0.5-r0,0.5-r0,\n  0.5+r0,0.5+r0,\n  0.5-r0,0.5+r0,\n  0.5+r0,0.5-r0\n)\nsq_sf &lt;- sf::st_as_sf(\n  sq_df,\n  coords = c(\"x\",\"y\")\n)\nsq_ppp &lt;- as.ppp(sq_sf, W=obs_window)\nsq_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(\n  mar=c(0,0,1,2),\n  # mai=c(0,0,0.1,0),\n  las=2,\n  oma=c(0,0,1,0)\n)\nsq_density &lt;- density(sq_ppp)\nplot(sq_density, main=NULL, xaxs='i', yaxs='i', bg=NA)\ncontour(sq_density, xaxs='i', yaxs='i', add = TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\n### PCF\npcf_result &lt;- spatstat.explore::pcf(\n  sq_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\npcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode (CSR Points)\ncsr_ppp &lt;- spatstat.random::rpoispp(\n  lambda = 60,\n  win=obs_window\n)\ncsr_ppp |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf(size=sq_psize) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npar(\n  mar=c(0,0,1,2),\n  las=2,\n  oma=c(0,0,1,0)\n)\ncsr_density &lt;- density(csr_ppp)\nplot(csr_density, main=NULL, xaxs=\"i\", yaxs=\"i\", bg=NA)\ncontour(csr_density, xaxs=\"i\", yaxs=\"i\", add = TRUE, lwd=1.5)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncsr_pcf_result &lt;- spatstat.explore::pcf(\n  csr_ppp,\n  divisor=\"d\",\n  r=seq(from=0.00, to=0.8, by=0.01)\n)\ncsr_pcf_result |&gt; ggplot(aes(x=r, y=iso)) +\n  geom_hline(yintercept=1, linetype='dashed', linewidth=1.5) +\n  geom_area(color='black', fill=cb_palette[1], alpha=0.75) +\n  scale_x_continuous(breaks=seq(from=0.0, to=1.0, by=0.1)) +\n  theme_classic(base_size=sq_base) +\n  transparent_bg()"
   },
   {
     "objectID": "w10/slides.html#poisson-point-processes-csr",
     "href": "w10/slides.html#poisson-point-processes-csr",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Poisson Point Processes (CSR)",
     "text": "Poisson Point Processes (CSR)\nspatstat.random::rpoispp(lambda, win)\n\n N \\sim \\text{Pois}(\\lambda)\n For i \\in \\{1, \\ldots, N\\}:\n\nGenerate X_i, Y_i \\sim \\mathcal{U}(\\texttt{win})\n\n\n\n\nCode\nsim_base &lt;- 20\nsim_psize &lt;- 2\nsim_xticks &lt;- seq(from=0.0, to=1.0, by=0.2)\nsim_yticks &lt;- seq(from=0.0, to=1.0, by=0.2)\ngen_pois_df &lt;- function(num_sims=1) {\n  pois_sims &lt;- spatstat.random::rpoispp(\n    lambda = 60, nsim=num_sims\n  )\n  return(tibble::as_tibble(pois_sims))\n}\n#pois_dfs &lt;- gen_pois_df()\n#pois_dfs |&gt; head()\npois_sims &lt;- spatstat.random::rpoispp(\n  lambda = 60, nsim=3\n)\nto_sim_df &lt;- function(cur_sim, sim_name) {\n  cur_df &lt;- tibble::as_tibble(cur_sim) |&gt; mutate(sim=sim_name)\n  return(cur_df)\n}\ncombined_df &lt;- imap(.x=pois_sims, .f=to_sim_df) |&gt; bind_rows()\ncombined_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim)) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()"
   },
   {
     "objectID": "w10/slides.html#simple-sequential-inhibition-ssi",
     "href": "w10/slides.html#simple-sequential-inhibition-ssi",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Simple Sequential Inhibition (SSI)",
     "text": "Simple Sequential Inhibition (SSI)\nspatstat.random::rSSI(r, n=Inf, giveup=1000, win)\n\n\\mathbf{S} = \\varnothing\nWhile not done:\n\n Generate \\mathbf{E} = (X, Y) \\sim \\mathcal{U}(\\texttt{win})\n Check if \\mathbf{E} within r units of any existing point in \\mathbf{S}\n\nIf it is, throw \\mathbf{E} away. Otherwise, add \\mathbf{E} to \\mathbf{S}\n\n done=TRUE if \\mathbf{S} has n points OR has been the same for giveup steps\n\n\n\n\nCode\ncapture.output(ssi_sims &lt;- spatstat.random::rSSI(\n  r = 0.05, n=60, nsim=3\n), file=nullfile())\ncombined_df &lt;- imap(.x=ssi_sims, .f=to_sim_df) |&gt; bind_rows()\ncombined_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim)) +\n  coord_equal() +\n  theme_classic(base_size=24) +\n  theme(panel.spacing.x = unit(3, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()"
   },
   {
     "objectID": "w10/slides.html#matérn-cluster-process",
     "href": "w10/slides.html#matérn-cluster-process",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Matérn Cluster Process",
     "text": "Matérn Cluster Process\n\n\nspatstat.random::rMatClust(kappa, scale, mu, win)\n\nDocs\n\n\n Generate K(\\kappa) parent points via Poisson Point Process with intensity \\lambda = \\kappa\n For each parent point \\mathbf{s}_i \\in \\left\\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{K(\\kappa)}\\right\\}:\n\nGenerate N(\\mu) offspring points via Poisson Point Process with intensity \\lambda = \\mu, distributed uniformly within a circle of radius scale centered at \\mathbf{s}_i\n\n Offspring points form the outcome (parent points are thrown away)\n\n\n\nCode\nmatclust_sims &lt;- rMatClust(\n  kappa = 6,\n  scale = 0.075,\n  mu = 10,\n  nsim = 3\n)\nmatclust_df &lt;- imap(.x=matclust_sims, .f=to_sim_df) |&gt; bind_rows()\nmatclust_plot &lt;- matclust_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim), nrow=1) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()\nmatclust_plot"
   },
   {
     "objectID": "w10/slides.html#matérn-inhibition-process-i-and-ii",
     "href": "w10/slides.html#matérn-inhibition-process-i-and-ii",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Matérn Inhibition Process (I and II)",
     "text": "Matérn Inhibition Process (I and II)\n\n\nspatstat.random::rMaternI(kappa, r, win)\n\nspatstat.random::rMaternII(kappa, r, win)\n\n\n\n\n\n\n\n\nrMaternI() [Docs]\nrMaternII() [Docs]\n\n\n\n\n\n\n Generate events \\mathbf{S} = \\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{N(\\lambda)}\\} via Poisson point process with \\lambda = \\kappa\n\n\n Generate events \\mathbf{S} = \\{\\mathbf{s}_1, \\ldots, \\mathbf{s}_{N(\\lambda)}\\} via Poisson point process with \\lambda = \\kappa, plus timestamp t_i \\sim \\mathcal{U}(0,1) for each \\mathbf{s}_i\n\n\n\n\n Delete all pairs of points \\mathbf{s}_i, \\mathbf{s}_j for which \\textsf{dist}(\\mathbf{s}_i, \\mathbf{s}_j) &lt; \\texttt{r}\n\n\n For each pair of points \\mathbf{s}_i, \\mathbf{s}_j: if \\textsf{dist}(\\mathbf{s}_i, \\mathbf{s}_j) &lt; \\texttt{r}, delete the later point\n\n\n\n\n\n\nCode\nmI_sims &lt;- rMaternI(\n  kappa = 60, r = 0.075, nsim=2\n)\nmII_sims &lt;- rMaternII(\n  kappa = 60, r = 0.075, nsim=2\n)\nmI_combined_df &lt;- imap(.x=mI_sims, .f=to_sim_df) |&gt; bind_rows() |&gt; mutate(sim=paste0(\"MI \",sim))\nmII_combined_df &lt;- imap(.x=mII_sims, .f=to_sim_df) |&gt; bind_rows() |&gt; mutate(sim=paste0(\"MII \",sim))\nm_combined_df &lt;- bind_rows(mI_combined_df, mII_combined_df)\nm_plot &lt;- m_combined_df |&gt; ggplot(aes(x=x, y=y)) +\n  geom_point(size=sim_psize) +\n  facet_wrap(vars(sim), nrow=1) +\n  coord_equal() +\n  theme_classic(base_size=sim_base) +\n  theme(panel.spacing.x = unit(2, \"lines\")) +\n  scale_x_continuous(breaks=sim_xticks) +\n  scale_y_continuous(breaks=sim_yticks) +\n  transparent_bg()\nm_plot"
   },
   {
     "objectID": "w10/slides.html#cox-processes-random-intensity-random-events",
     "href": "w10/slides.html#cox-processes-random-intensity-random-events",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Cox Processes: Random Intensity → Random Events",
     "text": "Cox Processes: Random Intensity → Random Events\n\n\nspatstat.random::rLGCP(model, mu, param, win)\nmodels=c(\"exponential\", \"gauss\", \"stable\", \"gencauchy\", \"matern\")\n\nDocs\n\n\n\nCode\ncox_pcol &lt;- \"black\"\ncox_bg &lt;- \"grey90\"\ncox_pch &lt;- 21\n# inhomogeneous LGCP with Gaussian covariance function\nm &lt;- as.im(function(x, y){\n  5 - 1.5 * (x - 0.5)^2 + 2 * (y - 0.5)^2\n}, W=owin())\nlgcp_sims &lt;- rLGCP(\"gauss\", m, var=0.15, scale =0.5, nsim=3)\n# lgcp_combined_df &lt;- imap(.x=ssi_sims, .f=to_sim_df) |&gt; bind_rows()\nplot_lgcp &lt;- function(lgcp_sim) {\n  plot(attr(lgcp_sim, \"Lambda\"), main=NULL)\n  points(lgcp_sim, col=cox_pcol, bg=cox_bg, pch=cox_pch)\n}\npar(mfrow=c(1,3), mar=c(0,0,0,2), oma=c(0,0,0,0), las=2)\nnulls &lt;- lapply(X=lgcp_sims, FUN=plot_lgcp)"
   },
   {
     "objectID": "w10/slides.html#the-point-base-rates-rightarrow-null-models",
     "href": "w10/slides.html#the-point-base-rates-rightarrow-null-models",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "The Point: Base Rates \\Rightarrow Null Models!",
     "text": "The Point: Base Rates \\Rightarrow Null Models!\n\nA “baseline” intensity function, \\lambda(\\mathbf{s}) (possibly c for all \\mathbf{s}) defines a null model, from which we can simulate a bunch of point patterns…\nThen we compare: How does an observed point pattern differ from these simulated point patterns?\nNot expecting any clusters? Prior expectation = Uniform distribution \\Rightarrow null model = homogeneous point process  Do I see clustering? I \\overset{\\tiny{?}}{\\gg} 0\nExpecting clusters in cities? Prior expectation = Population density \\Rightarrow null model = heterogeneous point process  Do I see clustering above and beyond what I expected? I_{\\text{obs}} \\overset{\\tiny{?}}{\\gg} I_{\\text{base}}"
   },
   {
     "objectID": "w10/slides.html#these-null-models-have-names",
     "href": "w10/slides.html#these-null-models-have-names",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "These Null Models Have Names!",
     "text": "These Null Models Have Names!\n\nNot expecting any clusters? Null model = Complete Spatial Randomness (CSR)\nExpecting clusters (e.g.) in cities? Null model = Constant Risk Hypothesis\nWhy “constant risk”? From epidemiology:\n\n\n\\underbrace{\\rho(\\mathbf{s})}_{\\text{Risk near }\\mathbf{s}}\n~~=~~~~~~ \\frac{\n  \\overbrace{\\lambda(\\mathbf{s})}^{\\mathclap{\\text{Density of cases near }s}}\n}{\n  \\underbrace{\\lambda_0(\\mathbf{s})}_{\\mathclap{\\text{Population density near }\\mathbf{s}}}\n}"
   },
   {
     "objectID": "w10/slides.html#constant-risk-hypothesis-motivation",
     "href": "w10/slides.html#constant-risk-hypothesis-motivation",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Constant Risk Hypothesis: Motivation",
     "text": "Constant Risk Hypothesis: Motivation\n\nHere is a (fictional) map of 2026 flu cases in the US “Midwest”\nAre people in Chicago (pop. 2,731,585) and Detroit (pop. 649,095) equally “at risk”?\n\n\n\nCode\nlibrary(mapview) |&gt; suppressPackageStartupMessages()\ncity_df &lt;- tibble::tribble(\n  ~city, ~lon, ~lat, ~pop,\n  \"Chicago\", 41.950567516553896, -87.93011127491978, 2746388,\n  \"Detroit\", 42.45123004999075, -83.18402319217698, 631524\n)\ncity_sf &lt;- sf::st_as_sf(\n  city_df,\n  coords = c(\"lat\", \"lon\"),\n  crs=4326\n)\ncity_buf_sf &lt;- city_sf |&gt; sf::st_buffer(20000)\ncity_cases_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=rep(10,2)) |&gt; sf::st_as_sf()\ncity_cases_sf$city &lt;- \"Detroit (10 Cases)\"\ncity_cases_sf[1:10, 'city'] &lt;- \"Chicago (10 Cases)\"\ncity_cases_sf$sample &lt;- \"Flu\"\nmapview(city_cases_sf, zcol=\"city\")"
   },
   {
     "objectID": "w10/slides.html#constant-risk-hypothesis-base-rates",
     "href": "w10/slides.html#constant-risk-hypothesis-base-rates",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Constant Risk Hypothesis: Base Rates",
     "text": "Constant Risk Hypothesis: Base Rates\n\n\n\n\n\nChicago\nDetroit\n\n\n\n\nPopulation\n2,731,585\n649,095\n\n\n\n\n\nCode\nlibrary(leaflet) |&gt; suppressPackageStartupMessages()\nlibrary(leaflet.extras2) |&gt; suppressPackageStartupMessages()\ncity_pop_sf &lt;- city_buf_sf |&gt; sf::st_sample(size=c(16, 4)) |&gt; sf::st_as_sf()\ncity_pop_sf$city &lt;- \"Detroit\"\ncity_pop_sf[1:16, 'city'] &lt;- \"Chicago\"\ncity_pop_sf$sample &lt;- \"People\"\ncity_combined_sf &lt;- bind_rows(city_cases_sf, city_pop_sf)\n# mapview(city_combined_sf, zcol=\"city\", marker=\"sample\")\nFlu = makeIcon(\n    iconUrl=\"images/Maki2-danger-24.svg\",\n    iconRetinaUrl=\"images/Maki2-danger-24.svg\",\n    iconWidth=20,\n    iconHeight=20,\n    className='highlight-icon'\n)\nPeople = makeIcon(\n  iconUrl=\"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg\",\n  iconRetinaUrl=\"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg\",\n  iconWidth=20,\n  iconHeight=20,\n  # className='boxed-cb'\n)\n\ncity_combined_sf$r &lt;- ifelse(city_combined_sf$sample == \"Flu\", 0, 4)\ncity_flu_sf &lt;- city_combined_sf |&gt; filter(sample == \"Flu\")\ncity_ppl_sf &lt;- city_combined_sf |&gt; filter(sample == \"People\")\nleaflet(city_flu_sf) |&gt;\n  addProviderTiles(\"Esri.WorldGrayCanvas\") |&gt;\n  # addProviderTiles(\"CartoDB.Positron\") |&gt;\n  addMarkers(data=city_flu_sf, icon = Flu) |&gt;\n  addMarkers(data=city_ppl_sf, icon = People)"
   },
   {
     "objectID": "w10/slides.html#example-from-moraga-2024",
     "href": "w10/slides.html#example-from-moraga-2024",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Example from Moraga (2024)",
     "text": "Example from Moraga (2024)\n\nData: N = 761 primary biliary cirrhosis (PBC) cases, N_0 = 3020 controls, UK 1987-94\n\n\n\n\n\nCode\nlibrary(sparr) |&gt; suppressPackageStartupMessages()\ndata(pbc)\ncontrols &lt;- unmark(pbc[which(pbc$marks == \"control\"), ])\ncontrols |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic() +\n  labs(title=\"Controls (Population Sample)\") +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ncases &lt;- unmark(pbc[which(pbc$marks == \"case\"), ])\ncases |&gt; sf::st_as_sf() |&gt; ggplot() +\n  geom_sf() +\n  theme_classic() +\n  labs(title=\"PBC Cases\") +\n  transparent_bg()"
   },
   {
     "objectID": "w10/slides.html#estimating-comparable-intensity-surfaces",
     "href": "w10/slides.html#estimating-comparable-intensity-surfaces",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Estimating Comparable Intensity Surfaces",
     "text": "Estimating Comparable Intensity Surfaces\n\nTo ensure comparable intensity functions, need a common bandwidth value\ndensity() from spatstat makes “smart” choices for this bandwidth, so for now we just average the bandwidths estimated for cases and controls:\n\n\n\nCode\nlibrary(sparr)\ndata(pbc)\npar(mar=c(2,0,2,0))\ncases &lt;- unmark(pbc[which(pbc$marks == \"case\"), ])\ncontrols &lt;- unmark(pbc[which(pbc$marks == \"control\"), ])\nbwcases &lt;- attr(density(cases), \"sigma\")\nbwcontr &lt;- attr(density(controls), \"sigma\")\n(bw &lt;- (bwcases + bwcontr)/2)\n\n\n[1] 11.45837\n\n\n\n\n\n\nCode\nint_controls &lt;- density(controls, sigma = bw, eps=0.25)\nplot(int_controls, main = \"λ(Controls)\", bg=NA)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nint_cases &lt;- density(cases, sigma = bw, eps=0.25)\nplot(int_cases, main = \"λ(Cases)\", bg=NA)"
   },
   {
     "objectID": "w10/slides.html#visualizing-relative-risk-surface",
     "href": "w10/slides.html#visualizing-relative-risk-surface",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Visualizing Relative Risk Surface",
     "text": "Visualizing Relative Risk Surface\n\n\nTo account for N_0 \\neq N, normalize numerator and denominator:\n\n\\hat{\\rho}(\\mathbf{s}) = \\frac{\\hat{\\lambda}(\\mathbf{s}) / N}{\\hat{\\lambda}_0(\\mathbf{s}) / N_0}\n\n\\Rightarrow \\hat{\\rho}(\\mathbf{s}) = \\frac{\\hat{\\lambda}(\\mathbf{s})}{\\alpha\\hat{\\lambda}_0(\\mathbf{s})}, where \\alpha = \\frac{N}{N_0}\n\n\nCode\n(alpha &lt;- cases$n/controls$n)\n\n\n[1] 0.2519868\n\n\n\n\n\nCode\nlibrary(fields)\nlibrary(scico)\nx &lt;- int_cases$xcol\ny &lt;- int_cases$yrow\nrr &lt;- t(int_cases$v)/t(alpha * int_controls$v)\ncenter &lt;- 1.0\nlim &lt;- max(abs(rr - center), na.rm = TRUE)\n# pal &lt;- colorRampPalette(c(\"#2166AC\", \"white\", \"#B2182B\"))(101)\npar(\n  mar=c(6.5,3,1.5,0.5),\n  oma=c(1,1,1,1),\n  xpd=NA,\n  mgp = c(1.6, 0.6, 0)\n)\npal &lt;- scico(101, palette = \"vik\")\nimage.plot(x, y, rr, asp = 1, col=pal, zlim = c(center - lim, center + lim), main=\"Relative Risk Surface\", xlab=\"Easting\", ylab=\"Northing\", bty='l')"
   },
   {
     "objectID": "w10/slides.html#null-model-csr",
     "href": "w10/slides.html#null-model-csr",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "Null Model: CSR",
     "text": "Null Model: CSR\n\nFigure from Gimond (2024)"
   },
   {
     "objectID": "w10/slides.html#the-random-labeling-hypothesis",
     "href": "w10/slides.html#the-random-labeling-hypothesis",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "The Random Labeling Hypothesis",
     "text": "The Random Labeling Hypothesis\n\n\nRandomly apply 761 “sick” labels to the 761 + 3020 = 3781 points!\n\n\n\n\n\n\nCode\nplot_rlabel &lt;- function(rl_ppp) {\n  rl_win_sf &lt;- window_to_sf(rl_ppp)\n  rl_points_sf &lt;- points_to_sf(rl_ppp) |&gt;\n    rename(\n      type = spatstat.geom..marks.x.\n    )\n  rl_plot &lt;- ggplot() +\n    geom_sf(\n      data=rl_win_sf,\n      alpha=0.3\n    ) +\n    geom_sf(\n      mapping=aes(fill=type, alpha=type),\n      data=rl_points_sf,\n      size=2,\n      # alpha=0.75,\n      shape=21,\n      stroke=0.1,\n      # color='white',\n    ) +\n    # scale_color_manual(\n    #   \"Point Type\",\n    #   values=c(\"control\"=\"gray\",\"case\"=cb_palette[1])\n    # ) +\n    scale_fill_manual(\n      \"Type\",\n      values=c(\"control\"=\"gray\",\"case\"=cb_palette[1])\n    ) +\n    scale_alpha_manual(\n      \"Type\",\n      values=c(\"control\"=0.5, \"case\"=1.0)\n    ) +\n    theme_classic(base_size=16) +\n    labs(\n      title=\"NE Britain Disease Cases\"\n    ) +\n    transparent_bg()\n  return(rl_plot)\n}\nset.seed(6810)\nrl1_ppp &lt;- rlabel(pbc)\nplot_rlabel(rl1_ppp)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nset.seed(6811)\npbc_2 &lt;- rlabel(pbc)\nplot_rlabel(pbc_2)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nset.seed(6812)\npbc_3 &lt;- rlabel(pbc)\nplot_rlabel(pbc_3)"
   },
   {
     "objectID": "w10/slides.html#the-constant-risk-hypothesis",
     "href": "w10/slides.html#the-constant-risk-hypothesis",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "The Constant Risk Hypothesis",
     "text": "The Constant Risk Hypothesis\n\nEveryone equally at risk of contracting disease, regardless of location: \\rho(\\mathbf{s}) = 1\nIn this case: \\lambda_{CR}(\\mathbf{s}) = \\alpha \\lambda_0(\\mathbf{s}) (some constant \\alpha \\times base rate \\lambda_0(\\mathbf{s}))\n\n\n\n\n\nCode\npbc_win_sf &lt;- pbc |&gt; sf::st_as_sf() |&gt; filter(label == \"window\")\nplot_pbc_sim &lt;- function() {\n    pbc_sim &lt;- spatstat.random::rpoispp(\n        lambda = alpha * int_controls\n    )\n    # Separate window and points\n    pbc_sf &lt;- pbc_sim |&gt; sf::st_as_sf()\n    pbc_point_sf &lt;- pbc_sf |&gt; filter(label == \"point\")\n    pbc_win_sf &lt;- pbc_sf |&gt; filter(label == \"window\")\n    pbc_plot &lt;- ggplot() +\n      geom_sf(data=pbc_win_sf) +\n      geom_sf(data=pbc_point_sf, size=0.5, alpha=0.5) +\n      theme_classic() +\n      transparent_bg()\n    return(pbc_plot)\n}\nplot_pbc_sim()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nplot_pbc_sim()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nplot_pbc_sim()"
   },
   {
     "objectID": "w10/slides.html#ppp-objects",
     "href": "w10/slides.html#ppp-objects",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "ppp Objects",
     "text": "ppp Objects\n\nThe main datatype used to represent Planar Point Patterns [spatstat book p. 41]\nUnlike sf objects, which contain data+geometries for any desired collection of N entities, ppp objects are required to have at least an observation window!\n\n\n\nsf Creation:\n\n\nCode\ntree_df &lt;- tibble::tibble(\n  lon=runif(100,0,1), lat=runif(100,0,1), age=runif(100,0,1)\n)\ntree_sf &lt;- sf::st_as_sf(\n  tree_df, coords = c('lon', 'lat')\n)\ntree_sf |&gt; head(4)\n\n\n\n\n\n\nage\ngeometry\n\n\n\n\n0.4083865\nPOINT (0.9493056 0.7413338)\n\n\n0.2109350\nPOINT (0.4885575 0.626284)\n\n\n0.1177755\nPOINT (0.1203148 0.2863668)\n\n\n0.7475464\nPOINT (0.6020442 0.4303325)\n\n\n\n\n\n\n\nppp Creation:\n\n\nCode\npois_ppp &lt;- spatstat.random::rpoispp(\n  lambda=100, win=spatstat.geom::square(1)\n)\npois_ppp\n\n\nPlanar point pattern: 98 points\nwindow: rectangle = [0, 1] x [0, 1] units\n\n\nCode\nattributes(pois_ppp)$names\n\n\n[1] \"window\"     \"n\"          \"x\"          \"y\"          \"markformat\"\n\n\nCode\npois_ppp$x |&gt; head(4)\n\n\n[1] 0.7185641 0.9781310 0.1744719 0.4256203"
   },
   {
     "objectID": "w10/slides.html#ppp-leftrightarrow-sf-conversion",
     "href": "w10/slides.html#ppp-leftrightarrow-sf-conversion",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "ppp \\leftrightarrow sf Conversion",
     "text": "ppp \\leftrightarrow sf Conversion\n\n\nppp to sf Conversion:\n\n\nCode\npois_sf &lt;- pois_ppp |&gt; sf::st_as_sf()\npois_sf |&gt; head(4)\n\n\n\n\n\n\nlabel\ngeom\n\n\n\n\nwindow\nPOLYGON ((0 0, 1 0, 1 1, 0 …\n\n\npoint\nPOINT (0.7185641 0.5606081)\n\n\npoint\nPOINT (0.978131 0.9523815)\n\n\npoint\nPOINT (0.1744719 0.06257196)\n\n\n\n\n\n\n\n\nCode\nlibrary(mdthemes) |&gt; suppressPackageStartupMessages()\npois_sf |&gt; ggplot() +\n  geom_sf(data=pois_sf |&gt; filter(label==\"window\"), aes(fill='grey')) +\n  geom_sf(data=pois_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'window'&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;label == 'point'&lt;/span&gt;\")) +\n  labs(title = \"&lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;sf&lt;/span&gt; Result\") +\n  transparent_bg()\n\n\n\n\n\n\n\n\n\n\nsf to ppp Conversion:\n\n\nCode\nsquare_sfc &lt;- sf::st_polygon(list(\n  matrix(c(0,0,1,0,1,1,0,1,0,0), nrow=5, byrow=TRUE)\n)) |&gt; sf::st_sfc()\ntree_ppp &lt;- as.ppp(\n  sf::st_as_sfc(tree_sf),\n  W=as.owin(square_sfc)\n)\ntree_ppp\n\n\nPlanar point pattern: 100 points\nwindow: polygonal boundary\nenclosing rectangle: [0, 1] x [0, 1] units\n\n\n\n\nCode\ntree_ppp_sf &lt;- tree_ppp |&gt; sf::st_as_sf()\ntree_ppp_sf |&gt; ggplot() +\n  geom_sf(aes(fill='gray90')) +\n  geom_sf(data=tree_ppp_sf |&gt; filter(label != \"window\"), aes(color='black')) +\n  md_theme_classic(base_size=26) +\n  scale_fill_manual(name=NULL, values=c(\"gray90\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp$window&lt;/span&gt;\")) +\n  scale_color_manual(name=NULL, values=c(\"black\"), labels=c(\"&lt;span style='font-family: mono'&gt;tree_ppp${x,y}&lt;/span&gt;\")) +\n  labs(\n    title = \"&lt;span style='font-family: mono'&gt;sf&lt;/span&gt; &rarr; &lt;span style='font-family: mono'&gt;ppp&lt;/span&gt; Result\",\n    x=\"&lt;span style='font-family: mono'&gt;tree_ppp$x&lt;/span&gt;\",\n    y=\"&lt;span style='font-family: mono'&gt;tree_ppp$y&lt;/span&gt;\"\n  ) + \n  guides(\n    fill = guide_legend(order = 1),\n    color = guide_legend(order = 2)\n  ) +\n  transparent_bg()"
   },
   {
     "objectID": "w10/slides.html#references",
     "href": "w10/slides.html#references",
-    "title": "Week 10: Evaluating Spatial Hypotheses II: Areal Data",
+    "title": "Week 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models",
     "section": "References",
     "text": "References\n\n\nGimond, Manuel. 2024. Introduction to GIS and Spatial Analysis. Colby College (ES214)."
   },
@@ -4615,7 +4615,7 @@
     "href": "syllabus.html#course-topics-calendar",
     "title": "PPOL 6805 / DSAN 6750",
     "section": "Course Topics / Calendar",
-    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week.\nNonetheless, if you are able to do the recommended readings listed below before the start of each week’s lecture, this will be a good indication that you are “on pace”, relative to the overall set of topics I aim to cover by the end of the semester.\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, let us know!\n\n\n\n\n\n\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Concepts\n1\nAug 26\nIntroduction to GIS\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Section 3.1: Simple Feature Geometries (pp. 29-33)\n\n\n\n2\nSep 2\nHow Do Maps Work?\n\n\n\nRecommended Readings\n\n\n\n1. Monmonier (2018), Chapter 2: Elements of the Map (pp. 5-26)\n\n\n\n3\nSep 9\nVector and Raster Representations\n\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Section 1.3-1.4: Raster and Vector Data and Raster Types (pp. 8-11)\n\n\nUnit 2: Geospatial Operations\n4\nSep 16\nUnary and Binary Operations\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Section 3.2: Operations on Geometries (pp. 34-39)\n\n\n\n5\nSep 23\nBinary Operations and DE-9IM\n\n\n\nRecommended Readings\n\n\n\n1. Moraga (2024), Chapter 3: The sf Package for Spatial Vector Data (pp. 27-39)\n\n\n\n6\nSep 30\nSpatial Joins and Areal-Weighted Interpolation\n\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Chapter 5: Attributes and Support (pp. 49-57)\n\n\nUnit 3: Spatial Data Science I: Foundations\n7\nOct 7\nSpatial Data Science: Three Types of Geographic Data\n\n\nRecommended Readings\n\n\n\n1. Amazing video introduction to analyzing spatial autocorrelation for epidemiology using R: Xie (2022)\n2. Three ‘core’ spatial-statistical datatypes: Schabenberger and Gotway (2004), Section 1.2: Types of Spatial Data (pp. 6-13)\n3. Baddeley, Rubak, and Turner (2015), Chapter 5: Point Process Methods (pp. 127-154)\n\n\n\n8\nOct 14\nSpatial Autocorrelation\n\n\n\nRecommended Readings\n\n\n\n1. Intensity Functions (First-order properties of point processes): Baddeley, Rubak, and Turner (2015), Chapter 6: Intensity (pp. 157-198)\n2. Pair Correlation Functions (Second-order properties of point processes): Baddeley, Rubak, and Turner (2015), Chapter 7: Correlation (pp. 199-254)\n\n\nUnit 4: Spatial Data Science II: Methods\n9\nOct 21\nEvaluating Spatial Hypotheses I: Null Models, Clustering, and Regularity\n\n\nRecommended Readings\n\n\n\n1. Monte Carlo Simulation: Waller and Gotway (2004), Section 5.2.3: Hypothesis Tests of CSR via Monte Carlo Methods (pp. 125-126ff)\n\n\n\n10\nOct 28\nEvaluating Spatial Hypotheses II: Areal Data \n\n\n\nRecommended Readings\n\n\n\n1. Ward and Gleditsch (2018), Chapter 2: Spatially-Lagged Dependent Variables (pp. 35-64)\n\n\n\n11\nNov 4\nIn-Class Midterm\n\n\nUnit 5: Final Projects\n12\nNov 11\nTools for Final Projects\n\n\n\n13\nNov 18\nVisualizing Spatial Data\n\n\n\nRecommended Readings\n\n\n\n1. Monmonier (2018), Chapter 3: Map Generalization: Little White Lies and Lots of Them (pp. 27-44)\n\n\n\n\nNov 26\nNo Class (Fall Break)\n\n\n\n14\nDec 2\nFinal Project Poster Session",
+    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week.\nNonetheless, if you are able to do the recommended readings listed below before the start of each week’s lecture, this will be a good indication that you are “on pace”, relative to the overall set of topics I aim to cover by the end of the semester.\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, let us know!\n\n\n\n\n\n\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Concepts\n1\nAug 26\nIntroduction to GIS\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Section 3.1: Simple Feature Geometries (pp. 29-33)\n\n\n\n2\nSep 2\nHow Do Maps Work?\n\n\n\nRecommended Readings\n\n\n\n1. Monmonier (2018), Chapter 2: Elements of the Map (pp. 5-26)\n\n\n\n3\nSep 9\nVector and Raster Representations\n\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Section 1.3-1.4: Raster and Vector Data and Raster Types (pp. 8-11)\n\n\nUnit 2: Geospatial Operations\n4\nSep 16\nUnary and Binary Operations\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Section 3.2: Operations on Geometries (pp. 34-39)\n\n\n\n5\nSep 23\nBinary Operations and DE-9IM\n\n\n\nRecommended Readings\n\n\n\n1. Moraga (2024), Chapter 3: The sf Package for Spatial Vector Data (pp. 27-39)\n\n\n\n6\nSep 30\nSpatial Joins and Areal-Weighted Interpolation\n\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Chapter 5: Attributes and Support (pp. 49-57)\n\n\nUnit 3: Spatial Data Science I: Foundations\n7\nOct 7\nSpatial Data Science: Three Types of Geographic Data\n\n\nRecommended Readings\n\n\n\n1. Amazing video introduction to analyzing spatial autocorrelation for epidemiology using R: Xie (2022)\n2. Three ‘core’ spatial-statistical datatypes: Schabenberger and Gotway (2004), Section 1.2: Types of Spatial Data (pp. 6-13)\n3. Baddeley, Rubak, and Turner (2015), Chapter 5: Point Process Methods (pp. 127-154)\n\n\n\n8\nOct 14\nSpatial Autocorrelation\n\n\n\nRecommended Readings\n\n\n\n1. Intensity Functions (First-order properties of point processes): Baddeley, Rubak, and Turner (2015), Chapter 6: Intensity (pp. 157-198)\n2. Pair Correlation Functions (Second-order properties of point processes): Baddeley, Rubak, and Turner (2015), Chapter 7: Correlation (pp. 199-254)\n\n\nUnit 4: Spatial Data Science II: Methods\n9\nOct 21\nEvaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness\n\n\nRecommended Readings\n\n\n\n1. Monte Carlo Simulation: Waller and Gotway (2004), Section 5.2.3: Hypothesis Tests of CSR via Monte Carlo Methods (pp. 125-126ff)\n\n\n\n10\nOct 28\nEvaluating Spatial Hypotheses II: Base Rates and Null Models \n\n\n\nRecommended Readings\n\n\n\n1. Ward and Gleditsch (2018), Chapter 2: Spatially-Lagged Dependent Variables (pp. 35-64)\n\n\n\n11\nNov 4\nIn-Class Midterm\n\n\nUnit 5: Final Projects\n12\nNov 11\nTools for Final Projects\n\n\n\n13\nNov 18\nVisualizing Spatial Data\n\n\n\nRecommended Readings\n\n\n\n1. Monmonier (2018), Chapter 3: Map Generalization: Little White Lies and Lots of Them (pp. 27-44)\n\n\n\n\nNov 26\nNo Class (Fall Break)\n\n\n\n14\nDec 2\nFinal Project Poster Session",
     "crumbs": [
       "Syllabus"
     ]
