@@ -153,6 +153,7 @@ div.csl-indent {
 <link href="../site_libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet">
 <link href="../site_libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet">
@@ -568,7 +569,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2026-10-28, 01:28:54 AM</em></p>
+<p><em>Updated 2026-10-28, 05:55:38 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -595,10 +596,10 @@ window.Quarto = {
   </ul></li>
   <li><a href="#heterogeneous-point-processes" id="toc-heterogeneous-point-processes" class="nav-link" data-scroll-target="#heterogeneous-point-processes"><em>Heterogeneous</em> Point Processes</a>
   <ul class="collapse">
-  <li><a href="#the-point-of-all-this-null-models-via-base-rates" id="toc-the-point-of-all-this-null-models-via-base-rates" class="nav-link" data-scroll-target="#the-point-of-all-this-null-models-via-base-rates">The Point of All This: Null Models via Base Rates!</a></li>
+  <li><a href="#the-point-base-rates-rightarrow-null-models" id="toc-the-point-base-rates-rightarrow-null-models" class="nav-link" data-scroll-target="#the-point-base-rates-rightarrow-null-models">The Point: Base Rates <span class="math inline">\(\Rightarrow\)</span> Null Models!</a></li>
+  <li><a href="#these-null-models-have-names" id="toc-these-null-models-have-names" class="nav-link" data-scroll-target="#these-null-models-have-names">These Null Models Have <em>Names!</em></a></li>
   <li><a href="#constant-risk-hypothesis-motivation" id="toc-constant-risk-hypothesis-motivation" class="nav-link" data-scroll-target="#constant-risk-hypothesis-motivation">Constant Risk Hypothesis: Motivation</a></li>
   <li><a href="#constant-risk-hypothesis-base-rates" id="toc-constant-risk-hypothesis-base-rates" class="nav-link" data-scroll-target="#constant-risk-hypothesis-base-rates">Constant Risk Hypothesis: Base Rates</a></li>
-  <li><a href="#meaningful-results-leftrightarrow-comparisons-with-null-models" id="toc-meaningful-results-leftrightarrow-comparisons-with-null-models" class="nav-link" data-scroll-target="#meaningful-results-leftrightarrow-comparisons-with-null-models">Meaningful Results <span class="math inline">\(\leftrightarrow\)</span> <em>Comparisons</em> with Null Model(s)</a></li>
   <li><a href="#example-from-moraga-2024" id="toc-example-from-moraga-2024" class="nav-link" data-scroll-target="#example-from-moraga-2024">Example from Moraga (2024)</a></li>
   <li><a href="#estimating-comparable-intensity-surfaces" id="toc-estimating-comparable-intensity-surfaces" class="nav-link" data-scroll-target="#estimating-comparable-intensity-surfaces">Estimating Comparable Intensity Surfaces</a></li>
   <li><a href="#visualizing-relative-risk-surface" id="toc-visualizing-relative-risk-surface" class="nav-link" data-scroll-target="#visualizing-relative-risk-surface">Visualizing Relative Risk Surface</a></li>
@@ -1427,18 +1428,63 @@ root were negative, and were set to zero. Range: [-2.96, 1910]</code></pre>
 </div>
 </section>
 </section>
-<section id="heterogeneous-point-processes" class="level1" data-stack-name="Base Rates">
-<h1 data-stack-name="Base Rates"><em>Heterogeneous</em> Point Processes</h1>
+<section id="heterogeneous-point-processes" class="level1 crunch-title text-70 crunch-ul" data-stack-name="Base Rates">
+<h1 class="crunch-title text-70 crunch-ul" data-stack-name="Base Rates"><em>Heterogeneous</em> Point Processes</h1>
 <ul>
-<li>Cox Process highlights a crucial simplifying assumption we’ve made up til now: <strong>homogeneous</strong> point processes</li>
-<li>And yet… We expect (e.g.) <strong>greater density of people in cities</strong></li>
+<li><p>Cox Process highlights a crucial simplifying assumption we’ve made up til now: <strong>homogeneous</strong> point processes</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Homogeneous Point Process">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Homogeneous Point Process
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Points are distributed such that intensity <span class="math inline">\(\lambda\)</span>, expected # of cases per unit area, is a <strong>constant</strong> across the study area</p>
+</div>
+</div></li>
+<li><p>Allows “eyeballing” clusters: areas w/more points than expected under <strong>uniformity</strong></p></li>
+<li><p>But… in many cases we expect (e.g.) <strong>greater density of people in cities!</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Heterogeneous Point Process">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Heterogeneous Point Process
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Distribution of points is determined by intensity <em>function</em> <span class="math inline">\(\lambda(\mathbf{s})\)</span>, expected # of cases per unit area <strong>around <span class="math inline">\(\mathbf{s}\)</span></strong></p>
+</div>
+</div></li>
 </ul>
-<section id="the-point-of-all-this-null-models-via-base-rates" class="level2">
-<h2 class="anchored" data-anchor-id="the-point-of-all-this-null-models-via-base-rates">The Point of All This: Null Models via Base Rates!</h2>
+<section id="the-point-base-rates-rightarrow-null-models" class="level2 crunch-title text-80 inline-80">
+<h2 class="crunch-title text-80 inline-80 anchored" data-anchor-id="the-point-base-rates-rightarrow-null-models">The Point: Base Rates <span class="math inline">\(\Rightarrow\)</span> Null Models!</h2>
 <ul>
-<li>Given an <strong>intensity function</strong>, we can compute a bunch of simulated <strong>point patterns</strong> (<strong>in</strong>homogeneous Poisson Point Process)…</li>
-<li>How does an <strong>observed</strong> point pattern <strong>differ</strong> from the simulated point patterns?</li>
+<li>A <strong>“baseline” intensity <em>function</em></strong>, <span class="math inline">\(\lambda(\mathbf{s})\)</span> (possibly <span class="math inline">\(c\)</span> for all <span class="math inline">\(\mathbf{s}\)</span>) defines a <strong>null model</strong>, from which we can simulate a bunch of <strong>point patterns</strong>…</li>
+<li>Then we <em>compare</em>: How does an <strong>observed</strong> point pattern <strong>differ</strong> from these simulated point patterns?</li>
+<li><em>Not expecting</em> any clusters? Prior expectation = <strong>Uniform</strong> distribution <span class="math inline">\(\Rightarrow\)</span> null model = homogeneous point process<br> <i class="bi bi-arrow-return-right" style="margin-left: 4px;"></i> <em>Do I see clustering? <span class="math inline">\(I \overset{\tiny{?}}{\gg} 0\)</span></em></li>
+<li><em>Expecting</em> clusters in cities? Prior expectation = <strong>Population density</strong> <span class="math inline">\(\Rightarrow\)</span> null model = heterogeneous point process<br> <i class="bi bi-arrow-return-right" style="margin-left: 4px;"></i> <em>Do I see clustering <strong>above and beyond</strong> what I expected? <span class="math inline">\(I_{\text{obs}} \overset{\tiny{?}}{\gg} I_{\text{base}}\)</span></em></li>
 </ul>
+</section>
+<section id="these-null-models-have-names" class="level2 crunch-title crunch-math crunch-ul text-90">
+<h2 class="crunch-title crunch-math crunch-ul text-90 anchored" data-anchor-id="these-null-models-have-names">These Null Models Have <em>Names!</em></h2>
+<ul>
+<li>Not expecting any clusters? Null model = <strong>Complete Spatial Randomness (CSR)</strong></li>
+<li>Expecting clusters (e.g.) in cities? Null model = <strong>Constant Risk Hypothesis</strong></li>
+<li>Why “constant <strong>risk</strong>”? From epidemiology:</li>
+</ul>
+<p><span class="math display">\[
+\underbrace{\rho(\mathbf{s})}_{\text{Risk near }\mathbf{s}}
+~~=~~~~~~ \frac{
+  \overbrace{\lambda(\mathbf{s})}^{\mathclap{\text{Density of cases near }s}}
+}{
+  \underbrace{\lambda_0(\mathbf{s})}_{\mathclap{\text{Population density near }\mathbf{s}}}
+}
+\]</span></p>
 </section>
 <section id="constant-risk-hypothesis-motivation" class="level2 text-65 crunch-title">
 <h2 class="text-65 crunch-title anchored" data-anchor-id="constant-risk-hypothesis-motivation">Constant Risk Hypothesis: Motivation</h2>
@@ -1473,8 +1519,13 @@ root were negative, and were set to zero. Range: [-2.96, 1910]</code></pre>
 </div>
 </div>
 </section>
-<section id="constant-risk-hypothesis-base-rates" class="level2 smaller crunch-title">
-<h2 class="smaller crunch-title anchored" data-anchor-id="constant-risk-hypothesis-base-rates">Constant Risk Hypothesis: Base Rates</h2>
+<section id="constant-risk-hypothesis-base-rates" class="level2 smaller crunch-title title-12">
+<h2 class="smaller crunch-title title-12 anchored" data-anchor-id="constant-risk-hypothesis-base-rates">Constant Risk Hypothesis: Base Rates</h2>
+<style>
+.highlight-icon {
+  color: #e69f00;
+}
+</style>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1503,53 +1554,39 @@ root were negative, and were set to zero. Range: [-2.96, 1910]</code></pre>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>city_combined_sf <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(city_cases_sf, city_pop_sf)</span>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co"># mapview(city_combined_sf, zcol="city", marker="sample")</span></span>
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>Flu <span class="ot">=</span> <span class="fu">makeIcon</span>(</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://upload.wikimedia.org/wikipedia/commons/c/c3/Maki2-danger-24.svg"</span>,</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://upload.wikimedia.org/wikipedia/commons/c/c3/Maki2-danger-24.svg"</span>,</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    <span class="dv">20</span>,</span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    <span class="dv">20</span></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>People <span class="ot">=</span> <span class="fu">makeIcon</span>(</span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg"</span>,</span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg"</span>,</span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>  <span class="dv">20</span>,</span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  <span class="dv">20</span></span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>city_combined_sf<span class="sc">$</span>r <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(city_combined_sf<span class="sc">$</span>sample <span class="sc">==</span> <span class="st">"Flu"</span>, <span class="dv">0</span>, <span class="dv">4</span>)</span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>city_flu_sf <span class="ot">&lt;-</span> city_combined_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(sample <span class="sc">==</span> <span class="st">"Flu"</span>)</span>
-<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>city_ppl_sf <span class="ot">&lt;-</span> city_combined_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(sample <span class="sc">==</span> <span class="st">"People"</span>)</span>
-<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(city_flu_sf) <span class="sc">|&gt;</span></span>
-<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(<span class="st">"Esri.WorldGrayCanvas"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># addProviderTiles("CartoDB.Positron") |&gt;</span></span>
-<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">data=</span>city_flu_sf, <span class="at">icon =</span> Flu) <span class="sc">|&gt;</span></span>
-<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">data=</span>city_ppl_sf, <span class="at">icon =</span> People)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">iconUrl=</span><span class="st">"images/Maki2-danger-24.svg"</span>,</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">iconRetinaUrl=</span><span class="st">"images/Maki2-danger-24.svg"</span>,</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">iconWidth=</span><span class="dv">20</span>,</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">iconHeight=</span><span class="dv">20</span>,</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">className=</span><span class="st">'highlight-icon'</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>People <span class="ot">=</span> <span class="fu">makeIcon</span>(</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">iconUrl=</span><span class="st">"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg"</span>,</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">iconRetinaUrl=</span><span class="st">"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg"</span>,</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">iconWidth=</span><span class="dv">20</span>,</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">iconHeight=</span><span class="dv">20</span>,</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># className='boxed-cb'</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>city_combined_sf<span class="sc">$</span>r <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(city_combined_sf<span class="sc">$</span>sample <span class="sc">==</span> <span class="st">"Flu"</span>, <span class="dv">0</span>, <span class="dv">4</span>)</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>city_flu_sf <span class="ot">&lt;-</span> city_combined_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(sample <span class="sc">==</span> <span class="st">"Flu"</span>)</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>city_ppl_sf <span class="ot">&lt;-</span> city_combined_sf <span class="sc">|&gt;</span> <span class="fu">filter</span>(sample <span class="sc">==</span> <span class="st">"People"</span>)</span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(city_flu_sf) <span class="sc">|&gt;</span></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(<span class="st">"Esri.WorldGrayCanvas"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># addProviderTiles("CartoDB.Positron") |&gt;</span></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">data=</span>city_flu_sf, <span class="at">icon =</span> Flu) <span class="sc">|&gt;</span></span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">data=</span>city_ppl_sf, <span class="at">icon =</span> People)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-e54b1b6927d23f747982" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-e54b1b6927d23f747982">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.WorldGrayCanvas",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[42.09167148795684,41.79392205180819,41.84325509544291,42.0693158503182,41.82955298718662,41.91081474288931,41.87468154658771,41.92766910282925,41.9296064444708,42.06343336793348,42.28910958050083,42.5777331804902,42.44905457188158,42.36382984997036,42.47670086453085,42.3568451634197,42.48326008216524,42.44476526900309,42.32821822832417,42.51411975375636],[-87.92864944844126,-88.04652187888182,-87.90782122167124,-87.78478151352861,-88.0405761648849,-87.88259567677301,-87.99130554569363,-87.73412080984642,-87.93322478076091,-88.10510406909928,-83.08166188520154,-83.18308893983004,-83.31041360023409,-83.34437533405828,-83.34674726191615,-83.31205877020047,-83.4091518737465,-83.03262221362699,-83.35396970314457,-83.15473601426784],{"iconUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/c/c3/Maki2-danger-24.svg","index":0},"iconRetinaUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/c/c3/Maki2-danger-24.svg","index":0},"iconWidth":20,"iconHeight":20},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[[41.82567006904617,42.08084930414642,42.00906550878439,41.83462152252631,41.83910244236071,41.78613858536786,41.78824349854956,42.10935337637873,41.93428521064766,42.05484895328968,42.02648822692855,41.8693651272234,41.79272204505365,41.97974248568856,42.08207867626273,41.80572708480424,42.41001656922956,42.57005546707324,42.48193452722954,42.54620643879002],[-87.80556680648043,-87.9619039938696,-87.95130338120994,-88.11108991273603,-87.97016493356804,-87.99342574432202,-87.99465863074428,-88.03915527353125,-87.916538592785,-88.12676139767214,-87.71078711723705,-87.85974922741381,-87.95415340208812,-87.87259008725528,-88.08676408566569,-88.0630948743311,-83.28438119540942,-83.14334558439465,-83.07531107597831,-83.00530278465422],{"iconUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg","index":0},"iconRetinaUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg","index":0},"iconWidth":20,"iconHeight":20},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[41.78613858536786,42.5777331804902],"lng":[-88.12676139767214,-83.00530278465422]}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-e54b1b6927d23f747982">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.WorldGrayCanvas",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[42.09167148795684,41.79392205180819,41.84325509544291,42.0693158503182,41.82955298718662,41.91081474288931,41.87468154658771,41.92766910282925,41.9296064444708,42.06343336793348,42.28910958050083,42.5777331804902,42.44905457188158,42.36382984997036,42.47670086453085,42.3568451634197,42.48326008216524,42.44476526900309,42.32821822832417,42.51411975375636],[-87.92864944844126,-88.04652187888182,-87.90782122167124,-87.78478151352861,-88.0405761648849,-87.88259567677301,-87.99130554569363,-87.73412080984642,-87.93322478076091,-88.10510406909928,-83.08166188520154,-83.18308893983004,-83.31041360023409,-83.34437533405828,-83.34674726191615,-83.31205877020047,-83.4091518737465,-83.03262221362699,-83.35396970314457,-83.15473601426784],{"iconUrl":{"data":"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgo8c3ZnIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6Y2M9Imh0dHA6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL25zIyIgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIiB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgaWQ9InN2ZzQ0NjAiPgogIDxkZWZzIGlkPSJkZWZzNDQ2MiIvPgogIDxtZXRhZGF0YSBpZD0ibWV0YWRhdGE0NDY1Ij4KICAgIDxyZGY6UkRGPgogICAgICA8Y2M6V29yayByZGY6YWJvdXQ9IiI+CiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+CiAgICAgICAgPGRjOnR5cGUgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIvPgogICAgICAgIDxkYzp0aXRsZS8+CiAgICAgIDwvY2M6V29yaz4KICAgIDwvcmRmOlJERj4KICA8L21ldGFkYXRhPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsLTEwMjguMzYyMikiIGlkPSJsYXllcjEiPgogICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTU1MiwtMjEuOTk5OTgzKSIgaWQ9ImRhbmdlci0yNCIgc3R5bGU9ImRpc3BsYXk6aW5saW5lIj4KICAgICAgPHBhdGggZD0ibSA1NjQuNSwxMDU0LjM2MjIgYyAtMi41LDAgLTQuNSwyIC00LjUsNCBsIDAsMiBjIDAsMSAyLDEgMiwyIGwgMCwxIDIuNSwxIDIuNSwtMSAwLC0xIGMgMCwtMSAyLC0xIDIsLTIgbCAwLC0yIGMgMCwtMiAtMiwtNCAtNC41LC00IHogbSAtMS41LDMgYyAwLjU1MjI4LDAgMSwwLjQ0NzcgMSwxIDAsMC41NTIzIC0wLjQ0NzcyLDEgLTEsMSAtMC41NTIyOCwwIC0xLC0wLjQ0NzcgLTEsLTEgMCwtMC41NTIzIDAuNDQ3NzIsLTEgMSwtMSB6IG0gMywwIGMgMC41NTIyOCwwIDEsMC40NDc3IDEsMSAwLDAuNTUyMyAtMC40NDc3MiwxIC0xLDEgLTAuNTUyMjgsMCAtMSwtMC40NDc3IC0xLC0xIDAsLTAuNTUyMyAwLjQ0NzcyLC0xIDEsLTEgeiBtIC04LDYgYyAtMC41LDAgLTEsMC41IC0xLDEgbCAwLDAuNSA1LjI1LDIuMjUgLTUuMjUsMi4yNSAwLDAuNSBjIDAsMC41IDAuNSwxIDEsMSBsIDE0LC02IDAsLTAuNSBjIDAsLTAuNSAtMC41LC0xIC0xLC0xIGwgLTYuNSwyLjc4MTMgLTYuNSwtMi43ODEzIHogbSAxMC41LDQuNSAtMi4yNSwwLjk2ODggNC43NSwyLjAzMTIgYyAwLjUsMCAxLC0wLjUgMSwtMSBsIDAsLTAuNSAtMy41LC0xLjUgeiIgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIgaWQ9InBhdGg1NTI5IiBzdHlsZT0ib3BhY2l0eTowLjM7Y29sb3I6IzAwMDAwMDtmaWxsOiNmZmZmZmY7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOm5vbnplcm87c3Ryb2tlOiNmZmZmZmY7c3Ryb2tlLXdpZHRoOjI7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2UtZGFzaGFycmF5Om5vbmU7c3Ryb2tlLWRhc2hvZmZzZXQ6MDttYXJrZXI6bm9uZTt2aXNpYmlsaXR5OnZpc2libGU7ZGlzcGxheTppbmxpbmU7b3ZlcmZsb3c6dmlzaWJsZTtlbmFibGUtYmFja2dyb3VuZDphY2N1bXVsYXRlIi8+CiAgICAgIDxwYXRoIGQ9Im0gNTY0LjUsMTA1NC4zNjIyIGMgLTIuNSwwIC00LjUsMiAtNC41LDQgbCAwLDIgYyAwLDEgMiwxIDIsMiBsIDAsMSAyLjUsMSAyLjUsLTEgMCwtMSBjIDAsLTEgMiwtMSAyLC0yIGwgMCwtMiBjIDAsLTIgLTIsLTQgLTQuNSwtNCB6IG0gLTEuNSwzIGMgMC41NTIyOCwwIDEsMC40NDc3IDEsMSAwLDAuNTUyMyAtMC40NDc3MiwxIC0xLDEgLTAuNTUyMjgsMCAtMSwtMC40NDc3IC0xLC0xIDAsLTAuNTUyMyAwLjQ0NzcyLC0xIDEsLTEgeiBtIDMsMCBjIDAuNTUyMjgsMCAxLDAuNDQ3NyAxLDEgMCwwLjU1MjMgLTAuNDQ3NzIsMSAtMSwxIC0wLjU1MjI4LDAgLTEsLTAuNDQ3NyAtMSwtMSAwLC0wLjU1MjMgMC40NDc3MiwtMSAxLC0xIHogbSAtOCw2IGMgLTAuNSwwIC0xLDAuNSAtMSwxIGwgMCwwLjUgNS4yNSwyLjI1IC01LjI1LDIuMjUgMCwwLjUgYyAwLDAuNSAwLjUsMSAxLDEgbCAxNCwtNiAwLC0wLjUgYyAwLC0wLjUgLTAuNSwtMSAtMSwtMSBsIC02LjUsMi43ODEzIC02LjUsLTIuNzgxMyB6IG0gMTAuNSw0LjUgLTIuMjUsMC45Njg4IDQuNzUsMi4wMzEyIGMgMC41LDAgMSwtMC41IDEsLTEgbCAwLC0wLjUgLTMuNSwtMS41IHoiIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiIGlkPSJwYXRoNDIzNiIgc3R5bGU9ImNvbG9yOiMwMDAwMDA7ZmlsbDojZTY5ZjAwO2ZpbGwtb3BhY2l0eToxO2ZpbGwtcnVsZTpub256ZXJvO3N0cm9rZTpub25lO3N0cm9rZS13aWR0aDowO21hcmtlcjpub25lO3Zpc2liaWxpdHk6dmlzaWJsZTtkaXNwbGF5OmlubGluZTtvdmVyZmxvdzp2aXNpYmxlO2VuYWJsZS1iYWNrZ3JvdW5kOmFjY3VtdWxhdGUiLz4KICAgIDwvZz4KICA8L2c+CiAgPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB4PSIwIiB5PSIwIiBpZD0iY2FudmFzIiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTpub25lO3Zpc2liaWxpdHk6aGlkZGVuIi8+Cjwvc3ZnPg==","index":0},"iconRetinaUrl":{"data":"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgo8c3ZnIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6Y2M9Imh0dHA6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL25zIyIgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIiB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgaWQ9InN2ZzQ0NjAiPgogIDxkZWZzIGlkPSJkZWZzNDQ2MiIvPgogIDxtZXRhZGF0YSBpZD0ibWV0YWRhdGE0NDY1Ij4KICAgIDxyZGY6UkRGPgogICAgICA8Y2M6V29yayByZGY6YWJvdXQ9IiI+CiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+CiAgICAgICAgPGRjOnR5cGUgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIvPgogICAgICAgIDxkYzp0aXRsZS8+CiAgICAgIDwvY2M6V29yaz4KICAgIDwvcmRmOlJERj4KICA8L21ldGFkYXRhPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsLTEwMjguMzYyMikiIGlkPSJsYXllcjEiPgogICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTU1MiwtMjEuOTk5OTgzKSIgaWQ9ImRhbmdlci0yNCIgc3R5bGU9ImRpc3BsYXk6aW5saW5lIj4KICAgICAgPHBhdGggZD0ibSA1NjQuNSwxMDU0LjM2MjIgYyAtMi41LDAgLTQuNSwyIC00LjUsNCBsIDAsMiBjIDAsMSAyLDEgMiwyIGwgMCwxIDIuNSwxIDIuNSwtMSAwLC0xIGMgMCwtMSAyLC0xIDIsLTIgbCAwLC0yIGMgMCwtMiAtMiwtNCAtNC41LC00IHogbSAtMS41LDMgYyAwLjU1MjI4LDAgMSwwLjQ0NzcgMSwxIDAsMC41NTIzIC0wLjQ0NzcyLDEgLTEsMSAtMC41NTIyOCwwIC0xLC0wLjQ0NzcgLTEsLTEgMCwtMC41NTIzIDAuNDQ3NzIsLTEgMSwtMSB6IG0gMywwIGMgMC41NTIyOCwwIDEsMC40NDc3IDEsMSAwLDAuNTUyMyAtMC40NDc3MiwxIC0xLDEgLTAuNTUyMjgsMCAtMSwtMC40NDc3IC0xLC0xIDAsLTAuNTUyMyAwLjQ0NzcyLC0xIDEsLTEgeiBtIC04LDYgYyAtMC41LDAgLTEsMC41IC0xLDEgbCAwLDAuNSA1LjI1LDIuMjUgLTUuMjUsMi4yNSAwLDAuNSBjIDAsMC41IDAuNSwxIDEsMSBsIDE0LC02IDAsLTAuNSBjIDAsLTAuNSAtMC41LC0xIC0xLC0xIGwgLTYuNSwyLjc4MTMgLTYuNSwtMi43ODEzIHogbSAxMC41LDQuNSAtMi4yNSwwLjk2ODggNC43NSwyLjAzMTIgYyAwLjUsMCAxLC0wLjUgMSwtMSBsIDAsLTAuNSAtMy41LC0xLjUgeiIgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIgaWQ9InBhdGg1NTI5IiBzdHlsZT0ib3BhY2l0eTowLjM7Y29sb3I6IzAwMDAwMDtmaWxsOiNmZmZmZmY7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOm5vbnplcm87c3Ryb2tlOiNmZmZmZmY7c3Ryb2tlLXdpZHRoOjI7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2UtZGFzaGFycmF5Om5vbmU7c3Ryb2tlLWRhc2hvZmZzZXQ6MDttYXJrZXI6bm9uZTt2aXNpYmlsaXR5OnZpc2libGU7ZGlzcGxheTppbmxpbmU7b3ZlcmZsb3c6dmlzaWJsZTtlbmFibGUtYmFja2dyb3VuZDphY2N1bXVsYXRlIi8+CiAgICAgIDxwYXRoIGQ9Im0gNTY0LjUsMTA1NC4zNjIyIGMgLTIuNSwwIC00LjUsMiAtNC41LDQgbCAwLDIgYyAwLDEgMiwxIDIsMiBsIDAsMSAyLjUsMSAyLjUsLTEgMCwtMSBjIDAsLTEgMiwtMSAyLC0yIGwgMCwtMiBjIDAsLTIgLTIsLTQgLTQuNSwtNCB6IG0gLTEuNSwzIGMgMC41NTIyOCwwIDEsMC40NDc3IDEsMSAwLDAuNTUyMyAtMC40NDc3MiwxIC0xLDEgLTAuNTUyMjgsMCAtMSwtMC40NDc3IC0xLC0xIDAsLTAuNTUyMyAwLjQ0NzcyLC0xIDEsLTEgeiBtIDMsMCBjIDAuNTUyMjgsMCAxLDAuNDQ3NyAxLDEgMCwwLjU1MjMgLTAuNDQ3NzIsMSAtMSwxIC0wLjU1MjI4LDAgLTEsLTAuNDQ3NyAtMSwtMSAwLC0wLjU1MjMgMC40NDc3MiwtMSAxLC0xIHogbSAtOCw2IGMgLTAuNSwwIC0xLDAuNSAtMSwxIGwgMCwwLjUgNS4yNSwyLjI1IC01LjI1LDIuMjUgMCwwLjUgYyAwLDAuNSAwLjUsMSAxLDEgbCAxNCwtNiAwLC0wLjUgYyAwLC0wLjUgLTAuNSwtMSAtMSwtMSBsIC02LjUsMi43ODEzIC02LjUsLTIuNzgxMyB6IG0gMTAuNSw0LjUgLTIuMjUsMC45Njg4IDQuNzUsMi4wMzEyIGMgMC41LDAgMSwtMC41IDEsLTEgbCAwLC0wLjUgLTMuNSwtMS41IHoiIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiIGlkPSJwYXRoNDIzNiIgc3R5bGU9ImNvbG9yOiMwMDAwMDA7ZmlsbDojZTY5ZjAwO2ZpbGwtb3BhY2l0eToxO2ZpbGwtcnVsZTpub256ZXJvO3N0cm9rZTpub25lO3N0cm9rZS13aWR0aDowO21hcmtlcjpub25lO3Zpc2liaWxpdHk6dmlzaWJsZTtkaXNwbGF5OmlubGluZTtvdmVyZmxvdzp2aXNpYmxlO2VuYWJsZS1iYWNrZ3JvdW5kOmFjY3VtdWxhdGUiLz4KICAgIDwvZz4KICA8L2c+CiAgPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB4PSIwIiB5PSIwIiBpZD0iY2FudmFzIiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTpub25lO3Zpc2liaWxpdHk6aGlkZGVuIi8+Cjwvc3ZnPg==","index":0},"iconWidth":20,"iconHeight":20,"className":"highlight-icon"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[[41.82567006904617,42.08084930414642,42.00906550878439,41.83462152252631,41.83910244236071,41.78613858536786,41.78824349854956,42.10935337637873,41.93428521064766,42.05484895328968,42.02648822692855,41.8693651272234,41.79272204505365,41.97974248568856,42.08207867626273,41.80572708480424,42.41001656922956,42.57005546707324,42.48193452722954,42.54620643879002],[-87.80556680648043,-87.9619039938696,-87.95130338120994,-88.11108991273603,-87.97016493356804,-87.99342574432202,-87.99465863074428,-88.03915527353125,-87.916538592785,-88.12676139767214,-87.71078711723705,-87.85974922741381,-87.95415340208812,-87.87259008725528,-88.08676408566569,-88.0630948743311,-83.28438119540942,-83.14334558439465,-83.07531107597831,-83.00530278465422],{"iconUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg","index":0},"iconRetinaUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg","index":0},"iconWidth":20,"iconHeight":20},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[41.78613858536786,42.5777331804902],"lng":[-88.12676139767214,-83.00530278465422]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
-<section id="meaningful-results-leftrightarrow-comparisons-with-null-models" class="level2 crunch-title title-10 smaller">
-<h2 class="crunch-title title-10 smaller anchored" data-anchor-id="meaningful-results-leftrightarrow-comparisons-with-null-models">Meaningful Results <span class="math inline">\(\leftrightarrow\)</span> <em>Comparisons</em> with Null Model(s)</h2>
+<section id="example-from-moraga-2024" class="level2 smaller crunch-title crunch-ul crunch-quarto-figure text-65 inline-80">
+<h2 class="smaller crunch-title crunch-ul crunch-quarto-figure text-65 inline-80 anchored" data-anchor-id="example-from-moraga-2024">Example from Moraga (2024)</h2>
 <ul>
-<li><p><strong>Cases</strong> of disease form an intensity function <span class="math inline">\(\lambda(\mathbf{s})\)</span></p></li>
-<li><p><strong>Controls</strong> form an “ambient” intensity function <span class="math inline">\(\lambda_0(\mathbf{s})\)</span></p></li>
-<li><p><span class="math inline">\(\implies\)</span> The following model allows us to separate the quantities we <strong>really</strong> care about from the <strong>base rate</strong> information:</p>
-<p><span class="math display">\[
-  \lambda(\mathbf{s}) = \alpha \overbrace{\lambda_0(\mathbf{s})}^{\mathclap{\text{Base Rate}}} \underbrace{\rho(\mathbf{s})}_{\mathclap{\text{Relative Risk}}},
-  \]</span></p>
-<p>where</p>
-<p><span class="math display">\[
-  \alpha = \frac{\# \text{Cases}}{\# \text{Controls}}
-  \]</span></p></li>
-<li><p>(Remember: <strong>unit</strong> of <span class="math inline">\(\lambda(\mathbf{s})\)</span> is <strong>number of cases</strong>; <strong>not</strong> a probability density!)</p></li>
-</ul>
-</section>
-<section id="example-from-moraga-2024" class="level2 smaller crunch-title crunch-ul crunch-quarto-figure text-65">
-<h2 class="smaller crunch-title crunch-ul crunch-quarto-figure text-65 anchored" data-anchor-id="example-from-moraga-2024">Example from Moraga (2024)</h2>
-<ul>
-<li><a href="https://tilmandavies.github.io/sparr/reference/pbc.html" target="_blank">Data</a>: 761 <a href="https://pubmed.ncbi.nlm.nih.gov/11731995/" target="_blank">primary biliary cirrhosis (PBC) cases</a>, 3020 controls, England 1987-94</li>
+<li><a href="https://tilmandavies.github.io/sparr/reference/pbc.html" target="_blank">Data</a>: <span class="math inline">\(N = 761\)</span> <a href="https://pubmed.ncbi.nlm.nih.gov/11731995/" target="_blank">primary biliary cirrhosis (PBC) cases</a>, <span class="math inline">\(N_0 = 3020\)</span> controls, UK 1987-94</li>
 </ul>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -1562,7 +1599,8 @@ root were negative, and were set to zero. Range: [-2.96, 1910]</code></pre>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>controls <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Controls (Population Sample)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Controls (Population Sample)"</span>) <span class="sc">+</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transparent_bg</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1580,7 +1618,8 @@ root were negative, and were set to zero. Range: [-2.96, 1910]</code></pre>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>cases <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"PBC Cases"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"PBC Cases"</span>) <span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transparent_bg</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1604,11 +1643,12 @@ root were negative, and were set to zero. Range: [-2.96, 1910]</code></pre>
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sparr)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(pbc)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>cases <span class="ot">&lt;-</span> <span class="fu">unmark</span>(pbc[<span class="fu">which</span>(pbc<span class="sc">$</span>marks <span class="sc">==</span> <span class="st">"case"</span>), ])</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>controls <span class="ot">&lt;-</span> <span class="fu">unmark</span>(pbc[<span class="fu">which</span>(pbc<span class="sc">$</span>marks <span class="sc">==</span> <span class="st">"control"</span>), ])</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>bwcases <span class="ot">&lt;-</span> <span class="fu">attr</span>(<span class="fu">density</span>(cases), <span class="st">"sigma"</span>)</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>bwcontr <span class="ot">&lt;-</span> <span class="fu">attr</span>(<span class="fu">density</span>(controls), <span class="st">"sigma"</span>)</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>(bw <span class="ot">&lt;-</span> (bwcases <span class="sc">+</span> bwcontr)<span class="sc">/</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">0</span>))</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>cases <span class="ot">&lt;-</span> <span class="fu">unmark</span>(pbc[<span class="fu">which</span>(pbc<span class="sc">$</span>marks <span class="sc">==</span> <span class="st">"case"</span>), ])</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>controls <span class="ot">&lt;-</span> <span class="fu">unmark</span>(pbc[<span class="fu">which</span>(pbc<span class="sc">$</span>marks <span class="sc">==</span> <span class="st">"control"</span>), ])</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>bwcases <span class="ot">&lt;-</span> <span class="fu">attr</span>(<span class="fu">density</span>(cases), <span class="st">"sigma"</span>)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>bwcontr <span class="ot">&lt;-</span> <span class="fu">attr</span>(<span class="fu">density</span>(controls), <span class="st">"sigma"</span>)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>(bw <span class="ot">&lt;-</span> (bwcases <span class="sc">+</span> bwcontr)<span class="sc">/</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11.45837</code></pre>
@@ -1616,11 +1656,11 @@ root were negative, and were set to zero. Range: [-2.96, 1910]</code></pre>
 </div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
+<div class="cell" data-layout-align="center" data-crop="true">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>int_controls <span class="ot">&lt;-</span> <span class="fu">density</span>(controls, <span class="at">sigma =</span> bw, <span class="at">eps=</span><span class="fl">0.25</span>)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(int_controls, <span class="at">main =</span> <span class="st">"Control Intensity"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(int_controls, <span class="at">main =</span> <span class="st">"λ(Controls)"</span>, <span class="at">bg=</span><span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1635,7 +1675,7 @@ root were negative, and were set to zero. Range: [-2.96, 1910]</code></pre>
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>int_cases <span class="ot">&lt;-</span> <span class="fu">density</span>(cases, <span class="at">sigma =</span> bw, <span class="at">eps=</span><span class="fl">0.25</span>)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(int_cases, <span class="at">main =</span> <span class="st">"Case Intensity"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(int_cases, <span class="at">main =</span> <span class="st">"λ(Cases)"</span>, <span class="at">bg=</span><span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1648,15 +1688,29 @@ root were negative, and were set to zero. Range: [-2.96, 1910]</code></pre>
 </div>
 </div>
 </section>
-<section id="visualizing-relative-risk-surface" class="level2 smaller crunch-title crunch-ul">
-<h2 class="smaller crunch-title crunch-ul anchored" data-anchor-id="visualizing-relative-risk-surface">Visualizing Relative Risk Surface</h2>
-<ul>
-<li>All that’s left is <span class="math inline">\(\alpha = \# \text{Controls} / \# \text{Cases}\)</span>!</li>
-</ul>
+<section id="visualizing-relative-risk-surface" class="level2 smaller crunch-title crunch-ul inline-90">
+<h2 class="smaller crunch-title crunch-ul inline-90 anchored" data-anchor-id="visualizing-relative-risk-surface">Visualizing Relative Risk Surface</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>To account for <span class="math inline">\(N_0 \neq N\)</span>, <em>normalize</em> numerator and denominator:</p>
+<p><span class="math display">\[
+\hat{\rho}(\mathbf{s}) = \frac{\hat{\lambda}(\mathbf{s}) / N}{\hat{\lambda}_0(\mathbf{s}) / N_0}
+\]</span></p>
+<p><span class="math inline">\(\Rightarrow \hat{\rho}(\mathbf{s}) = \frac{\hat{\lambda}(\mathbf{s})}{\alpha\hat{\lambda}_0(\mathbf{s})}\)</span>, where <span class="math inline">\(\alpha = \frac{N}{N_0}\)</span></p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>(alpha <span class="ot">&lt;-</span> cases<span class="sc">$</span>n<span class="sc">/</span>controls<span class="sc">$</span>n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2519868</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
 <div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fields)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fields)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: spam</code></pre>
@@ -1698,24 +1752,29 @@ Attaching package: 'fields'</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>(alpha_hat <span class="ot">&lt;-</span> cases<span class="sc">$</span>n<span class="sc">/</span>controls<span class="sc">$</span>n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2519868</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> int_cases<span class="sc">$</span>xcol</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> int_cases<span class="sc">$</span>yrow</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>rr <span class="ot">&lt;-</span> <span class="fu">t</span>(int_cases<span class="sc">$</span>v)<span class="sc">/</span><span class="fu">t</span>(alpha_hat <span class="sc">*</span> int_controls<span class="sc">$</span>v)</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image.plot</span>(x, y, rr, <span class="at">asp =</span> <span class="dv">1</span>)</span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">xlab =</span> <span class="st">"Easting"</span>, <span class="at">ylab =</span> <span class="st">"Northing"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scico)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> int_cases<span class="sc">$</span>xcol</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> int_cases<span class="sc">$</span>yrow</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>rr <span class="ot">&lt;-</span> <span class="fu">t</span>(int_cases<span class="sc">$</span>v)<span class="sc">/</span><span class="fu">t</span>(alpha <span class="sc">*</span> int_controls<span class="sc">$</span>v)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>center <span class="ot">&lt;-</span> <span class="fl">1.0</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>lim <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">abs</span>(rr <span class="sc">-</span> center), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="co"># pal &lt;- colorRampPalette(c("#2166AC", "white", "#B2182B"))(101)</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">6.5</span>,<span class="dv">3</span>,<span class="fl">1.5</span>,<span class="fl">0.5</span>),</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">oma=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>),</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">xpd=</span><span class="cn">NA</span>,</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">mgp =</span> <span class="fu">c</span>(<span class="fl">1.6</span>, <span class="fl">0.6</span>, <span class="dv">0</span>)</span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">scico</span>(<span class="dv">101</span>, <span class="at">palette =</span> <span class="st">"vik"</span>)</span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a><span class="fu">image.plot</span>(x, y, rr, <span class="at">asp =</span> <span class="dv">1</span>, <span class="at">col=</span>pal, <span class="at">zlim =</span> <span class="fu">c</span>(center <span class="sc">-</span> lim, center <span class="sc">+</span> lim), <span class="at">main=</span><span class="st">"Relative Risk Surface"</span>, <span class="at">xlab=</span><span class="st">"Easting"</span>, <span class="at">ylab=</span><span class="st">"Northing"</span>, <span class="at">bty=</span><span class="st">'l'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/cases-controls-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="index_files/figure-html/cases-controls-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="480"></p>
 </figure>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1759,7 +1818,7 @@ Attaching package: 'fields'</code></pre>
 <h2 class="smaller anchored" data-anchor-id="the-random-labeling-hypothesis">The <em>Random Labeling Hypothesis</em></h2>
 <div style="width: 100%;">
 <ul>
-<li>Randomly apply 761 “sick” labels to the 3781 points!</li>
+<li>Randomly apply 761 “sick” labels to the <span class="math inline">\(761 + 3020 = 3781\)</span> points!</li>
 </ul>
 </div>
 <div class="columns">
@@ -1802,12 +1861,13 @@ Attaching package: 'fields'</code></pre>
 <span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>(<span class="at">base_size=</span><span class="dv">16</span>) <span class="sc">+</span></span>
 <span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
 <span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">title=</span><span class="st">"NE Britain Disease Cases"</span></span>
-<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(rl_plot)</span>
-<span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6810</span>)</span>
-<span id="cb49-40"><a href="#cb49-40" aria-hidden="true" tabindex="-1"></a>rl1_ppp <span class="ot">&lt;-</span> <span class="fu">rlabel</span>(pbc)</span>
-<span id="cb49-41"><a href="#cb49-41" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_rlabel</span>(rl1_ppp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transparent_bg</span>()</span>
+<span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(rl_plot)</span>
+<span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-40"><a href="#cb49-40" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6810</span>)</span>
+<span id="cb49-41"><a href="#cb49-41" aria-hidden="true" tabindex="-1"></a>rl1_ppp <span class="ot">&lt;-</span> <span class="fu">rlabel</span>(pbc)</span>
+<span id="cb49-42"><a href="#cb49-42" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_rlabel</span>(rl1_ppp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1818,7 +1878,7 @@ Attaching package: 'fields'</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:33%;">
-<div class="cell" data-layout-align="center">
+<div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6811</span>)</span>
@@ -1834,7 +1894,7 @@ Attaching package: 'fields'</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:33%;">
-<div class="cell" data-layout-align="center">
+<div class="cell" data-layout-align="center" data-crop="true">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6812</span>)</span>
@@ -1856,7 +1916,7 @@ Attaching package: 'fields'</code></pre>
 <h2 class="smaller anchored" data-anchor-id="the-constant-risk-hypothesis">The <em>Constant Risk Hypothesis</em></h2>
 <ul>
 <li>Everyone <strong>equally at risk</strong> of contracting disease, <strong>regardless</strong> of location: <span class="math inline">\(\rho(\mathbf{s}) = 1\)</span></li>
-<li>In this case: <span class="math inline">\(\lambda_{CR}(\mathbf{s}) = \alpha \lambda_0(\mathbf{s})\)</span></li>
+<li>In this case: <span class="math inline">\(\lambda_{CR}(\mathbf{s}) = \alpha \lambda_0(\mathbf{s})\)</span> (some constant <span class="math inline">\(\alpha\)</span> <span class="math inline">\(\times\)</span> base rate <span class="math inline">\(\lambda_0(\mathbf{s})\)</span>)</li>
 </ul>
 <div class="columns">
 <div class="column" style="width:33%;">
@@ -1866,7 +1926,7 @@ Attaching package: 'fields'</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>pbc_win_sf <span class="ot">&lt;-</span> pbc <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>() <span class="sc">|&gt;</span> <span class="fu">filter</span>(label <span class="sc">==</span> <span class="st">"window"</span>)</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>plot_pbc_sim <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    pbc_sim <span class="ot">&lt;-</span> spatstat.random<span class="sc">::</span><span class="fu">rpoispp</span>(</span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">lambda =</span> alpha_hat <span class="sc">*</span> int_controls</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">lambda =</span> alpha <span class="sc">*</span> int_controls</span>
 <span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Separate window and points</span></span>
 <span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>    pbc_sf <span class="ot">&lt;-</span> pbc_sim <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>()</span>
@@ -1875,10 +1935,11 @@ Attaching package: 'fields'</code></pre>
 <span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>    pbc_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_sf</span>(<span class="at">data=</span>pbc_win_sf) <span class="sc">+</span></span>
 <span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_sf</span>(<span class="at">data=</span>pbc_point_sf, <span class="at">size=</span><span class="fl">0.5</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_classic</span>()</span>
-<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(pbc_plot)</span>
-<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_pbc_sim</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">transparent_bg</span>()</span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(pbc_plot)</span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_pbc_sim</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">

@@ -792,15 +792,46 @@ par(mfrow=c(1,3), mar=c(0,0,0,2), oma=c(0,0,0,0), las=2)
 nulls <- lapply(X=lgcp_sims, FUN=plot_lgcp)
 ```
 
-# *Heterogeneous* Point Processes {data-stack-name="Base Rates"}
+# *Heterogeneous* Point Processes {.crunch-title .text-70 .crunch-ul data-stack-name="Base Rates"}
 
 * Cox Process highlights a crucial simplifying assumption we've made up til now: **homogeneous** point processes
-* And yet... We expect (e.g.) **greater density of people in cities**
 
-## The Point of All This: Null Models via Base Rates!
+  ::: {.callout-tip title="Homogeneous Point Process"}
 
-* Given an **intensity function**, we can compute a bunch of simulated **point patterns** (**in**homogeneous Poisson Point Process)...
-* How does an **observed** point pattern **differ** from the simulated point patterns?
+  Points are distributed such that intensity $\lambda$, expected \# of cases per unit area, is a **constant** across the study area
+
+  :::
+
+* Allows "eyeballing" clusters: areas w/more points than expected under **uniformity**
+* But... in many cases we expect (e.g.) **greater density of people in cities!**
+
+  ::: {.callout-tip title="Heterogeneous Point Process"}
+
+  Distribution of points is determined by intensity *function* $\lambda(\mathbf{s})$, expected \# of cases per unit area **around $\mathbf{s}$**
+
+  :::
+
+## The Point: Base Rates $\Rightarrow$ Null Models! {.crunch-title .text-80 .inline-80}
+
+* A **"baseline" intensity *function***, $\lambda(\mathbf{s})$ (possibly $c$ for all $\mathbf{s}$) defines a **null model**, from which we can simulate a bunch of **point patterns**...
+* Then we *compare*: How does an **observed** point pattern **differ** from these simulated point patterns?
+* *Not expecting* any clusters? Prior expectation = **Uniform** distribution $\Rightarrow$ null model = homogeneous point process<br> <i class="bi bi-arrow-return-right" style='margin-left: 4px;'></i> *Do I see clustering? $I \overset{\tiny{?}}{\gg} 0$*
+* *Expecting* clusters in cities? Prior expectation = **Population density** $\Rightarrow$ null model = heterogeneous point process<br> <i class="bi bi-arrow-return-right" style='margin-left: 4px;'></i> *Do I see clustering **above and beyond** what I expected? $I_{\text{obs}} \overset{\tiny{?}}{\gg} I_{\text{base}}$*
+
+## These Null Models Have *Names!* {.crunch-title .crunch-math .crunch-ul .text-90}
+
+* Not expecting any clusters? Null model = **Complete Spatial Randomness (CSR)**
+* Expecting clusters (e.g.) in cities? Null model = **Constant Risk Hypothesis**
+* Why "constant **risk**"? From epidemiology:
+
+$$
+\underbrace{\rho(\mathbf{s})}_{\text{Risk near }\mathbf{s}} 
+~~=~~~~~~ \frac{
+  \overbrace{\lambda(\mathbf{s})}^{\mathclap{\text{Density of cases near }s}}
+}{
+  \underbrace{\lambda_0(\mathbf{s})}_{\mathclap{\text{Population density near }\mathbf{s}}}
+}
+$$
 
 ## Constant Risk Hypothesis: Motivation {.text-65 .crunch-title}
 
@@ -829,7 +860,15 @@ city_cases_sf$sample <- "Flu"
 mapview(city_cases_sf, zcol="city")
 ```
 
-## Constant Risk Hypothesis: Base Rates {.smaller .crunch-title}
+## Constant Risk Hypothesis: Base Rates {.smaller .crunch-title .title-12}
+
+```{=html}
+<style>
+.highlight-icon {
+  color: #e69f00;
+}
+</style>
+```
 
 | | Chicago | Detroit |
 |-|-|-|
@@ -847,16 +886,18 @@ city_pop_sf$sample <- "People"
 city_combined_sf <- bind_rows(city_cases_sf, city_pop_sf)
 # mapview(city_combined_sf, zcol="city", marker="sample")
 Flu = makeIcon(
-    "https://upload.wikimedia.org/wikipedia/commons/c/c3/Maki2-danger-24.svg",
-    "https://upload.wikimedia.org/wikipedia/commons/c/c3/Maki2-danger-24.svg",
-    20,
-    20
+    iconUrl="images/Maki2-danger-24.svg",
+    iconRetinaUrl="images/Maki2-danger-24.svg",
+    iconWidth=20,
+    iconHeight=20,
+    className='highlight-icon'
 )
 People = makeIcon(
-  "https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg",
-  "https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg",
-  20,
-  20
+  iconUrl="https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg",
+  iconRetinaUrl="https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg",
+  iconWidth=20,
+  iconHeight=20,
+  # className='boxed-cb'
 )
 
 city_combined_sf$r <- ifelse(city_combined_sf$sample == "Flu", 0, 4)
@@ -869,32 +910,14 @@ leaflet(city_flu_sf) |>
   addMarkers(data=city_ppl_sf, icon = People)
 ```
 
-## Meaningful Results $\leftrightarrow$ *Comparisons* with Null Model(s) {.crunch-title .title-10 .smaller}
+## Example from Moraga (2024) {.smaller .crunch-title .crunch-ul .crunch-quarto-figure .text-65 .inline-80}
 
-* **Cases** of disease form an intensity function $\lambda(\mathbf{s})$
-* **Controls** form an "ambient" intensity function $\lambda_0(\mathbf{s})$
-* $\implies$ The following model allows us to separate the quantities we **really** care about from the **base rate** information:
-
-    $$
-    \lambda(\mathbf{s}) = \alpha \overbrace{\lambda_0(\mathbf{s})}^{\mathclap{\text{Base Rate}}} \underbrace{\rho(\mathbf{s})}_{\mathclap{\text{Relative Risk}}},
-    $$
-
-    where
-
-    $$
-    \alpha = \frac{\# \text{Cases}}{\# \text{Controls}}
-    $$
-
-* (Remember: **unit** of $\lambda(\mathbf{s})$ is **number of cases**; **not** a probability density!)
-
-## Example from Moraga (2024) {.smaller .crunch-title .crunch-ul .crunch-quarto-figure .text-65}
-
-* [Data](https://tilmandavies.github.io/sparr/reference/pbc.html){target='_blank'}: 761 [primary biliary cirrhosis (PBC) cases](https://pubmed.ncbi.nlm.nih.gov/11731995/){target='_blank'}, 3020 controls, England 1987-94
+* [Data](https://tilmandavies.github.io/sparr/reference/pbc.html){target='_blank'}: $N = 761$ [primary biliary cirrhosis (PBC) cases](https://pubmed.ncbi.nlm.nih.gov/11731995/){target='_blank'}, $N_0 = 3020$ controls, UK 1987-94
 
 :::: {.columns}
 ::: {.column width="50%"}
 
-```{r}
+```{r, dev.args = list(bg = 'transparent')}
 #| label: plot-raw-controls
 #| code-fold: true
 #| crop: true
@@ -906,13 +929,14 @@ controls <- unmark(pbc[which(pbc$marks == "control"), ])
 controls |> sf::st_as_sf() |> ggplot() +
   geom_sf() +
   theme_classic() +
-  labs(title="Controls (Population Sample)")
+  labs(title="Controls (Population Sample)") +
+  transparent_bg()
 ```
 
 :::
 ::: {.column width="50%"}
 
-```{r}
+```{r, dev.args = list(bg = 'transparent')}
 #| label: plot-raw-cases
 #| code-fold: true
 #| crop: true
@@ -922,7 +946,8 @@ cases <- unmark(pbc[which(pbc$marks == "case"), ])
 cases |> sf::st_as_sf() |> ggplot() +
   geom_sf() +
   theme_classic() +
-  labs(title="PBC Cases")
+  labs(title="PBC Cases") +
+  transparent_bg()
 ```
 
 :::
@@ -933,11 +958,12 @@ cases |> sf::st_as_sf() |> ggplot() +
 * To ensure comparable **intensity functions**, need a common **bandwidth** value
 * `density()` from `spatstat` makes "smart" choices for this bandwidth, so for now we just **average** the bandwidths estimated for cases and controls:
 
-```{r}
+```{r, dev.args = list(bg = 'transparent')}
 #| label: mean-density
 #| code-fold: true
 library(sparr)
 data(pbc)
+par(mar=c(2,0,2,0))
 cases <- unmark(pbc[which(pbc$marks == "case"), ])
 controls <- unmark(pbc[which(pbc$marks == "control"), ])
 bwcases <- attr(density(cases), "sigma")
@@ -948,47 +974,84 @@ bwcontr <- attr(density(controls), "sigma")
 :::: {.columns}
 ::: {.column width="50%"}
 
-```{r}
+```{r, dev.args = list(bg = 'transparent')}
 #| label: plot-controls-density
 #| fig-width: 3
-#| fig-height: 4
+#| fig-height: 3.75
 #| fig-align: center
+#| crop: true
 int_controls <- density(controls, sigma = bw, eps=0.25)
-plot(int_controls, main = "Control Intensity")
+plot(int_controls, main = "λ(Controls)", bg=NA)
 ```
 
 :::
 ::: {.column width="50%"}
 
 ```{r}
+#| label: plot-cases-density-init
+#| echo: false
+par(mar=c(2,0,2,0))
+```
+
+```{r, dev.args = list(bg = 'transparent')}
 #| label: plot-cases-density
-#| crop: true
 #| fig-width: 3
-#| fig-height: 4
+#| fig-height: 3.75
 #| fig-align: center
+#| crop: true
 int_cases <- density(cases, sigma = bw, eps=0.25)
-plot(int_cases, main = "Case Intensity")
+plot(int_cases, main = "λ(Cases)", bg=NA)
 ```
 
 :::
 ::::
 
-## Visualizing Relative Risk Surface {.smaller .crunch-title .crunch-ul}
+## Visualizing Relative Risk Surface {.smaller .crunch-title .crunch-ul .inline-90}
 
-* All that's left is $\alpha = \# \text{Controls} / \# \text{Cases}$!
+:::: {.columns}
+::: {.column width="40%"}
+
+To account for $N_0 \neq N$, *normalize* numerator and denominator:
+
+$$
+\hat{\rho}(\mathbf{s}) = \frac{\hat{\lambda}(\mathbf{s}) / N}{\hat{\lambda}_0(\mathbf{s}) / N_0}
+$$
+
+$\Rightarrow \hat{\rho}(\mathbf{s}) = \frac{\hat{\lambda}(\mathbf{s})}{\alpha\hat{\lambda}_0(\mathbf{s})}$, where $\alpha = \frac{N}{N_0}$
 
 ```{r}
+#| label: uk-compute-alpha
+(alpha <- cases$n/controls$n)
+```
+
+:::
+::: {.column width="60%"}
+
+```{r, dev.args = list(bg = 'transparent')}
 #| label: cases-controls-plot
 #| code-fold: true
+#| fig-width: 5
 #| crop: true
 library(fields)
-(alpha_hat <- cases$n/controls$n)
+library(scico)
 x <- int_cases$xcol
 y <- int_cases$yrow
-rr <- t(int_cases$v)/t(alpha_hat * int_controls$v)
-image.plot(x, y, rr, asp = 1)
-title(xlab = "Easting", ylab = "Northing")
+rr <- t(int_cases$v)/t(alpha * int_controls$v)
+center <- 1.0
+lim <- max(abs(rr - center), na.rm = TRUE)
+# pal <- colorRampPalette(c("#2166AC", "white", "#B2182B"))(101)
+par(
+  mar=c(6.5,3,1.5,0.5),
+  oma=c(1,1,1,1),
+  xpd=NA,
+  mgp = c(1.6, 0.6, 0)
+)
+pal <- scico(101, palette = "vik")
+image.plot(x, y, rr, asp = 1, col=pal, zlim = c(center - lim, center + lim), main="Relative Risk Surface", xlab="Easting", ylab="Northing", bty='l')
 ```
+
+:::
+::::
 
 # From Exploratory to Confirmatory Data Analysis {data-stack-name="Monte Carlo" .smaller .title-10 .not-title-slide .crunch-title}
 
@@ -1018,19 +1081,19 @@ title(xlab = "Easting", ylab = "Northing")
 
 <div style="width: 100%;">
 
-* Randomly apply 761 "sick" labels to the 3781 points!
+* Randomly apply 761 "sick" labels to the $761 + 3020 = 3781$ points!
 
 </div>
 
 :::: {.columns}
 ::: {.column width="33%"}
 
-```{r}
+```{r, dev.args = list(bg = 'transparent')}
 #| label: random-labeling
 #| code-fold: true
-#| crop: true
 #| fig-width: 4.8
 #| fig-height: 6
+#| crop: true
 plot_rlabel <- function(rl_ppp) {
   rl_win_sf <- window_to_sf(rl_ppp)
   rl_points_sf <- points_to_sf(rl_ppp) |>
@@ -1066,7 +1129,8 @@ plot_rlabel <- function(rl_ppp) {
     theme_classic(base_size=16) +
     labs(
       title="NE Britain Disease Cases"
-    )
+    ) +
+    transparent_bg()
   return(rl_plot)
 }
 set.seed(6810)
@@ -1077,11 +1141,12 @@ plot_rlabel(rl1_ppp)
 :::
 ::: {.column width="33%"}
 
-```{r}
+```{r, dev.args = list(bg = 'transparent')}
 #| label: random-labeling-2
 #| code-fold: true
 #| fig-width: 4.8
 #| fig-height: 6
+#| crop: true
 set.seed(6811)
 pbc_2 <- rlabel(pbc)
 plot_rlabel(pbc_2)
@@ -1090,11 +1155,12 @@ plot_rlabel(pbc_2)
 :::
 ::: {.column width="33%"}
 
-```{r}
+```{r, dev.args = list(bg = 'transparent')}
 #| label: random-labeling-3
 #| code-fold: true
 #| fig-width: 4.8
 #| fig-height: 6
+#| crop: true
 set.seed(6812)
 pbc_3 <- rlabel(pbc)
 plot_rlabel(pbc_3)
@@ -1106,12 +1172,12 @@ plot_rlabel(pbc_3)
 ## The *Constant Risk Hypothesis* {.smaller}
 
 * Everyone **equally at risk** of contracting disease, **regardless** of location: $\rho(\mathbf{s}) = 1$
-* In this case: $\lambda_{CR}(\mathbf{s}) = \alpha \lambda_0(\mathbf{s})$
+* In this case: $\lambda_{CR}(\mathbf{s}) = \alpha \lambda_0(\mathbf{s})$ (some constant $\alpha$ $\times$ base rate $\lambda_0(\mathbf{s})$)
 
 :::: {.columns}
 ::: {.column width="33%"}
 
-```{r}
+```{r, dev.args = list(bg = 'transparent')}
 #| label: monte-carlo-sim
 #| code-fold: true
 #| fig-width: 2.5
@@ -1119,7 +1185,7 @@ plot_rlabel(pbc_3)
 pbc_win_sf <- pbc |> sf::st_as_sf() |> filter(label == "window")
 plot_pbc_sim <- function() {
     pbc_sim <- spatstat.random::rpoispp(
-        lambda = alpha_hat * int_controls
+        lambda = alpha * int_controls
     )
     # Separate window and points
     pbc_sf <- pbc_sim |> sf::st_as_sf()
@@ -1128,7 +1194,8 @@ plot_pbc_sim <- function() {
     pbc_plot <- ggplot() +
       geom_sf(data=pbc_win_sf) +
       geom_sf(data=pbc_point_sf, size=0.5, alpha=0.5) +
-      theme_classic()
+      theme_classic() +
+      transparent_bg()
     return(pbc_plot)
 }
 plot_pbc_sim()
@@ -1137,7 +1204,7 @@ plot_pbc_sim()
 :::
 ::: {.column width="33%"}
 
-```{r}
+```{r, dev.args = list(bg = 'transparent')}
 #| code-fold: true
 #| fig-width: 2.5
 #| crop: true
@@ -1147,7 +1214,7 @@ plot_pbc_sim()
 :::
 ::: {.column width="33%"}
 
-```{r}
+```{r, dev.args = list(bg = 'transparent')}
 #| code-fold: true
 #| fig-width: 2.5
 #| crop: true

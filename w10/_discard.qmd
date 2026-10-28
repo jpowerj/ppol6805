@@ -1,1 +1,64 @@
 * Are people in [**Chicago (pop. 2,731,585)**]{style="color: #4b0055;"} and [**Detroit (pop. 649,095)**]{style="color: #f1d202; text-shadow: 0 0 5px black;"} equally "at risk"?
+
+---
+
+## Constant Risk Hypothesis: Base Rates {.smaller .crunch-title .title-12}
+
+| | Chicago | Detroit |
+|-|-|-|
+| **Population** | 2,731,585 | 649,095 |
+
+```{r}
+#| label: midwest-pop-plot
+#| code-fold: true
+library(leaflet) |> suppressPackageStartupMessages()
+library(leaflet.extras2) |> suppressPackageStartupMessages()
+city_pop_sf <- city_buf_sf |> sf::st_sample(size=c(16, 4)) |> sf::st_as_sf()
+city_pop_sf$city <- "Detroit"
+city_pop_sf[1:16, 'city'] <- "Chicago"
+city_pop_sf$sample <- "People"
+city_combined_sf <- bind_rows(city_cases_sf, city_pop_sf)
+# mapview(city_combined_sf, zcol="city", marker="sample")
+Flu = makeIcon(
+    "https://upload.wikimedia.org/wikipedia/commons/c/c3/Maki2-danger-24.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/c/c3/Maki2-danger-24.svg",
+    20,
+    20
+)
+People = makeIcon(
+  "https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg",
+  "https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg",
+  20,
+  20
+)
+
+city_combined_sf$r <- ifelse(city_combined_sf$sample == "Flu", 0, 4)
+city_flu_sf <- city_combined_sf |> filter(sample == "Flu")
+city_ppl_sf <- city_combined_sf |> filter(sample == "People")
+leaflet(city_flu_sf) |>
+  addProviderTiles("Esri.WorldGrayCanvas") |>
+  # addProviderTiles("CartoDB.Positron") |>
+  addMarkers(data=city_flu_sf, icon = Flu) |>
+  addMarkers(data=city_ppl_sf, icon = People)
+```
+
+---
+
+## Meaningful Results $\leftrightarrow$ *Comparisons* with Null Model(s) {.crunch-title .title-10 .smaller}
+
+* **Cases** of disease form an intensity function $\lambda(\mathbf{s})$
+* **Controls** form an "ambient" intensity function $\lambda_0(\mathbf{s})$
+* $\implies$ The following model allows us to separate the quantities we **really** care about from the **base rate** information:
+
+    $$
+    \lambda(\mathbf{s}) = \alpha \overbrace{\lambda_0(\mathbf{s})}^{\mathclap{\text{Base Rate}}} \underbrace{\rho(\mathbf{s})}_{\mathclap{\text{Relative Risk}}},
+    $$
+
+    where
+
+    $$
+    \alpha = \frac{\# \text{Cases}}{\# \text{Controls}}
+    $$
+
+* (Remember: **unit** of $\lambda(\mathbf{s})$ is **number of cases**; **not** a probability density!)
+
