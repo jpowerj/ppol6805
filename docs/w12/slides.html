@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Jeff Jacobs">
-  <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 12: Tools for Final Projects</title>
+  <title>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science – Week 12: Spatial Regression</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -56,7 +56,23 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-3ac74058c2340f1d7b97df1a7d95c668.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ceee00d30631cd9547de687852f29e4b.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -150,14 +166,18 @@
       margin-right: 0; 
     }
   </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css" integrity="sha512-2bBQCjcnw658Lho4nlXJcc6WkV/UxpE/sAokbXPxQNGqmNdQrWqtw26Ns9kFF/yG792pKR1Sx8/Y1Lf1XN4GKA==" crossorigin="anonymous" referrerpolicy="no-referrer"><script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.min.js" integrity="sha512-nKXmKvJyiGQy343jatQlzDprflyB5c+tKCzGP3Uq67v+lmzfnZUi/ZT+fc6ITZfSC5HhaBKUIvr/nTLCV+7F+Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css"><script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Week 12: Tools for Final Projects</h1>
+  <h1 class="title">Week 12: Spatial Regression</h1>
   <p class="subtitle"><em>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</em><br>Fall 2026</p>
 
 <div class="quarto-title-authors">
@@ -174,7 +194,7 @@ Jeff Jacobs
   <p class="date">Wednesday, November 11, 2026</p>
 </section>
 <section>
-<section id="real-mf-project-hours" class="title-slide slide level1 center" data-stack-name="Final Project">
+<section id="real-mf-project-hours" class="title-slide slide level1 center" data-stack-name="Final Project Logistics">
 <h1>Real MF Project Hours!!!</h1>
 <ul>
 <li>The “MF” is for “Map Fanatic”!</li>
@@ -183,11 +203,11 @@ Jeff Jacobs
 <section id="final-project-details" class="slide level2 crunch-title">
 <h2>Final Project Details</h2>
 <ul>
-<li><strong>Project Showcase</strong>: 6:30-9pm, Wed, <strong>December 3</strong>, 2025
+<li><strong>Project Showcase</strong>: 6:30-9pm, Wed, <strong>December 2</strong>, 2026
 <ul>
 <li>Come eat falafel and show off your cool visualizations and regression coefficients!</li>
 </ul></li>
-<li><strong>Reports</strong>: Due 5:59pm, Fri, <strong>December 12</strong>, 2025
+<li><strong>Reports</strong>: Due 5:59pm, Fri, <strong>December 11</strong>, 2026
 <ul>
 <li>If you’re in DSAN 6000 and you’re worried about that final project… See next slide!</li>
 </ul></li>
@@ -201,27 +221,25 @@ Jeff Jacobs
 </iframe>
 </center>
 </section>
-<section id="presentation-setup" class="slide level2">
+<section id="presentation-setup" class="slide level2 text-95">
 <h2>Presentation Setup</h2>
 <ul>
-<li>Each of your desks becomes a <strong>“table”</strong> at a GIS conference!</li>
+<li>Each of your desks becomes a <strong>“table”</strong> at a <strong>GIS conference!</strong></li>
 <li>Everyone can go around and ask others about projects 😻</li>
-<li>But, <strong>FOOD</strong> <span class="math inline">\(\implies\)</span> you can also stay!</li>
+<li>But, <strong>FOOD</strong> <span class="math inline">\implies</span> you can also stay!</li>
 </ul>
 </section>
 <section id="report-setup" class="slide level2 crunch-title">
 <h2>Report Setup</h2>
 <ul>
-<li><a href="https://github.com/"><strong>GitHub repository</strong></a> (for your portfolio!)
-<ul>
+<li><i class="bi bi-1-circle" style="font-size: 90%;"></i> <a href="https://github.com/"><strong>GitHub repository</strong></a> (for your portfolio!)</li>
 <li>GH Pages site: <code>your_username.github.io/gis-project</code></li>
-</ul></li>
 <li>…What do you put in that GitHub repository?</li>
-<li><a href="https://quarto.org/docs/manuscripts/"><strong>Quarto Manuscript</strong></a></li>
-<li>What do you put in the Quarto manuscript?</li>
-<li><strong>Writeup</strong> + <strong>Visualizations</strong> + <strong>Code</strong>, interspersed!
+<li><i class="bi bi-2-circle" style="font-size: 90%;"></i> <a href="https://quarto.org/docs/manuscripts/"><strong>Quarto Manuscript</strong></a> [<a href="https://jjacobs.me/gis-manuscript-template/">PPOL 6805 Template</a>]</li>
+<li>…What do you put in the Quarto manuscript?</li>
+<li><i class="bi bi-3-circle"></i> <strong>Writeup</strong> + <strong>Visualizations</strong> + <strong>Code</strong>, interspersed!
 <ul>
-<li>“Literate Programming” <span class="math inline">\(\Rightarrow\)</span> <strong>Reproducible Results!</strong></li>
+<li>“Literate Programming” <span class="math inline">\Rightarrow</span> <strong>Reproducible Results!</strong></li>
 </ul></li>
 </ul>
 </section></section>
@@ -233,24 +251,24 @@ Jeff Jacobs
 <li>(Nearly all extremely-fancy applied GIS models can be implemented via Spatial Regression!)</li>
 </ul>
 </section>
-<section id="motivation-when-does-non-spatial-regression-work" class="slide level2">
-<h2>Motivation: When Does Non-Spatial Regression “Work”?</h2>
-<p><span class="math display">\[
+<section id="motivation-when-does-non-spatial-regression-work" class="slide level2 title-09">
+<h2>Motivation: When Does <em>Non</em>-Spatial Regression “Work”?</h2>
+<p><span class="math display">
 Y_i = \beta_0 + \beta_1X_{i,1} + \beta_2X_{i,2} + \cdots + \beta_MX_{i,M} + \varepsilon_i
-\]</span></p>
+</span></p>
 <ul>
 <li><p>Importance of OLS regression: can give us the <strong>Best Linear Unbiased Estimator (BLUE)</strong></p></li>
 <li><p>This is only true <strong>if</strong> the Gauss-Markov assumptions hold—one of these is that the error terms are <strong>uncorrelated</strong>:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 \text{Cov}[\varepsilon_i, \varepsilon_j] = 0 \; \forall i \neq j
-\]</span></p></li>
+</span></p></li>
 </ul>
 </section>
 <section id="spatial-autocorrelation-in-residuals" class="slide level2">
 <h2>Spatial Autocorrelation in Residuals</h2>
 <ul>
-<li>We have now seen several models / datasets where effect of some variable <span class="math inline">\(X\)</span> (say, population) on another variable <span class="math inline">\(Y\)</span> (say, disease count) is <strong>spatial</strong>! (Kind of the whole point of the class 😜)</li>
-<li>So, to see when OLS will “work”, vs.&nbsp;when you need to incorporate GIS, key step is <strong>plotting the spatial distribution of regression residuals!</strong></li>
+<li>We have now seen several models / datasets where effect of some variable <span class="math inline">X</span> (say, population density) on another variable <span class="math inline">Y</span> (say, disease count) is <strong>spatial</strong>! (Kind of the whole point of the class 😜)</li>
+<li>So, to see when OLS will “work” <strong>on its own</strong>, vs.&nbsp;when you need to incorporate GIS, key step is <strong>plotting the spatial distribution of regression residuals!</strong></li>
 </ul>
 </section>
 <section id="example-italian-elections" class="slide level2">
@@ -285,10 +303,10 @@ Plain OLS
 <table>
 <thead>
 <tr class="header">
-<th><span class="math inline">\(N = 477\)</span></th>
-<th><span class="math inline">\(\widehat{\beta}\)</span></th>
+<th><span class="math inline">N = 477</span></th>
+<th><span class="math inline">\widehat{\beta}</span></th>
 <th>SE</th>
-<th><span class="math inline">\(t\)</span></th>
+<th><span class="math inline">t</span></th>
 </tr>
 </thead>
 <tbody>
@@ -306,7 +324,7 @@ Plain OLS
 </tr>
 </tbody>
 </table>
-<p>Moran’s <span class="math inline">\(I\)</span> for residuals = <strong>0.47</strong>(!)</p>
+<p>Moran’s <span class="math inline">I</span> for residuals = <strong>0.47</strong>(!)</p>
 </div><div class="column" style="width:4%;">
 <p>&nbsp;</p>
 </div><div class="column" style="width:48%;">
@@ -316,10 +334,10 @@ Spatial Regression
 <table>
 <thead>
 <tr class="header">
-<th><span class="math inline">\(N = 477\)</span></th>
-<th><span class="math inline">\(\widehat{\beta}\)</span></th>
+<th><span class="math inline">N = 477</span></th>
+<th><span class="math inline">\widehat{\beta}</span></th>
 <th>SE</th>
-<th><span class="math inline">\(t\)</span></th>
+<th><span class="math inline">t</span></th>
 </tr>
 </thead>
 <tbody>
@@ -336,7 +354,7 @@ Spatial Regression
 <td>3.66</td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(\rho\)</span></td>
+<td><span class="math inline">\rho</span></td>
 <td>0.87</td>
 <td>0.02</td>
 <td>36.7</td>
@@ -345,42 +363,45 @@ Spatial Regression
 </table>
 </div></div>
 </section>
-<section id="what-does-it-mean-that-spatial-effect-is-significant" class="slide level2 smaller">
+<section id="what-does-it-mean-that-spatial-effect-is-significant" class="slide level2 smaller crunch-title crunch-img">
 <h2>What Does it Mean that “Spatial Effect” is Significant?</h2>
 
-<img data-src="images/spatial-reg-italy.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption"><em>(From the future… your HW4!)</em></p></section>
-<section id="case-1-no-residual-spatial-autocorrelation" class="slide level2">
+<img data-src="images/eq-effect-sbarre.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption"><em>(From the future… your HW4!)</em></p></section>
+<section id="case-1-no-residual-spatial-autocorrelation" class="slide level2 title-08">
 <h2>Case 1: No Residual Spatial Autocorrelation</h2>
 <ul>
-<li>Example: Residuals have Moran’s <span class="math inline">\(I\)</span> near 0…</li>
+<li>Example: Residuals have Moran’s <span class="math inline">I</span> near 0…</li>
 <li>…Don’t need GIS at all!</li>
 </ul>
 </section>
-<section id="case-2-conditional-autoregressive-model-car" class="slide level2">
+<section id="case-2-conditional-autoregressive-model-car" class="slide level2 title-08">
 <h2>Case 2: Conditional Autoregressive Model (CAR)</h2>
 <ul>
 <li>GIS, but… only for “fixing” your regression</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 Y_i = \underbrace{\mu_i}_{\text{Non-spatial model}} + \underbrace{\frac{1}{w_{i,\cdot}}\sum_{j \neq i}(Y_j - \mu_j)}_{\text{Spatial Autocorrelation}} + \varepsilon_i
-\]</span></p>
+</span></p>
 </section>
-<section id="case-3-simultaneous-autoregressive-model-sar" class="slide level2">
+<section id="case-3-simultaneous-autoregressive-model-sar" class="slide level2 title-075">
 <h2>Case 3: Simultaneous Autoregressive Model (SAR)</h2>
 <ul>
-<li>The main event! Here we are <strong>explicitly</strong> modeling “spatially lagged” versions of our dependent variable <span class="math inline">\(Y\)</span>!</li>
+<li>The main event! Here we <strong>explicitly</strong> model <strong>“spatially lagged”</strong> versions of our dependent variable <span class="math inline">Y</span>!</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 Y = \mathbf{X}\beta + \rho \underbrace{\mathbf{W}Y}_{\mathclap{\text{Spatially-lagged }Y}} + \boldsymbol\varepsilon
-\]</span></p>
+</span></p>
+<ul>
+<li>…This is your HW4 task!</li>
+</ul>
 </section></section>
 <section>
-<section id="immediately-relevant-tools-for-final-projects-the-coming-weeks" class="title-slide slide level1 title-09 center" data-stack-name="Tools Preview">
+<section id="immediately-relevant-tools-for-final-projects-the-coming-weeks" class="title-slide slide level1 title-09 center" data-stack-name="Final Project Tools">
 <h1>Immediately-Relevant Tools for Final Projects! (The Coming Weeks)</h1>
 <ul>
 <li>Research Methodology (<strong>Hypotheses</strong>)</li>
 <li>Visualizing Spatial Data</li>
-<li>Weighted Connection Matrices <span class="math inline">\(\mathbf{W}\)</span></li>
+<li>Weighted Connection Matrices <span class="math inline">\mathbf{W}</span></li>
 <li>Remote-Sensed / Raster Data</li>
 <li>Data Anonymization / Synthetic Datasets</li>
 </ul>
@@ -396,31 +417,32 @@ Y = \mathbf{X}\beta + \rho \underbrace{\mathbf{W}Y}_{\mathclap{\text{Spatially-l
 <img data-src="images/predictive.svg" style="width:40.0%">
 </center>
 </section>
-<section id="secretly-my-opportunity-to-do-more-spatial-regression" class="slide level2 crunch-title">
-<h2>(Secretly My Opportunity to do More Spatial Regression!)</h2>
+<section id="secret-opportunity-to-do-more-spatial-regression" class="slide level2 crunch-title title-07">
+<h2>(Secret Opportunity to do More Spatial Regression!)</h2>
 <ul>
 <li>What <strong>explains</strong> previously-observed instances of <strong>separatist insurgencies</strong>?</li>
 <li>Can we <strong>predict</strong> separatist insurgencies?</li>
 <li>One (spatial) idea: <strong>how far away</strong> are [centers of power] from [regions of countervailing power]?</li>
-<li><span class="math inline">\(X\)</span> = Distance from capital, <span class="math inline">\(Y\)</span> = Insurgency</li>
+<li><span class="math inline">X</span> = Distance from capital, <span class="math inline">Y</span> = Insurgency</li>
 <li>Unit of observation: Regions? Insurgent uprisings? Countries?</li>
 </ul>
 </section>
-<section id="operationalizing" class="slide level2 crunch-ul">
+<section id="operationalizing" class="slide level2 crunch-ul text-90 math-90 inline-90">
 <h2>Operationalizing</h2>
 <ul>
 <li>The variables in previous slide are <strong>conceptual</strong></li>
 <li>Operationalizing = “Turning into measurable quantities”</li>
-<li><span class="math inline">\(X\)</span> = MeanDistance(Capital, Insurgent Region), <span class="math inline">\(Y = \mathbf{1}[\text{Insurgency}]\)</span></li>
+<li><span class="math inline">X</span> = MeanDistance(Capital, Insurgent Region)</li>
+<li><span class="math inline">Y = \mathbf{1}[\text{Insurgency}]</span></li>
 <li>Alternative:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 Y = \begin{cases}
 2 &amp;\text{if Successful Insurgency} \\
 1 &amp;\text{if Failed Insurgency} \\
 0 &amp;\text{if No Insurgency}
 \end{cases}
-\]</span></p>
+</span></p>
 </section>
 <section id="connection-matrices" class="slide level2">
 <h2>Connection Matrices</h2>
@@ -431,29 +453,31 @@ Y = \begin{cases}
 <li>🤔</li>
 </ul>
 </section>
-<section id="remote-sensed-raster-data" class="slide level2">
-<h2>Remote-Sensed / Raster Data</h2>
+<section id="quick-example-bolshevik-revolution-rightarrow-bipolar-world" class="slide level2 title-08 crunch-title crunch-img">
+<h2>Quick Example: Bolshevik Revolution <span class="math inline">\rightarrow</span> “Bipolar” World</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/democracy.jpeg" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
 <ul>
-<li>You’ve seen (to some extent) <code>terra</code></li>
-<li><a href="https://r-spatial.github.io/stars/"><code>stars</code></a>: Same group behind <code>sf</code></li>
-<li>Google solar panel data</li>
-<li><code>.tif</code> files: Dynamically loaded</li>
-</ul>
-</section>
-<section id="anonymization-synthetic-datasets" class="slide level2">
-<h2>Anonymization / Synthetic Datasets</h2>
-<ul>
-<li>Differential privacy</li>
-<li>Used by the US Census(!) Since 2020</li>
-</ul>
-</section>
-<section id="example-bolshevik-revolution-rightarrow-bipolar-world" class="slide level2">
-<h2>Example: Bolshevik Revolution <span class="math inline">\(\rightarrow\)</span> “Bipolar” World</h2>
-
-<img data-src="images/democracy.jpg" class="quarto-figure quarto-figure-center r-stretch"><ul>
 <li>Null hypothesis: no spatial effect of democratization/de-democratization on neighboring countries</li>
-<li>If null hypothesis is true, and countries democratize/de-democratize independently… could this pattern still arise?</li>
+<li>If null hypothesis is true, and countries democratize/de-democratize independently, could this pattern still arise?</li>
 </ul>
+</section>
+<section id="fuller-example-1-coup-proofing-via-capital-relocation" class="slide level2">
+<h2>Fuller Example 1: Coup-Proofing via Capital Relocation</h2>
+<p>&nbsp;<br></p>
+<center>
+<p><span class="boxed-cb"><a href="https://jjacobs.me/gis-template/"><code>jjacobs.me/gis-template</code></a></span></p>
+</center>
+</section>
+<section id="fuller-example-2-ruggedness-in-africa" class="slide level2 text-90">
+<h2>Fuller Example 2: Ruggedness in Africa</h2>
+<p>&nbsp;<br></p>
+<center>
+<p><span class="boxed-cb"><a href="https://jjacobs.me/dsan5650-project-deconfounding/"><code>jjacobs.me/dsan5650-project-deconfounding</code></a></span></p>
+</center>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
@@ -468,7 +492,7 @@ Ward, Michael D., and Kristian Skrede Gleditsch. 2018. <em><a href="https://www.
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>PPOL 6805 Week 12: Tools for Final Projects</p>
+<p>PPOL 6805 Week 12: Spatial Regression</p>
 </div>
 </div></div>
 
@@ -486,7 +510,6 @@ Ward, Michael D., and Kristian Skrede Gleditsch. 2018. <em><a href="https://www.
   <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -655,27 +678,9 @@ Ward, Michael D., and Kristian Skrede Gleditsch. 2018. <em><a href="https://www.
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, Simplemenu, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

@@ -12,7 +12,7 @@
   {
     "objectID": "w13/index.html",
     "href": "w13/index.html",
-    "title": "Week 13: Visualizing Spatial Data",
+    "title": "Week 13: Visualization Tools for Final Projects",
     "section": "",
     "text": "Open slides in new tab →",
     "crumbs": [
@@ -1257,7 +1257,7 @@
     "href": "index.html",
     "title": "PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science",
     "section": "",
-    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2026, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn 203. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\n\nDate\n\n\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 26\n\n\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 2\n\n\n\n\n\n\nWeek 3: Vector and Raster Representations\n\n\nSep 9\n\n\n\n\n\n\nWeek 4: Unary and Binary Operations\n\n\nSep 16\n\n\n\n\n\n\nWeek 5: Binary Operations and DE-9IM\n\n\nSep 23\n\n\n\n\n\n\nWeek 6: Spatial Joins and Areal Weighted Interpolation\n\n\nSep 30\n\n\n\n\n\n\nWeek 7: Spatial Data Science: Three Types of Geographic Data\n\n\nOct 7\n\n\n\n\n\n\nWeek 8: Spatial Autocorrelation\n\n\nOct 14\n\n\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness\n\n\nOct 21\n\n\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models\n\n\nOct 28\n\n\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 4\n\n\n\n\n\n\nWeek 12: Tools for Final Projects\n\n\nNov 11\n\n\n\n\n\n\nWeek 13: Visualizing Spatial Data\n\n\nNov 18\n\n\n\n\n\n\nWeek 14: Final Project Poster Session\n\n\nDec 2\n\n\n\n\n\n\nNo matching items",
+    "text": "Welcome to the homepage for PPOL 6805 / DSAN 6750: Geographic Information Systems (GIS) for Spatial Data Science, Fall 2026, at Georgetown University! The course takes place on Wednesdays from 6:30 to 9:00pm in Car Barn 203. More details are provided on the syllabus.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\n\nDate\n\n\n\n\n\n\n\n\nWeek 1: Introduction to GIS\n\n\nAug 26\n\n\n\n\n\n\nWeek 2: How Do Maps Work?\n\n\nSep 2\n\n\n\n\n\n\nWeek 3: Vector and Raster Representations\n\n\nSep 9\n\n\n\n\n\n\nWeek 4: Unary and Binary Operations\n\n\nSep 16\n\n\n\n\n\n\nWeek 5: Binary Operations and DE-9IM\n\n\nSep 23\n\n\n\n\n\n\nWeek 6: Spatial Joins and Areal Weighted Interpolation\n\n\nSep 30\n\n\n\n\n\n\nWeek 7: Spatial Data Science: Three Types of Geographic Data\n\n\nOct 7\n\n\n\n\n\n\nWeek 8: Spatial Autocorrelation\n\n\nOct 14\n\n\n\n\n\n\nWeek 9: Evaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness\n\n\nOct 21\n\n\n\n\n\n\nWeek 10: Evaluating Spatial Hypotheses II: Base Rates and Null Models\n\n\nOct 28\n\n\n\n\n\n\nWeek 11: In-Class Midterm\n\n\nNov 4\n\n\n\n\n\n\nWeek 12: Spatial Regression\n\n\nNov 11\n\n\n\n\n\n\nWeek 13: Visualization Tools for Final Projects\n\n\nNov 18\n\n\n\n\n\n\nWeek 14: Final Project Showcase\n\n\nDec 2\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "<i class='bi bi-house pe-1'></i> Home"
     ]
@@ -4615,7 +4615,7 @@
     "href": "syllabus.html#course-topics-calendar",
     "title": "PPOL 6805 / DSAN 6750",
     "section": "Course Topics / Calendar",
-    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week.\nNonetheless, if you are able to do the recommended readings listed below before the start of each week’s lecture, this will be a good indication that you are “on pace”, relative to the overall set of topics I aim to cover by the end of the semester.\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, let us know!\n\n\n\n\n\n\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Concepts\n1\nAug 26\nIntroduction to GIS\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Section 3.1: Simple Feature Geometries (pp. 29-33)\n\n\n\n2\nSep 2\nHow Do Maps Work?\n\n\n\nRecommended Readings\n\n\n\n1. Monmonier (2018), Chapter 2: Elements of the Map (pp. 5-26)\n\n\n\n3\nSep 9\nVector and Raster Representations\n\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Section 1.3-1.4: Raster and Vector Data and Raster Types (pp. 8-11)\n\n\nUnit 2: Geospatial Operations\n4\nSep 16\nUnary and Binary Operations\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Section 3.2: Operations on Geometries (pp. 34-39)\n\n\n\n5\nSep 23\nBinary Operations and DE-9IM\n\n\n\nRecommended Readings\n\n\n\n1. Moraga (2024), Chapter 3: The sf Package for Spatial Vector Data (pp. 27-39)\n\n\n\n6\nSep 30\nSpatial Joins and Areal-Weighted Interpolation\n\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Chapter 5: Attributes and Support (pp. 49-57)\n\n\nUnit 3: Spatial Data Science I: Foundations\n7\nOct 7\nSpatial Data Science: Three Types of Geographic Data\n\n\nRecommended Readings\n\n\n\n1. Amazing video introduction to analyzing spatial autocorrelation for epidemiology using R: Xie (2022)\n2. Three ‘core’ spatial-statistical datatypes: Schabenberger and Gotway (2004), Section 1.2: Types of Spatial Data (pp. 6-13)\n3. Baddeley, Rubak, and Turner (2015), Chapter 5: Point Process Methods (pp. 127-154)\n\n\n\n8\nOct 14\nSpatial Autocorrelation\n\n\n\nRecommended Readings\n\n\n\n1. Intensity Functions (First-order properties of point processes): Baddeley, Rubak, and Turner (2015), Chapter 6: Intensity (pp. 157-198)\n2. Pair Correlation Functions (Second-order properties of point processes): Baddeley, Rubak, and Turner (2015), Chapter 7: Correlation (pp. 199-254)\n\n\nUnit 4: Spatial Data Science II: Methods\n9\nOct 21\nEvaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness\n\n\nRecommended Readings\n\n\n\n1. Monte Carlo Simulation: Waller and Gotway (2004), Section 5.2.3: Hypothesis Tests of CSR via Monte Carlo Methods (pp. 125-126ff)\n\n\n\n10\nOct 28\nEvaluating Spatial Hypotheses II: Base Rates and Null Models \n\n\n\nRecommended Readings\n\n\n\n1. Ward and Gleditsch (2018), Chapter 2: Spatially-Lagged Dependent Variables (pp. 35-64)\n\n\n\n11\nNov 4\nIn-Class Midterm\n\n\nUnit 5: Final Projects\n12\nNov 11\nTools for Final Projects\n\n\n\n13\nNov 18\nVisualizing Spatial Data\n\n\n\nRecommended Readings\n\n\n\n1. Monmonier (2018), Chapter 3: Map Generalization: Little White Lies and Lots of Them (pp. 27-44)\n\n\n\n\nNov 26\nNo Class (Fall Break)\n\n\n\n14\nDec 2\nFinal Project Poster Session",
+    "text": "Course Topics / Calendar\nThe following is a rough map of what we will work through together throughout the semester; given that everyone learns at a different pace, my aim is to leave us with a good amount of flexibility in terms of how much time we spend on each topic.\nIf I find that it takes me longer than a week to convey a certain topic in sufficient depth, for example, then I view it as a strength rather than a weakness of the course that we can then rearrange the calendar below by adding an extra week on that particular topic! Similarly, if it seems like I am spending too much time on a topic, to the point that students seem bored or impatient to move onto the next topic, we can move a topic intended for the next week to the current week.\nNonetheless, if you are able to do the recommended readings listed below before the start of each week’s lecture, this will be a good indication that you are “on pace”, relative to the overall set of topics I aim to cover by the end of the semester.\nIf you find any discrepancies between this schedule and Georgetown’s official calendar, let us know!\n\n\n\n\n\n\n\n\n\nUnit\nWeek\nDate\nTopic\n\n\n\n\nUnit 1: GIS Concepts\n1\nAug 26\nIntroduction to GIS\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Section 3.1: Simple Feature Geometries (pp. 29-33)\n\n\n\n2\nSep 2\nHow Do Maps Work?\n\n\n\nRecommended Readings\n\n\n\n1. Monmonier (2018), Chapter 2: Elements of the Map (pp. 5-26)\n\n\n\n3\nSep 9\nVector and Raster Representations\n\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Section 1.3-1.4: Raster and Vector Data and Raster Types (pp. 8-11)\n\n\nUnit 2: Geospatial Operations\n4\nSep 16\nUnary and Binary Operations\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Section 3.2: Operations on Geometries (pp. 34-39)\n\n\n\n5\nSep 23\nBinary Operations and DE-9IM\n\n\n\nRecommended Readings\n\n\n\n1. Moraga (2024), Chapter 3: The sf Package for Spatial Vector Data (pp. 27-39)\n\n\n\n6\nSep 30\nSpatial Joins and Areal-Weighted Interpolation\n\n\n\nRecommended Readings\n\n\n\n1. Pebesma and Bivand (2023), Chapter 5: Attributes and Support (pp. 49-57)\n\n\nUnit 3: Spatial Data Science I: Foundations\n7\nOct 7\nSpatial Data Science: Three Types of Geographic Data\n\n\nRecommended Readings\n\n\n\n1. Amazing video introduction to analyzing spatial autocorrelation for epidemiology using R: Xie (2022)\n2. Three ‘core’ spatial-statistical datatypes: Schabenberger and Gotway (2004), Section 1.2: Types of Spatial Data (pp. 6-13)\n3. Baddeley, Rubak, and Turner (2015), Chapter 5: Point Process Methods (pp. 127-154)\n\n\n\n8\nOct 14\nSpatial Autocorrelation\n\n\n\nRecommended Readings\n\n\n\n1. Intensity Functions (First-order properties of point processes): Baddeley, Rubak, and Turner (2015), Chapter 6: Intensity (pp. 157-198)\n2. Pair Correlation Functions (Second-order properties of point processes): Baddeley, Rubak, and Turner (2015), Chapter 7: Correlation (pp. 199-254)\n\n\nUnit 4: Spatial Data Science II: Methods\n9\nOct 21\nEvaluating Spatial Hypotheses I: Clustering, Repulsion, and Randomness\n\n\nRecommended Readings\n\n\n\n1. Monte Carlo Simulation: Waller and Gotway (2004), Section 5.2.3: Hypothesis Tests of CSR via Monte Carlo Methods (pp. 125-126ff)\n\n\n\n10\nOct 28\nEvaluating Spatial Hypotheses II: Base Rates and Null Models \n\n\n\nRecommended Readings\n\n\n\n1. Ward and Gleditsch (2018), Chapter 2: Spatially-Lagged Dependent Variables (pp. 35-64)\n\n\n\n11\nNov 4\nIn-Class Midterm\n\n\nUnit 5: Final Projects\n12\nNov 11\nSpatial Regression\n\n\n\n13\nNov 18\nVisualization Tools for Final Projects\n\n\n\nRecommended Readings\n\n\n\n1. Monmonier (2018), Chapter 3: Map Generalization: Little White Lies and Lots of Them (pp. 27-44)\n\n\n\n\nNov 26\nNo Class (Fall Break)\n\n\n\n14\nDec 2\nFinal Project Showcase",
     "crumbs": [
       "Syllabus"
     ]
@@ -4683,7 +4683,7 @@
   {
     "objectID": "w12/index.html",
     "href": "w12/index.html",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "",
     "text": "Open slides in new tab →",
     "crumbs": [
@@ -4693,9 +4693,9 @@
   {
     "objectID": "w12/index.html#final-project-details",
     "href": "w12/index.html#final-project-details",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Final Project Details",
-    "text": "Final Project Details\n\nProject Showcase: 6:30-9pm, Wed, December 3, 2025\n\nCome eat falafel and show off your cool visualizations and regression coefficients!\n\nReports: Due 5:59pm, Fri, December 12, 2025\n\nIf you’re in DSAN 6000 and you’re worried about that final project… See next slide!",
+    "text": "Final Project Details\n\nProject Showcase: 6:30-9pm, Wed, December 2, 2026\n\nCome eat falafel and show off your cool visualizations and regression coefficients!\n\nReports: Due 5:59pm, Fri, December 11, 2026\n\nIf you’re in DSAN 6000 and you’re worried about that final project… See next slide!",
     "crumbs": [
       "Week 12: Nov 11"
     ]
@@ -4703,7 +4703,7 @@
   {
     "objectID": "w12/index.html#due-date-details",
     "href": "w12/index.html#due-date-details",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Due Date Details",
     "text": "Due Date Details",
     "crumbs": [
@@ -4713,7 +4713,7 @@
   {
     "objectID": "w12/index.html#presentation-setup",
     "href": "w12/index.html#presentation-setup",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Presentation Setup",
     "text": "Presentation Setup\n\nEach of your desks becomes a “table” at a GIS conference!\nEveryone can go around and ask others about projects 😻\nBut, FOOD \\(\\implies\\) you can also stay!",
     "crumbs": [
@@ -4723,9 +4723,9 @@
   {
     "objectID": "w12/index.html#report-setup",
     "href": "w12/index.html#report-setup",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Report Setup",
-    "text": "Report Setup\n\nGitHub repository (for your portfolio!)\n\nGH Pages site: your_username.github.io/gis-project\n\n…What do you put in that GitHub repository?\nQuarto Manuscript\nWhat do you put in the Quarto manuscript?\nWriteup + Visualizations + Code, interspersed!\n\n“Literate Programming” \\(\\Rightarrow\\) Reproducible Results!",
+    "text": "Report Setup\n\n GitHub repository (for your portfolio!)\nGH Pages site: your_username.github.io/gis-project\n…What do you put in that GitHub repository?\n Quarto Manuscript [PPOL 6805 Template]\n…What do you put in the Quarto manuscript?\n Writeup + Visualizations + Code, interspersed!\n\n“Literate Programming” \\(\\Rightarrow\\) Reproducible Results!",
     "crumbs": [
       "Week 12: Nov 11"
     ]
@@ -4733,7 +4733,7 @@
   {
     "objectID": "w12/index.html#motivation-when-does-non-spatial-regression-work",
     "href": "w12/index.html#motivation-when-does-non-spatial-regression-work",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Motivation: When Does Non-Spatial Regression “Work”?",
     "text": "Motivation: When Does Non-Spatial Regression “Work”?\n\\[\nY_i = \\beta_0 + \\beta_1X_{i,1} + \\beta_2X_{i,2} + \\cdots + \\beta_MX_{i,M} + \\varepsilon_i\n\\]\n\nImportance of OLS regression: can give us the Best Linear Unbiased Estimator (BLUE)\nThis is only true if the Gauss-Markov assumptions hold—one of these is that the error terms are uncorrelated:\n\\[\n\\text{Cov}[\\varepsilon_i, \\varepsilon_j] = 0 \\; \\forall i \\neq j\n\\]",
     "crumbs": [
@@ -4743,9 +4743,9 @@
   {
     "objectID": "w12/index.html#spatial-autocorrelation-in-residuals",
     "href": "w12/index.html#spatial-autocorrelation-in-residuals",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Spatial Autocorrelation in Residuals",
-    "text": "Spatial Autocorrelation in Residuals\n\nWe have now seen several models / datasets where effect of some variable \\(X\\) (say, population) on another variable \\(Y\\) (say, disease count) is spatial! (Kind of the whole point of the class 😜)\nSo, to see when OLS will “work”, vs. when you need to incorporate GIS, key step is plotting the spatial distribution of regression residuals!",
+    "text": "Spatial Autocorrelation in Residuals\n\nWe have now seen several models / datasets where effect of some variable \\(X\\) (say, population density) on another variable \\(Y\\) (say, disease count) is spatial! (Kind of the whole point of the class 😜)\nSo, to see when OLS will “work” on its own, vs. when you need to incorporate GIS, key step is plotting the spatial distribution of regression residuals!",
     "crumbs": [
       "Week 12: Nov 11"
     ]
@@ -4753,7 +4753,7 @@
   {
     "objectID": "w12/index.html#example-italian-elections",
     "href": "w12/index.html#example-italian-elections",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Example: Italian Elections",
     "text": "Example: Italian Elections\n\n\n\n\n\nWard and Gleditsch (2018), Figure 2.3\n\n\n\n\n\n\nWard and Gleditsch (2018), Figure 2.4",
     "crumbs": [
@@ -4763,7 +4763,7 @@
   {
     "objectID": "w12/index.html#will-ols-work-here",
     "href": "w12/index.html#will-ols-work-here",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Will OLS “Work” Here?",
     "text": "Will OLS “Work” Here?\n\nCan we use OLS to derive the BLUE of the effect of GDP on voting?\n\n\n\n\nPlain OLS\n\n\n\n\n\\(N = 477\\)\n\\(\\widehat{\\beta}\\)\nSE\n\\(t\\)\n\n\n\n\nIntercept\n35.30\n2.21\n15.96\n\n\nLog GDP per cap\n13.46\n0.65\n20.84\n\n\n\nMoran’s \\(I\\) for residuals = 0.47(!)\n\n \n\n\nSpatial Regression\n\n\n\n\n\\(N = 477\\)\n\\(\\widehat{\\beta}\\)\nSE\n\\(t\\)\n\n\n\n\nIntercept\n4.70\n1.66\n2.80\n\n\nLog GDP per cap\n1.77\n0.48\n3.66\n\n\n\\(\\rho\\)\n0.87\n0.02\n36.7",
     "crumbs": [
@@ -4773,7 +4773,7 @@
   {
     "objectID": "w12/index.html#what-does-it-mean-that-spatial-effect-is-significant",
     "href": "w12/index.html#what-does-it-mean-that-spatial-effect-is-significant",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "What Does it Mean that “Spatial Effect” is Significant?",
     "text": "What Does it Mean that “Spatial Effect” is Significant?\n\n\n\n(From the future… your HW4!)",
     "crumbs": [
@@ -4783,7 +4783,7 @@
   {
     "objectID": "w12/index.html#case-1-no-residual-spatial-autocorrelation",
     "href": "w12/index.html#case-1-no-residual-spatial-autocorrelation",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Case 1: No Residual Spatial Autocorrelation",
     "text": "Case 1: No Residual Spatial Autocorrelation\n\nExample: Residuals have Moran’s \\(I\\) near 0…\n…Don’t need GIS at all!",
     "crumbs": [
@@ -4793,7 +4793,7 @@
   {
     "objectID": "w12/index.html#case-2-conditional-autoregressive-model-car",
     "href": "w12/index.html#case-2-conditional-autoregressive-model-car",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Case 2: Conditional Autoregressive Model (CAR)",
     "text": "Case 2: Conditional Autoregressive Model (CAR)\n\nGIS, but… only for “fixing” your regression\n\n\\[\nY_i = \\underbrace{\\mu_i}_{\\text{Non-spatial model}} + \\underbrace{\\frac{1}{w_{i,\\cdot}}\\sum_{j \\neq i}(Y_j - \\mu_j)}_{\\text{Spatial Autocorrelation}} + \\varepsilon_i\n\\]",
     "crumbs": [
@@ -4803,9 +4803,9 @@
   {
     "objectID": "w12/index.html#case-3-simultaneous-autoregressive-model-sar",
     "href": "w12/index.html#case-3-simultaneous-autoregressive-model-sar",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Case 3: Simultaneous Autoregressive Model (SAR)",
-    "text": "Case 3: Simultaneous Autoregressive Model (SAR)\n\nThe main event! Here we are explicitly modeling “spatially lagged” versions of our dependent variable \\(Y\\)!\n\n\\[\nY = \\mathbf{X}\\beta + \\rho \\underbrace{\\mathbf{W}Y}_{\\mathclap{\\text{Spatially-lagged }Y}} + \\boldsymbol\\varepsilon\n\\]",
+    "text": "Case 3: Simultaneous Autoregressive Model (SAR)\n\nThe main event! Here we explicitly model “spatially lagged” versions of our dependent variable \\(Y\\)!\n\n\\[\nY = \\mathbf{X}\\beta + \\rho \\underbrace{\\mathbf{W}Y}_{\\mathclap{\\text{Spatially-lagged }Y}} + \\boldsymbol\\varepsilon\n\\]\n\n…This is your HW4 task!",
     "crumbs": [
       "Week 12: Nov 11"
     ]
@@ -4813,7 +4813,7 @@
   {
     "objectID": "w12/index.html#research-methodology-hypotheses",
     "href": "w12/index.html#research-methodology-hypotheses",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Research Methodology: Hypotheses",
     "text": "Research Methodology: Hypotheses\n\nSocial Science (McCourt):\n\n\n\nMachine Learning (DSAN):",
     "crumbs": [
@@ -4821,11 +4821,11 @@
     ]
   },
   {
-    "objectID": "w12/index.html#secretly-my-opportunity-to-do-more-spatial-regression",
-    "href": "w12/index.html#secretly-my-opportunity-to-do-more-spatial-regression",
-    "title": "Week 12: Tools for Final Projects",
-    "section": "(Secretly My Opportunity to do More Spatial Regression!)",
-    "text": "(Secretly My Opportunity to do More Spatial Regression!)\n\nWhat explains previously-observed instances of separatist insurgencies?\nCan we predict separatist insurgencies?\nOne (spatial) idea: how far away are [centers of power] from [regions of countervailing power]?\n\\(X\\) = Distance from capital, \\(Y\\) = Insurgency\nUnit of observation: Regions? Insurgent uprisings? Countries?",
+    "objectID": "w12/index.html#secret-opportunity-to-do-more-spatial-regression",
+    "href": "w12/index.html#secret-opportunity-to-do-more-spatial-regression",
+    "title": "Week 12: Spatial Regression",
+    "section": "(Secret Opportunity to do More Spatial Regression!)",
+    "text": "(Secret Opportunity to do More Spatial Regression!)\n\nWhat explains previously-observed instances of separatist insurgencies?\nCan we predict separatist insurgencies?\nOne (spatial) idea: how far away are [centers of power] from [regions of countervailing power]?\n\\(X\\) = Distance from capital, \\(Y\\) = Insurgency\nUnit of observation: Regions? Insurgent uprisings? Countries?",
     "crumbs": [
       "Week 12: Nov 11"
     ]
@@ -4833,9 +4833,9 @@
   {
     "objectID": "w12/index.html#operationalizing",
     "href": "w12/index.html#operationalizing",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Operationalizing",
-    "text": "Operationalizing\n\nThe variables in previous slide are conceptual\nOperationalizing = “Turning into measurable quantities”\n\\(X\\) = MeanDistance(Capital, Insurgent Region), \\(Y = \\mathbf{1}[\\text{Insurgency}]\\)\nAlternative:\n\n\\[\nY = \\begin{cases}\n2 &\\text{if Successful Insurgency} \\\\\n1 &\\text{if Failed Insurgency} \\\\\n0 &\\text{if No Insurgency}\n\\end{cases}\n\\]",
+    "text": "Operationalizing\n\nThe variables in previous slide are conceptual\nOperationalizing = “Turning into measurable quantities”\n\\(X\\) = MeanDistance(Capital, Insurgent Region)\n\\(Y = \\mathbf{1}[\\text{Insurgency}]\\)\nAlternative:\n\n\\[\nY = \\begin{cases}\n2 &\\text{if Successful Insurgency} \\\\\n1 &\\text{if Failed Insurgency} \\\\\n0 &\\text{if No Insurgency}\n\\end{cases}\n\\]",
     "crumbs": [
       "Week 12: Nov 11"
     ]
@@ -4843,7 +4843,7 @@
   {
     "objectID": "w12/index.html#connection-matrices",
     "href": "w12/index.html#connection-matrices",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Connection Matrices",
     "text": "Connection Matrices\n\nspdep\nNeighbors if Centroids are close\nNeighbors if Capitals are close\n🤔",
     "crumbs": [
@@ -4851,31 +4851,31 @@
     ]
   },
   {
-    "objectID": "w12/index.html#remote-sensed-raster-data",
-    "href": "w12/index.html#remote-sensed-raster-data",
-    "title": "Week 12: Tools for Final Projects",
-    "section": "Remote-Sensed / Raster Data",
-    "text": "Remote-Sensed / Raster Data\n\nYou’ve seen (to some extent) terra\nstars: Same group behind sf\nGoogle solar panel data\n.tif files: Dynamically loaded",
+    "objectID": "w12/index.html#quick-example-bolshevik-revolution-rightarrow-bipolar-world",
+    "href": "w12/index.html#quick-example-bolshevik-revolution-rightarrow-bipolar-world",
+    "title": "Week 12: Spatial Regression",
+    "section": "Quick Example: Bolshevik Revolution \\(\\rightarrow\\) “Bipolar” World",
+    "text": "Quick Example: Bolshevik Revolution \\(\\rightarrow\\) “Bipolar” World\n\n\n\n\n\n\nNull hypothesis: no spatial effect of democratization/de-democratization on neighboring countries\nIf null hypothesis is true, and countries democratize/de-democratize independently, could this pattern still arise?",
     "crumbs": [
       "Week 12: Nov 11"
     ]
   },
   {
-    "objectID": "w12/index.html#anonymization-synthetic-datasets",
-    "href": "w12/index.html#anonymization-synthetic-datasets",
-    "title": "Week 12: Tools for Final Projects",
-    "section": "Anonymization / Synthetic Datasets",
-    "text": "Anonymization / Synthetic Datasets\n\nDifferential privacy\nUsed by the US Census(!) Since 2020",
+    "objectID": "w12/index.html#fuller-example-1-coup-proofing-via-capital-relocation",
+    "href": "w12/index.html#fuller-example-1-coup-proofing-via-capital-relocation",
+    "title": "Week 12: Spatial Regression",
+    "section": "Fuller Example 1: Coup-Proofing via Capital Relocation",
+    "text": "Fuller Example 1: Coup-Proofing via Capital Relocation\n \n\njjacobs.me/gis-template",
     "crumbs": [
       "Week 12: Nov 11"
     ]
   },
   {
-    "objectID": "w12/index.html#example-bolshevik-revolution-rightarrow-bipolar-world",
-    "href": "w12/index.html#example-bolshevik-revolution-rightarrow-bipolar-world",
-    "title": "Week 12: Tools for Final Projects",
-    "section": "Example: Bolshevik Revolution \\(\\rightarrow\\) “Bipolar” World",
-    "text": "Example: Bolshevik Revolution \\(\\rightarrow\\) “Bipolar” World\n\n\n\n\n\n\nNull hypothesis: no spatial effect of democratization/de-democratization on neighboring countries\nIf null hypothesis is true, and countries democratize/de-democratize independently… could this pattern still arise?",
+    "objectID": "w12/index.html#fuller-example-2-ruggedness-in-africa",
+    "href": "w12/index.html#fuller-example-2-ruggedness-in-africa",
+    "title": "Week 12: Spatial Regression",
+    "section": "Fuller Example 2: Ruggedness in Africa",
+    "text": "Fuller Example 2: Ruggedness in Africa\n \n\njjacobs.me/dsan5650-project-deconfounding",
     "crumbs": [
       "Week 12: Nov 11"
     ]
@@ -4883,7 +4883,7 @@
   {
     "objectID": "w12/index.html#references",
     "href": "w12/index.html#references",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "References",
     "text": "References\n\n\nWard, Michael D., and Kristian Skrede Gleditsch. 2018. Spatial Regression Models. SAGE Publications.",
     "crumbs": [
@@ -4893,147 +4893,147 @@
   {
     "objectID": "w12/slides.html#final-project-details",
     "href": "w12/slides.html#final-project-details",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Final Project Details",
-    "text": "Final Project Details\n\nProject Showcase: 6:30-9pm, Wed, December 3, 2025\n\nCome eat falafel and show off your cool visualizations and regression coefficients!\n\nReports: Due 5:59pm, Fri, December 12, 2025\n\nIf you’re in DSAN 6000 and you’re worried about that final project… See next slide!"
+    "text": "Final Project Details\n\nProject Showcase: 6:30-9pm, Wed, December 2, 2026\n\nCome eat falafel and show off your cool visualizations and regression coefficients!\n\nReports: Due 5:59pm, Fri, December 11, 2026\n\nIf you’re in DSAN 6000 and you’re worried about that final project… See next slide!"
   },
   {
     "objectID": "w12/slides.html#due-date-details",
     "href": "w12/slides.html#due-date-details",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Due Date Details",
     "text": "Due Date Details"
   },
   {
     "objectID": "w12/slides.html#presentation-setup",
     "href": "w12/slides.html#presentation-setup",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Presentation Setup",
-    "text": "Presentation Setup\n\nEach of your desks becomes a “table” at a GIS conference!\nEveryone can go around and ask others about projects 😻\nBut, FOOD \\(\\implies\\) you can also stay!"
+    "text": "Presentation Setup\n\nEach of your desks becomes a “table” at a GIS conference!\nEveryone can go around and ask others about projects 😻\nBut, FOOD \\implies you can also stay!"
   },
   {
     "objectID": "w12/slides.html#report-setup",
     "href": "w12/slides.html#report-setup",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Report Setup",
-    "text": "Report Setup\n\nGitHub repository (for your portfolio!)\n\nGH Pages site: your_username.github.io/gis-project\n\n…What do you put in that GitHub repository?\nQuarto Manuscript\nWhat do you put in the Quarto manuscript?\nWriteup + Visualizations + Code, interspersed!\n\n“Literate Programming” \\(\\Rightarrow\\) Reproducible Results!"
+    "text": "Report Setup\n\n GitHub repository (for your portfolio!)\nGH Pages site: your_username.github.io/gis-project\n…What do you put in that GitHub repository?\n Quarto Manuscript [PPOL 6805 Template]\n…What do you put in the Quarto manuscript?\n Writeup + Visualizations + Code, interspersed!\n\n“Literate Programming” \\Rightarrow Reproducible Results!"
   },
   {
     "objectID": "w12/slides.html#motivation-when-does-non-spatial-regression-work",
     "href": "w12/slides.html#motivation-when-does-non-spatial-regression-work",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Motivation: When Does Non-Spatial Regression “Work”?",
-    "text": "Motivation: When Does Non-Spatial Regression “Work”?\n\\[\nY_i = \\beta_0 + \\beta_1X_{i,1} + \\beta_2X_{i,2} + \\cdots + \\beta_MX_{i,M} + \\varepsilon_i\n\\]\n\nImportance of OLS regression: can give us the Best Linear Unbiased Estimator (BLUE)\nThis is only true if the Gauss-Markov assumptions hold—one of these is that the error terms are uncorrelated:\n\\[\n\\text{Cov}[\\varepsilon_i, \\varepsilon_j] = 0 \\; \\forall i \\neq j\n\\]"
+    "text": "Motivation: When Does Non-Spatial Regression “Work”?\n\nY_i = \\beta_0 + \\beta_1X_{i,1} + \\beta_2X_{i,2} + \\cdots + \\beta_MX_{i,M} + \\varepsilon_i\n\n\nImportance of OLS regression: can give us the Best Linear Unbiased Estimator (BLUE)\nThis is only true if the Gauss-Markov assumptions hold—one of these is that the error terms are uncorrelated:\n\n\\text{Cov}[\\varepsilon_i, \\varepsilon_j] = 0 \\; \\forall i \\neq j"
   },
   {
     "objectID": "w12/slides.html#spatial-autocorrelation-in-residuals",
     "href": "w12/slides.html#spatial-autocorrelation-in-residuals",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Spatial Autocorrelation in Residuals",
-    "text": "Spatial Autocorrelation in Residuals\n\nWe have now seen several models / datasets where effect of some variable \\(X\\) (say, population) on another variable \\(Y\\) (say, disease count) is spatial! (Kind of the whole point of the class 😜)\nSo, to see when OLS will “work”, vs. when you need to incorporate GIS, key step is plotting the spatial distribution of regression residuals!"
+    "text": "Spatial Autocorrelation in Residuals\n\nWe have now seen several models / datasets where effect of some variable X (say, population density) on another variable Y (say, disease count) is spatial! (Kind of the whole point of the class 😜)\nSo, to see when OLS will “work” on its own, vs. when you need to incorporate GIS, key step is plotting the spatial distribution of regression residuals!"
   },
   {
     "objectID": "w12/slides.html#example-italian-elections",
     "href": "w12/slides.html#example-italian-elections",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Example: Italian Elections",
     "text": "Example: Italian Elections\n\n\n\n\n\nWard and Gleditsch (2018), Figure 2.3\n\n\n\n\n\n\nWard and Gleditsch (2018), Figure 2.4"
   },
   {
     "objectID": "w12/slides.html#will-ols-work-here",
     "href": "w12/slides.html#will-ols-work-here",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Will OLS “Work” Here?",
-    "text": "Will OLS “Work” Here?\n\nCan we use OLS to derive the BLUE of the effect of GDP on voting?\n\n\n\n\nPlain OLS\n\n\n\n\n\\(N = 477\\)\n\\(\\widehat{\\beta}\\)\nSE\n\\(t\\)\n\n\n\n\nIntercept\n35.30\n2.21\n15.96\n\n\nLog GDP per cap\n13.46\n0.65\n20.84\n\n\n\nMoran’s \\(I\\) for residuals = 0.47(!)\n\n \n\n\nSpatial Regression\n\n\n\n\n\\(N = 477\\)\n\\(\\widehat{\\beta}\\)\nSE\n\\(t\\)\n\n\n\n\nIntercept\n4.70\n1.66\n2.80\n\n\nLog GDP per cap\n1.77\n0.48\n3.66\n\n\n\\(\\rho\\)\n0.87\n0.02\n36.7"
+    "text": "Will OLS “Work” Here?\n\nCan we use OLS to derive the BLUE of the effect of GDP on voting?\n\n\n\n\nPlain OLS\n\n\n\n\nN = 477\n\\widehat{\\beta}\nSE\nt\n\n\n\n\nIntercept\n35.30\n2.21\n15.96\n\n\nLog GDP per cap\n13.46\n0.65\n20.84\n\n\n\nMoran’s I for residuals = 0.47(!)\n\n \n\n\nSpatial Regression\n\n\n\n\nN = 477\n\\widehat{\\beta}\nSE\nt\n\n\n\n\nIntercept\n4.70\n1.66\n2.80\n\n\nLog GDP per cap\n1.77\n0.48\n3.66\n\n\n\\rho\n0.87\n0.02\n36.7"
   },
   {
     "objectID": "w12/slides.html#what-does-it-mean-that-spatial-effect-is-significant",
     "href": "w12/slides.html#what-does-it-mean-that-spatial-effect-is-significant",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "What Does it Mean that “Spatial Effect” is Significant?",
     "text": "What Does it Mean that “Spatial Effect” is Significant?\n\n(From the future… your HW4!)"
   },
   {
     "objectID": "w12/slides.html#case-1-no-residual-spatial-autocorrelation",
     "href": "w12/slides.html#case-1-no-residual-spatial-autocorrelation",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Case 1: No Residual Spatial Autocorrelation",
-    "text": "Case 1: No Residual Spatial Autocorrelation\n\nExample: Residuals have Moran’s \\(I\\) near 0…\n…Don’t need GIS at all!"
+    "text": "Case 1: No Residual Spatial Autocorrelation\n\nExample: Residuals have Moran’s I near 0…\n…Don’t need GIS at all!"
   },
   {
     "objectID": "w12/slides.html#case-2-conditional-autoregressive-model-car",
     "href": "w12/slides.html#case-2-conditional-autoregressive-model-car",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Case 2: Conditional Autoregressive Model (CAR)",
-    "text": "Case 2: Conditional Autoregressive Model (CAR)\n\nGIS, but… only for “fixing” your regression\n\n\\[\nY_i = \\underbrace{\\mu_i}_{\\text{Non-spatial model}} + \\underbrace{\\frac{1}{w_{i,\\cdot}}\\sum_{j \\neq i}(Y_j - \\mu_j)}_{\\text{Spatial Autocorrelation}} + \\varepsilon_i\n\\]"
+    "text": "Case 2: Conditional Autoregressive Model (CAR)\n\nGIS, but… only for “fixing” your regression\n\n\nY_i = \\underbrace{\\mu_i}_{\\text{Non-spatial model}} + \\underbrace{\\frac{1}{w_{i,\\cdot}}\\sum_{j \\neq i}(Y_j - \\mu_j)}_{\\text{Spatial Autocorrelation}} + \\varepsilon_i"
   },
   {
     "objectID": "w12/slides.html#case-3-simultaneous-autoregressive-model-sar",
     "href": "w12/slides.html#case-3-simultaneous-autoregressive-model-sar",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Case 3: Simultaneous Autoregressive Model (SAR)",
-    "text": "Case 3: Simultaneous Autoregressive Model (SAR)\n\nThe main event! Here we are explicitly modeling “spatially lagged” versions of our dependent variable \\(Y\\)!\n\n\\[\nY = \\mathbf{X}\\beta + \\rho \\underbrace{\\mathbf{W}Y}_{\\mathclap{\\text{Spatially-lagged }Y}} + \\boldsymbol\\varepsilon\n\\]"
+    "text": "Case 3: Simultaneous Autoregressive Model (SAR)\n\nThe main event! Here we explicitly model “spatially lagged” versions of our dependent variable Y!\n\n\nY = \\mathbf{X}\\beta + \\rho \\underbrace{\\mathbf{W}Y}_{\\mathclap{\\text{Spatially-lagged }Y}} + \\boldsymbol\\varepsilon\n\n\n…This is your HW4 task!"
   },
   {
     "objectID": "w12/slides.html#research-methodology-hypotheses",
     "href": "w12/slides.html#research-methodology-hypotheses",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Research Methodology: Hypotheses",
     "text": "Research Methodology: Hypotheses\n\nSocial Science (McCourt):\n\n\n\nMachine Learning (DSAN):"
   },
   {
-    "objectID": "w12/slides.html#secretly-my-opportunity-to-do-more-spatial-regression",
-    "href": "w12/slides.html#secretly-my-opportunity-to-do-more-spatial-regression",
-    "title": "Week 12: Tools for Final Projects",
-    "section": "(Secretly My Opportunity to do More Spatial Regression!)",
-    "text": "(Secretly My Opportunity to do More Spatial Regression!)\n\nWhat explains previously-observed instances of separatist insurgencies?\nCan we predict separatist insurgencies?\nOne (spatial) idea: how far away are [centers of power] from [regions of countervailing power]?\n\\(X\\) = Distance from capital, \\(Y\\) = Insurgency\nUnit of observation: Regions? Insurgent uprisings? Countries?"
+    "objectID": "w12/slides.html#secret-opportunity-to-do-more-spatial-regression",
+    "href": "w12/slides.html#secret-opportunity-to-do-more-spatial-regression",
+    "title": "Week 12: Spatial Regression",
+    "section": "(Secret Opportunity to do More Spatial Regression!)",
+    "text": "(Secret Opportunity to do More Spatial Regression!)\n\nWhat explains previously-observed instances of separatist insurgencies?\nCan we predict separatist insurgencies?\nOne (spatial) idea: how far away are [centers of power] from [regions of countervailing power]?\nX = Distance from capital, Y = Insurgency\nUnit of observation: Regions? Insurgent uprisings? Countries?"
   },
   {
     "objectID": "w12/slides.html#operationalizing",
     "href": "w12/slides.html#operationalizing",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Operationalizing",
-    "text": "Operationalizing\n\nThe variables in previous slide are conceptual\nOperationalizing = “Turning into measurable quantities”\n\\(X\\) = MeanDistance(Capital, Insurgent Region), \\(Y = \\mathbf{1}[\\text{Insurgency}]\\)\nAlternative:\n\n\\[\nY = \\begin{cases}\n2 &\\text{if Successful Insurgency} \\\\\n1 &\\text{if Failed Insurgency} \\\\\n0 &\\text{if No Insurgency}\n\\end{cases}\n\\]"
+    "text": "Operationalizing\n\nThe variables in previous slide are conceptual\nOperationalizing = “Turning into measurable quantities”\nX = MeanDistance(Capital, Insurgent Region)\nY = \\mathbf{1}[\\text{Insurgency}]\nAlternative:\n\n\nY = \\begin{cases}\n2 &\\text{if Successful Insurgency} \\\\\n1 &\\text{if Failed Insurgency} \\\\\n0 &\\text{if No Insurgency}\n\\end{cases}"
   },
   {
     "objectID": "w12/slides.html#connection-matrices",
     "href": "w12/slides.html#connection-matrices",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "Connection Matrices",
     "text": "Connection Matrices\n\nspdep\nNeighbors if Centroids are close\nNeighbors if Capitals are close\n🤔"
   },
   {
-    "objectID": "w12/slides.html#remote-sensed-raster-data",
-    "href": "w12/slides.html#remote-sensed-raster-data",
-    "title": "Week 12: Tools for Final Projects",
-    "section": "Remote-Sensed / Raster Data",
-    "text": "Remote-Sensed / Raster Data\n\nYou’ve seen (to some extent) terra\nstars: Same group behind sf\nGoogle solar panel data\n.tif files: Dynamically loaded"
+    "objectID": "w12/slides.html#quick-example-bolshevik-revolution-rightarrow-bipolar-world",
+    "href": "w12/slides.html#quick-example-bolshevik-revolution-rightarrow-bipolar-world",
+    "title": "Week 12: Spatial Regression",
+    "section": "Quick Example: Bolshevik Revolution \\rightarrow “Bipolar” World",
+    "text": "Quick Example: Bolshevik Revolution \\rightarrow “Bipolar” World\n\n\n\n\n\n\nNull hypothesis: no spatial effect of democratization/de-democratization on neighboring countries\nIf null hypothesis is true, and countries democratize/de-democratize independently, could this pattern still arise?"
   },
   {
-    "objectID": "w12/slides.html#anonymization-synthetic-datasets",
-    "href": "w12/slides.html#anonymization-synthetic-datasets",
-    "title": "Week 12: Tools for Final Projects",
-    "section": "Anonymization / Synthetic Datasets",
-    "text": "Anonymization / Synthetic Datasets\n\nDifferential privacy\nUsed by the US Census(!) Since 2020"
+    "objectID": "w12/slides.html#fuller-example-1-coup-proofing-via-capital-relocation",
+    "href": "w12/slides.html#fuller-example-1-coup-proofing-via-capital-relocation",
+    "title": "Week 12: Spatial Regression",
+    "section": "Fuller Example 1: Coup-Proofing via Capital Relocation",
+    "text": "Fuller Example 1: Coup-Proofing via Capital Relocation\n \n\njjacobs.me/gis-template"
   },
   {
-    "objectID": "w12/slides.html#example-bolshevik-revolution-rightarrow-bipolar-world",
-    "href": "w12/slides.html#example-bolshevik-revolution-rightarrow-bipolar-world",
-    "title": "Week 12: Tools for Final Projects",
-    "section": "Example: Bolshevik Revolution \\(\\rightarrow\\) “Bipolar” World",
-    "text": "Example: Bolshevik Revolution \\(\\rightarrow\\) “Bipolar” World\n\n\nNull hypothesis: no spatial effect of democratization/de-democratization on neighboring countries\nIf null hypothesis is true, and countries democratize/de-democratize independently… could this pattern still arise?"
+    "objectID": "w12/slides.html#fuller-example-2-ruggedness-in-africa",
+    "href": "w12/slides.html#fuller-example-2-ruggedness-in-africa",
+    "title": "Week 12: Spatial Regression",
+    "section": "Fuller Example 2: Ruggedness in Africa",
+    "text": "Fuller Example 2: Ruggedness in Africa\n \n\njjacobs.me/dsan5650-project-deconfounding"
   },
   {
     "objectID": "w12/slides.html#references",
     "href": "w12/slides.html#references",
-    "title": "Week 12: Tools for Final Projects",
+    "title": "Week 12: Spatial Regression",
     "section": "References",
     "text": "References\n\n\nWard, Michael D., and Kristian Skrede Gleditsch. 2018. Spatial Regression Models. SAGE Publications."
   },
   {
     "objectID": "w14/index.html",
     "href": "w14/index.html",
-    "title": "Week 14: Final Project Poster Session",
+    "title": "Week 14: Final Project Showcase",
     "section": "",
     "text": "Open slides in new tab →",
     "crumbs": [
@@ -5043,7 +5043,7 @@
   {
     "objectID": "w14/index.html#references",
     "href": "w14/index.html#references",
-    "title": "Week 14: Final Project Poster Session",
+    "title": "Week 14: Final Project Showcase",
     "section": "References",
     "text": "References",
     "crumbs": [
@@ -5053,7 +5053,7 @@
   {
     "objectID": "w14/slides.html#references",
     "href": "w14/slides.html#references",
-    "title": "Week 14: Final Project Poster Session",
+    "title": "Week 14: Final Project Showcase",
     "section": "References",
     "text": "References"
   }

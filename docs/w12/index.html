@@ -8,7 +8,7 @@
 
 <meta name="author" content="Jeff Jacobs">
 
-<title>Week 12: Tools for Final Projects – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
+<title>Week 12: Spatial Regression – PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -516,7 +516,7 @@ window.Quarto = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p><em>Updated 2026-11-04, 02:46:41 PM</em></p>
+<p><em>Updated 2026-11-11, 06:36:45 PM</em></p>
 </div></div></nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -534,7 +534,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#spatial-regression" id="toc-spatial-regression" class="nav-link" data-scroll-target="#spatial-regression">Spatial Regression</a>
   <ul class="collapse">
-  <li><a href="#motivation-when-does-non-spatial-regression-work" id="toc-motivation-when-does-non-spatial-regression-work" class="nav-link" data-scroll-target="#motivation-when-does-non-spatial-regression-work">Motivation: When Does Non-Spatial Regression “Work”?</a></li>
+  <li><a href="#motivation-when-does-non-spatial-regression-work" id="toc-motivation-when-does-non-spatial-regression-work" class="nav-link" data-scroll-target="#motivation-when-does-non-spatial-regression-work">Motivation: When Does <em>Non</em>-Spatial Regression “Work”?</a></li>
   <li><a href="#spatial-autocorrelation-in-residuals" id="toc-spatial-autocorrelation-in-residuals" class="nav-link" data-scroll-target="#spatial-autocorrelation-in-residuals">Spatial Autocorrelation in Residuals</a></li>
   <li><a href="#example-italian-elections" id="toc-example-italian-elections" class="nav-link" data-scroll-target="#example-italian-elections">Example: Italian Elections</a></li>
   <li><a href="#will-ols-work-here" id="toc-will-ols-work-here" class="nav-link" data-scroll-target="#will-ols-work-here">Will OLS “Work” Here?</a></li>
@@ -546,12 +546,12 @@ window.Quarto = {
   <li><a href="#immediately-relevant-tools-for-final-projects-the-coming-weeks" id="toc-immediately-relevant-tools-for-final-projects-the-coming-weeks" class="nav-link" data-scroll-target="#immediately-relevant-tools-for-final-projects-the-coming-weeks">Immediately-Relevant Tools for Final Projects! (The Coming Weeks)</a>
   <ul class="collapse">
   <li><a href="#research-methodology-hypotheses" id="toc-research-methodology-hypotheses" class="nav-link" data-scroll-target="#research-methodology-hypotheses">Research Methodology: Hypotheses</a></li>
-  <li><a href="#secretly-my-opportunity-to-do-more-spatial-regression" id="toc-secretly-my-opportunity-to-do-more-spatial-regression" class="nav-link" data-scroll-target="#secretly-my-opportunity-to-do-more-spatial-regression">(Secretly My Opportunity to do More Spatial Regression!)</a></li>
+  <li><a href="#secret-opportunity-to-do-more-spatial-regression" id="toc-secret-opportunity-to-do-more-spatial-regression" class="nav-link" data-scroll-target="#secret-opportunity-to-do-more-spatial-regression">(Secret Opportunity to do More Spatial Regression!)</a></li>
   <li><a href="#operationalizing" id="toc-operationalizing" class="nav-link" data-scroll-target="#operationalizing">Operationalizing</a></li>
   <li><a href="#connection-matrices" id="toc-connection-matrices" class="nav-link" data-scroll-target="#connection-matrices">Connection Matrices</a></li>
-  <li><a href="#remote-sensed-raster-data" id="toc-remote-sensed-raster-data" class="nav-link" data-scroll-target="#remote-sensed-raster-data">Remote-Sensed / Raster Data</a></li>
-  <li><a href="#anonymization-synthetic-datasets" id="toc-anonymization-synthetic-datasets" class="nav-link" data-scroll-target="#anonymization-synthetic-datasets">Anonymization / Synthetic Datasets</a></li>
-  <li><a href="#example-bolshevik-revolution-rightarrow-bipolar-world" id="toc-example-bolshevik-revolution-rightarrow-bipolar-world" class="nav-link" data-scroll-target="#example-bolshevik-revolution-rightarrow-bipolar-world">Example: Bolshevik Revolution <span class="math inline">\(\rightarrow\)</span> “Bipolar” World</a></li>
+  <li><a href="#quick-example-bolshevik-revolution-rightarrow-bipolar-world" id="toc-quick-example-bolshevik-revolution-rightarrow-bipolar-world" class="nav-link" data-scroll-target="#quick-example-bolshevik-revolution-rightarrow-bipolar-world">Quick Example: Bolshevik Revolution <span class="math inline">\(\rightarrow\)</span> “Bipolar” World</a></li>
+  <li><a href="#fuller-example-1-coup-proofing-via-capital-relocation" id="toc-fuller-example-1-coup-proofing-via-capital-relocation" class="nav-link" data-scroll-target="#fuller-example-1-coup-proofing-via-capital-relocation">Fuller Example 1: Coup-Proofing via Capital Relocation</a></li>
+  <li><a href="#fuller-example-2-ruggedness-in-africa" id="toc-fuller-example-2-ruggedness-in-africa" class="nav-link" data-scroll-target="#fuller-example-2-ruggedness-in-africa">Fuller Example 2: Ruggedness in Africa</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
@@ -563,7 +563,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 12: Tools for Final Projects</h1>
+<h1 class="title">Week 12: Spatial Regression</h1>
 <p class="subtitle lead"><em>PPOL 6805 / DSAN 6750: GIS for Spatial Data Science</em><br>Fall 2026</p>
   <div class="quarto-categories">
     <div class="quarto-category">Class Sessions</div>
@@ -606,19 +606,19 @@ window.Quarto = {
 <center class="mb-3">
 <a class="h2" href="./slides.html" target="_blank">Open slides in new tab →</a>
 </center>
-<section id="real-mf-project-hours" class="level1" data-stack-name="Final Project">
-<h1 data-stack-name="Final Project">Real MF Project Hours!!!</h1>
+<section id="real-mf-project-hours" class="level1" data-stack-name="Final Project Logistics">
+<h1 data-stack-name="Final Project Logistics">Real MF Project Hours!!!</h1>
 <ul>
 <li>The “MF” is for “Map Fanatic”!</li>
 </ul>
 <section id="final-project-details" class="level2 crunch-title">
 <h2 class="crunch-title anchored" data-anchor-id="final-project-details">Final Project Details</h2>
 <ul>
-<li><strong>Project Showcase</strong>: 6:30-9pm, Wed, <strong>December 3</strong>, 2025
+<li><strong>Project Showcase</strong>: 6:30-9pm, Wed, <strong>December 2</strong>, 2026
 <ul>
 <li>Come eat falafel and show off your cool visualizations and regression coefficients!</li>
 </ul></li>
-<li><strong>Reports</strong>: Due 5:59pm, Fri, <strong>December 12</strong>, 2025
+<li><strong>Reports</strong>: Due 5:59pm, Fri, <strong>December 11</strong>, 2026
 <ul>
 <li>If you’re in DSAN 6000 and you’re worried about that final project… See next slide!</li>
 </ul></li>
@@ -632,10 +632,10 @@ window.Quarto = {
 </iframe>
 </center>
 </section>
-<section id="presentation-setup" class="level2">
-<h2 class="anchored" data-anchor-id="presentation-setup">Presentation Setup</h2>
+<section id="presentation-setup" class="level2 text-95">
+<h2 class="text-95 anchored" data-anchor-id="presentation-setup">Presentation Setup</h2>
 <ul>
-<li>Each of your desks becomes a <strong>“table”</strong> at a GIS conference!</li>
+<li>Each of your desks becomes a <strong>“table”</strong> at a <strong>GIS conference!</strong></li>
 <li>Everyone can go around and ask others about projects 😻</li>
 <li>But, <strong>FOOD</strong> <span class="math inline">\(\implies\)</span> you can also stay!</li>
 </ul>
@@ -643,14 +643,12 @@ window.Quarto = {
 <section id="report-setup" class="level2 crunch-title">
 <h2 class="crunch-title anchored" data-anchor-id="report-setup">Report Setup</h2>
 <ul>
-<li><a href="https://github.com/"><strong>GitHub repository</strong></a> (for your portfolio!)
-<ul>
+<li><i class="bi bi-1-circle" style="font-size: 90%;"></i> <a href="https://github.com/"><strong>GitHub repository</strong></a> (for your portfolio!)</li>
 <li>GH Pages site: <code>your_username.github.io/gis-project</code></li>
-</ul></li>
 <li>…What do you put in that GitHub repository?</li>
-<li><a href="https://quarto.org/docs/manuscripts/"><strong>Quarto Manuscript</strong></a></li>
-<li>What do you put in the Quarto manuscript?</li>
-<li><strong>Writeup</strong> + <strong>Visualizations</strong> + <strong>Code</strong>, interspersed!
+<li><i class="bi bi-2-circle" style="font-size: 90%;"></i> <a href="https://quarto.org/docs/manuscripts/"><strong>Quarto Manuscript</strong></a> [<a href="https://jjacobs.me/gis-manuscript-template/">PPOL 6805 Template</a>]</li>
+<li>…What do you put in the Quarto manuscript?</li>
+<li><i class="bi bi-3-circle"></i> <strong>Writeup</strong> + <strong>Visualizations</strong> + <strong>Code</strong>, interspersed!
 <ul>
 <li>“Literate Programming” <span class="math inline">\(\Rightarrow\)</span> <strong>Reproducible Results!</strong></li>
 </ul></li>
@@ -663,8 +661,8 @@ window.Quarto = {
 <li>(We made it! This is the last Spatial Data Science topic!)</li>
 <li>(Nearly all extremely-fancy applied GIS models can be implemented via Spatial Regression!)</li>
 </ul>
-<section id="motivation-when-does-non-spatial-regression-work" class="level2">
-<h2 class="anchored" data-anchor-id="motivation-when-does-non-spatial-regression-work">Motivation: When Does Non-Spatial Regression “Work”?</h2>
+<section id="motivation-when-does-non-spatial-regression-work" class="level2 title-09">
+<h2 class="title-09 anchored" data-anchor-id="motivation-when-does-non-spatial-regression-work">Motivation: When Does <em>Non</em>-Spatial Regression “Work”?</h2>
 <p><span class="math display">\[
 Y_i = \beta_0 + \beta_1X_{i,1} + \beta_2X_{i,2} + \cdots + \beta_MX_{i,M} + \varepsilon_i
 \]</span></p>
@@ -679,8 +677,8 @@ Y_i = \beta_0 + \beta_1X_{i,1} + \beta_2X_{i,2} + \cdots + \beta_MX_{i,M} + \var
 <section id="spatial-autocorrelation-in-residuals" class="level2">
 <h2 class="anchored" data-anchor-id="spatial-autocorrelation-in-residuals">Spatial Autocorrelation in Residuals</h2>
 <ul>
-<li>We have now seen several models / datasets where effect of some variable <span class="math inline">\(X\)</span> (say, population) on another variable <span class="math inline">\(Y\)</span> (say, disease count) is <strong>spatial</strong>! (Kind of the whole point of the class 😜)</li>
-<li>So, to see when OLS will “work”, vs.&nbsp;when you need to incorporate GIS, key step is <strong>plotting the spatial distribution of regression residuals!</strong></li>
+<li>We have now seen several models / datasets where effect of some variable <span class="math inline">\(X\)</span> (say, population density) on another variable <span class="math inline">\(Y\)</span> (say, disease count) is <strong>spatial</strong>! (Kind of the whole point of the class 😜)</li>
+<li>So, to see when OLS will “work” <strong>on its own</strong>, vs.&nbsp;when you need to incorporate GIS, key step is <strong>plotting the spatial distribution of regression residuals!</strong></li>
 </ul>
 </section>
 <section id="example-italian-elections" class="level2">
@@ -777,24 +775,24 @@ Spatial Regression
 </div>
 </div>
 </section>
-<section id="what-does-it-mean-that-spatial-effect-is-significant" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="what-does-it-mean-that-spatial-effect-is-significant">What Does it Mean that “Spatial Effect” is Significant?</h2>
+<section id="what-does-it-mean-that-spatial-effect-is-significant" class="level2 smaller crunch-title crunch-img">
+<h2 class="smaller crunch-title crunch-img anchored" data-anchor-id="what-does-it-mean-that-spatial-effect-is-significant">What Does it Mean that “Spatial Effect” is Significant?</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/spatial-reg-italy.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p><img src="images/eq-effect-sbarre.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption><em>(From the future… your HW4!)</em></figcaption>
 </figure>
 </div>
 </section>
-<section id="case-1-no-residual-spatial-autocorrelation" class="level2">
-<h2 class="anchored" data-anchor-id="case-1-no-residual-spatial-autocorrelation">Case 1: No Residual Spatial Autocorrelation</h2>
+<section id="case-1-no-residual-spatial-autocorrelation" class="level2 title-08">
+<h2 class="title-08 anchored" data-anchor-id="case-1-no-residual-spatial-autocorrelation">Case 1: No Residual Spatial Autocorrelation</h2>
 <ul>
 <li>Example: Residuals have Moran’s <span class="math inline">\(I\)</span> near 0…</li>
 <li>…Don’t need GIS at all!</li>
 </ul>
 </section>
-<section id="case-2-conditional-autoregressive-model-car" class="level2">
-<h2 class="anchored" data-anchor-id="case-2-conditional-autoregressive-model-car">Case 2: Conditional Autoregressive Model (CAR)</h2>
+<section id="case-2-conditional-autoregressive-model-car" class="level2 title-08">
+<h2 class="title-08 anchored" data-anchor-id="case-2-conditional-autoregressive-model-car">Case 2: Conditional Autoregressive Model (CAR)</h2>
 <ul>
 <li>GIS, but… only for “fixing” your regression</li>
 </ul>
@@ -802,18 +800,21 @@ Spatial Regression
 Y_i = \underbrace{\mu_i}_{\text{Non-spatial model}} + \underbrace{\frac{1}{w_{i,\cdot}}\sum_{j \neq i}(Y_j - \mu_j)}_{\text{Spatial Autocorrelation}} + \varepsilon_i
 \]</span></p>
 </section>
-<section id="case-3-simultaneous-autoregressive-model-sar" class="level2">
-<h2 class="anchored" data-anchor-id="case-3-simultaneous-autoregressive-model-sar">Case 3: Simultaneous Autoregressive Model (SAR)</h2>
+<section id="case-3-simultaneous-autoregressive-model-sar" class="level2 title-075">
+<h2 class="title-075 anchored" data-anchor-id="case-3-simultaneous-autoregressive-model-sar">Case 3: Simultaneous Autoregressive Model (SAR)</h2>
 <ul>
-<li>The main event! Here we are <strong>explicitly</strong> modeling “spatially lagged” versions of our dependent variable <span class="math inline">\(Y\)</span>!</li>
+<li>The main event! Here we <strong>explicitly</strong> model <strong>“spatially lagged”</strong> versions of our dependent variable <span class="math inline">\(Y\)</span>!</li>
 </ul>
 <p><span class="math display">\[
 Y = \mathbf{X}\beta + \rho \underbrace{\mathbf{W}Y}_{\mathclap{\text{Spatially-lagged }Y}} + \boldsymbol\varepsilon
 \]</span></p>
+<ul>
+<li>…This is your HW4 task!</li>
+</ul>
 </section>
 </section>
-<section id="immediately-relevant-tools-for-final-projects-the-coming-weeks" class="level1 title-09" data-stack-name="Tools Preview">
-<h1 class="title-09" data-stack-name="Tools Preview">Immediately-Relevant Tools for Final Projects! (The Coming Weeks)</h1>
+<section id="immediately-relevant-tools-for-final-projects-the-coming-weeks" class="level1 title-09" data-stack-name="Final Project Tools">
+<h1 class="title-09" data-stack-name="Final Project Tools">Immediately-Relevant Tools for Final Projects! (The Coming Weeks)</h1>
 <ul>
 <li>Research Methodology (<strong>Hypotheses</strong>)</li>
 <li>Visualizing Spatial Data</li>
@@ -832,8 +833,8 @@ Y = \mathbf{X}\beta + \rho \underbrace{\mathbf{W}Y}_{\mathclap{\text{Spatially-l
 <img src="images/predictive.svg" class="img-fluid" style="width:40.0%">
 </center>
 </section>
-<section id="secretly-my-opportunity-to-do-more-spatial-regression" class="level2 crunch-title">
-<h2 class="crunch-title anchored" data-anchor-id="secretly-my-opportunity-to-do-more-spatial-regression">(Secretly My Opportunity to do More Spatial Regression!)</h2>
+<section id="secret-opportunity-to-do-more-spatial-regression" class="level2 crunch-title title-07">
+<h2 class="crunch-title title-07 anchored" data-anchor-id="secret-opportunity-to-do-more-spatial-regression">(Secret Opportunity to do More Spatial Regression!)</h2>
 <ul>
 <li>What <strong>explains</strong> previously-observed instances of <strong>separatist insurgencies</strong>?</li>
 <li>Can we <strong>predict</strong> separatist insurgencies?</li>
@@ -842,12 +843,13 @@ Y = \mathbf{X}\beta + \rho \underbrace{\mathbf{W}Y}_{\mathclap{\text{Spatially-l
 <li>Unit of observation: Regions? Insurgent uprisings? Countries?</li>
 </ul>
 </section>
-<section id="operationalizing" class="level2 crunch-ul">
-<h2 class="crunch-ul anchored" data-anchor-id="operationalizing">Operationalizing</h2>
+<section id="operationalizing" class="level2 crunch-ul text-90 math-90 inline-90">
+<h2 class="crunch-ul text-90 math-90 inline-90 anchored" data-anchor-id="operationalizing">Operationalizing</h2>
 <ul>
 <li>The variables in previous slide are <strong>conceptual</strong></li>
 <li>Operationalizing = “Turning into measurable quantities”</li>
-<li><span class="math inline">\(X\)</span> = MeanDistance(Capital, Insurgent Region), <span class="math inline">\(Y = \mathbf{1}[\text{Insurgency}]\)</span></li>
+<li><span class="math inline">\(X\)</span> = MeanDistance(Capital, Insurgent Region)</li>
+<li><span class="math inline">\(Y = \mathbf{1}[\text{Insurgency}]\)</span></li>
 <li>Alternative:</li>
 </ul>
 <p><span class="math display">\[
@@ -867,33 +869,31 @@ Y = \begin{cases}
 <li>🤔</li>
 </ul>
 </section>
-<section id="remote-sensed-raster-data" class="level2">
-<h2 class="anchored" data-anchor-id="remote-sensed-raster-data">Remote-Sensed / Raster Data</h2>
-<ul>
-<li>You’ve seen (to some extent) <code>terra</code></li>
-<li><a href="https://r-spatial.github.io/stars/"><code>stars</code></a>: Same group behind <code>sf</code></li>
-<li>Google solar panel data</li>
-<li><code>.tif</code> files: Dynamically loaded</li>
-</ul>
-</section>
-<section id="anonymization-synthetic-datasets" class="level2">
-<h2 class="anchored" data-anchor-id="anonymization-synthetic-datasets">Anonymization / Synthetic Datasets</h2>
-<ul>
-<li>Differential privacy</li>
-<li>Used by the US Census(!) Since 2020</li>
-</ul>
-</section>
-<section id="example-bolshevik-revolution-rightarrow-bipolar-world" class="level2">
-<h2 class="anchored" data-anchor-id="example-bolshevik-revolution-rightarrow-bipolar-world">Example: Bolshevik Revolution <span class="math inline">\(\rightarrow\)</span> “Bipolar” World</h2>
+<section id="quick-example-bolshevik-revolution-rightarrow-bipolar-world" class="level2 title-08 crunch-title crunch-img">
+<h2 class="title-08 crunch-title crunch-img anchored" data-anchor-id="quick-example-bolshevik-revolution-rightarrow-bipolar-world">Quick Example: Bolshevik Revolution <span class="math inline">\(\rightarrow\)</span> “Bipolar” World</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/democracy.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="images/democracy.jpeg" class="nostretch img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 <ul>
 <li>Null hypothesis: no spatial effect of democratization/de-democratization on neighboring countries</li>
-<li>If null hypothesis is true, and countries democratize/de-democratize independently… could this pattern still arise?</li>
+<li>If null hypothesis is true, and countries democratize/de-democratize independently, could this pattern still arise?</li>
 </ul>
+</section>
+<section id="fuller-example-1-coup-proofing-via-capital-relocation" class="level2">
+<h2 class="anchored" data-anchor-id="fuller-example-1-coup-proofing-via-capital-relocation">Fuller Example 1: Coup-Proofing via Capital Relocation</h2>
+<p>&nbsp;<br></p>
+<center>
+<p><span class="boxed-cb"><a href="https://jjacobs.me/gis-template/"><code>jjacobs.me/gis-template</code></a></span></p>
+</center>
+</section>
+<section id="fuller-example-2-ruggedness-in-africa" class="level2 text-90">
+<h2 class="text-90 anchored" data-anchor-id="fuller-example-2-ruggedness-in-africa">Fuller Example 2: Ruggedness in Africa</h2>
+<p>&nbsp;<br></p>
+<center>
+<p><span class="boxed-cb"><a href="https://jjacobs.me/dsan5650-project-deconfounding/"><code>jjacobs.me/dsan5650-project-deconfounding</code></a></span></p>
+</center>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>

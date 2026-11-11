@@ -58,15 +58,15 @@ weeks:
     footer: "PPOL 6805 Week 11"
     date-md: "Nov 4"
   - weeknum: 12
-    title: "Tools for Final Projects"
-    footer: "PPOL 6805 Week 12: Tools for Final Projects"
+    title: "Spatial Regression"
+    footer: "PPOL 6805 Week 12: Spatial Regression"
     date-md: "Nov 11"
   - weeknum: 13
-    title: "Visualizing Spatial Data"
+    title: "Visualization Tools for Final Projects"
     footer: "PPOL 6805 Week 13: Visualization"
     date-md: "Nov 18"
   - weeknum: 14
-    title: "Final Project Poster Session"
+    title: "Final Project Showcase"
     footer: "PPOL 6805 Week 14"
     date-md: "Dec 2"
 hw:

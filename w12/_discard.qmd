@@ -436,3 +436,17 @@ document.addEventListener(
   }
 );
 </script>
+
+---
+
+## Remote-Sensed / Raster Data
+
+* You've seen (to some extent) `terra`
+* [`stars`](https://r-spatial.github.io/stars/): Same group behind `sf`
+* Google solar panel data
+* `.tif` files: Dynamically loaded
+
+## Anonymization / Synthetic Datasets
+
+* Differential privacy
+* Used by the US Census(!) Since 2020
