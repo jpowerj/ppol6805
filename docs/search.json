@@ -10,11 +10,215 @@
     ]
   },
   {
+    "objectID": "w13/slides.html#final-project-details",
+    "href": "w13/slides.html#final-project-details",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Final Project Details",
+    "text": "Final Project Details\n\nProject Showcase: 6:30-9pm, Wed, December 2, 2026\n\nCome eat falafel and show off your cool visualizations and regression coefficients!\n\nReports: Due 5:59pm, Fri, December 11, 2026\n\nIf you’re in DSAN 6000 and you’re worried about that final project… See calendar! (In two slides)\n\n\n\n\n\n\nCode\nsource(\"../dsan-globals/_globals.r\")\nsource(\"../dsan-globals/_globals-sf.r\")"
+  },
+  {
+    "objectID": "w13/slides.html#research-methodology-hypotheses",
+    "href": "w13/slides.html#research-methodology-hypotheses",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Research Methodology: Hypotheses",
+    "text": "Research Methodology: Hypotheses\n\nSocial Science (McCourt):\n\n\n\nMachine Learning (DSAN):"
+  },
+  {
+    "objectID": "w13/slides.html#due-date-details",
+    "href": "w13/slides.html#due-date-details",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Due Date Details",
+    "text": "Due Date Details"
+  },
+  {
+    "objectID": "w13/slides.html#visualizing-spatial-data",
+    "href": "w13/slides.html#visualizing-spatial-data",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Visualizing Spatial Data",
+    "text": "Visualizing Spatial Data\n\n\nMy recommendation for final presentations: Tiptoe from mapview \\leadsto Leaflet!\n\n\n\n\nCode\nlibrary(leaflet) |&gt; suppressPackageStartupMessages()\nlibrary(leaflet.extras2) |&gt; suppressPackageStartupMessages()\nlibrary(mapview) |&gt; suppressPackageStartupMessages()\nset.seed(6805)\ncity_df &lt;- tibble::tribble(\n  ~city, ~lon, ~lat, ~pop,\n  \"Chicago\", 41.950567516553896, -87.93011127491978, 2746388,\n  \"Detroit\", 42.45123004999075, -83.18402319217698, 631524\n)\ncity_sf &lt;- sf::st_as_sf(\n  city_df,\n  coords = c(\"lat\", \"lon\"),\n  # Reminder: CRS 4326 is more *efficient* for web\n  # display (uses less memory on average);\n  # CRS 3857 is less efficient (uses more memory\n  # on average), since it includes info necessary\n  # for precise *distance* calculations (hence\n  # spatstat's 3857 requirement for ppp objects)\n  crs=4326\n)\ncity_buf_sf &lt;- city_sf |&gt; sf::st_buffer(20000)\ncity_cases_sf &lt;- city_buf_sf |&gt;\n  sf::st_sample(size=rep(10,2)) |&gt;\n  sf::st_as_sf()\ncity_cases_sf$city &lt;- \"Detroit (10 Cases)\"\ncity_cases_sf[1:10, 'city'] &lt;- \"Chicago (10 Cases)\"\ncity_cases_sf$sample &lt;- \"Flu\"\n# Now sample from *population* to visualize\n# *base rates*\ncity_pop_sf &lt;- city_buf_sf |&gt;\n  sf::st_sample(size=c(16, 4)) |&gt;\n  sf::st_as_sf()\ncity_pop_sf$city &lt;- \"Detroit\"\ncity_pop_sf[1:16, 'city'] &lt;- \"Chicago\"\ncity_pop_sf$sample &lt;- \"People\"\n# Uncomment for \"plain\" mapview output (compare!)\n# city_combined_sf &lt;- bind_rows(\n#   city_cases_sf,\n#   city_pop_sf\n# )\n# mapview(\n#   city_combined_sf, zcol=\"city\", marker=\"sample\"\n# )\n# Custom icon from *local* image for flu cases\nFlu = makeIcon(\n    iconUrl=\"images/Maki2-danger-24.svg\",\n    iconRetinaUrl=\"images/Maki2-danger-24.svg\",\n    iconWidth=20,\n    iconHeight=20,\n    className='highlight-icon'\n)\n# Custom icon from *web* image for base rates\nPeople = makeIcon(\n  iconUrl=\"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg\",\n  iconRetinaUrl=\"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg\",\n  iconWidth=20,\n  iconHeight=20\n)\nleaflet(city_cases_sf) |&gt;\n  addProviderTiles(\"Esri.WorldGrayCanvas\") |&gt;\n  # addProviderTiles(\"CartoDB.Positron\") |&gt;\n  addMarkers(data=city_cases_sf, icon = Flu) |&gt;\n  addMarkers(data=city_pop_sf, icon = People) |&gt;\n  addControl(\n    html_legend(\n      urls   = c(\"https://raw.githubusercontent.com/jpowerj/dsan-content/refs/heads/main/2026-fall-ppol6805/Maki2-danger-24.svg\", \"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg\"),\n      labels = c(\"Flu\", \"At Risk\"),\n      title  = \"Status\"\n    ),\n    position = \"bottomright\"\n  ) |&gt;\n  addControl(\n    html_label(\"Chicago&lt;br&gt;Population 2.7 million\"),\n    position = \"topleft\"\n  ) |&gt;\n  addControl(\n    html_label(\"Detroit, MI&lt;br&gt;Population 650,000\"),\n    position = \"topright\"\n  )"
+  },
+  {
+    "objectID": "w13/slides.html#youve-secretly-been-using-leaflet-all-along",
+    "href": "w13/slides.html#youve-secretly-been-using-leaflet-all-along",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "You’ve Secretly Been Using Leaflet All Along!",
+    "text": "You’ve Secretly Been Using Leaflet All Along!\n\n\nSetup Code\nlibrary(tidyverse) |&gt; suppressPackageStartupMessages()\nlibrary(sf) |&gt; suppressPackageStartupMessages()\nlibrary(osmdata) |&gt; suppressPackageStartupMessages()\nlibrary(mapview) |&gt; suppressPackageStartupMessages()\nget_osm_cached &lt;- function(query, cache_file, tries = 3) {\n  if (file.exists(cache_file)) {\n    message(\"Loading cached data from \", cache_file)\n    return(readRDS(cache_file))\n  }\n  for (i in seq_len(tries)) {\n    result &lt;- tryCatch(\n      osmdata_sf(query),\n      error = function(e) {\n        message(\"Attempt \", i, \" failed: \", conditionMessage(e))\n        NULL\n      }\n    )\n    if (!is.null(result)) {\n      saveRDS(result, cache_file)\n      message(\"Saved to \", cache_file)\n      return(result)\n    }\n    Sys.sleep(5)\n  }\n  stop(\"Failed to fetch after \", tries, \" attempts.\")\n}\nnh_bbox &lt;- getbb(\"New Haven, CT\")\nhighway_result &lt;- opq(bbox=nh_bbox) |&gt;\n  add_osm_feature(\n    key = \"highway\",\n    value = \"motorway\"\n  )\ntransport_result &lt;- opq(bbox=nh_bbox) |&gt;\n  add_osm_feature(\n    key=\"public_transport\"\n  )\nnh_road_sfs &lt;- get_osm_cached(highway_result, \"data/nh_road_sfs.rds\")\nnh_transport_sfs &lt;- get_osm_cached(transport_result, \"data/nh_transport_sfs.rds\")\nnh_road_sf &lt;- nh_road_sfs$osm_lines\n\n\n\n\n\n\nCode\nmapview(nh_road_sf)\n\n\n\n\n\n\n\n\n\nCode\nleaflet() |&gt;\n  leaflet::addProviderTiles(\"Esri.WorldGrayCanvas\") |&gt;\n  leaflet::addPolylines(\n    data=nh_road_sf, weight=2\n  )"
+  },
+  {
+    "objectID": "w13/slides.html#putting-things-into-leaflet",
+    "href": "w13/slides.html#putting-things-into-leaflet",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Putting Things Into Leaflet",
+    "text": "Putting Things Into Leaflet\n\n Let’s go take a look at the Getting GIS Data writeup!\n Constructing “Overpass Queries”:\n\ngetbb()\nMap features"
+  },
+  {
+    "objectID": "w13/slides.html#application-urban-segregation",
+    "href": "w13/slides.html#application-urban-segregation",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Application: Urban Segregation",
+    "text": "Application: Urban Segregation\nStep : Mapping Inequality\n\n\n\n\n\n\n\n\n\n\nMassey and Denton (1993)"
+  },
+  {
+    "objectID": "w13/slides.html#spatial-data-science",
+    "href": "w13/slides.html#spatial-data-science",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Spatial Data Science",
+    "text": "Spatial Data Science\nStep  Quantifying and evaluating hypotheses about urban segregation\n\nFrom Roberto and Hwang (2017)"
+  },
+  {
+    "objectID": "w13/slides.html#straight-line-vs.-street-distance",
+    "href": "w13/slides.html#straight-line-vs.-street-distance",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Straight-Line vs. Street Distance",
+    "text": "Straight-Line vs. Street Distance"
+  },
+  {
+    "objectID": "w13/slides.html#evaluating-impacts-of-policy-interventions",
+    "href": "w13/slides.html#evaluating-impacts-of-policy-interventions",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "…Evaluating Impacts of Policy Interventions!",
+    "text": "…Evaluating Impacts of Policy Interventions!"
+  },
+  {
+    "objectID": "w13/slides.html#custom-bounding-box",
+    "href": "w13/slides.html#custom-bounding-box",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Custom Bounding Box",
+    "text": "Custom Bounding Box\n\n\n\nCode\ncustom_upper_left &lt;- c(41.362432360113566, -72.9722636671877)\ncustom_lower_right &lt;- c(41.34295668062255, -72.9385289699316)\nbbox_coords &lt;- c(\n  custom_upper_left[2],\n  custom_upper_left[1],\n  custom_lower_right[2],\n  custom_lower_right[1]\n)\nnames(bbox_coords) = c(\"xmin\",\"ymin\",\"xmax\",\"ymax\")\ncustom_sf &lt;- st_as_sf(\n  st_as_sfc(\n    st_bbox(bbox_coords)\n  ),\n  crs=4326\n)\n# nh_query &lt;- opq(bbox=bbox_coords) |&gt;\n#   add_osm_feature(\n#     key = \"highway\"\n#   )\n# nh_sfs &lt;- osmdata_sf(nh_query)\n# nh_road_sf &lt;- nh_sfs$osm_lines\n# mapview(nh_road_sf)\nmapview(custom_sf)"
+  },
+  {
+    "objectID": "w13/slides.html#references",
+    "href": "w13/slides.html#references",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "References",
+    "text": "References\n\n\nMassey, Douglas S., and Nancy A. Denton. 1993. American Apartheid: Segregation and the Making of the Underclass. Harvard University Press.\n\n\nRoberto, Elizabeth, and Jackelyn Hwang. 2017. “Barriers to Integration: Physical Boundaries and the Spatial Structure of Residential Segregation.”"
+  },
+  {
     "objectID": "w13/index.html",
     "href": "w13/index.html",
     "title": "Week 13: Visualization Tools for Final Projects",
     "section": "",
     "text": "Open slides in new tab →",
+    "crumbs": [
+      "Week 13: Nov 18"
+    ]
+  },
+  {
+    "objectID": "w13/index.html#final-project-details",
+    "href": "w13/index.html#final-project-details",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Final Project Details",
+    "text": "Final Project Details\n\nProject Showcase: 6:30-9pm, Wed, December 2, 2026\n\nCome eat falafel and show off your cool visualizations and regression coefficients!\n\nReports: Due 5:59pm, Fri, December 11, 2026\n\nIf you’re in DSAN 6000 and you’re worried about that final project… See calendar! (In two slides)\n\n\n\n\n\n\nCode\nsource(\"../dsan-globals/_globals.r\")\nsource(\"../dsan-globals/_globals-sf.r\")",
+    "crumbs": [
+      "Week 13: Nov 18"
+    ]
+  },
+  {
+    "objectID": "w13/index.html#research-methodology-hypotheses",
+    "href": "w13/index.html#research-methodology-hypotheses",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Research Methodology: Hypotheses",
+    "text": "Research Methodology: Hypotheses\n\nSocial Science (McCourt):\n\n\n\nMachine Learning (DSAN):",
+    "crumbs": [
+      "Week 13: Nov 18"
+    ]
+  },
+  {
+    "objectID": "w13/index.html#due-date-details",
+    "href": "w13/index.html#due-date-details",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Due Date Details",
+    "text": "Due Date Details",
+    "crumbs": [
+      "Week 13: Nov 18"
+    ]
+  },
+  {
+    "objectID": "w13/index.html#visualizing-spatial-data",
+    "href": "w13/index.html#visualizing-spatial-data",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Visualizing Spatial Data",
+    "text": "Visualizing Spatial Data\n\n\nMy recommendation for final presentations: Tiptoe from mapview \\(\\leadsto\\) Leaflet!\n\n\n\nCode\nlibrary(leaflet) |&gt; suppressPackageStartupMessages()\nlibrary(leaflet.extras2) |&gt; suppressPackageStartupMessages()\nlibrary(mapview) |&gt; suppressPackageStartupMessages()\nset.seed(6805)\ncity_df &lt;- tibble::tribble(\n  ~city, ~lon, ~lat, ~pop,\n  \"Chicago\", 41.950567516553896, -87.93011127491978, 2746388,\n  \"Detroit\", 42.45123004999075, -83.18402319217698, 631524\n)\ncity_sf &lt;- sf::st_as_sf(\n  city_df,\n  coords = c(\"lat\", \"lon\"),\n  # Reminder: CRS 4326 is more *efficient* for web\n  # display (uses less memory on average);\n  # CRS 3857 is less efficient (uses more memory\n  # on average), since it includes info necessary\n  # for precise *distance* calculations (hence\n  # spatstat's 3857 requirement for ppp objects)\n  crs=4326\n)\ncity_buf_sf &lt;- city_sf |&gt; sf::st_buffer(20000)\ncity_cases_sf &lt;- city_buf_sf |&gt;\n  sf::st_sample(size=rep(10,2)) |&gt;\n  sf::st_as_sf()\ncity_cases_sf$city &lt;- \"Detroit (10 Cases)\"\ncity_cases_sf[1:10, 'city'] &lt;- \"Chicago (10 Cases)\"\ncity_cases_sf$sample &lt;- \"Flu\"\n# Now sample from *population* to visualize\n# *base rates*\ncity_pop_sf &lt;- city_buf_sf |&gt;\n  sf::st_sample(size=c(16, 4)) |&gt;\n  sf::st_as_sf()\ncity_pop_sf$city &lt;- \"Detroit\"\ncity_pop_sf[1:16, 'city'] &lt;- \"Chicago\"\ncity_pop_sf$sample &lt;- \"People\"\n# Uncomment for \"plain\" mapview output (compare!)\n# city_combined_sf &lt;- bind_rows(\n#   city_cases_sf,\n#   city_pop_sf\n# )\n# mapview(\n#   city_combined_sf, zcol=\"city\", marker=\"sample\"\n# )\n# Custom icon from *local* image for flu cases\nFlu = makeIcon(\n    iconUrl=\"images/Maki2-danger-24.svg\",\n    iconRetinaUrl=\"images/Maki2-danger-24.svg\",\n    iconWidth=20,\n    iconHeight=20,\n    className='highlight-icon'\n)\n# Custom icon from *web* image for base rates\nPeople = makeIcon(\n  iconUrl=\"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg\",\n  iconRetinaUrl=\"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg\",\n  iconWidth=20,\n  iconHeight=20\n)\nleaflet(city_cases_sf) |&gt;\n  addProviderTiles(\"Esri.WorldGrayCanvas\") |&gt;\n  # addProviderTiles(\"CartoDB.Positron\") |&gt;\n  addMarkers(data=city_cases_sf, icon = Flu) |&gt;\n  addMarkers(data=city_pop_sf, icon = People) |&gt;\n  addControl(\n    html_legend(\n      urls   = c(\"https://raw.githubusercontent.com/jpowerj/dsan-content/refs/heads/main/2026-fall-ppol6805/Maki2-danger-24.svg\", \"https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-pitch-24.svg\"),\n      labels = c(\"Flu\", \"At Risk\"),\n      title  = \"Status\"\n    ),\n    position = \"bottomright\"\n  ) |&gt;\n  addControl(\n    html_label(\"Chicago&lt;br&gt;Population 2.7 million\"),\n    position = \"topleft\"\n  ) |&gt;\n  addControl(\n    html_label(\"Detroit, MI&lt;br&gt;Population 650,000\"),\n    position = \"topright\"\n  )",
+    "crumbs": [
+      "Week 13: Nov 18"
+    ]
+  },
+  {
+    "objectID": "w13/index.html#youve-secretly-been-using-leaflet-all-along",
+    "href": "w13/index.html#youve-secretly-been-using-leaflet-all-along",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "You’ve Secretly Been Using Leaflet All Along!",
+    "text": "You’ve Secretly Been Using Leaflet All Along!\n\n\nSetup Code\nlibrary(tidyverse) |&gt; suppressPackageStartupMessages()\nlibrary(sf) |&gt; suppressPackageStartupMessages()\nlibrary(osmdata) |&gt; suppressPackageStartupMessages()\nlibrary(mapview) |&gt; suppressPackageStartupMessages()\nget_osm_cached &lt;- function(query, cache_file, tries = 3) {\n  if (file.exists(cache_file)) {\n    message(\"Loading cached data from \", cache_file)\n    return(readRDS(cache_file))\n  }\n  for (i in seq_len(tries)) {\n    result &lt;- tryCatch(\n      osmdata_sf(query),\n      error = function(e) {\n        message(\"Attempt \", i, \" failed: \", conditionMessage(e))\n        NULL\n      }\n    )\n    if (!is.null(result)) {\n      saveRDS(result, cache_file)\n      message(\"Saved to \", cache_file)\n      return(result)\n    }\n    Sys.sleep(5)\n  }\n  stop(\"Failed to fetch after \", tries, \" attempts.\")\n}\nnh_bbox &lt;- getbb(\"New Haven, CT\")\nhighway_result &lt;- opq(bbox=nh_bbox) |&gt;\n  add_osm_feature(\n    key = \"highway\",\n    value = \"motorway\"\n  )\ntransport_result &lt;- opq(bbox=nh_bbox) |&gt;\n  add_osm_feature(\n    key=\"public_transport\"\n  )\nnh_road_sfs &lt;- get_osm_cached(highway_result, \"data/nh_road_sfs.rds\")\n\n\nLoading cached data from data/nh_road_sfs.rds\n\n\nSetup Code\nnh_transport_sfs &lt;- get_osm_cached(transport_result, \"data/nh_transport_sfs.rds\")\n\n\nLoading cached data from data/nh_transport_sfs.rds\n\n\nSetup Code\nnh_road_sf &lt;- nh_road_sfs$osm_lines\n\n\n\n\n\n\nCode\nmapview(nh_road_sf)\n\n\n\n\n\n\n\n\n\nCode\nleaflet() |&gt;\n  leaflet::addProviderTiles(\"Esri.WorldGrayCanvas\") |&gt;\n  leaflet::addPolylines(\n    data=nh_road_sf, weight=2\n  )",
+    "crumbs": [
+      "Week 13: Nov 18"
+    ]
+  },
+  {
+    "objectID": "w13/index.html#putting-things-into-leaflet",
+    "href": "w13/index.html#putting-things-into-leaflet",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Putting Things Into Leaflet",
+    "text": "Putting Things Into Leaflet\n\n Let’s go take a look at the Getting GIS Data writeup!\n Constructing “Overpass Queries”:\n\ngetbb()\nMap features",
+    "crumbs": [
+      "Week 13: Nov 18"
+    ]
+  },
+  {
+    "objectID": "w13/index.html#application-urban-segregation",
+    "href": "w13/index.html#application-urban-segregation",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Application: Urban Segregation",
+    "text": "Application: Urban Segregation\nStep : Mapping Inequality\n\n\n\n\n\n\n\n\n\n\nMassey and Denton (1993)",
+    "crumbs": [
+      "Week 13: Nov 18"
+    ]
+  },
+  {
+    "objectID": "w13/index.html#spatial-data-science",
+    "href": "w13/index.html#spatial-data-science",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Spatial Data Science",
+    "text": "Spatial Data Science\nStep  Quantifying and evaluating hypotheses about urban segregation\n\n\n\nFrom Roberto and Hwang (2017)",
+    "crumbs": [
+      "Week 13: Nov 18"
+    ]
+  },
+  {
+    "objectID": "w13/index.html#straight-line-vs.-street-distance",
+    "href": "w13/index.html#straight-line-vs.-street-distance",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Straight-Line vs. Street Distance",
+    "text": "Straight-Line vs. Street Distance",
+    "crumbs": [
+      "Week 13: Nov 18"
+    ]
+  },
+  {
+    "objectID": "w13/index.html#evaluating-impacts-of-policy-interventions",
+    "href": "w13/index.html#evaluating-impacts-of-policy-interventions",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "…Evaluating Impacts of Policy Interventions!",
+    "text": "…Evaluating Impacts of Policy Interventions!",
+    "crumbs": [
+      "Week 13: Nov 18"
+    ]
+  },
+  {
+    "objectID": "w13/index.html#custom-bounding-box",
+    "href": "w13/index.html#custom-bounding-box",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "Custom Bounding Box",
+    "text": "Custom Bounding Box\n\n\nCode\ncustom_upper_left &lt;- c(41.362432360113566, -72.9722636671877)\ncustom_lower_right &lt;- c(41.34295668062255, -72.9385289699316)\nbbox_coords &lt;- c(\n  custom_upper_left[2],\n  custom_upper_left[1],\n  custom_lower_right[2],\n  custom_lower_right[1]\n)\nnames(bbox_coords) = c(\"xmin\",\"ymin\",\"xmax\",\"ymax\")\ncustom_sf &lt;- st_as_sf(\n  st_as_sfc(\n    st_bbox(bbox_coords)\n  ),\n  crs=4326\n)\n# nh_query &lt;- opq(bbox=bbox_coords) |&gt;\n#   add_osm_feature(\n#     key = \"highway\"\n#   )\n# nh_sfs &lt;- osmdata_sf(nh_query)\n# nh_road_sf &lt;- nh_sfs$osm_lines\n# mapview(nh_road_sf)\nmapview(custom_sf)",
+    "crumbs": [
+      "Week 13: Nov 18"
+    ]
+  },
+  {
+    "objectID": "w13/index.html#references",
+    "href": "w13/index.html#references",
+    "title": "Week 13: Visualization Tools for Final Projects",
+    "section": "References",
+    "text": "References\n\n\nMassey, Douglas S., and Nancy A. Denton. 1993. American Apartheid: Segregation and the Making of the Underclass. Harvard University Press.\n\n\nRoberto, Elizabeth, and Jackelyn Hwang. 2017. “Barriers to Integration: Physical Boundaries and the Spatial Structure of Residential Segregation.”",
     "crumbs": [
       "Week 13: Nov 18"
     ]
