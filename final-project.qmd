@@ -28,7 +28,7 @@ First things first, to jump right into an example of what the final project can 
 
 <center>
 
-[**Example Project: "Coup-Proofing via Capital Relocation"**](https://jjacobs.me/gis-manuscript-template)
+[**Example Project: "Coup-Proofing via Capital Relocation"**](https://jjacobs.me/gis-template)
 
 </center>
 
